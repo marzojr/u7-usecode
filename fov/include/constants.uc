@@ -158,6 +158,14 @@ enum damage_types {
 	SONIC_DAMAGE		= 5
 };
 
+// tick multipliers, for use with UI_advance_time or script statements
+enum times {
+	TICK	= 1,
+	MINUTE	= 25,
+	HOUR	= 1500,
+	DAY		= (long)36000,
+};
+
 enum wildcards {
 	FIND_ON_SCREEN	= -359,
 	QUANTITY_ANY	= -359,
@@ -455,4 +463,116 @@ enum item_masks {
 	MASK_PARTY_INVISIBLE	= 0x40,
 	MASK_TRANSLUCENT		= 0x80,
 	MASK_ALL_UNSEEN			= 0xB0		//MASK_EGG+MASK_INVISIBLE+MASK_TRANSLUCENT
+};
+
+enum Speech_clips {
+	SPEECH_GUARDIAN_GO_AWAY = 25,
+};
+
+/*
+ *	NPC animation frames. Use these with UI_set_item_frame or (preferably) in
+ *	script blocks, with 'actor frame'.
+ *	e.g.: script AVATAR {  actor frame STAND; actor frame USE; actor frame
+ *	SWING_1; actor_frame STAND; }
+ *	Important note: use 'actor frame' with NPCs instead of 'frame', as 'actor
+ *	frame' takes the NPC's current facing into account.
+ */
+enum npc_frames {
+	STAND		= 0,
+	WALK_1		= 1,
+	WALK_2		= 2,
+
+	USE			= 3,	//general use motion
+
+	SWING_1		= 4,	//start of one-handed swing, arm up over shoulder
+	SWING_2		= 5,	//middle of one-handed swing, arm out to the side
+	SWING_3 	= 6,	//end of one-handed swing, arm out to the front
+
+	SWING_2H_1 	= 7,	//start of 2-handed swing, arms up over shoulder
+	SWING_2H_2 	= 8,	//middle of 2-handed swing, arms out to the side
+	SWING_2H_3	= 9,	//end of 2-handed swing, arms out to the front
+
+	SIT			= 10,	//sitting down
+	LEAN		= 11,	//leaning down
+	KNEEL		= 12,	//kneeling on one knee
+	LIE			= 13,	//lying down
+	CAST_1		= 14,	//both arms high in the air (casting motion)
+	CAST_2		= 15	//both arms stretched out (casting motion)
+};
+
+//NPC animation frames, WITH rotation bit. Use these with UI_set_item_frame_rot
+//or (preferably) in script blocks, with 'frame'.
+//e.g.: script AVATAR {  frame STAND_WEST; frame USE_NORTH; frame SWING_1_SOUTH; frame STAND_EAST; }
+enum npc_rot_frames {
+	STAND_NORTH			= 0x00,
+	WALK_1_NORTH		= 0x01,
+	WALK_2_NORTH		= 0x02,
+	USE_NORTH			= 0x03,
+	SWING_1_NORTH		= 0x04,
+	SWING_2_NORTH		= 0x05,
+	SWING_3_NORTH		= 0x06,
+	SWING_2H_1_NORTH	= 0x07,
+	SWING_2H_2_NORTH	= 0x08,
+	SWING_2H_3_NORTH	= 0x09,
+	SIT_NORTH			= 0x0A,
+	LEAN_NORTH			= 0x0B,
+	KNEEL_NORTH			= 0x0C,
+	LIE_NORTH			= 0x0D,
+	CAST_1_NORTH		= 0x0E,
+	CAST_2_NORTH		= 0x0F,
+	STAND_SOUTH			= 0x10,
+	WALK_1_SOUTH		= 0x11,
+	WALK_2_SOUTH		= 0x12,
+	USE_SOUTH			= 0x13,
+	SWING_1_SOUTH		= 0x14,
+	SWING_2_SOUTH		= 0x15,
+	SWING_3_SOUTH		= 0x16,
+	SWING_2H_1_SOUTH	= 0x17,
+	SWING_2H_2_SOUTH	= 0x18,
+	SWING_2H_3_SOUTH	= 0x19,
+	SIT_SOUTH			= 0x1A,
+	LEAN_SOUTH			= 0x1B,
+	KNEEL_SOUTH			= 0x1C,
+	LIE_SOUTH			= 0x1D,
+	CAST_1_SOUTH		= 0x1E,
+	CAST_2_SOUTH		= 0x1F,
+	STAND_WEST			= 0x20,
+	WALK_1_WEST			= 0x21,
+	WALK_2_WEST			= 0x22,
+	USE_WEST			= 0x23,
+	SWING_1_WEST		= 0x24,
+	SWING_2_WEST		= 0x25,
+	SWING_3_WEST		= 0x26,
+	SWING_2H_1_WEST		= 0x27,
+	SWING_2H_2_WEST		= 0x28,
+	SWING_2H_3_WEST		= 0x29,
+	SIT_WEST			= 0x2A,
+	LEAN_WEST			= 0x2B,
+	KNEEL_WEST			= 0x2C,
+	LIE_WEST			= 0x2D,
+	CAST_1_WEST			= 0x2E,
+	CAST_2_WEST			= 0x2F,
+	STAND_EAST			= 0x30,
+	WALK_1_EAST			= 0x31,
+	WALK_2_EAST			= 0x32,
+	USE_EAST			= 0x33,
+	SWING_1_EAST		= 0x34,
+	SWING_2_EAST		= 0x35,
+	SWING_3_EAST		= 0x36,
+	SWING_2H_1_EAST		= 0x37,
+	SWING_2H_2_EAST		= 0x38,
+	SWING_2H_3_EAST		= 0x39,
+	SIT_EAST			= 0x3A,
+	LEAN_EAST			= 0x3B,
+	KNEEL_EAST			= 0x3C,
+	LIE_EAST			= 0x3D,
+	CAST_1_EAST			= 0x3E,
+	CAST_2_EAST			= 0x3F
+};
+
+enum Training_codes {
+	TRAIN_MISSING_SKILL = 0,
+	TRAIN_MISSING_GOLD = 1,
+	TRAIN_OVER_SKILLED = 2,
+	TRAIN_CAN_TRAIN = 3,
 };

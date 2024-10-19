@@ -181,6 +181,14 @@ enum damage_types {
 	SONIC_DAMAGE		= 5
 };
 
+// tick multipliers, for use with UI_advance_time or script statements
+enum times {
+	TICK	= 1,
+	MINUTE	= 25,
+	HOUR	= 1500,
+	DAY		= (long)36000,
+};
+
 enum wildcards {
 	FIND_ON_SCREEN	= -359,
 	QUANTITY_ANY	= -359,

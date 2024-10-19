@@ -76,7 +76,7 @@ void Func009A shape#(SHAPE_MONSTER_MAGE) () {
 				var var000C = find_nearby(SHAPE_PATH_EGG, 0, MASK_EGG);
 				if (var000C) {
 					for (var000F in var000C) {
-						if ((var000F->get_item_frame() == 4)
+						if ((var000F->get_item_frame() == FRAME_EGG_WEATHER)
 							&& (get_item_frame() >= 16)) {
 							item_say("@Ah, a wall.@");
 							var var0010 = script item after 18 ticks {
@@ -92,7 +92,8 @@ void Func009A shape#(SHAPE_MONSTER_MAGE) () {
 			}
 		}
 	}
-	if (!get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN, 4)) {
+	if (!get_cont_items(
+			SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN, FRAME_SCROLL_INVISIBLE)) {
 		return;
 	}
 	if (event == DOUBLECLICK) {
@@ -217,7 +218,9 @@ void Func009A shape#(SHAPE_MONSTER_MAGE) () {
 					"thou by chance have the parchment entitled Scroll of "
 					"Infinity with thee?");
 				if (Func090A()) {
-					if (!PARTY->count_objects(SHAPE_SCROLL, QUALITY_SCROLL_OF_INFINITY, 1)) {
+					if (!PARTY->count_objects(
+								SHAPE_SCROLL, QUALITY_SCROLL_OF_INFINITY,
+								FRAME_SCROLL_OPENED)) {
 						say("\"If thou dost not have the scroll, I cannot help "
 							"thee in this matter.\"");
 					} else {
@@ -257,7 +260,9 @@ void Func009A shape#(SHAPE_MONSTER_MAGE) () {
 				say("\"Dost thou have the Scroll of Infinity amongst thy "
 					"possessions?\"");
 				if (Func090A()) {
-					if (!PARTY->count_objects(SHAPE_SCROLL, QUALITY_SCROLL_OF_INFINITY, 1)) {
+					if (!PARTY->count_objects(
+								SHAPE_SCROLL, QUALITY_SCROLL_OF_INFINITY,
+								FRAME_SCROLL_OPENED)) {
 						say("\"I needs must touch the scroll to glean its "
 							"meaning. Else I'll not be able to help thee in "
 							"this matter.\"");
@@ -1043,7 +1048,7 @@ void Func00FB shape#(SHAPE_SAILS) () {
 			}
 		} else {
 			clear_item_flag(ACTIVE_SAILOR);
-			Func0830(var0001, 0x0000);
+			Func0830(var0001, 0);
 			clear_item_flag(ON_MOVING_BARGE);
 			clear_item_flag(ACTIVE_BARGE);
 			UI_play_music(0x00FF, 0x0000);
@@ -1051,7 +1056,7 @@ void Func00FB shape#(SHAPE_SAILS) () {
 	}
 }
 
-void Func00FC shape#(SHAPE_GRANDFATHER_CLOCK) () {
+void Func00FC shape#(SHAPE_GRANDFATHER_CLOCK_EW) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = UI_game_hour();
 		if (var0000 > 12) {
@@ -1124,7 +1129,8 @@ void Func0105 shape#(SHAPE_LOOM) () {
 		};
 	}
 	if (event == SCRIPTED) {
-		var var0002 = AVATAR->get_cont_items(SHAPE_SPINDLE_OF_THREAD, QUALITY_ANY, FRAME_ANY);
+		var var0002 = AVATAR->get_cont_items(
+				SHAPE_SPINDLE_OF_THREAD, QUALITY_ANY, FRAME_ANY);
 		if (var0002) {
 			var0002->remove_item();
 		}
@@ -1225,12 +1231,12 @@ void Func0124 shape#(SHAPE_SEAT) () {
 	if (event == DOUBLECLICK) {
 		if (get_barge()) {
 			var var0000 = Func080C(item);
-			if ((var0000 == 0x028C) || (var0000 == 0x0348)) {
+			if ((var0000 == SHAPE_CART_PIECE) || (var0000 == SHAPE_FLYING_CARPET)) {
 				if (get_item_flag(ON_MOVING_BARGE)) {
-					if (var0000 == 0x028C) {
+					if (var0000 == SHAPE_CART_PIECE) {
 						item->Func028C();
 					}
-					if (var0000 == 0x0348) {
+					if (var0000 == SHAPE_FLYING_CARPET) {
 						item->Func0348();
 					}
 				} else {
@@ -1386,7 +1392,7 @@ void Func012F shape#(SHAPE_METAL_WALL_EW) () {
 
 void Func0133 shape#(SHAPE_LABORATORY_BURNER) () {
 	if (event == DOUBLECLICK) {
-		if (get_item_frame() == 0) {
+		if (get_item_frame() == FRAME_LAB_BURNER_OFF) {
 			struct<Position> var0000 = get_object_position();
 			var var0001 = find_nearby(SHAPE_POTION, 5, MASK_NONE);
 			var var0002 = NULL_OBJ;
@@ -1429,7 +1435,8 @@ void Func0133 shape#(SHAPE_LABORATORY_BURNER) () {
 					if ((var000F.x == (var0000.x + 2))
 						&& ((var000F.y == (var0000.y - 2))
 							&& (var000F.z == var0000.z))) {
-						var var0010 = find_nearby(SHAPE_ALCHEMIST_DEVICE, 5, MASK_NONE);
+						var var0010 = find_nearby(
+								SHAPE_ALCHEMIST_DEVICE, 5, MASK_NONE);
 						for (var0013 in var0010) {
 							struct<Position> var0014
 									= var0013->get_object_position();
@@ -1479,7 +1486,7 @@ void Func0133 shape#(SHAPE_LABORATORY_BURNER) () {
 				previous frame cycle;
 			};
 		} else {
-			set_item_frame(0);
+			set_item_frame(FRAME_LAB_BURNER_OFF);
 		}
 	}
 }
@@ -1700,304 +1707,295 @@ void Func017B shape#(SHAPE_SIGN) () {
 	}
 	var var0000 = Func0908();
 	var var0001 = get_item_quality();
-	if (var0001 > 0x0097) {
-		UI_display_runes(0x0031, ["THIS IS", "NOT A", "VALID", "SIGN"]);
-	} else if (var0001 == 0x0000) {
-		UI_display_runes(
-				0x0031, ["drink", "at\{dot}\{th}e", "gilded", "lizard"]);
-	} else if (var0001 == 0x0001) {
-		UI_display_runes(0x0031, ["skara", "brae~", "~population", "47"]);
-	} else if (var0001 == 0x0002) {
-		UI_display_runes(0x0031, ["trinsic"]);
-	} else if (var0001 == 0x0003) {
-		UI_display_runes(0x0031, ["\{th}e", "honorable", "hound"]);
-	} else if (var0001 == 0x0004) {
-		UI_display_runes(0x0031, ["FELLOWSHIP", "HALL"]);
-	} else if (var0001 == 0x0005) {
-		UI_display_runes(0x0031, ["britain"]);
-	} else if (var0001 == 0x0006) {
-		UI_display_runes(
-				0x0031, ["COMING:", "RAYMUNDO'S", "@TRIALS OF", "THE AVATAR@"]);
-	} else if (var0001 == 0x0007) {
-		UI_display_runes(0x0031, ["RESERVE", "THY", "SEATS", "NOW"]);
-	} else if (var0001 == 0x0008) {
-		UI_display_runes(0x0031, ["royal", "museum"]);
-	} else if (var0001 == 0x0009) {
-		UI_display_runes(0x0031, ["\{th}e", "music", "hall"]);
-	} else if (var0001 == 0x000B) {
-		UI_display_runes(0x0031, ["\{th}e", "wayfarer's", "inn"]);
-	} else if (var0001 == 0x000C) {
-		UI_display_runes(0x0031, ["iolos", "bows"]);
-	} else if (var0001 == 0x000D) {
-		UI_display_runes(0x0031, ["\{th}e", "blue", "boar"]);
-	} else if (var0001 == 0x000E) {
-		UI_display_runes(0x0031, ["gayes", "clo\{th}iers"]);
-	} else if (var0001 == 0x000F) {
-		UI_display_runes(0x0031, ["nor\{th}", "\{st}ar", "armoury"]);
-	} else if (var0001 == 0x0010) {
-		UI_display_runes(0x0031, ["\{th}e", "oaken", "oar"]);
-	} else if (var0001 == 0x0011) {
-		UI_display_runes(0x0031, ["bakery"]);
-	} else if (var0001 == 0x0012) {
-		UI_display_runes(0x0031, ["jeweler"]);
-	} else if (var0001 == 0x0013) {
-		UI_display_runes(0x0031, ["farmers", "market"]);
-	} else if (var0001 == 0x0014) {
-		UI_display_runes(0x0031, ["apo\{th}ecary"]);
-	} else if (var0001 == 0x0015) {
-		UI_display_runes(0x0031, ["royal", "mint"]);
-	} else if (var0001 == 0x0016) {
-		UI_display_runes(0x0031, ["csil", "\{th}e", "h\{ea}ler"]);
-	} else if (var0001 == 0x0017) {
-		UI_display_runes(0x0031, ["provisions"]);
-	} else if (var0001 == 0x0018) {
-		UI_display_runes(0x0031, ["royal", "orchards"]);
-	} else if (var0001 == 0x0019) {
-		UI_display_runes(
-				0x0031, ["TEST OF STRENGTH", " -- ", "ART THOU AN AVATAR?"]);
-	} else if (var0001 == 0x001A) {
-		UI_display_runes(0x0031, ["punch and", "judy", "show"]);
-	} else if (var0001 == 0x001B) {
-		UI_display_runes(0x0031, ["fish\{dot}n\{dot}chips"]);
-	} else if (var0001 == 0x001C) {
-		UI_display_runes(0x0031, ["cove"]);
-	} else if (var0001 == 0x001D) {
-		UI_display_runes(0x0031, ["\{th}e", "emerald"]);
-	} else if (var0001 == 0x001E) {
-		UI_display_runes(0x0031, ["out\{dot}n\{dot}inn"]);
-	} else if (var0001 == 0x001F) {
-		UI_display_runes(0x0031, ["lovers", "walk"]);
-	} else if (var0001 == 0x0020) {
-		UI_display_runes(0x0031, ["buccaneers", "den"]);
-	} else if (var0001 == 0x0021) {
-		UI_display_runes(0x0031, "\{th}e\{dot}ba\{th}s");
-	} else if (var0001 == 0x0022) {
-		UI_display_runes(0x0031, ["house", "of", "games"]);
-	} else if (var0001 == 0x0023) {
-		UI_display_runes(0x0031, ["\{th}e", "fallen", "virgin"]);
-	} else if (var0001 == 0x0024) {
-		UI_display_runes(0x0031, "budos");
-	} else if (var0001 == 0x0025) {
-		UI_display_runes(0x0031, ["MEDITATION", "RETREAT"]);
-	} else if (var0001 == 0x002C) {
-		UI_display_runes(0x0031, ["GO THIS WAY"]);
-	} else if (var0001 == 0x0034) {
-		UI_display_runes(0x0031, ["lycaeum"]);
-	} else if (var0001 == 0x0035) {
-		UI_display_runes(0x0031, ["\{th}e", "hallowed", "dock"]);
-	} else if (var0001 == 0x0036) {
-		UI_display_runes(0x0031, ["\{th}e", "friendly", "knave"]);
-	} else if (var0001 == 0x0037) {
-		UI_display_runes(0x0031, ["\{th}e", "gilded", "lizard"]);
-	} else if (var0001 == 0x0038) {
-		UI_display_runes(0x0031, ["h\{ea}ler"]);
-	} else if (var0001 == 0x0039) {
-		UI_display_runes(0x0031, ["eldro\{th}s", "provisions"]);
-	} else if (var0001 == 0x003A) {
-		UI_display_runes(0x0031, ["house", "of", "items"]);
-	} else if (var0001 == 0x003B) {
-		UI_display_runes(0x0031, ["britannian", "mini\{ng}", "company"]);
-	} else if (var0001 == 0x003C) {
-		UI_display_runes(0x0031, ["minoc", "branch"]);
-	} else if (var0001 == 0x003D) {
-		UI_display_runes(0x0031, ["trainer"]);
-	} else if (var0001 == 0x003E) {
-		UI_display_runes(0x0031, ["scholar"]);
-	} else if (var0001 == 0x003F) {
-		UI_display_runes(0x0031, ["town\{dot}hall"]);
-	} else if (var0001 == 0x0040) {
-		UI_display_runes(0x0031, ["wis-surs", "magics"]);
-	} else if (var0001 == 0x0041) {
-		UI_display_runes(0x0031, ["observatory"]);
-	} else if (var0001 == 0x0042) {
-		UI_display_runes(0x0031, ["vesper"]);
-	} else if (var0001 == 0x0043) {
-		UI_display_runes(0x0031, ["moo\{ng}low"]);
-	} else if (var0001 == 0x0044) {
-		UI_display_runes(0x0031, ["terfin"]);
-	} else if (var0001 == 0x0045) {
-		UI_display_runes(0x0031, ["serpents", "hold"]);
-	} else if (var0001 == 0x0046) {
-		UI_display_runes(0x0031, ["empa\{th}", "abbey"]);
-	} else if (var0001 == 0x0047) {
-		UI_display_runes(0x0031, ["jhelom"]);
-	} else if (var0001 == 0x0048) {
-		UI_display_runes(0x0031, ["minoc"]);
-	} else if (var0001 == 0x0049) {
-		UI_display_runes(0x0031, ["undertaker"]);
-	} else if (var0001 == 0x004A) {
-		UI_display_runes(0x0031, ["high", "court", "of", "britannia"]);
-	} else if (var0001 == 0x004B) {
-		UI_display_runes(0x0031, ["prison"]);
-	} else if (var0001 == 0x004C) {
-		UI_display_runes(0x0031, ["\{th}e", "mode\{st}", "damsel"]);
-	} else if (var0001 == 0x004D) {
-		UI_display_runes(0x0031, ["armoury"]);
-	} else if (var0001 == 0x004E) {
-		UI_display_runes(0x0031, ["blacksmi\{th}"]);
-	} else if (var0001 == 0x004F) {
-		UI_display_runes(0x0031, ["recr\{ea}tion", "center"]);
-	} else if (var0001 == 0x0050) {
-		UI_display_runes(0x0031, ["hall", "of", "knowledge"]);
-	} else if (var0001 == 0x0051) {
-		UI_display_runes(0x0031, ["hello", "\{th}ere", "avatar"]);
-	} else if (var0001 == 0x0052) {
-		UI_display_runes(
-				0x0031,
-				["tonight\{dot}9-12", "in\{dot}person", "the\{dot}avatars"]);
-	} else if (var0001 == 0x0053) {
-		UI_display_runes(0x0031, ["why", "ask", "why?"]);
-	} else if (var0001 == 0x0054) {
-		UI_display_runes(0x0031, ["\{st}r\{ee}t", "of", "honor"]);
-	} else if (var0001 == 0x0055) {
-		UI_display_runes(0x0031, ["paladins", "pa\{th}"]);
-	} else if (var0001 == 0x0056) {
-		UI_display_runes(0x0031, ["AVENUE", "OF", "THE", "FELLOWSHIP"]);
-	} else if (var0001 == 0x0057) {
-		UI_display_runes(0x0031, ["widows", "walk"]);
-	} else if (var0001 == 0x0058) {
-		UI_display_runes(0x0031, ["harolds", "hallway"]);
-	} else if (var0001 == 0x0059) {
-		UI_display_runes(0x0031, ["fools\{dot}way"]);
-	} else if (var0001 == 0x005A) {
-		UI_display_runes(0x0031, ["whitsaber", "road"]);
-	} else if (var0001 == 0x005B) {
-		UI_display_runes(0x0031, ["\{st}rand"]);
-	} else if (var0001 == 0x005C) {
-		UI_display_runes(0x0031, ["chalice", "avenue"]);
-	} else if (var0001 == 0x005D) {
-		UI_display_runes(0x0031, ["two", "coves"]);
-	} else if (var0001 == 0x005E) {
-		UI_display_runes(0x0031, ["we\{st}", "wall", "road"]);
-	} else if (var0001 == 0x005F) {
-		UI_display_runes(0x0031, ["\{ea}\{st}", "wall", "road"]);
-	} else if (var0001 == 0x0060) {
-		UI_display_runes(0x0031, ["nor\{th}", "wall", "road"]);
-	} else if (var0001 == 0x0061) {
-		UI_display_runes(0x0031, ["sou\{th}", "wall", "road"]);
-	} else if (var0001 == 0x0062) {
-		UI_display_runes(0x0031, ["heroes", "way"]);
-	} else if (var0001 == 0x0063) {
-		UI_display_runes(0x0031, ["iolos", "sou\{th}"]);
-	} else if (var0001 == 0x0064) {
-		UI_display_runes(0x0031, ["paws"]);
-	} else if (var0001 == 0x0065) {
-		UI_display_runes(0x0031, ["\{th}e", "salty\{dot}dog"]);
-	} else if (var0001 == 0x0066) {
-		UI_display_runes(0x0031, ["FELLOWSHIP", "SHELTER"]);
-	} else if (var0001 == 0x0067) {
-		UI_display_runes(0x0031, ["vesper", "branch"]);
-	} else if (var0001 == 0x0068) {
-		UI_display_runes(0x0031, ["\{th}e", "checquered", "cork"]);
-	} else if (var0001 == 0x0069) {
-		UI_display_runes(0x0031, ["artists", "guild"]);
-	} else if (var0001 == 0x006A) {
-		UI_display_runes(0x0031, ["\{th}e bunk", "and", "\{st}ool"]);
-	} else if (var0001 == 0x006B) {
-		UI_display_runes(0x0031, ["\{th}e", "library", "of", "scars"]);
-	} else if (var0001 == 0x006C) {
-		UI_display_runes(0x0031, ["carlyns", "clo\{th}es"]);
-	} else if (var0001 == 0x006D) {
-		UI_display_runes(0x0031, [
+	if (var0001 > QUALITY_SIGN_FOLLOW_THE_FIRE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["THIS IS", "NOT A", "VALID", "SIGN"]);
+	} else if (var0001 == QUALITY_SIGN_DRINK_AT_GILDED_LIZARD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["drink", "at\{dot}\{th}e", "gilded", "lizard"]);
+	} else if (var0001 == QUALITY_SIGN_SKARA_BRAE_POPULATION) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["skara", "brae~", "~population", "47"]);
+	} else if (var0001 == QUALITY_SIGN_TRINSIC) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["trinsic"]);
+	} else if (var0001 == QUALITY_SIGN_HONORABLE_HOUND) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "honorable", "hound"]);
+	} else if (var0001 == QUALITY_SIGN_FELLOWSHIP_HALL) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["FELLOWSHIP", "HALL"]);
+	} else if (var0001 == QUALITY_SIGN_BRITAIN) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["britain"]);
+	} else if (var0001 == QUALITY_SIGN_COMING_RAYMUNDOS_TRIALS_OF_THE_AVATAR) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["COMING:", "RAYMUNDO'S", "@TRIALS OF", "THE AVATAR@"]);
+	} else if (var0001 == QUALITY_SIGN_RESERVE_THEY_SEATS_NOW) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["RESERVE", "THY", "SEATS", "NOW"]);
+	} else if (var0001 == QUALITY_SIGN_ROYAL_MUSEUM) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["royal", "museum"]);
+	} else if (var0001 == QUALITY_SIGN_MUSIC_HALL) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "music", "hall"]);
+	} else if (var0001 == QUALITY_SIGN_WAYFARERS_INN) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "wayfarer's", "inn"]);
+	} else if (var0001 == QUALITY_SIGN_IOLOS_BOWS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["iolos", "bows"]);
+	} else if (var0001 == QUALITY_SIGN_BLUE_BOAR) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "blue", "boar"]);
+	} else if (var0001 == QUALITY_SIGN_GAYES_CLOTHIERS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["gayes", "clo\{th}iers"]);
+	} else if (var0001 == QUALITY_SIGN_NORTH_STAR_ARMOURY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["nor\{th}", "\{st}ar", "armoury"]);
+	} else if (var0001 == QUALITY_SIGN_OAKEN_OAR) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "oaken", "oar"]);
+	} else if (var0001 == QUALITY_SIGN_BAKERY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["bakery"]);
+	} else if (var0001 == QUALITY_SIGN_JEWELER) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["jeweler"]);
+	} else if (var0001 == QUALITY_SIGN_FARMERS_MARKET) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["farmers", "market"]);
+	} else if (var0001 == QUALITY_SIGN_APOTHECARY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["apo\{th}ecary"]);
+	} else if (var0001 == QUALITY_SIGN_ROYAL_MINT) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["royal", "mint"]);
+	} else if (var0001 == QUALITY_SIGN_CSIL_THE_HEALER) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["csil", "\{th}e", "h\{ea}ler"]);
+	} else if (var0001 == QUALITY_SIGN_PROVISIONS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["provisions"]);
+	} else if (var0001 == QUALITY_SIGN_ROYAL_ORCHARDS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["royal", "orchards"]);
+	} else if (var0001 == QUALITY_SIGN_TEST_OF_STRENGTH) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["TEST OF STRENGTH", " -- ", "ART THOU AN AVATAR?"]);
+	} else if (var0001 == QUALITY_SIGN_PUNCH_AND_JUDY_SHOW) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["punch and", "judy", "show"]);
+	} else if (var0001 == QUALITY_SIGN_FISH_N_CHIPS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["fish\{dot}n\{dot}chips"]);
+	} else if (var0001 == QUALITY_SIGN_COVE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["cove"]);
+	} else if (var0001 == QUALITY_SIGN_EMERALD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "emerald"]);
+	} else if (var0001 == QUALITY_SIGN_OUT_N_INN) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["out\{dot}n\{dot}inn"]);
+	} else if (var0001 == QUALITY_SIGN_LOVERS_WALK) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["lovers", "walk"]);
+	} else if (var0001 == QUALITY_SIGN_BUCCANEERS_DEN) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["buccaneers", "den"]);
+	} else if (var0001 == QUALITY_SIGN_THE_BATHS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, "\{th}e\{dot}ba\{th}s");
+	} else if (var0001 == QUALITY_SIGN_HOUSE_OF_GAMES) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["house", "of", "games"]);
+	} else if (var0001 == QUALITY_SIGN_FALLEN_VIRGIN) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "fallen", "virgin"]);
+	} else if (var0001 == QUALITY_SIGN_BUDOS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, "budos");
+	} else if (var0001 == QUALITY_SIGN_MEDITATION_RETREAT) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["MEDITATION", "RETREAT"]);
+	} else if (var0001 == QUALITY_SIGN_GO_THIS_WAY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["GO THIS WAY"]);
+	} else if (var0001 == QUALITY_SIGN_LYCAEUM) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["lycaeum"]);
+	} else if (var0001 == QUALITY_SIGN_HALLOWED_DOCK) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "hallowed", "dock"]);
+	} else if (var0001 == QUALITY_SIGN_FRIENDLY_KNAVE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "friendly", "knave"]);
+	} else if (var0001 == QUALITY_SIGN_GILDED_LIZARD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "gilded", "lizard"]);
+	} else if (var0001 == QUALITY_SIGN_HEALER) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["h\{ea}ler"]);
+	} else if (var0001 == QUALITY_SIGN_ELDROTHS_PROVISIONS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["eldro\{th}s", "provisions"]);
+	} else if (var0001 == QUALITY_SIGN_HOUSE_OF_ITEMS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["house", "of", "items"]);
+	} else if (var0001 == QUALITY_SIGN_BRITANNIAN_MINING_COMPANY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["britannian", "mini\{ng}", "company"]);
+	} else if (var0001 == QUALITY_SIGN_MINOC_BRANCH) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["minoc", "branch"]);
+	} else if (var0001 == QUALITY_SIGN_TRAINER) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["trainer"]);
+	} else if (var0001 == QUALITY_SIGN_SCHOLAR) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["scholar"]);
+	} else if (var0001 == QUALITY_SIGN_TOWN_HALL) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["town\{dot}hall"]);
+	} else if (var0001 == QUALITY_SIGN_WIS_SUR_MAGICS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["wis-surs", "magics"]);
+	} else if (var0001 == QUALITY_SIGN_OBSERVATORY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["observatory"]);
+	} else if (var0001 == QUALITY_SIGN_VESPER) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["vesper"]);
+	} else if (var0001 == QUALITY_SIGN_MOONGLOW) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["moo\{ng}low"]);
+	} else if (var0001 == QUALITY_SIGN_TERFIN) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["terfin"]);
+	} else if (var0001 == QUALITY_SIGN_SERPENTS_HOLD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["serpents", "hold"]);
+	} else if (var0001 == QUALITY_SIGN_EMPATH_ABBEY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["empa\{th}", "abbey"]);
+	} else if (var0001 == QUALITY_SIGN_JHELOM) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["jhelom"]);
+	} else if (var0001 == QUALITY_SIGN_MINOC) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["minoc"]);
+	} else if (var0001 == QUALITY_SIGN_UNDERTAKER) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["undertaker"]);
+	} else if (var0001 == QUALITY_SIGN_HIGH_COURT_OF_BRITANNIA) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["high", "court", "of", "britannia"]);
+	} else if (var0001 == QUALITY_SIGN_PRISON) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["prison"]);
+	} else if (var0001 == QUALITY_SIGN_MODEST_DAMSEL) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "mode\{st}", "damsel"]);
+	} else if (var0001 == QUALITY_SIGN_ARMOURY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["armoury"]);
+	} else if (var0001 == QUALITY_SIGN_BLACKSMITH) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["blacksmi\{th}"]);
+	} else if (var0001 == QUALITY_SIGN_RECREATION_CENTER) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["recr\{ea}tion", "center"]);
+	} else if (var0001 == QUALITY_SIGN_HALL_OF_KNOWLEDGE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["hall", "of", "knowledge"]);
+	} else if (var0001 == QUALITY_SIGN_HELLO_THERE_AVATAR) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["hello", "\{th}ere", "avatar"]);
+	} else if (var0001 == QUALITY_SIGN_TONIGHT_9_12_IN_PERSON_THE_AVATARS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["tonight\{dot}9-12", "in\{dot}person", "the\{dot}avatars"]);
+	} else if (var0001 == QUALITY_SIGN_WHY_ASK_WHY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["why", "ask", "why?"]);
+	} else if (var0001 == QUALITY_SIGN_STREET_OF_HONOR) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{st}r\{ee}t", "of", "honor"]);
+	} else if (var0001 == QUALITY_SIGN_PALADINS_PATH) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["paladins", "pa\{th}"]);
+	} else if (var0001 == QUALITY_SIGN_AVENUE_OF_THE_FELLOWSHIP) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["AVENUE", "OF", "THE", "FELLOWSHIP"]);
+	} else if (var0001 == QUALITY_SIGN_WIDOWS_WALK) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["widows", "walk"]);
+	} else if (var0001 == QUALITY_SIGN_HAROLDS_HALLWAY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["harolds", "hallway"]);
+	} else if (var0001 == QUALITY_SIGN_FOOLS_WAY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["fools\{dot}way"]);
+	} else if (var0001 == QUALITY_SIGN_WHITSABER_ROAD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["whitsaber", "road"]);
+	} else if (var0001 == QUALITY_SIGN_STRAND) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{st}rand"]);
+	} else if (var0001 == QUALITY_SIGN_CHALICE_AVENUE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["chalice", "avenue"]);
+	} else if (var0001 == QUALITY_SIGN_TWO_COVES) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["two", "coves"]);
+	} else if (var0001 == QUALITY_SIGN_WEST_WALL_ROAD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["we\{st}", "wall", "road"]);
+	} else if (var0001 == QUALITY_SIGN_EAST_WALL_ROAD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{ea}\{st}", "wall", "road"]);
+	} else if (var0001 == QUALITY_SIGN_NORTH_WALL_ROAD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["nor\{th}", "wall", "road"]);
+	} else if (var0001 == QUALITY_SIGN_SOUTH_WALL_ROAD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["sou\{th}", "wall", "road"]);
+	} else if (var0001 == QUALITY_SIGN_HEROES_WAY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["heroes", "way"]);
+	} else if (var0001 == QUALITY_SIGN_IOLOS_SOUTH) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["iolos", "sou\{th}"]);
+	} else if (var0001 == QUALITY_SIGN_PAWS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["paws"]);
+	} else if (var0001 == QUALITY_SIGN_SALTY_DOG) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "salty\{dot}dog"]);
+	} else if (var0001 == QUALITY_SIGN_FELLOWSHIP_SHELTER) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["FELLOWSHIP", "SHELTER"]);
+	} else if (var0001 == QUALITY_SIGN_VESPER_BRANCH) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["vesper", "branch"]);
+	} else if (var0001 == QUALITY_SIGN_CHECKERED_CORK) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "checquered", "cork"]);
+	} else if (var0001 == QUALITY_SIGN_ARTISTS_GUILD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["artists", "guild"]);
+	} else if (var0001 == QUALITY_SIGN_THE_BUNK_AND_STOOL) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e bunk", "and", "\{st}ool"]);
+	} else if (var0001 == QUALITY_SIGN_LIBRARY_OF_SCARS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "library", "of", "scars"]);
+	} else if (var0001 == QUALITY_SIGN_CARLYNS_CLOTHES) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["carlyns", "clo\{th}es"]);
+	} else if (var0001 == QUALITY_SIGN_WITHIN_THESE_WALLS_LIES_MASTER_RICHARD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, [
 			"wi\{th}in\{dot}\{th}ese", "walls", "lies\{dot}ma\{st}er", "richard"
 		]);
-	} else if (var0001 == 0x006E) {
-		UI_display_runes(0x0031, ["ca\{st}le\{dot}way"]);
-	} else if (var0001 == 0x006F) {
-		UI_display_runes(0x0031, ["lord", "british", "lane"]);
-	} else if (var0001 == 0x0070) {
-		UI_display_runes(0x0031, ["noble\{dot}road"]);
-	} else if (var0001 == 0x0071) {
-		UI_display_runes(0x0031, ["we\{st}\{dot}end", "avenue"]);
-	} else if (var0001 == 0x0072) {
-		UI_display_runes(0x0031, ["hazle\{dot}lane"]);
-	} else if (var0001 == 0x0073) {
-		UI_display_runes(0x0031, ["park", "square", "nor\{th}"]);
-	} else if (var0001 == 0x0074) {
-		UI_display_runes(0x0031, ["park", "square", "sou\{th}"]);
-	} else if (var0001 == 0x0075) {
-		UI_display_runes(0x0031, ["market", "\{st}r\{ee}t"]);
-	} else if (var0001 == 0x0076) {
-		UI_display_runes(0x0031, ["golden", "way"]);
-	} else if (var0001 == 0x0077) {
-		UI_display_runes(0x0031, ["center", "avenue"]);
-	} else if (var0001 == 0x0078) {
-		UI_display_runes(0x0031, ["spike", "lane"]);
-	} else if (var0001 == 0x0079) {
-		UI_display_runes(0x0031, ["avatar", "avenue"]);
-	} else if (var0001 == 0x007A) {
-		UI_display_runes(0x0031, ["\{st}able", "lane"]);
-	} else if (var0001 == 0x007B) {
-		UI_display_runes(0x0031, ["\{ea}\{st}", "end", "avenue"]);
-	} else if (var0001 == 0x007C) {
-		UI_display_runes(0x0031, ["farm", "road"]);
-	} else if (var0001 == 0x007D) {
-		UI_display_runes(0x0031, ["nugget", "\{st}r\{ee}t"]);
-	} else if (var0001 == 0x007E) {
-		UI_display_runes(0x0031, ["cool", "cove"]);
-	} else if (var0001 == 0x007F) {
-		UI_display_runes(0x0031, ["nor\{th}", "end", "avenue"]);
-	} else if (var0001 == 0x0080) {
-		UI_display_runes(0x0031, ["golden", "eye", "way"]);
-	} else if (var0001 == 0x0081) {
-		UI_display_runes(0x0031, ["to", "\{th}e", "dark", "tower"]);
-	} else if (var0001 == 0x0082) {
-		UI_display_runes(0x0031, ["BEWARE", "OF", "LANDSLIDES"]);
-	} else if (var0001 == 0x0083) {
-		UI_display_runes(0x0031, ["DANGER:", "DO", "NOT", "ENTER"]);
-	} else if (var0001 == 0x0084) {
-		UI_display_runes(0x0031, ["old", "number", "one"]);
-	} else if (var0001 == 0x0085) {
-		UI_display_runes(0x0031, ["do\{dot}not", "free", "\{th}e", "liche"]);
-	} else if (var0001 == 0x0086) {
-		UI_display_runes(0x0031, ["beware", "mon\{st}ers", "wi\{th}in"]);
-	} else if (var0001 == 0x0087) {
-		UI_display_runes(0x0031, ["paupers", "graves"]);
-	} else if (var0001 == 0x0088) {
-		UI_display_runes(
-				0x0031,
+	} else if (var0001 == QUALITY_SIGN_CASTLE_WAY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["ca\{st}le\{dot}way"]);
+	} else if (var0001 == QUALITY_SIGN_LORD_BRITISH_LANE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["lord", "british", "lane"]);
+	} else if (var0001 == QUALITY_SIGN_NOBLE_ROAD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["noble\{dot}road"]);
+	} else if (var0001 == QUALITY_SIGN_WEST_END_AVENUE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["we\{st}\{dot}end", "avenue"]);
+	} else if (var0001 == QUALITY_SIGN_HAZLE_LANE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["hazle\{dot}lane"]);
+	} else if (var0001 == QUALITY_SIGN_PARK_SQUARE_NORTH) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["park", "square", "nor\{th}"]);
+	} else if (var0001 == QUALITY_SIGN_PARK_SQUARE_SOUTH) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["park", "square", "sou\{th}"]);
+	} else if (var0001 == QUALITY_SIGN_MARKET_STREET) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["market", "\{st}r\{ee}t"]);
+	} else if (var0001 == QUALITY_SIGN_GOLDEN_WAY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["golden", "way"]);
+	} else if (var0001 == QUALITY_SIGN_CENTER_AVENUE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["center", "avenue"]);
+	} else if (var0001 == QUALITY_SIGN_SPIKE_LANE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["spike", "lane"]);
+	} else if (var0001 == QUALITY_SIGN_AVATAR_AVENUE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["avatar", "avenue"]);
+	} else if (var0001 == QUALITY_SIGN_STABLE_LANE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{st}able", "lane"]);
+	} else if (var0001 == QUALITY_SIGN_EAST_END_AVENUE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["\{ea}\{st}", "end", "avenue"]);
+	} else if (var0001 == QUALITY_SIGN_FARM_ROAD) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["farm", "road"]);
+	} else if (var0001 == QUALITY_SIGN_NUGGET_STREET) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["nugget", "\{st}r\{ee}t"]);
+	} else if (var0001 == QUALITY_SIGN_COOL_COVE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["cool", "cove"]);
+	} else if (var0001 == QUALITY_SIGN_NORTH_END_AVENUE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["nor\{th}", "end", "avenue"]);
+	} else if (var0001 == QUALITY_SIGN_GOLDEN_EYE_WAY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["golden", "eye", "way"]);
+	} else if (var0001 == QUALITY_SIGN_TO_THE_DARK_TOWER) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["to", "\{th}e", "dark", "tower"]);
+	} else if (var0001 == QUALITY_SIGN_BEWARE_OF_LANDSLIDES) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["BEWARE", "OF", "LANDSLIDES"]);
+	} else if (var0001 == QUALITY_SIGN_DANGER_DO_NOT_ENTER) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["DANGER:", "DO", "NOT", "ENTER"]);
+	} else if (var0001 == QUALITY_SIGN_OLD_NUMBER_ONE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["old", "number", "one"]);
+	} else if (var0001 == QUALITY_SIGN_DO_NOT_FREE_THE_LICHE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["do\{dot}not", "free", "\{th}e", "liche"]);
+	} else if (var0001 == QUALITY_SIGN_BEWARE_MONSTERS_WITHIN) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["beware", "mon\{st}ers", "wi\{th}in"]);
+	} else if (var0001 == QUALITY_SIGN_PAUPERS_GRAVES) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["paupers", "graves"]);
+	} else if (var0001 == QUALITY_SIGN_MANRIK_A_SOUL_OF_A_SOUL) {
+		UI_display_runes(GUMP_WOODEN_SIGN,
 				["\{dot}manrik\{dot}", "a\{dot}soul", "of\{dot}a", "soul"]);
-	} else if (var0001 == 0x0089) {
-		UI_display_runes(0x0031, [
+	} else if (var0001 == QUALITY_SIGN_HERE_LIES_JULES_NO_WORDS_FOR_THE_LOSS) {
+		UI_display_runes(GUMP_WOODEN_SIGN, [
 			"here\{dot}lies", "jules\{dot}no", "words\{dot}for",
 			"\{th}e\{dot}loss"
 		]);
-	} else if (var0001 == 0x008A) {
-		UI_display_runes(
-				0x0031,
+	} else if (var0001 == QUALITY_SIGN_MORGAN_HER_DEATH_A_TRAGEDY) {
+		UI_display_runes(GUMP_WOODEN_SIGN,
 				["\{dot}morgan\{dot}", "her", "dea\{th}\{dot}a", "tragedy"]);
-	} else if (var0001 == 0x008B) {
-		UI_display_runes(
-				0x0031,
+	} else if (var0001 == QUALITY_SIGN_HERE_LIES_KETHIAN_FRIEND_TO_MANY) {
+		UI_display_runes(GUMP_WOODEN_SIGN,
 				["here\{dot}lies", "ke\{th}ian", "friend\{dot}to", "many"]);
-	} else if (var0001 == 0x008C) {
-		UI_display_runes(0x0031, [
+	} else if (var0001 == QUALITY_SIGN_WADLEY_HIS_SOUL_DEEPER_THAN_HIS_BODY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, [
 			"\{dot}wadley\{dot}", "his\{dot}soul", "deeper\{dot}\{th}an",
 			"his\{dot}body"
 		]);
-	} else if (var0001 == 0x008D) {
-		UI_display_runes(
-				0x0031, ["here\{dot}lies", "jenna", "kindred", "spirit"]);
-	} else if (var0001 == 0x008E) {
-		UI_display_runes(0x0031, ["d\{ea}d", "end"]);
-	} else if (var0001 == 0x008F) {
-		UI_display_runes(0x0031, ["to", "skara", "brae"]);
-	} else if (var0001 == 0x0090) {
-		UI_display_runes(0x0031, ["THE", "THRONE", "OF\{dot}THE", "GUARDIAN"]);
-	} else if (var0001 == 0x0091) {
-		UI_display_runes(0x0031, ["nor\{th}", "to", "britain"]);
-	} else if (var0001 == 0x0092) {
-		UI_display_runes(0x0031, ["pull", "lever"]);
-	} else if (var0001 == 0x0093) {
-		UI_display_runes(0x0031, ["round", "and", "round"]);
-	} else if (var0001 == 0x0094) {
-		UI_display_runes(0x0031, ["way", "out"]);
-	} else if (var0001 == 0x0095) {
-		UI_display_runes(0x0031, ["keep", "doors", "open"]);
-	} else if (var0001 == 150) {
-		UI_display_runes(0x0031, ["selwyns", "tower"]);
-	} else if (var0001 == 0x0097) {
-		UI_display_runes(0x0031, ["follow", "\{th}e", "fire"]);
+	} else if (var0001 == QUALITY_SIGN_HERE_LIES_JENNA_KINDRED_SPIRIT) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["here\{dot}lies", "jenna", "kindred", "spirit"]);
+	} else if (var0001 == QUALITY_SIGN_DEAD_END) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["d\{ea}d", "end"]);
+	} else if (var0001 == QUALITY_SIGN_TO_SKARA_BRAE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["to", "skara", "brae"]);
+	} else if (var0001 == QUALITY_SIGN_THE_THRONE_OF_THE_GUARDIAN) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["THE", "THRONE", "OF\{dot}THE", "GUARDIAN"]);
+	} else if (var0001 == QUALITY_SIGN_NORTH_TO_BRITAIN) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["nor\{th}", "to", "britain"]);
+	} else if (var0001 == QUALITY_SIGN_PULL_LEVER) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["pull", "lever"]);
+	} else if (var0001 == QUALITY_SIGN_ROUND_AND_ROUND) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["round", "and", "round"]);
+	} else if (var0001 == QUALITY_SIGN_WAY_OUT) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["way", "out"]);
+	} else if (var0001 == QUALITY_SIGN_KEEP_DOORS_OPEN) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["keep", "doors", "open"]);
+	} else if (var0001 == QUALITY_SIGN_SELWYNS_TOWER) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["selwyns", "tower"]);
+	} else if (var0001 == QUALITY_SIGN_FOLLOW_THE_FIRE) {
+		UI_display_runes(GUMP_WOODEN_SIGN, ["follow", "\{th}e", "fire"]);
 	}
 }
 
@@ -2145,7 +2143,8 @@ void Func01A2 shape#(SHAPE_GIANT_BONES) () {
 void Func01AF shape#(SHAPE_BELLOWS) () {
 	var var0000 = get_item_frame();
 	declare var var0002;
-	if ((var0000 >= FRAME_MAGIC_BELLOWS_OPEN) && (var0000 <= FRAME_MAGIC_BELLOWS_FLAT)) {
+	if (var0000 >= FRAME_MAGIC_BELLOWS_OPEN
+			&& var0000 <= FRAME_MAGIC_BELLOWS_FLAT) {
 		if (event == DOUBLECLICK) {
 			Func0828(item, 1, 0, -1, Func01AF, item, BG_PATH_SUCCESS);
 		}
@@ -2482,7 +2481,8 @@ void Func01B2 shape#(SHAPE_CASK) () {
 		struct<Position> var0000 = get_object_position();
 		var0000.x += 1;
 		var0000.y -= 1;
-		var var0001 = AVATAR->get_cont_items(SHAPE_BUCKET, QUALITY_ANY, FRAME_ANY);
+		var var0001 = AVATAR->get_cont_items(
+				SHAPE_BUCKET, QUALITY_ANY, FRAME_ANY);
 		declare var var0002;
 		if (var0001) {
 			var0002 = var0001->set_last_created();
@@ -2529,7 +2529,7 @@ void Func01D6 shape#(SHAPE_WELL) () {
 		var var0001 = [-5, -5];
 		var var0002 = [-1, -1];
 		Func0828(
-				item, var0001, var0002, 0x0000, Func032A, var0000,
+				item, var0001, var0002, 0, Func032A, var0000,
 				PATH_SUCCESS_9);
 	}
 }
@@ -2744,14 +2744,17 @@ void Func01F8 shape#(SHAPE_DRAGON) () {
 		if (!(var0001 == SHAPE_DRAGON)) {
 			var var0002 = find_nearby(SHAPE_DRAGON, 80, MASK_NPC);
 			for (var0005 in var0002) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS, 4)) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0000 = var0005;
 				}
 			}
 		} else {
 			var0000 = item;
 		}
-		if (!var0000->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS, 4)) {
+		if (!var0000->get_cont_items(
+				SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS, FRAME_SCROLL_INVISIBLE)) {
 			return;
 		}
 		DRACOTHRAXUS->show_npc_face(0x0000);
@@ -2981,7 +2984,8 @@ void Func0269 shape#(SHAPE_TIME_LORD) () {
 		abort;
 	}
 	TIME_LORD->show_npc_face(0x0000);
-	var var0000 = Func0931(PARTY, 0x0001, 0x0347, QUALITY_ANY, 0x0000);
+	var var0000 = Func0931(
+			PARTY, 1, SHAPE_HOURGLASS, QUALITY_ANY, FRAME_HOURGLASS_NORMAL);
 	if (gflags[BROKE_SPHERE] && (!gflags[TIMELORD_SAID_SPHERE])) {
 		say("\"Congratulations, Avatar, on destroying the Sphere. I am free "
 			"from my celestial prison. I thank thee. But I regret to inform "
@@ -3321,7 +3325,7 @@ void Func026F shape#(SHAPE_HAMMER) () {
 							if ((var0005 >= FRAME_BLACKSWORD_BLANK_LUKEWARM1)
 								&& (var0005 <= FRAME_BLACKSWORD_BLANK_COLD3)) {
 								Func0828(
-										var0002, 0x0000, 0x0002, 0x0000,
+										var0002, 0, 2, 0,
 										Func026F, var0002, BG_PATH_SUCCESS);
 							}
 						}
@@ -3427,7 +3431,8 @@ void Func0270 shape#(SHAPE_PICK) () {
 			var var000E = AVATAR->find_nearby(SHAPE_TREE, 3, MASK_NONE);
 			for (var0008 in var000E) {
 				var0009 = var000E->get_item_frame();
-				if ((var0009 == FRAME_TREE_OF_LIFE_WILTED) || (var0009 == FRAME_TREE_OF_LIFE_FULL)) {
+				if (var0009 == FRAME_TREE_OF_LIFE_WILTED
+						|| var0009 == FRAME_TREE_OF_LIFE_FULL) {
 					var var0011 = 0;
 					while (var0011 < FRAME_BLOOD_LAST) {
 						var var0012 = UI_create_new_object(SHAPE_BLOOD);
@@ -3440,8 +3445,8 @@ void Func0270 shape#(SHAPE_PICK) () {
 						var var0014 = UI_update_last_created(var0013);
 						var0011 += 1;
 					}
-					var var0015
-							= var0008->find_nearby(SHAPE_BUCKET, FRAME_BUCKET_BEER2, MASK_NONE);
+					var var0015 = var0008->find_nearby(
+									SHAPE_BUCKET, FRAME_BUCKET_BEER2, MASK_NONE);
 					if (var0015) {
 						var0015->set_item_frame(FRAME_BUCKET_BLOOD);
 						var var0016 = var0015->set_item_quality(0x0004);
@@ -3594,9 +3599,9 @@ void Func0281 shape#(SHAPE_KEY) () {
 	}
 }
 
-void Func0282 shape#(0x282) () {
+void Func0282 shape#(SHAPE_BOOK) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = 0x0089;
+		var var0000 = QUALITY_BOOK_CHICKEN_RAISING;
 		UI_play_sound_effect2(0x000E, item);
 		book_mode();
 		var var0001 = item;
@@ -3604,7 +3609,7 @@ void Func0282 shape#(0x282) () {
 		if (var0002 > var0000) {
 			say("This is @not a @valid book");
 		}
-		if (var0002 == 0x0000) {
+		if (var0002 == QUALITY_BOOK_GUIDE_TO_UNFINISHED_NOVELS) {
 			// TYPO: Should be "UNFINISHED"
 			say("~~ ~~MORGAN'S GUIDE TO UNIFINISHED NOVELS~~  ~~by Morgan*");
 			say("~~     An enlightening discourse on the enigma of blank "
@@ -3612,7 +3617,7 @@ void Func0282 shape#(0x282) () {
 			say("~Beginning with the heretofore unresolved mysteries of "
 				"empty...*Page 2*Page 3*Page 4*Page 5*Page 6*Page7");
 		}
-		if (var0002 == 0x0001) {
+		if (var0002 == QUALITY_BOOK_DEATH_EFFECTS_ON_WORKERS) {
 			say("~~ ~~ \"HOW DEATH AFFECTS THOSE WHO WORK AROUND IT WITH "
 				"REGULARITY\"*");
 			say("Day 1: Subject (Tiery) seems friendly enough and willing to "
@@ -3624,7 +3629,7 @@ void Func0282 shape#(0x282) () {
 				"conversations with cemetery occupants.~");
 			say("Day 5: ...");
 		}
-		if (var0002 == 0x0002) {
+		if (var0002 == QUALITY_BOOK_ALAGNERS_NOTEBOOK) {
 			say("MY NOTEBOOK by Alagner~~");
 			say("     These are my observations concerning the organization "
 				"known as The Fellowship.");
@@ -3693,7 +3698,7 @@ void Func0282 shape#(0x282) () {
 				"himself and rid Britannia of these very dangerous, lying "
 				"fascists.");
 		}
-		if (var0002 == 0x0003) {
+		if (var0002 == QUALITY_BOOK_OBSERVATIONS_OF_BLACKROCK) {
 			say("OBSERVATIONS OF BLACK ROCK, by Rudyom The Mage~~");
 			say("     The mysterious substance known as Black Rock is "
 				"completely indestructible. Only by magical means can it be "
@@ -3726,7 +3731,7 @@ void Func0282 shape#(0x282) () {
 				"spells. I believe something might be affecting the magical "
 				"ether. But I cannot be sure...");
 		}
-		if (var0002 == 0x0004) {
+		if (var0002 == QUALITY_BOOK_STRANGER_IN_A_STRANGE_LAND) {
 			say("~~ ~~ STRANGER IN A STRANGE LAND~~ ~~by Robert "
 				"Heinlein~~First Edition*");
 			// TYPO: Should be "difficulty"
@@ -3734,14 +3739,14 @@ void Func0282 shape#(0x282) () {
 				"finds difficutly assimilating into his new society and "
 				"culture.");
 		}
-		if (var0002 == 0x0005) {
+		if (var0002 == QUALITY_BOOK_CHITTY_CHITTY_BANG_BANG) {
 			say("~~ ~~CHITTY-CHITTY-BANG-BANG~~ ~~by Ian Fleming*");
 			// TYPO: Should be "children's"
 			say("    This wonderful childrens's story of a car that could fly "
 				"has been pleasing youths and adults alike for many "
 				"generations.");
 		}
-		if (var0002 == 0x0006) {
+		if (var0002 == QUALITY_BOOK_WIZARD_OF_OZ) {
 			say("~~ ~~THE WIZARD OF OZ ~~ ~~by Frank L. Baum*");
 			say("     The tale of a little girl, Dorthy, who, with her dog, "
 				"Toto, travels through whirlwinds and magic to a fanciful land "
@@ -3753,7 +3758,7 @@ void Func0282 shape#(0x282) () {
 				"cowardly lion, who, facing all perils to save her, "
 				"demonstrates the principle of Courage.");
 		}
-		if (var0002 == 0x0007) {
+		if (var0002 == QUALITY_BOOK_HUBERTS_HAIR_RAISING_ADVENTURE) {
 			say("~~ ~~ HUBERT'S HAIR-RAISING ADVENTURE ~~ ~~by Bill Peet*");
 			say("Hubert the Lion was haughty and vain And especially proud of "
 				"his elegant mane. ~But conceit of this sort isn't proper at "
@@ -3773,7 +3778,7 @@ void Func0282 shape#(0x282) () {
 				"zoo! ~And if anyone sees me, oh what a disgrace, So I'd "
 				"better discover a good hiding place!'");
 		}
-		if (var0002 == 0x0008) {
+		if (var0002 == QUALITY_BOOK_COURT_RECORDS) {
 			say("~~RECORDS OF THE HIGH COURT OF YEW~~ ~~ ~~");
 			gflags[HOOK_POST] = true;
 			// TYPO: Should be "scallywags"
@@ -3800,7 +3805,7 @@ void Func0282 shape#(0x282) () {
 				"Avatar.");
 			gflags[KREG_DIS] = true;
 		}
-		if (var0002 == 0x0009) {
+		if (var0002 == QUALITY_BOOK_MORFINS_LEDGER) {
 			gflags[MORFIN_CREEP] = true;
 			say("Morfin of Paws, Ledger of Venom Sales*");
 			say("~~ ~~...July, 0359:~Sale - 3 vials - 300~Sale - 5 vials - "
@@ -3812,7 +3817,7 @@ void Func0282 shape#(0x282) () {
 				"480~November, 0360:~ Sale - 10 vials - 990~January, "
 				"0361:~Sale - 12 vials - 1200... ");
 		}
-		if (var0002 == 0x000A) {
+		if (var0002 == QUALITY_BOOK_AVATAR_ADVENTURES) {
 			say("~~ ~~ULTIMA: THE AVATAR ADVENTURES ~~ ~~by Rusel DeMaria and "
 				"Caroline Spector*");
 			say("Within the pages of this tome are the details of the many "
@@ -3821,19 +3826,19 @@ void Func0282 shape#(0x282) () {
 				"amazingly accurate, and the descriptions should prove to be "
 				"surprisingly vivid.");
 		}
-		if (var0002 == 0x000B) {
+		if (var0002 == QUALITY_BOOK_AVATARS_GUIDE_TO_SEX) {
 			say("~~ ~~ ~~ ~~ EVERYTHING AN AVATAR SHOULD KNOW ABOUT SEX:*");
 			say("*");
 			say("*");
 		}
-		if (var0002 == 0x000C) {
+		if (var0002 == QUALITY_BOOK_ENCYCLOPEDIA_BRITANNIA_VOLUME_I) {
 			say("~~ ~~ENCYCLOPEDIA BRITANNIA ~~ ~~Volume I. A - E.*");
 			say("     Another volume in a long series of books detailing every "
 				"known geographical location and historical personage. This "
 				"work covers Aakara, the first mayor of Trinsic, through "
 				"Exodus, the vile offspring of Mondain and Minax.");
 		}
-		if (var0002 == 0x000D) {
+		if (var0002 == QUALITY_BOOK_ENCYCLOPEDIA_BRITANNIA_VOLUME_II) {
 			say("~~ ~~ENCYCLOPEDIA BRITANNIA ~~ ~~Volume II. F - L.*");
 			// TYPO: Should be "Lycaeum"
 			say("     Here is another volume in a long series of books "
@@ -3842,7 +3847,7 @@ void Func0282 shape#(0x282) () {
 				"reptiles, through Lyceaum, the reknowned library that is now "
 				"a part of Moonglow.");
 		}
-		if (var0002 == 0x000E) {
+		if (var0002 == QUALITY_BOOK_ENCYCLOPEDIA_BRITANNIA_VOLUME_III) {
 			say("~~ ~~ENCYCLOPEDIA BRITANNIA~~ ~~Volume III. M - P.*");
 			// TYPO: Should be "originator"
 			say("     Here is another volume in a long series of books "
@@ -3851,7 +3856,7 @@ void Func0282 shape#(0x282) () {
 				"ancient Yew, through Pusmoran, the orginator of the "
 				"rarely-used fourth person point of view.");
 		}
-		if (var0002 == 0x000F) {
+		if (var0002 == QUALITY_BOOK_ENCYCLOPEDIA_BRITANNIA_VOLUME_IV) {
 			say("~~ ~~ENCYCLOPEDIA BRITANNIA~~ ~~Volume IV. Q - U.*");
 			// TYPO: Should be "mythological"
 			say("     Here is another volume in a long series of books "
@@ -3861,7 +3866,7 @@ void Func0282 shape#(0x282) () {
 				"manifestation of the time-honored concept of a perfect "
 				"society.");
 		}
-		if (var0002 == 0x0010) {
+		if (var0002 == QUALITY_BOOK_ENCYCLOPEDIA_BRITANNIA_VOLUME_V) {
 			say("~~ ~~ENCYCLOPEDIA BRITANNIA~~ ~~Volume V. V - Z.*");
 			say("     Here is another volume in a long series of books "
 				"detailing every known geographical location and historical "
@@ -3869,13 +3874,13 @@ void Func0282 shape#(0x282) () {
 				"and compiler of legendary parables, through Zyand, a "
 				"prehistoric island.");
 		}
-		if (var0002 == 0x0011) {
+		if (var0002 == QUALITY_BOOK_KEY_TO_THE_BLACK_GATE) {
 			say("~~ ~~KEY TO THE BLACK GATE.*");
 			say("~~ ~~ ~~The pages bound within this book contain "
 				"well-documented clue information from the invaluable sources "
 				"at Origin Systems.");
 		}
-		if (var0002 == 0x0012) {
+		if (var0002 == QUALITY_BOOK_COLLECTED_PLAYS) {
 			say("~~ ~~COLLECTED PLAYS ~~ ~~by Raymundo.*");
 			say("     Housed inside this anthology of stage works are such "
 				"greats as \"Three on a Codpiece\", \"The Trials of the "
@@ -3884,13 +3889,13 @@ void Func0282 shape#(0x282) () {
 				"production, several suggested costumes and make-up techniques "
 				"are listed in the back.");
 		}
-		if (var0002 == 0x0013) {
+		if (var0002 == QUALITY_BOOK_NO_TIME_TO_DANCE) {
 			say("~~ ~~NO TIME TO DANCE~~ ~~by B.A. Morler.*");
 			say("     The wonderful depiction of the busy life of two "
 				"industrious scholars, caught betwixt the demands of a "
 				"forceful taskmaster and the pressure of time.");
 		}
-		if (var0002 == 0x0014) {
+		if (var0002 == QUALITY_BOOK_THE_SILENCE_OF_CHASTITY) {
 			say("~~ ~~THE SILENCE OF CHASTITY ~~by I.M. Munk.~~");
 			say("The treatise on the monks of the Brotherhood of the Rose, "
 				"including how they compare to their stereotypes.*");
@@ -3905,14 +3910,14 @@ void Func0282 shape#(0x282) () {
 				"entire building is devoted to the formation the delicious "
 				"mixture...");
 		}
-		if (var0002 == 0x0015) {
+		if (var0002 == QUALITY_BOOK_MURDER_BY_MONGBAT) {
 			say("~~ ~~MURDER BY MONGBAT~~ ~~by J. Dial.*");
 			// TYPO: Should be "extraordinary"
 			say("     This extraordianary work depicts an enthralling, but far "
 				"too gory thriller. Chapter after chapter describes innovative "
 				"and impressive ways to disembowel people and animals.");
 		}
-		if (var0002 == 0x0016) {
+		if (var0002 == QUALITY_BOOK_DOLPHIN_IN_THE_DUNES) {
 			say("~~ ~~DOLPHIN IN THE DUNES~~ ~~by Pietre Hueman.*");
 			// TYPO: Should be "undertones"
 			say("     Contained within the pages of this book is what seems to "
@@ -3922,13 +3927,13 @@ void Func0282 shape#(0x282) () {
 				"of view shifts, permitting the reader to see multiple sides "
 				"of each issue.");
 		}
-		if (var0002 == 0x0017) {
+		if (var0002 == QUALITY_BOOK_MANDIBLES) {
 			say("~~ ~~MANDIBLES~~ ~~by Peter Munchley.*");
 			say("     Held between the covers of this book is an "
 				"action-adventure novel about a man-eating sea creature who "
 				"terrorizes a small coastal town for several months.");
 		}
-		if (var0002 == 0x0018) {
+		if (var0002 == QUALITY_BOOK_THE_BOOK_OF_THE_FELLOWSHIP) {
 			say("~~ ~~THE BOOK OF THE FELLOWSHIP~~ ~~by Batlin of Britain.*");
 			say("     Good morning to thee, gentle friend and traveller! No "
 				"matter what time of day it might be when thou art reading "
@@ -3940,7 +3945,7 @@ void Func0282 shape#(0x282) () {
 				"It is my humble hope that these words may be for thee a "
 				"dawning, or at least, a sort of awakening...");
 		}
-		if (var0002 == 0x0019) {
+		if (var0002 == QUALITY_BOOK_BIOGRAPHY_OF_LORD_BRITISH) {
 			say("~~ ~~LORD BRITISH~~The biography of Britannia's longtime "
 				"ruler~~ ~~ by K.Bennos*");
 			say("     ...While many may remember that Lord British was once "
@@ -3973,7 +3978,7 @@ void Func0282 shape#(0x282) () {
 			say("     Then came the gargoyles, and our honorable sovereign "
 				"thoughtfully requested the return of the Avatar...");
 		}
-		if (var0002 == 0x001A) {
+		if (var0002 == QUALITY_BOOK_GARGOYLE_LIKE_ME) {
 			say("~~ ~~GARGOYLE LIKE ME~~ ~~by Darok.*");
 			say("     Within this work lies a fascinating novel of a human who "
 				"poses as a Gargoyle to view what life is like from the "
@@ -3991,13 +3996,13 @@ void Func0282 shape#(0x282) () {
 				"as if the wingless were children to be protect and watched "
 				"over by the winged.");
 		}
-		if (var0002 == 0x001B) {
+		if (var0002 == QUALITY_BOOK_TO_BE_OR_NOT_TO_BE) {
 			say("~~ ~~TO BE OR NOT TO BE~~ ~~by Wislem.*");
 			say("     To be the words comprising the complete Gargish primer, "
 				"designed to educate the young gargoyle mind, both winged and "
 				"wingless.");
 		}
-		if (var0002 == 0x001C) {
+		if (var0002 == QUALITY_BOOK_BOOK_OF_PROPHECY) {
 			say("~~ ~~BOOK OF PROPHECY~~ ~~by Naxatilor the Seer*");
 			say("     An ancient prophecy tells of the final days. When the "
 				"end of our world shall come. Three signs will precede the "
@@ -4022,14 +4027,14 @@ void Func0282 shape#(0x282) () {
 			say("     There is only one way that this prophecy may be averted: "
 				"That is by the sacrifice of the false prophet.");
 		}
-		if (var0002 == 0x001D) {
+		if (var0002 == QUALITY_BOOK_THE_BOOK_OF_FORGOTTEN_MANTRAS) {
 			say("~~ ~~THE BOOK OF FORGOTTEN MANTRAS.*");
 			say("akk~hor~kra~maow~detra~sa~nok~spank~a~mi~ah~xiop~yof~ow~ta~"
 				"goo~ si~yam~vil~wez~forat~asg~sem~tex~as~hiy~eyac~hodis~ni~ "
 				"baw~fes~upa~yuit~swer~xes~led~zep~bok~mar~sak~ces~blah~swu.."
 				".");
 		}
-		if (var0002 == 0x001E) {
+		if (var0002 == QUALITY_BOOK_STRUCK_COMMANDER) {
 			say("~~ ~~STRUCK COMMANDER~~ ~~by Gilberto.*");
 			say("     This tome is the fanciful story of a man who, along with "
 				"several comrades, gains access to a flying vehicle -- much "
@@ -4037,14 +4042,14 @@ void Func0282 shape#(0x282) () {
 				"despotic monarchs who employ mercenaries using their own "
 				"flying carts.");
 		}
-		if (var0002 == 0x001F) {
+		if (var0002 == QUALITY_BOOK_GONE_WITH_THE_WISP) {
 			say("~~ ~~GONE WITH THE WISP~~ ~~by Margareta Mitchellino.*");
 			say("     This novel, purportedly written by a young gypsy woman, "
 				"depicts the golden days of Britannia. Filled with short "
 				"anecdotes Mitchellino claims came from her people, the piece "
 				"is quite amusing.");
 		}
-		if (var0002 == 0x0020) {
+		if (var0002 == QUALITY_BOOK_KARENNAS_WORKOUT) {
 			say("~~ ~~KARENNA'S WORKOUT~~ ~~by Karenna.*");
 			say("     Found within this plain-bound volume is a combat and "
 				"exercise training manual. The work provides simple yet "
@@ -4052,7 +4057,7 @@ void Func0282 shape#(0x282) () {
 				"will not only disable an opponent, but also aids in good "
 				"cardiovascular circulation.");
 		}
-		if (var0002 == 0x0021) {
+		if (var0002 == QUALITY_BOOK_KARENNAS_PREGNANCY_WORKOUT) {
 			say("~~ ~~KARENNA'S PREGNANCY WORKOUT~~ ~~by Karenna.*");
 			say("     Herein are many words of wisdom for use within the realm "
 				"of combat and exercise for pregnant women. The drawings "
@@ -4060,7 +4065,7 @@ void Func0282 shape#(0x282) () {
 				"forms differ from more conventional styles, and how pregnancy "
 				"truly affects fighting skills.");
 		}
-		if (var0002 == 0x0022) {
+		if (var0002 == QUALITY_BOOK_KARENNAS_TOTAL_BODY_WORKOUT) {
 			say("~~ ~~KARENNA'S TOTAL BODY WORKOUT~~ ~~by Karenna.*");
 			// TYPO: Should be "received"
 			say("     Found upon the pages of this combat and exercise "
@@ -4068,7 +4073,7 @@ void Func0282 shape#(0x282) () {
 				"edition. Sadly, this work has recieved much less attention "
 				"than Karenna's other two.");
 		}
-		if (var0002 == 0x0023) {
+		if (var0002 == QUALITY_BOOK_THE_FIVE_STAGES_OF_LAWN_CARE) {
 			say("~~ ~~THE FIVE STAGES OF LAWN CARE~~ ~~by A.P. Berk.*");
 			say("     This is the brilliant and witty depiction of the "
 				"humorous antics of two young boys during one very hot summer "
@@ -4077,7 +4082,7 @@ void Func0282 shape#(0x282) () {
 				"up by the end of the story, they don't quite seem to lose all "
 				"of their youthful instinct.");
 		}
-		if (var0002 == 0x0024) {
+		if (var0002 == QUALITY_BOOK_AND_THEN_THERE_WAS_KAREN) {
 			say("~~ ~~AND THEN THERE WAS KAREN... ~~ ~~by B. MacDae*");
 			say("     Within the pages of this tome are words that relate the "
 				"story of how one man's life was changed by a woman, both "
@@ -4085,7 +4090,7 @@ void Func0282 shape#(0x282) () {
 				"but both survive to to become happier people with better "
 				"outlooks on their lives.");
 		}
-		if (var0002 == 0x0025) {
+		if (var0002 == QUALITY_BOOK_PERRINS_SCIENTIFIC_JOURNAL) {
 			say("~~ ~~THE INTRINSIC COMPLEXITIES OF INVESTIGATING A NEW "
 				"SPECIES OF FLORA IN THE LAND OF BRITANNIA~~ ~~by Perrin*");
 			say("     This scientific journal describes, with examples, the "
@@ -4095,14 +4100,14 @@ void Func0282 shape#(0x282) () {
 				"warning about the difficulties of gathering specimens from "
 				"the poisonous swamps.");
 		}
-		if (var0002 == 0x0026) {
+		if (var0002 == QUALITY_BOOK_RINGWORLD) {
 			say("~~ ~~RINGWORLD ~~ ~~by Larry Niven*");
 			say("     Herein lie the words that tell of adventures to be had "
 				"in the space between Britannia and the heavens. The work, "
 				"although fictional, preposes that there are many undiscovered "
 				"lands that lie between Britannia and other suns.");
 		}
-		if (var0002 == 0x0027) {
+		if (var0002 == QUALITY_BOOK_THE_APOTHECARYS_DESK_REFERENCE) {
 			say("~~ ~~THE APOTHECARY'S DESK REFERENCE~~ ~~by Fetoau*");
 			// TYPO: Should be "alchemical"
 			say("     It is the author's expectation that thou art reading "
@@ -4128,7 +4133,7 @@ void Func0282 shape#(0x282) () {
 			say("     This next section details how one can best recreate "
 				"these uncanny concoctions...");
 		}
-		if (var0002 == 0x0028) {
+		if (var0002 == QUALITY_BOOK_HORSE_AND_WAGON_MAINTENANCE) {
 			say("~~ ~~MAGIC AND THE ART OF HORSE-AND-WAGON MAINTENANCE*");
 			// TYPO: Should be "possessions"
 			say("     This lengthy tome contains wonderous jewels of wisdom "
@@ -4141,7 +4146,7 @@ void Func0282 shape#(0x282) () {
 				"has ever cared for a horse, for, as any stablemaster or horse "
 				"owner can attest, horses need no food or rest.");
 		}
-		if (var0002 == 0x0029) {
+		if (var0002 == QUALITY_BOOK_JESSES_BOOK_OF_PERFORMANCE_ART) {
 			say("~~ ~~JESSE'S BOOK OF PERFORMANCE ART~~ ~~by Jesse.*");
 			say("     This anthology is filled with many performance art "
 				"scripts. The author, a controversial and eccentric Britannian "
@@ -4157,7 +4162,7 @@ void Func0282 shape#(0x282) () {
 				"many facets of performance art can better an actor's "
 				"skill...");
 		}
-		if (var0002 == 0x002A) {
+		if (var0002 == QUALITY_BOOK_THE_WRITE_STUFF) {
 			say("~~ ~~THE WRITE STUFF~~ ~~by Perrin*");
 			say("     Within these pages is found a treatise on the value of "
 				"literacy and proper writing skills. The first few chapters "
@@ -4168,7 +4173,7 @@ void Func0282 shape#(0x282) () {
 				"promising writer can apply what has been learned to construct "
 				"better prose.");
 		}
-		if (var0002 == 0x002B) {
+		if (var0002 == QUALITY_BOOK_THAT_BEER_NEEDS_A_HEAD_ON_IT) {
 			say("~~ ~~THAT BEER NEEDS A HEAD ON IT! ~~ ~~by Yongi*");
 			say("     Found within are many a recipe for the most delicious of "
 				"alcoholic beverages. Not only are the pages filled with "
@@ -4177,7 +4182,7 @@ void Func0282 shape#(0x282) () {
 				"serving methods. In addition, the back index references each "
 				"drink by type -and- color.");
 		}
-		if (var0002 == 0x002C) {
+		if (var0002 == QUALITY_BOOK_GUIDE_TO_USEFUL_EQUIPMENT) {
 			say("~~ ~~THE PROVISIONER'S GUIDE TO USEFUL EQUIPMENT~~ ~~by "
 				"Dell*");
 			say("     While most suppliers will rave about the effectiveness "
@@ -4194,7 +4199,7 @@ void Func0282 shape#(0x282) () {
 				"container for thy refreshment? Purchase a jug or bucket. As "
 				"for...");
 		}
-		if (var0002 == 0x002D) {
+		if (var0002 == QUALITY_BOOK_THE_ACCEDENS_OF_ARMOURY) {
 			say("~~ ~~THE ACCEDENS OF ARMOURY~~ ~~by Legh*");
 			// TYPO: Should be "conception"
 			say("     This book on heraldry not only describes various houses "
@@ -4202,7 +4207,7 @@ void Func0282 shape#(0x282) () {
 				"in their concepton. Thus, this book will also permit the "
 				"reader to formalize an heraldric symbol of his own.");
 		}
-		if (var0002 == 0x002E) {
+		if (var0002 == QUALITY_BOOK_THE_BIOPARAPHYSICS_OF_THE_HEALING_ARTS) {
 			say("~~ ~~THE BIOPARAPHYSICS OF THE HEALING ARTS~~ ~~by Lady "
 				"Leigh*");
 			say("     Within this rather in-depth and complex look at healing "
@@ -4218,7 +4223,7 @@ void Func0282 shape#(0x282) () {
 				"good as an introduction to healing for beginners, the tome is "
 				"perfect for the seasoned healer.");
 		}
-		if (var0002 == 0x002F) {
+		if (var0002 == QUALITY_BOOK_WHAT_COLOR_IS_THY_BLADE) {
 			say("~~ ~~WHAT COLOR IS THY BLADE? ~~ ~~by Menion*");
 			// TYPO: Should be "extremely"
 			say("The first step in effective sword-forging is to fill a "
@@ -4241,7 +4246,7 @@ void Func0282 shape#(0x282) () {
 				"over the tang. It takes some doing to make a fine, sturdy "
 				"sword, but the finished weapon is well worth it!");
 		}
-		if (var0002 == 0x0030) {
+		if (var0002 == QUALITY_BOOK_THE_BLACKSMITHS_HANDBOOK) {
 			say("~~ ~~THE BLACKSMITH'S HANDBOOK~~ ~~by Christopher*");
 			say("     Within this book can be found the details of fine "
 				"metal-working. The chapters are broken down into sections "
@@ -4250,7 +4255,7 @@ void Func0282 shape#(0x282) () {
 				"chapters on weapon forging, and blacksmiths have the "
 				"remaining chapters which discuss horseshoes to iron gates.");
 		}
-		if (var0002 == 0x0031) {
+		if (var0002 == QUALITY_BOOK_THIRTEEN_MONTHS_IN_A_YEAR) {
 			say("~~ ~~THIRTEEN MONTHS IN A YEAR~~ ~~by Euralyn*");
 			say("     This epic details a long, fierce war between swords and "
 				"spells in a fictional land called Corellethra. The story "
@@ -4259,14 +4264,14 @@ void Func0282 shape#(0x282) () {
 				"of patricide, and must be stopped by an outside group of "
 				"sell-swords.");
 		}
-		if (var0002 == 0x0032) {
+		if (var0002 == QUALITY_BOOK_THE_DAY_IT_DIDNT_WORK) {
 			say("~~ ~~THE DAY IT DIDN'T WORK~~ ~~by R. Allen G.*");
 			say("     This collection of essays details the difficulties in "
 				"overseeing a group of well-meaning misfits in a mechanical "
 				"environment --  especially when the overseer is a misfit, as "
 				"well!");
 		}
-		if (var0002 == 0x0033) {
+		if (var0002 == QUALITY_BOOK_NO_ONE_LEAVES) {
 			say("~~ ~~NO ONE LEAVES~~ ~~by R. Allen G.");
 			say("~~ ~~The sequel to THE DAY IT DIDN'T WORK.*");
 			say("     This short tome offers insight to why new mechanical "
@@ -4278,7 +4283,7 @@ void Func0282 shape#(0x282) () {
 				"regardless of how tired they are and how late in the evening "
 				"it is.");
 		}
-		if (var0002 == 0x0034) {
+		if (var0002 == QUALITY_BOOK_COMPLETE_GUIDE_TO_BRITANNIAN_MINERALS) {
 			say("~~ ~~A COMPLETE GUIDE TO BRITANNIAN MINERALS, PRECIOUS, AND "
 				"SEMI-PRECIOUS STONES~~ ~~by B. Ledbetter*");
 			say("     Herein one can find the descriptions of a plethora of "
@@ -4299,7 +4304,7 @@ void Func0282 shape#(0x282) () {
 				"researches refuse to comment on what, exactly, the material "
 				"does)...");
 		}
-		if (var0002 == 0x0035) {
+		if (var0002 == QUALITY_BOOK_TREES_AND_THEN_SOME) {
 			say("~~ ~~TREES, AND THEN SOME! ~~ ~~by Ben*");
 			say("     Previously titled: MY LIFE AS A WOODCUTTER, this classic "
 				"volume pleased readers more than two centuries ago. Much of "
@@ -4325,7 +4330,7 @@ void Func0282 shape#(0x282) () {
 				"carries so much weight with Lord British (the weight of wine "
 				"bottles, that is).");
 		}
-		if (var0002 == 0x0036) {
+		if (var0002 == QUALITY_BOOK_BLOODIED_BLADES_AND_BUXOM_BEAUTIES) {
 			say("~~ ~~BLOODIED BLADES AND BUXOM BEAUTIES~~ ~~A.G. Fishmor*");
 			say("     This illustrious tome depicts the life of the romantic "
 				"pirate, Roguerre, as he sails the Northeast Sea. As he "
@@ -4335,7 +4340,7 @@ void Func0282 shape#(0x282) () {
 				"from whom he must escape -and- save the beautiful native "
 				"princess.");
 		}
-		if (var0002 == 0x0037) {
+		if (var0002 == QUALITY_BOOK_THE_HUNDRED_AND_ELEVEN_YEAR_THREE_MONTH_SEVEN_DAY_WAR) {
 			say("~~ ~~THE HUNDRED AND ELEVEN YEAR, THREE-MONTH, SEVEN-DAY "
 				"WAR~~ ~~ by Perrin*");
 			say("     Within this work of fiction is written the renowned "
@@ -4344,7 +4349,7 @@ void Func0282 shape#(0x282) () {
 				"to strike home the advantages the people of Britannia have by "
 				"remaining unified under the rule of Lord British.");
 		}
-		if (var0002 == 0x0038) {
+		if (var0002 == QUALITY_BOOK_BLACK_MOON_RED_DAY) {
 			say("~~ ~~BLACK MOON, RED DAY~~ ~~by Euralyn*");
 			say("     This novel is set in THIRTEEN MONTHS IN A YEAR's "
 				"Corellethra. The story describes an epic struggle of man "
@@ -4353,7 +4358,7 @@ void Func0282 shape#(0x282) () {
 				"supernatural abilities of a sorcerous family can prevent "
 				"global destruction.");
 		}
-		if (var0002 == 0x0039) {
+		if (var0002 == QUALITY_BOOK_TWO_IN_THE_FOLD) {
 			say("~~ ~~TWO IN THE FOLD~~ ~~by Morian*");
 			// TYPO: Should be "guards"
 			say("     Herein lies a fable of treachery in the fair city of "
@@ -4364,7 +4369,7 @@ void Func0282 shape#(0x282) () {
 				"each other that they miss important pieces if evidence that "
 				"lead to the two thieves.");
 		}
-		if (var0002 == 0x003A) {
+		if (var0002 == QUALITY_BOOK_THE_FOREST_OF_YEW) {
 			say("~~ ~~THE FOREST OF YEW~~ ~~by Taylor*");
 			say("     Though once the large, prosperous city of Justice, Yew "
 				"has been swallowed by the Deep Forest. However, let not it be "
@@ -4392,7 +4397,7 @@ void Func0282 shape#(0x282) () {
 				"built shelters high up in the limbs of Silverleaf trees.~");
 			say("     Of course, Emps are not the only creatures who...");
 		}
-		if (var0002 == 0x003B) {
+		if (var0002 == QUALITY_BOOK_THIS_OLDE_SHIP) {
 			say("~~ ~~THIS OLDE SHIP~~ ~~by Owen of Minoc*");
 			say("     This tome contains much more than just the fundamentals "
 				"for building ships and other assorted sailing vessels, it has "
@@ -4404,7 +4409,7 @@ void Func0282 shape#(0x282) () {
 				"between working on one's own ships and those crafted by "
 				"others.");
 		}
-		if (var0002 == 0x003C) {
+		if (var0002 == QUALITY_BOOK_THE_CARVER_CHRONICLES) {
 			say("~~ ~~THE CARVER CHRONICLES~~ ~~by Morfin*");
 			say("     Here, finally in one volume are the details of the "
 				"skills necessary for butchering. The work discusses several "
@@ -4413,14 +4418,14 @@ void Func0282 shape#(0x282) () {
 				"detail that would turn the stomach of all but the toughest "
 				"meat carvers.");
 		}
-		if (var0002 == 0x003D) {
+		if (var0002 == QUALITY_BOOK_HERO_FERTILIZER) {
 			say("~~ ~~HERO FERTILIZER~~ ~~by Werdron*");
 			say("     A warrior's handbook, depicting several "
 				"esoteric\tfighting styles. Each step is accompanied by a "
 				"short piece of fiction, permitting the reader better "
 				"visualization of the detailed style.");
 		}
-		if (var0002 == 0x003E) {
+		if (var0002 == QUALITY_BOOK_WHAT_COULD_BE_LEFT_BUT_THE_ASHES) {
 			say("~~ ~~WHAT COULD BE LEFT BUT THE ASHES~~ ~~by N. Flaims*");
 			// TYPO: Should be "in-depth", "testimonials"
 			say("     Herein are the many essays covering an indepth study of "
@@ -4431,54 +4436,54 @@ void Func0282 shape#(0x282) () {
 				"experienced a volcanic eruption near every one of the five "
 				"towns in which she has lived.");
 		}
-		if (var0002 == 0x003F) {
+		if (var0002 == QUALITY_BOOK_THE_SUMMER_OF_MY_SATISFACTION) {
 			say("~~ ~~THE SUMMER OF MY SATISFACTION~~ ~~by Plexes*");
 			say("     The story within this novel relates the tale of Good "
 				"King Kettle, who rules a great land without any troubles.");
 		}
-		if (var0002 == 0x0040) {
+		if (var0002 == QUALITY_BOOK_HITHER_COMES_THE_RAIN) {
 			say("~~ ~~HITHER COMES THE RAIN~~ ~~by Perrin*");
 			say("     Within the pages of this book are descriptions of the "
 				"various effects of Spring weather on plants and animals in "
 				"Britannia, explaining that Britannia seems to see an increase "
 				"in the amount of rainfall each year.");
 		}
-		if (var0002 == 0x0041) {
+		if (var0002 == QUALITY_BOOK_WHITE_RAIN) {
 			say("~~ ~~WHITE RAIN~~ ~~by Perrin*");
 			say("     This detailed tome is filled with descriptions of the "
 				"various effects Winter weather has on plants and animals in "
 				"Britannia.");
 		}
-		if (var0002 == 0x0042) {
+		if (var0002 == QUALITY_BOOK_MILORD_CONDUCT) {
 			say("~~ ~~MILORD CONDUCT~~ ~~by Aleina*");
 			say("     Found within is a description of the proper behavior for "
 				"courtiers and courted individuals. The book reveals many "
 				"different techniques for both polite and impolite seduction.");
 		}
-		if (var0002 == 0x0043) {
+		if (var0002 == QUALITY_BOOK_TO_THE_DEATH) {
 			say("~~ ~~TO THE DEATH!~~ ~~by Zaksam*");
 			say("     This book is an in-depth manual of the fighting styles "
 				"prevalent in Britannia. The author distinguishes between "
 				"contemporary and historical styles, and comments on the value "
 				"of each.");
 		}
-		if (var0002 == 0x0044) {
+		if (var0002 == QUALITY_BOOK_BLADE_OF_THE_GRYPHON_BARONY) {
 			say("~~ ~~BLADE OF THE GRYPHON BARONY~~ ~~by Pebrogdy*");
 			say("     This novel is about a knight's fight against the "
 				"doctrines of his society to win the love of a common maiden.");
 		}
-		if (var0002 == 0x0045) {
+		if (var0002 == QUALITY_BOOK_THE_WINNING_NUMBER) {
 			say("~~ ~~THE WINNING NUMBER~~ ~~by A.P. Berk*");
 			say("     Herein is the sequel to THE FIVE STAGES OF LAWN CARE. "
 				"This novel, which focuses on the same two men, is set ten "
 				"years after the former work.");
 		}
-		if (var0002 == 0x0046) {
+		if (var0002 == QUALITY_BOOK_THE_SCENT_OF_VALOR) {
 			say("~~ ~~THE SCENT OF VALOR~~ ~~by Wetterson*");
 			say("     Herein can be found the definitive word on chivalry and "
 				"the duties to a knight's liege.");
 		}
-		if (var0002 == 0x0047) {
+		if (var0002 == QUALITY_BOOK_HOW_THE_WEST_WAS) {
 			say("~~ ~~HOW THE WEST WAS~~ ~~by Yuclydia*");
 			say("     This tome of history tracks the geography of Britannia "
 				"from the early centuries to more recent times. The included "
@@ -4487,7 +4492,7 @@ void Func0282 shape#(0x282) () {
 				"once-important virtues reveals their source from the broader "
 				"tenets of Truth, Love, and Courage.");
 		}
-		if (var0002 == 0x0048) {
+		if (var0002 == QUALITY_BOOK_THY_MESSAGE_RECEIVED) {
 			say("~~ ~~THY MESSAGE RECEIVED! ~~ ~~by For-Lem. Translated by "
 				"Jillian*");
 			say("     Within this diary is revealed the poor treatment of the "
@@ -4510,24 +4515,24 @@ void Func0282 shape#(0x282) () {
 				"of both races, for our children and ourselves.*");
 			say("     To hope, and to live...");
 		}
-		if (var0002 == 0x0049) {
+		if (var0002 == QUALITY_BOOK_RIBALD_ENCOUNTERS) {
 			say("~~ ~~RIBALD ENCOUNTERS~~ ~~by Madden*");
 			say("     Within the pages of this anthology are many stories full "
 				"of suggestive prose.");
 		}
-		if (var0002 == 0x004A) {
+		if (var0002 == QUALITY_BOOK_THE_KNIGHT_AND_THE_THIEF) {
 			say("~~ ~~THE KNIGHT AND THE THIEF~~ ~~by Hobbs*");
 			say("     This novel describes the life of an heroic warrior "
 				"suffering from delusions of an alternate life as a rogue and "
 				"cutpurse.");
 		}
-		if (var0002 == 0x004B) {
+		if (var0002 == QUALITY_BOOK_THE_TRIO) {
 			say("~~ ~~THE TRIO~~ ~~by  Leepeartson*");
 			say("     Compiled from the music of three master bards, this full "
 				"volume contains a collection of songs for a variety of "
 				"stringed and percussion instruments.");
 		}
-		if (var0002 == 0x004C) {
+		if (var0002 == QUALITY_BOOK_THE_BLACK_COMPENDIUM) {
 			say("~~ ~~THE BLACK COMPENDIUM ~~ ~~Written by Mondain, with "
 				"annotations by the enchantress Minax and magical formulae by "
 				"the hellspawn Exodus.*");
@@ -4550,14 +4555,14 @@ void Func0282 shape#(0x282) () {
 				"mixing of each baby's blood is quite permissible.*");
 			say("     Now thou shalt seek out...");
 		}
-		if (var0002 == 0x004D) {
+		if (var0002 == QUALITY_BOOK_NO_WAY_TO_JUMP) {
 			say("~~ ~~NO WAY TO JUMP~~ ~~by Desmonth*");
 			say("     Herein lies the compilation that discusses various "
 				"elements found in adventure stories. In addition to an "
 				"evaluation of their literary worth, one essay demonstrates "
 				"how to apply such elements in other styles.");
 		}
-		if (var0002 == 0x004E) {
+		if (var0002 == QUALITY_BOOK_STEALING_THE_WIND) {
 			say("~~ ~~STEALING THE WIND~~ ~~by Brianna*");
 			// TYPO: Should be "crisscross"
 			say("     Kite-building techniques thou hast never seen before, "
@@ -4566,7 +4571,7 @@ void Func0282 shape#(0x282) () {
 				"beginning to end. At the end of the essay is a listing of "
 				"wind variables and flying styles.");
 		}
-		if (var0002 == 0x004F) {
+		if (var0002 == QUALITY_BOOK_BROMMERS_FLORA) {
 			say("~~ ~~BROMMER'S FLORA~~ ~~by Brommer*");
 			say("     This large tome describes most of common plants "
 				"indigenous to Britannia.~~");
@@ -4581,7 +4586,7 @@ void Func0282 shape#(0x282) () {
 				"been known to attack those who cause harm to their home (i.e. "
 				"the forests), but seldom reveal themselves otherwise...");
 		}
-		if (var0002 == 0x0050) {
+		if (var0002 == QUALITY_BOOK_BROMMERS_FAUNA) {
 			say("~~ ~~BROMMER'S FAUNA~~ ~~by Brommer*");
 			say("     Betwixt the covers of this book can be found details on "
 				"the most prevalent animals that inhabit the lands of "
@@ -4594,7 +4599,7 @@ void Func0282 shape#(0x282) () {
 				"is an omnivore, and more than willing to make off with a "
 				"farmer's chicken when it tires of other foods...");
 		}
-		if (var0002 == 0x0051) {
+		if (var0002 == QUALITY_BOOK_BROMMERS_BRITANNIA) {
 			say("~~ ~~BROMMER'S BRITANNIA~~ ~~by Brommer*");
 			say("     Betwixt the covers of this atlas is a detailed "
 				"description of the entire continent of Britannia and the "
@@ -4607,14 +4612,14 @@ void Func0282 shape#(0x282) () {
 				"description of the entire continent of Britannia and the "
 				"nearby islands.");
 		}
-		if (var0002 == 0x0052) {
+		if (var0002 == QUALITY_BOOK_UP_IS_OUT) {
 			say("~~ ~~UP IS OUT~~ ~~by Goodefellow*");
 			say("     Herein is discussed the most current theories on gravity "
 				"and mass. After years of study and research, the author "
 				"finally put the fruits of his labor down in the pages of this "
 				"tome, which includes his discussion on falling apples.");
 		}
-		if (var0002 == 0x0053) {
+		if (var0002 == QUALITY_BOOK_WEAVING) {
 			say("~~ ~WEAVING~~ ~~by Carlyn*");
 			say("     This is a complete sourcebook for a variety of patterns. "
 				"Included are patterns for clothing, blankets, quilts, and "
@@ -4627,14 +4632,14 @@ void Func0282 shape#(0x282) () {
 				"useful things. For variation, use different colored threads "
 				"on the loom to create exciting patterns.");
 		}
-		if (var0002 == 0x0054) {
+		if (var0002 == QUALITY_BOOK_FOLLOW_THE_STARS) {
 			say("~~ ~~FOLLOW THE STARS~~ ~~by Laurnen*");
 			say("     This is a guidebook for navigation, with most of the "
 				"pages illustrating various constellations and heavenly "
 				"bodies. The final sections contain maps useful to any ship "
 				"mate or captain.");
 		}
-		if (var0002 == 0x0055) {
+		if (var0002 == QUALITY_BOOK_HOW_TO_CONQUER_THE_WORLD) {
 			say("~~ ~~HOW TO CONQUER THE WORLD IN THREE EASY STEPS~~ ~~by "
 				"Maximillian the Amazingly Mean*");
 			// TYPO: Should be "megalomaniac"
@@ -4646,18 +4651,18 @@ void Func0282 shape#(0x282) () {
 				"the spell. Even the loft Lord Brit, himself, will offer his "
 				"obeisance to me...");
 		}
-		if (var0002 == 0x0056) {
+		if (var0002 == QUALITY_BOOK_TREN) {
 			say("~~ ~~TREN I, II, III, IV . . . XVII*");
 			say("     This autobiography, penned by the obtuse mage, reveals "
 				"Tren's life in all of his incarnations as he continually "
 				"strove to possess more powerful beings.");
 		}
-		if (var0002 == 0x0057) {
+		if (var0002 == QUALITY_BOOK_SIR_KILROY) {
 			say("~~ ~~SIR KILROY~~ ~~Anonymous*");
 			say("     This novel details the rise of a shining white knight, "
 				"driven to madness by the women in his life.");
 		}
-		if (var0002 == 0x0058) {
+		if (var0002 == QUALITY_BOOK_MY_CUP_RUNNETH_OVER) {
 			say("~~ ~~MY CUP RUNNETH OVER~~ ~~by Marseine*");
 			// TYPO: Should be "techniques"
 			say("     This illustrious volume holds many detailed instructions "
@@ -4666,7 +4671,7 @@ void Func0282 shape#(0x282) () {
 				"tome lists several monks from the Brotherhood of the Rose as "
 				"sources.");
 		}
-		if (var0002 == 0x0059) {
+		if (var0002 == QUALITY_BOOK_SPRING_PLANTING_AUTUMN_HARVEST) {
 			// TYPO: Should be "AUTUMN"
 			say("~~ ~~SPRING PLANTING, AUTUMNM HARVEST*");
 			// TYPO: Should be "explanation"
@@ -4675,14 +4680,14 @@ void Func0282 shape#(0x282) () {
 				"mulching process. The middle section is an illustrated guide "
 				"to many gardening implements.");
 		}
-		if (var0002 == 0x005A) {
+		if (var0002 == QUALITY_BOOK_SHOOT_THE_MOON) {
 			say("~~ ~~SHOOT THE MOON~~ ~~by Oswauld*");
 			say("     Herein can be found the guidebook for druidic culture. "
 				"Details on rituals, spells, and the organizational structure "
 				"fill the rather large number of pages that make up this fine "
 				"well-spring of knowledge. ");
 		}
-		if (var0002 == 0x005B) {
+		if (var0002 == QUALITY_BOOK_OUTPOST) {
 			say("~~ ~~OUTPOST~~ ~~by Gasreth*");
 			say("     Betwixt the covers of this volume is invaluable reading "
 				"for all soldiers. This manual details the tactics and "
@@ -4692,7 +4697,7 @@ void Func0282 shape#(0x282) () {
 				"is the cannon. After thy comrades have already loaded the "
 				"cannon, simply aim the cannon at thy target and fire away!");
 		}
-		if (var0002 == 0x005C) {
+		if (var0002 == QUALITY_BOOK_LANDSHIPS) {
 			say("~~ ~~LANDSHIPS~~ ~~by Equinestra*");
 			say("     Not only does this extensive tome describe the many "
 				"riding beasts in Britannia, but it also discusses riding "
@@ -4702,7 +4707,7 @@ void Func0282 shape#(0x282) () {
 				"flying carpets, and how they will ultimately replace all "
 				"non-magical means of travel.");
 		}
-		if (var0002 == 0x005D) {
+		if (var0002 == QUALITY_BOOK_LANDSHIPS_OF_WAR) {
 			say("~~ ~~LANDSHIPS OF WAR~~ ~~by Equinestra*");
 			say("     An illustrated guide to jousting and barding. This work "
 				"builds upon the concepts presented in the prequel, "
@@ -4712,7 +4717,7 @@ void Func0282 shape#(0x282) () {
 				"missiles unto their foes who were unable to surmount the "
 				"vehicle.");
 		}
-		if (var0002 == 0x005E) {
+		if (var0002 == QUALITY_BOOK_WHY_GOOD_MAGES_LIKE_BLACK_MAGIC) {
 			say("~~ ~~WHY GOOD MAGES LIKE BLACK MAGIC~~ ~~by Magus*");
 			say("     Despite the rather frivolous title, this complete tome "
 				"explains the value of applying magic for the benefit of "
@@ -4720,7 +4725,7 @@ void Func0282 shape#(0x282) () {
 				"presented herein mesh quite well with those exemplified by "
 				"the virtues.");
 		}
-		if (var0002 == 0x005F) {
+		if (var0002 == QUALITY_BOOK_WHEN_STARTS_THE_ADVENTURE) {
 			say("~~ ~~WHEN STARTS THE ADVENTURE~~ ~~by Sabra*");
 			// TYPO: Should be "ideology"
 			say("     Herein can be found a novel relating the travels of a "
@@ -4730,13 +4735,13 @@ void Func0282 shape#(0x282) () {
 				"balanced in ideaology:  for every evil, there seems to be a "
 				"good, and vice-versa.");
 		}
-		if (var0002 == 0x0060) {
+		if (var0002 == QUALITY_BOOK_WHAT_A_FOOL_BELIEVES) {
 			say("~~ ~~WHAT A FOOL BELIEVES~~ ~~by P. Nolan*");
 			say("     Within the pages of this book is the story of a bard, a "
 				"blonde, and a bottle -- the perfect combination for a classic "
 				"tale of the war between the sexes.");
 		}
-		if (var0002 == 0x0061) {
+		if (var0002 == QUALITY_BOOK_THE_COMPLETE_HISTORY_OF_THE_LUTE) {
 			// TYPO: Should be "COMPLETE"
 			say("~~ ~~THE COMPLEATE HISTORY OF THE LUTE~~ ~~by Devonaillion, "
 				"with foreword by the Master Bard, Iolo*");
@@ -4748,7 +4753,7 @@ void Func0282 shape#(0x282) () {
 				"that thee follow his words of wisdom well~");
 			say("          -- Iolo Arbalest");
 		}
-		if (var0002 == 0x0062) {
+		if (var0002 == QUALITY_BOOK_BIRDS_OF_BRITANNIA) {
 			say("~~ ~~BIRDS OF BRITANNIA~~ ~~by Brother Wayne*");
 			say("     Bound here is the comprehensive guide to the avian "
 				"species, beautifully and colorfully illustrated by many "
@@ -4760,7 +4765,7 @@ void Func0282 shape#(0x282) () {
 				"Black-Tipped Grackle, but it's predilection for dark, cool "
 				"areas make is considerable less visible.");
 		}
-		if (var0002 == 0x0063) {
+		if (var0002 == QUALITY_BOOK_I_AM_NOT_A_DRAGON) {
 			say("~~ ~~I AM NOT A DRAGON~~ ~~by Thomson*");
 			say("     Within these pages is a bawdy tale of Belnarth, "
 				"fictional lord of Serpent's Hold. This volume is part one of "
@@ -4778,23 +4783,23 @@ void Func0284 shape#(SHAPE_GOLD_COIN) () {
 			return;
 		}
 		if (Func08F7(IOLO)) {
-			Func0933(AVATAR, "@Call it.@", 0x0000);
-			var var0000 = UI_die_roll(0x0001, 0x0002);
-			if (var0000 == 0x0001) {
-				Func0933(IOLO, "@Tails.@", 0x0010);
-				Func0933(AVATAR, "@It is heads.@", 0x0020);
+			Func0933(AVATAR, "@Call it.@", 0);
+			var var0000 = UI_die_roll(1, 2);
+			if (var0000 == 1) {
+				Func0933(IOLO, "@Tails.@", 16);
+				Func0933(AVATAR, "@It is heads.@", 32);
 			} else {
-				Func0933(IOLO, "@Heads.@", 0x0010);
-				Func0933(AVATAR, "@It is tails.@", 0x0020);
+				Func0933(IOLO, "@Heads.@", 16);
+				Func0933(AVATAR, "@It is tails.@", 32);
 			}
-			if (UI_die_roll(0x0001, 0x0003) == 0x0001) {
-				Func0933(IOLO, "@Again!@", 0x0030);
+			if (UI_die_roll(1, 3) == 1) {
+				Func0933(IOLO, "@Again!@", 48);
 			}
 		}
 	}
 }
 
-void Func0285 shape#(0x285) () {
+void Func0285 shape#(SHAPE_GOLD_NUGGET) () {
 	if (event == DOUBLECLICK) {
 		// TYPO: Should be "Britain"
 		var var0000 = "@I believe that the current exchange rate is "
@@ -4803,7 +4808,7 @@ void Func0285 shape#(0x285) () {
 	}
 }
 
-void Func0286 shape#(0x286) () {
+void Func0286 shape#(SHAPE_GOLD_BAR) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = "@I believe the current exchange rate is "
 					  + "one hundred crowns per bar at the Britannian mint.@";
@@ -4811,7 +4816,7 @@ void Func0286 shape#(0x286) () {
 	}
 }
 
-void Func0288 shape#(0x288) () {
+void Func0288 shape#(SHAPE_SLEEPING_POWDER) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
@@ -4823,7 +4828,7 @@ void Func0288 shape#(0x288) () {
 	}
 }
 
-void Func0289 shape#(0x289) () {
+void Func0289 shape#(SHAPE_VENOM) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
@@ -4862,19 +4867,19 @@ void Func0289 shape#(0x289) () {
 	}
 }
 
-void Func028A shape#(0x28A) () {
+void Func028A shape#(SHAPE_SEXTANT) () {
 	if (event == DOUBLECLICK) {
 		struct<Position> var0000 = AVATAR->get_object_position();
 		var var0001 = (var0000.x - 933) / 10;
 		var var0002 = (var0000.y - 1134) / 10;
 		declare var var0003;
-		if (var0001 < 0x0000) {
+		if (var0001 < 0) {
 			var0003 = " " + Func0932(var0001) + " West";
 		} else {
 			var0003 = " " + Func0932(var0001) + " East";
 		}
 		declare var var0004;
-		if (var0002 < 0x0000) {
+		if (var0002 < 0) {
 			var0004 = " " + Func0932(var0002) + " North";
 		} else {
 			var0004 = " " + Func0932(var0002) + " South";
@@ -4887,12 +4892,12 @@ void Func028A shape#(0x28A) () {
 	}
 }
 
-void Func028B shape#(0x28B) () {
+void Func028B shape#(SHAPE_SPINNING_WHEEL) () {
 	declare var var0002;
 	if (event == BG_PATH_SUCCESS) {
 		var var0000 = AVATAR->find_nearby(SHAPE_CHAIR, 1, MASK_NONE);
-		var var0001 = 0x0000;
-		if (UI_get_array_size(var0000) > 0x0000) {
+		var var0001 = 0;
+		if (UI_get_array_size(var0000) > 0) {
 			var0002 = script AVATAR {
 				face west;
 				actor frame bowing;
@@ -4900,7 +4905,7 @@ void Func028B shape#(0x28B) () {
 					actor frame sitting;
 				};
 			};
-			var0001 = 0x0003;
+			var0001 = 3;
 		}
 		halt_scheduled();
 		var0002 = script item after var0001 ticks {
@@ -4915,7 +4920,8 @@ void Func028B shape#(0x28B) () {
 		return;
 	}
 	if (event == SCRIPTED) {
-		var var0003 = AVATAR->get_cont_items(0x028D, QUALITY_ANY, FRAME_ANY);
+		var var0003 = AVATAR->get_cont_items(
+				SHAPE_BALE_OF_WOOL, QUALITY_ANY, FRAME_ANY);
 		if (var0003) {
 			var0003->remove_item();
 		}
@@ -4923,7 +4929,7 @@ void Func028B shape#(0x28B) () {
 		if (var0004) {
 			var0004->set_item_flag(TEMPORARY);
 			var0004->set_item_flag(OKAY_TO_TAKE);
-			var0004->set_item_frame(UI_die_roll(0x0000, 0x0009));
+			var0004->set_item_frame(UI_die_roll(0, 9));
 			struct<Position> var0005 = get_object_position();
 			var0005.x += 1;
 			var0005.y += 1;
@@ -4938,13 +4944,13 @@ void Func028B shape#(0x28B) () {
 	}
 }
 
-void Func028C shape#(0x28C) () {
+void Func028C shape#(SHAPE_CART_PIECE) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
 
-void Func028D shape#(0x28D) () {
+void Func028D shape#(SHAPE_BALE_OF_WOOL) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_container();
 		if (var0000 == AVATAR->get_npc_object()) {
@@ -5008,7 +5014,7 @@ void Func028E shape#(SHAPE_SPINDLE_OF_THREAD) () {
 	}
 }
 
-void Func0291 shape#(0x291) () {
+void Func0291 shape#(SHAPE_CURTAINS_NS) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		declare var var0001;
@@ -5022,15 +5028,15 @@ void Func0291 shape#(0x291) () {
 	}
 }
 
-void Func0292 shape#(0x292) () {
+void Func0292 shape#(SHAPE_DOUGH) () {
 	declare var var0003;
 	declare struct<Position> var0004;
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
-		if ((var0000 == 0x0001) || (var0000 == 0x0002)) {
+		if (var0000 == FRAME_DOUGH_FLAT_BREAD || var0000 == FRAME_DOUGH_BREAD) {
 			struct<ObjPos> var0001 = UI_click_on_item();
 			var var0002 = var0001->get_item_shape();
-			if (var0002 == 0x033F) {
+			if (var0002 == SHAPE_BAKING_HEARTH) {
 				var0003 = set_last_created();
 				if (var0003) {
 					var0004 = var0001->get_object_position();
@@ -5042,7 +5048,7 @@ void Func0292 shape#(0x292) () {
 							nohalt;
 							call Func0292;
 						};
-						if (UI_die_roll(0x0001, 0x0002) == 0x0001) {
+						if (UI_die_roll(1, 2) == 1) {
 							Func08FE("@Do not over cook it!@");
 						}
 					}
@@ -5052,12 +5058,14 @@ void Func0292 shape#(0x292) () {
 	}
 	if (event == SCRIPTED) {
 		var0004 = get_object_position();
-		var var0005 = find_nearby(0x033F, 0x0002, MASK_NONE);
+		var var0005 = find_nearby(SHAPE_BAKING_HEARTH, 2, MASK_NONE);
 		if (UI_get_array_size(var0005) > 0) {
 			remove_item();
 			var var0006 = UI_create_new_object(SHAPE_FOOD);
 			if (var0006) {
 				var0006->set_item_flag(TEMPORARY);
+				// BUG: This should have been done on var0006. As if, it "works"
+				// by pure luck.
 				set_item_frame(FRAME_BREAD);
 				var0003 = UI_update_last_created(var0004);
 				if (var0003) {
@@ -5074,13 +5082,13 @@ void Func0292 shape#(0x292) () {
 	}
 }
 
-void Func0294 shape#(0x294) () {
+void Func0294 shape#(SHAPE_CART_PIECE2) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
 
-void Func0296 shape#(0x296) () {
+void Func0296 shape#(SHAPE_FISHING_ROD) () {
 	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		UI_close_gumps();
 		struct<ObjPos> var0000 = UI_click_on_item();
@@ -5095,14 +5103,14 @@ void Func0296 shape#(0x296) () {
 		struct<Position> var0002 = AVATAR->get_object_position();
 		var0002.x += 1;
 		var var0003 = false;
-		var var0004 = 0x0000;
-		var var0005 = AVATAR->find_nearby(0x01FD, 0x000F, MASK_NONE);
+		var var0004 = 0;
+		var var0005 = AVATAR->find_nearby(SHAPE_FISH, 15, MASK_NONE);
 		declare var var0008;
 		for (var0008 in var0005) {
-			var0004 += 0x0001;
+			var0004 += 1;
 		}
-		if (var0004 != 0x0000) {
-			if (UI_die_roll(0x0001, 0x000A) <= var0004) {
+		if (var0004 != 0) {
+			if (UI_die_roll(1, 10) <= var0004) {
 				var0003 = true;
 			}
 		}
@@ -5115,9 +5123,10 @@ void Func0296 shape#(0x296) () {
 				var0001 = UI_update_last_created(var0002);
 				var0009 = UI_die_roll(1, 3);
 				if (var0009 == 1) {
+					// TYPO: Should be "Indeed".
 					Func08FE("@Indded, a whopper!@");
 					if (SPARK->npc_nearby()) {
-						Func0933(SPARK, "@I have seen bigger.@", 0x0010);
+						Func0933(SPARK, "@I have seen bigger.@", 16);
 					}
 				}
 				if (var0009 == 2) {
@@ -5128,21 +5137,21 @@ void Func0296 shape#(0x296) () {
 				}
 			}
 		} else {
-			var0009 = UI_die_roll(0x0001, 0x0004);
-			if (var0009 == 0x0001) {
-				Func0933(AVATAR, "@Not even a bite!@", 0x0000);
+			var0009 = UI_die_roll(1, 4);
+			if (var0009 == 1) {
+				Func0933(AVATAR, "@Not even a bite!@", 0);
 			}
-			if (var0009 == 0x0002) {
-				Func0933(AVATAR, "@It got away!@", 0x0000);
+			if (var0009 == 2) {
+				Func0933(AVATAR, "@It got away!@", 0);
 				if (IOLO->npc_nearby()) {
-					Func0933(IOLO, "@It was the Big One!@", 0x0010);
+					Func0933(IOLO, "@It was the Big One!@", 16);
 				}
 			}
-			if (var0009 == 0x0003) {
-				Func0933(AVATAR, "@I've lost my bait.@", 0x0000);
+			if (var0009 == 3) {
+				Func0933(AVATAR, "@I've lost my bait.@", 0);
 			}
-			if (var0009 == 0x0004) {
-				Func0933(AVATAR, "@I felt a nibble.@", 0x0000);
+			if (var0009 == 4) {
+				Func0933(AVATAR, "@I felt a nibble.@", 0);
 			}
 		}
 	}
@@ -5221,7 +5230,7 @@ void Func029C shape#(SHAPE_SWORD_BLANK) () {
 			if (var000C == SHAPE_ANVIL) {
 				if (var000B->get_item_frame() == FRAME_MAGIC_ANVIL) {
 					Func0828(
-							var000B, 0x0000, 0x0002, 0x0000, Func029C, var000B,
+							var000B, 0, 2, 0, Func029C, var000B,
 							BG_PATH_FAILURE);
 				}
 			}
@@ -5229,15 +5238,16 @@ void Func029C shape#(SHAPE_SWORD_BLANK) () {
 				if ((var000B->get_item_frame() >= FRAME_MAGIC_FIREPIT_COLD)
 					&& (var000B->get_item_frame() <= FRAME_MAGIC_FIREPIT_FLAME)) {
 					Func0828(
-							var000B, 0x0001, 0x0000, 0x0000, Func029C, var000B,
+							var000B, 1, 0, 0, Func029C, var000B,
 							PATH_SUCCESS_9);
 				}
 			}
-			if (var000C == 0x02E5) {
+			if (var000C == SHAPE_WATER_TROUGH_NS) {
 				var0003 = var000A->get_item_frame();
-				if ((var0003 >= FRAME_BLACKSWORD_BLANK_LUKEWARM1) && (var0003 <= FRAME_BLACKSWORD_BLANK_HOT3)) {
+				if ((var0003 >= FRAME_BLACKSWORD_BLANK_LUKEWARM1)
+					&& (var0003 <= FRAME_BLACKSWORD_BLANK_HOT3)) {
 					Func0828(
-							var000B, 0x0000, 0x0001, 0x0000, Func029C, var000B,
+							var000B, 0, 1, 0, Func029C, var000B,
 							PATH_SUCCESS);
 				} else {
 					AVATAR->get_npc_object()->item_say(
@@ -5292,19 +5302,19 @@ void Func029C shape#(SHAPE_SWORD_BLANK) () {
 	}
 }
 
-void Func02A3 shape#(0x2A3) () {
+void Func02A3 shape#(SHAPE_DESK_ITEMS) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		declare var var0002;
-		if (var0000 == 0x0000) {
+		if (var0000 == FRAME_DESK_ITEM_GAVEL) {
 			struct<ObjPos> var0001 = UI_click_on_item();
 			UI_play_sound_effect2(0x000F, item);
 			if (var0001->is_npc()) {
 				var0001->item_say("@Hey, that hurt!@");
 				return;
 			}
-			if (var0001->get_item_shape() == 0x02A3) {
-				if (var0001->get_item_frame() == 0x000A) {
+			if (var0001->get_item_shape() == SHAPE_DESK_ITEMS) {
+				if (var0001->get_item_frame() == FRAME_DESK_ITEM_PARROT) {
 					var0002 = script var0001 {
 						nohalt;
 						say "@I will tell!@";
@@ -5324,21 +5334,21 @@ void Func02A3 shape#(0x2A3) () {
 				}
 			}
 		}
-		if (var0000 == 0x000A) {
-			var var0003 = UI_die_roll(0x0001, 0x0007);
-			if (var0003 == 0x0001) {
+		if (var0000 == FRAME_DESK_ITEM_PARROT) {
+			var var0003 = UI_die_roll(1, 7);
+			if (var0003 == 1) {
 				var0002 = script item {
 					nohalt;
 					say "@Squawk!@";
 				};
 			}
-			if (var0003 == 0x0002) {
+			if (var0003 == 2) {
 				var0002 = script item {
 					nohalt;
 					say "@Polly want a cracker?@";
 				};
 			}
-			if ((var0003 == 0x0003) || (var0003 == 0x0004)) {
+			if ((var0003 == 3) || (var0003 == 4)) {
 				var0002 = script item {
 					nohalt;
 					say "@I know where@";
@@ -5348,13 +5358,13 @@ void Func02A3 shape#(0x2A3) () {
 					say "@the treasure is!@";
 				};
 			}
-			if (var0003 == 0x0005) {
+			if (var0003 == 5) {
 				var0002 = script item {
 					nohalt;
 					say "@Gimmee a cracker!@";
 				};
 			}
-			if ((var0003 == 0x0006) || (var0003 == 0x0007)) {
+			if ((var0003 == 6) || (var0003 == 7)) {
 				var0002 = script item {
 					nohalt;
 					say "@Pretty bird!@";
@@ -5375,8 +5385,9 @@ void Func02A3 shape#(0x2A3) () {
 				}
 			}
 		}
-		if ((var0000 == 0x0011)
-			|| ((var0000 == 0x0012) || (var0000 == 0x0013))) {
+		if (var0000 == FRAME_DESK_ITEM_CLACKER1
+			|| (var0000 == FRAME_DESK_ITEM_CLACKER2
+				|| var0000 == FRAME_DESK_ITEM_CLACKER3)) {
 			if (!in_usecode()) {
 				var0002 = script item {
 					repeat 12 {
@@ -5394,12 +5405,13 @@ void Func02A3 shape#(0x2A3) () {
 				}
 			}
 		}
-		if (var0000 == 0x000B) {
-			var var0004 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+		if (var0000 == FRAME_DESK_ITEM_ABACUS) {
+			var var0004 = PARTY->count_objects(
+					SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 			var var0005 = "Party gold: " + var0004;
 			item_say(var0005);
 		}
-		if (var0000 == 0x0014) {
+		if (var0000 == FRAME_DESK_ITEM_BELL) {
 			var0002 = script item {
 				repeat 4 {
 					sfx 23;
@@ -5409,11 +5421,11 @@ void Func02A3 shape#(0x2A3) () {
 	}
 }
 
-void Func02A6 shape#(0x2A6) () {
+void Func02A6 shape#(SHAPE_CURTAINS_EW) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		declare var var0001;
-		if ((var0000 % 0x0002) == 0x0000) {
+		if ((var0000 % 2) == 0) {
 			var0001 = 1;
 		} else {
 			var0001 = -1;
@@ -5423,34 +5435,34 @@ void Func02A6 shape#(0x2A6) () {
 	}
 }
 
-void Func02B1 shape#(0x2B1) () {
+void Func02B1 shape#(SHAPE_HARPSICORD) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(0x0039, item);
 	}
 }
 
-void Func02B2 shape#(0x2B2) () {
+void Func02B2 shape#(SHAPE_XYLOPHONE) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(0x0038, item);
 	}
 }
 
-void Func02B3 shape#(0x2B3) () {
+void Func02B3 shape#(SHAPE_LYRE) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(0x003A, item);
 	}
 }
 
-void Func02B4 shape#(0x2B4) () {
+void Func02B4 shape#(SHAPE_LUTE) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(0x003B, item);
 	}
 }
 
-void Func02B5 shape#(0x2B5) () {
+void Func02B5 shape#(SHAPE_WHISTLE) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(0x0037, item);
-		if (get_item_frame() == 0x0001) {
+		if (get_item_frame() == FRAME_WHISTLE_WISP_WHISTLE) {
 			UI_close_gumps();
 			var var0000 = UI_find_nearby_avatar(SHAPE_WISP);
 			for (var0003 in var0000) {
@@ -5460,25 +5472,25 @@ void Func02B5 shape#(0x2B5) () {
 	}
 }
 
-void Func02B7 shape#(0x2B7) () {
+void Func02B7 shape#(SHAPE_GRANDFATHER_CLOCK_NS) () {
 	if (event == DOUBLECLICK) {
 		item->Func00FC();
 	}
 }
 
-void Func02B8 shape#(0x2B8) () {
+void Func02B8 shape#(SHAPE_BED_EW) () {
 	if (event == DOUBLECLICK) {
 		Func0800(item);
 	}
 }
 
-void Func02BA shape#(0x2BA) () {
+void Func02BA shape#(SHAPE_SHEARS) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		var var0001 = var0000.obj->get_item_shape();
 		if (var0001 == SHAPE_CLOTH) {
-			var0000->set_item_shape(0x033B);
-			var0000->set_item_frame(UI_die_roll(0x0000, 0x0002));
+			var0000->set_item_shape(SHAPE_BANDAGES);
+			var0000->set_item_frame(UI_die_roll(0, 2));
 		} else {
 			Func08FF("@Might not those come in handy for cutting cloth into "
 					 "bandages?@");
@@ -5505,11 +5517,11 @@ void Func02BD shape#(SHAPE_LIT_TORCH) () {
 	}
 }
 
-void Func02BE shape#(0x2BE) () {
+void Func02BE shape#(SHAPE_CANNON) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var var0000 = find_nearby(SHAPE_POWDER_KEG, 10, MASK_NONE);
-		var var0001 = find_nearby(0x02BF, 10, MASK_NONE);
+		var var0001 = find_nearby(SHAPE_CANNON_BALL, 10, MASK_NONE);
 		if (!var0000) {
 			Func08FE("@It needs powder!@");
 			return;
@@ -5526,18 +5538,19 @@ void Func02BE shape#(0x2BE) () {
 		var var0005 = var0002.y - var0003.y;
 		declare var var0006;
 		if (Func0932(var0004) > Func0932(var0005)) {
-			if (var0004 > 0x0000) {
+			if (var0004 > 0) {
 				var0006 = EAST;
 			} else {
 				var0006 = WEST;
 			}
-		} else if (var0005 > 0x0000) {
+		} else if (var0005 > 0) {
 			var0006 = SOUTH;
 		} else {
 			var0006 = NORTH;
 		}
 		set_item_frame(var0006 / 2);
-		fire_projectile(var0006, 0x02BF, 0x001E, 0x02BE, 0x02BE);
+		fire_projectile(
+				var0006, SHAPE_CANNON_BALL, 30, SHAPE_CANNON, SHAPE_CANNON);
 	}
 	if (event == WEAPON) {
 		var var0007 = get_item_shape();
@@ -5551,13 +5564,10 @@ void Func02BE shape#(0x2BE) () {
 		}
 		declare var var000A;
 		if ((var0007 == SHAPE_DOOR_EW_BOTTOM) || (var0007 == SHAPE_DOOR_NS_RIGHT)) {
-			var000A = [
-				0x0000, 0x0001, 0x0002, 0x0008, 0x0009, 0x000A, 0x0010, 0x0011,
-				0x0012
-			];
+			var000A = [0, 1, 2, 8, 9, 10, 16, 17, 18];
 		}
 		if ((var0007 == SHAPE_DOOR_EW_TOP) || (var0007 == SHAPE_DOOR_NS_LEFT)) {
-			var000A = [0x0000, 0x0001, 0x0002, 0x0004, 0x0005, 0x0006];
+			var000A = [0, 1, 2, 4, 5, 6];
 		}
 		for (var000D in var000A) {
 			if (var0008 == var000D) {
@@ -5577,7 +5587,8 @@ void Func02C0 shape#(SHAPE_POWDER_KEG) () {
 		var var0000 = get_container();
 		if (!var0000->is_npc()) {
 			UI_close_gumps();
-			var var0001 = UI_get_avatar_ref()->attack_object(item, SHAPE_POWDER_KEG);
+			var var0001 = UI_get_avatar_ref()->attack_object(
+					item, SHAPE_POWDER_KEG);
 		}
 	}
 }
@@ -5597,25 +5608,25 @@ void Func02C3 shape#(SHAPE_BLACK_SWORD) () {
 	}
 }
 
-void Func02C4 shape#(0x2C4) () {
+void Func02C4 shape#(SHAPE_STOCKS) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		var var0001 = var0000;
-		if (var0000 == 0x0001) {
-			var0001 = 0x0000;
+		if (var0000 == FRAME_STOCKS_CLOSED) {
+			var0001 = FRAME_STOCKS_OPEN;
 		}
-		if (var0000 == 0x0000) {
-			var0001 = 0x0001;
+		if (var0000 == FRAME_STOCKS_OPEN) {
+			var0001 = FRAME_STOCKS_CLOSED;
 		}
 		UI_play_sound_effect2(0x001C, item);
 		set_item_frame(var0001);
 	}
 }
 
-void Func02C5 shape#(0x2C5) () {
+void Func02C5 shape#(SHAPE_GUILLOTINE_PLATFORM) () {
 	if (event == DOUBLECLICK) {
 		struct<Position> var0000 = get_object_position();
-		var var0001 = find_nearby(0x02DE, 0x0004, MASK_NONE);
+		var var0001 = find_nearby(SHAPE_GUILLOTINE, 4, MASK_NONE);
 		for (var0004 in var0001) {
 			struct<Position> var0005 = var0004->get_object_position();
 			if (var0005.x == var0000) {
@@ -5630,573 +5641,592 @@ labelFunc02C5_004E:
 	return;
 }
 
-void Func02CB shape#(0x2CB) () {
+void Func02CB shape#(SHAPE_TOMBSTONE) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
 	var var0000 = Func0908();
 	var var0001 = get_item_quality();
-	if (var0001 > 0x0066) {
-		UI_display_runes(0x0032, ["IS", "SIGN ZERO"]);
+	if (var0001 > QUALITY_TOMBSTONE_BELOVED_FATHER) {
+		UI_display_runes(GUMP_TOMBSTONE, ["IS", "SIGN ZERO"]);
 	} else {
-		if (var0001 == 0x0000) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_JOHN_DOE) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"here\{dot}lies", "john\{dot}doe", "buried", "where",
 				"he\{dot}died"
 			]);
 		}
-		if (var0001 == 0x0001) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_GARTH) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}garth\{dot}", "sorry", "about", "thy\{dot}\{th}umb"
 			]);
 		}
-		if (var0001 == 0x0002) {
-			UI_display_runes(
-					0x0032, ["LADY M:", "YOUTH IS", "HERS", "FOREVER"]);
+		if (var0001 == QUALITY_TOMBSTONE_LADY_M) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"LADY M:", "YOUTH IS", "HERS", "FOREVER"
+			]);
 		}
-		if (var0001 == 0x0003) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_JULIUS) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}julius\{dot}", "may\{dot}his", "spirit", "re\{st}",
 				"forever"
 			]);
 		}
-		if (var0001 == 0x0004) {
-			UI_display_runes(
-					0x0032,
-					["here", "lies", "argent", "died\{dot}a", "sargeant"]);
+		if (var0001 == QUALITY_TOMBSTONE_ARGENT) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"here", "lies", "argent", "died\{dot}a", "sargeant"
+			]);
 		}
-		if (var0001 == 0x0005) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}darek\{dot}", "his", "days", "were", "numbered"]);
+		if (var0001 == QUALITY_TOMBSTONE_DAREK) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}darek\{dot}", "his", "days", "were", "numbered"
+			]);
 		}
-		if (var0001 == 0x0006) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_MALC) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}malc\{dot}", "his", "words", "remain", "wi\{th}\{dot}us"
 			]);
 		}
-		if (var0001 == 0x0007) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}nina\{dot}", "may", "her", "spirit", "soar"]);
+		if (var0001 == QUALITY_TOMBSTONE_NINA) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}nina\{dot}", "may", "her", "spirit", "soar"
+			]);
 		}
-		if (var0001 == 0x0008) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_BART) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}bart\{dot}", "he\{dot}never", "finished",
 				"\{th}e\{dot}joke"
 			]);
 		}
-		if (var0001 == 0x0009) {
-			UI_display_runes(
-					0x0032, ["\{dot}ann\{dot}", "a", "delicate", "flower"]);
+		if (var0001 == QUALITY_TOMBSTONE_ANN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}ann\{dot}", "a", "delicate", "flower"
+			]);
 		}
-		if (var0001 == 0x000A) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_DALLAS) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}dallas\{dot}", "went", "down", "wi\{th}\{dot}\{th}e",
 				"ship"
 			]);
 		}
-		if (var0001 == 0x000B) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}alan\{dot}", "looked", "great\{dot}in", "pink"]);
+		if (var0001 == QUALITY_TOMBSTONE_ALAN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}alan\{dot}", "looked", "great\{dot}in", "pink"
+			]);
 		}
-		if (var0001 == 0x000C) {
-			UI_display_runes(
-					0x0032, ["here", "lies", "ken", "killed\{dot}by", "a pen"]);
+		if (var0001 == QUALITY_TOMBSTONE_KEN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"here", "lies", "ken", "killed\{dot}by", "a pen"
+			]);
 		}
-		if (var0001 == 0x000D) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_JEFF_D) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}jeff\{dot}d\{dot}", "died\{dot}wi\{th}", "a\{dot}pencil",
 				"in\{dot}hand"
 			]);
 		}
-		if (var0001 == 0x000E) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_MARTIN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}martin\{dot}", "\{th}e\{dot}notes", "were\{dot}too",
 				"sharp"
 			]);
 		}
-		if (var0001 == 0x000F) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_TONY_B) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}tony\{dot}b\{dot}", "a\{dot}credit", "to\{dot}his",
 				"name"
 			]);
 		}
-		if (var0001 == 0x0010) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}philip\{dot}", "spells", "ma\{st}ered", "him"]);
+		if (var0001 == QUALITY_TOMBSTONE_PHILIP) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}philip\{dot}", "spells", "ma\{st}ered", "him"
+			]);
 		}
-		if (var0001 == 0x0011) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_CHUCKLES) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}chuckles\{dot}", "laughed", "till\{dot}\{th}e", "end"
 			]);
 		}
-		if (var0001 == 0x0012) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_ART_D) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}art\{dot}d\{dot}", "bit\{dot}\{th}e\{dot}rump",
 				"of\{dot}a\{dot}big\{dot}", "bad\{dot}gump"
 			]);
 		}
-		if (var0001 == 0x0013) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_JIM_G) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}jim\{dot}g\{dot}", "he\{dot}was", "a\{dot}wonder",
 				"to\{dot}us\{dot}all"
 			]);
 		}
-		if (var0001 == 0x0014) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_WILL) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}will\{dot}", "he\{dot}was\{dot}a", "rebel\{dot}and",
 				"a\{dot}runner"
 			]);
 		}
-		if (var0001 == 0x0015) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_MR_MIKE) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}mr\{dot}mike\{dot}", "lost\{dot}early",
 				"from\{dot}a\{dot}bout", "with\{dot}gumps"
 			]);
 		}
-		if (var0001 == 0x0016) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_PAUL) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}paul\{dot}", "odd\{dot}how", "awake", "sleep",
 				"made\{dot}him"
 			]);
 		}
-		if (var0001 == 0x0017) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_ZACK) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}zack\{dot}", "he", "demanded", "atomic", "d\{ea}\{th}"
 			]);
 		}
-		if (var0001 == 0x0018) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_PHIL_S) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}phil\{dot}s\{dot}", "a\{dot}victim", "of", "venomous",
 				"fate"
 			]);
 		}
-		if (var0001 == 0x0019) {
-			UI_display_runes(
-					0x0032, ["\{dot}jeff\{dot}w\{dot}", "danger", "radiation"]);
+		if (var0001 == QUALITY_TOMBSTONE_JEFF_W) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}jeff\{dot}w\{dot}", "danger", "radiation"
+			]);
 		}
-		if (var0001 == 0x001A) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_TONY_Z) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}tony\{dot}z\{dot}", "a\{dot}good", "source",
 				"for\{dot}gumps"
 			]);
 		}
-		if (var0001 == 0x001B) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_BILL_B) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}bill\{dot}b\{dot}", "we\{dot}\{th}ought",
 				"he\{dot}was\{dot}only", "winged"
 			]);
 		}
-		if (var0001 == 0x001C) {
-			UI_display_runes(
-					0x0032, ["\{dot}charles\{dot}c\{dot}", "guest", "victim"]);
+		if (var0001 == QUALITY_TOMBSTONE_CHARLES_C) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}charles\{dot}c\{dot}", "guest", "victim"
+			]);
 		}
-		if (var0001 == 0x001D) {
+		if (var0001 == QUALITY_TOMBSTONE_DANNY) {
 			// TYPO: Should be "departed"
-			UI_display_runes(
-					0x0032, ["\{dot}danny\{dot}", "dearly", "depainted"]);
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}danny\{dot}", "dearly", "depainted"
+			]);
 		}
-		if (var0001 == 0x001E) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_BOB) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}bob\{dot}", "he\{dot}makes", "\{th}e\{dot}grass",
 				"greener"
 			]);
 		}
-		if (var0001 == 0x001F) {
-			UI_display_runes(
-					0x0032,
-					["here\{dot}lies", "donna", "she\{dot}is\{dot}a", "gonna"]);
+		if (var0001 == QUALITY_TOMBSTONE_DONNA) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"here\{dot}lies", "donna", "she\{dot}is\{dot}a", "gonna"
+			]);
 		}
-		if (var0001 == 0x0020) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}karl\{dot}", "a\{dot}portrait", "of", "talent"]);
+		if (var0001 == QUALITY_TOMBSTONE_KARL) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}karl\{dot}", "a\{dot}portrait", "of", "talent"
+			]);
 		}
-		if (var0001 == 0x0021) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_CHRIS_D) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}chris\{dot}d\{dot}", "an", "explosive", "character"
 			]);
 		}
-		if (var0001 == 0x0022) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}glen\{dot}", "went", "with\{dot}a", "smile"]);
+		if (var0001 == QUALITY_TOMBSTONE_GLEN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}glen\{dot}", "went", "with\{dot}a", "smile"
+			]);
 		}
-		if (var0001 == 0x0023) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_BRUCE_L) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}bruce\{dot}l\{dot}", "had\{dot}a", "fantastic", "ending"
 			]);
 		}
-		if (var0001 == 0x0024) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}loubet\{dot}", "his", "last", "br\{ea}\{th}"]);
+		if (var0001 == QUALITY_TOMBSTONE_LOUBET) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}loubet\{dot}", "his", "last", "br\{ea}\{th}"
+			]);
 		}
-		if (var0001 == 0x0025) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_MICAEL_P) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}micael\{dot}p\{dot}", "lo\{ng}\{dot}time",
 				"comi\{ng}\{dot}gone", "for\{dot}good"
 			]);
 		}
-		if (var0001 == 0x0026) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}jake\{dot}", "\{th}e\{dot}party", "is", "over"]);
+		if (var0001 == QUALITY_TOMBSTONE_JAKE) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}jake\{dot}", "\{th}e\{dot}party", "is", "over"
+			]);
 		}
-		if (var0001 == 0x0027) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_GARY_W) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}gary\{dot}w\{dot}", "man\{dot}of\{dot}a", "\{th}ousand",
 				"faces"
 			]);
 		}
-		if (var0001 == 0x0028) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_THE_BEAST) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}\{th}e\{dot}b\{ea}\{st}\{dot}", "it\{dot}was\{dot}a",
 				"full", "life"
 			]);
 		}
-		if (var0001 == 0x0029) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_KIRK) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"here\{dot}lies", "kirk\{dot}died", "from\{dot}too",
 				"much\{dot}work"
 			]);
 		}
-		if (var0001 == 0x002A) {
-			UI_display_runes(
-					0x0032, ["\{dot}targ\{dot}", "a", "wor\{th}y", "opponent"]);
+		if (var0001 == QUALITY_TOMBSTONE_TARG) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}targ\{dot}", "a", "wor\{th}y", "opponent"
+			]);
 		}
-		if (var0001 == 0x002B) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_MYSTRAL) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"here\{dot}lies", "my\{st}ral", "shined", "like\{dot}a",
 				"crystal"
 			]);
 		}
-		if (var0001 == 0x002C) {
-			UI_display_runes(
-					0x0032, ["here\{dot}lies", "marc", "and\{dot}why", "not"]);
+		if (var0001 == QUALITY_TOMBSTONE_MARC) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"here\{dot}lies", "marc", "and\{dot}why", "not"
+			]);
 		}
-		if (var0001 == 0x002D) {
-			UI_display_runes(
-					0x0032, ["\{dot}nenad\{dot}", "\{th}e", "music", "maker"]);
+		if (var0001 == QUALITY_TOMBSTONE_NENAD) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}nenad\{dot}", "\{th}e", "music", "maker"
+			]);
 		}
-		if (var0001 == 0x002E) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_JOHN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"here\{dot}lies", "john", "his", "work\{dot}was",
 				"never\{dot}done"
 			]);
 		}
-		if (var0001 == 0x002F) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}bruce\{dot}a\{dot}", "we", "killed", "him"]);
+		if (var0001 == QUALITY_TOMBSTONE_BRUCE_A) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}bruce\{dot}a\{dot}", "we", "killed", "him"
+			]);
 		}
-		if (var0001 == 0x0030) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_ERIC) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}eric\{dot}", "unaware", "\{th}e\{dot}game", "was",
 				"loaded"
 			]);
 		}
-		if (var0001 == 0x0031) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_RAYMOND) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}raymond\{dot}", "\{th}e\{dot}world", "is\{dot}not",
 				"enough"
 			]);
 		}
-		if (var0001 == 0x0032) {
+		if (var0001 == QUALITY_TOMBSTONE_BETH) {
 			// TYPO: Should be "garrote"
-			UI_display_runes(
-					0x0032, ["\{dot}Beth\{dot}", "died", "by", "garriot"]);
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}Beth\{dot}", "died", "by", "garriot"
+			]);
 		}
-		if (var0001 == 0x0033) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}jack\{dot}", "\{ea}ten", "by", "di\{ng}os"]);
+		if (var0001 == QUALITY_TOMBSTONE_JACK) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}jack\{dot}", "\{ea}ten", "by", "di\{ng}os"
+			]);
 		}
-		if (var0001 == 0x0034) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_MICHELLE) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}michelle\{dot}", "hu\{ng}\{dot}for", "poisoni\{ng}",
 				"lover"
 			]);
 		}
-		if (var0001 == 0x0035) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_SCOTT_H) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}scott\{dot}h\{dot}", "gone", "today", "gone", "tomorrow"
 			]);
 		}
-		if (var0001 == 0x0036) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_BRIAN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}brian\{dot}", "swallowed", "by", "\{th}e", "mon\{st}er"
 			]);
 		}
-		if (var0001 == 0x0037) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_SHERRY_C) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}sherry\{dot}c\{dot}", "managed", "until",
 				"\{th}e\{dot}end"
 			]);
 		}
-		if (var0001 == 0x0038) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}karen\{dot}", "quality", "was\{dot}job", "one"]);
+		if (var0001 == QUALITY_TOMBSTONE_KAREN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}karen\{dot}", "quality", "was\{dot}job", "one"
+			]);
 		}
-		if (var0001 == 0x0039) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_J_SHELTON) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}j\{dot}shelton", "here\{dot}i\{dot}lie",
 				"but\{dot}\{st}ill", "i\{dot}roam"
 			]);
 		}
-		if (var0001 == 0x003A) {
+		if (var0001 == QUALITY_TOMBSTONE_MARCO) {
 			// TYPO: Should be "underground"
-			UI_display_runes(0x0032, [
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}marco\{dot}", "underfed", "under\{dot}gun", "undergrnd"
 			]);
 		}
-		if (var0001 == 0x003B) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_LYNN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}lynn\{dot}", "she\{dot}had", "\{th}e\{dot}grace",
 				"of\{dot}a\{dot}swan"
 			]);
 		}
-		if (var0001 == 0x003C) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_CHENAULT) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}chenault\{dot}", "me\{dot}puergo", "canus\{dot}meus",
 				"urit"
 			]);
 		}
-		if (var0001 == 0x003D) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_J_CRIPPEN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}j\{dot}crippen\{dot}", "to\{dot}dizzy", "and\{dot}tc",
 				"cocopuff"
 			]);
 		}
-		if (var0001 == 0x003E) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}tim\{dot}", "\{th}e\{dot}unknown", "tomb\{st}one"]);
+		if (var0001 == QUALITY_TOMBSTONE_TIM) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}tim\{dot}", "\{th}e\{dot}unknown", "tomb\{st}one"
+			]);
 		}
-		if (var0001 == 0x003F) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_NATHAN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}na\{th}an\{dot}", "blown\{dot}away", "by\{dot}grogs",
 				"fireball"
 			]);
 		}
-		if (var0001 == 0x0040) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_JAMES_N) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}james\{dot}n\{dot}", "last\{dot}words", "i\{dot}drank",
 				"what"
 			]);
 		}
-		if (var0001 == 0x0041) {
-			UI_display_runes(
-					0x0032,
-					["here\{dot}lies", "Ben", "all\{dot}te\{st}ed", "out"]);
+		if (var0001 == QUALITY_TOMBSTONE_BEN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"here\{dot}lies", "Ben", "all\{dot}te\{st}ed", "out"
+			]);
 		}
-		if (var0001 == 0x0042) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_SCOTT) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}scott\{dot}", "buried\{dot}an", "axe\{dot}in",
 				"his\{dot}h\{ea}d"
 			]);
 		}
-		if (var0001 == 0x0043) {
+		if (var0001 == QUALITY_TOMBSTONE_DUKE) {
 			// Caesar joke: I came, I saw, I left
-			UI_display_runes(
-					0x0032, ["\{dot}duke\{dot}", "veni", "vidi", "exii"]);
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}duke\{dot}", "veni", "vidi", "exii"
+			]);
 		}
-		if (var0001 == 0x0044) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_MIKE_H) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}mike\{dot}h\{dot}", "every\{th}i\{ng}", "fit\{dot}to",
 				"print"
 			]);
 		}
-		if (var0001 == 0x0045) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_ROBIN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}robin\{dot}", "she\{dot}gave", "sunshine",
 				"to\{dot}us\{dot}all"
 			]);
 		}
-		if (var0001 == 0x0046) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_ANDREW_M) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}andrew\{dot}", "\{dot}m\{dot}", "never", "got",
 				"clued\{dot}in"
 			]);
 		}
-		if (var0001 == 0x0047) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_WAYNE_S) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}wayne\{dot}s\{dot}", "\{th}e\{dot}food", "was",
 				"gr\{ea}t"
 			]);
 		}
-		if (var0001 == 0x0048) {
-			UI_display_runes(
-					0x0032, ["\{dot}craig\{dot}c\{dot}", "was", "delivered"]);
+		if (var0001 == QUALITY_TOMBSTONE_CRAIG_C) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}craig\{dot}c\{dot}", "was", "delivered"
+			]);
 		}
-		if (var0001 == 0x0049) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_JEFF_F) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}jeff\{dot}f\{dot}", "fed\{dot}but", "never", "ate"
 			]);
 		}
-		if (var0001 == 0x004A) {
-			UI_display_runes(
-					0x0032, ["\{dot}w\{dot}hagy", "food", "for", "\{th}ought"]);
+		if (var0001 == QUALITY_TOMBSTONE_W_HAGY) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}w\{dot}hagy", "food", "for", "\{th}ought"
+			]);
 		}
-		if (var0001 == 0x004B) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_M_STEVENS) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}m\{dot}", "\{dot}stevens\{dot}", "arrived",
 				"wi\{th}\{dot}gifts"
 			]);
 		}
-		if (var0001 == 0x004C) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_MICHELLE_G) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}michelle\{dot}", "\{dot}g\{dot}", "bringer", "of",
 				"dinner"
 			]);
 		}
-		if (var0001 == 0x004D) {
-			UI_display_runes(
-					0x0032, ["\{dot}brian\{dot}s\{dot}", "food", "was", "him"]);
+		if (var0001 == QUALITY_TOMBSTONE_BRIAN_S) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}brian\{dot}s\{dot}", "food", "was", "him"
+			]);
 		}
-		if (var0001 == 0x004E) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_JACKIE_D) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}jackie\{dot}", "d\{dot}", "as\{dot}in\{dot}d\{dot}",
 				"for", "dinner"
 			]);
 		}
-		if (var0001 == 0x004F) {
+		if (var0001 == QUALITY_TOMBSTONE_B_ADAMS) {
 			// TYPO: Should be "attained" maybe?
-			UI_display_runes(0x0032, [
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}b\{dot}adams\{dot}", "spained", "a", "perfect", "record"
 			]);
 		}
-		if (var0001 == 0x0050) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_HAL) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}hal\{dot}", "a\{dot}nice", "fellow", "who\{dot}is",
 				"now\{dot}below"
 			]);
 		}
-		if (var0001 == 0x0051) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_ROVER) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}rover\{dot}", "mans\{dot}best", "friend",
 				"over\{dot}and", "over"
 			]);
 		}
-		if (var0001 == 0x0052) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_FELCORE) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}felcore\{dot}", "age\{dot}old", "love", "never", "dies"
 			]);
 		}
-		if (var0001 == 0x0053) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_TONY_MORSE) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"heres", "tony", "morse", "hes\{dot}d\{ea}d", "of\{dot}course"
 			]);
 		}
-		if (var0001 == 0x0054) {
-			UI_display_runes(
-					0x0032, ["heres", "larry", "salamon", "\{dot}", "gross"]);
+		if (var0001 == QUALITY_TOMBSTONE_LARRY_SALAMON) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"heres", "larry", "salamon", "\{dot}", "gross"
+			]);
 		}
-		if (var0001 == 0x0055) {
-			UI_display_runes(
-					0x0032, ["darren", "mcdonald", "who\{dot}is", "faltran"]);
+		if (var0001 == QUALITY_TOMBSTONE_DARREN_MCDONALD) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"darren", "mcdonald", "who\{dot}is", "faltran"
+			]);
 		}
-		if (var0001 == 0x0056) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_KEVIN_B) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}kevin\{dot}b\{dot}", "died", "away", "from\{dot}\{th}e",
 				"chiltons"
 			]);
 		}
-		if (var0001 == 0x0057) {
-			UI_display_runes(
-					0x0032,
-					["\{dot}beth", "and", "michael\{dot}", "worm", "food"]);
+		if (var0001 == QUALITY_TOMBSTONE_BETH_AND_MICHAEL) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}beth", "and", "michael\{dot}", "worm", "food"
+			]);
 		}
-		if (var0001 == 0x0058) {
-			UI_display_runes(
-					0x0032, ["\{dot}a\{dot}h\{dot}", "died", "honorably"]);
+		if (var0001 == QUALITY_TOMBSTONE_A_H) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}a\{dot}h\{dot}", "died", "honorably"
+			]);
 		}
-		if (var0001 == 0x0059) {
-			UI_display_runes(
-					0x0032, ["\{dot}john\{dot}t\{dot}", "gone", "and", "went"]);
+		if (var0001 == QUALITY_TOMBSTONE_JOHN_T) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}john\{dot}t\{dot}", "gone", "and", "went"
+			]);
 		}
-		if (var0001 == 0x005A) {
-			UI_display_runes(
-					0x0032, ["\{dot}rey\{dot}", "", "installed", "here"]);
+		if (var0001 == QUALITY_TOMBSTONE_REY) {
+			UI_display_runes(GUMP_TOMBSTONE, [
+				"\{dot}rey\{dot}", "", "installed", "here"
+			]);
 		}
-		if (var0001 == 0x005B) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_RHOODE) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}rhoode\{dot}", "a\{dot}more", "deservi\{ng}",
 				"man\{dot}never", "died"
 			]);
 		}
-		if (var0001 == 0x005C) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_JASNER) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}jasner\{dot}", "every", "moment", "she\{dot}is", "missed"
 			]);
 		}
-		if (var0001 == 0x005D) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_WAMPOL) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}wampol\{dot}", "here\{dot}he", "lied", "now\{dot}here",
 				"he\{dot}lays"
 			]);
 		}
-		if (var0001 == 0x005E) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_DESTRA) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}destra\{dot}", "wounded", "by\{dot}a", "lovers",
 				"spurni\{ng}"
 			]);
 		}
-		if (var0001 == 0x005F) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_MENDAR) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}mendar\{dot}", "buried", "wi\{th}\{dot}his",
 				"boots\{dot}on"
 			]);
 		}
-		if (var0001 == 0x0060) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_GREGHIM) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}greghim\{dot}", "old\{dot}age", "never",
 				"looked\{dot}so", "good"
 			]);
 		}
-		if (var0001 == 0x0061) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_SARNAN) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}sarnan\{dot}", "was\{dot}not", "missed", "but\{dot}is",
 				"now"
 			]);
 		}
-		if (var0001 == 0x0062) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_ERLEMAR) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}erlemar\{dot}", "gr\{ea}te\{st}", "enchanter",
 				"of\{dot}his", "day"
 			]);
 		}
-		if (var0001 == 0x0063) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_GALLER) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}galler\{dot}", "came\{dot}", "saw\{dot}", "was",
 				"conquered"
 			]);
 		}
-		if (var0001 == 0x0064) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_ELGELETH) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}elgele\{th}\{dot}", "queen", "for\{dot}a\{dot}day",
 				"worm\{dot}food", "forever"
 			]);
 		}
-		if (var0001 == 0x0065) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_PANTOR) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"\{dot}pantor\{dot}", "\{th}e\{dot}si\{ng}i\{ng}", "never",
 				"stops"
 			]);
 		}
-		if (var0001 == 0x0066) {
-			UI_display_runes(0x0032, [
+		if (var0001 == QUALITY_TOMBSTONE_BELOVED_FATHER) {
+			UI_display_runes(GUMP_TOMBSTONE, [
 				"here\{dot}lies", "beloved", "fa\{th}er", "and", "ma\{st}er"
 			]);
 		}
 	}
 }
 
-void Func02CF shape#(0x2CF) () {
+void Func02CF shape#(SHAPE_WATER_TROUGH_EW) () {
 	var var0000 = AVATAR->get_npc_object()->get_cont_items(
 			SHAPE_BUCKET, QUALITY_ANY, FRAME_BUCKET_WATER);
 	declare var var0001;
@@ -6218,7 +6248,7 @@ void Func02CF shape#(0x2CF) () {
 	}
 }
 
-void Func02D3 shape#(0x2D3) () {
+void Func02D3 shape#(SHAPE_BOLT) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = Func0908();
 		if (IOLO->npc_nearby()) {
@@ -6233,9 +6263,9 @@ void Func02D3 shape#(0x2D3) () {
 	}
 }
 
-void Func02D5 shape#(0x2D5) () {
+void Func02D5 shape#(SHAPE_VIRTUE_ROULETTE_WHEEL) () {
 	if ((event == DOUBLECLICK) && (!in_usecode())) {
-		var var0000 = UI_die_roll(0x0001, 0x0010);
+		var var0000 = UI_die_roll(1, 16);
 		halt_scheduled();
 		var var0001 = script item {
 			repeat var0000 {
@@ -6270,12 +6300,12 @@ void Func02D5 shape#(0x2D5) () {
 			sfx 29;
 			call Func060A;
 		};
-		if ((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003)) {
+		if ((UI_game_hour() >= 15) || (UI_game_hour() <= 3)) {
 			if (Func0937(SMITHY)) {
 				Func0904(SMITHY, ["@Place your bets.@", "@Round she goes!@"]);
 			}
 			SMITHY->set_schedule_type(HOUND);
-			var var0002 = find_nearby(0x0208, 7, MASK_NONE);
+			var var0002 = find_nearby(SHAPE_VIRTUE_ROULETTE_TABLE, 7, MASK_NONE);
 			var var0003 = var0002->find_nearby(SHAPE_GOLD_COIN, 5, MASK_NONE);
 			for (var0006 in var0003) {
 				var0006->clear_item_flag(OKAY_TO_TAKE);
@@ -6284,7 +6314,7 @@ void Func02D5 shape#(0x2D5) () {
 	}
 }
 
-void Func02D8 shape#(0x2D8) () {
+void Func02D8 shape#(SHAPE_CADDELITE_CHUNKS) () {
 	if (event == DOUBLECLICK) {
 		if (SPARK->npc_nearby()) {
 			SPARK->say("\"Thou dost need a blacksmith to do that. I wager my "
@@ -6295,61 +6325,61 @@ void Func02D8 shape#(0x2D8) () {
 	}
 }
 
-void Func02D9 shape#(0x2D9) () {
+void Func02D9 shape#(SHAPE_CRYSTAL_BALL) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var var0000 = get_item_quality();
 		declare struct<Position> var0001;
-		if ((var0000 == 0x0000) || (var0000 > 0x0007)) {
-			Func0940(0x0019);
+		if ((var0000 == QUALITY_CRYSTAL_BALL_GO_AWAY) || (var0000 > QUALITY_CRYSTAL_BALL_HIDDEN_ROOM)) {
+			Func0940(SPEECH_GUARDIAN_GO_AWAY);
 			return;
 		}
-		if (var0000 == 0x0001) {
+		if (var0000 == QUALITY_CRYSTAL_BALL_ALAGNERS_LAB) {
 			if (gflags[WISP_READ_NOTEBOOK]) {
 				var0001 = [0x0A82, 0x0970, 0x0003];
 			} else {
 				var0001 = [0x0A82, 0x09A0, 0x0003];
 			}
 		}
-		if (var0000 == 0x0002) {
+		if (var0000 == QUALITY_CRYSTAL_BALL_ROYAL_BEDROOM) {
 			var0001 = [0x038F, 0x047D, 0x0003];
 		}
-		if (var0000 == 0x0003) {
+		if (var0000 == QUALITY_CRYSTAL_BALL_BLACKGATE) {
 			var0001 = [0x0A28, 0x0A25, 0x0003];
 		}
-		if (var0000 == 0x0004) {
+		if (var0000 == QUALITY_CRYSTAL_BALL_AMBROSIA) {
 			var0001 = [0x0AF7, 0x00D7, 0x0003];
 		}
-		if (var0000 == 0x0005) {
+		if (var0000 == QUALITY_CRYSTAL_BALL_SKARA_BRAE) {
 			var0001 = [0x009F, 0x0540, 0x0003];
 		}
-		if (var0000 == 0x0006) {
+		if (var0000 == QUALITY_CRYSTAL_BALL_THE_BATHS) {
 			var0001 = [0x0609, 0x0773, 0x0003];
 		}
-		if (var0000 == 0x0007) {
+		if (var0000 == QUALITY_CRYSTAL_BALL_HIDDEN_ROOM) {
 			var0001 = [0x0928, 0x0597, 0x0003];
 		}
-		if (var0000 == 0x00FF) {
+		if (var0000 == QUALITY_CRYSTAL_BALL_INVALID) {
 			return;
 		}
 		UI_display_area(var0001);
 	}
 }
 
-void Func02DA shape#(0x2DA) () {
+void Func02DA shape#(SHAPE_BABY) () {
 	if (event == DOUBLECLICK) {
-		if (get_item_frame() == 0x0002) {
+		if (get_item_frame() == FRAME_BABY_RIKY) {
 			var var0000 = "@Praise All! The child is still alive. He must"
 						  + " be returned to Lady Tory immediately!@";
 			Func08FF(var0000);
 		} else {
 			struct<ObjPos> var0001 = UI_click_on_item();
 			var var0002 = var0001->get_item_shape();
-			if (var0002 == 0x03DB) {
+			if (var0002 == SHAPE_BABY_IN_A_CRADLE) {
 				Func08FF("@Pardon me my friend, dost thou not think that would "
 						 "be a little crowded?@");
-			} else if (var0002 == 0x03E0) {
-				var0001->set_item_shape(0x03DB);
+			} else if (var0002 == SHAPE_CRADLE) {
+				var0001->set_item_shape(SHAPE_BABY_IN_A_CRADLE);
 				Func0925(item);
 			} else {
 				Func08FD(0x003C);
@@ -6358,12 +6388,12 @@ void Func02DA shape#(0x2DA) () {
 	}
 }
 
-void Func02DE shape#(0x2DE) () {
+void Func02DE shape#(SHAPE_GUILLOTINE) () {
 	if (event == DOUBLECLICK) {
 		if (!in_usecode()) {
 			declare var var0000;
-			if (get_item_frame() < 0x0005) {
-				set_item_frame(0x0000);
+			if (get_item_frame() < FRAME_GUILLOTINE_BOTTOM) {
+				set_item_frame(FRAME_GUILLOTINE_READY);
 				var0000 = script item {
 					repeat 4 {
 						sfx 35;
@@ -6372,9 +6402,9 @@ void Func02DE shape#(0x2DE) () {
 				};
 				return;
 			}
-			UI_play_sound_effect2(0x0023, item);
+			UI_play_sound_effect2(35, item);
 			var var0001 = get_item_frame();
-			if (var0001 < 0x000B) {
+			if (var0001 < FRAME_GUILLOTINE_RISING6) {
 				var0000 = script item {
 					repeat 1 {
 						sfx 34;
@@ -6383,23 +6413,23 @@ void Func02DE shape#(0x2DE) () {
 					sfx 35;
 				};
 			}
-			if (var0001 == 0x000B) {
+			if (var0001 == FRAME_GUILLOTINE_RISING6) {
 				var0000 = script item {
 					sfx 35;
-					frame 12;
+					frame FRAME_GUILLOTINE_RISING7;
 					sfx 35;
-					frame 0;
+					frame FRAME_GUILLOTINE_READY;
 				};
 			}
-			if (var0001 == 0x000C) {
-				UI_play_sound_effect2(0x0023, item);
-				set_item_frame(0x0000);
+			if (var0001 == FRAME_GUILLOTINE_RISING7) {
+				UI_play_sound_effect2(35, item);
+				set_item_frame(FRAME_GUILLOTINE_READY);
 			}
 		}
 	}
 }
 
-void Func02DF shape#(0x2DF) () {
+void Func02DF shape#(SHAPE_ARCHERY_TARGET) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = "@I believe those are for the trainers to use.*"
 					  + "If thou art in need of practice, why not "
@@ -6410,7 +6440,7 @@ void Func02DF shape#(0x2DF) () {
 
 void Func02E3 shape#(SHAPE_FIREPIT) () {}
 
-void Func02E4 shape#(0x2E4) () {
+void Func02E4 shape#(SHAPE_WELL_PULLEY) () {
 	var var0000 = AVATAR->get_npc_object()->get_cont_items(
 			SHAPE_BUCKET, QUALITY_ANY, FRAME_BUCKET_EMPTY);
 	if (var0000) {
@@ -6419,13 +6449,13 @@ void Func02E4 shape#(0x2E4) () {
 		var var0003 = find_nearest(SHAPE_WELL, 5);
 		if (var0003) {
 			Func0828(
-					var0003, var0001, var0002, 0x0000, Func032A, var0000,
+					var0003, var0001, var0002, 0, Func032A, var0000,
 					PATH_SUCCESS_9);
 		}
 	}
 }
 
-void Func02E5 shape#(0x2E5) () {
+void Func02E5 shape#(SHAPE_WATER_TROUGH_NS) () {
 	var var0000 = AVATAR->get_npc_object()->get_cont_items(
 			SHAPE_BUCKET, QUALITY_ANY, FRAME_BUCKET_WATER);
 	declare var var0001;
@@ -6447,7 +6477,7 @@ void Func02E5 shape#(0x2E5) () {
 	}
 }
 
-void Func02E6 shape#(0x2E6) () {
+void Func02E6 shape#(SHAPE_STUFFED_TOY) () {
 	if (event == DOUBLECLICK) {
 		if (SPARK->npc_nearby() && Func0937(SPARK)) {
 			SPARK->item_say("@Gee, is that neat.@");
@@ -6455,7 +6485,7 @@ void Func02E6 shape#(0x2E6) () {
 	}
 }
 
-void Func02E7 shape#(0x2E7) () {
+void Func02E7 shape#(SHAPE_STRENGTH_TESTER) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var var0000 = [0, -1, 1];
@@ -6474,35 +6504,35 @@ void Func02E7 shape#(0x2E7) () {
 			actor frame standing;
 		};
 		var var0005 = AVATAR->get_npc_prop(STRENGTH);
-		if ((var0005 >= 0) && (var0005 < 4)) {
+		if (var0005 >= 0 && var0005 < 4) {
 			var0005 = 0;
 		}
-		if ((var0005 >= 4) && (var0005 < 8)) {
+		if (var0005 >= 4 && var0005 < 8) {
 			var0005 = 1;
 		}
-		if ((var0005 >= 8) && (var0005 < 12)) {
+		if (var0005 >= 8 && var0005 < 12) {
 			var0005 = 2;
 		}
-		if ((var0005 >= 12) && (var0005 < 15)) {
+		if (var0005 >= 12 && var0005 < 15) {
 			var0005 = 3;
 		}
-		if ((var0005 >= 15) && (var0005 < 18)) {
+		if (var0005 >= 15 && var0005 < 18) {
 			var0005 = 4;
 		}
-		if ((var0005 >= 18) && (var0005 < 23)) {
+		if (var0005 >= 18 && var0005 < 23) {
 			var0005 = 5;
 		}
-		if ((var0005 >= 23) && (var0005 < 27)) {
+		if (var0005 >= 23 && var0005 < 27) {
 			var0005 = 6;
 		}
-		if ((var0005 >= 27) && (var0005 < 30)) {
+		if (var0005 >= 27 && var0005 < 30) {
 			var0005 = 7;
 		}
 		if (var0005 >= 30) {
 			var0005 = 8;
 		}
 		if (var0005 > 3) {
-			var0005 -= UI_die_roll(0x0000, 0x0002);
+			var0005 -= UI_die_roll(0, 2);
 		}
 		if (var0005 == 7) {
 			var0005 = 6;
@@ -6518,7 +6548,8 @@ void Func02E7 shape#(0x2E7) () {
 					say "@Avatar wins a Dragon!@";
 				};
 				var0004 = UI_add_party_items(
-						0x0001, 0x02E6, QUALITY_ANY, 0x0000, false);
+						1, SHAPE_STUFFED_TOY, QUALITY_ANY,
+						FRAME_STUFFED_TOY_DRAGON, false);
 			}
 		}
 		var0004 = script item {
@@ -6535,28 +6566,33 @@ void Func02E7 shape#(0x2E7) () {
 	}
 }
 
-void Func02E8 shape#(0x2E8) () {
+void Func02E8 shape#(SHAPE_TELESCOPE) () {
 	if (event == DOUBLECLICK) {
-		UI_wizard_eye(0x2710, 0x03E8);
+		// BUG: UI_wizard_eye only takes one parameter, the duration of the
+		// effect. This makes a very long lasting wizard eye, and the second
+		// parameter is ignored.
+		// Maybe at some point the intrinsic had two parameters for a random
+		// duration? Of maybe a maximum range?
+		UI_wizard_eye(6 * HOUR + 40 * MINUTE, 40 * MINUTE);
 	}
 }
 
-void Func02E9 shape#(0x2E9) () {
+void Func02E9 shape#(SHAPE_HARP) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(0x003A, item);
 	}
 }
 
-void Func02EB shape#(0x2EB) () {
+void Func02EB shape#(SHAPE_SOUL_CAGE) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		struct<ObjPos> var0001 = UI_click_on_item();
-		if (var0000 == 0x0000) {
-			if (var0001->get_item_shape() == 0x0207) {
+		if (var0000 == FRAME_SOUL_CAGE_ENCHANTED) {
+			if (var0001->get_item_shape() == SHAPE_LICHE_HORANCE) {
 				var var0002 = HORANCE->find_nearest(SHAPE_BED, 1);
 				if ((var0002->get_item_frame() == FRAME_BED_STONE)
 					&& ((HORANCE->get_schedule_type() == SLEEP)
-						&& (HORANCE->get_item_frame() == 0x000D))) {
+						&& (HORANCE->get_item_frame() == LIE))) {
 					HORANCE->halt_scheduled();
 					var var0003 = set_last_created();
 					if (var0003) {
@@ -6568,26 +6604,26 @@ void Func02EB shape#(0x2EB) () {
 				}
 			}
 		}
-		if (var0000 == 0x0001) {
-			if (var0001->get_item_shape() == 0x02EC) {
-				set_item_frame(0x0000);
+		if (var0000 == FRAME_SOUL_CAGE_NORMAL) {
+			if (var0001->get_item_shape() == SHAPE_WELL_OF_SOULS) {
+				set_item_frame(FRAME_SOUL_CAGE_ENCHANTED);
 			}
 		}
 	}
 }
 
-void Func02F0 shape#(0x2F0) () {
+void Func02F0 shape#(SHAPE_MUSIC_BOX) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
-		if (var0000 == 0x0000) {
-			set_item_frame(0x0001);
+		if (var0000 == FRAME_MUSIC_BOX_CLOSED) {
+			set_item_frame(FRAME_MUSIC_BOX_OPEN);
 			UI_play_music(0x0029, item);
 			if (Func08F7(ROWENA)) {
 				gflags[MUSIC_BOX] = true;
 				ROWENA->get_npc_object()->FuncRowena();
 			}
 		} else {
-			set_item_frame(0x0000);
+			set_item_frame(FRAME_MUSIC_BOX_CLOSED);
 			UI_play_music(0x00FF, item);
 		}
 	}
@@ -6595,16 +6631,16 @@ void Func02F0 shape#(0x2F0) () {
 
 void Func02F2 shape#(SHAPE_VIAL) () {
 	if (event == DOUBLECLICK) {
-		if (get_item_frame() == 0x0005) {
+		if (get_item_frame() == FRAME_VIAL_FULL) {
 			struct<ObjPos> var0000 = UI_click_on_item();
 			var var0001 = var0000->get_item_shape();
 			if (gflags[HORANCE_TRAPPED]) {
-				if ((var0001 == 0x0207) || (var0001 == 0x02EB)) {
-					var var0002 = find_nearby(0x02EB, 0x0028, MASK_NONE);
+				if (var0001 == SHAPE_LICHE_HORANCE || var0001 == SHAPE_SOUL_CAGE) {
+					var var0002 = find_nearby(SHAPE_SOUL_CAGE, 40, MASK_NONE);
 					declare var var0003;
 					if (var0002) {
 						var0003 = script var0002 {
-							frame 1;
+							frame FRAME_SOUL_CAGE_NORMAL;
 							sfx 45;
 							repeat 7 {
 								wait 2;
@@ -6645,7 +6681,7 @@ void Func02F2 shape#(SHAPE_VIAL) () {
 	}
 }
 
-void Func02F5 shape#(0x2F5) () {
+void Func02F5 shape#(SHAPE_CART_PIECE3) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
@@ -6682,7 +6718,8 @@ void Func02F8 shape#(SHAPE_GEM) () {
 					return;
 				}
 				if (var0000 == FRAME_GEM_DRACOTHRAXUS) {
-					if (!AVATAR->is_readied(BG_WEAPON_HAND, SHAPE_GEM, FRAME_GEM_DRACOTHRAXUS)) {
+					if (!AVATAR->is_readied(BG_WEAPON_HAND, SHAPE_GEM,
+							FRAME_GEM_DRACOTHRAXUS)) {
 						Func08FF("@I believe the gem must be held in the "
 								 "weapon hand to break the mirror.@");
 						return;
@@ -6700,8 +6737,8 @@ void Func02F8 shape#(SHAPE_GEM) () {
 		struct<ObjPos> var0004 = UI_click_on_item();
 		var var0005 = var0004->get_item_shape();
 		var var0006 = var0004->get_item_frame();
-		if (var0005 == 0x0350) {
-			if (var0006 == 0x0003) {
+		if (var0005 == SHAPE_MIRROR_NS) {
+			if (var0006 == FRAME_MIRROR_MAGIC) {
 				Func0828(var0004, 0, 2, -2, Func02F8, var0004, BG_PATH_SUCCESS);
 			}
 		}
@@ -6726,7 +6763,7 @@ void Func02F8 shape#(SHAPE_GEM) () {
 				SHAPE_GEM, QUALITY_ANY, FRAME_GEM_DRACOTHRAXUS);
 		var0003 = script var0008 {
 			wait 10;
-			frame 13;
+			frame FRAME_GEM_ARCADION;
 			wait 2;
 			call Func0350;
 		};
@@ -6735,19 +6772,19 @@ void Func02F8 shape#(SHAPE_GEM) () {
 	}
 }
 
-void Func02FB shape#(0x2FB) () {
+void Func02FB shape#(SHAPE_RAT_RACE_GAME) () {
 	if ((!in_usecode()) && (event == DOUBLECLICK)) {
-		if ((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003)) {
+		if ((UI_game_hour() >= 15) || (UI_game_hour() <= 3)) {
 			SMITHY->set_schedule_type(HOUND);
 		}
 		Func082F();
 	}
 }
 
-void Func0301 shape#(0x301) () {
+void Func0301 shape#(SHAPE_SMOKE_BOMB) () {
 	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		UI_close_gumps();
-		var var0000 = find_nearby(0x01EE, 0x012C, MASK_NONE);
+		var var0000 = find_nearby(SHAPE_BEE, 300, MASK_NONE);
 		for (var0003 in var0000) {
 			var0003->set_schedule_type(IN_COMBAT);
 			var0003->set_attack_mode(FLEE);
@@ -6768,7 +6805,7 @@ void Func0301 shape#(0x301) () {
 	}
 }
 
-void Func0302 shape#(0x302) () {
+void Func0302 shape#(SHAPE_ORRERY_VIEWER) () {
 	if ((event == DOUBLECLICK) && Func0906()) {
 		UI_close_gumps();
 		UI_view_tile([0x0B4C, 0x058C]);
@@ -6778,7 +6815,7 @@ void Func0302 shape#(0x302) () {
 	}
 }
 
-void Func0303 shape#(0x303) () {
+void Func0303 shape#(SHAPE_RUDYOMS_WAND) () {
 	declare struct<ObjPos> var0000;
 	if (event == WEAPON) {
 		var0000 = item;
@@ -6803,8 +6840,8 @@ void Func0303 shape#(0x303) () {
 				attack;
 			};
 		}
-		if (var0001 == 0x0131) {
-			var var0004 = find_nearby(0x00A8, 0x000C, MASK_ALL_UNSEEN);
+		if (var0001 == SHAPE_BLACK_GATE) {
+			var var0004 = find_nearby(SHAPE_BEAM_OF_LIGHT, 12, MASK_ALL_UNSEEN);
 			var var0005 = AVATAR->find_nearby(SHAPE_BATLIN, 80, MASK_NONE);
 			if (!var0005) {
 				if (!var0004) {
@@ -6822,13 +6859,13 @@ void Func0303 shape#(0x303) () {
 	}
 }
 
-void Func0305 shape#(0x305) () {
+void Func0305 shape#(SHAPE_CART_PIECE4) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
 
-void Func0306 shape#(0x306) () {
+void Func0306 shape#(SHAPE_CART_PIECE5) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
@@ -6845,7 +6882,7 @@ void Func030D shape#(SHAPE_GANGPLANK_RAISED) () {
 	}
 }
 
-void Func030E shape#(0x30E) () {
+void Func030E shape#(SHAPE_FLAMING_OIL) () {
 	if (event == DOUBLECLICK) {
 		Func08FF("@Perhaps thou shouldst attack with it.@");
 	}
@@ -6863,21 +6900,21 @@ void Func030E shape#(0x30E) () {
 				};
 			}
 			if (var0000.z == 0) {
-				var var0004 = UI_create_new_object(0x00E0);
+				var var0004 = UI_create_new_object(SHAPE_DUST);
 				if (var0004) {
 					var0004->set_item_flag(TEMPORARY);
 					var0003 = UI_update_last_created(var0001);
 				}
 			}
 		}
-		var var0005 = var0000->find_nearby(0x030E, 0x0002, MASK_NONE);
+		var var0005 = var0000->find_nearby(SHAPE_FLAMING_OIL, 2, MASK_NONE);
 		if (var0005) {
 			Func0925(var0005);
 		}
 	}
 }
 
-void Func0311 shape#(0x311) () {
+void Func0311 shape#(SHAPE_ORB_OF_THE_MOONS) () {
 	if (event == DOUBLECLICK) {
 		if (gflags[BROKE_SPHERE]) {
 			Func08FE(["@How odd!@", "@It work before.@"]);
@@ -6891,17 +6928,17 @@ void Func0311 shape#(0x311) () {
 			declare var var0004;
 			if ((var0002 == NORTH) || (var0002 == SOUTH)) {
 				var0003 = X;
-				var0004 = 0x030B;
+				var0004 = SHAPE_RED_MOONGATE_NS;
 			} else {
 				var0003 = Y;
-				var0004 = 0x009D;
+				var0004 = SHAPE_RED_MOONGATE_EW;
 			}
 			var0001[var0003] += 2;
-			if (!UI_is_not_blocked(var0001, var0004, 0x0000)) {
+			if (!UI_is_not_blocked(var0001, var0004, 0)) {
 				var var0005 = [1, 2, 3];
 				for (var0008 in var0005) {
 					var0001.z += 1;
-					if (UI_is_not_blocked(var0001, var0004, 0x0000)) {
+					if (UI_is_not_blocked(var0001, var0004, 0)) {
 						break;
 					}
 				}
@@ -6974,7 +7011,7 @@ void Func0311 shape#(0x311) () {
 						} else {
 							remove_item();
 							var000A = UI_add_party_items(
-									0x0001, 0x0311, 0x0000, 0x0000, false);
+									1, SHAPE_ORB_OF_THE_MOONS, 0, 0, false);
 							break;
 						}
 					}
@@ -6998,7 +7035,7 @@ void Func0311 shape#(0x311) () {
 	}
 }
 
-void Func0313 shape#(0x313) () {
+void Func0313 shape#(SHAPE_LEVER) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var var0000 = -1;
@@ -7023,7 +7060,7 @@ void Func0313 shape#(0x313) () {
 	}
 }
 
-void Func0314 shape#(0x314) () {
+void Func0314 shape#(SHAPE_SWITCH) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var var0000 = -1;
@@ -7052,8 +7089,8 @@ void Func0314 shape#(0x314) () {
 		}
 		UI_play_sound_effect2(0x001C, item);
 		var var0006 = get_item_quality();
-		var var0007 = find_nearby(0x0366, 0x000F, MASK_NONE);
-		var var0008 = find_nearby(0x0203, 0x000F, MASK_NONE);
+		var var0007 = find_nearby(SHAPE_DRAWBRIDGE, 15, MASK_NONE);
+		var var0008 = find_nearby(SHAPE_CLOSED_DRAWBRIDGE, 15, MASK_NONE);
 		var0007 &= var0008;
 		var0008 = [];
 		for (var000B in var0007) {
@@ -7066,7 +7103,7 @@ void Func0314 shape#(0x314) () {
 	}
 }
 
-void Func0316 shape#(0x316) () {
+void Func0316 shape#(SHAPE_INVISIBILITY_DUST) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
@@ -7082,7 +7119,7 @@ void Func0316 shape#(0x316) () {
 	}
 }
 
-void Func031C shape#(0x31C) () {
+void Func031C shape#(SHAPE_DRAFT_HORSE) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
@@ -7100,11 +7137,11 @@ void Func031D shape#(SHAPE_SCROLL) () {
 		say("This is not a valid scroll");
 		return;
 	}
-	if (var0000 == 0x0000) {
+	if (var0000 == QUALITY_SCROLL_LORD_BRITISH_STATIONERY) {
 		say("From the Desk of Lord British");
 		return;
 	}
-	if (var0000 == 0x0001) {
+	if (var0000 == QUALITY_SCROLL_SCROLL_OF_CHUCKLES) {
 		say("How to keep the Avatar busy for hours looking for a clue--");
 		say("(please scroll forward)*");
 		say("How to keep the Avatar very busy for hours looking for a clue--");
@@ -7153,17 +7190,17 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"for not more than three consecutive days and not fewer than...");
 		return;
 	}
-	if (var0000 == 0x0005) {
+	if (var0000 == QUALITY_SCROLL_CHRISTOPHERS_CHEST) {
 		say("\"Thou hast received payment. Make the delivery tonight.\"");
 		return;
 	}
-	if (var0000 == 0x0006) {
+	if (var0000 == QUALITY_SCROLL_BLACKROCK_CROWN_JEWEL) {
 		say("Once the construction is complete, store the blackrock in the "
 			"hold of The Crown Jewel.");
 		return;
 	}
 	declare var var0001;
-	if (var0000 == 0x0007) {
+	if (var0000 == QUALITY_SCROLL_HOOKS_HIT_LIST) {
 		var0001 = Func0908();
 		say("Finster - Britain (x)");
 		say("Duncan - Buccaneer's Den (x)");
@@ -7183,11 +7220,11 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"have already been constructed by the Trinsic blacksmith.");
 		return;
 	}
-	if (var0000 == 0x0009) {
+	if (var0000 == QUALITY_SCROLL_CROWN_JEWEL_SAILING_PLAN) {
 		say("Crown Jewel~~Sunrise tomorrow - sail for the Isle of the Avatar!");
 		return;
 	}
-	if (var0000 == 0x000A) {
+	if (var0000 == QUALITY_SCROLL_RUNEBS_NOTE) {
 		gflags[FOUND_NOTE] = true;
 		say("To tell you the amount of explosives is quite adequate to destroy "
 			"the altars. To remind you of the need for silence, and of the "
@@ -7289,23 +7326,23 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"Britain");
 		return;
 	}
-	if (var0000 == 0x0014) {
+	if (var0000 == QUALITY_SCROLL_LUTE_SONG) {
 		say("       ZARA's DANCE~For the lute.");
 		return;
 	}
-	if (var0000 == 0x0015) {
+	if (var0000 == QUALITY_SCROLL_HARP_SONG) {
 		say("       WINDY NIGHT~For the harp.");
 		return;
 	}
-	if (var0000 == 0x0016) {
+	if (var0000 == QUALITY_SCROLL_HARPSICORD_SONG) {
 		say("       ONE OF THE BEAST~For the harpsichord.");
 		return;
 	}
-	if (var0000 == 0x0017) {
+	if (var0000 == QUALITY_SCROLL_XYLOPHONE_SONG) {
 		say("       SPRING FIRE~For the xylophone.");
 		return;
 	}
-	if (var0000 == 0x0018) {
+	if (var0000 == QUALITY_SCROLL_SHIP_DEED_TEMPLATE) {
 		say("By proclamation of Lord British this is an official document "
 			"denoting ownership of the heretofore mentioned sailing vessel. "
 			"Forgery of this title is prohibited under law no. 1989832.A5, "
@@ -7314,7 +7351,7 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"SHIPWRIGHT:");
 		return;
 	}
-	if (var0000 == 0x0019) {
+	if (var0000 == QUALITY_SCROLL_BILL_SPORTS_REGULATION) {
 		say("Bill of Underwater Scavenging and Cricket Playing~~23568976.Y7, "
 			"section 069~~Whereby the participants belonging to the first "
 			"party of the first team may also engage in supplementary treasure "
@@ -7326,11 +7363,11 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"second party of the first part may not involve outside...");
 		return;
 	}
-	if (var0000 == 0x001A) {
+	if (var0000 == QUALITY_SCROLL_GJ_SKETCH_PAD) {
 		say("   G.J.'S SKETCH PAD");
 		return;
 	}
-	if (var0000 == 0x001B) {
+	if (var0000 == QUALITY_SCROLL_CODEX_SCROLL) {
 		// TYPO: Should be "Diligence"
 		say("~~Between these columns, upon this pedestal, once sat the CODEX "
 			"OF ULTIMATE WISDOM.~~Now it lies in the infinite darkness of the "
@@ -7360,21 +7397,21 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"Act, as enforced by the Britannian Tax Council.");
 		return;
 	}
-	if (var0000 == 0x001E) {
+	if (var0000 == QUALITY_SCROLL_BILL_ANIMAL_HOUSING) {
 		say("Bill of Indoor Animal Housing~~89634510.P4, section 402~~");
 		say("Whereby the participants belonging to the owning party are "
 			"permitted to store both animal and goods related to the care of "
 			"said animal indoors, providing...");
 		return;
 	}
-	if (var0000 == 0x001F) {
+	if (var0000 == QUALITY_SCROLL_BILL_CARRIAGE_CONSTRUCTION) {
 		say("Bill of Carriage Construction ~~48382745.F3, section 058~~");
 		say("Whereby wood-builders and metal-workers may cross skills without "
 			"the need for guild officiation limited by the following "
 			"principles...");
 		return;
 	}
-	if (var0000 == 0x0020) {
+	if (var0000 == QUALITY_SCROLL_BILL_CABIN_CONSTRUCTION) {
 		say("Bill of Cabin Construction Near Granite Zoned Districts~~ "
 			"48923013.Q4, section 193~~");
 		// TYPO: Should be "complaints"
@@ -7384,7 +7421,7 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"with the intent of...");
 		return;
 	}
-	if (var0000 == 0x0021) {
+	if (var0000 == QUALITY_SCROLL_SHIP_DEED_ANNES_REVENGE) {
 		say("By proclamation of Lord British this is an official document "
 			"denoting ownership of the heretofore mentioned sailing vessel. "
 			"Forgery of this title is prohibited under law no. 1989832.A5, "
@@ -7394,7 +7431,7 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"Magincia");
 		return;
 	}
-	if (var0000 == 0x0022) {
+	if (var0000 == QUALITY_SCROLL_SHIP_DEED_GOLDEN_HINDE) {
 		say("By proclamation of Lord British this is an official document "
 			"denoting ownership of the heretofore mentioned sailing vessel. "
 			"Forgery of this title is prohibited under law no. 1989832.A5, "
@@ -7403,7 +7440,7 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"~~INSPECTION DATE: 7-12-0105~~SHIPWRIGHT: Gendra of Trinsic");
 		return;
 	}
-	if (var0000 == 0x0023) {
+	if (var0000 == QUALITY_SCROLL_SHIP_DEED_BOUNTY) {
 		say("By proclamation of Lord British this is an official document "
 			"denoting ownership of the heretofore mentioned sailing vessel. "
 			"Forgery of this title is prohibited under law no. 1989832.A5, "
@@ -7412,7 +7449,7 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"~~INSPECTION DATE: 6-04-0185~~SHIPWRIGHT: Gibson of Minoc");
 		return;
 	}
-	if (var0000 == 0x0024) {
+	if (var0000 == QUALITY_SCROLL_GWENNOS_LETTER) {
 		var0001 = Func0908();
 		say("Dearest Iolo,~     In Buccaneer's Den I came across an old pirate "
 			"who told me he had sailed across the waters of Britannia more "
@@ -7427,11 +7464,11 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			var0001, ".~~     'Til I see thee again, my love!~     Gwenno");
 		return;
 	}
-	if (var0000 == 0x0025) {
+	if (var0000 == QUALITY_SCROLL_CRYPTIC_NOTE) {
 		say("~~All is not as it seems...");
 		return;
 	}
-	if (var0000 == 0x0026) {
+	if (var0000 == QUALITY_SCROLL_CARRIAGE_DEED_TEMPLATE) {
 		say("~     Ownership of Horse and Carriage~~This writ entitles the "
 			"bearer to ownership and use of the wagon and its accompanying "
 			"horse, ____________. Misuse of this writ by those not in full "
@@ -7440,12 +7477,12 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"Act, as enforced by the Britannian Tax Council.");
 		return;
 	}
-	if (var0000 == 0x0027) {
+	if (var0000 == QUALITY_SCROLL_ASSASSINATION_PLOT) {
 		say("~Very well. It is agreed that we attack Lord British's castle at "
 			"the dawning of the seventh day.~~Fransisa~Corwin~ Brax~Athelas");
 		return;
 	}
-	if (var0000 == 0x0028) {
+	if (var0000 == QUALITY_SCROLL_SELWYNS_WILL) {
 		say("~     Selwyn's Last Will:~~");
 		// TYPO: Should be "hereby"
 		say("     I do hearby bequeath my firedoom staff to anyone who is "
@@ -7455,12 +7492,12 @@ void Func031D shape#(SHAPE_SCROLL) () {
 		say("          Selwyn");
 		return;
 	}
-	if (var0000 == 0x0029) {
+	if (var0000 == QUALITY_SCROLL_THRONE_OF_CHANGE) {
 		say("     Throne of `Change' keeps thee at bay, but `Virtue' shall "
 			"show the way!");
 		return;
 	}
-	if (var0000 == 0x002A) {
+	if (var0000 == QUALITY_SCROLL_DENYELS_LETTER) {
 		say("     I have been here for more days than I am able to remember, "
 			"though I have not forgotten the day I entered this forsaken cave "
 			"which has become my tomb. That was 2-29-0227. But my food ran out "
@@ -7469,7 +7506,7 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"dost find this, please tell Mythra I love her.");
 		say("     --Denyel");
 	}
-	if (var0000 == 0x002B) {
+	if (var0000 == QUALITY_SCROLL_LORD_BRITISH_WILL) {
 		say("~     Lord British's Last Will and Testament:~~");
 		say("     Being of sound mind and body, I hereby bequeath all of my "
 			"belongings to... Nell, my beloved chambermaid. She has kept me "
@@ -7479,7 +7516,7 @@ void Func031D shape#(SHAPE_SCROLL) () {
 		say("          Lord British");
 		return;
 	}
-	if (var0000 == 0x002C) {
+	if (var0000 == QUALITY_SCROLL_SHIP_DEED_GOLDEN_ANKH) {
 		say("By proclamation of Lord British this is an official document "
 			"denoting ownership of the heretofore mentioned sailing vessel. "
 			"Forgery of this title is prohibited under law no. 1989832.A5, "
@@ -7492,7 +7529,7 @@ void Func031D shape#(SHAPE_SCROLL) () {
 		item->Func0710();
 		return;
 	}
-	if (var0000 == 0x002F) {
+	if (var0000 == QUALITY_SCROLL_MAZE_RUNNER_DIARY) {
 		say("Day 1: I circumvented the living statues and made it through the "
 			"gate. Despite the long boat ride, I feel no weakness. I suspect "
 			"the excitement of the quest gives my strength. I will rest soon.");
@@ -7513,7 +7550,7 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"well hilp arrive in time!? I think but am thoughtful...");
 		return;
 	}
-	if (var0000 == 0x0030) {
+	if (var0000 == QUALITY_SCROLL_LOST_MAZE_RUNNER) {
 		say("... I have been in this wretched place for more weeks than I care "
 			"to remember -- than I COULD remember were I to try. I have seen "
 			"far too much in the way of deception and falsehood. I am forced "
@@ -7525,7 +7562,7 @@ void Func031D shape#(SHAPE_SCROLL) () {
 			"finder:  remember well my strug...");
 		return;
 	}
-	if (var0000 == 0x0031) {
+	if (var0000 == QUALITY_SCROLL_AVATAR_WANNABE_DIARY) {
 		// TYPO: Should be "reflect"
 		say("... I write this with what little hope I have left. Frenke has "
 			"now died -- killed by shooting balls of flame. I will attempt to "
@@ -7566,14 +7603,14 @@ void Func031D shape#(SHAPE_SCROLL) () {
 	}
 }
 
-void Func031E shape#(0x31E) () {
+void Func031E shape#(SHAPE_SEALED_BOX) () {
 	if (event == DOUBLECLICK) {
-		set_item_shape(0x031F);
+		set_item_shape(SHAPE_UNSEALED_BOX);
 		UI_play_sound_effect2(0x000E, item);
 	}
 }
 
-void Func0326 shape#(0x326) () {
+void Func0326 shape#(SHAPE_GUARD3) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
@@ -7622,28 +7659,28 @@ void Func0326 shape#(0x326) () {
 
 // BUG: This function has stack underflows due to incorrect extern entries.
 // This version is patched to fix said underflows.
-void Func0329 shape#(0x329) () {
+void Func0329 shape#(SHAPE_TRIPLES_GAME_WHEEL) () {
 	if ((event == DOUBLECLICK) && (!in_usecode())) {
 		UI_close_gumps();
 		var var0000 = Func083C(Func083A());
-		if ((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003)) {
+		if ((UI_game_hour() >= 15) || (UI_game_hour() <= 3)) {
 			for (var0003 in var0000) {
 				var0003->clear_item_flag(OKAY_TO_TAKE);
 			}
 			SMITHY->set_schedule_type(HOUND);
 		}
-		var var0004 = UI_find_nearby_avatar(0x032E);
-		var var0005 = UI_find_nearby_avatar(0x0329);
-		var var0006 = UI_find_nearby_avatar(0x0332);
-		if (UI_get_array_size(var0006) > 0x0000) {
-			if (UI_get_array_size(var0005) == 0x0003) {
-				if (UI_get_array_size(var0004) >= 0x0001) {
+		var var0004 = UI_find_nearby_avatar(SHAPE_TRIPLES_GAME_TABLE);
+		var var0005 = UI_find_nearby_avatar(SHAPE_TRIPLES_GAME_WHEEL);
+		var var0006 = UI_find_nearby_avatar(SHAPE_TRIPLES_GAME_PART);
+		if (UI_get_array_size(var0006) > 0) {
+			if (UI_get_array_size(var0005) == 3) {
+				if (UI_get_array_size(var0004) >= 1) {
 					gflags[WHEEL_1] = false;
 					gflags[WHEEL_2] = false;
 					gflags[WHEEL_3] = false;
-					Func0933(AVATAR, "@Spin baby!@", 0x0000);
+					Func0933(AVATAR, "@Spin baby!@", 0);
 					for (var0009 in var0005) {
-						var var000A = UI_die_roll(0x0000, 0x0002) * 0x0008;
+						var var000A = UI_die_roll(0, 2) * 8;
 						var0009->halt_scheduled();
 						var var000B = script var0009 {
 							repeat 22 {
@@ -7730,7 +7767,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 		var0000 = get_item_frame();
 		struct<ObjPos> var0006 = UI_click_on_item();
 		var0007 = var0006->get_item_shape();
-		if ((var0007 == 0x02D1) || (var0007 == 0x03DD)) {
+		if ((var0007 == SHAPE_MALE_AVATAR) || (var0007 == SHAPE_FEMALE_AVATAR)) {
 			if (var0000 == FRAME_BUCKET_BLOOD) {
 				AVATAR->get_npc_object()->item_say("@No, thank thee.@");
 			} else if (var0000 == FRAME_BUCKET_EMPTY) {
@@ -7759,14 +7796,14 @@ void Func032A shape#(SHAPE_BUCKET) () {
 						WEAPON);
 			}
 		}
-		if (var0007 == 0x02E5) {
+		if (var0007 == SHAPE_WATER_TROUGH_NS) {
 			var0001 = [-1, -2, -1, -2, 1, 1, -4, -4];
 			var0002 = [1, 1, -2, -2, 0, -1, 0, -1];
 			Func0828(
 					var0006, var0001, var0002, 0, Func032A, item,
 					BG_PATH_SUCCESS);
 		}
-		if (var0007 == 0x02CF) {
+		if (var0007 == SHAPE_WATER_TROUGH_EW) {
 			var0001 = [1, 1, -2, -2, 0, -1, 0, -1];
 			var0002 = [-1, -2, -1, -2, 1, 1, -4, -4];
 			Func0828(
@@ -7794,10 +7831,10 @@ void Func032A shape#(SHAPE_BUCKET) () {
 				return;
 			}
 		}
-		if ((var0007 == SHAPE_LIT_LIGHT_SOURCE)
-			|| ((var0007 == SHAPE_LIT_SCONCE)
-				|| ((var0007 == SHAPE_LIT_TORCH)
-					|| ((var0007 == 0x0292) || (var0007 == 0x0339))))) {
+		if (var0007 == SHAPE_LIT_LIGHT_SOURCE
+			|| (var0007 == SHAPE_LIT_SCONCE
+				|| (var0007 == SHAPE_LIT_TORCH
+					|| (var0007 == SHAPE_DOUGH || var0007 == SHAPE_CAMPFIRE)))) {
 			var0001 = [2, 0, -2, 0];
 			var0002 = [0, 2, 0, -2];
 			if (var0000 == FRAME_BUCKET_EMPTY) {
@@ -7812,7 +7849,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 						BG_PATH_FAILURE);
 			}
 		}
-		if (var0007 == 0x02E4) {
+		if (var0007 == SHAPE_WELL_PULLEY) {
 			if (var0000 == FRAME_BUCKET_EMPTY) {
 				var var0008 = var0006->find_nearest(SHAPE_WELL, 3);
 				if (var0008) {
@@ -7839,7 +7876,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 		}
 		struct<Position>& pos = var0006;
 		declare var var0009;
-		if (var0007 == 0x014B) {
+		if (var0007 == SHAPE_ROCK) {
 			if (var0000 == FRAME_BUCKET_EMPTY) {
 				AVATAR->get_npc_object()->item_say("@The bucket is empty.@");
 				return;
@@ -7897,9 +7934,11 @@ void Func032A shape#(SHAPE_BUCKET) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		var var0010 = false;
-		var0010 = AVATAR->get_npc_object()->find_nearest(0x02E5, 0x0005);
+		var0010 = AVATAR->get_npc_object()->find_nearest(
+				SHAPE_WATER_TROUGH_NS, 5);
 		if (!var0010) {
-			var0010 = AVATAR->get_npc_object()->find_nearest(0x02CF, 0x0005);
+			var0010 = AVATAR->get_npc_object()->find_nearest(
+					SHAPE_WATER_TROUGH_EW, 5);
 		}
 		if (var0010) {
 			var0000 = get_item_frame();
@@ -7910,18 +7949,20 @@ void Func032A shape#(SHAPE_BUCKET) () {
 			declare var var0012;
 			declare var var0013;
 			if (var0000 == FRAME_BUCKET_WATER) {
-				if ((var0011 == 0x0003) || (var0011 == 0x0007)) {
+				if (var0011 == FRAME_WATER_TROUGH_PLAIN_FULL
+						|| var0011 == FRAME_WATER_TROUGH_GOLDEN_FULL) {
 					AVATAR->get_npc_object()->item_say("@The trough is full.@");
 					return;
 				}
-				var0012 = var0011 + 0x0001;
-				var0013 = 0x0000;
-			} else if ((var0011 == 0x0000) || (var0011 == 0x0004)) {
+				var0012 = var0011 + 1;
+				var0013 = 0;
+			} else if (var0011 == FRAME_WATER_TROUGH_PLAIN
+					|| var0011 == FRAME_WATER_TROUGH_GOLDEN) {
 				AVATAR->get_npc_object()->item_say("@The trough is empty.@");
 				return;
 			} else {
-				var0012 = var0011 - 0x0001;
-				var0013 = 0x0001;
+				var0012 = var0011 - 1;
+				var0013 = 1;
 			}
 			var0005 = Func092D(var0010);
 			var000E = script AVATAR->get_npc_object() {
@@ -8028,23 +8069,23 @@ void Func032A shape#(SHAPE_BUCKET) () {
 					actor frame standing;
 				};
 			}
-			if ((var0017.z == 0x0002) || (var0017.z == 0x0003)) {
-				var0018 += 0x0001;
+			if ((var0017.z == 2) || (var0017.z == 3)) {
+				var0018 += 1;
 			}
-			if ((var0017.z == 0x0004) || (var0017.z == 0x0005)) {
-				var0018 += 0x0002;
+			if ((var0017.z == 4) || (var0017.z == 5)) {
+				var0018 += 2;
 			}
-			if ((var0017.z == 0x0006) || (var0017.z == 0x0007)) {
-				var0018 += 0x0003;
+			if ((var0017.z == 6) || (var0017.z == 7)) {
+				var0018 += 3;
 			}
-			if ((var0017.z == 0x0008) || (var0017.z == 0x0009)) {
-				var0018 += 0x0004;
+			if ((var0017.z == 8) || (var0017.z == 9)) {
+				var0018 += 4;
 			}
-			if ((var0017.z == 0x000A) || (var0017.z == 0x000B)) {
-				var0018 += 0x0005;
+			if ((var0017.z == 10) || (var0017.z == 11)) {
+				var0018 += 5;
 			}
-			if ((var0017.z == 0x000C) || (var0017.z == 0x000D)) {
-				var0018 += 0x0006;
+			if ((var0017.z == 12) || (var0017.z == 13)) {
+				var0018 += 6;
 			}
 			declare struct<Position> var001D;
 			var001D.x = var0017.x - var0018;
@@ -8053,8 +8094,8 @@ void Func032A shape#(SHAPE_BUCKET) () {
 					ANIMATION_POOF, var001D.x, var001D.y, 0, 0, 0, LOOP_ONCE);
 			UI_play_sound_effect(0x002E);
 		}
-		if (var0007 == 0x0339) {
-			if (var0015 == 0x0000) {
+		if (var0007 == SHAPE_CAMPFIRE) {
+			if (var0015 == FRAME_CAMPFIRE_COALS) {
 				AVATAR->get_npc_object()->item_say("@There are only coals.@");
 				return;
 			}
@@ -8073,8 +8114,8 @@ void Func032A shape#(SHAPE_BUCKET) () {
 					ANIMATION_POOF, var001F.x, var001F.y, 0, 0, 0, LOOP_ONCE);
 			UI_play_sound_effect(0x002E);
 		}
-		if (var0007 == 0x0292) {
-			if (var0015 == 0x0000) {
+		if (var0007 == SHAPE_DOUGH) {
+			if (var0015 == FRAME_DOUGH_FLOUR) {
 				var0005 = Func092D(item);
 				var000E = script AVATAR->get_npc_object() {
 					face var0005;
@@ -8082,18 +8123,19 @@ void Func032A shape#(SHAPE_BUCKET) () {
 					wait 2;
 					actor frame standing;
 				};
-				set_item_frame(FRAME_BUCKET_BLOOD);
+				set_item_frame(FRAME_DOUGH_BREAD);
 			}
 		}
 	}
 	if (event == STARTED_TALKING) {
-		var var0020 = AVATAR->get_npc_object()->find_nearest(0x02E4, 0x000A);
+		var var0020 = AVATAR->get_npc_object()->find_nearest(
+				SHAPE_WELL_PULLEY, 10);
 		var var0021 = var0020->get_item_frame();
-		if ((var0021 >= 0x0000) && (var0021 <= 0x000B)) {
-			var0021 = 0x0001;
+		if ((var0021 >= FRAME_WOODEN_BEAM) && (var0021 <= FRAME_WOODEN_BEAM_LAST)) {
+			var0021 = FRAME_WOODEN_BEAM_LOWER1;
 		}
-		if ((var0021 >= 0x000C) && (var0021 <= 0x0017)) {
-			var0021 = 0x000D;
+		if ((var0021 >= FRAME_GOLDEN_BEAM) && (var0021 <= FRAME_GOLDEN_BEAM_LAST)) {
+			var0021 = FRAME_GOODEN_BEAM_LOWER1;
 		}
 		var var0022 = script var0020 {
 			wait 1;
@@ -8143,14 +8185,14 @@ void Func032A shape#(SHAPE_BUCKET) () {
 	}
 }
 
-void Func0334 shape#(0x334) () {
+void Func0334 shape#(SHAPE_PLAQUE) () {
 	var var0000 = item;
 	var var0001 = var0000->get_item_quality();
 	declare var var0007;
 	declare struct<Position> var0008;
 	if (event == EGG) {
-		if (get_item_shape() != 0x0334) {
-			var0000 = var0000->find_nearby(0x0334, 0x0005, MASK_ALL_UNSEEN);
+		if (get_item_shape() != SHAPE_PLAQUE) {
+			var0000 = var0000->find_nearby(SHAPE_PLAQUE, 5, MASK_ALL_UNSEEN);
 			var0000 = Func093D(var0000, var0000);
 			if (!var0000) {
 				abort;
@@ -8158,26 +8200,28 @@ void Func0334 shape#(0x334) () {
 		}
 		var0001 = var0000->get_item_quality();
 		var var0002 = [];
-		if (var0001 == 0x0007) {
-			var0002 = [0x0258, SHAPE_HAMMER, 0x022D];
+		if (var0001 == QUALITY_EGG_PLAQUE_HAMMER) {
+			var0002 = [
+				SHAPE_TWO_HANDED_HAMMER, SHAPE_HAMMER, SHAPE_JUGGERNAUT_HAMMER
+			];
 		}
-		if (var0001 == 0x0008) {
+		if (var0001 == QUALITY_EGG_PLAQUE_LOCKPICK) {
 			var0002 = SHAPE_LOCKPICK;
 		}
-		if (var0001 == 0x0009) {
-			var0002 = 0x0280;
+		if (var0001 == QUALITY_EGG_PLAQUE_RING) {
+			var0002 = SHAPE_RING;
 		}
-		if (var0001 == 0x000A) {
+		if (var0001 == QUALITY_EGG_PLAQUE_THREAD) {
 			var0002 = SHAPE_SPINDLE_OF_THREAD;
 		}
-		if (var0001 == 0x000B) {
-			var0002 = [SHAPE_GOLD_COIN, 0x0285, 0x0286];
+		if (var0001 == QUALITY_EGG_PLAQUE_GOLD) {
+			var0002 = [SHAPE_GOLD_COIN, SHAPE_GOLD_NUGGET, SHAPE_GOLD_BAR];
 		}
 		var var0003 = false;
 		for (var0006 in var0002) {
 			if (var0000->find_nearby(var0006, 5, MASK_ALL_UNSEEN)) {
-				if (var0001 < 0x000B) {
-					var0001 += 0x0001;
+				if (var0001 < QUALITY_EGG_PLAQUE_GOLD) {
+					var0001 += 1;
 					var0007 = var0000->set_item_quality(var0001);
 					UI_close_gumps();
 					var0003 = true;
@@ -8205,119 +8249,120 @@ void Func0334 shape#(0x334) () {
 	}
 	var var0009 = Func0908();
 	declare var var000A;
-	if (var0001 > 0x0041) {
+	if (var0001 > QUALITY_PLAQUE_DO_NOT_WISH_TO_SEE_THIS) {
 		var000A = "This is not a valid plaque ";
-	} else if (var0001 == 0x0000) {
+	} else if (var0001 == QUALITY_PLAQUE_IMPORTANT_EVENT) {
 		var000A = ["important", "event", "to\{dot}be", "recorded", "here"];
-	} else if (var0001 == 0x0001) {
+	} else if (var0001 == QUALITY_PLAQUE_TOMB_OF_KRONOS) {
 		var000A = [
 			"tomb\{dot}of", "kronos", "forgotten", "but\{dot}not", "forgiven"
 		];
-	} else if (var0001 == 0x0002) {
+	} else if (var0001 == QUALITY_PLAQUE_ROYAL_THEATRE) {
 		var000A = ["royal", "\{th}\{ea}tre"];
-	} else if (var0001 == 0x0003) {
+	} else if (var0001 == QUALITY_PLAQUE_FELLOWSHIP_HALL) {
 		var000A = ["FELLOWSHIP", "HALL"];
-	} else if (var0001 == 0x0004) {
+	} else if (var0001 == QUALITY_PLAQUE_TEST_OF_STRENGTH) {
 		var000A = ["TEST", "OF", "STRENGTH"];
-	} else if (var0001 == 0x0005) {
+	} else if (var0001 == QUALITY_PLAQUE_MEDITATION_RETREAT) {
 		var000A = ["MEDITATION", "RETREAT"];
-	} else if (var0001 == 0x0006) {
+	} else if (var0001 == QUALITY_PLAQUE_SHRINE_OF_THE_CODEX) {
 		var000A = ["SHRINE OF", "THE CODEX"];
-	} else if (var0001 == 0x0007) {
+	} else if (var0001 == QUALITY_PLAQUE_HAMMER_HERE_TO_ENTER) {
 		var000A = ["hammer", "here", "to", "enter"];
-	} else if (var0001 == 0x0008) {
-		var000A =
-				["pick\{dot}item", "carefully", "to\{dot}k\{ee}p", "goi\{ng}"];
+	} else if (var0001 == QUALITY_PLAQUE_PICK_ITEM_CAREFULLY) {
+		var000A = [
+			"pick\{dot}item", "carefully", "to\{dot}k\{ee}p", "goi\{ng}"
+		];
 		Func08FF([
 			"By Jove, I think thou art on the right track!",
 			"The sign appears to have changed!", "Look at it now!"
 		]);
-	} else if (var0001 == 0x0009) {
+	} else if (var0001 == QUALITY_PLAQUE_GOLDEN_RING_OF_TRUTH) {
 		var000A = [
 			"a\{dot}golden", "ring\{dot}of", "tru\{th}", "faces\{dot}\{th}\{ee}"
 		];
-	} else if (var0001 == 0x000A) {
+	} else if (var0001 == QUALITY_PLAQUE_GRASP_NOT_AT_THREADS) {
 		var000A = ["grasp", "not", "at", "\{th}r\{ea}ds"];
-	} else if (var0001 == 0x000B) {
+	} else if (var0001 == QUALITY_PLAQUE_ROYAL_MINT_HOLD) {
 		var000A = [
 			"\{th}e", "royal\{dot}mint", "shall\{dot}not",
 			"hold\{dot}\{th}\{ee}", "back"
 		];
-	} else if (var0001 == 0x000C) {
+	} else if (var0001 == QUALITY_PLAQUE_GO_THIS_WAY) {
 		var000A = "GO THIS WAY";
-	} else if (var0001 == 0x000D) {
+	} else if (var0001 == QUALITY_PLAQUE_DO_NOT_GO_THIS_WAY) {
 		var000A = ["DO NOT", "GO", "THIS WAY"];
-	} else if (var0001 == 0x000E) {
+	} else if (var0001 == QUALITY_PLAQUE_DO_NOT_GO_IN_WOODEN_DOOR) {
 		var000A = ["DO NOT GO", "IN", "THE", "WOODEN DOOR"];
-	} else if (var0001 == 0x000F) {
+	} else if (var0001 == QUALITY_PLAQUE_DO_NOT_GO_IN_WINDOWED_DOOR) {
 		var000A = ["DO NOT", "GO IN", "THE", "WINDOWED", "DOOR"];
-	} else if (var0001 == 0x0010) {
+	} else if (var0001 == QUALITY_PLAQUE_GO_IN_STEEL_DOOR) {
 		var000A = ["GO", "IN", "THE", "STEEL", "DOOR"];
-	} else if (var0001 == 0x0011) {
+	} else if (var0001 == QUALITY_PLAQUE_DO_NOT_GO_IN_GREEN_DOOR) {
 		var000A = ["DO NOT", "GO", "IN THE", "GREEN DOOR"];
-	} else if (var0001 == 0x0012) {
+	} else if (var0001 == QUALITY_PLAQUE_ONLY_ONE_SIGN_IS_TRUE) {
 		var000A = ["ONLY", "ONE", "OF THESE", "SIGNS", "IS TRUE"];
-	} else if (var0001 == 0x0013) {
+	} else if (var0001 == QUALITY_PLAQUE_AT_LEAST_TWO_SIGNS_ARE_FALSE) {
 		var000A = ["AT LEAST", "TWO SIGNS", "ARE", "FALSE"];
-	} else if (var0001 == 0x0014) {
+	} else if (var0001 == QUALITY_PLAQUE_NATIONAL_BRANCH) {
 		var000A = ["NATIONAL", "BRANCH"];
-	} else if (var0001 == 0x0015) {
+	} else if (var0001 == QUALITY_PLAQUE_ART_THOU_AN_AVATAR) {
 		var000A = ["ART THOU", "AN", "AVATAR?"];
-	} else if (var0001 == 0x0016) {
+	} else if (var0001 == QUALITY_PLAQUE_RESERVE_THY_SEATS_NOW) {
 		var000A = ["RESERVE", "THY", "SEATS", "NOW!"];
-	} else if (var0001 == 0x0017) {
+	} else if (var0001 == QUALITY_PLAQUE_BONES_OF_ZOG) {
 		var000A = ["THE BONES OF", "ZOG:", "EARLIEST", "BRITANNIAN", "FOSSIL"];
-	} else if (var0001 == 0x0018) {
+	} else if (var0001 == QUALITY_PLAQUE_SWAMP_BOOTS) {
 		var000A = ["SWAMP BOOTS", "ONCE WORN", "BY THE", "AVATAR"];
-	} else if (var0001 == 0x0019) {
+	} else if (var0001 == QUALITY_PLAQUE_MANITTZIS_HARPSICORD) {
 		var000A = ["MANITTZI'S", "HARPSICORD", "USED WHILE", "COMPOSING"];
-	} else if (var0001 == 0x001A) {
+	} else if (var0001 == QUALITY_PLAQUE_ANIA_OF_SPRING) {
 		var000A = ["\{dot}ANIA", "OF", "SPRING\{dot}"];
-	} else if (var0001 == 0x001B) {
+	} else if (var0001 == QUALITY_PLAQUE_MARNEY_SKARA_BRAES_FLOWER) {
 		var000A = [
 			"\{dot}marney\{dot}", "skara\{dot}braes", "fine\{st}", "flower"
 		];
-	} else if (var0001 == 0x001C) {
+	} else if (var0001 == QUALITY_PLAQUE_WAYFARERS_INN) {
 		var000A = ["\{th}e", "wayfarers", "inn"];
-	} else if (var0001 == 0x001D) {
+	} else if (var0001 == QUALITY_PLAQUE_BLUE_BOAR) {
 		var000A = ["\{th}e", "blue", "boar"];
-	} else if (var0001 == 0x001E) {
+	} else if (var0001 == QUALITY_PLAQUE_ROYAL_MUSEUM) {
 		var000A = ["royal", "museum"];
-	} else if (var0001 == 0x001F) {
+	} else if (var0001 == QUALITY_PLAQUE_MUSIC_HALL) {
 		var000A = ["\{th}e", "music", "hall"];
-	} else if (var0001 == 0x0020) {
+	} else if (var0001 == QUALITY_PLAQUE_TOWN_HALL) {
 		var000A = ["town", "hall"];
-	} else if (var0001 == 0x0021) {
+	} else if (var0001 == QUALITY_PLAQUE_ROYAL_MINT) {
 		var000A = ["royal", "mint"];
-	} else if (var0001 == 0x0022) {
+	} else if (var0001 == QUALITY_PLAQUE_THRONE_OF_MANY_CHANGES) {
 		var000A = ["THE", "THRONE", "OF", "MANY", "CHANGES"];
-	} else if (var0001 == 0x0023) {
+	} else if (var0001 == QUALITY_PLAQUE_THRONE_OF_VIRTUE) {
 		var000A = ["THE", "THRONE", "OF", "VIRTUE"];
-	} else if (var0001 == 0x0024) {
+	} else if (var0001 == QUALITY_PLAQUE_LORD_BRITISH_MUSKET) {
 		var000A = ["LORD", "BRITISH'S", "MUSKET"];
-	} else if (var0001 == 0x0025) {
+	} else if (var0001 == QUALITY_PLAQUE_STONES_OF_VIRTUE) {
 		var000A = ["THE", "STONES", "OF", "VIRTUE"];
-	} else if (var0001 == 0x0026) {
+	} else if (var0001 == QUALITY_PLAQUE_SILVER_HORN) {
 		var000A = ["SILVER", "HORN", "ONCE USED", "BY THE", "GARGOYLES"];
-	} else if (var0001 == 0x0027) {
+	} else if (var0001 == QUALITY_PLAQUE_SUMMON_SILVER_SNAKES) {
 		var000A = ["TO SUMMON", "THE", "SILVER", "SNAKES"];
-	} else if (var0001 == 0x0028) {
+	} else if (var0001 == QUALITY_PLAQUE_ANKH_SYMBOL_OF_VIRTUES) {
 		var000A = ["THE ANKH", "", "SYMBOL OF", "THE", "VIRTUES"];
-	} else if (var0001 == 0x0029) {
+	} else if (var0001 == QUALITY_PLAQUE_LORD_BRITISH) {
 		var000A = ["LORD", "BRITISH"];
-	} else if (var0001 == 0x002A) {
+	} else if (var0001 == QUALITY_PLAQUE_AVATAR) {
 		var000A = ["THE", "AVATAR"];
-	} else if (var0001 == 0x002B) {
+	} else if (var0001 == QUALITY_PLAQUE_VORTEX_CUBE) {
 		var000A = ["THE", "VORTEX", "CUBE"];
-	} else if (var0001 == 0x002C) {
+	} else if (var0001 == QUALITY_PLAQUE_RUNES_OF_VIRTUES) {
 		var000A = ["THE", "RUNES", "OF", "THE", "VIRTUES"];
-	} else if (var0001 == 0x002D) {
+	} else if (var0001 == QUALITY_PLAQUE_GAME_OF_KNIGHTS_BRIDGE) {
 		var000A = ["\{th}e", "game", "of", "knights", "bridge"];
-	} else if (var0001 == 0x002E) {
+	} else if (var0001 == QUALITY_PLAQUE_DO_NOT_ENTER) {
 		var000A = ["DO NOT", "ENTER"];
-	} else if (var0001 == 0x002F) {
+	} else if (var0001 == QUALITY_PLAQUE_BLOW_HORN_TO_SUMMON_FERRY) {
 		var000A = ["blow", "horn", "to", "summon", "ferry"];
-	} else if (var0001 == 0x0030) {
+	} else if (var0001 == QUALITY_PLAQUE_THRONE_ROOM_OF_LORD_BRITISH) {
 		var0008 = get_object_position();
 		struct<Position> var000B = LORD_BRITISH->get_object_position();
 		if ((Func0932(var0008.x - var000B.x) <= 0x0002)
@@ -8338,8 +8383,7 @@ void Func0334 shape#(0x334) () {
 				actor frame sleeping;
 				call Func0334;
 			};
-			Func08FE(
-					["", "@He's dead, Avatar!@", "@Yancey-Hausman will pay!@"]);
+			Func08FE(["", "@He's dead, Avatar!@", "@Yancey-Hausman will pay!@"]);
 			var0007 = script AVATAR {
 				nohalt;
 				speech 26;
@@ -8347,120 +8391,121 @@ void Func0334 shape#(0x334) () {
 			return;
 		}
 		var000A = ["THE", "THRONE", "ROOM", "OF", "LORD", "BRITISH"];
-	} else if (var0001 == 0x0031) {
+	} else if (var0001 == QUALITY_PLAQUE_NEXT_LORD_OF_BRITANNIA) {
 		var000A = ["SEE IF", "THOU ART", "THE NEXT", "LORD OF", "BRITANNIA"];
-	} else if (var0001 == 0x0032) {
+	} else if (var0001 == QUALITY_PLAQUE_MEMORY_OF_MAMA) {
 		var000A = ["in", "lovi\{ng}", "memory", "of", "mama"];
-	} else if (var0001 == 0x0033) {
+	} else if (var0001 == QUALITY_PLAQUE_BEWARE_THE_DRAGON) {
 		var000A = ["BEWARE", "THE", "DRAGON"];
-	} else if (var0001 == 0x0034) {
+	} else if (var0001 == QUALITY_PLAQUE_LOVE_OF_MARNEY) {
 		var000A = ["for", "\{th}e", "love", "of", "marney"];
-	} else if (var0001 == 0x0035) {
+	} else if (var0001 == QUALITY_PLAQUE_JRRT) {
 		var000A = [
 			"\{dot}j\{dot}r\{dot}r\{dot}t\{dot}", "a\{dot}gr\{ea}t", "man",
 			"a\{dot}gr\{ea}t", "writer"
 		];
-	} else if (var0001 == 0x0036) {
+	} else if (var0001 == QUALITY_PLAQUE_BRITANNIAN_LENS) {
 		var000A = ["THE", "BRITANNIAN", "LENS"];
-	} else if (var0001 == 0x0037) {
+	} else if (var0001 == QUALITY_PLAQUE_GARGOYLE_LENS) {
 		var000A = ["THE", "GARGOYLE", "LENS"];
-	} else if (var0001 == 0x0038) {
+	} else if (var0001 == QUALITY_PLAQUE_EX_POR) {
 		var000A = ["EX", "POR"];
-	} else if (var0001 == 0x0039) {
+	} else if (var0001 == QUALITY_PLAQUE_TEST_OF_LOVE) {
 		var000A = ["\{th}e", "te\{st}", "of", "love"];
-	} else if (var0001 == 0x003A) {
+	} else if (var0001 == QUALITY_PLAQUE_TEST_OF_COURAGE) {
 		var000A = ["\{th}e", "te\{st}", "of", "courage"];
-	} else if (var0001 == 0x003B) {
+	} else if (var0001 == QUALITY_PLAQUE_NORTH_IS_THE_WAY) {
 		var000A = ["nor\{th}", "is", "\{th}e", "way"];
-	} else if (var0001 == 0x003C) {
+	} else if (var0001 == QUALITY_PLAQUE_TRUTH_IS_TRUTH) {
 		var000A = ["tru\{th}", "is", "tru\{th}"];
-	} else if (var0001 == 0x003D) {
+	} else if (var0001 == QUALITY_PLAQUE_ONLY_APPEARANCES_ARE_DECEPTIVE) {
 		var000A = ["only", "app\{ea}rances", "are", "deceptive"];
-	} else if (var0001 == 0x003E) {
+	} else if (var0001 == QUALITY_PLAQUE_WELL_DONE) {
 		var000A = ["well", "done"];
-	} else if (var0001 == 0x003F) {
+	} else if (var0001 == QUALITY_PLAQUE_KEYS_OF_TRUTH) {
 		var000A = ["\{th}e", "keys", "of", "tru\{th}"];
-	} else if (var0001 == 0x0040) {
-		var000A =
-				["tru\{st}\{dot}not", "always\{dot}\{th}e", "obvious", "path"];
-	} else if (var0001 == 0x0041) {
+	} else if (var0001 == QUALITY_PLAQUE_TRUST_NOT_ALWAYS_OBVIOUS_PATH) {
+		var000A = [
+			"tru\{st}\{dot}not", "always\{dot}\{th}e", "obvious", "path"
+		];
+	} else if (var0001 == QUALITY_PLAQUE_DO_NOT_WISH_TO_SEE_THIS) {
 		var000A = [
 			"\{th}ou", "do\{st}\{dot}not", "wish\{dot}to", "see\{dot}\{th}is"
 		];
 	}
-	UI_display_runes(0x0033, var000A);
+	UI_display_runes(GUMP_GOLDEN_PLAQUE, var000A);
 }
 
-void Func0336 shape#(0x336) () {
+void Func0336 shape#(SHAPE_DIAPER) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		declare struct<ObjPos> var0001;
-		if (var0000 == 0x0000) {
+		if (var0000 == FRAME_DIAPER_CLEAN) {
 			var0001 = UI_click_on_item();
 			var var0002 = var0001->get_item_shape();
-			if ((var0002 == 0x02DA) || (var0002 == 0x0360)) {
-				set_item_frame(0x0001);
-			} else if (var0001->get_item_shape() == 0x0336) {
-				if (var0001->get_item_frame() == 0x0002) {
+			if (var0002 == SHAPE_BABY || var0002 == SHAPE_TODDLER) {
+				set_item_frame(FRAME_DIAPER_DIRTY);
+			} else if (var0001->get_item_shape() == SHAPE_DIAPER) {
+				if (var0001->get_item_frame() == FRAME_DIAPER_BASKET) {
 					Func0925(item);
 				}
 			} else {
 				Func08FE("@Those are for babies.@");
 			}
 		}
-		if (var0000 == 0x0001) {
+		if (var0000 == FRAME_DIAPER_DIRTY) {
 			var0001 = UI_click_on_item();
 			if (var0001->is_npc()) {
 				var0001->set_schedule_type(IN_COMBAT);
 				var0001->set_attack_mode(FLEE);
 				var0001->set_oppressor(AVATAR);
 				Func0925(item);
-			} else if (var0001->get_item_shape() == 0x0336) {
-				if (var0001->get_item_frame() == 0x0002) {
+			} else if (var0001->get_item_shape() == SHAPE_DIAPER) {
+				if (var0001->get_item_frame() == FRAME_DIAPER_BASKET) {
 					Func0925(item);
 				}
 			}
 		}
-		if (var0000 == 0x0002) {
+		if (var0000 == FRAME_DIAPER_BASKET) {
 			Func08FE("@That is for dirty diapers.@");
 		}
 	}
 }
 
-void Func0337 shape#(0x337) () {
+void Func0337 shape#(SHAPE_ARTISTS_EQUIPMENT) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
-		if (var0000 < 0x0002) {
+		if (var0000 < FRAME_ARTISTS_PAINTBRUSH_NS) {
 			Func08FE("@Finger-painting again?@");
 		} else {
 			struct<ObjPos> var0001 = UI_click_on_item();
 			var var0002 = var0001->get_item_shape();
-			if (var0002 == 0x0337) {
-				if (var0001->get_item_frame() < 0x0002) {
+			if (var0002 == SHAPE_ARTISTS_EQUIPMENT) {
+				if (var0001->get_item_frame() < FRAME_ARTISTS_PAINTBRUSH_NS) {
 					var0001 = UI_click_on_item();
-					if (var0001->get_item_shape() == 0x0345) {
-						var var0003 = var0001->get_item_frame() % 0x0008;
-						var var0004 = UI_die_roll(0x0001, 0x000A);
+					if (var0001->get_item_shape() == SHAPE_EASEL) {
+						var var0003 = var0001->get_item_frame() % 8;
+						var var0004 = UI_die_roll(1, 10);
 						declare var var0005;
-						if (var0004 == 0x0001) {
+						if (var0004 == 1) {
 							var0005 = "@Looks great!@";
 						}
-						if (var0004 == 0x0002) {
+						if (var0004 == 2) {
 							var0005 = "@Do not quit your day job.@";
 						}
-						if (var0004 == 0x0003) {
+						if (var0004 == 3) {
 							var0005 = "@I can barely" & "see the numbers.@";
 						}
-						if (var0004 == 0x0004) {
+						if (var0004 == 4) {
 							var0005 = "@Stay within the lines.@";
 						}
-						if (var0004 == 0x0005) {
+						if (var0004 == 5) {
 							var0005 = "@What is it?@";
 						}
 						Func08FE(var0005);
-						if (var0003 < 0x0007) {
+						if (var0003 < 7) {
 							var0001->set_item_frame(
-									var0001->get_item_frame() + 0x0001);
+									var0001->get_item_frame() + 1);
 						}
 					} else if (var0001->is_npc()) {
 						Func08FE("@Tattooing?@");
@@ -8475,7 +8520,7 @@ void Func0337 shape#(0x337) () {
 	}
 }
 
-void Func033B shape#(0x33B) () {
+void Func033B shape#(SHAPE_BANDAGES) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
@@ -8512,16 +8557,16 @@ void Func033B shape#(0x33B) () {
 	}
 }
 
-void Func033C shape#(0x33C) () {
+void Func033C shape#(SHAPE_WALL_BOTTOM) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	if (get_item_quality() == 0x0000) {
+	if (get_item_quality() == QUALITY_DOOR_PICKABLE) {
 		var var0000 = Func081F(item);
 	}
 }
 
-void Func0345 shape#(0x345) () {
+void Func0345 shape#(SHAPE_EASEL) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = "@Thou shouldst use the brush and pigments, " + Func0908()
 					  + ".@";
@@ -8529,10 +8574,10 @@ void Func0345 shape#(0x345) () {
 	}
 }
 
-void Func0347 shape#(0x347) () {
+void Func0347 shape#(SHAPE_HOURGLASS) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
-		if (var0000 == 0x0001) {
+		if (var0000 == FRAME_HOURGLASS_ENCHANTED) {
 			if (gflags[BROKE_SPHERE]) {
 				// BUG: this should probably have been 'item' instead of
 				// SHAPE_TIME_LORD
@@ -8543,9 +8588,9 @@ void Func0347 shape#(0x347) () {
 	}
 }
 
-void Func0348 shape#(0x348) () {
+void Func0348 shape#(SHAPE_FLYING_CARPET) () {
 	var var0000 = get_barge();
-	if ((event == DOUBLECLICK) && (!(var0000 == 0x0000))) {
+	if ((event == DOUBLECLICK) && (!(var0000 == NULL_OBJ))) {
 		if (!get_item_flag(ON_MOVING_BARGE)) {
 			if (Func080D()) {
 				Func0812(var0000);
@@ -8568,25 +8613,25 @@ void Func0348 shape#(0x348) () {
 	}
 }
 
-void Func034A shape#(0x34A) () {
-	if (get_item_frame() == 0x0004) {
+void Func034A shape#(SHAPE_REAGENT) () {
+	if (get_item_frame() == FRAME_REAGENT_GARLIC) {
 		Func0813(item, 0x0002, 0x005B);
 	}
 }
 
-void Func034D shape#(0x34D) () {
+void Func034D shape#(SHAPE_WALL_NS_RIGHT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	if (get_item_quality() == 0x0000) {
+	if (get_item_quality() == QUALITY_DOOR_PICKABLE) {
 		var var0000 = Func0820(item);
 	}
 }
 
-void Func0350 shape#(0x350) () {
+void Func0350 shape#(SHAPE_MIRROR_NS) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
-		if (var0000 == 0x0003) {
+		if (var0000 == FRAME_MIRROR_MAGIC) {
 			var var0001 = script item {
 				sfx 67;
 				continue;
@@ -8615,7 +8660,7 @@ void Func0353 shape#(SHAPE_CLOTH) () {
 	}
 }
 
-void Func0356 shape#(0x356) () {
+void Func0356 shape#(SHAPE_STATUE) () {
 	declare var var0000;
 	declare var var0001;
 	if (event == DOUBLECLICK) {
@@ -8623,7 +8668,7 @@ void Func0356 shape#(0x356) () {
 			abort;
 		}
 		var0000 = get_item_frame();
-		if (var0000 == 0x0010) {
+		if (var0000 == FRAME_STATUE_SHRINE_OF_TRUTH) {
 			SHRINE_OF_PRINCIPLE->show_npc_face(0x0000);
 			if (gflags[BANISHED_EXODUS]) {
 				say("\"Our gratitude is thine, Avatar. Thou hast saved "
@@ -8658,7 +8703,7 @@ void Func0356 shape#(0x356) () {
 				abort;
 			}
 		}
-		if (var0000 == 0x000E) {
+		if (var0000 == FRAME_STATUE_SHRINE_OF_LOVE) {
 			SHRINE_OF_PRINCIPLE->show_npc_face(0x0001);
 			if (gflags[BANISHED_EXODUS]) {
 				say("\"Thy Love for life is boundless. Thine heart-felt "
@@ -8684,7 +8729,7 @@ void Func0356 shape#(0x356) () {
 			}
 			abort;
 		}
-		if (var0000 == 0x000F) {
+		if (var0000 == FRAME_STATUE_SHRINE_OF_COURAGE) {
 			SHRINE_OF_PRINCIPLE->show_npc_face(0x0002);
 			if (gflags[BANISHED_EXODUS]) {
 				// TYPO: Should be "remembered"
@@ -8714,20 +8759,20 @@ void Func0356 shape#(0x356) () {
 	}
 	if (event == WEAPON) {
 		var0000 = get_item_frame();
-		if (var0000 == 0x0010) {
+		if (var0000 == FRAME_STATUE_SHRINE_OF_TRUTH) {
 			SHRINE_OF_PRINCIPLE->say(
 					"\"Thou hast mastered the Test of Truth, and so a boon of "
 					"great intellect and magical ability will be bestowed upon "
 					"thee. Use -- and respect -- thy powers well, Avatar.\"");
 		}
-		if (var0000 == 0x000E) {
+		if (var0000 == FRAME_STATUE_SHRINE_OF_LOVE) {
 			SHRINE_OF_PRINCIPLE->show_npc_face(0x0001);
 			say("\"My heart is gladdened to learn that Love is a Principle "
 				"thou dost hold dear, evident by thy successful completion of "
 				"the Test of Love. Now, then, shall a blessing of quickness "
 				"and skill be thine.\"");
 		}
-		if (var0000 == 0x000F) {
+		if (var0000 == FRAME_STATUE_SHRINE_OF_COURAGE) {
 			SHRINE_OF_PRINCIPLE->show_npc_face(0x0002);
 			say("\"Well done, mighty warrior! The unsurpassed Courage which "
 				"flows through thy veins could be none other than that of the "
@@ -8757,7 +8802,7 @@ void Func0356 shape#(0x356) () {
 		declare var var0004;
 		declare var var0005;
 		declare var var0006;
-		if (var0000 == 0x0010) {
+		if (var0000 == FRAME_STATUE_SHRINE_OF_TRUTH) {
 			if (!gflags[DID_SHRINE_OF_TRUTH]) {
 				var0003 = AVATAR->get_npc_object()->get_object_position();
 				UI_sprite_effect(
@@ -8795,7 +8840,7 @@ void Func0356 shape#(0x356) () {
 				abort;
 			}
 		}
-		if (var0000 == 0x000E) {
+		if (var0000 == FRAME_STATUE_SHRINE_OF_LOVE) {
 			if (!gflags[DID_SHRINE_OF_LOVE]) {
 				var0003 = AVATAR->get_npc_object()->get_object_position();
 				UI_sprite_effect(
@@ -8831,7 +8876,7 @@ void Func0356 shape#(0x356) () {
 				abort;
 			}
 		}
-		if (var0000 == 0x000F) {
+		if (var0000 == FRAME_STATUE_SHRINE_OF_COURAGE) {
 			if (!gflags[DID_SHRINE_OF_COURAGE]) {
 				var0003 = AVATAR->get_npc_object()->get_object_position();
 				UI_sprite_effect(
@@ -8867,23 +8912,23 @@ void Func0356 shape#(0x356) () {
 	}
 }
 
-void Func035F shape#(0x35F) () {
+void Func035F shape#(SHAPE_KITCHEN_ITEMS) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		declare struct<ObjPos> var0001;
-		if (var0000 == 0x0000) {
+		if (var0000 == FRAME_KITCHEN_ITEMS_FLOUR_OPEN) {
 			var0001 = UI_click_on_item();
 			struct<Position> var0002 = var0001->get_object_position();
 			var var0003 = var0001->get_item_shape();
 			var var0004 = -1;
 			declare var var0005;
 			declare var var0006;
-			if (var0003 == 0x03FA) {
+			if (var0003 == SHAPE_TABLE_EW) {
 				var0004 = var0002.x - UI_die_roll(0, 3);
 				var0005 = var0002.y;
 				var0006 = var0002.z + 2;
 			}
-			if (var0003 == 0x03EB) {
+			if (var0003 == SHAPE_TABLE_NS) {
 				var0004 = var0002.x;
 				var0005 = var0002.y - UI_die_roll(0, 2);
 				var0006 = var0002.z + 2;
@@ -8891,26 +8936,28 @@ void Func035F shape#(0x35F) () {
 			if (var0004 == -1) {
 				Func08FF("@Why not put the flour on the table first?@");
 			} else {
-				struct<Position> var0007 = UI_create_new_object(0x0292);
+				struct<Position> var0007 = UI_create_new_object(SHAPE_DOUGH);
 				if (var0007) {
 					var0007->set_item_flag(TEMPORARY);
-					var0007->set_item_frame(0x0000);
+					var0007->set_item_frame(FRAME_DOUGH_FLOUR);
 					struct<Position> var0008 = UI_update_last_created(
 							[var0004, var0005, var0006]);
 				}
 			}
 		}
-		if ((var0000 == 0x0008) || (var0000 == 0x0009)) {
+		if (var0000 == FRAME_KITCHEN_ITEMS_ROLLING_PIN1
+				|| var0000 == FRAME_KITCHEN_ITEMS_ROLLING_PIN2) {
 			var0001 = UI_click_on_item();
-			if (var0001->get_item_shape() == 0x0292) {
-				if (var0001->get_item_frame() == 0x0002) {
-					var0001->set_item_frame(0x0001);
+			if (var0001->get_item_shape() == SHAPE_DOUGH) {
+				if (var0001->get_item_frame() == FRAME_DOUGH_BREAD) {
+					var0001->set_item_frame(FRAME_DOUGH_FLAT_BREAD);
 				}
 			}
-			Func0933(var0001, "@Hey! That really hurt!@", 0x0000);
+			Func0933(var0001, "@Hey! That really hurt!@", 0);
 		}
-		if ((var0000 == 0x000D) || (var0000 == 0x000E)) {
-			set_item_frame(0x0000);
+		if (var0000 == FRAME_KITCHEN_ITEMS_FLOUR_CLOSED1
+				|| var0000 == FRAME_KITCHEN_ITEMS_FLOUR_CLOSED2) {
+			set_item_frame(FRAME_KITCHEN_ITEMS_FLOUR_OPEN);
 		}
 	}
 }
@@ -8937,13 +8984,13 @@ void Func036C shape#(SHAPE_METAL_WALL_NS) () {
 	Func0833(item, Func03A7);
 }
 
-void Func0378 shape#(0x378) () {
+void Func0378 shape#(SHAPE_HORN) () {
 	if (event == DOUBLECLICK) {
-		if (get_item_frame() == 0x0001) {
+		if (get_item_frame() == FRAME_HORN_FERRYMAN) {
 			UI_play_music(0x0030, item);
 			struct<Position> var0000
-					= Func093C(item, find_nearby(0x0378, 0x007D, MASK_NONE));
-			if (UI_get_array_size(var0000) == 0x0001) {
+					= Func093C(item, find_nearby(SHAPE_HORN, 125, MASK_NONE));
+			if (UI_get_array_size(var0000) == 1) {
 				struct<Position> var0001 = get_object_position();
 				struct<Position> var0002 = var0000->get_object_position();
 				declare var var0003;
@@ -8989,47 +9036,47 @@ void Func0379 shape#(SHAPE_LAMP_POST) () {
 	}
 }
 
-void Func037D shape#(0x37D) () {
+void Func037D shape#(SHAPE_POOL_OF_WATER) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_quality();
 		struct<ObjPos> var0001 = UI_click_on_item();
 		UI_play_sound_effect2(0x005A, item);
-		if (var0000 == 0x0001) {
+		if (var0000 == QUALITY_POOL_OF_SLEEPING) {
 			var0001->set_item_flag(ASLEEP);
 		}
-		if (var0000 == 0x0002) {
+		if (var0000 == QUALITY_POOL_OF_HEALING) {
 			var var0002 = UI_die_roll(1, 10);
 			var var0003 = 13 - var0002;
 			Func092A(var0001, var0003);
 		}
-		if (var0000 == 0x0003) {
+		if (var0000 == QUALITY_POOL_OF_CURING) {
 			var0001->clear_item_flag(POISONED);
 			var0001->clear_item_flag(PARALYZED);
 			var0001->clear_item_flag(ASLEEP);
 			var0001->clear_item_flag(CHARMED);
 			var0001->clear_item_flag(CURSED);
 		}
-		if (var0000 == 0x0004) {
+		if (var0000 == QUALITY_POOL_OF_POISON) {
 			var0001->set_item_flag(POISONED);
 		}
-		if (var0000 == 0x0005) {
+		if (var0000 == QUALITY_POOL_OF_AWAKENING) {
 			var0001->clear_item_flag(ASLEEP);
 		}
-		if (var0000 == 0x0006) {
+		if (var0000 == QUALITY_POOL_OF_PROTECTION) {
 			var0001->set_item_flag(PROTECTION);
 		}
-		if (var0000 == 0x0007) {
-			UI_cause_light(0x0064);
+		if (var0000 == QUALITY_POOL_OF_LIGHT) {
+			UI_cause_light(100);
 		}
-		if (var0000 == 0x0008) {
+		if (var0000 == QUALITY_POOL_OF_INVISIBILITY) {
 			var0001->set_item_flag(INVISIBLE);
 		}
 	}
 }
 
-void Func03A7 shape#(0x3A7) () {
+void Func03A7 shape#(SHAPE_PORTCULLIS_DOOR_NS) () {
 	if (event == SCRIPTED) {
-		set_item_shape(0x03A7);
+		set_item_shape(SHAPE_PORTCULLIS_DOOR_NS);
 		abort;
 	}
 	if (event == DOUBLECLICK) {
@@ -9039,9 +9086,9 @@ void Func03A7 shape#(0x3A7) () {
 	Func0832(item, Func036C);
 }
 
-void Func03A8 shape#(0x3A8) () {
+void Func03A8 shape#(SHAPE_PORTCULLIS_DOOR_EW) () {
 	if (event == SCRIPTED) {
-		set_item_shape(0x03A8);
+		set_item_shape(SHAPE_PORTCULLIS_DOOR_EW);
 		abort;
 	}
 	if (event == DOUBLECLICK) {
@@ -9051,7 +9098,7 @@ void Func03A8 shape#(0x3A8) () {
 	Func0832(item, Func012F);
 }
 
-void Func03B0 shape#(0x3B0) () {
+void Func03B0 shape#(SHAPE_POT) () {
 	if (event == DOUBLECLICK) {
 		if (get_item_frame()) {
 			if (Func0937(AVATAR)) {
@@ -9066,7 +9113,7 @@ void Func03B0 shape#(0x3B0) () {
 	}
 }
 
-void Func03B2 shape#(0x3B2) () {
+void Func03B2 shape#(SHAPE_GUARD4) () {
 	var var0000 = get_npc_object()->get_schedule_type();
 	if (event == PROXIMITY) {
 		abort;
@@ -9089,26 +9136,26 @@ void Func03B2 shape#(0x3B2) () {
 	say("\"Goodbye.\"*");
 }
 
-void Func03B5 shape#(0x3B5) () {
+void Func03B5 shape#(SHAPE_WINCH_NS) () {
 	UI_close_gumps();
 	Func083E(item, event);
 }
 
-void Func03B6 shape#(0x3B6) () {
+void Func03B6 shape#(SHAPE_WINCH_EW) () {
 	UI_close_gumps();
 	Func083E(item, event);
 }
 
-void Func03C8 shape#(0x3C8) () {
+void Func03C8 shape#(SHAPE_ENCLOSED_PRISM) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
-		if (var0000 == 0x0000) {
+		if (var0000 == FRAME_PRISM_SPHERE) {
 			Func0805(item);
 		}
-		if (var0000 == 0x0001) {
+		if (var0000 == FRAME_PRISM_CUBE) {
 			Func0807(item);
 		}
-		if (var0000 == 0x0002) {
+		if (var0000 == FRAME_PRISM_TETRAHEDRON) {
 			Func0803(item);
 		}
 	}
@@ -9120,13 +9167,13 @@ void Func03C8 shape#(0x3C8) () {
 	}
 }
 
-void Func03D5 shape#(0x3D5) () {
+void Func03D5 shape#(SHAPE_PRISM) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		var var0001 = var0000->get_item_shape();
 		struct<Position> var0002 = var0000->get_object_position();
 		declare var var0003;
-		if ((var0001 == 0x0241)
+		if ((var0001 == SHAPE_PEDESTAL)
 			&& (var0000->get_item_frame() == get_item_frame())) {
 			var0003 = set_last_created();
 			if (var0003) {
@@ -9140,7 +9187,7 @@ void Func03D5 shape#(0x3D5) () {
 	}
 }
 
-void Func03DB shape#(0x3DB) () {
+void Func03DB shape#(SHAPE_BABY_IN_A_CRADLE) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		// Equivalent code to everything up to, and including, the call
@@ -9181,10 +9228,10 @@ void Func03DB shape#(0x3DB) () {
 		// opcodes like this. Specifically, data flow so that the repeat
 		// can detect the number of bytes needed from the given array.
 		var var0001 = item->run_script(var0000 & [(byte)0x0B, -26, 2]);
-		if (UI_die_roll(0x0001, 0x000A) == 0x0001) {
+		if (UI_die_roll(1, 10) == 1) {
 			struct<Position> var0002 = get_object_position();
-			set_item_shape(0x03E0);
-			var var0003 = UI_create_new_object(0x02DA);
+			set_item_shape(SHAPE_CRADLE);
+			var var0003 = UI_create_new_object(SHAPE_BABY);
 			var0003->set_item_flag(TEMPORARY);
 			var0003->set_item_flag(OKAY_TO_TAKE);
 			if (var0003) {
@@ -9268,7 +9315,7 @@ void Func03DF shape#(SHAPE_ANVIL) () {
 	}
 }
 
-void Func03E0 shape#(0x3E0) () {
+void Func03E0 shape#(SHAPE_CRADLE) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		// Equivalent code to everything up to, and including, the call
@@ -9318,7 +9365,7 @@ void Func03F3 shape#(SHAPE_BED) () {
 	}
 }
 
-void Func03F5 shape#(0x3F5) () {
+void Func03F5 shape#(SHAPE_ROCKING_HORSE) () {
 	if (event == DOUBLECLICK) {
 		if (!in_usecode()) {
 			// Equivalent code to everything up to, and including, the call
@@ -9364,9 +9411,10 @@ void Func03F5 shape#(0x3F5) () {
 	}
 }
 
-void Func03F7 shape#(0x3F7) () {
+void Func03F7 shape#(SHAPE_GOLEM) () {
 	if (event == DOUBLECLICK) {
-		if (get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, 4)) {
+		if (get_cont_items(
+				SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, FRAME_SCROLL_INVISIBLE)) {
 			ADJHAR->show_npc_face(0x0000);
 			if (gflags[GOT_TALISMAN_OF_LOVE]) {
 				Func0893();
@@ -9377,7 +9425,8 @@ void Func03F7 shape#(0x3F7) () {
 			if (gflags[KNOWS_ABOUT_STONE_OF_CASTAMBRE]) {
 				if (!gflags[ADJHAR_READ_BOOK]) {
 					var var0000 = Func0931(
-							PARTY, 1, SHAPE_BOOK, 0x0090, FRAME_ANY);
+							PARTY, 1, SHAPE_BOOK,
+							QUALITY_BOOK_STONE_OF_CASTAMBRE, FRAME_ANY);
 					if (var0000) {
 						// TYPO: Should be "possession"
 						say("\"Hast thou in thy possesion the book on the "
@@ -9401,11 +9450,11 @@ void Func03F7 shape#(0x3F7) () {
 					"greater\tcapability for speech than his fallen "
 					"companion.");
 				if (gflags[BOLLUX_IS_DEAD]) {
-					var var0001
-							= AVATAR->find_nearby(0x019E, 0x0028, MASK_NONE);
+					var var0001 = AVATAR->find_nearby(SHAPE_BODY2, 40, MASK_NONE);
 					for (var0004 in var0001) {
 						var var0005 = var0004->get_item_frame();
-						if ((var0005 == 0x0004) || (var0005 == 0x0005)) {
+						if (var0005 == FRAME_BODY2_GOLEM1
+								|| var0005 == FRAME_BODY2_GOLEM2) {
 							say("The recently raised golem stares down at the "
 								"prone, lifeless body of Bollux. Quickly he "
 								"looks up at you.~\"Wh-what has happened?\"");
@@ -9435,7 +9484,8 @@ void Func03F7 shape#(0x3F7) () {
 				}
 			}
 		} else if (
-				get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX, 4)
+				get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX, FRAME_SCROLL_INVISIBLE)
 				|| (find_nearby(SHAPE_SCROLL, 1, MASK_ALL_UNSEEN)
 							->get_item_quality()
 					== QUALITY_SCROLL_BOLLUX)) {
@@ -9444,7 +9494,7 @@ void Func03F7 shape#(0x3F7) () {
 	}
 }
 
-void Func03FD shape#(0x3FD) () {
+void Func03FD shape#(SHAPE_TIME_BARRIER) () {
 	// BUG: this should probably have been 'item' instead of SHAPE_TIME_LORD
 	SHAPE_TIME_LORD->get_npc_object()->Func0269();
 }
@@ -11155,7 +11205,7 @@ void FuncTrellek object#(FIRST_NPC_FUNCTION - TRELLEK)() {
 				"minutes of this, he turns around and presents the whistle to "
 				"you.");
 			var var000A = UI_add_party_items(
-					0x0001, 0x02B5, QUALITY_ANY, 0x0001, false);
+					1, SHAPE_WHISTLE, QUALITY_ANY, FRAME_WHISTLE_WISP_WHISTLE, false);
 			if (var000A) {
 				say("\"Here is your whistle.\"");
 				Func0911(0x0032);
@@ -11409,7 +11459,7 @@ void FuncSentri object#(FIRST_NPC_FUNCTION - SENTRI)() {
 					"thee?\"*");
 				DUPRE->show_npc_face(0x0000);
 				var var000E
-						= Func0931(DUPRE, 0x0001, SHAPE_BOTTLE, QUALITY_ANY, FRAME_BOTTLE_ALE);
+						= Func0931(DUPRE, 1, SHAPE_BOTTLE, QUALITY_ANY, FRAME_BOTTLE_ALE);
 				if (var000E) {
 					say("\"Art thou joking? I -always- have ale!\"*");
 					SENTRI->say("\"Then we should have some before someone "
@@ -11615,7 +11665,8 @@ void FuncJulia object#(FIRST_NPC_FUNCTION - JULIA)() {
 			remove("gruesome");
 			fallthrough;
 		case "plans":
-			var var000A = Func0931(PARTY, 1, SHAPE_SCROLL, QUALITY_SCROLL_SHIP_PLANS, FRAME_ANY);
+			var var000A = Func0931(
+					PARTY, 1, SHAPE_SCROLL, QUALITY_SCROLL_SHIP_PLANS, FRAME_ANY);
 			if (var000A) {
 				say("\"May I see them?\" She examines every line of the plans "
 					"carefully. \"These designs are unsound. Ships built to "
@@ -11940,7 +11991,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 		}
 		var var0007 = UI_get_array_size(var0002);
 		var var0008 = "";
-		if (var0007 > 0x0001) {
+		if (var0007 > 1) {
 			var0008 = "s";
 		}
 		var var0009 = 0x0000;
@@ -11957,12 +12008,13 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 		var var0014 = false;
 		var var0015 = false;
 		var var0016 = false;
-		var var0017 = var0004->find_nearby(0x0211, 0x000D, MASK_NONE);
-		var var0018 = var0004->find_nearby(0x01FE, 0x000D, MASK_NONE);
-		var var0019 = var0004->find_nearby(0x0214, 0x000D, MASK_NONE);
-		var var001A = var0004->find_nearby(0x01EE, 0x0014, MASK_NONE);
+		var var0017 = var0004->find_nearby(SHAPE_SLIME, 13, MASK_NONE);
+		var var0018 = var0004->find_nearby(SHAPE_FOX, 13, MASK_NONE);
+		var var0019 = var0004->find_nearby(SHAPE_HARPIE, 13, MASK_NONE);
+		var var001A = var0004->find_nearby(SHAPE_BEE, 20, MASK_NONE);
 		var var001B = false;
-		if (Func08F7(0x00E5) || Func08F7(0x00E4)) {
+		// BUG: These were likely meant to be without the minus signs.
+		if (Func08F7(-BUDO) || Func08F7(-LUCKY)) {
 			var001B = true;
 		}
 		var var001C = "valiant warrior";
@@ -12001,14 +12053,14 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 			var001C = "lowly deceiver";
 		}
 		add(["name", "job", "bye"]);
-		if (gflags[MET_TSERAMED] && (var0007 == 0x0001)) {
+		if (gflags[MET_TSERAMED] && (var0007 == 1)) {
 			gflags[TSERAMED_INTRO] = true;
 		}
 		if (gflags[TSERAMED_SAID_PREF] && (!(var0004 in var0002))) {
 			add(var0006);
 		}
 		if ((!gflags[TSERAMED_INTRO])
-			&& ((var0007 > 0x0001) && gflags[MET_TSERAMED])) {
+			&& ((var0007 > 1) && gflags[MET_TSERAMED])) {
 			add("introduce");
 		}
 		declare var var001F;
@@ -12044,7 +12096,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 			if (gflags[TSERAMED_KNOWS_AVATAR]) {
 				say("Thy demeanor is noble.");
 			}
-			if (var0007 == 0x0001) {
+			if (var0007 == 1) {
 				gflags[TSERAMED_INTRO] = true;
 			}
 			UI_pop_answers();
@@ -12137,8 +12189,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 			fallthrough;
 		always:
 			if (gflags[MET_TSERAMED] && (!var0013)) {
-				if ((var0004 in var0002)
-					|| (UI_get_array_size(var0003) == 0x0000)) {
+				if ((var0004 in var0002) || (UI_get_array_size(var0003) == 0)) {
 					add("Fellowship");
 					var0013 = true;
 				}
@@ -12162,7 +12213,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 						"Perhaps introductions are in order first."
 					];
 					var var0021 = var0020[UI_die_roll(
-							0x0001, UI_get_array_size(var0020))];
+							1, UI_get_array_size(var0020))];
 					say("\"", var0021, "\"");
 					var001F = 0x0000;
 					add("introduce");
@@ -12285,7 +12336,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 			fallthrough;
 		case "foxes":
 			var000F = true;
-			if (var0004->find_nearby(0x01FE, 0x000A, MASK_NONE)) {
+			if (var0004->find_nearby(SHAPE_FOX, 10, MASK_NONE)) {
 				var001D = "  See how lustrous is the coat of that fox.";
 			}
 			say("\"Cunning is the fox, and shy of humans. We shall never "
@@ -12316,31 +12367,32 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 			say("\"I fashion my arrows from the stingers of giant bees. With "
 				"them one may put a foe to sleep.\"");
 			var var0022 = "";
-			var var0023 = 0x0000;
+			var var0023 = 0;
 			if (gflags[GAVE_ARROWS]) {
-				var0023 = PARTY->count_objects(0x03B3, QUALITY_ANY, FRAME_ANY);
-				if (var0023 > 0x0006) {
-					var0023 = 0x0006;
+				var0023 = PARTY->count_objects(
+						SHAPE_BEE_STINGERS, QUALITY_ANY, FRAME_ANY);
+				if (var0023 > 6) {
+					var0023 = 6;
 				}
-				var var0024
-						= PARTY->count_objects(0x0238, QUALITY_ANY, FRAME_ANY);
-				if ((var0004 in var0002)
-					&& ((var0024 < 0x0006) && (var0023 > 0x0000))) {
+				var var0024 = PARTY->count_objects(
+						SHAPE_TSERAMED_ARROW, QUALITY_ANY, FRAME_ANY);
+				if ((var0004 in var0002) && (var0024 < 6 && var0023 > 0)) {
 					var0022 = "Shall I fashion these stingers into arrows?";
 				}
 			} else {
 				var0022 = "If thou wouldst like, I would be happy to give thee "
 						  "a dozen of my special arrows. Art thou interested?";
-				var0023 = 0x000C;
+				var0023 = 12;
 			}
 			if (var0022 != "") {
 				say(var0022, "");
 				if (Func090A()) {
 					var var0025 = UI_add_party_items(
-							var0023, 0x0238, QUALITY_ANY, FRAME_ANY, false);
+							var0023, SHAPE_TSERAMED_ARROW, QUALITY_ANY,
+							FRAME_ANY, false);
 					if (var0025) {
 						var var0026 = "";
-						if (var0023 > 0x0001) {
+						if (var0023 > 1) {
 							var0026 = "s";
 						}
 						say("\"Use them with care, for even a scratch may put "
@@ -12348,8 +12400,8 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 							var0023, " arrow", var0026, ".");
 						if (gflags[GAVE_ARROWS]) {
 							var001F = UI_remove_party_items(
-									var0023, 0x03B3, QUALITY_ANY, FRAME_ANY,
-									true);
+									var0023, SHAPE_BEE_STINGERS, QUALITY_ANY,
+									FRAME_ANY, true);
 						}
 						gflags[GAVE_ARROWS] = true;
 					} else {
@@ -12362,7 +12414,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 			}
 			fallthrough;
 		case "join"(remove):
-			if (var0007 < 0x0008) {
+			if (var0007 < 8) {
 				TSERAMED->add_to_party();
 				say("\"I would be honored, ", var0001, ".\"");
 				add("Fellowship");
@@ -12613,11 +12665,12 @@ void FuncPetre object#(FIRST_NPC_FUNCTION - PETRE)() {
 				"thou want a title?\"");
 			var var0005 = Func090A();
 			if (var0005) {
-				var var0006
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var0006 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var0006 >= 60) {
 					var var0007 = UI_add_party_items(
-							0x0001, SHAPE_SCROLL, QUALITY_SCROLL_CARRIAGE_DEED_FLETCHER, FRAME_ANY, false);
+							1, SHAPE_SCROLL, QUALITY_SCROLL_CARRIAGE_DEED_FLETCHER,
+							FRAME_ANY, false);
 					if (var0007) {
 						say("\"Very good. Nothing like a little business "
 							"transaction to take my mind off the ghastly scene "
@@ -13380,7 +13433,7 @@ void FuncKlog object#(FIRST_NPC_FUNCTION - KLOG)() {
 		var var0000 = Func0908();
 		var var0001 = UI_part_of_day();
 		var var0002 = false;
-		var var0003 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var var0003 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 		if (var0001 == NIGHT) {
 			Func08AB();
 		}
@@ -13844,8 +13897,8 @@ void FuncApollonia object#(FIRST_NPC_FUNCTION - APOLLONIA)() {
 					var0007 += 1;
 				}
 				var var000B = var0007 * 6;
-				var var000C
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var000C = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var000C >= var000B) {
 					var var000D = UI_add_party_items(
 							1, SHAPE_KEY, QUALITY_DOOR_INN, FRAME_ANY, true);
@@ -13856,7 +13909,8 @@ void FuncApollonia object#(FIRST_NPC_FUNCTION - APOLLONIA)() {
 						say("\"Here is thy room key. It is good only until "
 							"thou dost leave.\"");
 						var var000E = UI_remove_party_items(
-								var000B, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
+								var000B, SHAPE_GOLD_COIN, QUALITY_ANY,
+								FRAME_ANY, true);
 					}
 				} else {
 					say("\"Thou dost not have enough gold, ", var0002, ".\"");
@@ -14021,7 +14075,7 @@ void FuncGargan object#(FIRST_NPC_FUNCTION - GARGAN)() {
 							SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 					if (var0003 >= 80) {
 						var var0004 = UI_add_party_items(
-								0x0001, 0x028A, QUALITY_ANY, FRAME_ANY, true);
+								1, SHAPE_SEXTANT, QUALITY_ANY, FRAME_ANY, true);
 						say("\"Here ye are!\"");
 						if (!var0004) {
 							say("\"Thine arms are too full to carry the "
@@ -14076,8 +14130,8 @@ void FuncGargan object#(FIRST_NPC_FUNCTION - GARGAN)() {
 									"He hands you the deed and takes your "
 									"gold.~Gargan sneezes.");
 								var var0007 = UI_remove_party_items(
-										600, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY,
-										true);
+										600, SHAPE_GOLD_COIN, QUALITY_ANY,
+										FRAME_ANY, true);
 								gflags[SOLD_BLUEFIN] = true;
 							} else {
 								say("\"Thou'rt already carrying enough to sink "
@@ -14433,7 +14487,7 @@ void FuncLordBritish object#(FIRST_NPC_FUNCTION - LORD_BRITISH)() {
 					"work for thee. Be careful, though. The Moongates have "
 					"become dangerous.\"");
 				var var0009 = UI_add_party_items(
-						0x0001, 0x0311, QUALITY_ANY, FRAME_ANY, false);
+						1, SHAPE_ORB_OF_THE_MOONS, QUALITY_ANY, FRAME_ANY, false);
 				if (var0009) {
 					say("Lord British hands you his Orb of the Moons.");
 					gflags[LB_GAVE_ORB] = true;
@@ -15115,7 +15169,7 @@ void FuncBatlin object#(FIRST_NPC_FUNCTION - BATLIN)() {
 	if (event == DOUBLECLICK) {
 		BATLIN->show_npc_face(0x0000);
 		var var0000 = BATLIN->get_npc_object()->get_schedule_type();
-		var var0001 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var var0001 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 		if (var0001) {
 			say("Batlin's eyes narrow to red slits as he peers practically "
 				"through you.");
@@ -15165,7 +15219,8 @@ void FuncBatlin object#(FIRST_NPC_FUNCTION - BATLIN)() {
 						say("\"Very good, Avatar.\"");
 					}
 					var0002 = UI_add_party_items(
-							0x0001, 0x03BB, QUALITY_ANY, 0x0001, false);
+							1, SHAPE_AMULET, QUALITY_ANY,
+							FRAME_AMULET_FELLOWSHIP_MEDALLION, false);
 					gflags[CEREMONY_DONE] = true;
 					gflags[JOIN_FELLOWSHIP] = true;
 					Func0911(500);
@@ -15419,8 +15474,8 @@ void FuncBatlin object#(FIRST_NPC_FUNCTION - BATLIN)() {
 			if (gflags[DIDNT_GET_PACKAGE] && (!gflags[PACKAGE_QUEST])) {
 				say("\"Ah! I do hope thine hands are not too full to take the "
 					"package.\"");
-				var var0008
-						= BATLIN->find_object(0x031E, QUALITY_ANY, FRAME_ANY);
+				var var0008 = BATLIN->find_object(
+						SHAPE_SEALED_BOX, QUALITY_ANY, FRAME_ANY);
 				var var0009 = var0008->set_last_created();
 				var var000A = AVATAR->give_last_created();
 				if (var000A) {
@@ -15537,7 +15592,8 @@ void FuncBatlin object#(FIRST_NPC_FUNCTION - BATLIN)() {
 			fallthrough;
 		case "medallion":
 			var0002 = UI_add_party_items(
-					0x0001, 0x03BB, QUALITY_ANY, 0x0001, false);
+					1, SHAPE_AMULET, QUALITY_ANY,
+					FRAME_AMULET_FELLOWSHIP_MEDALLION, false);
 			if (var0002) {
 				say("\"Allow me to present thee with thy Fellowship "
 					"medallion.\" Batlin gives you the medallion. \"Please -- "
@@ -15721,7 +15777,7 @@ void FuncRaymundo object#(FIRST_NPC_FUNCTION - RAYMUNDO)() {
 		case "audition":
 			if (var0001 == TEND_SHOP) {
 				var var0007 = Func0931(
-						AVATAR, 0x0001, 0x0346, QUALITY_ANY, FRAME_ANY);
+						AVATAR, 1, SHAPE_AVATAR_COSTUME, QUALITY_ANY, FRAME_ANY);
 				if (var0007) {
 					say("\"I see thou art ready? Very well. Take center stage, "
 						"wouldst thou?\"");
@@ -16989,8 +17045,8 @@ void FuncGreg object#(FIRST_NPC_FUNCTION - GREG)() {
 				"me so himself. All sorts of famous adventurers pass through "
 				"these doors. Why, just last week, we had the Avatar himself "
 				"in this, my very own store!\"");
-			var var0004
-					= Func0931(AVATAR, 0x0001, 0x0346, QUALITY_ANY, FRAME_ANY);
+			var var0004 = Func0931(
+					AVATAR, 1, SHAPE_AVATAR_COSTUME, QUALITY_ANY, FRAME_ANY);
 			if (var0004) {
 				say("\"Why, now that I mention it, he was dressed a lot like "
 					"thou art. Yes, he was.\"");
@@ -17463,7 +17519,8 @@ void FuncCynthia object#(FIRST_NPC_FUNCTION - CYNTHIA)() {
 				"earning any money here in Britannia thou wilt need to take "
 				"this paper.\"");
 			var var0002 = UI_add_party_items(
-					1, SHAPE_SCROLL, QUALITY_SCROLL_TAX_DECLARATION, FRAME_ANY, true);
+					1, SHAPE_SCROLL, QUALITY_SCROLL_TAX_DECLARATION,
+					FRAME_ANY, true);
 			if (var0002) {
 				say("\"Fill it out and return it here at the end of the year "
 					"when thou dost come back to pay thy taxes.\"");
@@ -17541,9 +17598,9 @@ void FuncCynthia object#(FIRST_NPC_FUNCTION - CYNTHIA)() {
 				var var0004 = Func090A();
 				if (var0004) {
 					var var0005 = Func0931(
-							PARTY, 0x0001, 0x0285, QUALITY_ANY, FRAME_ANY);
+							PARTY, 1, SHAPE_GOLD_NUGGET, QUALITY_ANY, FRAME_ANY);
 					var var0006 = Func0931(
-							PARTY, 0x0001, 0x0286, QUALITY_ANY, FRAME_ANY);
+							PARTY, 1, SHAPE_GOLD_BAR, QUALITY_ANY, FRAME_ANY);
 					declare var var0007;
 					if (var0005 || var0006) {
 						var0007 = true;
@@ -17561,25 +17618,26 @@ void FuncCynthia object#(FIRST_NPC_FUNCTION - CYNTHIA)() {
 							"gold coins for each gold nugget and one-hundred "
 							"gold coins for each gold bar.\"");
 						var var0008 = PARTY->count_objects(
-								0x0285, QUALITY_ANY, FRAME_ANY);
+								SHAPE_GOLD_NUGGET, QUALITY_ANY, FRAME_ANY);
 						var var0009 = PARTY->count_objects(
-								0x0286, QUALITY_ANY, FRAME_ANY);
+								SHAPE_GOLD_BAR, QUALITY_ANY, FRAME_ANY);
 						var var000A = 10 * var0008;
 						var var000B = 100 * var0009;
 						var var000C = var000A + var000B;
 						var var000D = UI_add_party_items(
-								var000C, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
+								var000C, SHAPE_GOLD_COIN, QUALITY_ANY,
+								FRAME_ANY, true);
 						if (!var000D) {
 							say("\"Oh, my. Thou canst not possibly carry that "
 								"many gold coins. Thou must return when thou "
 								"dost have more space in thy pack.\"");
 						} else {
 							var var000E = UI_remove_party_items(
-									var0008, 0x0285, QUALITY_ANY, FRAME_ANY,
-									true);
+									var0008, SHAPE_GOLD_NUGGET, QUALITY_ANY,
+									FRAME_ANY, true);
 							var var000F = UI_remove_party_items(
-									var0009, 0x0286, QUALITY_ANY, FRAME_ANY,
-									true);
+									var0009, SHAPE_GOLD_BAR, QUALITY_ANY,
+									FRAME_ANY, true);
 							say("\"And here are ", var000C,
 								" gold coins for thee in return, ", var0000,
 								". I thank thee for thy business.\"");
@@ -18231,7 +18289,8 @@ void FuncFigg object#(FIRST_NPC_FUNCTION - FIGG)() {
 			var var0006 = Func090A();
 			if (var0006) {
 				var var0007 = UI_remove_party_items(
-						5, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, TEMPORARY_ANY);
+						5, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY,
+						TEMPORARY_ANY);
 				if (var0007) {
 					var var0008 = UI_add_party_items(
 							1, SHAPE_FOOD, QUALITY_ANY, FRAME_APPLE, true);
@@ -18426,8 +18485,8 @@ void FuncJames object#(FIRST_NPC_FUNCTION - JAMES)() {
 							say("\"Here is thy room key. It is only good until "
 								"thou leavest the inn.\"");
 							var var000B = UI_remove_party_items(
-									var0008, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY,
-									true);
+									var0008, SHAPE_GOLD_COIN, QUALITY_ANY,
+									FRAME_ANY, true);
 						}
 					} else {
 						say("\"Thou dost not have enough gold to get a room "
@@ -19047,8 +19106,14 @@ void FuncWilly object#(FIRST_NPC_FUNCTION - WILLY)() {
 		if (gflags[WILLY_HIRED]) {
 			add("made bread");
 		}
-		var var0005 = Func0931(PARTY, 0x0001, 0x035F, QUALITY_ANY, 0x000E);
-		var var0006 = Func0931(PARTY, 0x0001, 0x035F, QUALITY_ANY, 0x000F);
+		var var0005 = Func0931(
+				PARTY, 1, SHAPE_KITCHEN_ITEMS, QUALITY_ANY,
+				FRAME_KITCHEN_ITEMS_FLOUR_CLOSED2);
+		// BUG: This should have been FRAME_KITCHEN_ITEMS_FLOUR_CLOSED1 instead
+		// of FRAME_KITCHEN_ITEMS_BUTTER_CHURN.
+		var var0006 = Func0931(
+				PARTY, 1, SHAPE_KITCHEN_ITEMS, QUALITY_ANY,
+				FRAME_KITCHEN_ITEMS_BUTTER_CHURN);
 		if (var0005 || var0006) {
 			add("sell flour");
 		}
@@ -19364,13 +19429,14 @@ void FuncGaye object#(FIRST_NPC_FUNCTION - GAYE)() {
 						"them recently!\"");
 					var var0006 = PARTY->count_objects(
 							SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
-					if (var0006 < 0x001E) {
+					if (var0006 < 30) {
 						say("\"Um. Perhaps thou couldst return when thou dost "
 							"have enough gold.\" She lays the costume down and "
 							"smiles.");
 					} else {
 						var var0007 = UI_add_party_items(
-								0x0001, 0x0346, QUALITY_ANY, FRAME_ANY, false);
+								1, SHAPE_AVATAR_COSTUME, QUALITY_ANY,
+								FRAME_ANY, false);
 						if (!var0007) {
 							say("\"Oh. Thou canst not carry this with what "
 								"thou art already carrying. Mayhaps thou "
@@ -19814,11 +19880,12 @@ void FuncDiane object#(FIRST_NPC_FUNCTION - DIANE)() {
 				"across the street. Dost thou want a title?\"");
 			var var0003 = Func090A();
 			if (var0003) {
-				var var0004
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var0004 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var0004 >= 120) {
 					var var0005 = UI_add_party_items(
-							1, SHAPE_SCROLL, QUALITY_SCROLL_CARRIAGE_DEED_BRIKABRAK, FRAME_ANY, false);
+							1, SHAPE_SCROLL, QUALITY_SCROLL_CARRIAGE_DEED_BRIKABRAK,
+							FRAME_ANY, false);
 					if (var0005) {
 						say("\"Very good. Here is thy title.\"");
 						var var0006 = UI_remove_party_items(
@@ -19972,7 +20039,8 @@ void FuncClint object#(FIRST_NPC_FUNCTION - CLINT)() {
 							800, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 					if (var0005) {
 						var var0006 = UI_add_party_items(
-								1, SHAPE_SCROLL, QUALITY_SCROLL_SHIP_DEED_BEAST, FRAME_ANY, false);
+								1, SHAPE_SCROLL, QUALITY_SCROLL_SHIP_DEED_BEAST,
+								FRAME_ANY, false);
 						if (var0006) {
 							say("\"Here is thy deed, ", var0002, ".\"");
 							gflags[SOLD_SHARKTOOTH] = true;
@@ -20000,7 +20068,7 @@ void FuncClint object#(FIRST_NPC_FUNCTION - CLINT)() {
 						100, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 				if (var0008) {
 					var var0009 = UI_add_party_items(
-							0x0001, 0x028A, QUALITY_ANY, FRAME_ANY, false);
+							1, SHAPE_SEXTANT, QUALITY_ANY, FRAME_ANY, false);
 					if (var0009) {
 						say("\"Here is thy sextant. She shall steer thee true, "
 							"to be sure.\"");
@@ -20349,7 +20417,8 @@ void FuncSean object#(FIRST_NPC_FUNCTION - SEAN)() {
 							say("\"I see that thou hast ", var000B, " gems.\"");
 						}
 						var var000E = UI_add_party_items(
-								var000C, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
+								var000C, SHAPE_GOLD_COIN, QUALITY_ANY,
+								FRAME_ANY, true);
 						if (var000E) {
 							say("\"Here is thy payment.\"");
 						} else {
@@ -20564,8 +20633,10 @@ void FuncBrownie object#(FIRST_NPC_FUNCTION - BROWNIE)() {
 				say("\"How nice! A helper! Please, feel free to start work at "
 					"any time!\"");
 				gflags[BROWNIE_HIRED] = true;
-				var var0003 = UI_find_nearby_avatar(0x0014);
-				var var0004 = UI_find_nearby_avatar(0x0015);
+				// BUG: These probably want to search for SHAPE_FOOD and the
+				// given frames below. As is, these functions return nothing.
+				var var0003 = UI_find_nearby_avatar(FRAME_PUMPKIN_LARGE);
+				var var0004 = UI_find_nearby_avatar(FRAME_PUMPKIN_SMALL);
 				declare var var0007;
 				for (var0007 in var0003) {
 					var0007->set_item_flag(OKAY_TO_TAKE);
@@ -22011,7 +22082,8 @@ void FuncMiranda object#(FIRST_NPC_FUNCTION - MIRANDA)() {
 					say("\"Wonderful! Here is the bill. Please bring it back "
 						"to me when it is signed. And we thank thee.\"");
 					var0005 = UI_add_party_items(
-							1, SHAPE_SCROLL, QUALITY_SCROLL_LOCK_LAKE_BILL, FRAME_ANY, true);
+							1, SHAPE_SCROLL, QUALITY_SCROLL_LOCK_LAKE_BILL,
+							FRAME_ANY, true);
 					if (var0005) {
 						gflags[BILL_QUEST] = true;
 					} else {
@@ -22035,10 +22107,12 @@ void FuncMiranda object#(FIRST_NPC_FUNCTION - MIRANDA)() {
 				say("\"Excellent! Let me see it.\"");
 				if (gflags[BILL_QUEST_DONE]) {
 					var var0007 = Func0931(
-							PARTY, 1, SHAPE_SCROLL, QUALITY_SCROLL_LOCK_LAKE_BILL, FRAME_ANY);
+							PARTY, 1, SHAPE_SCROLL, QUALITY_SCROLL_LOCK_LAKE_BILL,
+							FRAME_ANY);
 					if (var0007) {
 						var0005 = UI_remove_party_items(
-								1, SHAPE_SCROLL, QUALITY_SCROLL_LOCK_LAKE_BILL, FRAME_ANY, true);
+								1, SHAPE_SCROLL, QUALITY_SCROLL_LOCK_LAKE_BILL,
+								FRAME_ANY, true);
 						if (var0005) {
 							say("\"It looks in order! We thank thee, "
 								"Avatar!\"");
@@ -22395,7 +22469,7 @@ void FuncCharles object#(FIRST_NPC_FUNCTION - CHARLES)() {
 					var0003 += 0x0001;
 				}
 				var var0007 = UI_add_party_items(
-						var0003, 0x0274, QUALITY_ANY, 0x0000, true);
+						var0003, SHAPE_CUP, QUALITY_ANY, FRAME_CUP_WINE_GLASS, true);
 				if (var0007) {
 					say("\"'Tis on the house.\" Charles hands you and your "
 						"friends glasses of wine.");
@@ -22979,7 +23053,9 @@ void FuncLordHeather object#(FIRST_NPC_FUNCTION - LORD_HEATHER)() {
 		case "bill":
 			if (!gflags[BILL_QUEST_DONE]) {
 				var var0005
-						= Func0931(PARTY, 1, SHAPE_SCROLL, QUALITY_SCROLL_LOCK_LAKE_BILL, FRAME_ANY);
+						= Func0931(
+								PARTY, 1, SHAPE_SCROLL,
+								QUALITY_SCROLL_LOCK_LAKE_BILL, FRAME_ANY);
 				if (var0005) {
 					say("\"'Tis about time that the government did something "
 						"about the awful stench coming from that lake! I shall "
@@ -23062,8 +23138,8 @@ void FuncPamela object#(FIRST_NPC_FUNCTION - PAMELA)() {
 					var0002 += 1;
 				}
 				var var0006 = var0002 * 8;
-				var var0007
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var0007 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var0007 >= var0006) {
 					var var0008 = UI_add_party_items(
 							1, SHAPE_KEY, QUALITY_DOOR_INN, FRAME_ANY, true);
@@ -23074,7 +23150,8 @@ void FuncPamela object#(FIRST_NPC_FUNCTION - PAMELA)() {
 						say("\"Here is thy room key. It is good only until "
 							"thou leavest.\"");
 						var var0009 = UI_remove_party_items(
-								var0006, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
+								var0006, SHAPE_GOLD_COIN, QUALITY_ANY,
+								FRAME_ANY, true);
 					}
 				} else {
 					say("\"Thou dost not have enough gold, eh? Too bad.\"");
@@ -23283,7 +23360,7 @@ void FuncElynor object#(FIRST_NPC_FUNCTION - ELYNOR)() {
 	if (event == DOUBLECLICK) {
 		ELYNOR->show_npc_face(0x0000);
 		var var0000 = UI_wearing_fellowship();
-		var var0001 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var var0001 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 		var var0002 = Func0909();
 		var var0003 = UI_part_of_day();
 		var var0004 = ELYNOR->get_npc_object()->get_schedule_type();
@@ -23404,13 +23481,15 @@ void FuncElynor object#(FIRST_NPC_FUNCTION - ELYNOR)() {
 			fallthrough;
 		case "deliver":
 			var var0006 = false;
-			var var0007 = PARTY->find_object(0x031E, 0x0001, FRAME_ANY);
-			var var0008 = PARTY->find_object(0x031F, 0x0001, FRAME_ANY);
-			var var0009 = 0x0000;
+			var var0007 = PARTY->find_object(SHAPE_SEALED_BOX, 1, FRAME_ANY);
+			var var0008 = PARTY->find_object(SHAPE_UNSEALED_BOX, 1, FRAME_ANY);
+			var var0009 = NULL_OBJ;
 			if (var0008) {
-				var0009 = var0008->find_object(SHAPE_SCROLL, QUALITY_SCROLL_BLACKGATE_DEFENSES, FRAME_ANY);
+				var0009 = var0008->find_object(
+					SHAPE_SCROLL, QUALITY_SCROLL_BLACKGATE_DEFENSES, FRAME_ANY);
 			} else if (var0007) {
-				var0009 = var0007->find_object(SHAPE_SCROLL, QUALITY_SCROLL_BLACKGATE_DEFENSES, FRAME_ANY);
+				var0009 = var0007->find_object(
+					SHAPE_SCROLL, QUALITY_SCROLL_BLACKGATE_DEFENSES, FRAME_ANY);
 			}
 			if (var0009) {
 				var0006 = true;
@@ -24250,7 +24329,7 @@ void FuncZorn object#(FIRST_NPC_FUNCTION - ZORN)() {
 		var var0001 = UI_part_of_day();
 		var0002 = ZORN->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
-		var var0003 = Func0931(PARTY, 0x0001, 0x02D8, QUALITY_ANY, FRAME_ANY);
+		var var0003 = Func0931(PARTY, 1, SHAPE_CADDELITE_CHUNKS, QUALITY_ANY, FRAME_ANY);
 		if (var0003) {
 			add("Caddellite");
 		}
@@ -24360,8 +24439,9 @@ void FuncZorn object#(FIRST_NPC_FUNCTION - ZORN)() {
 				"Zorn nods. \"Yes, I can make some for thee. I shall start "
 				"work immediately.\"");
 			var var0004 = UI_get_array_size(UI_get_party_list());
-			var var0005 = PARTY->count_objects(0x02D8, QUALITY_ANY, FRAME_ANY);
-			if (var0005 == 0x0000) {
+			var var0005 = PARTY->count_objects(
+					SHAPE_CADDELITE_CHUNKS, QUALITY_ANY, FRAME_ANY);
+			if (var0005 == 0) {
 				say("\"But thou dost not have any Caddellite chunks with which "
 					"to make helmets!\"");
 			}
@@ -24371,8 +24451,9 @@ void FuncZorn object#(FIRST_NPC_FUNCTION - ZORN)() {
 					"Caddellite for me to make that many helmets.\"");
 			} else {
 				var var0006 = UI_remove_party_items(
-						var0005, 0x02D8, QUALITY_ANY, FRAME_ANY, false);
-				if (var0005 == 0x0001) {
+						var0005, SHAPE_CADDELITE_CHUNKS, QUALITY_ANY,
+						FRAME_ANY, false);
+				if (var0005 == 1) {
 					say("Zorn takes the Caddellite from you and begins his "
 						"work.");
 				} else {
@@ -24385,13 +24466,14 @@ void FuncZorn object#(FIRST_NPC_FUNCTION - ZORN)() {
 					"the ore in the fire, then molds it into\tshape. Zorn "
 					"quickly takes the necessary measurements, then makes some "
 					"adjustments with the hot material. Finally, it is done.");
-				if (var0005 == 0x0001) {
+				if (var0005 == 1) {
 					say("Zorn dips the helmet in water to cool it.");
 				} else {
 					say("Zorn dips the helmets in water to cool them.");
 				}
 				var var0007 = UI_add_party_items(
-						var0005, 0x027E, QUALITY_ANY, FRAME_ANY, false);
+						var0005, SHAPE_CADDELLITE_HELMET, QUALITY_ANY,
+						FRAME_ANY, false);
 				if (var0007) {
 					gflags[ZORN_GAVE_HELMET] = true;
 					Func0911(0x00C8);
@@ -24868,15 +24950,16 @@ void FuncOwen object#(FIRST_NPC_FUNCTION - OWEN)() {
 								"designs. I shall give thee thy ship's deed in "
 								"advance\"");
 							var var0008 = UI_add_party_items(
-									1, SHAPE_SCROLL, QUALITY_SCROLL_SHIP_DEED_EXCELLENCIA, 0x0002, false);
+									1, SHAPE_SCROLL, QUALITY_SCROLL_SHIP_DEED_EXCELLENCIA,
+									FRAME_SCROLL_LETTER, false);
 							if (var0008) {
 								say("\"It will be called the Excellencia.\"");
 							} else {
 								say("\"I would give thee thy deed but thou art "
 									"carrying too much.\"");
 								var var0009 = UI_add_party_items(
-										1000, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY,
-										true);
+										1000, SHAPE_GOLD_COIN, QUALITY_ANY,
+										FRAME_ANY, true);
 								if (var0009) {
 									say("\"Take thy gold back! I cannot in "
 										"good conscious keep it!\"");
@@ -24913,7 +24996,7 @@ void FuncOwen object#(FIRST_NPC_FUNCTION - OWEN)() {
 							"it again.\"");
 					} else {
 						var var000B = UI_add_party_items(
-								0x0001, 0x028A, QUALITY_ANY, FRAME_ANY, true);
+								1, SHAPE_SEXTANT, QUALITY_ANY, FRAME_ANY, true);
 						if (!var000B) {
 							say("\"Thou dost not have enough strength to add "
 								"my treasure to thy pack. Thou must dispose of "
@@ -24950,7 +25033,8 @@ void FuncOwen object#(FIRST_NPC_FUNCTION - OWEN)() {
 						30, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 				if (var000E) {
 					var var000F = UI_add_party_items(
-							1, SHAPE_BOOK, 0x003B, FRAME_ANY, false);
+							1, SHAPE_BOOK, QUALITY_BOOK_THIS_OLDE_SHIP,
+							FRAME_ANY, false);
 					if (var000F) {
 						say("\"Here it is.\"");
 					} else {
@@ -25442,8 +25526,8 @@ void FuncRutherford object#(FIRST_NPC_FUNCTION - RUTHERFORD)() {
 							say("\"Here is thy room key. It is good only until "
 								"thou dost leave.\"");
 							var var000C = UI_remove_party_items(
-									var0009, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY,
-									true);
+									var0009, SHAPE_GOLD_COIN, QUALITY_ANY,
+									FRAME_ANY, true);
 						}
 					} else {
 						say("\"Thou dost not have enough gold, eh? That be "
@@ -26695,7 +26779,8 @@ void FuncNicodemus object#(FIRST_NPC_FUNCTION - NICODEMUS)() {
 	var var0000 = Func0908();
 	add(["name", "job", "bye"]);
 	var var0001 = UI_get_party_list();
-	var var0002 = PARTY->count_objects(0x0347, QUALITY_ANY, 0x0000);
+	var var0002 = PARTY->count_objects(
+			SHAPE_HOURGLASS, QUALITY_ANY, FRAME_HOURGLASS_NORMAL);
 	if (gflags[HOURGLASS_QUEST]) {
 		add(["hourglass", "Time Lord"]);
 	}
@@ -26786,7 +26871,8 @@ void FuncNicodemus object#(FIRST_NPC_FUNCTION - NICODEMUS)() {
 		say("\"Dost thou want it for, say, 75 gold?\"");
 		var var0005 = Func090A();
 		if (var0005) {
-			var var0006 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+			var var0006 = PARTY->count_objects(
+					SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 			if (var0006 >= 75) {
 				var var0007 = UI_add_party_items(
 						1, SHAPE_POTION, QUALITY_ANY, FRAME_POTION_INVISIBILITY, true);
@@ -26893,9 +26979,11 @@ void FuncNicodemus object#(FIRST_NPC_FUNCTION - NICODEMUS)() {
 					"and passes his hand over the artifact.~~\"That should do "
 					"it.\" He hands the hourglass back to you.");
 				var var000A = UI_remove_party_items(
-						0x0001, 0x0347, QUALITY_ANY, 0x0000, false);
+						1, SHAPE_HOURGLASS, QUALITY_ANY,
+						FRAME_HOURGLASS_NORMAL, false);
 				var var000B = UI_add_party_items(
-						0x0001, 0x0347, QUALITY_ANY, 0x0001, false);
+						1, SHAPE_HOURGLASS, QUALITY_ANY,
+						FRAME_HOURGLASS_ENCHANTED, false);
 				gflags[ENCHANTED_HOURGLASS] = true;
 				Func0911(0x0064);
 			} else {
@@ -27514,7 +27602,8 @@ void FuncReyna object#(FIRST_NPC_FUNCTION - REYNA)() {
 		var var0002 = REYNA;
 		var var0003 = false;
 		var var0004 = false;
-		var var0005 = Func0931(PARTY, 0x0001, 0x03E7, QUALITY_ANY, 0x0004);
+		var var0005 = Func0931(
+				PARTY, 1, SHAPE_PLANT, QUALITY_ANY, FRAME_PLANT_BOUQUET);
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_REYNA]) {
 			say("The woman greets you with shining eyes.");
@@ -27522,7 +27611,7 @@ void FuncReyna object#(FIRST_NPC_FUNCTION - REYNA)() {
 		} else {
 			say("\"Hello, ", var0000, ",\" says Reyna.");
 		}
-		var var0006 = AVATAR->find_nearest(0x02CB, ON_SCREEN);
+		var var0006 = AVATAR->find_nearest(SHAPE_TOMBSTONE, ON_SCREEN);
 		if (var0006) {
 			if (!gflags[ASKED_REYNA_ABOUT_MOTHER]) {
 				add("cemetery");
@@ -27625,9 +27714,9 @@ void FuncReyna object#(FIRST_NPC_FUNCTION - REYNA)() {
 			declare var var0007;
 			if (var0006) {
 				var0007 = "";
-				var var0008 = REYNA->find_nearby(0x03E7, 0x000A, MASK_NONE);
+				var var0008 = REYNA->find_nearby(SHAPE_PLANT, 10, MASK_NONE);
 				for (var000B in var0008) {
-					if (var000B->get_item_frame() == 0x0004) {
+					if (var000B->get_item_frame() == FRAME_PLANT_BOUQUET) {
 						var0007 = "I realize there are already "
 								  "\r\n\t\t\t\t\t\tvery beautiful flowers "
 								  "here, \r\n\t\t\t\t\t\tbut there can never "
@@ -27664,18 +27753,18 @@ void FuncReyna object#(FIRST_NPC_FUNCTION - REYNA)() {
 				", to bring flowers for my mother! I cannot wait to set them "
 				"by her grave.\"");
 			var var000C = UI_remove_party_items(
-					0x0001, 0x03E7, QUALITY_ANY, 0x0004, true);
-			var var000D = UI_die_roll(0x0001, 0x0006);
+					1, SHAPE_PLANT, QUALITY_ANY, FRAME_PLANT_BOUQUET, true);
+			var var000D = UI_die_roll(1, 6);
 			declare var var000E;
-			if ((var000D == 0x0001) || (var000D == 0x0002)) {
-				var000E = 0x0009;
+			if ((var000D == 1) || (var000D == 2)) {
+				var000E = 9;
 			}
-			if ((var000D == 0x0003)
-				|| ((var000D == 0x0004) || (var000D == 0x0005))) {
-				var000E = 0x0013;
+			if ((var000D == 3)
+				|| ((var000D == 4) || (var000D == 5))) {
+				var000E = 19;
 			}
-			if (var000D == 0x0006) {
-				var000E = 0x005A;
+			if (var000D == 6) {
+				var000E = 90;
 			}
 			Func0911(var000E);
 			gflags[GAVE_REYNA_FLOWERS] = true;
@@ -28017,21 +28106,29 @@ void FuncGarok object#(FIRST_NPC_FUNCTION - GAROK)() {
 			var var0002 = Func090A();
 			if (var0002) {
 				var var0003 = UI_add_party_items(
-						0x0006, 0x034A, QUALITY_ANY, 0x0000, false);
+						6, SHAPE_REAGENT, QUALITY_ANY,
+						FRAME_REAGENT_BLACK_PEARL, false);
 				var var0004 = UI_add_party_items(
-						0x0004, 0x034A, QUALITY_ANY, 0x0001, false);
+						4, SHAPE_REAGENT, QUALITY_ANY,
+						FRAME_REAGENT_BLOOD_MOSS, false);
 				var var0005 = UI_add_party_items(
-						0x0008, 0x034A, QUALITY_ANY, 0x0004, false);
+						8, SHAPE_REAGENT, QUALITY_ANY,
+						FRAME_REAGENT_GARLIC, false);
 				var var0006 = UI_add_party_items(
-						0x0008, 0x034A, QUALITY_ANY, 0x0005, false);
+						8, SHAPE_REAGENT, QUALITY_ANY,
+						FRAME_REAGENT_GINSENG, false);
 				var var0007 = UI_add_party_items(
-						0x0006, 0x034A, QUALITY_ANY, 0x0003, false);
+						6, SHAPE_REAGENT, QUALITY_ANY,
+						FRAME_REAGENT_MANDRAKE_ROOT, false);
 				var var0008 = UI_add_party_items(
-						0x0007, 0x034A, QUALITY_ANY, 0x0002, false);
+						7, SHAPE_REAGENT, QUALITY_ANY,
+						FRAME_REAGENT_NIGHTSHADE, false);
 				var var0009 = UI_add_party_items(
-						0x0006, 0x034A, QUALITY_ANY, 0x0006, false);
+						6, SHAPE_REAGENT, QUALITY_ANY,
+						FRAME_REAGENT_SPIDER_SILK, false);
 				var var000A = UI_add_party_items(
-						0x0008, 0x034A, QUALITY_ANY, 0x0007, false);
+						8, SHAPE_REAGENT, QUALITY_ANY,
+						FRAME_REAGENT_SULFUROUS_ASH, false);
 				if (var0003
 					&& (var0004
 						&& (var0005
@@ -28513,7 +28610,8 @@ void FuncAimi object#(FIRST_NPC_FUNCTION - AIMI)() {
 							"That is a noble reason. Please take these flowers "
 							"and give them to her.\"");
 						var var0004 = UI_add_party_items(
-								0x0001, 0x03E7, QUALITY_ANY, 0x0004, true);
+								1, SHAPE_PLANT, QUALITY_ANY,
+								FRAME_PLANT_BOUQUET, true);
 						gflags[MOMS_FLOWERS] = true;
 					} else {
 						say("\"Good. 'Tis always best to have someone to "
@@ -28525,7 +28623,8 @@ void FuncAimi object#(FIRST_NPC_FUNCTION - AIMI)() {
 									PARTY, 10, SHAPE_GOLD_COIN, QUALITY_ANY,
 									FRAME_ANY);
 							var var0007 = UI_add_party_items(
-									0x0001, 0x03E7, QUALITY_ANY, 0x0004, true);
+									1, SHAPE_PLANT, QUALITY_ANY,
+									FRAME_PLANT_BOUQUET, true);
 							if (var0006) {
 								if (var0007) {
 									var var0008 = UI_remove_party_items(
@@ -28883,7 +28982,8 @@ void FuncGoth object#(FIRST_NPC_FUNCTION - GOTH)() {
 			fallthrough;
 		case "5":
 			UI_pop_answers();
-			var var0001 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+			var var0001 = PARTY->count_objects(
+					SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 			if (var0001 > 4) {
 				var var0002 = UI_remove_party_items(
 						5, SHAPE_GOLD_COIN, QUALITY_ANY, 0, 0);
@@ -28907,8 +29007,8 @@ void FuncGoth object#(FIRST_NPC_FUNCTION - GOTH)() {
 			say("\"I will tell thee for 5 gold. Interested?\"");
 			var var0003 = Func090A();
 			if (var0003) {
-				var var0004
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var0004 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var0004 > 4) {
 					var var0005 = UI_remove_party_items(
 							5, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -28928,8 +29028,8 @@ void FuncGoth object#(FIRST_NPC_FUNCTION - GOTH)() {
 			say("\"Another, eh. Hast thou 5 more gold for me?\"");
 			var var0006 = Func090A();
 			if (var0006) {
-				var var0007
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var0007 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var0007 > 4) {
 					say("\"The other one is a troll. 'E don't talk much, "
 						"but\t'e's the first troll prisoner I have ever "
@@ -28952,8 +29052,8 @@ void FuncGoth object#(FIRST_NPC_FUNCTION - GOTH)() {
 				"\"'Twill cost thee... 20 gold. Still want them?\"");
 			var var0009 = Func090A();
 			if (var0009) {
-				var var000A
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var000A = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var000A > 19) {
 					say("\"Done!\"");
 					var var000B = UI_remove_party_items(
@@ -29185,8 +29285,8 @@ void FuncDeSnel object#(FIRST_NPC_FUNCTION - DE_SNEL)() {
 				"engraving. It is the sign of the snake. Striking quick, "
 				"silent, deadly, as are we!\"");
 			remove("weaponry");
-			var var0008
-					= Func0931(PARTY, 0x0001, 0x027C, QUALITY_ANY, FRAME_ANY);
+			var var0008 = Func0931(
+					PARTY, 1, SHAPE_SERPENTINE_DAGGER, QUALITY_ANY, FRAME_ANY);
 			if (var0008) {
 				add("dagger");
 			}
@@ -29671,7 +29771,7 @@ void FuncKliftin object#(FIRST_NPC_FUNCTION - KLIFTIN)() {
 				say("\"Here is the imitation I have made of the Library of "
 					"Scars' honor flag.\"");
 				var var0005 = UI_add_party_items(
-						0x0001, 0x011E, QUALITY_ANY, FRAME_ANY, false);
+						1, SHAPE_BANNER, QUALITY_ANY, FRAME_ANY, false);
 				if (var0005) {
 					say("\"The time for the duels must be drawing near. Good "
 						"luck to Sprellic, and to thee as well!\"");
@@ -29934,12 +30034,12 @@ void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA)() {
 							var0000,
 							", thy markers are, of course, worthless.\"");
 						var var0014 = UI_add_party_items(
-								var0012 / 10, 0x0399, QUALITY_ANY, 0,
-								false);
+								var0012 / 10, SHAPE_BETTING_MARKER, QUALITY_ANY,
+								FRAME_BETTING_MARKER_BLUE, false);
 						if (var0014) {
 							var var0015 = UI_remove_party_items(
-									var0012, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY,
-									true);
+									var0012, SHAPE_GOLD_COIN, QUALITY_ANY,
+									FRAME_ANY, true);
 							gflags[AVATAR_BET_ON_SPRELLIC] = true;
 							say("\"I shall soon see thee again, ", var0000,
 								".\" You notice she is suppressing a tiny "
@@ -29965,13 +30065,16 @@ void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA)() {
 			fallthrough;
 		case "winnings":
 			if (!gflags[AVATAR_PAID_WINNINGS]) {
-				var var0016 = PARTY->count_objects(0x0399, QUALITY_ANY, 0);
-				var var0017 = var0016 * 0x0014;
+				var var0016 = PARTY->count_objects(
+						SHAPE_BETTING_MARKER, QUALITY_ANY,
+						FRAME_BETTING_MARKER_BLUE);
+				var var0017 = var0016 * 20;
 				var var0018 = UI_add_party_items(
 						var0017, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 				if (var0018) {
 					var var0019 = UI_remove_party_items(
-							var0016, 0x0399, QUALITY_ANY, 0, false);
+							var0016, SHAPE_BETTING_MARKER, QUALITY_ANY,
+							FRAME_BETTING_MARKER_BLUE, false);
 					say("\"I see thou hast returned to collect thy winnings.\" "
 						"She shrugs and pays them to you.");
 					gflags[AVATAR_PAID_WINNINGS] = true;
@@ -30173,12 +30276,12 @@ void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE)() {
 							SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 					if (var000D >= var000B) {
 						var var000E = UI_add_party_items(
-								var000B / 0x000A, 0x0399, QUALITY_ANY, 0x0001,
-								false);
+								var000B / 10, SHAPE_BETTING_MARKER, QUALITY_ANY,
+								FRAME_BETTING_MARKER_RED, false);
 						if (var000E) {
 							var var000F = UI_remove_party_items(
-									var000B, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY,
-									true);
+									var000B, SHAPE_GOLD_COIN, QUALITY_ANY,
+									FRAME_ANY, true);
 							var var0010 = true;
 							say("\"Very well. Let me give thee markers for thy "
 								"gold. Each one is worth 10 gold coins. If "
@@ -30208,7 +30311,9 @@ void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE)() {
 			remove("gambling");
 			fallthrough;
 		case "winnings":
-			var var0011 = PARTY->count_objects(0x0399, QUALITY_ANY, 0x0001);
+			var var0011 = PARTY->count_objects(
+					SHAPE_BETTING_MARKER, QUALITY_ANY,
+					FRAME_BETTING_MARKER_RED);
 			var var0012 = var0011 * 20;
 			var var0013 = UI_add_party_items(
 					var0012, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -30218,7 +30323,8 @@ void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE)() {
 					"killed poor Sprellic! If this is the way that thou makest "
 					"thy money, then thou shouldst be ashamed!\"");
 				var var0014 = UI_remove_party_items(
-						var0011, 0x0399, QUALITY_ANY, 0x0001, false);
+						var0011, SHAPE_BETTING_MARKER, QUALITY_ANY,
+						FRAME_BETTING_MARKER_RED, false);
 				gflags[AVATAR_WON_WINNINGS] = true;
 			} else {
 				say("\"Thou cannot possibly carry all that gold. Thou must "
@@ -30702,7 +30808,7 @@ void FuncSyria object#(FIRST_NPC_FUNCTION - SYRIA)() {
 						"so that it may be returned to us. Thou hadst better "
 						"hand it over.\"");
 					var0006 = UI_remove_party_items(
-							0x0001, 0x011E, QUALITY_ANY, FRAME_ANY,
+							1, SHAPE_BANNER, QUALITY_ANY, FRAME_ANY,
 							TEMPORARY_ANY);
 					if (var0006) {
 						say("She takes the banner from you.");
@@ -30827,7 +30933,7 @@ void FuncSyria object#(FIRST_NPC_FUNCTION - SYRIA)() {
 				"so that it may be returned to us. Thou hadst better hand it "
 				"over.\"");
 			var0006 = UI_remove_party_items(
-					0x0001, 0x011E, QUALITY_ANY, FRAME_ANY, TEMPORARY_ANY);
+					1, SHAPE_BANNER, QUALITY_ANY, FRAME_ANY, TEMPORARY_ANY);
 			if (var0006) {
 				say("She takes the banner from you.");
 				say("\"This matter is now settled. But tell that worm Sprellic "
@@ -31148,7 +31254,7 @@ void FuncRussell object#(FIRST_NPC_FUNCTION - RUSSELL)() {
 						var var000A = UI_remove_party_items(
 								40, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 						var var000B = UI_add_party_items(
-								0x0001, 0x028A, QUALITY_ANY, FRAME_ANY, true);
+								1, SHAPE_SEXTANT, QUALITY_ANY, FRAME_ANY, true);
 						if (!var000B) {
 							say("\"I would gladly give thee thy sextant but "
 								"thou shalt have to put something down! Thou "
@@ -31382,8 +31488,8 @@ void FuncBoris object#(FIRST_NPC_FUNCTION - BORIS)() {
 					var0007 += 1;
 				}
 				var var000B = var0007 * 3;
-				var var000C
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var000C = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var000C >= var000B) {
 					var var000D = UI_add_party_items(
 							1, SHAPE_KEY, QUALITY_DOOR_INN, FRAME_ANY, true);
@@ -31639,7 +31745,8 @@ void FuncMagenta object#(FIRST_NPC_FUNCTION - MAGENTA)() {
 						"Boris... well, I shall deal with him later!\"");
 					if (!gflags[AVATAR_HAS_LOCKET]) {
 						var0003 = UI_add_party_items(
-								0x0001, 0x03BB, QUALITY_ANY, 0x0002, false);
+								1, SHAPE_AMULET, QUALITY_ANY,
+								FRAME_AMULET_LOCKET, false);
 						if (var0003) {
 							say("\"Here is the locket. Take it.\"");
 							gflags[AVATAR_HAS_LOCKET] = true;
@@ -31676,7 +31783,8 @@ void FuncMagenta object#(FIRST_NPC_FUNCTION - MAGENTA)() {
 						"this locket and returning it to them.\"");
 					if (!gflags[AVATAR_HAS_LOCKET]) {
 						var0003 = UI_add_party_items(
-								0x0001, 0x03BB, QUALITY_ANY, 0x0002, false);
+								1, SHAPE_AMULET, QUALITY_ANY,
+								FRAME_AMULET_LOCKET, false);
 						if (var0003) {
 							say("\"Here it is. Take it.\"");
 							gflags[AVATAR_HAS_LOCKET] = true;
@@ -31830,7 +31938,8 @@ void FuncHenry object#(FIRST_NPC_FUNCTION - HENRY)() {
 		case "found":
 			say("\"Thou hast found the locket!\"");
 			var var0003 = UI_remove_party_items(
-					0x0001, 0x03BB, QUALITY_ANY, 0x0002, true);
+					1, SHAPE_AMULET, QUALITY_ANY,
+					FRAME_AMULET_LOCKET, true);
 			if (var0003) {
 				Func0911(0x0032);
 				say("You hand the locket to Henry. \"Now I may give it to "
@@ -32069,7 +32178,8 @@ void FuncRobin object#(FIRST_NPC_FUNCTION - ROBIN)() {
 		var var0001 = ROBIN->get_npc_object();
 		var var0002 = LEAVELL->get_npc_object();
 		var var0003 = BATTLES->get_npc_object();
-		var var0004 = Func0931(AVATAR, 0x0001, 0x03BB, QUALITY_ANY, 0x0002);
+		var var0004 = Func0931(
+			AVATAR, 1, SHAPE_AMULET, QUALITY_ANY, FRAME_AMULET_LOCKET);
 		var var0005 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (gflags[HENRY_ASKED_FIND_LOCKET]) {
@@ -32772,7 +32882,8 @@ void FuncSam object#(FIRST_NPC_FUNCTION - SAM)() {
 								SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 						if (var000B >= 12) {
 							var var000C = UI_add_party_items(
-									0x0001, 0x03E7, QUALITY_ANY, 0x0004, true);
+									1, SHAPE_PLANT, QUALITY_ANY,
+									FRAME_PLANT_BOUQUET, true);
 							if (var000C) {
 								say("\"The bouquet is thine!\"");
 								var var000D = UI_remove_party_items(
@@ -33537,9 +33648,9 @@ void FuncHorance object#(FIRST_NPC_FUNCTION - HORANCE)() {
 void FuncTrent object#(FIRST_NPC_FUNCTION - TRENT)() {
 	if (event == DOUBLECLICK) {
 		TRENT->show_npc_face(0x0000);
-		var var0000 = Func0931(PARTY, 0x0001, 0x0127, 0x0000, FRAME_ANY);
+		var var0000 = Func0931(PARTY, 1, SHAPE_WEDDING_RING, 0, FRAME_ANY);
 		var var0001 = Func0909();
-		var var0002 = TRENT->find_nearest(0x02EB, ON_SCREEN);
+		var var0002 = TRENT->find_nearest(SHAPE_SOUL_CAGE, ON_SCREEN);
 		var var0003 = false;
 		if (gflags[LEFT_WHILE_TRENT_WORKING]) {
 			say("Trent glares, giving his eyes an intensity that leaves no "
@@ -33672,7 +33783,7 @@ void FuncTrent object#(FIRST_NPC_FUNCTION - TRENT)() {
 				"her by.\" His tone changes.~~\"Do thou see what thou hast "
 				"done?! I cannot work when I think of her!\" He returns to his "
 				"work with renewed passion.");
-			var var0004 = AVATAR->find_nearest(0x02F0, ON_SCREEN);
+			var var0004 = AVATAR->find_nearest(SHAPE_MUSIC_BOX, ON_SCREEN);
 			if (var0004) {
 				say("You notice the music box he spoke of sitting nearby.");
 			}
@@ -33680,7 +33791,7 @@ void FuncTrent object#(FIRST_NPC_FUNCTION - TRENT)() {
 			fallthrough;
 		case "ring":
 			var var0005 = UI_remove_party_items(
-					0x0001, 0x0127, 0x0000, FRAME_ANY, false);
+					1, SHAPE_WEDDING_RING, 0, FRAME_ANY, false);
 			say("You hold out the ring to Trent. At first he ignores you. "
 				"Then, recognizing the ring, he takes it from you and holds it "
 				"before him. Something in him snaps and his huge frame slumps "
@@ -33785,12 +33896,12 @@ void FuncMordra object#(FIRST_NPC_FUNCTION - MORDRA)() {
 			var0008 = true;
 		}
 		var var000D = UI_get_avatar_ref();
-		var var000E = var000D->find_nearest(0x0190, 0x0019);
-		if (var000E == 0x0000) {
-			var000E = var000D->find_nearest(0x019E, 0x0019);
+		var var000E = var000D->find_nearest(SHAPE_BODY1, 25);
+		if (var000E == NULL_OBJ) {
+			var000E = var000D->find_nearest(SHAPE_BODY2, 25);
 		}
-		if (!(var000E == 0x0000)) {
-			var var000F = 0x0000;
+		if (!(var000E == NULL_OBJ)) {
+			var var000F = 0;
 			Func091F(var000E, var000F);
 			var0002 = true;
 		}
@@ -34630,7 +34741,7 @@ void FuncForsythe object#(FIRST_NPC_FUNCTION - FORSYTHE)() {
 		var var0003 = UI_get_party_list();
 		if (FORSYTHE->get_npc_object() in var0003) {
 			add("leave");
-			var var0004 = AVATAR->find_nearby(0x02EC, 0x001E, MASK_NONE);
+			var var0004 = AVATAR->find_nearby(SHAPE_WELL_OF_SOULS, 30, MASK_NONE);
 			if (var0004) {
 				say("He looks into the well, at the swirling pool of trapped "
 					"souls and his newfound resolve seems to diminish. "
@@ -35111,7 +35222,7 @@ void FuncPenumbra object#(FIRST_NPC_FUNCTION - PENUMBRA)() {
 	PENUMBRA->show_npc_face(0x0000);
 	gflags[BLACKROCK_DONE] = Func08C9();
 	var var0000 = Func0908();
-	var var0001 = Func0931(PARTY, 0x0001, 0x02F7, QUALITY_ANY, FRAME_ANY);
+	var var0001 = Func0931(PARTY, 1, SHAPE_ETHEREAL_RING, QUALITY_ANY, FRAME_ANY);
 	var var0002 = Func0909();
 	add(["name", "job", "bye"]);
 	if (gflags[BLACKROCK_QUEST]) {
@@ -35298,16 +35409,18 @@ void FuncPenumbra object#(FIRST_NPC_FUNCTION - PENUMBRA)() {
 	case "ring":
 		if (!gflags[BROKE_TETRA]) {
 			if (!gflags[RING_ENCHANTED]) {
-				var0001 = Func0931(PARTY, 0x0001, 0x02F7, QUALITY_ANY, 0x0000);
+				var0001 = Func0931(PARTY, 1, SHAPE_ETHEREAL_RING, QUALITY_ANY, 0x0000);
 				if (var0001) {
 					say("\"Thou hast the ethereal ring? Good! I must enchant "
 						"it! Quickly!\"~~Penumbra takes the ring from you and "
 						"intones a few magical words upon it. After a moment, "
 						"she hands it back to you.");
 					var var0006 = UI_remove_party_items(
-							0x0001, 0x02F7, QUALITY_ANY, 0x0000, false);
+							1, SHAPE_ETHEREAL_RING, QUALITY_ANY,
+							FRAME_ETHEREAL_RING_PLAIN, false);
 					var var0007 = UI_add_party_items(
-							0x0001, 0x02F7, QUALITY_ANY, 0x0001, false);
+							1, SHAPE_ETHEREAL_RING, QUALITY_ANY,
+							FRAME_ETHEREAL_RING_ENCHANTED, false);
 					gflags[RING_ENCHANTED] = true;
 					Func0911(0x00C8);
 					say("\"Now thou must go to the generator. Be sure thou art "
@@ -36040,7 +36153,7 @@ void FuncGrod object#(FIRST_NPC_FUNCTION - GROD)() {
 						SULLIVAN->hide();
 						GROD->say("\"Go ahead,\" says Grod.*");
 						var var000D = UI_add_party_items(
-								0x0001, 0x026E, QUALITY_ANY, FRAME_ANY, true);
+								1, SHAPE_WHIP, QUALITY_ANY, FRAME_ANY, true);
 						if (var000D) {
 							say("He hands you a whip.");
 						} else {
@@ -36298,7 +36411,8 @@ void FuncBalayna object#(FIRST_NPC_FUNCTION - BALAYNA)() {
 			fallthrough;
 		case "liqueur":
 			var var0005 = UI_remove_party_items(
-					0x0001, 0x02ED, QUALITY_ANY, 0x001E, false);
+					1, SHAPE_ALCHEMISTS_APPARATUS, QUALITY_ANY,
+					FRAME_ALCHEMISTS_APPARATUS_VIAL, false);
 			if (var0005) {
 				say("\"What's this?\" she asks, taking the vial from you. She "
 					"opens it up and sniffs. \"Very good quality. I wonder why "
@@ -37158,7 +37272,7 @@ void FuncPhearcy object#(FIRST_NPC_FUNCTION - PHEARCY)() {
 						gflags[GOT_FOOD] = true;
 					}
 					var var0008 = UI_add_party_items(
-							0x0005, SHAPE_BOTTLE, QUALITY_ANY, FRAME_BOTTLE_MEAD, true);
+							5, SHAPE_BOTTLE, QUALITY_ANY, FRAME_BOTTLE_MEAD, true);
 					if (!var0008) {
 						say("\"And when thy load is lighter, then I can give "
 							"thee thy beverages.\"");
@@ -37467,7 +37581,7 @@ void FuncAddom object#(FIRST_NPC_FUNCTION - ADDOM)() {
 			var var0003 = Func090A();
 			if (var0003) {
 				var var0004 = UI_add_party_items(
-						0x0001, 0x02EA, QUALITY_ANY, FRAME_ANY, false);
+						1, SHAPE_ORRERY_CRYSTAL, QUALITY_ANY, FRAME_ANY, false);
 				var var0005 = UI_remove_party_items(
 						20, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 				if (var0005) {
@@ -37482,7 +37596,7 @@ void FuncAddom object#(FIRST_NPC_FUNCTION - ADDOM)() {
 					say("\"I am truly sorry, ", var0001,
 						", but thou dost not have enough gold.\"");
 					var var0006 = UI_remove_party_items(
-							0x0001, 0x02EA, QUALITY_ANY, FRAME_ANY, false);
+							1, SHAPE_ORRERY_CRYSTAL, QUALITY_ANY, FRAME_ANY, false);
 				}
 			} else {
 				say("\"Very well,\" he sighs, disappointed.");
@@ -37686,7 +37800,8 @@ void FuncThurston object#(FIRST_NPC_FUNCTION - THURSTON)() {
 								SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 						if (var0004 >= 12) {
 							var var0005 = UI_add_party_items(
-									0x0001, 0x035F, QUALITY_ANY, 0x000E, true);
+									1, SHAPE_KITCHEN_ITEMS, QUALITY_ANY,
+									FRAME_KITCHEN_ITEMS_FLOUR_CLOSED2, true);
 							if (var0005) {
 								var var0006 = UI_remove_party_items(
 										12, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY,
@@ -37750,7 +37865,7 @@ void FuncThurston object#(FIRST_NPC_FUNCTION - THURSTON)() {
 					"so again.\"");
 			} else {
 				var var0008 = UI_remove_party_items(
-						0x0001, 0x02A5, QUALITY_ANY, FRAME_ANY, true);
+						1, SHAPE_SACK_OF_WHEAT, QUALITY_ANY, FRAME_ANY, true);
 				if (var0008) {
 					say("You give the sack over to Thurston. He opens it and "
 						"reaches inside. His hand comes back out filled with "
@@ -37841,7 +37956,7 @@ void FuncFeridwyn object#(FIRST_NPC_FUNCTION - FERIDWYN)() {
 		var var0000 = Func0909();
 		var var0001 = UI_wearing_fellowship();
 		var var0002 = false;
-		var var0003 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var var0003 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 		if (gflags[PAWS_SETUP] && (!gflags[FERIDWYN_ACCUSED_TOBIAS])) {
 			if (!gflags[HEARD_ABOUT_PAWS_THEFT]) {
 				say("\"Avatar! Didst thou know that the merchant Morfin had a "
@@ -37878,7 +37993,7 @@ void FuncFeridwyn object#(FIRST_NPC_FUNCTION - FERIDWYN)() {
 		if (gflags[EA_GONE_TO_PAWS]) {
 			add("Elizabeth and Abraham");
 		}
-		var var0005 = Func0931(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
+		var var0005 = Func0931(PARTY, 1, SHAPE_VENOM, QUALITY_ANY, FRAME_VENOM_MORFINS);
 		if (var0005) {
 			var0002 = true;
 			add(["found venom", "case solved"]);
@@ -38146,7 +38261,7 @@ void FuncBrita object#(FIRST_NPC_FUNCTION - BRITA)() {
 		if (gflags[GARRITT_GUILTY]) {
 			add("venom found");
 		}
-		var var0001 = Func0931(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
+		var var0001 = Func0931(PARTY, 1, SHAPE_VENOM, QUALITY_ANY, FRAME_VENOM_MORFINS);
 		if (var0001) {
 			add("venom found");
 		}
@@ -38577,7 +38692,7 @@ void FuncGarritt object#(FIRST_NPC_FUNCTION - GARRITT)() {
 		if (gflags[STREET_TROUBLE]) {
 			add("Tobias");
 		}
-		var var0002 = Func0931(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
+		var var0002 = Func0931(PARTY, 1, SHAPE_VENOM, QUALITY_ANY, FRAME_VENOM_MORFINS);
 		if (var0002) {
 			add("found venom");
 		}
@@ -38831,7 +38946,7 @@ void FuncMorfin object#(FIRST_NPC_FUNCTION - MORFIN)() {
 		if (gflags[MORFIN_CREEP]) {
 			add("ledger");
 		}
-		var var0007 = Func0931(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
+		var var0007 = Func0931(PARTY, 1, SHAPE_VENOM, QUALITY_ANY, FRAME_VENOM_MORFINS);
 		if (var0007) {
 			add("return venom");
 		}
@@ -39133,7 +39248,7 @@ void FuncMorfin object#(FIRST_NPC_FUNCTION - MORFIN)() {
 			fallthrough;
 		case "return venom":
 			var var001A = UI_remove_party_items(
-					0x0001, 0x0289, QUALITY_ANY, FRAME_ANY, true);
+					1, SHAPE_VENOM, QUALITY_ANY, FRAME_ANY, true);
 			if (var001A) {
 				say("\"I thank thee for ferreting out the thief and returning "
 					"my snake venom.\"");
@@ -39165,7 +39280,7 @@ void FuncBeverlea object#(FIRST_NPC_FUNCTION - BEVERLEA)() {
 		var var0000 = Func0909();
 		var var0001 = UI_part_of_day();
 		var0002 = BEVERLEA->get_npc_object()->get_schedule_type();
-		var var0003 = AVATAR->find_nearest(0x0347, ON_SCREEN);
+		var var0003 = AVATAR->find_nearest(SHAPE_HOURGLASS, ON_SCREEN);
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_BEVERLEA]) {
 			say("You see an old woman who gives you a smile of grandmotherly "
@@ -39528,8 +39643,8 @@ void FuncKomor object#(FIRST_NPC_FUNCTION - KOMOR)() {
 				say("How much?");
 				UI_push_answers();
 				var var0002 = Func090B(["0", "1", "2", "3", "4", "5"]);
-				var var0003
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var0003 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var0003 >= var0002) {
 					var var0004 = UI_remove_party_items(
 							var0002, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -39728,8 +39843,8 @@ void FuncFenn object#(FIRST_NPC_FUNCTION - FENN)() {
 				say("How much?");
 				UI_push_answers();
 				var var0002 = Func090B(["O", "1", "2", "3", "4", "5"]);
-				var var0003
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var0003 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if ((var0003 >= var0002) && (var0002 != "0")) {
 					var var0004 = UI_remove_party_items(
 							var0002, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -39824,7 +39939,8 @@ void FuncAndrew object#(FIRST_NPC_FUNCTION - ANDREW)() {
 								3, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 						if (var0004) {
 							var var0005 = UI_add_party_items(
-									0x0001, SHAPE_BOTTLE, QUALITY_ANY, FRAME_BOTTLE_MILK, true);
+									1, SHAPE_BOTTLE, QUALITY_ANY,
+									FRAME_BOTTLE_MILK, true);
 							if (var0005) {
 								say("\"Here it is,\" he says, handing you the "
 									"jug. \"Wouldst thou like another?\"*");
@@ -39866,12 +39982,13 @@ void FuncAndrew object#(FIRST_NPC_FUNCTION - ANDREW)() {
 							SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 					if (var000A >= var0009) {
 						var var000B = UI_add_party_items(
-								var0008, SHAPE_FOOD, QUALITY_ANY, FRAME_CHEESE_WEDGE, true);
+								var0008, SHAPE_FOOD, QUALITY_ANY,
+								FRAME_CHEESE_WEDGE, true);
 						if (var000B) {
 							say("\"Here it is.\"");
 							var var000C = UI_remove_party_items(
-									var0009, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY,
-									true);
+									var0009, SHAPE_GOLD_COIN, QUALITY_ANY,
+									FRAME_ANY, true);
 						} else {
 							say("\"Thou hast not the room for this cheese.\"");
 						}
@@ -40043,7 +40160,8 @@ void FuncCamille object#(FIRST_NPC_FUNCTION - CAMILLE)() {
 						say("\"Thou must first lighten thy load. Then I can "
 							"give thee some delicious carrots.\"");
 						var var0006 = UI_add_party_items(
-								var0003, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
+								var0003, SHAPE_GOLD_COIN, QUALITY_ANY,
+								FRAME_ANY, true);
 					}
 				} else {
 					say("\"I am sorry, Avatar.\" She shakes her head sadly. "
@@ -40073,7 +40191,7 @@ void FuncCamille object#(FIRST_NPC_FUNCTION - CAMILLE)() {
 			var var0008 = Func090A();
 			if (var0008) {
 				var var0009 = UI_add_party_items(
-						0x0001, 0x02A5, QUALITY_ANY, FRAME_ANY, true);
+						1, SHAPE_SACK_OF_WHEAT, QUALITY_ANY, FRAME_ANY, true);
 				if (var0009) {
 					say("\"Be sure and take this to Thurston, the mill owner. "
 						"He shall pay thee for thy trouble.\"");
@@ -40417,8 +40535,8 @@ void FuncPolly object#(FIRST_NPC_FUNCTION - POLLY)() {
 					var0004 += 1;
 				}
 				var var0008 = var0004 * 5;
-				var var0009
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var0009 = PARTY->count_objects(SHAPE_GOLD_COIN,
+						QUALITY_ANY, FRAME_ANY);
 				if (var0009 >= var0008) {
 					var var000A = UI_add_party_items(
 							1, SHAPE_KEY, QUALITY_DOOR_INN, FRAME_ANY, true);
@@ -40426,7 +40544,8 @@ void FuncPolly object#(FIRST_NPC_FUNCTION - POLLY)() {
 						say("\"Here is thy key for this inn. 'Twill only work "
 							"once.\"");
 						var var000B = UI_remove_party_items(
-								var0008, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
+								var0008, SHAPE_GOLD_COIN, QUALITY_ANY,
+								FRAME_ANY, true);
 					} else {
 						say("\"Sorry, ", var0000,
 							", thou must lose some of thy bundles before I can "
@@ -41195,7 +41314,7 @@ void FuncQuan object#(FIRST_NPC_FUNCTION - QUAN)() {
 		QUAN->show_npc_face(0x0000);
 		var var0000 = Func0908();
 		var var0001 = UI_part_of_day();
-		var var0002 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var var0002 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 		if (var0001 == NIGHT) {
 			say("The gargoyle seems to be too busy conducting the Fellowship "
 				"meeting to speak with you now.");
@@ -42311,7 +42430,8 @@ void FuncMenion object#(FIRST_NPC_FUNCTION - MENION)() {
 						"quickly jots down a few things on a scroll and turns "
 						"to give it to you.*");
 					var var0004 = UI_add_party_items(
-							1, SHAPE_SCROLL, QUALITY_SCROLL_SWORD_SMITHING, 0, true);
+							1, SHAPE_SCROLL, QUALITY_SCROLL_SWORD_SMITHING,
+							FRAME_SCROLL_CLOSED, true);
 					if (var0004) {
 						say("\"May thy blade be sturdy and sharp!\"*");
 					} else {
@@ -42494,8 +42614,8 @@ void FuncJehanne object#(FIRST_NPC_FUNCTION - JEHANNE)() {
 				"gold?\"");
 			var var0003 = Func090A();
 			if (var0003) {
-				var var0004
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var0004 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var0004 >= 600) {
 					var var0005 = UI_add_party_items(
 							1, SHAPE_SCROLL, QUALITY_SCROLL_SHIP_DEED_DRAGONS_BREATH, FRAME_ANY, false);
@@ -43068,7 +43188,8 @@ void FuncRichter object#(FIRST_NPC_FUNCTION - RICHTER)() {
 						"statue. Thou wilt notice that they are stained red in "
 						"some places. I believe it to be blood.\"");
 					var var0009 = UI_add_party_items(
-							0x0001, 0x032F, QUALITY_ANY, 0x0004, false);
+							1, SHAPE_STONE_CHIPS, QUALITY_ANY,
+							FRAME_STONE_CHIPS_BLOODY, false);
 					if (var0009) {
 						gflags[GOT_CHIPS] = true;
 					} else {
@@ -43654,7 +43775,7 @@ void FuncTory object#(FIRST_NPC_FUNCTION - TORY)() {
 				var var0003 = Func090A();
 				if (var0003) {
 					var var0004 = Func0931(
-							PARTY, 0x0001, 0x02DA, QUALITY_ANY, 0x0002);
+							PARTY, 1, SHAPE_BABY, QUALITY_ANY, FRAME_BABY_RIKY);
 					if (var0004) {
 						Func0911(0x0064);
 						say("\"I cannot begin to express my gratitude, ",
@@ -43665,7 +43786,7 @@ void FuncTory object#(FIRST_NPC_FUNCTION - TORY)() {
 						gflags[BABY_BACK] = true;
 					} else {
 						var var0005 = Func0931(
-								PARTY, 0x0001, 0x02DA, QUALITY_ANY, FRAME_ANY);
+								PARTY, 1, SHAPE_BABY, QUALITY_ANY, FRAME_ANY);
 						if (var0005) {
 							say("\"Why, that's not my little Riky, ", var0001,
 								". Thou hast someone else's child. Oh, where "
@@ -43904,7 +44025,9 @@ void FuncLeigh object#(FIRST_NPC_FUNCTION - LEIGH)() {
 			remove("Denton");
 			fallthrough;
 		case "examine chips":
-			var var0002 = Func0931(PARTY, 0x0001, 0x032F, QUALITY_ANY, 0x0004);
+			var var0002 = Func0931(
+					PARTY, 1, SHAPE_STONE_CHIPS, QUALITY_ANY,
+					FRAME_STONE_CHIPS_BLOODY);
 			if (var0002) {
 				if (gflags[CHIPS_EXAMINED]) {
 					say("She looks at you, puzzled. \"Did I not do that "
@@ -44820,7 +44943,7 @@ void FuncBlorn object#(FIRST_NPC_FUNCTION - BLORN)() {
 			say("He glares at you for a moment, then shrugs, muttering, \"It's "
 				"not like he earned it honestly or anything...\"");
 			var var0003 = UI_add_party_items(
-					0x0001, 0x03BB, QUALITY_ANY, 0x0003, true);
+					1, SHAPE_AMULET, QUALITY_ANY, FRAME_AMULET_RED, true);
 			if (var0003) {
 				say("\"Here! I hope it strangles him!\" He thrusts the amulet "
 					"into your palm. \"And I hope he bloody strangles thee, "
@@ -45152,7 +45275,8 @@ void FuncLapLem object#(FIRST_NPC_FUNCTION - LAP_LEM)() {
 		} else {
 			say("\"To be pleased to again see you, human.\" Lap-Lem smiles.");
 		}
-		var var0000 = Func0931(PARTY, 0x0001, 0x03BB, QUALITY_ANY, 0x0003);
+		var var0000 = Func0931(
+			PARTY, 1, SHAPE_AMULET, QUALITY_ANY, FRAME_AMULET_RED);
 		if (gflags[BLORN_GIVE] || var0000) {
 			if (!gflags[GAVE_AMULET]) {
 				add("give amulet");
@@ -45233,7 +45357,7 @@ void FuncLapLem object#(FIRST_NPC_FUNCTION - LAP_LEM)() {
 		case "give amulet":
 			say("\"To have returned with amulet?\"");
 			var var0002 = UI_remove_party_items(
-					0x0001, 0x03BB, QUALITY_ANY, 0x0003, false);
+					1, SHAPE_AMULET, QUALITY_ANY, FRAME_AMULET_RED, false);
 			if (var0002) {
 				Func0911(0x0032);
 				say("He grins widely as you return the jewelry to him.~~ \"To "
@@ -46064,11 +46188,11 @@ void FuncAurvidlem object#(FIRST_NPC_FUNCTION - AURVIDLEM)() {
 				say("\"To be not selling at this time. To come back tomorrow "
 					"to buy provisions.\"");
 			} else {
-				var var0001
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var0001 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				Func084C();
-				var var0002
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var0002 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if ((var0001 - var0002) > 29) {
 					gflags[BOUGHT_MUCH] = true;
 				}
@@ -46977,7 +47101,7 @@ void FuncSintag object#(FIRST_NPC_FUNCTION - SINTAG)() {
 		SINTAG->show_npc_face(0x0000);
 		var var0000 = UI_part_of_day();
 		var0001 = SINTAG->get_npc_object()->get_schedule_type();
-		var var0002 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var var0002 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 		add(["name", "job", "bye"]);
 		if (gflags[RUTH_SAID_HOOK] || gflags[DREL_SAID_HOOK]) {
 			add("Hook");
@@ -47579,7 +47703,7 @@ void FuncBudo object#(FIRST_NPC_FUNCTION - BUDO)() {
 		BUDO->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = BUDO->get_npc_object()->get_schedule_type();
-		var var0002 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var var0002 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 		add(["name", "job", "bye"]);
 		if (gflags[DREL_SAID_HOOK] || gflags[RUTH_SAID_HOOK]) {
 			add("Crown Jewel");
@@ -47668,7 +47792,7 @@ void FuncBudo object#(FIRST_NPC_FUNCTION - BUDO)() {
 							SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 					if (var0008 >= 800) {
 						var var0009 = UI_add_party_items(
-								1, SHAPE_SCROLL, QUALITY_SCROLL_SHIP_DEED_LUSTY_WENCH, 2, false);
+								1, SHAPE_SCROLL, QUALITY_SCROLL_SHIP_DEED_LUSTY_WENCH, FRAME_SCROLL_LETTER, false);
 						if (var0009) {
 							say("\"A wise move. A magnificent ship for thee!\" "
 								"He takes your gold.");
@@ -47897,7 +48021,7 @@ void FuncGordy object#(FIRST_NPC_FUNCTION - GORDY)() {
 			remove("profitable");
 			fallthrough;
 		case "Hook":
-			var0008 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+			var0008 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 			if (var0008) {
 				say("The Cube vibrates a moment. \"Yes, I know Hook very well. "
 					"He lives beneath the House of Games. Talk to Sintag. He "
@@ -47910,7 +48034,7 @@ void FuncGordy object#(FIRST_NPC_FUNCTION - GORDY)() {
 			remove("Hook");
 			fallthrough;
 		case "party":
-			var0008 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+			var0008 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 			if (var0008) {
 				say("The Cube vibrates a moment. \"That would be The "
 					"Fellowship, of course.\"");
@@ -48169,7 +48293,7 @@ void FuncMandy object#(FIRST_NPC_FUNCTION - MANDY)() {
 			remove("Sintag");
 			fallthrough;
 		case "Hook":
-			var var000E = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+			var var000E = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 			if (var000E) {
 				say("You feel your Cube vibrate, but somehow you know that "
 					"Mandy would have told you the truth without it.");
@@ -48565,7 +48689,7 @@ void FuncKessler object#(FIRST_NPC_FUNCTION - KESSLER)() {
 		var var0001 = KESSLER->get_npc_object()->get_schedule_type();
 		var var0002 = Func0909();
 		add(["name", "job", "bye"]);
-		var var0003 = Func0931(PARTY, 0x0001, 0x0289, QUALITY_ANY, FRAME_ANY);
+		var var0003 = Func0931(PARTY, 1, SHAPE_VENOM, QUALITY_ANY, FRAME_ANY);
 		if (var0003) {
 			add("venom");
 		}
@@ -48692,12 +48816,12 @@ void FuncKessler object#(FIRST_NPC_FUNCTION - KESSLER)() {
 			remove("impair");
 			fallthrough;
 		case "venom":
-			var var0005 = PARTY->count_objects(0x0289, QUALITY_ANY, FRAME_ANY);
-			var var0006 = 0x0032 * var0005;
-			if (var0005 == 0x0000) {
+			var var0005 = PARTY->count_objects(SHAPE_VENOM, QUALITY_ANY, FRAME_ANY);
+			var var0006 = 50 * var0005;
+			if (var0005 == 0) {
 				say("\"Thou dost not have any vials of venom!\"");
 			} else {
-				if (var0005 == 0x0001) {
+				if (var0005 == 1) {
 					say("Kessler examines the vial carefully. ");
 				} else {
 					say("Kessler examines the vials carefully. ");
@@ -48707,7 +48831,7 @@ void FuncKessler object#(FIRST_NPC_FUNCTION - KESSLER)() {
 					"right?\"");
 				if (Func090A()) {
 					var var0007 = UI_remove_party_items(
-							var0005, 0x0289, QUALITY_ANY, FRAME_ANY, true);
+							var0005, SHAPE_VENOM, QUALITY_ANY, FRAME_ANY, true);
 					if (var0007) {
 						var var0008 = UI_add_party_items(
 								var0006, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -49559,15 +49683,15 @@ void FuncTaylor object#(FIRST_NPC_FUNCTION - TAYLOR)() {
 			say("\"Bee Cave is located to the southwest of the Abbey. But if "
 				"thou art planning a trip there, beware the giant bees that "
 				"live in the caves. Their venom is very poisonous.~~");
-			var var0003
-					= Func0931(PARTY, 0x0001, 0x0301, QUALITY_ANY, FRAME_ANY);
+			var var0003 = Func0931(
+					PARTY, 1, SHAPE_SMOKE_BOMB, QUALITY_ANY, FRAME_ANY);
 			if (!var0003) {
 				say("\"If thou wishest, I can give thee a smoke bomb that will "
 					"repel the bees for a short time. Dost thou want it?\"");
 				var var0004 = Func090A();
 				if (var0004) {
 					var var0005 = UI_add_party_items(
-							0x0001, 0x0301, QUALITY_ANY, FRAME_ANY, true);
+							1, SHAPE_SMOKE_BOMB, QUALITY_ANY, FRAME_ANY, true);
 					if (var0005) {
 						say("\"Here it is.\"");
 					} else {
@@ -49930,10 +50054,11 @@ void FuncKreg object#(FIRST_NPC_FUNCTION - KREG)() {
 			fallthrough;
 		case "Thief!":
 			say("\"Ah! Found me out, didst thou? 'Tis too bad... for thee!\"*");
-			Func0911(0x0064);
-			var var0003 = KREG->count_objects(0x0231, QUALITY_ANY, FRAME_ANY);
+			Func0911(100);
+			var var0003 = KREG->count_objects(
+					SHAPE_GREAT_DAGGER, QUALITY_ANY, FRAME_ANY);
 			if (var0003 < 0x0001) {
-				var var0004 = UI_create_new_object(0x0231);
+				var var0004 = UI_create_new_object(SHAPE_GREAT_DAGGER);
 				var var0005 = KREG->give_last_created();
 			}
 			var0001->set_alignment(EVIL);
@@ -50689,9 +50814,9 @@ void FuncBrion object#(FIRST_NPC_FUNCTION - BRION)() {
 			fallthrough;
 		case "sextant":
 			var var0009 = false;
-			var var000A = AVATAR->find_nearby(0x028A, 0x0028, MASK_NONE);
+			var var000A = AVATAR->find_nearby(SHAPE_SEXTANT, 40, MASK_NONE);
 			for (var0008 in var000A) {
-				if (var0008->get_item_frame() == 0x0001) {
+				if (var0008->get_item_frame() == FRAME_SEXTANT_GOLD) {
 					var0009 = true;
 				}
 			}
@@ -50750,7 +50875,7 @@ void FuncBrion object#(FIRST_NPC_FUNCTION - BRION)() {
 			fallthrough;
 		case "have crystal":
 			var var000F
-					= Func0931(PARTY, 0x0001, 0x02EA, QUALITY_ANY, FRAME_ANY);
+					= Func0931(PARTY, 1, SHAPE_ORRERY_CRYSTAL, QUALITY_ANY, FRAME_ANY);
 			if (var000F) {
 				say("\"Thou hast the crystal? Excellent.\" He takes the "
 					"crystal that you got from the adventurer and begins "
@@ -50761,7 +50886,7 @@ void FuncBrion object#(FIRST_NPC_FUNCTION - BRION)() {
 				remove("have crystal");
 				add("want crystal");
 				var var0010 = UI_remove_party_items(
-						0x0001, 0x02EA, QUALITY_ANY, FRAME_ANY, false);
+						1, SHAPE_ORRERY_CRYSTAL, QUALITY_ANY, FRAME_ANY, false);
 			} else {
 				say("\"I am sorry, ", var0001,
 					", but I must have the crystal to complete the viewer.\"");
@@ -50769,7 +50894,8 @@ void FuncBrion object#(FIRST_NPC_FUNCTION - BRION)() {
 			fallthrough;
 		case "want crystal":
 			var var0011 = UI_add_party_items(
-					0x0001, 0x0302, QUALITY_ANY, 0x0001, 0x0000);
+					1, SHAPE_ORRERY_VIEWER, QUALITY_ANY,
+					FRAME_ORRERY_VIEWER_CLOSED, 0);
 			if (var0011) {
 				say("\"Use it well, ", var0001,
 					".\" He gives the contraption to you.");
@@ -50930,7 +51056,7 @@ void FuncNelson object#(FIRST_NPC_FUNCTION - NELSON)() {
 			add(["bookstand", "bookmark", "quill holder", "book", "nothing"]);
 			fallthrough;
 		case "bookstand":
-			var var0002 = AVATAR->find_nearest(0x02B9, ON_SCREEN);
+			var var0002 = AVATAR->find_nearest(SHAPE_PODIUM, ON_SCREEN);
 			if (var0002) {
 				say("\"This solid brass bookstand has matching, overhanging "
 					"candleholder for late-night exploration in literature. I "
@@ -50944,9 +51070,9 @@ void FuncNelson object#(FIRST_NPC_FUNCTION - NELSON)() {
 			fallthrough;
 		case "bookmark":
 			var var0003 = false;
-			var var0004 = find_nearby(0x02A3, 0x0014, MASK_NONE);
+			var var0004 = find_nearby(SHAPE_DESK_ITEMS, 20, MASK_NONE);
 			for (var0007 in var0004) {
-				if (var0007->get_item_frame() == 0x0004) {
+				if (var0007->get_item_frame() == FRAME_DESK_ITEM_BOOK_MARK) {
 					var0003 = true;
 				}
 			}
@@ -50964,16 +51090,16 @@ void FuncNelson object#(FIRST_NPC_FUNCTION - NELSON)() {
 			fallthrough;
 		case "quill holder":
 			var var0008 = false;
-			var0009 = find_nearby(0x02A3, 0x0014, MASK_NONE);
+			var0009 = find_nearby(SHAPE_DESK_ITEMS, 20, MASK_NONE);
 			for (var0007 in var0009) {
-				if (var0007->get_item_frame() == 0x0003) {
+				if (var0007->get_item_frame() == FRAME_DESK_ITEM_QUILL_HOLDER) {
 					var0008 = true;
 				}
 			}
 			var var000C = false;
-			var var000D = find_nearby(0x02A3, 0x0014, MASK_NONE);
+			var var000D = find_nearby(SHAPE_DESK_ITEMS, 20, MASK_NONE);
 			for (var0007 in var000D) {
-				if (var0007->get_item_frame() == 0x0005) {
+				if (var0007->get_item_frame() == FRAME_DESK_ITEM_LETTER_OPENER) {
 					var000C = true;
 				}
 			}
@@ -51001,10 +51127,10 @@ void FuncNelson object#(FIRST_NPC_FUNCTION - NELSON)() {
 			fallthrough;
 		case "book":
 			var var0010 = false;
-			var var0011 = find_nearby(0x02A3, 0x0014, MASK_NONE);
+			var var0011 = find_nearby(SHAPE_DESK_ITEMS, 20, MASK_NONE);
 			// BUG: This should have been var0011 instead of var0009.
 			for (var0010 in var0009) {
-				if (var0010->get_item_quality() == 0x0004) {
+				if (var0010->get_item_quality() == 4) {
 					var0010 = true;
 				}
 			}
@@ -51041,7 +51167,7 @@ void FuncRankin object#(FIRST_NPC_FUNCTION - RANKIN)() {
 		var var0001 = false;
 		var var0002 = Func08F7(BALAYNA);
 		var var0003 = UI_part_of_day();
-		var var0004 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var var0004 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 		if (var0003 == NIGHT) {
 			if (gflags[MET_RANKIN]) {
 				say("Rankin is unable to speak with you now, for he is "
@@ -51304,7 +51430,8 @@ void FuncRankin object#(FIRST_NPC_FUNCTION - RANKIN)() {
 				if (var000A) {
 					say("\"Excellent, my friend.\"");
 					var var000B = UI_add_party_items(
-							0x0001, 0x02ED, QUALITY_ANY, 0x001E, false);
+							1, SHAPE_ALCHEMISTS_APPARATUS, QUALITY_ANY,
+							FRAME_ALCHEMISTS_APPARATUS_VIAL, false);
 					if (var000B) {
 						say("\"I thank thee.\" He gives you the vial of "
 							"liquor.");
@@ -51349,7 +51476,7 @@ void FuncDanag object#(FIRST_NPC_FUNCTION - DANAG)() {
 		DANAG->show_npc_face(0x0000);
 		var var0000 = UI_part_of_day();
 		var var0001 = UI_wearing_fellowship();
-		var var0002 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var var0002 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 		if (var0000 == NIGHT) {
 			say("Danag nods his head at you. \"I do not mean to be impolite, "
 				"but I am concentrating on the games. I wish to win a bundle "
@@ -52191,7 +52318,8 @@ void FuncXorinia object#(FIRST_NPC_FUNCTION - XORINIA)() {
 		abort;
 	}
 	add(["name", "job", "bye"]);
-	var var0002 = Func0931(PARTY, 1, SHAPE_BOOK, 0x0002, FRAME_ANY);
+	var var0002 = Func0931(
+		PARTY, 1, SHAPE_BOOK, QUALITY_BOOK_ALAGNERS_NOTEBOOK, FRAME_ANY);
 	if (var0002) {
 		add("notebook");
 	}
@@ -52412,7 +52540,7 @@ void Func0600 object#(0x600) () {
 			var0001 = set_item_quality(QUALITY_SPENT_TORCH);
 		}
 		if (var0002 == SHAPE_LIT_SCONCE) {
-			set_item_shape(0x0217);
+			set_item_shape(SHAPE_SPENT_SCONCE);
 		}
 		UI_play_sound_effect(0x006A);
 	} else {
@@ -52499,7 +52627,10 @@ void Func0608 object#(0x608) () {
 				"immediate death! Kill ",
 				var0003, " now!\"*");
 		BATLIN->hide();
-		var var0004 = [SHAPE_BATLIN, SHAPE_HOOK, 0x0325, 0x0372, 0x0371];
+		var var0004 = [
+			SHAPE_BATLIN, SHAPE_HOOK, SHAPE_FORSKIS, SHAPE_ABRAHAM,
+			SHAPE_ELIZABETH
+		];
 		for (var0007 in var0004) {
 			var var0008 = find_nearby(var0007, 30, MASK_NONE);
 			for (var000B in var0008) {
@@ -52522,49 +52653,49 @@ void Func060A object#(0x60A) () {
 	if (SMITHY->get_schedule_type() == HOUND) {
 		SMITHY->set_schedule_type(STANDTHERE);
 	}
-	var var0000 = find_nearby(0x0208, 0x0007, MASK_NONE);
+	var var0000 = find_nearby(SHAPE_VIRTUE_ROULETTE_TABLE, 7, MASK_NONE);
 	var var0001 = var0000->find_nearby(SHAPE_GOLD_COIN, 5, MASK_NONE);
-	var var0002 = 0x0000;
-	var var0003 = 0x0000;
+	var var0002 = 0;
+	var var0003 = 0;
 	var var0004 = get_item_frame();
-	var var0005 = var0004 / 0x0004;
+	var var0005 = var0004 / 4;
 	declare var var0006;
-	if (var0005 == 0x0000) {
+	if (var0005 == 0) {
 		var0002 = -3;
 		var0003 = -1;
 		var0006 = "Blue";
 	}
-	if (var0005 == 0x0001) {
+	if (var0005 == 1) {
 		var0002 = 0;
 		var0003 = 0;
 		var0006 = "Black";
 	}
-	if (var0005 == 0x0002) {
+	if (var0005 == 2) {
 		var0002 = -1;
 		var0003 = 0;
 		var0006 = "White";
 	}
-	if (var0005 == 0x0003) {
+	if (var0005 == 3) {
 		var0002 = -2;
 		var0003 = 0;
 		var0006 = "Purple";
 	}
-	if (var0005 == 0x0004) {
+	if (var0005 == 4) {
 		var0002 = -3;
 		var0003 = 0;
 		var0006 = "Orange";
 	}
-	if (var0005 == 0x0005) {
+	if (var0005 == 5) {
 		var0002 = 0;
 		var0003 = -1;
 		var0006 = "Green";
 	}
-	if (var0005 == 0x0006) {
+	if (var0005 == 6) {
 		var0002 = -1;
 		var0003 = -1;
 		var0006 = "Red";
 	}
-	if (var0005 == 0x0007) {
+	if (var0005 == 7) {
 		var0002 = -2;
 		var0003 = -1;
 		var0006 = "Yellow";
@@ -52580,9 +52711,9 @@ void Func060A object#(0x60A) () {
 	}
 	declare var var000A;
 	if (gflags[JOIN_FELLOWSHIP]) {
-		var000A = 0x000E;
+		var000A = 14;
 	} else {
-		var000A = 0x0007;
+		var000A = 7;
 	}
 	for (var000D in var0001) {
 		struct<Position> var000E = var000D->get_object_position();
@@ -52643,24 +52774,24 @@ void Func060C object#(0x60C) () {
 	declare var var0000;
 	declare var var0003;
 	if (!SMITHY->npc_nearby()) {
-		var0000 = AVATAR->find_nearby(0x02FC, 0x0032, MASK_NONE);
+		var0000 = AVATAR->find_nearby(SHAPE_RAT_RACE_GAME_RAT, 50, MASK_NONE);
 		for (var0003 in var0000) {
-			var0003->set_item_frame(0x0000);
+			var0003->set_item_frame(0);
 			var0003->halt_scheduled();
 		}
 		return;
 	}
 	var var0004 = find_nearby(SHAPE_GOLD_COIN, 7, MASK_NONE);
 	struct<Position> var0005 = get_object_position();
-	var var0006 = 0x0000;
-	var var0007 = UI_find_nearby_avatar(0x02FB);
+	var var0006 = NULL_OBJ;
+	var var0007 = UI_find_nearby_avatar(SHAPE_RAT_RACE_GAME);
 	for (var000A in var0007) {
-		if ((var000A->get_item_frame() == 0x0001)
-			|| (var000A->get_item_frame() == 0x0002)) {
+		if ((var000A->get_item_frame() == FRAME_RAT_RACE_GAME_RIGHT_CLOSE)
+			|| (var000A->get_item_frame() == FRAME_RAT_RACE_GAME_RIGHT_OPEN)) {
 			var0006 = var000A;
 		}
 	}
-	var0000 = UI_find_nearby_avatar(0x02FB);
+	var0000 = UI_find_nearby_avatar(SHAPE_RAT_RACE_GAME);
 	struct<Position> var000B = var0006[1]->get_object_position();
 	declare var var000C;
 	if (gflags[JOIN_FELLOWSHIP]) {
@@ -52669,11 +52800,11 @@ void Func060C object#(0x60C) () {
 		var000C = 3;
 	}
 	var var000D = script var0006 {
-		frame 1;
+		frame FRAME_RAT_RACE_GAME_RIGHT_CLOSE;
 		sfx 73;
-		frame 2;
+		frame FRAME_RAT_RACE_GAME_RIGHT_OPEN;
 		sfx 74;
-		frame 1;
+		frame FRAME_RAT_RACE_GAME_RIGHT_CLOSE;
 		sfx 73;
 	};
 	if (gflags[RAT_1] == false) {
@@ -52704,7 +52835,7 @@ void Func060C object#(0x60C) () {
 					var0010->set_item_flag(OKAY_TO_TAKE);
 					var var0014 = Func0932((var000B.y - var0005.y) - 4);
 					var var0015 = "@A winnah in lane " + var0014 + "!@";
-					Func0933(SMITHY, var0015, 0x0001);
+					Func0933(SMITHY, var0015, 1);
 				}
 				var0010->remove_item();
 			}
@@ -52718,9 +52849,9 @@ void Func060C object#(0x60C) () {
 		gflags[RAT_2] = false;
 		gflags[RAT_3] = false;
 		gflags[RAT_4] = false;
-		var0000 = UI_find_nearby_avatar(0x02FC);
+		var0000 = UI_find_nearby_avatar(SHAPE_RAT_RACE_GAME_RAT);
 		for (var0003 in var0000) {
-			var0003->set_item_frame(0x0000);
+			var0003->set_item_frame(0);
 		}
 	}
 }
@@ -52741,7 +52872,7 @@ void Func060D object#(0x60D) () {
 		var var0005 = UI_create_new_object(var0003);
 		if (var0005) {
 			var0005->set_item_flag(TEMPORARY);
-			var0005->set_item_frame(0x0000);
+			var0005->set_item_frame(0);
 			var0006 = UI_update_last_created([var0004.x - 9, var0004.y, 1]);
 		}
 	}
@@ -52798,11 +52929,12 @@ void Func060E object#(0x60E) () {
 					AVATAR->get_object_position(), [0x02F1, 0x063B, 0x0000],
 					[0x0383, 0x06FF, 0x0000]);
 			if (gflags[NEAR_SHELTER]) {
-				var var0007 = AVATAR->find_nearby(SHAPE_ANY, 0x005A, MASK_NPC);
+				var var0007 = AVATAR->find_nearby(SHAPE_ANY, 90, MASK_NPC);
 				var0007 = Func093C(AVATAR->get_npc_object(), var0007);
 				for (var000A in var0007) {
 					if (var000A->get_schedule_type() == IN_COMBAT) {
 						var var000B = var000A->get_alignment();
+						// BUG: It should be var000B == GOOD instead of GOOD.
 						if ((var000B == NEUTRAL) || GOOD) {
 							var000A->set_schedule_type(WANDER);
 						}
@@ -52818,12 +52950,12 @@ void Func060E object#(0x60E) () {
 				}
 			}
 			struct<Position> var0010 = [0x0344, 0x06C5, 0x0001];
-			AVATAR->set_item_frame(0x000D);
+			AVATAR->set_item_frame(LIE_NORTH);
 			AVATAR->set_item_flag(ASLEEP);
 			var var0011 = [
 				-4, 0, 4, 0, 0, 4, -4, 1, 4, 1, -4, -1, 4, -1, 1, 2, -1, 2
 			];
-			var var0012 = 0x0000;
+			var var0012 = STAND_NORTH;
 			var var0013 = [
 				FACE_EAST, var0012, FACE_WEST, var0012, FACE_NORTH, var0012,
 				FACE_EAST, var0012, FACE_WEST, var0012, FACE_EAST, var0012,
@@ -52831,8 +52963,9 @@ void Func060E object#(0x60E) () {
 			];
 			var var0014 = [-7, 0, 8, 0, 0, 8, -7, 8, 8, 8, -17, 0, -17, 8];
 			var var0015 = [
-				0x000D, var0012, 0x000D, var0012, 0x001D, var0012, 0x001D,
-				var0012, 0x001D, var0012, 0x000D, var0012, 0x000D
+				LIE_NORTH, var0012, LIE_NORTH, var0012, LIE_SOUTH, var0012,
+				LIE_SOUTH, var0012, LIE_SOUTH, var0012, LIE_NORTH, var0012,
+				LIE_NORTH
 			];
 			var var0016 = 0x0001;
 			var var0017 = UI_get_party_list2();
@@ -52884,7 +53017,7 @@ void Func060E object#(0x60E) () {
 							var0010.y + var0014[var0016 + 1], var0010.z
 						];
 						var0003->set_item_frame(var0015[var0016]);
-						var var001E = UI_die_roll(0x0001, 0x0014);
+						var var001E = UI_die_roll(1, 20);
 						var0004 = script var0003 {
 							wait var001E;
 							call Func0619;
@@ -52916,7 +53049,7 @@ void Func060F object#(0x60F) () {
 
 void Func0610 object#(0x610) () {
 	UI_fade_palette(0x0024, 0x0001, 0x0001);
-	var var0000 = find_nearby(SHAPE_ANY, 0x0023, MASK_NPC);
+	var var0000 = find_nearby(SHAPE_ANY, 35, MASK_NPC);
 	for (var0003 in var0000) {
 		if ((var0003->get_alignment() == NEUTRAL)
 			&& (var0003->get_schedule_type() == IN_COMBAT)) {
@@ -52984,11 +53117,11 @@ void Func0611 object#(0x611) () {
 	var var0000 = get_item_shape();
 	declare var var0001;
 	declare var var0002;
-	if (var0000 == 0x0203) {
-		var0001 = 0x0366;
+	if (var0000 == SHAPE_CLOSED_DRAWBRIDGE) {
+		var0001 = SHAPE_DRAWBRIDGE;
 		var0002 = 7;
 	} else {
-		var0001 = 0x0203;
+		var0001 = SHAPE_CLOSED_DRAWBRIDGE;
 		var0002 = -7;
 	}
 	struct<Position> var0003 = get_object_position();
@@ -53111,7 +53244,7 @@ void Func0614 object#(0x614) () {
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x0019) {
+	if (var0000 == SPEECH_GUARDIAN_GO_AWAY) {
 		say("\"Go away!!\"");
 		UUUNGH->hide();
 		return;
@@ -53159,7 +53292,7 @@ void Func0617 object#(0x617) () {
 			finish;
 			call Func0617;
 		};
-		var var0001 = find_nearest(0x02EB, 0x0028);
+		var var0001 = find_nearest(SHAPE_SOUL_CAGE, 40);
 		var0000 = script var0001 after 19 ticks {
 			finish;
 			frame 1;
@@ -53202,7 +53335,7 @@ void Func061A object#(0x61A) () {
 
 void Func061B object#(0x61B) () {
 	if (event == SCRIPTED) {
-		Func0806(0x00EA, item);
+		Func0806(SHAPE_SPHERE_GENERATOR_NW, item);
 		// BUG: these should probably have been 'item' instead of SHAPE_TIME_LORD
 		var var0000 = SHAPE_TIME_LORD->get_npc_object();
 		SHAPE_TIME_LORD->set_schedule_type(WAIT);
@@ -53245,7 +53378,7 @@ void Func061C object#(0x61C) () {
 void Func061D object#(0x61D) () {
 	if (event == SCRIPTED) {
 		struct<Position> var0000 = get_object_position();
-		Func0806(0x00EE, item);
+		Func0806(SHAPE_CUBE_GENERATOR_NW, item);
 		// BUG: This is likely meant to be 'item' instead of SHAPE_TIME_LORD.
 		var var0001 = script SHAPE_TIME_LORD after 25 ticks {
 			nohalt;
@@ -53256,7 +53389,7 @@ void Func061D object#(0x61D) () {
 
 void Func061E object#(0x61E) () {
 	if (event == SCRIPTED) {
-		Func0806(0x00F2, item);
+		Func0806(SHAPE_TETRAHEDRON_GENERATOR_NW, item);
 		var var0000 = SHAPE_EGG;
 		var var0001 = FRAME_EGG_TELEPORT;
 		var var0002 = 1;
@@ -53488,7 +53621,7 @@ void Func0621 object#(0x621) () {
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0029) {
-			if ((!Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0000))
+			if ((!Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_SPHERE))
 				&& gflags[BROKE_SPHERE]) {
 				var0000 = "You left the small sphere!";
 				var0002 = PARTY;
@@ -53498,7 +53631,7 @@ void Func0621 object#(0x621) () {
 			}
 		}
 		if (var0001 == 0x002A) {
-			if ((!Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001))
+			if ((!Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE))
 				&& gflags[BROKE_CUBE]) {
 				var0000 = "You left the small cube!";
 				var0002 = PARTY;
@@ -53508,7 +53641,7 @@ void Func0621 object#(0x621) () {
 			}
 		}
 		if (var0001 == 0x002B) {
-			if ((!Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0002))
+			if ((!Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_TETRAHEDRON))
 				&& gflags[BROKE_TETRA]) {
 				var0000 = "You left the small tetrahedron!";
 				var0002 = PARTY;
@@ -53554,7 +53687,7 @@ void Func0622 object#(0x622) () {
 			var var0003 = AVATAR->get_npc_name();
 			var var0004 = UI_get_array_size(UI_get_party_list());
 			declare var var0005;
-			if (var0004 > 0x0002) {
+			if (var0004 > 2) {
 				var0005 = "we";
 			} else {
 				var0005 = "I";
@@ -53682,7 +53815,7 @@ void Func0625 object#(0x625) () {
 		}
 		BOB->show_npc_face(0x0000);
 		var var0004 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
-		if ((UI_die_roll(0x0001, 0x0002) == 0x0001) && var0004) {
+		if ((UI_die_roll(1, 2) == 1) && var0004) {
 			say("You see an angry guard. \"Cease and desist "
 				"immediately!.~~Dost thou wish to avoid the unpleasantries of "
 				"a lengthy trial?\"");
@@ -53704,15 +53837,17 @@ void Func0625 object#(0x625) () {
 					} else {
 						var0006 = "man";
 					}
-					var var0007 = [SHAPE_GUARD1, 0x02D0, 0x0326, 0x03B2];
+					var var0007 = [
+						SHAPE_GUARD1, SHAPE_GUARD2, SHAPE_GUARD3, SHAPE_GUARD4
+					];
 					var var0008 = [];
 					for (var000B in var0007) {
-						var0008 &= find_nearby(var000B, 0x001E, MASK_NONE);
+						var0008 &= find_nearby(var000B, 30, MASK_NONE);
 					}
 					for (var000E in var0008) {
 						var000E->set_schedule_type(WANDER);
 					}
-					var var000F = find_nearby(SHAPE_ANY, 0x001E, MASK_NPC2);
+					var var000F = find_nearby(SHAPE_ANY, 30, MASK_NPC2);
 					for (var0012 in var000F) {
 						if (var0012->get_schedule_type() == IN_COMBAT) {
 							var0012->set_schedule_type(WANDER);
@@ -53750,14 +53885,14 @@ void Func0625 object#(0x625) () {
 		var var0014 = UI_get_party_list();
 		for (var0017 in var0014) {
 			Func093F(var0017, FOLLOW_AVATAR);
-			var0017->set_item_frame(0x0000);
+			var0017->set_item_frame(STAND_NORTH);
 		}
 		struct<Position> var0018 = [0x01A4, 0x0127, 0x0000];
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_play_music(0x00FF, item);
 		PARTY->move_object(var0018);
-		var var0019 = AVATAR->find_nearby(0x033C, 0x000A, MASK_NONE);
-		if (var0019 && (Func081B(var0019) == 0x0001)) {
+		var var0019 = AVATAR->find_nearby(SHAPE_WALL_BOTTOM, 10, MASK_NONE);
+		if (var0019 && (Func081B(var0019) == 1)) {
 			var0013 = Func081F(var0019);
 		}
 		Func084A();
@@ -53770,9 +53905,10 @@ void Func0625 object#(0x625) () {
 
 void Func0626 object#(0x626) () {
 	var var0000 = get_item_shape();
-	if (var0000 == 0x0206) {
+	if (var0000 == SHAPE_GLASS_COUNTER_TOPS) {
 		UI_call_guards();
-		var var0001 = Func093C(item, find_nearby(0x0206, 0x0006, MASK_NONE));
+		var var0001 = Func093C(item,
+				find_nearby(SHAPE_GLASS_COUNTER_TOPS, 6, MASK_NONE));
 		var var0002 = [];
 		declare var var0005;
 		for (var0005 in var0001) {
@@ -53800,8 +53936,8 @@ void Func0626 object#(0x626) () {
 		remove_item();
 		return;
 	}
-	if ((var0000 == 0x0350) || (var0000 == 0x010C)) {
-		if (!(get_item_frame() == 0x0002)) {
+	if ((var0000 == SHAPE_MIRROR_NS) || (var0000 == SHAPE_MIRROR_EW)) {
+		if (!(get_item_frame() == FRAME_MIRROR_BROKEN)) {
 			var var000D = script item {
 				sfx 37;
 				continue;
@@ -53814,7 +53950,7 @@ void Func0626 object#(0x626) () {
 }
 
 void Func0627 object#(0x627) () {
-	var var0000 = find_nearby(0x0201, 0x0003, MASK_NONE);
+	var var0000 = find_nearby(SHAPE_GREMLIN, 3, MASK_NONE);
 	var var0001 = get_cont_items(SHAPE_FOOD, QUALITY_ANY, FRAME_ANY);
 	declare var var0002;
 	if (var0001) {
@@ -53866,11 +54002,11 @@ void Func0628 object#(0x628) () {
 		var0001.x -= UI_die_roll(1, 3);
 		var0001.y += UI_die_roll(1, 2);
 		var0007 = UI_update_last_created(var0001);
-		var var0008 = UI_die_roll(0x0001, 0x0002);
-		if (var0008 == 0x0001) {
+		var var0008 = UI_die_roll(1, 2);
+		if (var0008 == 1) {
 			Func08FE("@Turn it off!@");
 		}
-		if (var0008 == 0x0002) {
+		if (var0008 == 2) {
 			Func08FE("@Thou art wasting it!@");
 		}
 		if (DUPRE->npc_nearby()) {
@@ -53909,11 +54045,11 @@ void Func0629 object#(0x629) () {
 		var0001.x += UI_die_roll(1, 2);
 		var0001.y -= UI_die_roll(0, 2);
 		var0007 = UI_update_last_created(var0001);
-		var var0008 = UI_die_roll(0x0001, 0x0002);
-		if (var0008 == 0x0001) {
+		var var0008 = UI_die_roll(1, 2);
+		if (var0008 == 1) {
 			Func08FE("@Turn it off!@");
 		}
-		if (var0008 == 0x0002) {
+		if (var0008 == 2) {
 			Func08FE("@Thou art wasting it!@");
 		}
 		halt_scheduled();
@@ -53927,7 +54063,7 @@ void Func062C object#(0x62C) () {
 	var var0000 = item;
 	var var0001 = Func0945(var0000);
 	var var0002 = UI_find_nearby(
-			[0x09B7, 0x06C8, 0x0000], 0x014B, 0x0012, MASK_NONE);
+			[0x09B7, 0x06C8, 0x0000], SHAPE_ROCK, 18, MASK_NONE);
 	for (var0005 in var0002) {
 		var var0006 = var0005->find_nearby(SHAPE_BLOOD, 3, MASK_ALL_UNSEEN);
 		for (var0009 in var0006) {
@@ -53939,18 +54075,19 @@ void Func062C object#(0x62C) () {
 			var var000D = UI_update_last_created(var000B);
 		}
 	}
-	var var000E = var0001->get_cont_items(SHAPE_SCROLL, QUALITY_ANY, 4);
+	var var000E = var0001->get_cont_items(
+			SHAPE_SCROLL, QUALITY_ANY, FRAME_SCROLL_INVISIBLE);
 	var var000F = script var0000 {
 		nohalt;
 		finish;
 		remove;
 	};
-	if (var000E->get_item_quality() == 0x00F3) {
+	if (var000E->get_item_quality() == QUALITY_SCROLL_ADJHAR) {
 		Func08E6(var0001);
 		gflags[CREATED_GOLEM_BODY_1] = false;
 		gflags[ADJHAR_IS_ALIVE] = true;
 	}
-	if (var000E->get_item_quality() == 0x00F4) {
+	if (var000E->get_item_quality() == QUALITY_SCROLL_BOLLUX) {
 		Func08E6(var0001);
 		gflags[BOLLUX_IS_DEAD] = false;
 		gflags[CREATED_GOLEM_BODY_2] = false;
@@ -54009,7 +54146,7 @@ void Func062D object#(0x62D) () {
 	if ((event == SCRIPTED) || var0000) {
 		struct<ObjPos> var0004 = UI_click_on_item();
 		var var0005 = var0004->get_item_shape();
-		if (var0005 == 0x028B) {
+		if (var0005 == SHAPE_SPINNING_WHEEL) {
 			var var0006 = [1, 1];
 			var var0007 = [0, 0];
 			var var0008 = -1;
@@ -54073,8 +54210,8 @@ void Func062E object#(0x62E) () {
 void Func0631 object#(0x631) () {
 	if (event == BG_PATH_SUCCESS) {
 		var var0000 = get_item_quality();
-		var var0001 = find_nearby(0x0366, 0x000F, MASK_NONE);
-		var var0002 = find_nearby(0x0203, 0x000F, MASK_NONE);
+		var var0001 = find_nearby(SHAPE_DRAWBRIDGE, 15, MASK_NONE);
+		var var0002 = find_nearby(SHAPE_CLOSED_DRAWBRIDGE, 15, MASK_NONE);
 		var0001 &= var0002;
 		var0002 = [];
 		for (var0005 in var0001) {
@@ -54144,9 +54281,9 @@ void Func0631 object#(0x631) () {
 				};
 				return;
 			}
-			if (AVATAR->find_nearest(0x0326, ON_SCREEN)
+			if (AVATAR->find_nearest(SHAPE_GUARD3, ON_SCREEN)
 				&& (!gflags[LEFT_TRINSIC])) {
-				var0007 = find_nearest(0x0326, 0x0014);
+				var0007 = find_nearest(SHAPE_GUARD3, 20);
 				if (Func0937(var0007) && Func0937(AVATAR)) {
 					var0006 = script var0007 after 1 ticks {
 						nohalt;
@@ -54185,9 +54322,9 @@ void Func0631 object#(0x631) () {
 					};
 				}
 			}
-			if (AVATAR->find_nearest(0x0326, ON_SCREEN)
+			if (AVATAR->find_nearest(SHAPE_GUARD3, ON_SCREEN)
 				&& (!gflags[LEFT_TRINSIC])) {
-				var0007 = find_nearest(0x0326, 0x0014);
+				var0007 = find_nearest(SHAPE_GUARD3, 20);
 				if (Func0937(var0007)) {
 					var0006 = script var0007 after 1 ticks {
 						nohalt;
@@ -54256,10 +54393,10 @@ void Func0634 object#(0x634) () {
 	var var0000 = get_barge();
 	if (var0000) {
 		var var0001 = Func080C(item);
-		if (var0001 == 0x0348) {
+		if (var0001 == SHAPE_FLYING_CARPET) {
 			Func0812(var0000);
 		}
-		if (var0001 == 0x028C) {
+		if (var0001 == SHAPE_CART_PIECE) {
 			item->Func028C();
 		}
 		if (var0001 == SHAPE_MAST) {
@@ -54284,25 +54421,27 @@ void Func0634 object#(0x634) () {
 void Func0635 object#(0x635) () {
 	declare var var0001;
 	if (event == EGG) {
-		var var0000 = find_nearby(0x0292, 0x0000, MASK_NONE);
+		var var0000 = find_nearby(SHAPE_DOUGH, 0, MASK_NONE);
 		if (var0000) {
 			var0001 = script var0000 after 60 ticks {
 				nohalt;
 				call Func0635;
 			};
-			if (UI_die_roll(0x0001, 0x0002) == 0x0001) {
+			if (UI_die_roll(1, 2) == 1) {
 				Func08FE("@Do not over cook it!@");
 			}
 		}
 	}
 	if (event == SCRIPTED) {
 		struct<Position> var0002 = get_object_position();
-		var var0003 = find_nearby(0x033F, 0x0002, MASK_NONE);
-		if (UI_get_array_size(var0003) > 0x0000) {
+		var var0003 = find_nearby(SHAPE_BAKING_HEARTH, 2, MASK_NONE);
+		if (UI_get_array_size(var0003) > 0) {
 			remove_item();
 			var var0004 = UI_create_new_object(SHAPE_FOOD);
 			if (var0004) {
 				var0004->set_item_flag(TEMPORARY);
+				// BUG: This should have been done on var0004. As if, it "works"
+				// by pure luck.
 				set_item_frame(FRAME_BREAD);
 				var0001 = UI_update_last_created(var0002);
 				if (var0001) {
@@ -54340,10 +54479,11 @@ void Func0638 object#(0x638) () {
 	}
 	declare var var0001;
 	if (event == SCRIPTED) {
-		if ((var0000 == 0x0090) && (get_item_shape() == SHAPE_BOOK)) {
+		if (var0000 == QUALITY_BOOK_STONE_OF_CASTAMBRE
+				&& get_item_shape() == SHAPE_BOOK) {
 			Func08FF("@Odd. The page is smudged with dirt here. I cannot make "
 					 "out this text.@");
-			var0001 = set_item_quality(0x0091);
+			var0001 = set_item_quality(QUALITY_BOOK_STONE_OF_CASTAMBRE2);
 			var0001 = script item {
 				call Func0638;
 			};
@@ -54359,10 +54499,10 @@ void Func0638 object#(0x638) () {
 	}
 	UI_play_sound_effect2(0x000E, item);
 	book_mode();
-	if (var0000 > 0x0094) {
+	if (var0000 > QUALITY_BOOK_CONVERTING_MOONGATES) {
 		say("This is @not a @valid book");
 	}
-	if (var0000 == 0x0064) {
+	if (var0000 == QUALITY_BOOK_DRAGON_COMPENDIUM) {
 		say("~~ ~~THE DRAGON COMPENDIUM~~ ~~by Perrin*");
 		say("     Found almost exclusively in the dungeon Destard, dragons are "
 			"an ancient race of large reptiles. They possess great "
@@ -54379,7 +54519,7 @@ void Func0638 object#(0x638) () {
 			"battle with one of these terrible lizards, and even fewer can "
 			"emerge victorious.");
 	}
-	if (var0000 == 0x0065) {
+	if (var0000 == QUALITY_BOOK_JOURNAL_OF_GARRET_MOORE) {
 		say("~~ ~~THE JOURNAL OF GARRET MOORE*");
 		say("Day 1: I arrived upon this forsaken isle.~~");
 		say("Day 3: Found the ruins of an edifice. A tower?~~");
@@ -54405,12 +54545,12 @@ void Func0638 object#(0x638) () {
 		say("Day 40232: Hah! The voices now beg, but I will not finish until "
 			"he is gone. The night is my haven and the dogs will bark!~~");
 	}
-	if (var0000 == 0x0066) {
+	if (var0000 == QUALITY_BOOK_TRANSITIVE_VAMPIRE) {
 		say("~~ ~~THE TRANSITIVE VAMPIRE, by Karen Elizabeth Gordon*");
 		say("     This richly-detailed tome is a \"handbook of grammar for the "
 			"Innocent, the Eager, and the Doomed.\"");
 	}
-	if (var0000 == 0x0067) {
+	if (var0000 == QUALITY_BOOK_TOME_OF_THE_DEAD) {
 		say("~~ ~~THE TOME OF THE DEAD~~ ~~by Suvol Shadowface*");
 		say("     The crinkled pages of this book appear to be made of an odd "
 			"sort of leather. It contains various essays concerning the "
@@ -54419,7 +54559,7 @@ void Func0638 object#(0x638) () {
 			"Another passage describes the method by which human skin is "
 			"tanned and pressed for use as writing material...");
 	}
-	if (var0000 == 0x0068) {
+	if (var0000 == QUALITY_BOOK_ARTIFACTS_OF_DARKNESS) {
 		say("~~ ~~ARTIFACTS OF DARKNESS~~ ~~by Mordra Morgaelin*");
 		say("     Within the pages of this handwritten book are many "
 			"references to devices of destructive power. Amongst them are "
@@ -54433,7 +54573,7 @@ void Func0638 object#(0x638) () {
 			"explains what seems to be a far simpler method of dispatching the "
 			"noble monarch.");
 	}
-	if (var0000 == 0x0069) {
+	if (var0000 == QUALITY_BOOK_LIGHT_UNTIL_DAWN) {
 		say("~~ ~~THE LIGHT UNTIL DAWN~~ ~~by Drennal*");
 		say("     Herein is the short book that discusses both moons of "
 			"Britannia, Trammel and Felucca, in detail, explaining their "
@@ -54445,13 +54585,13 @@ void Func0638 object#(0x638) () {
 			"quickly learns that the changes have little affect on anything or "
 			"anyone.");
 	}
-	if (var0000 == 0x006A) {
+	if (var0000 == QUALITY_BOOK_CODAVAR) {
 		say("~~ ~~CODAVAR~~ ~~by Nexa*");
 		say("     Within the pages of this novel is the parable of an usurping "
 			"lord seemingly inspired by Blackthorn's tyrranical rule during "
 			"Lord British's disappearance more than two hundred years ago.");
 	}
-	if (var0000 == 0x006B) {
+	if (var0000 == QUALITY_BOOK_RITUAL_MAGIC) {
 		say("~~ ~~RITUAL MAGIC~~ ~~by Nicodemus*");
 		say("     The ability to combine one's power with that of another "
 			"mage's is fundamental to the casting of enchantments. While "
@@ -54464,7 +54604,7 @@ void Func0638 object#(0x638) () {
 			"within one of the five corners of a pentagram drawn from the dust "
 			"of a dragon's thigh bone...");
 	}
-	if (var0000 == 0x006C) {
+	if (var0000 == QUALITY_BOOK_PATHWAYS_OF_PLANAR_TRAVEL) {
 		say("~~ ~~PATHWAYS OF PLANAR TRAVEL~~ ~~by Nicodemus*");
 		say("     Herein are the many complex formulae necessary for travel "
 			"between and through the many diverse planes of existence. Each "
@@ -54479,7 +54619,7 @@ void Func0638 object#(0x638) () {
 			"into our fair lands at their whimsy? A thought to be considered "
 			"for the future.");
 	}
-	if (var0000 == 0x006D) {
+	if (var0000 == QUALITY_BOOK_ENCHANTING_ITEMS_FOR_HOUSEHOLD_USE) {
 		say("~~ ~~ENCHANTING ITEMS FOR HOUSEHOLD USE~~ ~~by Nicodemus*");
 		say("     Found upon the pages of this tome are many a recipe for the "
 			"creation of \"mundane\" magic utensils and apparatuses, including "
@@ -54492,12 +54632,12 @@ void Func0638 object#(0x638) () {
 			"BLADES. It would seem that this mage was not conjuring with all "
 			"of his reagents.");
 	}
-	if (var0000 == 0x006E) {
+	if (var0000 == QUALITY_BOOK_MISCELLANEOUS_CANTRIPS) {
 		say("~~ ~~MISCELLANEOUS CANTRIPS~~ ~~Anonymous*");
 		say("     As the title says, this book describes the minor spells that "
 			"fall into the bailiwick of charlatans and prestidigitators.");
 	}
-	if (var0000 == 0x006F) {
+	if (var0000 == QUALITY_BOOK_MODERN_NECROMANCY) {
 		say("~~ ~~MODERN NECROMANCY~~ ~~by Horance*");
 		say("     The author of this poetic treatise attempts to show how "
 			"necromancy has been maligned throughout the years and explains "
@@ -54506,7 +54646,7 @@ void Func0638 object#(0x638) () {
 			"art of returning life to a dead companion, known as "
 			"resurrection.");
 	}
-	if (var0000 == 0x0070) {
+	if (var0000 == QUALITY_BOOK_SYMBOLOGY_OF_RUNES) {
 		say("~~ ~~THE SYMBOLOGY OF RUNES~~ ~~by Smidgeon the Green*");
 		say("     Found within is the complete dictionary of terms for "
 			"understanding and translating runes. In addition, the work "
@@ -54514,62 +54654,62 @@ void Func0638 object#(0x638) () {
 			"the intense text within, it would seem that the author is either "
 			"a profound dolt or a simple genius.");
 	}
-	if (var0000 == 0x0071) {
+	if (var0000 == QUALITY_BOOK_BUNK_AND_STOOL) {
 		say("~~ ~~THE BUNK AND STOOL");
 		say("~~ ~~Register*");
 		say("~ ~Dosklin of Vesper~~Lord Shamino~~Erstran of Moonglow~~Aaron of "
 			"Britain~~Karman of Buccaneer's Den~~The Avatar...");
 	}
-	if (var0000 == 0x0072) {
+	if (var0000 == QUALITY_BOOK_MODEST_DAMSEL) {
 		say("~~ ~~THE MODEST DAMSEL");
 		say("~~ ~~Register*");
 		say("~ ~Sir Dupre~~Lord Iolo~~Rasmereng of Britain~~Hetteth of "
 			"Paws~~Dukat of New Magincia~~Newon of Britain...");
 	}
-	if (var0000 == 0x0073) {
+	if (var0000 == QUALITY_BOOK_CHECQUERED_CORK) {
 		say("~~ ~~THE CHECQUERED CORK");
 		say("~~ ~~Register*");
 		say("~ ~Sars of Yew~~Lord Shamino~~Sir Dupre~~Keth of "
 			"Moonglow~~Darek~~ Vinder of Jhelom...");
 	}
-	if (var0000 == 0x0074) {
+	if (var0000 == QUALITY_BOOK_HONORABLE_HOUND) {
 		say("~~ ~~THE HONORABLE HOUND");
 		say("~~ ~~Register*");
 		say("~ ~Walter of Britain~~Jaffe of Yew~~Jaana~~Atans of Serpent's "
 			"Hold...");
 	}
-	if (var0000 == 0x0075) {
+	if (var0000 == QUALITY_BOOK_OUTNINN) {
 		say("~~ ~~THE OUT'N'INN");
 		say("~~ ~~Register*");
 		say("~ ~Tyors of Britain~~Kellin of Buccaneer's Den~~Sir Dupre~~Wentok "
 			"of Trinsic~~Uberak of Minok...");
 	}
-	if (var0000 == 0x0076) {
+	if (var0000 == QUALITY_BOOK_WAYFARERERS_INN) {
 		say("~~ ~~THE WAYFARERER'S INN");
 		say("~~ ~~Register*");
 		say("~ ~John-Paul of Serpent's Hold~~Horffe of Serpent's "
 			"Hold~~Featherbank of Moonglow~~Tervis of Buccaneer's Den~~Lord "
 			"Shamino...");
 	}
-	if (var0000 == 0x0077) {
+	if (var0000 == QUALITY_BOOK_FALLEN_VIRGIN) {
 		say("~~ ~~THE FALLEN VIRGIN");
 		say("~~ ~~Register*");
 		say("~ ~Carson of Minoc~~Lord Iolo~~Lady Gwenno~~Yethrod of "
 			"Britain~~Addom of Yew...");
 	}
-	if (var0000 == 0x0078) {
+	if (var0000 == QUALITY_BOOK_BRITANNIAN_MINING_COMPANY_LOG) {
 		say("BRITANNIAN MINING COMPANY ~~ ~~log.");
 		say("... Iron Ore -- 30 tons~~Lead -- 24 tons~~Iron Ore -- 27 tons~~ "
 			"B.R. -- 2 tons~~Lead -- 14 tons~~Lead -- 37 tons~~Iron Ore -- 26 "
 			"tons ~~B.R. -- 3 tons~~Iron Ore -- 31 tons...");
 	}
-	if (var0000 == 0x0079) {
+	if (var0000 == QUALITY_BOOK_SALTY_DOG) {
 		say("~~ ~~THE SALTY DOG");
 		say("~~ ~~Register*");
 		say("~ ~Addom of Yew~~The Avatar~~Jalal of Britain~~Tim of Yew~~Blorn "
 			"of Vesper~~Sir Dupre~~Penelope of Cove...");
 	}
-	if (var0000 == 0x007A) {
+	if (var0000 == QUALITY_BOOK_GUIDE_TO_CHILDCARE) {
 		say("~~ ~~A GUIDE TO CHILDCARE FOR THE RICH AND FAMOUS~~ ~~by Lady M "
 			"~~ ~~with love for Samantha Meng Ling*");
 		say("     Within is the extensive guide for nannies, describing "
@@ -54580,7 +54720,7 @@ void Func0638 object#(0x638) () {
 			"who may be reading) the effects of hurling soiled diapers at "
 			"one's enemies.");
 	}
-	if (var0000 == 0x007B) {
+	if (var0000 == QUALITY_BOOK_ALAGNERS_BOOK_OF_MARVELOUS_THINGS) {
 		say("~~ ~~ ~~ALAGNER'S BOOK OF MARVELOUS AND ASTONISHING THINGS");
 		say("~~A compiled volume of items of interest both magical and "
 			"mundane~~by Alagner*");
@@ -54711,12 +54851,12 @@ void Func0638 object#(0x638) () {
 			"magically triggered by the approaching close approach of any "
 			"creature.");
 	}
-	if (var0000 == 0x007C) {
+	if (var0000 == QUALITY_BOOK_BATHS_PROFITS) {
 		say("BATHS - PROFITS~~...April, 0360 - 9000~May, 0360 - 8700~June, "
 			"0360 - 8300~July, 0360 - 8000~August, 0630 - 6300~September, 0630 "
 			"- 7600~ October, 0360 - 10,000...~...January, 0361 - 9600");
 	}
-	if (var0000 == 0x007D) {
+	if (var0000 == QUALITY_BOOK_HISTORY_OF_STONEGATE) {
 		say("~~ ~~THE HISTORY OF STONEGATE~~ ~~by Shazle*");
 		say("     The story of Stonegate Castle is, indeed, an interesting "
 			"one. At one time the keep was occupied by the Shadowlords, during "
@@ -54736,7 +54876,7 @@ void Func0638 object#(0x638) () {
 			"residence amongst the ruins, along with an ancient wizard, but no "
 			"one has ever confirmed\ttheir existence.");
 	}
-	if (var0000 == 0x007E) {
+	if (var0000 == QUALITY_BOOK_WAY_OF_THE_SWALLOW) {
 		say("~~ ~~THE WAY OF THE SWALLOW~~ ~~by Foiles*");
 		say("     Within the pages of this tome lies the story of a mother who "
 			"loved, and was deeply loved by, her family. Though the work ends "
@@ -54744,7 +54884,7 @@ void Func0638 object#(0x638) () {
 			"the knowledge that her inner spirit has found a better place to "
 			"rest.");
 	}
-	if (var0000 == 0x007F) {
+	if (var0000 == QUALITY_BOOK_VETRONS_GUIDE_TO_WEAPONS_AND_ARMOUR) {
 		say("~~ ~~VETRONS GUIDE TO WEAPONS AND ARMOUR~~ ~~Their effectiveness "
 			"and value*");
 		say("Here is listed, for easy comparison, the various weapons and "
@@ -54775,7 +54915,7 @@ void Func0638 object#(0x638) () {
 			"unique items, or legendary items. Their usefulness in combat has "
 			"not yet been explored fully.");
 	}
-	if (var0000 == 0x0080) {
+	if (var0000 == QUALITY_BOOK_VARGAZS_STORIES_OF_LEGEND) {
 		say("~~ ~~VARGAZ'S STORIES OF LEGEND~~Reasons why one should never "
 			"build doors facing north or west.*");
 		say("     Many centuries ago, the prophet, Father Antos, foretold the "
@@ -54796,7 +54936,7 @@ void Func0638 object#(0x638) () {
 			"more likely to invade households with doors that directly cross "
 			"their paths... ");
 	}
-	if (var0000 == 0x0081) {
+	if (var0000 == QUALITY_BOOK_ONE_HUNDRED_AND_ONE_WAYS_TO_CHEAT_AT_NIM) {
 		say("~~ ~~ONE HUNDRED AND ONE WAYS TO CHEAT AT NIM~~ ~~by Dr. Cat*");
 		say("     Within the pages of this tome are all the many ways to earn "
 			"supplementary gold by gambling at Nim. Written by the originator "
@@ -54804,7 +54944,7 @@ void Func0638 object#(0x638) () {
 			"as, \"claw first, question later\" and \"there are no ways to "
 			"skin a cat.\"");
 	}
-	if (var0000 == 0x0082) {
+	if (var0000 == QUALITY_BOOK_PLAY_DIRECTING) {
 		say("~~ ~~PLAY DIRECTING: ANALYSIS, COMMUNICATION AND STYLE~~ ~~by "
 			"Francis Hodge*");
 		say("     Within the pages of this highly respected textbook one can "
@@ -54813,14 +54953,14 @@ void Func0638 object#(0x638) () {
 			"university in a distant land, this book is considered by most "
 			"thespians as the definitive source book on directing.");
 	}
-	if (var0000 == 0x0083) {
+	if (var0000 == QUALITY_BOOK_ON_ACTING) {
 		say("~~ ~~ON ACTING~~ ~~by Laurence Olivier*");
 		say("     Within the pages of this tome are the theories and "
 			"philosophies of acting, as well as personal anecdotes, written by "
 			"a noted thespian of a distant land. Apparently this book was one "
 			"of the many brought to Britannia by Lord British.");
 	}
-	if (var0000 == 0x0084) {
+	if (var0000 == QUALITY_BOOK_THOU_ART_WHAT_THEE_EATS) {
 		say("~~ ~~THOU ART WHAT THEE EATS~~ ~~by Fordras*");
 		say("     Within these pages thou wilt find the comparitive analysis "
 			"of many of things we, humans, place in our bodies in the name of "
@@ -54850,7 +54990,7 @@ void Func0638 object#(0x638) () {
 			"and thou truly hast a wonderful feast!~     For a second course, "
 			"I would suggest...");
 	}
-	if (var0000 == 0x0085) {
+	if (var0000 == QUALITY_BOOK_MAN_VERSUS_FISH) {
 		say("~~ ~~MAN VERSUS FISH: THE ULTIMATE CONFLICT~~ ~~by Aquastyr*");
 		say("     Thou might consider fishing to be an activity designed "
 			"simply to feed thy familty. Daily thou takest thy fishing pole "
@@ -54878,7 +55018,7 @@ void Func0638 object#(0x638) () {
 			"unwillingly into the waiting bucket.~");
 		say("     And then, the process must begin anew...");
 	}
-	if (var0000 == 0x0086) {
+	if (var0000 == QUALITY_BOOK_KNIGHTS_BRIDGE_IN_A_NUTSHELL) {
 		say("~~ ~~KNIGHT'S BRIDGE IN A NUTSHELL~~ ~~by Nicodemus*");
 		say("     This is a board game for two players.  Each player begins "
 			"with three pieces. The object is to move thy three pieces in "
@@ -54901,7 +55041,7 @@ void Func0638 object#(0x638) () {
 		say("To win the game, a player must \"push\" the treasure to the back "
 			"row of squares on his side of the board.");
 	}
-	if (var0000 == 0x0087) {
+	if (var0000 == QUALITY_BOOK_MEMPTO_RAYS) {
 		say("~~ ~~MEMPTO RAYS~~A qualitative study in metaparaphilosophical "
 			"radiation~~ ~~by Mempto*");
 		say("     Despite Felcrodan's theory of 0335, there are, indeed, rays "
@@ -54913,7 +55053,7 @@ void Func0638 object#(0x638) () {
 			"ability numerous times, once killing an entire boulder in a "
 			"matter of a few hours. It is my recommendation...");
 	}
-	if (var0000 == 0x0088) {
+	if (var0000 == QUALITY_BOOK_BOOK_OF_CIRCLES) {
 		say("~~ ~~THE BOOK OF CIRCLES~~ ~~Translated from Gargish to "
 			"Britannian by Jillian*");
 		say("     All begins with the three principles: Control, Passion and "
@@ -54936,7 +55076,7 @@ void Func0638 object#(0x638) () {
 		say("     Our society is the same. It, too, continues forever, with "
 			"all members (and all virtues) equeal parts of the unified whole.");
 	}
-	if (var0000 == 0x0089) {
+	if (var0000 == QUALITY_BOOK_CHICKEN_RAISING) {
 		say("~~ ~~CHICKEN RAISING~~ ~~by Daheness Gon*");
 		say("     While handling chickens is a relatively easy task, as is "
 			"collecting eggs, there are several pieces of information that "
@@ -54953,7 +55093,7 @@ void Func0638 object#(0x638) () {
 			"not be concerned if more time is necessary for thy hens to create "
 			"more of their offspring.");
 	}
-	if (var0000 == 0x008A) {
+	if (var0000 == QUALITY_BOOK_ART_OF_FIELD_DRESSING) {
 		say("~~ ~~THE ART OF FIELD DRESSING~~ ~~by Creston~Forward by Lady "
 			"Leigh*");
 		say("     Though I personally advocate the use of healing herbs and "
@@ -54975,7 +55115,7 @@ void Func0638 object#(0x638) () {
 			"ready to travel again (though I advise this travel to be to the "
 			"house of a competent healer!).");
 	}
-	if (var0000 == 0x008B) {
+	if (var0000 == QUALITY_BOOK_WATER_ON_THE_CAT) {
 		say("~~ ~~WATER ON THE CAT~~ ~~by Mowze*");
 		say("     (This text is a humorous diatribe, and should be taken as "
 			"nothing more than such. Any of the following activities should "
@@ -54992,7 +55132,7 @@ void Func0638 object#(0x638) () {
 			"parents DO often anger quickly when their offspring is "
 			"threatened.");
 	}
-	if (var0000 == 0x008C) {
+	if (var0000 == QUALITY_BOOK_SHORT_TREATISE_ON_BRITANNIAN_SOCIETY) {
 		say("~~ ~~A SHORT TREATISE ON BRITANNIAN SOCIETY~~ ~~by Clayton*");
 		say("     The hierarchy of the peoples of Britannia follows a "
 			"traditional order. Though little here is meant to be law, the "
@@ -55013,7 +55153,7 @@ void Func0638 object#(0x638) () {
 		say("     Much of the impact upon our economic system has come "
 			"from...");
 	}
-	if (var0000 == 0x008D) {
+	if (var0000 == QUALITY_BOOK_BAKERS_HANDBOOK) {
 		say("~~ ~~A BAKER'S HANDBOOK~~ ~~by Settlar*");
 		say("     The fundamentals for baking all come from knowledge of how "
 			"to perform one simple task: baking bread. If thou art able to do "
@@ -55031,7 +55171,7 @@ void Func0638 object#(0x638) () {
 		say("     Now, the next item will prove a true treat for thy loved "
 			"ones...");
 	}
-	if (var0000 == 0x008E) {
+	if (var0000 == QUALITY_BOOK_LOGBOOK_ASTELLERON) {
 		say("~~ Logbook~~ Astelleron*");
 		say("... I have grown lonely here on the island. Despite my golems, I "
 			"have no one with whom I can converse, no one with any "
@@ -55069,7 +55209,7 @@ void Func0638 object#(0x638) () {
 			"can hear them discussing weather! I must go now and talk with "
 			"them. Oddly enough, the sky no longer seems overcast...");
 	}
-	if (var0000 == 0x008F) {
+	if (var0000 == QUALITY_BOOK_GOLEMS_FROM_CLAY_TO_STONE) {
 		say("~~ ~~GOLEMS: FROM CLAY TO STONE~~ ~~by Castadon*");
 		say("... Stone golems can be created from any hard rock. However, it "
 			"is important to note that the enchantments require they be "
@@ -55098,7 +55238,7 @@ void Func0638 object#(0x638) () {
 			"investigation quite worth while. For additional information, see "
 			"\"The Stone of Castambre,\" by MacCuth.");
 	}
-	if (var0000 == 0x0090) {
+	if (var0000 == QUALITY_BOOK_STONE_OF_CASTAMBRE) {
 		say("~~ ~~THE STONE OF CASTAMBRE~~ ~~by MacCuth*");
 		say("     Legendary rock? Perhaps. Powerful relic? Definitely.~The "
 			"Stone Of Castambre -- named for the mage who is rumored to have "
@@ -55133,7 +55273,7 @@ void Func0638 object#(0x638) () {
 			call Func0638;
 		};
 	}
-	if (var0000 == 0x0091) {
+	if (var0000 == QUALITY_BOOK_STONE_OF_CASTAMBRE2) {
 		say("... Once the the \"heart\" has been placed within the \"chest\" "
 			"of the creature, the ritual may begin. First, using perhaps the "
 			"same pick, thou must strike the Tree hard enough to draw blood. "
@@ -55165,7 +55305,7 @@ void Func0638 object#(0x638) () {
 			call Func0638;
 		};
 	}
-	if (var0000 == 0x0092) {
+	if (var0000 == QUALITY_BOOK_DARK_CORE_OF_EXODUS) {
 		say("~~ ~~THE DARK CORE OF EXODUS~~ ~~by Erethian*");
 		say("    Exodus was a mixture of etherial being and magical mechanism. "
 			"Its living portion, or psyche, was comprised of its ambitions, "
@@ -55180,13 +55320,13 @@ void Func0638 object#(0x638) () {
 		say("    Exodus served none other than...");
 		say("~~(The text remains unfinished.)");
 	}
-	if (var0000 == 0x0093) {
+	if (var0000 == QUALITY_BOOK_ETHICAL_HEDONISM) {
 		say("~~ ~~Ethical Hedonism~~ ~~by R. Allen G.*");
 		say("    This handbook details a non-religous religion in which people "
 			"live for the joy of living and make it their responsibility to "
 			"keep the entire world out of disrepair.");
 	}
-	if (var0000 == 0x0094) {
+	if (var0000 == QUALITY_BOOK_CONVERTING_MOONGATES) {
 		say("~~ ~~CONVERTING MOONGATES TO THINE OWN USE~~ ~~by Erethian*");
 		say("    Moongates come in four known varieties: blue, a gate across a "
 			"land, red, a gate connecting worlds, black, a gate that traverses "
@@ -55251,11 +55391,11 @@ void Func063A object#(0x63A) () {
 
 void Func063C object#(0x63C) () {
 	UI_fade_palette(0x000C, 0x0001, 0x0001);
-	var var0000 = AVATAR->find_nearby(SHAPE_DOOR_EW_BOTTOM, 0x0006, MASK_NONE);
+	var var0000 = AVATAR->find_nearby(SHAPE_DOOR_EW_BOTTOM, 6, MASK_NONE);
 	if (var0000) {
 		var var0001 = script var0000 after 1 ticks {
 			call Func010E;
-			frame 6;
+			frame FRAME_DOOR_JAIL_LOCKED;
 		};
 	}
 }
@@ -55286,7 +55426,7 @@ void Func063E object#(0x63E) () {
 			struct<Position> var0001 = AVATAR->get_object_position();
 			var0001.y -= 4;
 			var0000 = UI_update_last_created(var0001);
-			LORD_BRITISH->set_item_frame(0x0010);
+			LORD_BRITISH->set_item_frame(STAND_SOUTH);
 		}
 		var0000 = script AVATAR after 1 ticks {
 			nohalt;
@@ -55419,7 +55559,7 @@ void Func0642 object#(0x642) () {
 		var var0001 = Func092D(var0000);
 		item_say("@An Flam@");
 		if (Func0906()) {
-			var0002 = set_to_attack(var0000, 0x021C);
+			var0002 = set_to_attack(var0000, SHAPE_SPELL_DOUSE);
 			var0002 = script item {
 				face var0001;
 				actor frame raise_1h;
@@ -55558,7 +55698,7 @@ void Func0646 object#(0x646) () {
 		var var0001 = Func092D(var0000);
 		item_say("@In Flam@");
 		if (Func0906()) {
-			var0002 = set_to_attack(var0000, 0x0118);
+			var0002 = set_to_attack(var0000, SHAPE_SPELL_IGNITE);
 			var0002 = script item {
 				face var0001;
 				actor frame cast_up;
@@ -55707,7 +55847,7 @@ void Func064A object#(0x64A) () {
 			};
 			var var0001 = Func08F6(AVATAR);
 			var var0002 = 0x0015 + var0001;
-			var var0003 = find_nearby(0x00C8, var0002, MASK_ALL_UNSEEN);
+			var var0003 = find_nearby(SHAPE_TRAP, var0002, MASK_ALL_UNSEEN);
 			declare var var0006;
 			for (var0006 in var0003) {
 				var0000 = script var0006 after 5 ticks {
@@ -55937,7 +56077,7 @@ void Func0650 object#(0x650) () {
 				actor frame cast_out;
 				actor frame strike_2h;
 			};
-			var var0003 = var0000->find_nearby(0x00C8, 0x0002, MASK_ALL_UNSEEN);
+			var var0003 = var0000->find_nearby(SHAPE_TRAP, 2, MASK_ALL_UNSEEN);
 			declare var var0006;
 			for (var0006 in var0003) {
 				var0000 = var0006->get_object_position();
@@ -55974,8 +56114,8 @@ void Func0650 object#(0x650) () {
 }
 
 void Func0651 object#(0x651) () {
-	var var0000 = [0x02D2, 0x02D3];
-	var var0001 = [0x022C, 0x01A1];
+	var var0000 = [SHAPE_ARROW, SHAPE_BOLT];
+	var var0001 = [SHAPE_MAGIC_ARROW, SHAPE_MAGIC_BOLT];
 	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		struct<ObjPos> var0002 = UI_click_on_item();
@@ -56024,7 +56164,7 @@ void Func0652 object#(0x652) () {
 		item_say("@Vas Flam@");
 		declare var var0003;
 		if (Func0906()) {
-			var var0002 = set_to_attack(var0000, 0x0358);
+			var var0002 = set_to_attack(var0000, SHAPE_SPELL_FIRE_BOLT);
 			var0003 = script item {
 				face var0001;
 				sfx 65;
@@ -56155,8 +56295,8 @@ void Func0656 object#(0x656) () {
 		}
 		var var0001 = Func092D(var0000);
 		item_say("@Ort Por Ylem@");
-		if (Func0906() && ((!var0000->is_npc()) && (var0000.obj != NULL_OBJ))) {
-			var0002 = set_to_attack(var0000, 0x01BB);
+		if (Func0906() && (!var0000->is_npc() && var0000.obj != NULL_OBJ)) {
+			var0002 = set_to_attack(var0000, SHAPE_SPELL_TELEKINESIS);
 			var0002 = script item {
 				face var0001;
 				sfx 67;
@@ -56175,11 +56315,15 @@ void Func0656 object#(0x656) () {
 	}
 	if (event == WEAPON) {
 		var var0003 = [
-			SHAPE_LOOM, SHAPE_SPINDLE_OF_THREAD, 0x028B, 0x028D, SHAPE_KITE, SHAPE_BUCKET, SHAPE_BELLOWS, SHAPE_KEG,
-			SHAPE_CASK, 0x02E7, SHAPE_WELL, 0x02E4, SHAPE_CHAIR, SHAPE_BED_ROLL, 0x02B8, SHAPE_BED,
-			0x0311
+			SHAPE_LOOM, SHAPE_SPINDLE_OF_THREAD, SHAPE_SPINNING_WHEEL,
+			SHAPE_BALE_OF_WOOL, SHAPE_KITE, SHAPE_BUCKET, SHAPE_BELLOWS,
+			SHAPE_KEG, SHAPE_CASK, SHAPE_STRENGTH_TESTER, SHAPE_WELL,
+			SHAPE_WELL_PULLEY, SHAPE_CHAIR, SHAPE_BED_ROLL, SHAPE_BED_EW,
+			SHAPE_BED, SHAPE_ORB_OF_THE_MOONS
 		];
-		var var0004 = [0x03B5, 0x03B6, 0x0314, 0x0313];
+		var var0004 = [
+			SHAPE_WINCH_NS, SHAPE_WINCH_EW, SHAPE_SWITCH, SHAPE_LEVER
+		];
 		var var0005 = get_item_shape();
 		if (var0005 in var0004) {
 			var0002 = script item {
@@ -56221,7 +56365,12 @@ void Func0657 object#(0x657) () {
 	}
 	if (event == SCRIPTED) {
 		struct<Position> var0001 = get_object_position();
-		UI_wizard_eye(0x002D, 0x00C8);
+		// BUG: UI_wizard_eye only takes one parameter, the duration of the
+		// effect. This makes a short wizard eye, and the second parameter
+		// is ignored.
+		// Maybe at some point the intrinsic had two parameters for a random
+		// duration? Of maybe a maximum range?
+		UI_wizard_eye(1 * MINUTE + 20 * TICK, 8 * MINUTE);
 	}
 }
 
@@ -56233,7 +56382,7 @@ void Func0658 object#(0x658) () {
 		item_say("@Des Sanct@");
 		declare var var0003;
 		if (Func0906() && (var0000.obj != NULL_OBJ)) {
-			var var0002 = set_to_attack(var0000, 0x0119);
+			var var0002 = set_to_attack(var0000, SHAPE_SPELL_CURSE);
 			var0003 = script item {
 				face var0001;
 				sfx 67;
@@ -56320,10 +56469,10 @@ void Func065A object#(0x65A) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var var0001 = UI_die_roll(0x0007, 0x000A);
+		var var0001 = UI_die_roll(7, 10);
 		while (var0001 > 0) {
 			var0001 -= 1;
-			var var0002 = 0x0205;
+			var var0002 = SHAPE_INSECTS;
 			var var0003 = UI_summon(var0002, false);
 		}
 	}
@@ -56374,7 +56523,7 @@ void Func065C object#(0x65C) () {
 		item_say("@An Por@");
 		declare var var0003;
 		if (Func0906() && (var0000.obj != NULL_OBJ)) {
-			var var0002 = set_to_attack(var0000, 0x0198);
+			var var0002 = set_to_attack(var0000, SHAPE_SPELL_PARALYZE);
 			var0003 = script item {
 				face var0001;
 				actor frame raise_1h;
@@ -56428,7 +56577,7 @@ void Func065E object#(0x65E) () {
 		item_say("@In Nox@");
 		declare var var0003;
 		if (Func0906() && (var0000.obj != NULL_OBJ)) {
-			var var0002 = set_to_attack(var0000, 0x01A8);
+			var var0002 = set_to_attack(var0000, SHAPE_SPELL_POISON);
 			var0003 = script item {
 				face var0001;
 				sfx 110;
@@ -56457,7 +56606,7 @@ void Func065F object#(0x65F) () {
 		item_say("@In Zu@");
 		declare var var0003;
 		if (Func0906() && (var0000.obj != NULL_OBJ)) {
-			var var0002 = set_to_attack(var0000, 0x0048);
+			var var0002 = set_to_attack(var0000, SHAPE_SPELL_SLEEP);
 			var0003 = script item {
 				face var0001;
 				actor frame raise_1h;
@@ -56500,22 +56649,25 @@ void Func0660 object#(0x660) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var var0001 = [0x02CC, 0x032B, 0x020B, 0x01FE, 0x0212, 0x01F6, 0x0219];
+		var var0001 = [
+			SHAPE_BIRD, SHAPE_RABBIT, SHAPE_RAT, SHAPE_FOX, SHAPE_SNAKE,
+			SHAPE_DEER, SHAPE_WOLF
+		];
 		var var0002 = UI_get_array_size(var0001);
 		var var0003 = Func08F6(AVATAR);
 		if (var0003 > var0002) {
 			var0003 = var0002;
 		}
-		if (var0003 < 0x0002) {
-			var0003 = 0x0002;
+		if (var0003 < 2) {
+			var0003 = 2;
 		}
-		var var0004 = var0003 / 0x0002;
-		if (var0004 < 0x0001) {
-			var0004 = 0x0001;
+		var var0004 = var0003 / 2;
+		if (var0004 < 1) {
+			var0004 = 1;
 		}
 		var var0005 = UI_die_roll(var0004, var0003);
-		while (var0005 > 0x0000) {
-			var0005 -= 0x0001;
+		while (var0005 > 0) {
+			var0005 -= 1;
 			var var0006 = UI_die_roll(var0004, var0003);
 			var var0007 = var0001[var0006];
 			var var0008 = UI_summon(var0007, false);
@@ -56531,7 +56683,7 @@ void Func0661 object#(0x661) () {
 		item_say("@Ort Grav@");
 		declare var var0002;
 		if (Func0906()) {
-			var0002 = set_to_attack(var0000, 0x0327);
+			var0002 = set_to_attack(var0000, SHAPE_SPELL_LIGHTNING);
 			var0002 = script item {
 				face var0001;
 				actor frame raise_1h;
@@ -56561,7 +56713,7 @@ void Func0662 object#(0x662) () {
 		halt_scheduled();
 		struct<ObjPos> var0000 = UI_click_on_item();
 		declare var var0002;
-		if (var0000->get_item_shape() == 0x014A) {
+		if (var0000->get_item_shape() == SHAPE_VIRTUE_STONE) {
 			if (!AVATAR->get_barge()) {
 				item_say("@Kal Por Ylem@");
 				if (Func0906() && (!gflags[INSIDE_GENERATOR])) {
@@ -56648,7 +56800,7 @@ void Func0664 object#(0x664) () {
 		struct<Position> var0001 = get_object_position();
 		item_say("@Kal Ort Por@");
 		declare var var0002;
-		if (Func0906() && (var0000->get_item_shape() == 0x014A)) {
+		if (Func0906() && var0000->get_item_shape() == SHAPE_VIRTUE_STONE) {
 			var0002 = script item {
 				actor frame cast_up;
 				actor frame cast_out;
@@ -56814,8 +56966,14 @@ void Func0667 object#(0x667) () {
 		var var0001 = var0000->get_item_shape();
 		var var0002 = Func092D(item);
 		halt_scheduled();
-		var var0003 = [SHAPE_DOOR_NS_RIGHT, SHAPE_DOOR_EW_BOTTOM, SHAPE_DOOR_NS_LEFT, SHAPE_DOOR_EW_TOP, 0x034D, 0x033C];
-		var var0004 = [SHAPE_DOOR_NS_LEFT, SHAPE_DOOR_EW_TOP, SHAPE_DOOR_NS_RIGHT, SHAPE_DOOR_EW_BOTTOM];
+		var var0003 = [
+			SHAPE_DOOR_NS_RIGHT, SHAPE_DOOR_EW_BOTTOM, SHAPE_DOOR_NS_LEFT,
+			SHAPE_DOOR_EW_TOP, SHAPE_WALL_NS_RIGHT, SHAPE_WALL_BOTTOM
+		];
+		var var0004 = [
+			SHAPE_DOOR_NS_LEFT, SHAPE_DOOR_EW_TOP, SHAPE_DOOR_NS_RIGHT,
+			SHAPE_DOOR_EW_BOTTOM
+		];
 		item_say("@Ex Por@");
 		breakable {
 			declare var var0006;
@@ -56862,7 +57020,7 @@ void Func0668 object#(0x668) () {
 		item_say("@An Xen Ex@");
 		declare var var0002;
 		if (Func0906()) {
-			var0002 = set_to_attack(var0000, 0x0050);
+			var0002 = set_to_attack(var0000, SHAPE_SPELL_CHARM);
 			var0002 = script item {
 				face var0001;
 				sfx 68;
@@ -56923,7 +57081,7 @@ void Func0669 object#(0x669) () {
 					"@I'm bad!@", "@Boogie!@", "@Yow!@"
 				];
 				var var0009 = UI_die_roll(0x0001, 0x0007);
-				var var000A = UI_die_roll(0x000A, 0x0028);
+				var var000A = UI_die_roll(10, 40);
 				Func0933(var0005, var0008[var0009], var000A);
 				var000A = UI_die_roll(0x0032, 0x004B);
 				var0000 = script var0005 after var000A ticks {
@@ -56940,7 +57098,10 @@ void Func066A object#(0x66A) () {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		var var0001 = Func092D(var0000);
 		halt_scheduled();
-		var var0002 = [0x0300, SHAPE_FIRE_FIELD, 0x0384, 0x0386];
+		var var0002 = [
+			SHAPE_ENERGY_FIELD, SHAPE_FIRE_FIELD, SHAPE_POISON_FIELD,
+			SHAPE_SLEEP_FIELD
+		];
 		item_say("@An Grav@");
 		declare var var0003;
 		if (Func0906()) {
@@ -56980,7 +57141,7 @@ void Func066B object#(0x66B) () {
 		item_say("@Vas Flam Hur@");
 		declare var var0002;
 		if (Func0906()) {
-			var0002 = set_to_attack(var0000, 0x004E);
+			var0002 = set_to_attack(var0000, SHAPE_SPELL_EXPLOSION);
 			var0002 = script item {
 				face var0001;
 				sfx 65;
@@ -57091,7 +57252,7 @@ void Func066E object#(0x66E) () {
 				var var0006 = var0000.z;
 				struct<Position> var0007 = [var0004, var0005, var0006];
 				var var0008 = UI_update_last_created(var0007);
-				var var0009 = 0x0064;
+				var var0009 = 100;
 				var0008 = var0003->set_item_quality(var0009);
 				var0003->set_item_flag(TEMPORARY);
 				var0008 = script var0003 after var0009 ticks remove;
@@ -57140,7 +57301,7 @@ void Func066F object#(0x66F) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var var0002 = 0x0019;
+		var var0002 = 25;
 		var var0003 = find_nearby(ANY_SHAPE, var0002, MASK_NPC);
 		var var0004 = UI_get_party_list();
 		for (var0007 in var0003) {
@@ -57179,7 +57340,7 @@ void Func0670 object#(0x670) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var var0001 = find_nearby(ANY_SHAPE, 0x0019, MASK_NPC2);
+		var var0001 = find_nearby(ANY_SHAPE, 25, MASK_NPC2);
 		var var0002 = UI_get_party_list();
 		for (var0005 in var0001) {
 			if (!(var0005 in var0002)) {
@@ -57254,11 +57415,13 @@ void Func0672 object#(0x672) () {
 				var var0008 = var0000.z;
 				var0009 = [var0006, var0007, var0008];
 				var var000A = [var0006, var0007, var0008 + 1];
-				if (!UI_is_not_blocked(var0009, 0x026D, 0x0000)) {
+				if (!UI_is_not_blocked(
+						var0009, SHAPE_SPELL_DELAYED_EXPLOSION, 0)) {
 					var0009 = var000A;
 				}
-				if (UI_is_not_blocked(var0009, 0x026D, 0x0000)) {
-					var000B = UI_create_new_object(0x026D);
+				if (UI_is_not_blocked(
+						var0009, SHAPE_SPELL_DELAYED_EXPLOSION, 0)) {
+					var000B = UI_create_new_object(SHAPE_SPELL_DELAYED_EXPLOSION);
 					if (var000B) {
 						var000B->set_item_flag(TEMPORARY);
 						var000B->set_item_flag(INVISIBLE);
@@ -57291,8 +57454,8 @@ void Func0672 object#(0x672) () {
 		if (var000B) {
 			var000B->set_item_flag(TEMPORARY);
 			var0002 = UI_update_last_created(var0009);
-			var var000D = 0x001E;
-			var000D += UI_die_roll(0x0001, 0x0005);
+			var var000D = 30;
+			var000D += UI_die_roll(1, 5);
 			var0002 = script var000B after var000D ticks {
 				nohalt;
 				remove;
@@ -57326,8 +57489,8 @@ void Func0673 object#(0x673) () {
 				var var000B = UI_create_new_object(SHAPE_FIRE_FIELD);
 				if (var000B) {
 					var0002 = UI_update_last_created(var000A);
-					var var000C = UI_die_roll(0x0001, 0x000F);
-					var var000D = 0x001E + var000C;
+					var var000C = UI_die_roll(1, 15);
+					var var000D = 30 + var000C;
 					var0002 = var000B->set_item_quality(var000D);
 					var000B->set_item_flag(TEMPORARY);
 					var0002 = script var000B after var000D ticks {
@@ -57388,8 +57551,7 @@ void Func0674 object#(0x674) () {
 		if (gflags[MAGIC_STORM_SPELL] == true) {
 			var var0002 = 0x002D;
 			var var0003 = Func0934(var0002);
-			var var0004
-					= var0003[UI_die_roll(0x0001, UI_get_array_size(var0003))];
+			var var0004 = var0003[UI_die_roll(1, UI_get_array_size(var0003))];
 			if (var0004) {
 				var0001 = script var0004 {
 					nohalt;
@@ -57420,7 +57582,7 @@ void Func0675 object#(0x675) () {
 				actor frame reach_1h;
 				actor frame strike_1h;
 			};
-			var var0003 = UI_create_new_object(0x0384);
+			var var0003 = UI_create_new_object(SHAPE_POISON_FIELD);
 			if (var0003) {
 				var var0004 = var0000.x + 1;
 				var var0005 = var0000.y + 1;
@@ -57460,7 +57622,7 @@ void Func0676 object#(0x676) () {
 			var var0004 = var0000.y + 1;
 			var var0005 = var0000.z;
 			struct<Position> var0006 = [var0003, var0004, var0005];
-			var var0007 = UI_create_new_object(0x0386);
+			var var0007 = UI_create_new_object(SHAPE_SLEEP_FIELD);
 			if (var0007) {
 				var0007->set_item_flag(TEMPORARY);
 				var var0008 = UI_update_last_created(var0006);
@@ -57500,7 +57662,7 @@ void Func0677 object#(0x677) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var var0001 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
+		var var0001 = find_nearby(SHAPE_ANY, 40, MASK_NPC2);
 		var var0002 = UI_get_party_list();
 		var var0003 = 12;
 		var var0004 = get_item_flag(IN_PARTY);
@@ -57596,7 +57758,7 @@ void Func0677 object#(0x677) () {
 				var0000 = var0007->run_script(var0009);
 			}
 		}
-		UI_earthquake(var0003 * 0x0003);
+		UI_earthquake(var0003 * (3 * TICK));
 	}
 }
 
@@ -57607,7 +57769,7 @@ void Func0678 object#(0x678) () {
 		var var0001 = Func092D(var0000);
 		item_say("@Rel Ylem@");
 		declare var var0002;
-		if (Func0906() && (var0000->get_item_shape() == SHAPE_CHUNKS_OF_LEAD)) {
+		if (Func0906() && var0000->get_item_shape() == SHAPE_CHUNKS_OF_LEAD) {
 			var0002 = script item {
 				face var0001;
 				sfx 66;
@@ -57631,9 +57793,9 @@ void Func0678 object#(0x678) () {
 			};
 		}
 	} else {
-		var var0005 = get_item_quantity(0x0001);
+		var var0005 = get_item_quantity(1);
 		var0005 *= 10;
-		set_item_shape(0x0285);
+		set_item_shape(SHAPE_GOLD_NUGGET);
 		var0005 = set_item_quantity(var0005);
 	}
 }
@@ -57647,7 +57809,7 @@ void Func0679 object#(0x679) () {
 		item_say("@Corp Por@");
 		declare var var0002;
 		if (Func0906()) {
-			var0002 = set_to_attack(var0000, 0x020F);
+			var0002 = set_to_attack(var0000, SHAPE_SPELL_DEATH_BOLT);
 			var0002 = script item {
 				face var0001;
 				actor frame cast_up;
@@ -57697,14 +57859,15 @@ void Func067A object#(0x67A) () {
 		declare var var0004;
 		declare var var0005;
 		if (Func0906()) {
-			var0004 = UI_create_new_object(0x026D);
+			var0004 = UI_create_new_object(SHAPE_SPELL_DELAYED_EXPLOSION);
 			if (var0004) {
 				var0004->set_item_flag(TEMPORARY);
 				var0004->set_item_flag(INVISIBLE);
 				var0005 = UI_update_last_created(var0003);
 				if (var0005) {
 					var0005 = var0004->set_npc_prop(HEALTH, 1);
-					var0005 = set_to_attack(var0004, 0x026D);
+					var0005 = set_to_attack(
+							var0004, SHAPE_SPELL_DELAYED_EXPLOSION);
 					var0005 = script item after 12 ticks {
 						nohalt;
 						attack;
@@ -57754,7 +57917,7 @@ void Func067B object#(0x67B) () {
 		var var0003 = var0001.y + 1;
 		var var0004 = var0001.z;
 		struct<Position> var0005 = [var0002, var0003, var0004];
-		var var0006 = UI_is_not_blocked(var0005, 0x0300, 0x0000);
+		var var0006 = UI_is_not_blocked(var0005, SHAPE_ENERGY_FIELD, 0);
 		declare var var0007;
 		if (Func0906() && var0006) {
 			var0007 = script item {
@@ -57762,11 +57925,11 @@ void Func067B object#(0x67B) () {
 				actor frame reach_1h;
 				actor frame strike_1h;
 			};
-			var var0008 = UI_create_new_object(0x0300);
+			var var0008 = UI_create_new_object(SHAPE_ENERGY_FIELD);
 			if (var0008) {
 				var var0009 = UI_update_last_created(var0005);
 				if (var0009) {
-					var var000A = 0x00C8;
+					var var000A = 200;
 					var0009 = var0008->set_item_quality(var000A);
 					var0009 = script var0008 after var000A ticks remove;
 					;
@@ -57800,7 +57963,7 @@ void Func067C object#(0x67C) () {
 		item_say("@In Hur Grav Ylem@");
 		declare var var0002;
 		if (Func0906()) {
-			var0002 = set_to_attack(var0000, 0x018F);
+			var0002 = set_to_attack(var0000, SHAPE_SPELL_ENERGY_MYST);
 			var0002 = script item {
 				face var0001;
 				sfx 65;
@@ -57996,7 +58159,7 @@ void Func0680 object#(0x680) () {
 	}
 	if (event == SCRIPTED) {
 		item_say("@In Corp Hur Tym@");
-		UI_earthquake(0x0028);
+		UI_earthquake(40 * TICK);
 		UI_armageddon();
 		gflags[CAST_ARMAGEDDON] = true;
 	}
@@ -58010,7 +58173,7 @@ void Func0681 object#(0x681) () {
 		item_say("@Vas Corp Hur@");
 		declare var var0002;
 		if (Func0906()) {
-			var0002 = set_to_attack(var0000, 0x027F);
+			var0002 = set_to_attack(var0000, SHAPE_SPELL_DEATH_VORTEX);
 			var var0003 = script item {
 				face var0001;
 				sfx 65;
@@ -58048,7 +58211,7 @@ void Func0682 object#(0x682) () {
 				actor frame cast_out;
 				sfx 67;
 			};
-			var var0002 = 0x0019;
+			var var0002 = 25;
 			var var0003 = find_nearby(ANY_SHAPE, var0002, MASK_NPC);
 			var var0004 = UI_get_party_list2();
 			var0004 &= LORD_BRITISH->get_npc_object();
@@ -58144,22 +58307,24 @@ void Func0684 object#(0x684) () {
 		var0000->halt_scheduled();
 		halt_scheduled();
 		declare var var0006;
-		if (var0000->get_item_shape() in [0x0190, 0x019E, 0x030A]) {
+		if (var0000->get_item_shape() in [SHAPE_BODY1, SHAPE_BODY2, SHAPE_BODY4]) {
+			// NOTE: In SI, the 'if' condition could instead be replaced by:
+			// var0000->get_body_npc() == INVALID_NPC
 			var var0004 = var0000->get_item_quality();
 			var var0005 = var0000->get_item_quantity(var0001);
-			if ((var0004 == 0x0000) && (var0005 == 0x0000)) {
-				var0006 = 0x0000;
+			if (var0004 == 0 && var0005 == 0) {
+				var0006 = NULL_OBJ;
 			} else {
 				var0006 = var0000->resurrect();
 			}
 		} else {
-			var0006 = 0x0000;
+			var0006 = NULL_OBJ;
 		}
 		item_say("@In Mani Corp@");
 		declare var var0007;
 		declare var var0008;
 		if (Func0906() && var0006) {
-			var0007 = 0x0001;
+			var0007 = 1;
 			var0008 = script item {
 				face var0003;
 				sfx 64;
@@ -58175,7 +58340,7 @@ void Func0684 object#(0x684) () {
 					ANIMATION_GREEN_BUBBLES, var0002.x - 2, var0002.y - 2, 0, 0,
 					0, LOOP_ONCE);
 		} else {
-			var0007 = 0x0001;
+			var0007 = 1;
 			var0008 = script item {
 				face var0003;
 				actor frame kneeling;
@@ -58215,37 +58380,33 @@ void Func0685 object#(0x685) () {
 	}
 	if (event == SCRIPTED) {
 		var var0001 = [
-			0x0210, SHAPE_DRAGON, 0x0151, 0x0215, SHAPE_MONSTER_MAGE, 0x01F5, 0x01F9, 0x0373,
-			0x0112, 0x0202, 0x0162, 0x0295, 0x02C2
+			SHAPE_SKELETON, SHAPE_DRAGON, SHAPE_GHOST, SHAPE_TROLL,
+			SHAPE_MONSTER_MAGE, SHAPE_CYCLOPS_MONSTER, SHAPE_DRAKE,
+			SHAPE_WINGLESS_GARGOYLE, SHAPE_GARGOYLE_WARRIOR, SHAPE_HEADLESS,
+			SHAPE_LICHE, SHAPE_MONGBAT, SHAPE_SCORPION
 		];
-		var var0002 = [
-			0x0005, 0x000F, 0x0005, 0x0005, 0x0005, 0x0005, 0x0005, 0x0005,
-			0x000E, 0x0005, 0x000A, 0x0005, 0x0005
-		];
-		var var0003 = [
-			0x0005, 0x0001, 0x0005, 0x0001, 0x0002, 0x0002, 0x0002, 0x0001,
-			0x0001, 0x0003, 0x0001, 0x0005, 0x0002
-		];
+		var var0002 = [5, 15, 5, 5, 5, 5, 5, 5, 14, 5, 10, 5, 5];
+		var var0003 = [5, 1, 5, 1, 2, 2, 2, 1, 1, 3, 1, 5, 2];
 		var var0004 = Func092B(var0001);
 		declare var var0005;
 		declare var var0006;
 		do {
-			var0005 = UI_die_roll(0x0001, var0004);
-			var0006 = UI_die_roll(0x0001, 0x0064);
+			var0005 = UI_die_roll(1, var0004);
+			var0006 = UI_die_roll(1, 100);
 		} while (var0002[var0005] < var0006);
 		var var0007 = var0003[var0005];
-		var var0008 = var0007 / 0x0002;
-		if (var0008 < 0x0001) {
-			var0008 = 0x0001;
+		var var0008 = var0007 / 2;
+		if (var0008 < 1) {
+			var0008 = 1;
 		}
-		var var0009 = UI_die_roll(0x0001, var0008);
-		if (UI_die_roll(0x0001, 0x0002) == 0x0001) {
+		var var0009 = UI_die_roll(1, var0008);
+		if (UI_die_roll(1, 2) == 1) {
 			var0009 = -1 * var0009;
 		}
 		var0007 += var0009;
 		while (var0007) {
 			var0000 = UI_summon(var0001[var0005], true);
-			var0007 -= 0x0001;
+			var0007 -= 1;
 		}
 	}
 }
@@ -58258,7 +58419,7 @@ void Func0686 object#(0x686) () {
 		item_say("@In Jux Por Ylem@");
 		declare var var0003;
 		if (Func0906()) {
-			var var0002 = set_to_attack(var0000, 0x011F);
+			var var0002 = set_to_attack(var0000, SHAPE_SPELL_SWORDSTRIKE);
 			var0003 = script item {
 				face var0001;
 				sfx 65;
@@ -58334,7 +58495,7 @@ void Func068A object#(0x68A) () {
 void Func068B object#(0x68B) () {
 	var var0000 = AVATAR->get_npc_object()->find_nearest(SHAPE_ANVIL, 5);
 	if (var0000) {
-		var var0001 = Func0837(item, var0000, 0x0000, 0x0000, 0x0001);
+		var var0001 = Func0837(item, var0000, 0, 0, 1);
 		Func0838(item);
 	}
 }
@@ -58351,7 +58512,7 @@ void Func068D object#(0x68D) () {
 	var var0000 = get_item_frame();
 	var var0001 = AVATAR->get_npc_object()->get_cont_items(
 			SHAPE_SWORD_BLANK, QUALITY_ANY, FRAME_ANY);
-	if ((var0000 == FRAME_SWORD_BLANK_HOT1) || (var0000 == FRAME_SWORD_BLANK_HOTTEST)) {
+	if (var0000 == FRAME_SWORD_BLANK_HOT1 || var0000 == FRAME_SWORD_BLANK_HOTTEST) {
 		var var0002 = script AVATAR->get_npc_object() {
 			wait 10;
 			actor frame standing;
@@ -58366,8 +58527,8 @@ void Func068D object#(0x68D) () {
 }
 
 void Func068E object#(0x68E) () {
-	var var0000 = AVATAR->get_npc_object()->find_nearest(0x02E5, 0x0005);
-	if (Func0837(item, var0000, 0x0000, 0x0000, 0x0002)) {
+	var var0000 = AVATAR->get_npc_object()->find_nearest(SHAPE_WATER_TROUGH_NS, 5);
+	if (Func0837(item, var0000, 0, 0, 2)) {
 		struct<Position> var0001 = get_object_position();
 		UI_sprite_effect(
 				ANIMATION_POOF, var0001.x - 3, var0001.y - 3, 0, 0, 0,
@@ -58443,9 +58604,9 @@ void Func0691 object#(0x691) () {
 		};
 	}
 	if (event == DOUBLECLICK) {
-		var var0003 = UI_get_random(0x0064);
+		var var0003 = UI_get_random(100);
 		if (!gflags[IMPROVED_BLADE]) {
-			if (var0003 > 0x0042) {
+			if (var0003 > 66) {
 				gflags[IMPROVED_BLADE] = true;
 				AVATAR->show_npc_face(UI_is_pc_female());
 				say("After a short while you notice that the edge has "
@@ -58453,7 +58614,7 @@ void Func0691 object#(0x691) () {
 				AVATAR->hide();
 			}
 		} else if (!gflags[FINISHED_BLADE]) {
-			if (var0003 > 0x0042) {
+			if (var0003 > 66) {
 				gflags[FINISHED_BLADE] = true;
 				AVATAR->show_npc_face(UI_is_pc_female());
 				say("You feel that you've done the best job that you can, but "
@@ -58461,7 +58622,7 @@ void Func0691 object#(0x691) () {
 					"and cumbersome to wield as a weapon.");
 				gflags[FINISHED_BLADE_FORGING] = true;
 				AVATAR->hide();
-			} else if (var0003 < 0x0014) {
+			} else if (var0003 < 20) {
 				gflags[IMPROVED_BLADE] = false;
 				AVATAR->show_npc_face(UI_is_pc_female());
 				say("That last blow was perhaps a bit too hard, It'll take a "
@@ -58551,10 +58712,10 @@ void Func0694 object#(0x694) () {
 }
 
 void Func0695 object#(0x695) () {
-	var var0000 = AVATAR->get_npc_object()->find_nearest(0x02E4, 0x000A);
+	var var0000 = AVATAR->get_npc_object()->find_nearest(SHAPE_WELL_PULLEY, 10);
 	if (var0000) {
 		var var0001 = var0000->get_item_frame();
-		var0001 -= 0x0006;
+		var0001 -= 6;
 		var var0002 = script var0000 {
 			next frame cycle;
 			wait 1;
@@ -58649,7 +58810,7 @@ void Func0696 object#(0x696) () {
 		ERETHIAN->show_npc_face(0x0001);
 		if (!gflags[ERETHIAN_TURNED_GARGOYLE]) {
 			var0007 = set_last_created();
-			if (!UI_is_not_blocked(var0006, SHAPE_COW, 0)) {
+			if (!UI_is_not_blocked(var0006, SHAPE_COW, STAND_NORTH)) {
 				var0004 = true;
 				var0007 = UI_update_last_created(var0006);
 			} else {
@@ -58717,7 +58878,7 @@ void Func0696 object#(0x696) () {
 		};
 	}
 	if (var0001) {
-		var0000 = find_nearest(0x0112, 0x0001);
+		var0000 = find_nearest(SHAPE_GARGOYLE_WARRIOR, 1);
 		var var000C = script var0000 {
 			wait 6;
 			actor frame bowing;
@@ -58808,9 +58969,9 @@ void Func0697 object#(0x697) () {
 					ANIMATION_TELEPORT, var0000.x - 2, var0000.y - 2, 0, 0, 0,
 					LOOP_ONCE);
 			UI_play_sound_effect(0x0043);
-			set_item_frame(0x0004);
-			var0001 = UI_create_new_object(0x0112);
-			var0001->set_item_frame(0x001C);
+			set_item_frame(SWING_1_NORTH);
+			var0001 = UI_create_new_object(SHAPE_GARGOYLE_WARRIOR);
+			var0001->set_item_frame(KNEEL_SOUTH);
 			var0002 = UI_update_last_created(var0000);
 			var0003 = script item {
 				wait 16;
@@ -58834,10 +58995,10 @@ void Func0697 object#(0x697) () {
 					ANIMATION_MEDIUM_BLAST, var0000.x - 2, var0000.y - 2, 0, 0,
 					0, LOOP_ONCE);
 			UI_play_sound_effect(0x0009);
-			var0001 = find_nearest(0x0112, 0x0001);
+			var0001 = find_nearest(SHAPE_GARGOYLE_WARRIOR, 1);
 			var0001->remove_item();
 			var var0005 = UI_create_new_object(SHAPE_DRAGON);
-			var0005->set_item_frame(19);
+			var0005->set_item_frame(USE_SOUTH);
 			var0002 = UI_update_last_created(var0000);
 			var0006 = var0005->find_nearest(SHAPE_MONSTER_MAGE, 1);
 			var0003 = script var0006 {
@@ -58864,7 +59025,7 @@ void Func0697 object#(0x697) () {
 			UI_play_sound_effect(0x0008);
 			var0006 = find_nearest(SHAPE_MONSTER_MAGE, 1);
 			remove_item();
-			var0006->set_item_frame(0x001C);
+			var0006->set_item_frame(KNEEL_SOUTH);
 			var0003 = script var0006 {
 				actor frame kneeling;
 				wait 5;
@@ -58890,9 +59051,9 @@ void Func0697 object#(0x697) () {
 				ANIMATION_GREEN_BUBBLES, var0000.x, var0000.y, 0, 0, 0,
 				LOOP_ONCE);
 		UI_play_sound_effect(0x0043);
-		set_item_frame(0x0004);
-		var var000B = UI_create_new_object(0x0209);
-		var000B->set_item_frame(0x0010);
+		set_item_frame(SWING_1_NORTH);
+		var var000B = UI_create_new_object(SHAPE_MOUSE);
+		var000B->set_item_frame(STAND_SOUTH);
 		var0002 = UI_update_last_created(var0000);
 		var0003 = script item {
 			wait 11;
@@ -58924,9 +59085,9 @@ void Func0697 object#(0x697) () {
 		UI_sprite_effect(
 				ANIMATION_TELEPORT, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
 		UI_play_sound_effect(0x003E);
-		set_item_frame(0x0004);
+		set_item_frame(SWING_1_NORTH);
 		var var000D = UI_create_new_object(SHAPE_COW);
-		var000D->set_item_frame(23);
+		var000D->set_item_frame(SWING_2H_1_SOUTH);
 		var0002 = UI_update_last_created(var0000);
 		var0003 = script item {
 			wait 11;
@@ -58956,7 +59117,7 @@ void Func0697 object#(0x697) () {
 
 void Func0698 object#(0x698) () {
 	struct<Position> var0000 = get_object_position();
-	var var0001 = find_nearby(0x0209, 1, MASK_NPC);
+	var var0001 = find_nearby(SHAPE_MOUSE, 1, MASK_NPC);
 	var var0002 = find_nearby(SHAPE_COW, 1, MASK_NPC);
 	declare var var0003;
 	if (var0001) {
@@ -58965,7 +59126,7 @@ void Func0698 object#(0x698) () {
 				LOOP_ONCE);
 		UI_play_sound_effect(0x0043);
 		var0001->remove_item();
-		set_item_frame(0x001C);
+		set_item_frame(KNEEL_SOUTH);
 		var0003 = script item {
 			actor frame kneeling;
 			wait 5;
@@ -58983,7 +59144,7 @@ void Func0698 object#(0x698) () {
 				ANIMATION_TELEPORT, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
 		UI_play_sound_effect(0x003E);
 		var0002->remove_item();
-		set_item_frame(0x001E);
+		set_item_frame(CAST_1_SOUTH);
 		var0003 = script item {
 			actor frame cast_up;
 			wait 5;
@@ -59010,35 +59171,35 @@ void Func0699 object#(0x699) () {
 		if (var0006) {
 			var0006->move_object(var0005);
 		}
-		var var0007 = 0x0001;
+		var var0007 = 1;
 		var var0008 = UI_get_party_list();
 		struct<Position> var0009 = var0005;
 		for (var000C in var0008) {
-			if (var0007 == 0x0001) {
+			if (var0007 == 1) {
 				var0009.x = var0005.x - 2;
 				var0009.y = var0005.y + 2;
 			}
-			if (var0007 == 0x0002) {
+			if (var0007 == 2) {
 				var0009.x = var0005.x + 2;
 				var0009.y = var0005.y + 2;
 			}
-			if (var0007 == 0x0003) {
+			if (var0007 == 3) {
 				var0009.x = var0005.x - 4;
 				var0009.y = var0005.y + 4;
 			}
-			if (var0007 == 0x0004) {
+			if (var0007 == 4) {
 				var0009.x = var0005.x;
 				var0009.y = var0005.y + 4;
 			}
-			if (var0007 == 0x0005) {
+			if (var0007 == 5) {
 				var0009.x = var0005.x + 4;
 				var0009.y = var0005.y + 4;
 			}
-			if (var0007 == 0x0006) {
+			if (var0007 == 6) {
 				var0009.x = var0005.x - 2;
 				var0009.y = var0005.y + 6;
 			}
-			if (var0007 == 0x0007) {
+			if (var0007 == 7) {
 				var0009.x = var0005.x + 2;
 				var0009.y = var0005.y + 6;
 			}
@@ -59047,7 +59208,7 @@ void Func0699 object#(0x699) () {
 				var var000D = script var000C {
 					face north;
 				};
-				var0007 += 0x0001;
+				var0007 += 1;
 			}
 		}
 		var var000E = script item {
@@ -59061,11 +59222,11 @@ void Func0699 object#(0x699) () {
 		declare var var0010;
 		if (UI_is_pc_female()) {
 			var0010 = script var0006 {
-				frame 20;
+				frame FRAME_STATUE_FEMALE_AVATAR_NORTH;
 			};
 		} else {
 			var0010 = script var0006 {
-				frame 18;
+				frame FRAME_STATUE_MALE_AVATAR_NORTH;
 			};
 		}
 	}
@@ -59154,30 +59315,28 @@ void Func069D object#(0x69D) () {
 	}
 	var var0001 = false;
 	var var0002 = false;
-	var var0003 = AVATAR->get_npc_object()->find_nearest(0x02CE, 0x000A);
+	var var0003 = AVATAR->get_npc_object()->find_nearest(SHAPE_PEDESTAL2, 10);
 	if (var0003) {
 		var var0004 = Func092D(var0003);
-		if ((var0004 == 0x0000)
-			|| ((var0004 == 0x0001) || (var0004 == 0x0007))) {
+		if (var0004 == 0 || (var0004 == 1 || var0004 == 7)) {
 			var0001 = [0, 0, 1, -1];
 			var0002 = [-1, 1, 0, 0];
 		}
-		if (var0004 == 0x0002) {
+		if (var0004 == 2) {
 			var0001 = [1, 0, 0, -1];
 			var0002 = [0, 1, -1, 0];
 		}
-		if ((var0004 == 0x0003)
-			|| ((var0004 == 0x0004) || (var0004 == 0x0005))) {
+		if (var0004 == 3 || (var0004 == 4 || var0004 == 5)) {
 			var0001 = [0, 0, 1, -1];
 			var0002 = [1, -1, 0, 0];
 		}
-		if (var0004 == 0x0006) {
+		if (var0004 == 6) {
 			var0001 = [-1, 0, 0, 1];
 			var0002 = [0, 1, -1, 0];
 		}
 	} else {
-		var0001 = [0x0000, 0x0001, 0x0000, -1];
-		var0002 = [-1, 0x0000, 0x0001, 0x0000];
+		var0001 = [0, 1, 0, -1];
+		var0002 = [-1, 0, 1, 0];
 	}
 	var var0005 = AVATAR->get_npc_object();
 	Func0828(var0005, var0001, var0002, 0, Func069D, var0005, BG_PATH_SUCCESS);
@@ -59233,7 +59392,7 @@ void Func069F object#(0x69F) () {
 		declare var var000A;
 		if (var0005 == FRAME_EGG_PATH) {
 			if (var0004 == 0) {
-				var0007 = 0x0003;
+				var0007 = 3;
 				var0008.x = 0x0887;
 				var0008.y = 0x05F5;
 				var0008.z = 0x0000;
@@ -59243,7 +59402,7 @@ void Func069F object#(0x69F) () {
 				var000A = UI_update_last_created(var0006);
 			}
 			if (var0004 == 1) {
-				var0007 = 0x0001;
+				var0007 = 1;
 				var0008.x = 0x088C;
 				var0008.y = 0x05F7;
 				var0008.z = 0x0000;
@@ -59256,7 +59415,7 @@ void Func069F object#(0x69F) () {
 						0, 0, 0, LOOP_ONCE);
 			}
 			if (var0004 == 2) {
-				var0007 = 0x0002;
+				var0007 = 2;
 				var0008.x = 0x088B;
 				var0008.y = 0x05F1;
 				var0008.z = 0x0000;
@@ -59266,39 +59425,39 @@ void Func069F object#(0x69F) () {
 				var000A = UI_update_last_created(var0006);
 			}
 			if (var0004 == 4) {
-				var0007 = 0x0003;
+				var0007 = 3;
 				var0008.x = 0x0891;
 				var0008.y = 0x05F0;
 				var0008.z = 0x0000;
 				Func087E(var0008, var0007, var0006, var0003);
-				var var000D = UI_create_new_object(0x02E5);
-				var000D->set_item_frame(0x0004);
+				var var000D = UI_create_new_object(SHAPE_WATER_TROUGH_NS);
+				var000D->set_item_frame(FRAME_WATER_TROUGH_GOLDEN);
 				var000A = UI_update_last_created(var0006);
 				UI_sprite_effect(
 						ANIMATION_GREEN_BUBBLES, var0006.x - 5, var0006.y - 1,
 						0, 0, 0, LOOP_ONCE);
 			}
 			if (var0004 == 5) {
-				var0007 = 0x0003;
+				var0007 = 3;
 				var0008.x = 0x0894;
 				var0008.y = 0x05F6;
 				var0008.z = 0x0000;
 				Func087E(var0008, var0007, var0006, var0003);
 				var var000E = UI_create_new_object(SHAPE_WELL);
-				var000E->set_item_frame(0x0001);
+				var000E->set_item_frame(FRAME_WELL_GOLDEN);
 				var000A = UI_update_last_created(var0006);
 				UI_sprite_effect(
 						ANIMATION_GREEN_BUBBLES, var0006.x - 2, var0006.y - 2,
 						0, 0, 0, LOOP_ONCE);
 			}
 			if (var0004 == 6) {
-				var0007 = 0x0003;
+				var0007 = 3;
 				var0008.x = 0x0898;
 				var0008.y = 0x05F3;
 				var0008.z = 0x0000;
 				Func087E(var0008, var0007, var0006, var0003);
-				var var000F = UI_create_new_object(0x02E4);
-				var000F->set_item_frame(0x000C);
+				var var000F = UI_create_new_object(SHAPE_WELL_PULLEY);
+				var000F->set_item_frame(FRAME_GOLDEN_BEAM);
 				var000A = UI_update_last_created(var0006);
 			}
 		}
@@ -59332,20 +59491,20 @@ void Func06A0 object#(0x6A0) () {
 			declare var var000B;
 			declare var var000C;
 			if (var0008 == 3) {
-				var000B = var0007->find_nearest(0x02A3, 0x0001);
+				var000B = var0007->find_nearest(SHAPE_DESK_ITEMS, 1);
 				var000C = var000B->get_item_frame();
 				if (var000B) {
-					if (var000C == 0x0010) {
+					if (var000C == FRAME_DESK_ITEM_MIRROR) {
 						var0001 = var000B;
 						var0002 = var000A;
 					}
 				}
 			}
 			if (var0008 == 7) {
-				var000B = var0007->find_nearest(0x03E7, 0x0001);
+				var000B = var0007->find_nearest(SHAPE_PLANT, 1);
 				var000C = var000B->get_item_frame();
 				if (var000B) {
-					if (var000C == 0x0001) {
+					if (var000C == FRAME_PLANT_FLOWER_POT) {
 						var0003 = var000B;
 						var0004 = var000A;
 					}
@@ -59500,8 +59659,8 @@ void Func06A2 object#(0x6A2) () {
 		if (var0005 == FRAME_EGG_PATH) {
 			declare var var0009;
 			if (var0004 == 3) {
-				var var0007 = UI_create_new_object(0x02A3);
-				var0007->set_item_frame(0x0010);
+				var var0007 = UI_create_new_object(SHAPE_DESK_ITEMS);
+				var0007->set_item_frame(FRAME_DESK_ITEM_MIRROR);
 				struct<Position> var0008 = var0006;
 				var0008.x -= 1;
 				var0009 = UI_update_last_created(var0008);
@@ -59510,8 +59669,8 @@ void Func06A2 object#(0x6A2) () {
 						0, 0, 0, LOOP_ONCE);
 			}
 			if (var0004 == 7) {
-				var var000A = UI_create_new_object(0x03E7);
-				var000A->set_item_frame(0x0001);
+				var var000A = UI_create_new_object(SHAPE_PLANT);
+				var000A->set_item_frame(FRAME_PLANT_FLOWER_POT);
 				var0009 = UI_update_last_created(var0006);
 				UI_sprite_effect(
 						ANIMATION_GREEN_BUBBLES, var0006.x - 1, var0006.y - 2,
@@ -59544,7 +59703,9 @@ void Func06A3 object#(0x6A3) () {
 				var0001 = false;
 				var0002 = find_nearby(SHAPE_MONSTER_MAGE, 80, MASK_NPC2);
 				for (var0005 in var0002) {
-					if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN, 4)) {
+					if (var0005->get_cont_items(
+							SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN,
+							FRAME_SCROLL_INVISIBLE)) {
 						var0001 = var0005;
 					}
 				}
@@ -59554,8 +59715,8 @@ void Func06A3 object#(0x6A3) () {
 						if (!UI_is_not_blocked(
 									get_object_position(),
 									SHAPE_MONSTER_MAGE,
-									16)) {
-							Func08EB(item, SHAPE_MONSTER_MAGE, 16);
+									STAND_SOUTH)) {
+							Func08EB(item, SHAPE_MONSTER_MAGE, STAND_SOUTH);
 						}
 						var0007 = get_object_position()
 								  & (QUALITY_ANY & FRAME_EGG_MONSTER);
@@ -59581,7 +59742,7 @@ void Func06A3 object#(0x6A3) () {
 						var var000B = UI_create_new_object(SHAPE_SCROLL);
 						var000B->set_item_flag(TEMPORARY);
 						var0009 = var000B->set_item_quality(QUALITY_SCROLL_ERETHIAN);
-						var000B->set_item_frame(4);
+						var000B->set_item_frame(FRAME_SCROLL_INVISIBLE);
 						var0009 = var0006->give_last_created();
 						var000C = script var000B after 3 ticks {
 							finish;
@@ -59597,7 +59758,9 @@ void Func06A3 object#(0x6A3) () {
 				var0001 = false;
 				var0002 = find_nearby(SHAPE_DRAGON, 80, MASK_NPC2);
 				for (var0005 in var0002) {
-					if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS, 4)) {
+					if (var0005->get_cont_items(
+							SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS,
+							FRAME_SCROLL_INVISIBLE)) {
 						var0001 = var0005;
 					}
 				}
@@ -59605,8 +59768,8 @@ void Func06A3 object#(0x6A3) () {
 					var0006 = find_nearest(SHAPE_DRAGON, 1);
 					if (!var0006) {
 						if (!UI_is_not_blocked(
-									get_object_position(), SHAPE_DRAGON, 19)) {
-							Func08EB(item, SHAPE_DRAGON, 19);
+									get_object_position(), SHAPE_DRAGON, USE_SOUTH)) {
+							Func08EB(item, SHAPE_DRAGON, USE_SOUTH);
 						}
 						var0007 = get_object_position()
 								  & (QUALITY_ANY & FRAME_EGG_MONSTER);
@@ -59620,12 +59783,12 @@ void Func06A3 object#(0x6A3) () {
 						};
 					} else {
 						var0006->set_schedule_type(WAIT);
-						var0006->set_item_frame(0x0013);
+						var0006->set_item_frame(USE_SOUTH);
 						var0006->set_item_flag(TEMPORARY);
 						var var000F = UI_create_new_object(SHAPE_SCROLL);
 						var000F->set_item_flag(TEMPORARY);
 						var0009 = var000F->set_item_quality(QUALITY_SCROLL_DRACOTHRAXUS);
-						var000F->set_item_frame(4);
+						var000F->set_item_frame(FRAME_SCROLL_INVISIBLE);
 						var0009 = var0006->give_last_created();
 						var000C = script var000F after 3 ticks {
 							finish;
@@ -59640,18 +59803,20 @@ void Func06A3 object#(0x6A3) () {
 		if (var0000 == 4) {
 			if ((!gflags[CREATED_GOLEM_BODY_1]) && gflags[ADJHAR_IS_ALIVE]) {
 				var0001 = false;
-				var0002 = find_nearby(0x03F7, 0x0050, MASK_NPC2);
+				var0002 = find_nearby(SHAPE_GOLEM, 80, MASK_NPC2);
 				for (var0005 in var0002) {
-					if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, 4)) {
+					if (var0005->get_cont_items(
+							SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR,
+							FRAME_SCROLL_INVISIBLE)) {
 						var0001 = var0005;
 					}
 				}
 				if (!var0001) {
-					var0006 = find_nearest(0x03F7, 0x0001);
+					var0006 = find_nearest(SHAPE_GOLEM, 1);
 					if (!var0006) {
 						if (!UI_is_not_blocked(
-									get_object_position(), 0x03F7, 0x0010)) {
-							Func08EB(item, 0x03F7, 0x0010);
+									get_object_position(), SHAPE_GOLEM, STAND_SOUTH)) {
+							Func08EB(item, SHAPE_GOLEM, STAND_SOUTH);
 						}
 						var0007 = get_object_position()
 								  & (QUALITY_ANY & FRAME_EGG_MONSTER);
@@ -59664,7 +59829,7 @@ void Func06A3 object#(0x6A3) () {
 							call Func06A3;
 						};
 					} else {
-						var0006->set_item_frame(0x0010);
+						var0006->set_item_frame(STAND_SOUTH);
 						var0006->set_item_flag(TEMPORARY);
 						if (gflags[ADJHAR_IS_ALIVE]
 							&& ((!gflags[BOLLUX_IS_DEAD])
@@ -59677,7 +59842,7 @@ void Func06A3 object#(0x6A3) () {
 						var0012 = UI_create_new_object(SHAPE_SCROLL);
 						var0012->set_item_flag(TEMPORARY);
 						var0009 = var0012->set_item_quality(QUALITY_SCROLL_ADJHAR);
-						var0012->set_item_frame(4);
+						var0012->set_item_frame(FRAME_SCROLL_INVISIBLE);
 						var0009 = var0006->give_last_created();
 						var000C = script var0012 after 3 ticks {
 							finish;
@@ -59694,18 +59859,20 @@ void Func06A3 object#(0x6A3) () {
 		if (var0000 == 5) {
 			if ((!gflags[CREATED_GOLEM_BODY_2]) && (!gflags[BOLLUX_IS_DEAD])) {
 				var0001 = false;
-				var0002 = find_nearby(0x03F7, 0x0050, MASK_NPC2);
+				var0002 = find_nearby(SHAPE_GOLEM, 80, MASK_NPC2);
 				for (var0005 in var0002) {
-					if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX, 4)) {
+					if (var0005->get_cont_items(
+							SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX,
+							FRAME_SCROLL_INVISIBLE)) {
 						var0001 = var0005;
 					}
 				}
 				if (!var0001) {
-					var0006 = find_nearest(0x03F7, 0x0001);
+					var0006 = find_nearest(SHAPE_GOLEM, 1);
 					if (!var0006) {
 						if (!UI_is_not_blocked(
-									get_object_position(), 0x03F7, 0x0010)) {
-							Func08EB(item, 0x03F7, 0x0010);
+									get_object_position(), SHAPE_GOLEM, STAND_SOUTH)) {
+							Func08EB(item, SHAPE_GOLEM, STAND_SOUTH);
 						}
 						var0007 = get_object_position()
 								  & (QUALITY_ANY & FRAME_EGG_MONSTER);
@@ -59718,7 +59885,7 @@ void Func06A3 object#(0x6A3) () {
 							call Func06A3;
 						};
 					} else {
-						var0006->set_item_frame(0x0010);
+						var0006->set_item_frame(STAND_SOUTH);
 						if (gflags[ADJHAR_IS_ALIVE]
 							&& ((!gflags[BOLLUX_IS_DEAD])
 								&& (!gflags[REVIVING_GOLEM]))) {
@@ -59730,7 +59897,7 @@ void Func06A3 object#(0x6A3) () {
 						var0012 = UI_create_new_object(SHAPE_SCROLL);
 						var0012->set_item_flag(TEMPORARY);
 						var0009 = var0012->set_item_quality(QUALITY_SCROLL_BOLLUX);
-						var0012->set_item_frame(4);
+						var0012->set_item_frame(FRAME_SCROLL_INVISIBLE);
 						var0009 = var0006->give_last_created();
 						var000C = script var0012 after 3 ticks {
 							finish;
@@ -59745,10 +59912,12 @@ void Func06A3 object#(0x6A3) () {
 			}
 		}
 		if (var0000 == 6) {
-			var var0015 = find_nearby(ANY_SHAPE, 0x000A, MASK_NPC2);
+			var var0015 = find_nearby(ANY_SHAPE, 10, MASK_NPC2);
 			for (var0018 in var0015) {
 				if (var0018->get_item_shape() == SHAPE_DRAGON) {
-					if (var0018->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS, 4)) {
+					if (var0018->get_cont_items(
+							SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS,
+							FRAME_SCROLL_INVISIBLE)) {
 						item->Func01F8();
 					}
 				}
@@ -59764,13 +59933,13 @@ void Func06A3 object#(0x6A3) () {
 		if (var0000 == 8) {
 			if (!gflags[CREATED_GOLEM_BODY_4]) {
 				var0019 = QUALITY_SCROLL_GOLEM_4;
-				var001A = 4;
+				var001A = SOUTH;
 			}
 		}
 		if (var0000 == 9) {
 			if (!gflags[CREATED_GOLEM_BODY_5]) {
 				var0019 = QUALITY_SCROLL_GOLEM_5;
-				var001A = 4;
+				var001A = SOUTH;
 			}
 		}
 		if (var0000 == 10) {
@@ -59781,7 +59950,7 @@ void Func06A3 object#(0x6A3) () {
 		if (var0000 == 11) {
 			if (!gflags[CREATED_GOLEM_BODY_7]) {
 				var0019 = QUALITY_SCROLL_GOLEM_7;
-				var001A = 4;
+				var001A = SOUTH;
 			}
 		}
 		if (var0000 == 12) {
@@ -59810,18 +59979,19 @@ void Func06A3 object#(0x6A3) () {
 			}
 		}
 		if (var0019) {
-			var0002 = find_nearby(0x03F7, 0x0050, MASK_NPC);
+			var0002 = find_nearby(SHAPE_GOLEM, 80, MASK_NPC);
 			for (var0005 in var0002) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, var0019, 4)) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, var0019, FRAME_SCROLL_INVISIBLE)) {
 					var0001 = var0005;
 				}
 			}
 			if (!var0001) {
-				var0006 = find_nearest(0x03F7, 0x0001);
+				var0006 = find_nearest(SHAPE_GOLEM, 1);
 				if (!var0006) {
 					if (!UI_is_not_blocked(
-								get_object_position(), 0x03F7, 0x0010)) {
-						Func08EB(item, 0x03F7, 0x0010);
+								get_object_position(), SHAPE_GOLEM, STAND_SOUTH)) {
+						Func08EB(item, SHAPE_GOLEM, STAND_SOUTH);
 					}
 					var0007 = get_object_position() & (QUALITY_ANY & FRAME_EGG_MONSTER);
 					var0008 = var0007->find_nearby(SHAPE_EGG, 0, MASK_EGG);
@@ -59832,7 +60002,7 @@ void Func06A3 object#(0x6A3) () {
 						call Func06A3;
 					};
 				} else {
-					var0006->set_item_frame(0x0000);
+					var0006->set_item_frame(STAND_NORTH);
 					var0006->set_item_flag(TEMPORARY);
 					if (var001A) {
 						var var001D = script var0006 {
@@ -59843,7 +60013,7 @@ void Func06A3 object#(0x6A3) () {
 					var0012 = UI_create_new_object(SHAPE_SCROLL);
 					var0012->set_item_flag(TEMPORARY);
 					var0009 = var0012->set_item_quality(var0019);
-					var0012->set_item_frame(4);
+					var0012->set_item_frame(FRAME_SCROLL_INVISIBLE);
 					var0009 = var0006->give_last_created();
 					var000C = script var0012 after 3 ticks {
 						finish;
@@ -59902,9 +60072,9 @@ void Func06A9 object#(0x6A9) () {
 
 void Func06AA object#(0x6AA) () {
 	if (event == SCRIPTED) {
-		var var0000 = UI_create_new_object(0x009D);
+		var var0000 = UI_create_new_object(SHAPE_RED_MOONGATE_EW);
 		if (var0000) {
-			AVATAR->set_item_frame_rot(0x0020);
+			AVATAR->set_item_frame_rot(STAND_WEST);
 			struct<Position> var0001 = AVATAR->get_object_position();
 			var0001.x += 1;
 			var0001.y += 1;
@@ -59943,7 +60113,7 @@ void Func06AB object#(0x6AB) () {
 
 void Func06AC object#(0x6AC) () {
 	if (event == EGG) {
-		var var0000 = find_nearby(0x02F1, 0x0005, MASK_NONE);
+		var var0000 = find_nearby(SHAPE_STONE_HARPIE, 5, MASK_NONE);
 		for (var0003 in var0000) {
 			var0003->set_alignment(EVIL);
 			var0003->set_schedule_type(IN_COMBAT);
@@ -60072,8 +60242,8 @@ void Func06B4 object#(0x6B4) () {
 void Func06B5 object#(0x6B5) () {
 	if (event == EGG) {
 		event = DOUBLECLICK;
-		var var0000 = find_nearby(SHAPE_DOOR_NS_RIGHT, 0x0028, MASK_NONE);
-		var0000 &= find_nearby(SHAPE_DOOR_EW_BOTTOM, 0x0028, MASK_NONE);
+		var var0000 = find_nearby(SHAPE_DOOR_NS_RIGHT, 40, MASK_NONE);
+		var0000 &= find_nearby(SHAPE_DOOR_EW_BOTTOM, 40, MASK_NONE);
 		var var0001 = [];
 		declare var var0004;
 		for (var0004 in var0000) {
@@ -60088,7 +60258,7 @@ void Func06B5 object#(0x6B5) () {
 				// Need to make UCC optimize this.
 				goto labelFunc06B5_00BE;
 			}
-			if (Func081B(var0004) != 0x0002) {
+			if (Func081B(var0004) != FRAME_DOOR_LOCKED) {
 				break;
 			}
 			var0005 += 1;
@@ -60119,9 +60289,9 @@ void Func06B6 object#(0x6B6) () {
 		var0004 = var0000[1];
 		if (var0004) {
 			var var0005 = var0004->get_item_frame();
-			var var0006 = var0005 % 0x0004;
+			var var0006 = var0005 % 4;
 			declare var var0007;
-			if (var0006 < 0x0003) {
+			if (var0006 < (WEST / 2)) {
 				var0007 = script var0004 {
 					sfx 83;
 					next frame cycle;
@@ -60267,7 +60437,7 @@ void Func06BC object#(0x6BC) () {
 		var var0000 = get_item_quality();
 		declare var var0001;
 		if (!var0000) {
-			var0001 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
+			var0001 = find_nearby(SHAPE_ANY, 40, MASK_NPC2);
 		} else {
 			var0001 = find_nearby(SHAPE_ANY, var0000, MASK_NPC2);
 		}
@@ -60282,18 +60452,18 @@ void Func06BC object#(0x6BC) () {
 
 void Func06BD object#(0x6BD) () {
 	if (event == EGG) {
-		var var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
+		var var0000 = find_nearby(SHAPE_ANY, 40, MASK_NPC2);
 		var var0001 = UI_get_party_list();
-		var var0002 = 0x000A;
+		var var0002 = 10;
 		var var0003 = get_item_flag(IN_PARTY);
 		for (var0006 in var0000) {
-			if ((!var0003) || (!(var0006 in var0001))) {
-				var var0007 = 0x0000;
+			if (!var0003 || !(var0006 in var0001)) {
+				var var0007 = 0;
 				var var0008 = "";
 				while (var0007 < var0002) {
-					var var0009 = UI_die_roll(0x0000, 0x0008);
+					var var0009 = UI_die_roll(0, 8);
 					declare var var000A;
-					if (var0009 == 0x0000) {
+					if (var0009 == 0) {
 						var000A = new script {
 							actor frame kneeling;
 							actor frame bowing;
@@ -60301,7 +60471,7 @@ void Func06BD object#(0x6BD) () {
 						};
 						var0008 = [var0008, var000A];
 					}
-					if (var0009 == 0x0001) {
+					if (var0009 == 1) {
 						var000A = new script {
 							actor frame kneeling;
 							actor frame standing;
@@ -60309,7 +60479,7 @@ void Func06BD object#(0x6BD) () {
 						};
 						var0008 = [var0008, var000A];
 					}
-					if (var0009 == 0x0002) {
+					if (var0009 == 2) {
 						var000A = new script {
 							actor frame bowing;
 							actor frame sleeping;
@@ -60317,7 +60487,7 @@ void Func06BD object#(0x6BD) () {
 						};
 						var0008 = [var0008, var000A];
 					}
-					if (var0009 == 0x0003) {
+					if (var0009 == 3) {
 						var000A = new script {
 							actor frame standing;
 							actor frame standing;
@@ -60325,7 +60495,7 @@ void Func06BD object#(0x6BD) () {
 						};
 						var0008 = [var0008, var000A];
 					}
-					if (var0009 == 0x0004) {
+					if (var0009 == 4) {
 						var000A = new script {
 							actor frame kneeling;
 							actor frame ready;
@@ -60333,7 +60503,7 @@ void Func06BD object#(0x6BD) () {
 						};
 						var0008 = [var0008, var000A];
 					}
-					if (var0009 == 0x0005) {
+					if (var0009 == 5) {
 						var000A = new script {
 							actor frame ready;
 							actor frame kneeling;
@@ -60342,9 +60512,8 @@ void Func06BD object#(0x6BD) () {
 						var0008 = [var0008, var000A];
 					}
 					declare var var000B;
-					if (var0009 == 0x0006) {
-						var000B = FACE_NORTH
-								  + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+					if (var0009 == 6) {
+						var000B = FACE_NORTH + (UI_die_roll(0, 3) * 2);
 						var000A = new script {
 							face var000B;
 							actor frame bowing;
@@ -60352,9 +60521,8 @@ void Func06BD object#(0x6BD) () {
 						};
 						var0008 = [var0008, var000A];
 					}
-					if (var0009 == 0x0007) {
-						var000B = FACE_NORTH
-								  + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+					if (var0009 == 7) {
+						var000B = FACE_NORTH + (UI_die_roll(0, 3) * 2);
 						var000A = new script {
 							face var000B;
 							actor frame kneeling;
@@ -60362,9 +60530,8 @@ void Func06BD object#(0x6BD) () {
 						};
 						var0008 = [var0008, var000A];
 					}
-					if (var0009 == 0x0008) {
-						var000B = FACE_NORTH
-								  + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+					if (var0009 == 8) {
+						var000B = FACE_NORTH + (UI_die_roll(0, 3) * 2);
 						var000A = new script {
 							face var000B;
 							actor frame ready;
@@ -60372,13 +60539,13 @@ void Func06BD object#(0x6BD) () {
 						};
 						var0008 = [var0008, var000A];
 					}
-					var0007 += 0x0001;
+					var0007 += 1;
 				}
 				var0006->halt_scheduled();
 				var var000C = var0006->run_script(var0008);
 			}
 		}
-		UI_earthquake(var0002 * 0x0003);
+		UI_earthquake(var0002 * (3 * TICK));
 	}
 }
 
@@ -60401,7 +60568,7 @@ void Func06BF object#(0x6BF) () {
 
 void Func06C0 object#(0x6C0) () {
 	if (event == EGG) {
-		var var0000 = find_nearby(0x01EE, 0x0063, MASK_NONE);
+		var var0000 = find_nearby(SHAPE_BEE, 99, MASK_NONE);
 		for (var0003 in var0000) {
 			var var0004 = var0003->get_schedule_type();
 			if (!(var0004 == IN_COMBAT)) {
@@ -60415,7 +60582,7 @@ void Func06C1 object#(0x6C1) () {
 	if (event == EGG) {
 		if (gflags[WISP_READ_NOTEBOOK] && (!gflags[SEEN_NEW_MAGINCIA_MURDER])) {
 			ALAGNER->remove_npc();
-			var var0000 = find_nearby(0x0363, 15, MASK_NONE);
+			var var0000 = find_nearby(SHAPE_VICTIM, 15, MASK_NONE);
 			var var0001 = find_nearby(SHAPE_LIT_LIGHT_SOURCE, 15, MASK_NONE);
 			var var0002 = find_nearby(SHAPE_BUCKET, 15, MASK_NONE);
 			var var0003 = find_nearby(SHAPE_BLOOD, 15, MASK_ALL_UNSEEN);
@@ -60425,7 +60592,7 @@ void Func06C1 object#(0x6C1) () {
 				struct<Position> var0009 = var0007->get_object_position();
 				if (var0009.z == 6) {
 					declare struct<Position> var000A;
-					if ((var0008 == 0x0363) || (var0008 == SHAPE_BLOOD)) {
+					if (var0008 == SHAPE_VICTIM || var0008 == SHAPE_BLOOD) {
 						var000A = [var0009.x, var0009.y, 1];
 					} else {
 						var000A = [var0009.x, var0009.y, 0];
@@ -60436,11 +60603,13 @@ void Func06C1 object#(0x6C1) () {
 					}
 				}
 			}
-			var var000C = find_nearby(0x0190, 0x0028, MASK_NONE);
-			var000C &= find_nearby(0x019E, 0x0028, MASK_NONE);
+			var var000C = find_nearby(SHAPE_BODY1, 40, MASK_NONE);
+			var000C &= find_nearby(SHAPE_BODY2, 40, MASK_NONE);
 			for (var000F in var000C) {
-				if ((var000F->get_item_quality() == 0x0001)
-					&& (var000F->get_item_quantity(0x0001) == 0x0076)) {
+				// NOTE: In SI, the 'if' condition could instead be replaced by:
+				// var000F->get_body_npc() == ALAGNER
+				if (var000F->get_item_quality() == (((-ALAGNER) / 128) % 4)
+						&& var000F->get_item_quantity(1) == ((-ALAGNER) % 128)) {
 					var000F->remove_item();
 				}
 			}
@@ -60448,7 +60617,7 @@ void Func06C1 object#(0x6C1) () {
 			UI_set_timer(0x0006);
 		} else if (gflags[WISP_READ_NOTEBOOK]) {
 			var var0010 = UI_get_timer(0x0006);
-			if (var0010 >= 0x0018) {
+			if (var0010 >= 24) {
 				Func080F();
 				remove_item();
 			}
@@ -60468,10 +60637,10 @@ void Func06C2 object#(0x6C2) () {
 					var0004 = UI_update_last_created(FLAG_DESTROY);
 				}
 			}
-			var var0005 = find_nearby(0x019E, 0x0050, MASK_NONE);
+			var var0005 = find_nearby(SHAPE_BODY2, 80, MASK_NONE);
 			for (var0008 in var0005) {
 				var var0009 = var0008->get_item_frame();
-				if (var0009 > 0x0014) {
+				if (var0009 > FRAME_BODY2_DUPRE) {
 					var0004 = var0008->set_last_created();
 					if (var0004) {
 						var0004 = UI_update_last_created(FLAG_DESTROY);
@@ -60575,12 +60744,13 @@ void Func06CC object#(0x6CC) () {
 			var var0000 = get_item_quality();
 			var var0001 = UI_get_party_list();
 			for (var0004 in var0001) {
-				if (!var0004->is_readied(BG_HEAD, 0x027E, FRAME_ANY)) {
+				if (!var0004->is_readied(
+						BG_HEAD, SHAPE_CADDELLITE_HELMET, FRAME_ANY)) {
 					declare var var0005;
-					if (var0000 == 0x001E) {
-						var0005 = 0x001E;
+					if (var0000 == 30) {
+						var0005 = 30;
 					} else {
-						var0005 = UI_die_roll(0x0001, var0000);
+						var0005 = UI_die_roll(1, var0000);
 					}
 					var0004->reduce_health(var0005, SONIC_DAMAGE);
 				}
@@ -60591,7 +60761,8 @@ void Func06CC object#(0x6CC) () {
 
 void Func06CF object#(0x6CF) () {
 	if (gflags[BROKE_SPHERE] == 0) {
-		var var0000 = PARTY->count_objects(0x0347, QUALITY_ANY, 0x0001);
+		var var0000 = PARTY->count_objects(
+				SHAPE_HOURGLASS, QUALITY_ANY, FRAME_HOURGLASS_ENCHANTED);
 		if (var0000 == 0) {
 			struct<Position> var0001 = [0x0217, 0x0489, 0x0000];
 			PARTY->move_object(var0001);
@@ -60653,7 +60824,7 @@ void Func06D5 object#(0x6D5) () {
 
 void Func06D6 object#(0x6D6) () {
 	if (event == EGG) {
-		var var0000 = find_nearby(0x03D5, 0x0001, MASK_NONE);
+		var var0000 = find_nearby(SHAPE_PRISM, 1, MASK_NONE);
 		var var0001 = [];
 		for (var0004 in var0000) {
 			var0001 &= var0004->get_distance(item);
@@ -60730,8 +60901,10 @@ void Func06DE object#(0x6DE) () {
 void Func06DF object#(0x6DF) () {
 	if (event == EGG) {
 		if ((!gflags[BROKE_TETRA])
-			&& (AVATAR->is_readied(BG_LEFT_RING, 0x02F7, 0x0001)
-				|| AVATAR->is_readied(BG_RIGHT_RING, 0x02F7, 0x0001))) {
+			&& (AVATAR->is_readied(BG_LEFT_RING, SHAPE_ETHEREAL_RING,
+					FRAME_ETHEREAL_RING_ENCHANTED)
+				|| AVATAR->is_readied(BG_RIGHT_RING, SHAPE_ETHEREAL_RING,
+						FRAME_ETHEREAL_RING_ENCHANTED))) {
 			struct<Position> var0000 = [0x0A67, 0x034D, 0x0000];
 			Func0811();
 			AVATAR->move_object(var0000);
@@ -60742,8 +60915,8 @@ void Func06DF object#(0x6DF) () {
 void Func06E0 object#(0x6E0) () {
 	if (event == EGG) {
 		if (gflags[BROKE_SPHERE]) {
-			var var0000 = find_nearby(0x0308, 0x000A, MASK_EGG);
-			var0000 &= find_nearby(0x0309, 0x000A, MASK_EGG);
+			var var0000 = find_nearby(SHAPE_RED_MOONGATE_UNSTABLE_NS, 10, MASK_EGG);
+			var0000 &= find_nearby(SHAPE_BLUE_MOONGATE_NS, 10, MASK_EGG);
 			for (var0003 in var0000) {
 				Func0925(var0003);
 			}
@@ -60850,7 +61023,9 @@ void Func06F6 object#(0x6F6) () {
 		var var0000 = false;
 		var var0001 = find_nearby(SHAPE_MONSTER_MAGE, 10, MASK_NPC2);
 		for (var0004 in var0001) {
-			if (var0004->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN, 4)) {
+			if (var0004->get_cont_items(
+					SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN,
+					FRAME_SCROLL_INVISIBLE)) {
 				var0000 = var0004;
 			}
 		}
@@ -60895,7 +61070,8 @@ void Func06F6 object#(0x6F6) () {
 							"Arcadion's smile stretches from ear to ear.");
 						add(["name", "job", "release", "bye"]);
 					}
-				} else if (PARTY->count_objects(SHAPE_GEM, QUALITY_ANY, FRAME_GEM_DRACOTHRAXUS)) {
+				} else if (PARTY->count_objects(
+							SHAPE_GEM, QUALITY_ANY, FRAME_GEM_DRACOTHRAXUS)) {
 					say("\"Thou hast within thy possessions a small blue gem. "
 						"It can be used to free me! Crack this accursed mirror "
 						"with it! I'll enter it as I am freed!\"\tArcadion "
@@ -61051,7 +61227,8 @@ void Func06F6 object#(0x6F6) () {
 						"Find it. Bring it to me and together, we shall break "
 						"this mirror which binds me to that blasted mage.*");
 				}
-			} else if (PARTY->count_objects(SHAPE_GEM, QUALITY_ANY, FRAME_GEM_DRACOTHRAXUS)) {
+			} else if (PARTY->count_objects(
+						SHAPE_GEM, QUALITY_ANY, FRAME_GEM_DRACOTHRAXUS)) {
 				say("\"Thou hast the gem! I feel it! Use it now to crack the "
 					"mirror! I'll enter it as I'm freed!\" The daemon hardly "
 					"restains his enthusiasm.*");
@@ -61409,15 +61586,15 @@ void Func06F6 object#(0x6F6) () {
 			ARCADION_SWORD->show_npc_face(0x0000);
 			if (var0011->is_npc()) {
 				breakable {
-					if ((var0017 == 0x02D1) || (var0017 == 0x03DD)) {
+					if (var0017 == SHAPE_MALE_AVATAR
+							|| var0017 == SHAPE_FEMALE_AVATAR) {
 						say("The daemon speaks with a sanctimonious tone. \"I "
 							"could not in honor take the life of my most "
 							"wondrous master.\"");
 						break;
 					}
-					if (var0017 == 0x01D2) {
-						if (AVATAR->get_npc_object()->get_distance(var0011)
-							< 0x0005) {
+					if (var0017 == SHAPE_LORD_BRITISH) {
+						if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
 							say("\"Yes! I have long sought the end of Lord "
 								"British, my traitorous master.\"");
 							var var0019 = Func0908();
@@ -61450,7 +61627,8 @@ void Func06F6 object#(0x6F6) () {
 								"perform this task for thee, master.\"");
 							break;
 						}
-					} else if ((var0017 == 0x01E2) || (var0017 == SHAPE_BATLIN)) {
+					} else if (var0017 == SHAPE_BATLIN2
+							|| var0017 == SHAPE_BATLIN) {
 						say("\"Alas master, this one is protected by a power "
 							"greater than mine. His destiny lies elsewhere.\"");
 						break;
@@ -61464,10 +61642,10 @@ void Func06F6 object#(0x6F6) () {
 						break;
 					}
 					if (var0017 == SHAPE_DRAGON) {
-						if (AVATAR->get_npc_object()->get_distance(var0011)
-							< 0x0005) {
+						if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
 							if (var0011->get_cont_items(
-										SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS, 4)) {
+									SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS,
+									FRAME_SCROLL_INVISIBLE)) {
 								say("\"Ah, Dracothraxus. We meet once again. "
 									"'Tis a pity thou shan't survive our "
 									"meeting this time. Perhaps if thou hadst "
@@ -61495,10 +61673,10 @@ void Func06F6 object#(0x6F6) () {
 							break;
 						}
 					} else if (var0017 == SHAPE_MONSTER_MAGE) {
-						if (AVATAR->get_npc_object()->get_distance(var0011)
-							< 0x0005) {
+						if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
 							if (var0011->get_cont_items(
-										SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN, 4)) {
+									SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN,
+									FRAME_SCROLL_INVISIBLE)) {
 								say("\"I owe thee quite a favor for this, "
 									"master. I thank thee for allowing me "
 									"this, my revenge!\"*");
@@ -61511,7 +61689,7 @@ void Func06F6 object#(0x6F6) () {
 								"sounds almost gleeful at this prospect.");
 							break;
 						}
-					} else if (var0017 == 0x03F7) {
+					} else if (var0017 == SHAPE_GOLEM) {
 						say("\"This creature is not strictly speaking,... "
 							"living. Thy best course of action would be to "
 							"smash it to pieces\" You hear a smile in "
@@ -61519,8 +61697,7 @@ void Func06F6 object#(0x6F6) () {
 						break;
 					}
 					if (Func0848(var0017)) {
-						if (AVATAR->get_npc_object()->get_distance(var0011)
-							< 0x0005) {
+						if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
 							say("\"Very well, master. If thou cannot dispatch "
 								"this foe thyself, I shall do it for thee.\"");
 							var0015 = true;
@@ -61551,7 +61728,8 @@ void Func06F6 object#(0x6F6) () {
 			} else if (var0017 == SHAPE_FERRYMAN) {
 				say("The sword recoils in something akin to horror. \"That one "
 					"is beyond even my power.\"");
-			} else if ((var0017 == 0x031C) || (var0017 == SHAPE_WOUNDED_MAN)) {
+			} else if (var0017 == SHAPE_DRAFT_HORSE
+					|| var0017 == SHAPE_WOUNDED_MAN) {
 				say("The daemon sword abruptly ceases its vibration. \"This "
 					"being is hardly worth a death the likes of which I would "
 					"visit upon it. Call upon me again when thou art faced "
@@ -61691,14 +61869,16 @@ void Func06F7 object#(0x6F7) () {
 	declare var var0006;
 	declare struct<Position> var0008;
 	var var0000 = get_item_quality();
-	if (var0000 == 0x00F0) {
+	if (var0000 == QUALITY_SCROLL_ERETHIAN) {
 		var var0001 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x02FA, 0x0050, MASK_NONE);
+				SHAPE_BODY3, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0016) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN, 4)) {
+			if (var0006 == FRAME_BODY3_MAGE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0001 = var0005;
 				}
 			}
@@ -61715,14 +61895,16 @@ void Func06F7 object#(0x6F7) () {
 			}
 		}
 	}
-	if (var0000 == 0x00F1) {
+	if (var0000 == QUALITY_SCROLL_DRACOTHRAXUS) {
 		var var0009 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x030A, 0x0050, MASK_NONE);
+				SHAPE_BODY4, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0007) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS, 4)) {
+			if (var0006 == FRAME_BODY4_DRAGON) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0009 = var0005;
 				}
 			}
@@ -61738,7 +61920,7 @@ void Func06F7 object#(0x6F7) () {
 					0, LOOP_ONCE);
 			UI_play_sound_effect(0x0009);
 			var var000D = UI_create_new_object(SHAPE_DRAGON);
-			var000D->set_item_frame(19);
+			var000D->set_item_frame(USE_SOUTH);
 			var000D->set_item_flag(TEMPORARY);
 			var0008 = UI_update_last_created(var000C);
 			var var000E = script var000D {
@@ -61750,14 +61932,16 @@ void Func06F7 object#(0x6F7) () {
 		}
 	}
 	declare var var0012;
-	if (var0000 == 0x00F3) {
+	if (var0000 == QUALITY_SCROLL_ADJHAR) {
 		var var000F = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x0190, 0x0050, MASK_NONE);
+				SHAPE_BODY1, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0000) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, 4)) {
+			if (var0006 == FRAME_BODY1_INVISIBLE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR,
+						FRAME_SCROLL_INVISIBLE)) {
 					var000F = var0005;
 				}
 			}
@@ -61765,8 +61949,8 @@ void Func06F7 object#(0x6F7) () {
 		if (var000F) {
 			if (!gflags[CREATED_GOLEM_BODY_1]) {
 				gflags[CREATED_GOLEM_BODY_1] = true;
-				var0012 = UI_create_new_object(0x019E);
-				var0012->set_item_frame(0x0004);
+				var0012 = UI_create_new_object(SHAPE_BODY2);
+				var0012->set_item_frame(FRAME_BODY2_GOLEM1);
 				var0008 = UI_update_last_created(
 						var000F->get_object_position());
 				Func08E6(var000F);
@@ -61774,14 +61958,16 @@ void Func06F7 object#(0x6F7) () {
 			}
 		}
 	}
-	if (var0000 == 0x00F4) {
+	if (var0000 == QUALITY_SCROLL_BOLLUX) {
 		var var0013 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x0190, 0x0050, MASK_NONE);
+				SHAPE_BODY1, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0000) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX, 4)) {
+			if (var0006 == FRAME_BODY2_INVISIBLE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0013 = var0005;
 				}
 			}
@@ -61789,8 +61975,8 @@ void Func06F7 object#(0x6F7) () {
 		if (var0013) {
 			if (!gflags[CREATED_GOLEM_BODY_2]) {
 				gflags[CREATED_GOLEM_BODY_2] = true;
-				var0012 = UI_create_new_object(0x019E);
-				var0012->set_item_frame(0x0004);
+				var0012 = UI_create_new_object(SHAPE_BODY2);
+				var0012->set_item_frame(FRAME_BODY2_GOLEM1);
 				var0008 = UI_update_last_created(
 						var0013->get_object_position());
 				Func08E6(var0013);
@@ -61799,210 +61985,230 @@ void Func06F7 object#(0x6F7) () {
 		}
 	}
 	declare var var0016;
-	if (var0000 == 0x00F5) {
+	if (var0000 == QUALITY_SCROLL_GOLEM_3) {
 		var0016 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x0190, 0x0050, MASK_NONE);
+				SHAPE_BODY1, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0000) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_3, 4)) {
+			if (var0006 == FRAME_BODY1_INVISIBLE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_3,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0016 = var0005;
 				}
 			}
 		}
 		if (var0016) {
-			var0012 = UI_create_new_object(0x019E);
-			var0012->set_item_frame(0x0004);
+			var0012 = UI_create_new_object(SHAPE_BODY2);
+			var0012->set_item_frame(FRAME_BODY2_GOLEM1);
 			var0008 = UI_update_last_created(var0016->get_object_position());
 			gflags[CREATED_GOLEM_BODY_3] = true;
 			Func08E6(var0016);
 			return;
 		}
 	}
-	if (var0000 == 246) {
+	if (var0000 == QUALITY_SCROLL_GOLEM_4) {
 		var0016 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x0190, 0x0050, MASK_NONE);
+				SHAPE_BODY1, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0000) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_4, 4)) {
+			if (var0006 == FRAME_BODY1_INVISIBLE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_4,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0016 = var0005;
 				}
 			}
 		}
 		if (var0016) {
-			var0012 = UI_create_new_object(0x019E);
-			var0012->set_item_frame(0x0004);
+			var0012 = UI_create_new_object(SHAPE_BODY2);
+			var0012->set_item_frame(FRAME_BODY2_GOLEM1);
 			var0008 = UI_update_last_created(var0016->get_object_position());
 			gflags[CREATED_GOLEM_BODY_4] = true;
 			Func08E6(var0016);
 			return;
 		}
 	}
-	if (var0000 == 0x00F7) {
+	if (var0000 == QUALITY_SCROLL_GOLEM_5) {
 		var0016 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x0190, 0x0050, MASK_NONE);
+				SHAPE_BODY1, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0000) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_5, 4)) {
+			if (var0006 == FRAME_BODY1_INVISIBLE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_5,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0016 = var0005;
 				}
 			}
 		}
 		if (var0016) {
-			var0012 = UI_create_new_object(0x019E);
-			var0012->set_item_frame(0x0004);
+			var0012 = UI_create_new_object(SHAPE_BODY2);
+			var0012->set_item_frame(FRAME_BODY2_GOLEM1);
 			var0008 = UI_update_last_created(var0016->get_object_position());
 			gflags[CREATED_GOLEM_BODY_5] = true;
 			Func08E6(var0016);
 			return;
 		}
 	}
-	if (var0000 == 0x00F8) {
+	if (var0000 == QUALITY_SCROLL_GOLEM_6) {
 		var0016 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x0190, 0x0050, MASK_NONE);
+				SHAPE_BODY1, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0000) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_6, 4)) {
+			if (var0006 == FRAME_BODY1_INVISIBLE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_6,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0016 = var0005;
 				}
 			}
 		}
 		if (var0016) {
-			var0012 = UI_create_new_object(0x019E);
-			var0012->set_item_frame(0x0004);
+			var0012 = UI_create_new_object(SHAPE_BODY2);
+			var0012->set_item_frame(FRAME_BODY2_GOLEM1);
 			var0008 = UI_update_last_created(var0016->get_object_position());
 			gflags[CREATED_GOLEM_BODY_6] = true;
 			Func08E6(var0016);
 			return;
 		}
 	}
-	if (var0000 == 0x00F9) {
+	if (var0000 == QUALITY_SCROLL_GOLEM_7) {
 		var0016 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x0190, 0x0050, MASK_NONE);
+				SHAPE_BODY1, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0000) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_7, 4)) {
+			if (var0006 == FRAME_BODY1_INVISIBLE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_7,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0016 = var0005;
 				}
 			}
 		}
 		if (var0016) {
-			var0012 = UI_create_new_object(0x019E);
-			var0012->set_item_frame(0x0004);
+			var0012 = UI_create_new_object(SHAPE_BODY2);
+			var0012->set_item_frame(FRAME_BODY2_GOLEM1);
 			var0008 = UI_update_last_created(var0016->get_object_position());
 			gflags[CREATED_GOLEM_BODY_7] = true;
 			Func08E6(var0016);
 			return;
 		}
 	}
-	if (var0000 == 250) {
+	if (var0000 == QUALITY_SCROLL_GOLEM_8) {
 		var0016 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x0190, 0x0050, MASK_NONE);
+				SHAPE_BODY1, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0000) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_8, 4)) {
+			if (var0006 == FRAME_BODY1_INVISIBLE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_8,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0016 = var0005;
 				}
 			}
 		}
 		if (var0016) {
-			var0012 = UI_create_new_object(0x019E);
-			var0012->set_item_frame(0x0004);
+			var0012 = UI_create_new_object(SHAPE_BODY2);
+			var0012->set_item_frame(FRAME_BODY2_GOLEM1);
 			var0008 = UI_update_last_created(var0016->get_object_position());
 			gflags[CREATED_GOLEM_BODY_8] = true;
 			Func08E6(var0016);
 			return;
 		}
 	}
-	if (var0000 == 251) {
+	if (var0000 == QUALITY_SCROLL_GOLEM_9) {
 		var0016 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x0190, 0x0050, MASK_NONE);
+				SHAPE_BODY1, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0000) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_9, 4)) {
+			if (var0006 == FRAME_BODY1_INVISIBLE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_9,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0016 = var0005;
 				}
 			}
 		}
 		if (var0016) {
-			var0012 = UI_create_new_object(0x019E);
-			var0012->set_item_frame(0x0004);
+			var0012 = UI_create_new_object(SHAPE_BODY2);
+			var0012->set_item_frame(FRAME_BODY2_GOLEM1);
 			var0008 = UI_update_last_created(var0016->get_object_position());
 			gflags[CREATED_GOLEM_BODY_9] = true;
 			Func08E6(var0016);
 			return;
 		}
 	}
-	if (var0000 == 252) {
+	if (var0000 == QUALITY_SCROLL_GOLEM_A) {
 		var0016 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x0190, 0x0050, MASK_NONE);
+				SHAPE_BODY1, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0000) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_A, 4)) {
+			if (var0006 == FRAME_BODY1_INVISIBLE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_A,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0016 = var0005;
 				}
 			}
 		}
 		if (var0016) {
-			var0012 = UI_create_new_object(0x019E);
-			var0012->set_item_frame(0x0004);
+			var0012 = UI_create_new_object(SHAPE_BODY2);
+			var0012->set_item_frame(FRAME_BODY2_GOLEM1);
 			var0008 = UI_update_last_created(var0016->get_object_position());
 			gflags[CREATED_GOLEM_BODY_A] = true;
 			Func08E6(var0016);
 			return;
 		}
 	}
-	if (var0000 == 0x00FD) {
+	if (var0000 == QUALITY_SCROLL_GOLEM_B) {
 		var0016 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x0190, 0x0050, MASK_NONE);
+				SHAPE_BODY1, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0000) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_B, 4)) {
+			if (var0006 == FRAME_BODY1_INVISIBLE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_B,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0016 = var0005;
 				}
 			}
 		}
 		if (var0016) {
-			var0012 = UI_create_new_object(0x019E);
-			var0012->set_item_frame(0x0004);
+			var0012 = UI_create_new_object(SHAPE_BODY2);
+			var0012->set_item_frame(FRAME_BODY2_GOLEM1);
 			var0008 = UI_update_last_created(var0016->get_object_position());
 			gflags[CREATED_GOLEM_BODY_B] = true;
 			Func08E6(var0016);
 			return;
 		}
 	}
-	if (var0000 == 0x00FE) {
+	if (var0000 == QUALITY_SCROLL_GOLEM_C) {
 		var0016 = false;
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				0x0190, 0x0050, MASK_NONE);
+				SHAPE_BODY1, 80, MASK_NONE);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_frame();
-			if (var0006 == 0x0000) {
-				if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_C, 4)) {
+			if (var0006 == FRAME_BODY1_INVISIBLE) {
+				if (var0005->get_cont_items(
+						SHAPE_SCROLL, QUALITY_SCROLL_GOLEM_C,
+						FRAME_SCROLL_INVISIBLE)) {
 					var0016 = var0005;
 				}
 			}
 		}
 		if (var0016) {
-			var0012 = UI_create_new_object(0x019E);
-			var0012->set_item_frame(0x0004);
+			var0012 = UI_create_new_object(SHAPE_BODY2);
+			var0012->set_item_frame(FRAME_BODY2_GOLEM1);
 			var0008 = UI_update_last_created(var0016->get_object_position());
 			gflags[CREATED_GOLEM_BODY_C] = true;
 			Func08E6(var0016);
@@ -62027,16 +62233,16 @@ void Func06F8 object#(0x6F8) () {
 	if (event == EGG) {
 		var var0000 = get_item_quality();
 		breakable {
-			if (var0000 == 0x0000) {
-				var var0001 = find_nearest(0x0350, 0x000A);
+			if (var0000 == 0) {
+				var var0001 = find_nearest(SHAPE_MIRROR_NS, 10);
 				var var0002 = var0001->get_item_frame();
-				if (!(var0002 == 0x0009)) {
-					var0001->set_item_frame(0x0003);
+				if (!(var0002 == FRAME_MIRROR_MAGIC_BROKEN)) {
+					var0001->set_item_frame(FRAME_MIRROR_MAGIC);
 				}
 			}
 			declare var var0003;
-			if (var0000 == 0x0001) {
-				var0003 = find_nearby(0x02D6, 0x0001, MASK_NONE);
+			if (var0000 == 1) {
+				var0003 = find_nearby(SHAPE_LENS, 1, MASK_NONE);
 				if (var0003) {
 					gflags[PLACED_FIRST_LENS] = true;
 				} else {
@@ -62046,8 +62252,8 @@ void Func06F8 object#(0x6F8) () {
 					break;
 				}
 			}
-			if (var0000 == 0x0002) {
-				var0003 = find_nearby(0x02D6, 0x0001, MASK_NONE);
+			if (var0000 == 2) {
+				var0003 = find_nearby(SHAPE_LENS, 1, MASK_NONE);
 				if (var0003) {
 					gflags[PLACED_SECOND_LENS] = true;
 				} else {
@@ -62057,7 +62263,7 @@ void Func06F8 object#(0x6F8) () {
 					break;
 				}
 			}
-			if (var0000 == 0x0004) {
+			if (var0000 == 4) {
 				if (gflags[PLACED_SECOND_LENS] && gflags[PLACED_FIRST_LENS]) {
 					break;
 				}
@@ -62067,40 +62273,40 @@ void Func06F8 object#(0x6F8) () {
 		var var0004 = find_nearest(SHAPE_DARK_CORE, 10);
 		if (var0004) {
 			var0005 = var0004->get_object_position();
-			var0006 = var0004->find_nearby(0x03BB, 0x0001, MASK_NONE);
+			var0006 = var0004->find_nearby(SHAPE_AMULET, 1, MASK_NONE);
 			var var0007 = false;
 			for (var000A in var0006) {
 				var000B = var000A->get_item_frame();
 				struct<Position> var000C = var000A->get_object_position();
-				if (var000B == 0x0008) {
+				if (var000B == FRAME_AMULET_TALISMAN_OF_TRUTH) {
 					if (var000C.x == (var0005.x - 1)) {
 						if (var000C.y == var0005.y) {
 							if (var000C.z == 4) {
-								var0007 += 0x0001;
+								var0007 += 1;
 							}
 						}
 					}
 				}
-				if (var000B == 0x0009) {
+				if (var000B == FRAME_AMULET_TALISMAN_OF_COURAGE) {
 					if (var000C.x == var0005.x) {
 						if (var000C.y == (var0005.y - 1)) {
 							if (var000C.z == 4) {
-								var0007 += 0x0001;
+								var0007 += 1;
 							}
 						}
 					}
 				}
-				if (var000B == 0x000A) {
+				if (var000B == FRAME_AMULET_TALISMAN_OF_LOVE) {
 					if (var000C.x == var0005.x) {
 						if (var000C.y == var0005.y) {
 							if (var000C.z == 4) {
-								var0007 += 0x0001;
+								var0007 += 1;
 							}
 						}
 					}
 				}
 			}
-			if (var0007 == 0x0003) {
+			if (var0007 == 3) {
 				var var000D = false;
 				var var000E = AVATAR->get_npc_object()->find_nearby(
 						SHAPE_LIT_SCONCE, 40, MASK_NONE);
@@ -62109,28 +62315,28 @@ void Func06F8 object#(0x6F8) () {
 					if ((var0012.x == 2208) || (var0012.x == 2221)) {
 						if (var0012.y == 1514) {
 							if (var0012.z == 1) {
-								var000D += 0x0001;
+								var000D += 1;
 							}
 						}
 					}
 				}
-				if (var000D == 0x0002) {
+				if (var000D == 2) {
 					Func087D();
 					var0013 = AVATAR->get_npc_object()->get_object_position();
 					if (var0013.y > var0005.y) {
 						if (UI_is_pc_female()) {
-							Func0881()->set_item_frame(0x0014);
+							Func0881()->set_item_frame(FRAME_STATUE_FEMALE_AVATAR_NORTH);
 						} else {
-							Func0881()->set_item_frame(0x0012);
+							Func0881()->set_item_frame(FRAME_STATUE_MALE_AVATAR_NORTH);
 						}
 					} else if (UI_is_pc_female()) {
-						Func0881()->set_item_frame(0x0015);
+						Func0881()->set_item_frame(FRAME_STATUE_FEMALE_AVATAR_SOUTH);
 					} else {
-						Func0881()->set_item_frame(0x0013);
+						Func0881()->set_item_frame(FRAME_STATUE_MALE_AVATAR_SOUTH);
 					}
-					var var0014 = UI_create_new_object(0x03BB);
-					var0014->set_item_frame(0x0007);
-					var0004->set_item_frame(0x0001);
+					var var0014 = UI_create_new_object(SHAPE_AMULET);
+					var0014->set_item_frame(FRAME_AMULET_TALISMAN_OF_INFINITY);
+					var0004->set_item_frame(FRAME_DARK_CORE_AMULETS0);
 					var0005.x -= 1;
 					var0005.y -= 1;
 					var0005.z += 2;
@@ -62140,7 +62346,7 @@ void Func06F8 object#(0x6F8) () {
 							0, 0, LOOP_ONCE);
 					UI_play_sound_effect(0x0044);
 					var0016 = script var0004 {
-						frame 5;
+						frame FRAME_DARK_CORE_AMULETS5;
 						repeat 24 {
 							next frame cycle;
 						};
@@ -62177,8 +62383,10 @@ void Func06F8 object#(0x6F8) () {
 				var var0019 = find_nearby(SHAPE_MONSTER_MAGE, 80, MASK_NPC2);
 				declare struct<Position> var001D;
 				for (var001C in var0019) {
-					if (var001C->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN, 4)) {
-						if (!(var001C->get_distance(item) < 0x0008)) {
+					if (var001C->get_cont_items(
+							SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN,
+							FRAME_SCROLL_INVISIBLE)) {
+						if (!(var001C->get_distance(item) < 8)) {
 							var001D = var001C->get_object_position();
 							UI_sprite_effect(
 									ANIMATION_GREEN_BUBBLES, var001D.x - 1,
@@ -62198,10 +62406,10 @@ void Func06F8 object#(0x6F8) () {
 					var001F = get_object_position();
 					var001D = [0x08A8, 0x0000, 0x0000];
 					if (var001E.y > var001F.y) {
-						var0017->set_item_frame(0x0013);
+						var0017->set_item_frame(USE_SOUTH);
 						var001D.y = 0x05E6;
 					} else {
-						var0017->set_item_frame(0x0003);
+						var0017->set_item_frame(USE_NORTH);
 						var001D.y = 0x05EE;
 					}
 					var0015 = UI_update_last_created(var001D);
@@ -62211,9 +62419,9 @@ void Func06F8 object#(0x6F8) () {
 				}
 				var001D = var0017->get_object_position();
 				var001F = get_object_position();
-				var var0020 = 0x0004;
+				var var0020 = SOUTH;
 				if (var001D.y > var001F.y) {
-					var0020 = 0x0000;
+					var0020 = NORTH;
 				}
 				var0016 = script var0017 {
 					face var0020;
@@ -62221,7 +62429,7 @@ void Func06F8 object#(0x6F8) () {
 					actor frame cast_out;
 				};
 			}
-			UI_earthquake(0x0001);
+			UI_earthquake(1 * TICK);
 			UI_sprite_effect(
 					ANIMATION_LIGHTNING, var0013.x, var0013.y, 0, 0, 0,
 					LOOP_ONCE);
@@ -62257,7 +62465,7 @@ void Func06F8 object#(0x6F8) () {
 					actor frame kneeling;
 				};
 			}
-			UI_earthquake(0x0001);
+			UI_earthquake(1 * TICK);
 			var0022 = find_nearby(SHAPE_EGG, 10, MASK_EGG);
 			for (var0025 in var0022) {
 				if ((var0025->get_item_frame() == FRAME_EGG_USECODE)
@@ -62287,12 +62495,12 @@ void Func06F8 object#(0x6F8) () {
 				var0027 = var001C->get_item_frame_rot();
 				var0028 = var001C->get_object_position();
 				Func08E6(var001C);
-				var0029 = UI_create_new_object(0x0210);
+				var0029 = UI_create_new_object(SHAPE_SKELETON);
 				var0029->set_item_flag(TEMPORARY);
 				var0029->set_item_frame_rot(var0027);
 				var0015 = UI_update_last_created(var0028);
 			}
-			UI_earthquake(0x0001);
+			UI_earthquake(1 * TICK);
 			var0022 = find_nearby(SHAPE_EGG, 10, MASK_EGG);
 			for (var0025 in var0022) {
 				if ((var0025->get_item_frame() == FRAME_EGG_USECODE)
@@ -62315,17 +62523,17 @@ void Func06F8 object#(0x6F8) () {
 			abort;
 		}
 		if (!gflags[ERETHIAN_IS_DEAD]) {
-			var001C = find_nearest(0x0210, 0x000A);
+			var001C = find_nearest(SHAPE_SKELETON, 10);
 			var0027 = var001C->get_item_frame();
 			var0028 = var001C->get_object_position();
 			Func08E6(var001C);
-			var0029 = UI_create_new_object(0x037C);
+			var0029 = UI_create_new_object(SHAPE_BODY5);
 			var0029->set_item_flag(TEMPORARY);
-			if (var0027 == 0x000C) {
-				var0029->set_item_frame(0x000E);
+			if (var0027 == KNEEL_NORTH) {
+				var0029->set_item_frame(FRAME_BODY5_SKELETON_NORTH);
 			}
-			if (var0027 == 0x001C) {
-				var0029->set_item_frame(0x0016);
+			if (var0027 == KNEEL_SOUTH) {
+				var0029->set_item_frame(FRAME_BODY5_SKELETON_SOUTH);
 			}
 			var0015 = UI_update_last_created(var0028);
 			gflags[ERETHIAN_IS_DEAD] = true;
@@ -62338,19 +62546,19 @@ void Func06F8 object#(0x6F8) () {
 				ANIMATION_DEATH_VORTEX, var0005.x - 2, var0005.y - 2, 0, 0, 0,
 				LOOP_ONCE);
 		UI_play_sound_effect(0x0009);
-		var0006 = find_nearby(0x03BB, 0x0001, MASK_NONE);
+		var0006 = find_nearby(SHAPE_AMULET, 1, MASK_NONE);
 		for (var000A in var0006) {
 			var000B = var000A->get_item_frame();
-			if (var000B == 0x0007) {
+			if (var000B == FRAME_AMULET_TALISMAN_OF_INFINITY) {
 				var000A->remove_item();
 			}
-			if (var000B == 0x0008) {
+			if (var000B == FRAME_AMULET_TALISMAN_OF_TRUTH) {
 				var000A->remove_item();
 			}
-			if (var000B == 0x0009) {
+			if (var000B == FRAME_AMULET_TALISMAN_OF_COURAGE) {
 				var000A->remove_item();
 			}
-			if (var000B == 0x000A) {
+			if (var000B == FRAME_AMULET_TALISMAN_OF_LOVE) {
 				var000A->remove_item();
 			}
 		}
@@ -62364,7 +62572,7 @@ void Func06F8 object#(0x6F8) () {
 			wait 12;
 			call Func069D;
 		};
-		var var0030 = find_nearest(0x02D6, 0x000A);
+		var var0030 = find_nearest(SHAPE_LENS, 10);
 		if (var0030) {
 			var0016 = script var0030 {
 				wait 16;
@@ -62381,31 +62589,31 @@ void Func06F9 object#(0x6F9) () {
 	var var0001 = false;
 	if (event == SCRIPTED) {
 		var var0002 = get_item_shape();
-		if (var0002 == 0x0356) {
+		if (var0002 == SHAPE_STATUE) {
 			goto labelFunc06F9_0025;
 		}
 		if (var0002 == SHAPE_BLACK_SWORD) {
 			goto labelFunc06F9_0032;
 		}
 		UI_fade_palette(0x000C, 0x0001, 0x0001);
-		if (var0002 == 0x03BB) {
+		if (var0002 == SHAPE_AMULET) {
 			var var0003 = false;
 			var var0004 = AVATAR->get_npc_object()->find_nearby(
-					0x0356, 0x0014, MASK_NONE);
+					SHAPE_STATUE, 20, MASK_NONE);
 			if (var0004) {
 				for (var0007 in var0004) {
-					if (get_item_frame() == 0x0008) {
-						if (var0007->get_item_frame() == 0x0010) {
+					if (get_item_frame() == FRAME_AMULET_TALISMAN_OF_TRUTH) {
+						if (var0007->get_item_frame() == FRAME_STATUE_SHRINE_OF_TRUTH) {
 							var0003 = var0007;
 						}
 					}
-					if (get_item_frame() == 0x0009) {
-						if (var0007->get_item_frame() == 0x000F) {
+					if (get_item_frame() == FRAME_AMULET_TALISMAN_OF_COURAGE) {
+						if (var0007->get_item_frame() == FRAME_STATUE_SHRINE_OF_COURAGE) {
 							var0003 = var0007;
 						}
 					}
-					if (get_item_frame() == 0x000A) {
-						if (var0007->get_item_frame() == 0x000E) {
+					if (get_item_frame() == FRAME_AMULET_TALISMAN_OF_LOVE) {
+						if (var0007->get_item_frame() == FRAME_STATUE_SHRINE_OF_LOVE) {
 							var0003 = var0007;
 						}
 					}
@@ -62419,64 +62627,64 @@ void Func06F9 object#(0x6F9) () {
 	if (event == DOUBLECLICK) {
 	labelFunc06F9_0025:
 		var0000 = [0x0878, 0x0665, 0x0000];
-		var0001 = 0x0004;
+		var0001 = SOUTH;
 	}
 	if (event == WEAPON) {
 	labelFunc06F9_0032:
 		var0000 = [0x0890, 0x05FA, 0x0000];
-		var0001 = 0x0000;
+		var0001 = NORTH;
 	}
 	if (event == BG_PATH_SUCCESS) {
 		var0000 = [0x088B, 0x05CF, 0x0000];
-		var0001 = 0x0006;
+		var0001 = WEST;
 	}
 	declare var var000C;
 	if (event == EGG) {
 		var var0008 = get_item_quality();
-		if (var0008 == 0x0001) {
+		if (var0008 == 1) {
 			if (!gflags[GOT_TALISMAN_OF_LOVE]) {
 				var0000 = [0x09A0, 0x0687, 0x0000];
-				var0001 = 0x0004;
+				var0001 = SOUTH;
 			}
 		}
-		if (var0008 == 0x0002) {
+		if (var0008 == 2) {
 			if (!gflags[PLACED_ONE_TALISMAN]) {
 				var0000 = [0x08A8, 0x0665, 0x0000];
-				var0001 = 0x0004;
+				var0001 = SOUTH;
 			}
 		}
-		if (var0008 == 0x0003) {
+		if (var0008 == 3) {
 			var0000 = [0x088F, 0x05CB, 0x0000];
-			var0001 = 0x0000;
+			var0001 = NORTH;
 		}
-		if (var0008 == 0x0004) {
+		if (var0008 == 4) {
 			if (!gflags[GOT_TALISMAN_OF_LOVE]) {
 				var0000 = [0x0886, 0x05DE, 0x0000];
-				var0001 = 0x0004;
+				var0001 = SOUTH;
 			}
 		}
-		if (var0008 == 0x0005) {
+		if (var0008 == 5) {
 			var0000 = [0x0899, 0x05DE, 0x0000];
-			var0001 = 0x0004;
+			var0001 = SOUTH;
 		}
-		if (var0008 == 0x0006) {
+		if (var0008 == 6) {
 			var0000 = [0x0908, 0x0637, 0x0000];
-			var0001 = 0x0000;
+			var0001 = NORTH;
 		}
 		declare var var0009;
 		declare var var000D;
 		declare struct<Position> var000E;
 		declare var var000F;
-		if (var0008 == 0x0007) {
-			if (Func08E8(0x0008)) {
+		if (var0008 == 7) {
+			if (Func08E8(FRAME_AMULET_TALISMAN_OF_TRUTH)) {
 				var0000 = [0x088F, 0x05CB, 0x0000];
-				var0001 = 0x0000;
+				var0001 = NORTH;
 				gflags[PLACED_SECOND_TALISMAN] = true;
 			} else {
-				var0009 = find_nearby(0x03BB, 0x0050, MASK_NONE);
+				var0009 = find_nearby(SHAPE_AMULET, 80, MASK_NONE);
 				for (var000C in var0009) {
 					var000D = var000C->get_item_frame();
-					if (var000D == 0x0008) {
+					if (var000D == FRAME_AMULET_TALISMAN_OF_TRUTH) {
 						var000E = var000C->get_object_position();
 						var000F = set_last_created();
 						var000F = UI_update_last_created(var000E);
@@ -62484,16 +62692,16 @@ void Func06F9 object#(0x6F9) () {
 				}
 			}
 		}
-		if (var0008 == 0x0008) {
-			if (Func08E8(0x0009)) {
+		if (var0008 == 8) {
+			if (Func08E8(FRAME_AMULET_TALISMAN_OF_COURAGE)) {
 				var0000 = [0x0893, 0x05CF, 0x0000];
-				var0001 = 0x0002;
+				var0001 = EAST;
 				gflags[PLACED_ONE_TALISMAN] = true;
 			} else {
-				var0009 = find_nearby(0x03BB, 0x0050, MASK_NONE);
+				var0009 = find_nearby(SHAPE_AMULET, 80, MASK_NONE);
 				for (var000C in var0009) {
 					var000D = var000C->get_item_frame();
-					if (var000D == 0x0009) {
+					if (var000D == FRAME_AMULET_TALISMAN_OF_COURAGE) {
 						var000E = var000C->get_object_position();
 						var000F = set_last_created();
 						var000F = UI_update_last_created(var000E);
@@ -62505,12 +62713,12 @@ void Func06F9 object#(0x6F9) () {
 		declare var var0013;
 		declare struct<Position> var0014;
 		declare var var0029;
-		if (var0008 == 0x0009) {
-			var0012 = find_nearest(0x03BB, 0);
-			if (var0012 && (var0012->get_item_frame() == 0x000B)) {
+		if (var0008 == 9) {
+			var0012 = find_nearest(SHAPE_AMULET, 0);
+			if (var0012 && (var0012->get_item_frame() == FRAME_AMULET_FAKE_TALISMAN)) {
 				return;
 			}
-			var0013 = Func08E8(0x000B);
+			var0013 = Func08E8(FRAME_AMULET_FAKE_TALISMAN);
 			if (var0013) {
 				var0013->remove_item();
 				var0014 = get_object_position();
@@ -62520,11 +62728,11 @@ void Func06F9 object#(0x6F9) () {
 				UI_play_sound_effect(0x0043);
 			}
 			var0009 = AVATAR->get_npc_object()->find_nearby(
-					0x03BB, 25, MASK_NONE);
+					SHAPE_AMULET, 25, MASK_NONE);
 			if (var0009) {
 				for (var0013 in var0009) {
 					var000D = var0013->get_item_frame();
-					if (var000D == 0x000B) {
+					if (var000D == FRAME_AMULET_FAKE_TALISMAN) {
 						var0013->remove_item();
 						var0014 = get_object_position();
 						UI_sprite_effect(
@@ -62534,55 +62742,55 @@ void Func06F9 object#(0x6F9) () {
 					}
 				}
 			}
-			var var0017 = find_nearby(0x02EE, 8, MASK_NONE);
+			var var0017 = find_nearby(SHAPE_CARPET, 8, MASK_NONE);
 			declare var var001A;
 			if (var0017) {
 				for (var001A in var0017) {
 					var001A->remove_item();
 				}
 			}
-			var var001B = find_nearby(0x0351, 8, MASK_NONE);
-			var001B &= find_nearby(0x0125, 8, MASK_NONE);
-			var001B &= find_nearby(0x02A6, 8, MASK_NONE);
-			var001B &= find_nearby(0x0291, 8, MASK_NONE);
-			var001B &= find_nearby(0x02EE, 8, MASK_NONE);
+			var var001B = find_nearby(SHAPE_TAPESTRY_NS, 8, MASK_NONE);
+			var001B &= find_nearby(SHAPE_TAPESTRY_EW, 8, MASK_NONE);
+			var001B &= find_nearby(SHAPE_CURTAINS_EW, 8, MASK_NONE);
+			var001B &= find_nearby(SHAPE_CURTAINS_NS, 8, MASK_NONE);
+			var001B &= find_nearby(SHAPE_CARPET, 8, MASK_NONE);
 			var var001C = find_nearby(SHAPE_LIT_LIGHT_SOURCE, 8, MASK_NONE);
 			declare var var001F;
 			declare var var0020;
 			for (var001F in var001C) {
 				var0020 = var001F->get_item_frame();
-				if (var0020 == 0x0002) {
+				if (var0020 == FRAME_LIGHT_SOURCE_LAMP) {
 					var001B &= var001F;
 				}
 			}
 			var var0021 = find_nearby(SHAPE_LIGHT_SOURCE, 8, MASK_NONE);
 			for (var001F in var0021) {
 				var0020 = var001F->get_item_frame();
-				if (var0020 == 0x0002) {
+				if (var0020 == FRAME_LIGHT_SOURCE_LAMP) {
 					var001B &= var001F;
 				}
 			}
 			var var0024 = find_nearby(SHAPE_SPENT_LIGHT_SOURCE, 8, MASK_NONE);
 			for (var001F in var0024) {
 				var0020 = var001F->get_item_frame();
-				if (var0020 == 0x0002) {
+				if (var0020 == FRAME_LIGHT_SOURCE_LAMP) {
 					var001B &= var001F;
 				}
 			}
 			for (var001A in var001B) {
 				var001A->remove_item();
 			}
-			var0029 = find_nearest(0x02CE, 8);
-			var0029->set_item_frame(0x0001);
+			var0029 = find_nearest(SHAPE_PEDESTAL2, 8);
+			var0029->set_item_frame(FRAME_PEDESTAL2_DARK);
 			return;
 		}
-		if (var0008 == 0x000A) {
-			var0012 = find_nearest(0x03BB, 0);
-			if (var0012 && (var0012->get_item_frame() == 0x000B)) {
+		if (var0008 == 10) {
+			var0012 = find_nearest(SHAPE_AMULET, 0);
+			if (var0012 && (var0012->get_item_frame() == FRAME_AMULET_FAKE_TALISMAN)) {
 				return;
 			}
 			gflags[PLACED_THIRD_TALISMAN] = true;
-			var0013 = Func08E8(0x000B);
+			var0013 = Func08E8(FRAME_AMULET_FAKE_TALISMAN);
 			if (var0013) {
 				var0013->remove_item();
 				var0014 = get_object_position();
@@ -62592,11 +62800,11 @@ void Func06F9 object#(0x6F9) () {
 				UI_play_sound_effect(0x0043);
 			}
 			var0009 = AVATAR->get_npc_object()->find_nearby(
-					0x03BB, 0x0019, MASK_NONE);
+					SHAPE_AMULET, 25, MASK_NONE);
 			if (var0009) {
 				for (var0013 in var0009) {
 					var000D = var0013->get_item_frame();
-					if (var000D == 0x000B) {
+					if (var000D == FRAME_AMULET_FAKE_TALISMAN) {
 						var0013->remove_item();
 						var0014 = get_object_position();
 						UI_sprite_effect(
@@ -62606,56 +62814,56 @@ void Func06F9 object#(0x6F9) () {
 					}
 				}
 			}
-			var0029 = find_nearest(0x02CE, 0x0008);
-			var0029->set_item_frame(0x0001);
+			var0029 = find_nearest(SHAPE_PEDESTAL2, 8);
+			var0029->set_item_frame(FRAME_PEDESTAL2_DARK);
 			return;
 		}
-		if (var0008 == 0x000B) {
+		if (var0008 == 11) {
 			if (gflags[PLACED_THIRD_TALISMAN]) {
-				var var002C = find_nearest(0x0203, 0x000A);
+				var var002C = find_nearest(SHAPE_CLOSED_DRAWBRIDGE, 10);
 				var002C->remove_item();
-				var var002D = UI_create_new_object(0x0366);
-				var002D->set_item_frame(0x0000);
+				var var002D = UI_create_new_object(SHAPE_DRAWBRIDGE);
+				var002D->set_item_frame(0);
 				var0014 = get_object_position();
 				var000F = UI_update_last_created(var0014);
 			}
 		}
-		if (var0008 == 0x000C) {
+		if (var0008 == 12) {
 			var0000 = [0x0958, 0x0635, 0x0000];
-			var0001 = 0x0004;
+			var0001 = SOUTH;
 		}
-		if (var0008 == 0x000D) {
+		if (var0008 == 13) {
 			var0000 = [0x0868, 0x0579, 0x0000];
-			var0001 = 0x0004;
+			var0001 = SOUTH;
 		}
-		if (var0008 == 0x000E) {
+		if (var0008 == 14) {
 			if (!gflags[GOT_TALISMAN_OF_LOVE]) {
 				var0000 = [0x0987, 0x05D7, 0x0000];
-				var0001 = 0x0004;
+				var0001 = SOUTH;
 			}
 		}
-		if (var0008 == 0x000F) {
+		if (var0008 == 15) {
 			if (!gflags[GOT_TALISMAN_OF_LOVE]) {
 				var0000 = [0x09D8, 0x06C4, 0x0000];
-				var0001 = 0x0000;
+				var0001 = NORTH;
 			}
 		}
-		if (var0008 == 0x0010) {
+		if (var0008 == 16) {
 			var0000 = [0x0957, 0x0636, 0x0000];
-			var0001 = 0x0000;
+			var0001 = NORTH;
 		}
-		if (var0008 == 0x0011) {
+		if (var0008 == 17) {
 			var0000 = [0x0937, 0x05C4, 0x0000];
-			var0001 = 0x0004;
+			var0001 = SOUTH;
 		}
-		if (var0008 == 0x0014) {
+		if (var0008 == 20) {
 			var0000 = [0x0AB4, 0x0618, 0x0000];
-			var0001 = 0x0006;
+			var0001 = WEST;
 		}
-		if (var0008 == 0x0015) {
-			var var002E = find_nearest(0x010C, 0x0003);
+		if (var0008 == 21) {
+			var var002E = find_nearest(SHAPE_MIRROR_EW, 3);
 			if (var002E) {
-				var002E->set_item_frame(0x0002);
+				var002E->set_item_frame(FRAME_MIRROR_BROKEN);
 				UI_play_sound_effect(0x0025);
 			}
 		}
@@ -62666,7 +62874,7 @@ void Func06F9 object#(0x6F9) () {
 		declare var var002F;
 		declare var var0030;
 		if (gflags[PLACED_SECOND_TALISMAN] && (!gflags[DID_SHRINE_OF_TRUTH])) {
-			var000C = Func08E8(0x0008);
+			var000C = Func08E8(FRAME_AMULET_TALISMAN_OF_TRUTH);
 			if (var000C) {
 				gflags[CAN_TALK_SHRINE_OF_PRINCIPLE] = true;
 				var002F = script var000C {
@@ -62681,7 +62889,7 @@ void Func06F9 object#(0x6F9) () {
 			}
 		}
 		if (gflags[GOT_TALISMAN_OF_LOVE] && (!gflags[DID_SHRINE_OF_LOVE])) {
-			var000C = Func08E8(0x000A);
+			var000C = Func08E8(FRAME_AMULET_TALISMAN_OF_LOVE);
 			if (var000C) {
 				gflags[CAN_TALK_SHRINE_OF_PRINCIPLE] = true;
 				var002F = script var000C {
@@ -62696,7 +62904,7 @@ void Func06F9 object#(0x6F9) () {
 			}
 		}
 		if (gflags[PLACED_ONE_TALISMAN] && (!gflags[DID_SHRINE_OF_COURAGE])) {
-			var000C = Func08E8(0x0009);
+			var000C = Func08E8(FRAME_AMULET_TALISMAN_OF_COURAGE);
 			if (var000C) {
 				gflags[CAN_TALK_SHRINE_OF_PRINCIPLE] = true;
 				var002F = script var000C {
@@ -62722,7 +62930,8 @@ void Func06FA object#(0x6FA) () {
 	if (get_item_shape() == SHAPE_EGG) {
 		Func08FF("@It would seem the nearby island is not at all stable.@");
 	}
-	if ((get_item_shape() == 0x02D1) || (get_item_shape() == 0x03DD)) {
+	if (get_item_shape() == SHAPE_MALE_AVATAR
+			|| get_item_shape() == SHAPE_FEMALE_AVATAR) {
 		Func08FF("@All is not right in Britannia. Perhaps Lord British will "
 				 "know the reason behind this tremor.@");
 	}
@@ -62766,13 +62975,13 @@ void Func06FC object#(0x6FC) () {
 		struct<Position> var0002 = false;
 		struct<Position> var0003
 				= AVATAR->get_npc_object()->get_object_position();
-		if ((var0001 == 0x02D1) || (var0001 == 0x03DD)) {
+		if ((var0001 == SHAPE_MALE_AVATAR) || (var0001 == SHAPE_FEMALE_AVATAR)) {
 			return;
 		}
 		if (var0000->is_npc()) {
 			var0000->halt_scheduled();
 			var0002 = var0000->get_object_position();
-		} else if (var0000 == 0x0000) {
+		} else if (var0000 == NULL_OBJ) {
 			var0002.x = var0000.x;
 			var0002.y = var0000.y;
 			var0002.z = var0000.z;
@@ -62780,9 +62989,10 @@ void Func06FC object#(0x6FC) () {
 			var0002 = var0000->get_object_position();
 		}
 		var var0004 = UI_create_new_object(SHAPE_SCROLL);
-		var0004->set_item_frame(4);
+		var0004->set_item_frame(FRAME_SCROLL_INVISIBLE);
 		var0004->set_item_flag(TEMPORARY);
-		var var0005 = var0004->set_item_quality(QUALITY_SCROLL_96);
+		var var0005 = var0004->set_item_quality(
+				QUALITY_SCROLL_BACKSWORD_KILL_TARGET);
 		var0005 = UI_update_last_created(var0002);
 		var var0006 = Func092D(var0004);
 		var var0007 = script AVATAR->get_npc_object() {
@@ -62803,17 +63013,17 @@ void Func06FC object#(0x6FC) () {
 			}
 		}
 		var var0008 = UI_create_new_object(SHAPE_FIRE_FIELD);
-		var0008->set_item_frame(0x0000);
+		var0008->set_item_frame(0);
 		var0008->set_item_flag(TEMPORARY);
-		if (UI_is_not_blocked(var0003, 0x02D1, 0x0000)) {
+		if (UI_is_not_blocked(var0003, SHAPE_MALE_AVATAR, STAND_NORTH)) {
 			var0005 = UI_update_last_created(var0003);
 		} else {
-			var0003.z += 0x0001;
-			if (UI_is_not_blocked(var0003, 0x02D1, 0x0000)) {
+			var0003.z += 1;
+			if (UI_is_not_blocked(var0003, SHAPE_MALE_AVATAR, STAND_NORTH)) {
 				var0005 = UI_update_last_created(var0003);
 			} else {
-				var0003.z -= 0x0002;
-				if (UI_is_not_blocked(var0003, 0x02D1, 0x0000)) {
+				var0003.z -= 2;
+				if (UI_is_not_blocked(var0003, SHAPE_MALE_AVATAR, STAND_NORTH)) {
 					var0005 = UI_update_last_created(var0003);
 				} else {
 					UI_sprite_effect(
@@ -62840,8 +63050,8 @@ void Func06FC object#(0x6FC) () {
 		for (var000E in var000B) {
 			var var000F = var000E->get_item_quality();
 			var var0010 = var000E->get_item_frame();
-			if (var000F == QUALITY_SCROLL_96) {
-				if (var0010 == 4) {
+			if (var000F == QUALITY_SCROLL_BACKSWORD_KILL_TARGET) {
+				if (var0010 == FRAME_SCROLL_INVISIBLE) {
 					UI_close_gumps();
 					struct<Position> var0011
 							= AVATAR->get_npc_object()->get_object_position();
@@ -62870,8 +63080,8 @@ void Func06FD object#(0x6FD) () {
 		for (var0005 in var0002) {
 			var var0006 = var0005->get_item_quality();
 			var var0007 = var0005->get_item_frame();
-			if (var0006 == QUALITY_SCROLL_96) {
-				if (var0007 == 4) {
+			if (var0006 == QUALITY_SCROLL_BACKSWORD_KILL_TARGET) {
+				if (var0007 == FRAME_SCROLL_INVISIBLE) {
 					var0000 = var0005;
 					var0001 = var0005->get_object_position();
 				}
@@ -62884,19 +63094,19 @@ void Func06FD object#(0x6FD) () {
 			return;
 		}
 		var var000A = UI_create_new_object(SHAPE_FIRE_FIELD);
-		var000A->set_item_frame(0x0000);
+		var000A->set_item_frame(0);
 		var000A->set_item_flag(TEMPORARY);
 		declare var var000B;
 		declare var var000C;
-		if (UI_is_not_blocked(var0009, 0x02D1, 0x0000)) {
+		if (UI_is_not_blocked(var0009, SHAPE_MALE_AVATAR, STAND_NORTH)) {
 			var000B = UI_update_last_created(var0009);
 		} else {
 			var0009.z += 1;
-			if (UI_is_not_blocked(var0009, 0x02D1, 0x0000)) {
+			if (UI_is_not_blocked(var0009, SHAPE_MALE_AVATAR, STAND_NORTH)) {
 				var000B = UI_update_last_created(var0009);
 			} else {
 				var0009.z -= 2;
-				if (UI_is_not_blocked(var0009, 0x02D1, 0x0000)) {
+				if (UI_is_not_blocked(var0009, SHAPE_MALE_AVATAR, STAND_NORTH)) {
 					var000B = UI_update_last_created(var0009);
 				} else {
 					UI_sprite_effect(
@@ -62926,17 +63136,17 @@ void Func06FD object#(0x6FD) () {
 			return;
 		}
 		var000A = UI_create_new_object(SHAPE_FIRE_FIELD);
-		var000A->set_item_frame(0x0000);
+		var000A->set_item_frame(0);
 		var000A->set_item_flag(TEMPORARY);
-		if (UI_is_not_blocked(var0009, 0x02D1, 0x0000)) {
+		if (UI_is_not_blocked(var0009, SHAPE_MALE_AVATAR, STAND_NORTH)) {
 			var000B = UI_update_last_created(var0009);
 		} else {
 			var0009.z += 1;
-			if (UI_is_not_blocked(var0009, 0x02D1, 0x0000)) {
+			if (UI_is_not_blocked(var0009, SHAPE_MALE_AVATAR, STAND_NORTH)) {
 				var000B = UI_update_last_created(var0009);
 			} else {
 				var0009.z -= 2;
-				if (UI_is_not_blocked(var0009, 0x02D1, 0x0000)) {
+				if (UI_is_not_blocked(var0009, SHAPE_MALE_AVATAR, STAND_NORTH)) {
 					var000B = UI_update_last_created(var0009);
 				} else {
 					UI_sprite_effect(
@@ -62986,7 +63196,7 @@ void Func070A object#(0x70A) () {
 				var var0000 = find_nearest(SHAPE_MONSTER_MAGE, 0);
 				if (var0000) {
 					var0001 = UI_create_new_object(SHAPE_KEY);
-					var0001->set_item_frame(7);
+					var0001->set_item_frame(SWING_2H_1_NORTH);
 					var0002 = var0001->set_item_quality(QUALITY_DOOR_RITUAL);
 					var0002 = var0000->give_last_created();
 					var0000->item_say("@I summon thee!@");
@@ -63012,8 +63222,8 @@ void Func070A object#(0x70A) () {
 					};
 					var0003 = find_nearby(SHAPE_LIGHT_SOURCE, 20, MASK_NONE);
 					for (var0001 in var0003) {
-						if ((var0001->get_item_frame() == 0x0007)
-							|| (var0001->get_item_frame() == 0x0009)) {
+						if ((var0001->get_item_frame() == FRAME_LIGHT_RED_CANDLE1)
+							|| (var0001->get_item_frame() == FRAME_LIGHT_RED_CANDLE2)) {
 							var0006 = UI_create_new_object(SHAPE_LIT_LIGHT_SOURCE);
 							var0006->set_item_frame(var0001->get_item_frame());
 							var0002 = UI_update_last_created(
@@ -63023,14 +63233,14 @@ void Func070A object#(0x70A) () {
 					}
 					var0003 = find_nearby(SHAPE_LIT_LIGHT_SOURCE, 20, MASK_NONE);
 					for (var0001 in var0003) {
-						if (var0001->get_item_frame() == 0x0009) {
+						if (var0001->get_item_frame() == FRAME_LIGHT_RED_CANDLE2) {
 							var var0009 = var0001->find_nearby(
 									SHAPE_EGG, 1, MASK_EGG);
 							for (var000C in var0009) {
 								if ((var000C->get_item_frame() == FRAME_EGG_PATH)
 									&& (var000C->get_item_quality() == 201)) {
 									var var000D = UI_create_new_object(SHAPE_FIRE_FIELD);
-									var000D->set_item_frame(0x0000);
+									var000D->set_item_frame(0);
 									var0002 = UI_update_last_created(
 											var000C->get_object_position());
 								}
@@ -63042,8 +63252,8 @@ void Func070A object#(0x70A) () {
 		} else if (gflags[SUMMONING_RITUAL_DONE]) {
 			var0003 = find_nearby(SHAPE_LIT_LIGHT_SOURCE, 20, MASK_NONE);
 			for (var0001 in var0003) {
-				if ((var0001->get_item_frame() == 0x0007)
-					|| (var0001->get_item_frame() == 0x0009)) {
+				if ((var0001->get_item_frame() == FRAME_LIGHT_RED_CANDLE1)
+					|| (var0001->get_item_frame() == FRAME_LIGHT_RED_CANDLE2)) {
 					var0006 = UI_create_new_object(SHAPE_SPENT_LIGHT_SOURCE);
 					var0006->set_item_frame(var0001->get_item_frame());
 					var0002 = UI_update_last_created(
@@ -63051,17 +63261,17 @@ void Func070A object#(0x70A) () {
 					var0001->remove_item();
 				}
 			}
-			var0003 = find_nearby(SHAPE_FIRE_FIELD, 0x001E, MASK_EGG);
+			var0003 = find_nearby(SHAPE_FIRE_FIELD, 30, MASK_EGG);
 			for (var0001 in var0003) {
 				var0001->remove_item();
 			}
-			var0003 = find_nearby(0x00A8, 0x001E, MASK_NONE);
+			var0003 = find_nearby(SHAPE_BEAM_OF_LIGHT, 30, MASK_NONE);
 			for (var0001 in var0003) {
 				var0001->remove_item();
 			}
-			var0003 = find_nearby(0x0190, 0x000A, MASK_NONE);
+			var0003 = find_nearby(SHAPE_BODY1, 10, MASK_NONE);
 			for (var0001 in var0003) {
-				if (var0001->get_item_frame() == 0x001D) {
+				if (var0001->get_item_frame() == FRAME_BODY1_TODDLER) {
 					Func08E6(var0001);
 				}
 			}
@@ -63104,8 +63314,9 @@ void Func070A object#(0x70A) () {
 				}
 			}
 		}
-		if ((get_item_shape() == 0x02D1) || (get_item_shape() == 0x03DD)) {
-			var0001 = AVATAR->find_nearby(0x0162, 0x001E, MASK_NPC2);
+		if (get_item_shape() == SHAPE_MALE_AVATAR ||
+				get_item_shape() == SHAPE_FEMALE_AVATAR) {
+			var0001 = AVATAR->find_nearby(SHAPE_LICHE, 30, MASK_NPC2);
 			if (var0001) {
 				var0021 = var0001->get_object_position();
 				UI_sprite_effect(
@@ -63115,7 +63326,7 @@ void Func070A object#(0x70A) () {
 						ANIMATION_TELEPORT, var0021.x - 2, var0021.y - 2, 0, 0,
 						0, LOOP_ONCE);
 				UI_play_sound_effect(0x0034);
-				var0001->set_item_frame(0x0013);
+				var0001->set_item_frame(USE_SOUTH);
 				var0002 = script var0001 {
 					face south;
 					wait 5;
@@ -63141,10 +63352,10 @@ void Func070A object#(0x70A) () {
 		if (AVATAR->get_item_flag(DEAD)) {
 			abort;
 		}
-		if (get_item_shape() == 0x0162) {
+		if (get_item_shape() == SHAPE_LICHE) {
 			var var0024 = get_distance(AVATAR->get_npc_object());
 			declare var var002D;
-			if ((var0024 < 0x0014)
+			if ((var0024 < 20)
 				&& AVATAR->get_npc_object()->get_item_flag(IN_DUNGEON)) {
 				var0021 = get_object_position();
 				UI_sprite_effect(
@@ -63153,9 +63364,9 @@ void Func070A object#(0x70A) () {
 				var var0025 = UI_get_party_list();
 				for (var0028 in var0025) {
 					var var0029 = "";
-					var var002A = UI_die_roll(0x0000, 0x0008);
+					var var002A = UI_die_roll(0, 8);
 					declare var var002B;
-					if (var002A == 0x0000) {
+					if (var002A == 0) {
 						var002B = new script {
 							actor frame kneeling;
 							actor frame bowing;
@@ -63163,7 +63374,7 @@ void Func070A object#(0x70A) () {
 						};
 						var0029 = [var0029, var002B];
 					}
-					if (var002A == 0x0001) {
+					if (var002A == 1) {
 						var002B = new script {
 							actor frame kneeling;
 							actor frame standing;
@@ -63171,7 +63382,7 @@ void Func070A object#(0x70A) () {
 						};
 						var0029 = [var0029, var002B];
 					}
-					if (var002A == 0x0002) {
+					if (var002A == 2) {
 						var002B = new script {
 							actor frame bowing;
 							actor frame sleeping;
@@ -63179,7 +63390,7 @@ void Func070A object#(0x70A) () {
 						};
 						var0029 = [var0029, var002B];
 					}
-					if (var002A == 0x0003) {
+					if (var002A == 3) {
 						var002B = new script {
 							actor frame standing;
 							actor frame standing;
@@ -63187,7 +63398,7 @@ void Func070A object#(0x70A) () {
 						};
 						var0029 = [var0029, var002B];
 					}
-					if (var002A == 0x0004) {
+					if (var002A == 4) {
 						var002B = new script {
 							actor frame kneeling;
 							actor frame ready;
@@ -63195,7 +63406,7 @@ void Func070A object#(0x70A) () {
 						};
 						var0029 = [var0029, var002B];
 					}
-					if (var002A == 0x0005) {
+					if (var002A == 5) {
 						var002B = new script {
 							actor frame ready;
 							actor frame kneeling;
@@ -63204,9 +63415,8 @@ void Func070A object#(0x70A) () {
 						var0029 = [var0029, var002B];
 					}
 					declare var var002C;
-					if (var002A == 0x0006) {
-						var002C = FACE_NORTH
-								  + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+					if (var002A == 6) {
+						var002C = FACE_NORTH + (UI_die_roll(0, 3) * 2);
 						var002B = new script {
 							face var002C;
 							actor frame bowing;
@@ -63214,9 +63424,8 @@ void Func070A object#(0x70A) () {
 						};
 						var0029 = [var0029, var002B];
 					}
-					if (var002A == 0x0007) {
-						var002C = FACE_NORTH
-								  + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+					if (var002A == 7) {
+						var002C = FACE_NORTH + (UI_die_roll(0, 3) * 2);
 						var002B = new script {
 							face var002C;
 							actor frame kneeling;
@@ -63224,9 +63433,8 @@ void Func070A object#(0x70A) () {
 						};
 						var0029 = [var0029, var002B];
 					}
-					if (var002A == 0x0008) {
-						var002C = FACE_NORTH
-								  + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+					if (var002A == 8) {
+						var002C = FACE_NORTH + (UI_die_roll(0, 3) * 2);
 						var002B = new script {
 							face var002C;
 							actor frame ready;
@@ -63237,8 +63445,8 @@ void Func070A object#(0x70A) () {
 					var0028->halt_scheduled();
 					var0002 = var0028->run_script(var0029);
 				}
-				UI_earthquake(0x0003);
-				var002D = UI_die_roll(0x0005, 0x0014);
+				UI_earthquake(3 * TICK);
+				var002D = UI_die_roll(5, 20);
 				var0002 = script item {
 					actor frame ready;
 					wait var002D;
@@ -63253,7 +63461,7 @@ void Func070A object#(0x70A) () {
 					call Func070A;
 				};
 			} else {
-				var002D = UI_die_roll(0x0005, 0x000F);
+				var002D = UI_die_roll(5, 15);
 				var0002 = script item {
 					actor frame ready;
 					wait var002D;
@@ -63276,7 +63484,7 @@ void Func070B object#(0x70B) () {
 					ANY_SHAPE, QUALITY_ANY, FRAME_ANY);
 			for (var0006 in var0003) {
 				declare struct<Position> var0007;
-				if (var0001 == 0x0000) {
+				if (var0001 == 0) {
 					if (Func08E9(var0006)) {
 						var0002 = var0006->set_last_created();
 						var0007 = AVATAR->get_npc_object()
@@ -63284,7 +63492,7 @@ void Func070B object#(0x70B) () {
 						var0002 = UI_update_last_created(var0007);
 					}
 				}
-				if (var0001 == 0x0001) {
+				if (var0001 == 1) {
 					if (Func08EA(var0006)) {
 						var0002 = var0006->set_last_created();
 						var0007 = AVATAR->get_npc_object()
@@ -63292,7 +63500,7 @@ void Func070B object#(0x70B) () {
 						var0002 = UI_update_last_created(var0007);
 					}
 				}
-				if (var0001 == 0x0002) {
+				if (var0001 == 2) {
 					if (var0006->get_container() == AVATAR->get_npc_object()) {
 						var0002 = var0006->set_last_created();
 						var0007 = AVATAR->get_npc_object()
@@ -63301,7 +63509,7 @@ void Func070B object#(0x70B) () {
 					}
 				}
 			}
-			var0001 += 0x0001;
+			var0001 += 1;
 			var0002 = set_last_created();
 		}
 	}
@@ -63313,12 +63521,12 @@ void Func070B object#(0x70B) () {
 }
 
 void Func070C object#(0x70C) () {
-	var var0000 = find_nearest(0x025C, 0x0001);
+	var var0000 = find_nearest(SHAPE_GLASS_SWORD, 1);
 	if (var0000) {
-		var var0001 = find_nearest(0x02D9, 0x0008);
+		var var0001 = find_nearest(SHAPE_CRYSTAL_BALL, 8);
 		if (var0001) {
 			var var0002 = var0001->get_item_quality();
-			if (var0002 == 0x0007) {
+			if (var0002 == 7) {
 				struct<Position> var0003 = var0001->get_object_position();
 				var0001->remove_item();
 				var0000->remove_item();
@@ -63336,7 +63544,7 @@ void Func070C object#(0x70C) () {
 }
 
 void Func070D object#(0x70D) () {
-	var var0000 = find_nearby(0x03A8, 20, MASK_NONE);
+	var var0000 = find_nearby(SHAPE_PORTCULLIS_DOOR_EW, 20, MASK_NONE);
 	var var0001 = find_nearby(SHAPE_METAL_WALL_EW, 20, MASK_NONE);
 	var var0002 = get_item_quality();
 	declare var var0003;
@@ -63344,12 +63552,12 @@ void Func070D object#(0x70D) () {
 	declare var var0007;
 	declare var var0008;
 	if (var0002) {
-		var0003 = find_nearest(0x017F, 0x0000);
-		var0004 = find_nearest(0x021D, 0x0000);
+		var0003 = find_nearest(SHAPE_MAGIC_HELM, 0);
+		var0004 = find_nearest(SHAPE_GREAT_HELM, 0);
 		if (var0003) {
 			gflags[OPENED_WALLS_1] = true;
 			for (var0007 in var0001) {
-				if (var0007->get_item_quality() == 0x000C) {
+				if (var0007->get_item_quality() == 12) {
 					var0008 = script var0007 {
 						frame 4;
 						sfx 33;
@@ -63363,7 +63571,7 @@ void Func070D object#(0x70D) () {
 		} else {
 			gflags[OPENED_WALLS_1] = false;
 			for (var0007 in var0000) {
-				if (var0007->get_item_quality() == 0x000C) {
+				if (var0007->get_item_quality() == 12) {
 					var0008 = script var0007 {
 						call Func012F;
 						sfx 32;
@@ -63380,12 +63588,12 @@ void Func070D object#(0x70D) () {
 			}
 		}
 	} else {
-		var0004 = find_nearest(0x021D, 0x0000);
-		var0003 = find_nearest(0x017F, 0x0000);
+		var0004 = find_nearest(SHAPE_GREAT_HELM, 0);
+		var0003 = find_nearest(SHAPE_MAGIC_HELM, 0);
 		if (var0004) {
 			gflags[OPENED_WALLS_2] = true;
 			for (var0007 in var0001) {
-				if (var0007->get_item_quality() == 0x000B) {
+				if (var0007->get_item_quality() == 11) {
 					var0008 = script var0007 {
 						frame 4;
 						sfx 33;
@@ -63399,7 +63607,7 @@ void Func070D object#(0x70D) () {
 		} else {
 			gflags[OPENED_WALLS_2] = false;
 			for (var0007 in var0000) {
-				if (var0007->get_item_quality() == 0x000B) {
+				if (var0007->get_item_quality() == 11) {
 					var0008 = script var0007 {
 						call Func012F;
 						sfx 32;
@@ -63419,7 +63627,7 @@ void Func070D object#(0x70D) () {
 }
 
 void Func070E object#(0x70E) () {
-	var var0000 = find_nearby(0x03A8, 1, MASK_NONE);
+	var var0000 = find_nearby(SHAPE_PORTCULLIS_DOOR_EW, 1, MASK_NONE);
 	var var0001 = find_nearby(SHAPE_METAL_WALL_EW, 1, MASK_NONE);
 	declare var var0004;
 	declare struct<Position> var0005;
@@ -63431,8 +63639,8 @@ void Func070E object#(0x70E) () {
 			var0005 = var0004->get_object_position();
 			var0006 = var0004->get_item_quality();
 			var0004->remove_item();
-			var0007 = UI_create_new_object(0x03A8);
-			var0007->set_item_frame(0x0000);
+			var0007 = UI_create_new_object(SHAPE_PORTCULLIS_DOOR_EW);
+			var0007->set_item_frame(0);
 			var0008 = var0007->set_item_quality(var0006);
 			var0008 = UI_update_last_created(var0005);
 			return;
@@ -63441,18 +63649,18 @@ void Func070E object#(0x70E) () {
 		if (gflags[OPENED_WALLS_2]) {
 			for (var0004 in var0001) {
 				var0006 = var0004->get_item_quality();
-				if (var0006 == 0x000B) {
+				if (var0006 == 11) {
 					var0005 = var0004->get_object_position();
 					var0004->remove_item();
-					var0007 = UI_create_new_object(0x03A8);
-					var0007->set_item_frame(0x0000);
+					var0007 = UI_create_new_object(SHAPE_PORTCULLIS_DOOR_EW);
+					var0007->set_item_frame(0);
 					var0008 = var0007->set_item_quality(var0006);
 					var0008 = UI_update_last_created(var0005);
 				}
 			}
 			for (var0004 in var0000) {
 				var0006 = var0004->get_item_quality();
-				if (var0006 == 0x000C) {
+				if (var0006 == 12) {
 					var0005 = var0004->get_object_position();
 					var0004->remove_item();
 					var0007 = UI_create_new_object(SHAPE_METAL_WALL_EW);
@@ -63466,18 +63674,18 @@ void Func070E object#(0x70E) () {
 		if (gflags[OPENED_WALLS_1]) {
 			for (var0004 in var0001) {
 				var0006 = var0004->get_item_quality();
-				if (var0006 == 0x000C) {
+				if (var0006 == 12) {
 					var0005 = var0004->get_object_position();
 					var0004->remove_item();
-					var0007 = UI_create_new_object(0x03A8);
-					var0007->set_item_frame(0x0000);
+					var0007 = UI_create_new_object(SHAPE_PORTCULLIS_DOOR_EW);
+					var0007->set_item_frame(0);
 					var0008 = var0007->set_item_quality(var0006);
 					var0008 = UI_update_last_created(var0005);
 				}
 			}
 			for (var0004 in var0000) {
 				var0006 = var0004->get_item_quality();
-				if (var0006 == 0x000B) {
+				if (var0006 == 11) {
 					var0005 = var0004->get_object_position();
 					var0004->remove_item();
 					var0007 = UI_create_new_object(SHAPE_METAL_WALL_EW);
@@ -63497,7 +63705,7 @@ void Func070E object#(0x70E) () {
 			var0007->set_item_frame(4);
 			var0008 = var0007->set_item_quality(var0006);
 			var0008 = UI_update_last_created(var0005);
-			// BUG: This return probably should not be here.
+			// BUG: This break probably should not be here.
 			break;
 		}
 	}
@@ -63509,17 +63717,18 @@ void Func070F object#(0x70F) () {
 	declare var var0005;
 	declare var var0006;
 	declare var var0009;
-	if (var0000 == 0x01D2) {
+	if (var0000 == SHAPE_LORD_BRITISH) {
 		struct<Position> var0001
 				= AVATAR->get_npc_object()->get_object_position();
 		UI_sprite_effect(
 				ANIMATION_LIGHTNING, var0001.x, var0001.y, 0, 0, 0, LOOP_ONCE);
 		UI_play_sound_effect(0x003E);
 		var0002 = AVATAR->get_npc_object()->find_nearby(
-				ANY_SHAPE, 0x0050, MASK_NPC2);
+				ANY_SHAPE, 80, MASK_NPC2);
 		for (var0005 in var0002) {
 			var0006 = var0005->get_item_shape();
-			if (!((var0006 == 0x02D1) || (var0006 == 0x03DD))) {
+			if (!(var0006 == SHAPE_MALE_AVATAR
+					|| var0006 == SHAPE_FEMALE_AVATAR)) {
 				if (var0005->get_alignment() == NEUTRAL) {
 					var0005->set_alignment(EVIL);
 					var0005->set_schedule_type(IN_COMBAT);
@@ -63527,13 +63736,13 @@ void Func070F object#(0x70F) () {
 			}
 		}
 		struct<Position> var0007 = get_object_position();
-		var var0008 = UI_create_new_object(0x019E);
+		var var0008 = UI_create_new_object(SHAPE_BODY2);
 		var0008->set_item_frame_rot(get_item_frame_rot());
-		var0008->set_item_frame(0x001E);
+		var0008->set_item_frame(FRAME_BODY2_LORD_BRITISH1);
 		LORD_BRITISH->remove_npc();
 		var0009 = UI_update_last_created(var0007);
 		var var000A = UI_create_new_object(SHAPE_SCROLL);
-		var000A->set_item_frame(0);
+		var000A->set_item_frame(FRAME_SCROLL_CLOSED);
 		var0009 = var000A->set_item_quality(QUALITY_SCROLL_LORD_BRITISH_WILL);
 		var0009 = var0008->give_last_created();
 		var var000B = script var0008 {
@@ -63549,10 +63758,11 @@ void Func070F object#(0x70F) () {
 			kill_npc();
 			remove_npc();
 			var0002 = AVATAR->get_npc_object()->find_nearby(
-					ANY_SHAPE, 0x0050, MASK_NPC2);
+					ANY_SHAPE, 80, MASK_NPC2);
 			for (var0005 in var0002) {
 				var0006 = var0005->get_item_shape();
-				if (!((var0006 == 0x02D1) || (var0006 == 0x03DD))) {
+				if (!(var0006 == SHAPE_MALE_AVATAR
+						|| var0006 == SHAPE_FEMALE_AVATAR)) {
 					if (var0005->get_alignment() == var000C) {
 						var0005->set_alignment(EVIL);
 						var0005->set_schedule_type(IN_COMBAT);
@@ -63560,7 +63770,8 @@ void Func070F object#(0x70F) () {
 				}
 			}
 		} else {
-			var var000F = get_cont_items(SHAPE_SCROLL, QUALITY_ANY, 0x0004);
+			var var000F = get_cont_items(
+					SHAPE_SCROLL, QUALITY_ANY, FRAME_SCROLL_INVISIBLE);
 			if (var000F) {
 				var var0010 = var000F->get_item_quality();
 				var var0011 = false;
@@ -63568,25 +63779,25 @@ void Func070F object#(0x70F) () {
 				if (var0010 == QUALITY_SCROLL_ERETHIAN) {
 					gflags[ERETHIAN_IS_DEAD] = true;
 					var0012 = get_object_position();
-					var0011 = UI_create_new_object(0x02FA);
+					var0011 = UI_create_new_object(SHAPE_BODY3);
 					var0011->set_item_frame_rot(get_item_frame_rot());
-					var0011->set_item_frame(0x0016);
+					var0011->set_item_frame(FRAME_BODY3_MAGE);
 					Func08E6(item);
 					var0009 = UI_update_last_created(var0012);
 				}
 				if (var0010 == QUALITY_SCROLL_DRACOTHRAXUS) {
 					gflags[USED_KILL_DRACOTHRAXUS] = true;
 					var0012 = get_object_position();
-					var0011 = UI_create_new_object(0x030A);
+					var0011 = UI_create_new_object(SHAPE_BODY4);
 					var0011->set_item_frame_rot(get_item_frame_rot());
-					var0011->set_item_frame(0x0007);
+					var0011->set_item_frame(FRAME_BODY4_DRAGON);
 					Func08E6(item);
 					var0009 = UI_update_last_created(var0012);
 				}
 				var var0013 = UI_create_new_object(SHAPE_SCROLL);
 				var0013->set_item_flag(TEMPORARY);
 				var0009 = var0013->set_item_quality(var0010);
-				var0013->set_item_frame(4);
+				var0013->set_item_frame(FRAME_SCROLL_INVISIBLE);
 				var0009 = var0011->give_last_created();
 				var var0014 = script var0013 after 1 ticks {
 					finish;
@@ -63597,7 +63808,7 @@ void Func070F object#(0x70F) () {
 						ANY_SHAPE, 80, MASK_NPC2);
 				for (var0005 in var0002) {
 					var0006 = var0005->get_item_shape();
-					if (!((var0006 == 0x02D1) || (var0006 == 0x03DD))) {
+					if (!((var0006 == SHAPE_MALE_AVATAR) || (var0006 == SHAPE_FEMALE_AVATAR))) {
 						if (var0005->get_alignment() == var000C) {
 							var0005->set_alignment(EVIL);
 							var0005->set_schedule_type(IN_COMBAT);
@@ -63607,10 +63818,11 @@ void Func070F object#(0x70F) () {
 			} else {
 				kill_npc();
 				var0002 = AVATAR->get_npc_object()->find_nearby(
-						ANY_SHAPE, 0x0050, MASK_NPC2);
+						ANY_SHAPE, 80, MASK_NPC2);
 				for (var0005 in var0002) {
 					var0006 = var0005->get_item_shape();
-					if (!((var0006 == 0x02D1) || (var0006 == 0x03DD))) {
+					if (!(var0006 == SHAPE_MALE_AVATAR
+							|| var0006 == SHAPE_FEMALE_AVATAR)) {
 						if (var0005->get_alignment() == var000C) {
 							var0005->set_alignment(EVIL);
 							var0005->set_schedule_type(IN_COMBAT);
@@ -63625,14 +63837,18 @@ void Func070F object#(0x70F) () {
 void Func0710 object#(0x710) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
-		var var0000 = find_nearby(0x03F7, 0x0028, MASK_NPC2);
+		var var0000 = find_nearby(SHAPE_GOLEM, 40, MASK_NPC2);
 		var var0001 = false;
 		var var0002 = false;
 		for (var0005 in var0000) {
-			if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, 4)) {
+			if (var0005->get_cont_items(
+					SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR,
+					FRAME_SCROLL_INVISIBLE)) {
 				var0001 = var0005;
 			}
-			if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX, 4)) {
+			if (var0005->get_cont_items(
+					SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX,
+					FRAME_SCROLL_INVISIBLE)) {
 				var0002 = var0005;
 			}
 		}
@@ -63649,12 +63865,11 @@ void Func0710 object#(0x710) () {
 			]);
 		} else {
 			var0000 = UI_find_nearby(
-					[0x09B7, 0x06C8, 0x0000], 0x014B, 0x000A, MASK_NONE);
+					[0x09B7, 0x06C8, 0x0000], SHAPE_ROCK, 10, MASK_NONE);
 			var var0008 = 0;
 			for (var000B in var0000) {
 				var var000C = var000B->get_item_frame();
-				if ((var000C >= 0x0000)
-					&& ((var000C <= 0x000A)
+				if (var000C >= 0 && (var000C <= 10
 						&& var000B->find_nearby(
 								SHAPE_BLOOD, 2, MASK_ALL_UNSEEN))) {
 					var0008 += 1;
@@ -63696,12 +63911,12 @@ void Func0710 object#(0x710) () {
 		gflags[BOLLUX_IS_DEAD] = true;
 		struct<Position> var0010 = get_object_position();
 		Func08E6(item);
-		var var0011 = UI_create_new_object(0x019E);
-		var0011->set_item_frame(0x0005);
+		var var0011 = UI_create_new_object(SHAPE_BODY2);
+		var0011->set_item_frame(FRAME_BODY2_GOLEM2);
 		var var0012 = UI_update_last_created(var0010);
 		var var0013 = UI_create_new_object(SHAPE_SCROLL);
 		var0012 = var0013->set_item_quality(QUALITY_SCROLL_BOLLUX);
-		var0013->set_item_frame(4);
+		var0013->set_item_frame(FRAME_SCROLL_INVISIBLE);
 		var0012 = var0011->give_last_created();
 		var var0014 = UI_create_new_object(SHAPE_SMALL_ROCK);
 		var0014->set_item_frame(FRAME_GOLEM_HEART);
@@ -63718,8 +63933,8 @@ void Func0710 object#(0x710) () {
 
 void Func0712 object#(0x712) () {
 	if (event == EGG) {
-		var var0000 = UI_find_nearby_avatar(0x01F9);
-		var0000 &= UI_find_nearby_avatar(0x03CA);
+		var var0000 = UI_find_nearby_avatar(SHAPE_DRAKE);
+		var0000 &= UI_find_nearby_avatar(SHAPE_SHEEP);
 		if (var0000) {
 			for (var0003 in var0000) {
 				Func08E6(var0003);
@@ -63736,8 +63951,8 @@ void Func0713 object#(0x713) () {
 		UI_sprite_effect(
 				ANIMATION_FIREWORKS, var0001.x, var0001.y, 0, 0, 0, LOOP_ONCE);
 		UI_play_sound_effect(0x003E);
-		if (var0000->get_item_frame() == 0x0003) {
-			var0000->set_item_frame(0x0002);
+		if (var0000->get_item_frame() == FRAME_TREE_OF_LIFE_WILTED) {
+			var0000->set_item_frame(FRAME_TREE_OF_LIFE_FULL);
 		}
 		var var0002 = var0000->find_nearby(SHAPE_BLOOD, 20, MASK_ALL_UNSEEN);
 		for (var0005 in var0002) {
@@ -63751,17 +63966,19 @@ void Func0713 object#(0x713) () {
 }
 
 void Func0714 object#(0x714) () {
-	var var0000 = find_nearby(0x03F7, 0x0028, MASK_NPC2);
+	var var0000 = find_nearby(SHAPE_GOLEM, 40, MASK_NPC2);
 	var var0001 = false;
 	var var0002 = false;
 	declare var var0005;
 	declare var var0006;
 	for (var0005 in var0000) {
-		if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, 4)) {
+		if (var0005->get_cont_items(
+				SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, FRAME_SCROLL_INVISIBLE)) {
 			var0001 = var0005;
 			var0006 = var0001;
 		}
-		if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX, 4)) {
+		if (var0005->get_cont_items(
+				SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX, FRAME_SCROLL_INVISIBLE)) {
 			var0002 = var0005;
 			var0006 = var0002;
 		}
@@ -63770,7 +63987,8 @@ void Func0714 object#(0x714) () {
 		var var0007 = false;
 		var var0008 = Func0814();
 		for (var000B in var0008) {
-			var0007 = var000B->get_cont_items(SHAPE_SMALL_ROCK, QUALITY_ANY, FRAME_GOLEM_HEART);
+			var0007 = var000B->get_cont_items(
+					SHAPE_SMALL_ROCK, QUALITY_ANY, FRAME_GOLEM_HEART);
 			if (var0007) {
 				break;
 			}
@@ -63781,7 +63999,7 @@ void Func0714 object#(0x714) () {
 					= AVATAR->get_object_position() & (QUALITY_ANY & FRAME_GOLEM_HEART);
 			var0000 = var000C->find_nearby(SHAPE_SMALL_ROCK, 30, MASK_NONE);
 			if (var0000
-				|| Func0931(PARTY, 0x0001, SHAPE_SMALL_ROCK, QUALITY_ANY, FRAME_GOLEM_HEART)) {
+				|| Func0931(PARTY, 1, SHAPE_SMALL_ROCK, QUALITY_ANY, FRAME_GOLEM_HEART)) {
 				Func08FF("@The heart must be placed in the body.@");
 				abort;
 			}
@@ -63793,9 +64011,11 @@ void Func0714 object#(0x714) () {
 				var var000D = script AVATAR {
 					wait 500;
 				};
-				var0000 = find_nearby(0x019E, 0x0050, MASK_NONE);
+				var0000 = find_nearby(SHAPE_BODY2, 80, MASK_NONE);
 				for (var0005 in var0000) {
-					if (var0005->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, 4)) {
+					if (var0005->get_cont_items(
+							SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR,
+							FRAME_SCROLL_INVISIBLE)) {
 						BOLLUX->say("You watch in stunned horror as Bollux "
 									"pierces his chest open with his fingers.");
 						BOLLUX->hide();
@@ -63864,13 +64084,15 @@ void Func0714 object#(0x714) () {
 }
 
 void Func0715 object#(0x715) () {
-	var var0000 = AVATAR->find_nearby(0x03F7, 0x0028, MASK_NPC2);
+	var var0000 = AVATAR->find_nearby(SHAPE_GOLEM, 40, MASK_NPC2);
 	var var0001 = false;
 	for (var0004 in var0000) {
-		if (var0004->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, 4)) {
+		if (var0004->get_cont_items(
+				SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, FRAME_SCROLL_INVISIBLE)) {
 			var0001 = var0004;
 		}
-		if (var0004->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX, 4)) {
+		if (var0004->get_cont_items(
+				SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX, FRAME_SCROLL_INVISIBLE)) {
 			var0001 = var0004;
 		}
 	}
@@ -63905,18 +64127,20 @@ void Func0715 object#(0x715) () {
 
 void Func0716 object#(0x716) () {
 	gflags[REVIVING_GOLEM] = false;
-	var var0000 = AVATAR->find_nearby(0x03F7, 0x0028, MASK_NPC2);
+	var var0000 = AVATAR->find_nearby(SHAPE_GOLEM, 40, MASK_NPC2);
 	var var0001 = false;
 	for (var0004 in var0000) {
-		if (var0004->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, 4)) {
+		if (var0004->get_cont_items(
+				SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, FRAME_SCROLL_INVISIBLE)) {
 			var0001 = var0004;
 		}
-		if (var0004->get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX, 4)) {
+		if (var0004->get_cont_items(
+				SHAPE_SCROLL, QUALITY_SCROLL_BOLLUX, FRAME_SCROLL_INVISIBLE)) {
 			var0001 = var0004;
 		}
 	}
 	if (var0001) {
-		var0001->set_item_frame(0x001D);
+		var0001->set_item_frame(LIE_SOUTH);
 	}
 	var var0005 = script AVATAR after 10 ticks {
 		nohalt;
@@ -63966,15 +64190,15 @@ void Func0800 0x800 (var var0000) {
 	} else {
 		var var0003 = var0000->get_item_frame();
 		var var0004 = var0000->get_item_shape();
-		if ((var0003 > 0x0003) && (!Func0801(var0000))) {
+		if (var0003 > 3 && !Func0801(var0000)) {
 			struct<Position> var0005 = var0000->get_object_position();
-			var var0006 = var0000->find_nearby(var0004, 0x0002, MASK_NONE);
+			var var0006 = var0000->find_nearby(var0004, 2, MASK_NONE);
 			for (var0009 in var0006) {
-				if (var0009->get_item_frame() <= 0x0002) {
+				if (var0009->get_item_frame() <= 2) {
 					struct<Position> var000A = var0009->get_object_position();
-					if ((var000A.x == var0005.x)
-						&& ((var000A.y == var0005.y)
-							&& ((var000A.z + 1) == var0005.z))) {
+					if (var000A.x == var0005.x
+						&& (var000A.y == var0005.y
+							&& (var000A.z + 1) == var0005.z)) {
 						var0000 = var0009;
 					}
 				}
@@ -63995,7 +64219,7 @@ void Func0800 0x800 (var var0000) {
 var Func0801 0x801 (var var0000) {
 	var var0001 = var0000->get_item_frame();
 	var var0002 = var0000->get_item_shape();
-	if ((var0001 == FRAME_BED_ROLL) && (var0002 == SHAPE_BED)) {
+	if (var0001 == FRAME_BED_ROLL && var0002 == SHAPE_BED) {
 		return true;
 	}
 	return false;
@@ -64012,20 +64236,20 @@ var Func0802 0x802 (var var0000, var var0001) {
 }
 
 void Func0803 0x803 (var var0000) {
-	var var0001 = var0000->find_nearby(0x00E6, 0x0028, MASK_NONE);
+	var var0001 = var0000->find_nearby(SHAPE_ETHEREAL_MONSTER, 40, MASK_NONE);
 	if (var0001->get_item_flag(ASLEEP)) {
-		var0001 = 0x0000;
+		var0001 = NULL_OBJ;
 	}
 	if ((!gflags[BROKE_TETRA]) && (!var0001)) {
-		var0000->set_item_shape(0x03D5);
+		var0000->set_item_shape(SHAPE_PRISM);
 		gflags[BROKE_TETRA] = true;
 		struct<Position> var0002 = [0x0AB7, 0x0375, 0x0000];
 		var0000->move_object(var0002);
 		var0002.y += 2;
 		AVATAR->move_object(var0002);
 		Func0808();
-		var var0003 = 0x00C8;
-		var var0004 = 0x0001;
+		var var0003 = SHAPE_TRAP;
+		var var0004 = FRAME_TRAP_MISSILE_TARGETTED;
 		var var0005 = QUALITY_ANY;
 		Func0804(var0003, var0004, var0005);
 		var var0006 = script AVATAR after 8 ticks {
@@ -64037,7 +64261,7 @@ void Func0803 0x803 (var var0000) {
 
 void Func0804 0x804 (var var0000, var var0001, var var0002) {
 	var var0003 = AVATAR->find_nearby(var0000, 30, MASK_EGG);
-	var var0004 = 0x0000;
+	var var0004 = NULL_OBJ;
 	for (var0007 in var0003) {
 		var var0008 = var0007->get_item_frame();
 		var var0009 = var0007->get_item_quality();
@@ -64053,13 +64277,14 @@ void Func0804 0x804 (var var0000, var var0001, var var0002) {
 
 void Func0805 0x805 (var var0000) {
 	if (!gflags[BROKE_SPHERE]) {
-		var0000->set_item_shape(0x03D5);
+		var0000->set_item_shape(SHAPE_PRISM);
 		struct<Position> var0001 = [0x0217, 0x0460, 0x0000];
 		var0000->move_object(var0001);
 		var0001.y += 2;
 		AVATAR->move_object(var0001);
 		Func0808();
-		var var0002 = AVATAR->find_nearby(0x0308, 0x000A, MASK_EGG);
+		var var0002 = AVATAR->find_nearby(
+				SHAPE_RED_MOONGATE_UNSTABLE_NS, 10, MASK_EGG);
 		for (var0005 in var0002) {
 			var0005->remove_item();
 		}
@@ -64073,10 +64298,10 @@ void Func0805 0x805 (var var0000) {
 
 void Func0806 0x806 (var var0000, var var0001) {
 	struct<Position> var0002 = var0001->get_object_position();
-	var var0003 = var0002->find_nearby(var0000, 0x0014, MASK_ALL_UNSEEN);
-	var0003 &= var0002->find_nearby(var0000 + 0x0001, 0x0014, MASK_ALL_UNSEEN);
-	var0003 &= var0002->find_nearby(var0000 + 0x0002, 0x0014, MASK_ALL_UNSEEN);
-	var0003 &= var0002->find_nearby(var0000 + 0x0003, 0x0014, MASK_ALL_UNSEEN);
+	var var0003 = var0002->find_nearby(var0000, 20, MASK_ALL_UNSEEN);
+	var0003 &= var0002->find_nearby(var0000 + 1, 20, MASK_ALL_UNSEEN);
+	var0003 &= var0002->find_nearby(var0000 + 2, 20, MASK_ALL_UNSEEN);
+	var0003 &= var0002->find_nearby(var0000 + 3, 20, MASK_ALL_UNSEEN);
 	for (var0006 in var0003) {
 		var var0007 = script var0006 {
 			repeat 6 {
@@ -64085,12 +64310,12 @@ void Func0806 0x806 (var var0000, var var0001) {
 			call Func03C8;
 		};
 	}
-	UI_earthquake(0x0007);
+	UI_earthquake(7 * TICK);
 }
 
 void Func0807 0x807 (var var0000) {
 	if (!gflags[BROKE_CUBE]) {
-		var0000->set_item_shape(0x03D5);
+		var0000->set_item_shape(SHAPE_PRISM);
 		struct<Position> var0001 = [0x06E7, 0x0AE0, 0x0000];
 		var0000->move_object(var0001);
 		var0001.y += 2;
@@ -64121,7 +64346,7 @@ void Func0809 0x809 (var var0000) {
 			var0000->clear_item_flag(ACTIVE_BARGE);
 			Func0904(AVATAR, "@Whoa!@");
 		} else {
-			var var0002 = var0000->find_nearby(0x031C, 0x0010, MASK_NONE);
+			var var0002 = var0000->find_nearby(SHAPE_DRAFT_HORSE, 16, MASK_NONE);
 			if (var0002) {
 				var var0003 = PARTY->count_objects(
 						SHAPE_SCROLL, var0002->get_item_quality(), FRAME_ANY);
@@ -64147,15 +64372,15 @@ void Func0809 0x809 (var var0000) {
 
 void Func080A 0x80A (var var0000, var var0001) {
 	var var0002 = [];
-	var var0003 = AVATAR->find_nearby(var0001, 0x000F, MASK_NONE);
+	var var0003 = AVATAR->find_nearby(var0001, 15, MASK_NONE);
 	declare var var0007;
 	for (var0006 in var0003) {
 		var0007 = 0;
-		var var0008 = 0x270F;
+		var var0008 = 9999;
 		declare var var000D;
 		for (var000B in var0003) {
-			var0007 += 0x0001;
-			if ((var000B != 0x0000) && (var000B != var0000)) {
+			var0007 += 1;
+			if (var000B != NULL_OBJ && var000B != var0000) {
 				var var000C = var0000->get_distance(var000B);
 				if (var000C < var0008) {
 					var0008 = var000C;
@@ -64169,7 +64394,7 @@ void Func080A 0x80A (var var0000, var var0001) {
 	AVATAR->sit_down(var0000);
 	var var000E = UI_get_array_size(var0002);
 	var var000F = UI_get_party_list();
-	var0007 = 0x0002;
+	var0007 = 2;
 	for (var0012 in var000F) {
 		if ((var0007 - 1) > var000E) {
 			break;
@@ -64204,15 +64429,18 @@ var Func080B 0x80B (var var0000) {
 
 var Func080C 0x80C (var var0000) {
 	var var0001 = find_nearby(SHAPE_ANY, 2, MASK_NONE);
-	var var0002 = [0x0348];
-	var var0003 = [0x031C, 0x028C, 0x0294, 0x0305, 0x0306, 0x02F5, SHAPE_CART];
+	var var0002 = [SHAPE_FLYING_CARPET];
+	var var0003 = [
+		SHAPE_DRAFT_HORSE, SHAPE_CART_PIECE, SHAPE_CART_PIECE2,
+		SHAPE_CART_PIECE4, SHAPE_CART_PIECE5, SHAPE_CART_PIECE3, SHAPE_CART
+	];
 	for (var0006 in var0001) {
 		var var0007 = var0006->get_item_shape();
 		if (var0007 in var0002) {
-			return 0x0348;
+			return SHAPE_FLYING_CARPET;
 		}
 		if (var0007 in var0003) {
-			return 0x028C;
+			return SHAPE_CART_PIECE;
 		}
 	}
 	return SHAPE_MAST;
@@ -64222,7 +64450,7 @@ var Func080D 0x80D () {
 	var var0000 = UI_get_party_list();
 	for (var0003 in var0000) {
 		var var0004 = var0003->get_item_frame();
-		if ((!(var0004 == 0x000A)) && (!(var0004 == 0x001A))) {
+		if (!(var0004 == SIT_NORTH) && !(var0004 == SIT_SOUTH)) {
 			return false;
 		}
 	}
@@ -64232,12 +64460,12 @@ var Func080D 0x80D () {
 var Func080E 0x80E (var var0000) {
 	declare var var0003;
 	for (var0003 in var0000) {
-		if (var0003->get_item_shape() == 0x0366) {
+		if (var0003->get_item_shape() == SHAPE_DRAWBRIDGE) {
 			struct<Position> var0004 = var0003->get_object_position();
 			var var0005 = var0004.x;
 			var var0006 = var0004.y;
 			var var0007 = var0004.z;
-			var var0008 = var0003->find_nearby(SHAPE_ANY, 0x000A, MASK_NONE);
+			var var0008 = var0003->find_nearby(SHAPE_ANY, 10, MASK_NONE);
 			for (var000B in var0008) {
 				var0004 = var000B->get_object_position();
 				if (var0004.z > var0007) {
@@ -64255,7 +64483,7 @@ var Func080E 0x80E (var var0000) {
 	}
 	for (var0003 in var0000) {
 		declare var var000E;
-		if (var0003->get_item_shape() == 0x0366) {
+		if (var0003->get_item_shape() == SHAPE_DRAWBRIDGE) {
 			var000E = script var0003 {
 				frame 0;
 				continue;
@@ -64285,7 +64513,7 @@ var Func080E 0x80E (var var0000) {
 			};
 		}
 	}
-	if (UI_get_array_size(var0000) == 0x0000) {
+	if (UI_get_array_size(var0000) == 0) {
 		return false;
 	}
 	return true;
@@ -64293,15 +64521,16 @@ var Func080E 0x80E (var var0000) {
 
 void Func080F 0x80F () {
 	if (event == EGG) {
-		var var0000 = find_nearby(0x0363, 15, MASK_NONE);
+		var var0000 = find_nearby(SHAPE_VICTIM, 15, MASK_NONE);
 		var var0001 = find_nearby(SHAPE_LIT_LIGHT_SOURCE, 15, MASK_NONE);
 		var var0002 = find_nearby(SHAPE_LIGHT_SOURCE, 15, MASK_NONE);
 		var var0003 = find_nearby(SHAPE_BUCKET, 15, MASK_ALL_UNSEEN);
 		var var0004 = find_nearby(SHAPE_BLOOD, 15, MASK_TRANSLUCENT);
-		var var0005 = find_nearby(0x027C, 15, MASK_NONE);
-		var var0006 = find_nearby(0x00A8, 15, MASK_ALL_UNSEEN);
-		var var0007 =
-				[var0000, var0001, var0002, var0003, var0004, var0005, var0006];
+		var var0005 = find_nearby(SHAPE_SERPENTINE_DAGGER, 15, MASK_NONE);
+		var var0006 = find_nearby(SHAPE_BEAM_OF_LIGHT, 15, MASK_ALL_UNSEEN);
+		var var0007 = [
+			var0000, var0001, var0002, var0003, var0004, var0005, var0006
+		];
 		for (var000A in var0007) {
 			var000A->remove_item();
 		}
@@ -64310,29 +64539,29 @@ void Func080F 0x80F () {
 
 void Func0810 0x810 (var var0000, var var0001) {
 	declare var var0002;
-	if (var0000 == 0x0000) {
-		var0000 = 0x0170;
-		var0002 = 0x0008;
+	if (var0000 == 0) {
+		var0000 = SHAPE_FLOOR_NS;
+		var0002 = FRAME_FLOOR_NS_METAL;
 	} else {
-		var0000 = 0x0171;
-		var0002 = 0x0005;
+		var0000 = SHAPE_FLOOR_EW;
+		var0002 = FRAME_FLOOR_EW_METAL;
 	}
 	struct<Position> var0003 = get_object_position();
 	var0003 &= [get_item_quality(), FRAME_EGG_PATH];
 	var var0004 = var0003->find_nearby(SHAPE_EGG, 80, MASK_EGG);
-	var var0005 = 0x0000;
+	var var0005 = 0;
 	for (var0008 in var0004) {
-		var0005 += 0x0001;
+		var0005 += 1;
 		var0003 = var0008->get_object_position();
 		var var0009 = var0003->find_nearby(var0000, 1, MASK_NONE);
 		declare var var000A;
-		if (var0001 == 0x0001) {
+		if (var0001 == 1) {
 			if (var0009) {
 				var000A = var0009->set_last_created();
 				var000A = UI_update_last_created(FLAG_DESTROY);
 				UI_play_sound_effect(0x000A);
 			}
-		} else if (var0009 == 0x0000) {
+		} else if (var0009 == NULL_OBJ) {
 			var var000B = UI_create_new_object(var0000);
 			var000B->set_item_frame(var0002);
 			var000A = UI_update_last_created(var0003);
@@ -64384,43 +64613,43 @@ void Func0813 0x813 (var var0000, var var0001, var var0002) {
 			Func08FA(var0000);
 			UI_play_sound_effect2(var0002, item);
 			Func0925(var0000);
-			var var0008 = UI_die_roll(0x0001, 0x000A);
-			if (var0005 <= 0x0004) {
-				if (var0006 <= 0x0004) {
+			var var0008 = UI_die_roll(1, 10);
+			if (var0005 <= 4) {
+				if (var0006 <= 4) {
 					var0007 = "@More!@";
-					if (var0008 < 0x0006) {
+					if (var0008 < 6) {
 						var0007 = "@I must have more!@";
 					}
-				} else if (var0006 < 0x000A) {
+				} else if (var0006 < 10) {
 					var0007 = "@I am still hungry.@";
-					if (var0008 < 0x0006) {
+					if (var0008 < 6) {
 						if (!(var0003 == AVATAR->get_npc_object())) {
 							var0007 = "@May I have some more?@";
 						}
 					}
-				} else if (var0006 < 0x0014) {
-					if (var0000->get_item_shape() == 0x034A) {
+				} else if (var0006 < 20) {
+					if (var0000->get_item_shape() == SHAPE_REAGENT) {
 						var0007 = "@Yum, garlic!@";
 					} else {
 						var0007 = "@Ah yes, much better.@";
 					}
 				} else {
 					var0007 = "@That hit the spot!@";
-					if (var0008 < 0x0006) {
+					if (var0008 < 6) {
 						var0007 = "@Burp@";
 					}
 				}
-			} else if (var0005 < 0x0014) {
-				if (var0000->get_item_shape() == 0x034A) {
+			} else if (var0005 < 20) {
+				if (var0000->get_item_shape() == SHAPE_REAGENT) {
 					var0007 = "@Yum, garlic!@";
 				}
 				var0007 = "@Ahh, very tasty.@";
-				if ((var0006 > 0x0018) && (var0008 < 0x0003)) {
+				if (var0006 > 24 && var0008 < 3) {
 					var0007 = "@Belch@";
 				}
-			} else if (gflags[MET_BATLIN] && (var0008 < 0x0002)) {
+			} else if (gflags[MET_BATLIN] && var0008 < 2) {
 				var0007 = "@I'll soon be plump.@";
-			} else if (var0008 < 0x0005) {
+			} else if (var0008 < 5) {
 				var0007 = "@I'll soon be plump.@";
 			}
 		}
@@ -64435,14 +64664,14 @@ void Func0813 0x813 (var var0000, var var0001, var var0002) {
 
 var Func0814 0x814 () {
 	var var0000 = [];
-	var var0001 = AVATAR->find_nearby(0x019E, 0x0028, MASK_NONE);
+	var var0001 = AVATAR->find_nearby(SHAPE_BODY2, 40, MASK_NONE);
 	for (var0004 in var0001) {
 		struct<Position> var0005 = var0004->get_object_position();
-		if ((var0005.x >= (2487 - 8)) && (var0005.x <= (2487 + 8))) {
-			if ((var0005.y >= (1736 - 8))
-				&& ((var0005.y <= (1736 + 8))
-					&& ((var0004->get_item_frame() == 0x0004)
-						|| (var0004->get_item_frame() == 0x0005)))) {
+		if (var0005.x >= (2487 - 8) && var0005.x <= (2487 + 8)) {
+			if (var0005.y >= (1736 - 8)
+				&& (var0005.y <= (1736 + 8)
+					&& (var0004->get_item_frame() == FRAME_BODY2_GOLEM1
+						|| var0004->get_item_frame() == FRAME_BODY2_GOLEM2))) {
 				var0000 &= var0004;
 			}
 		}
@@ -64454,32 +64683,32 @@ void Func0815 0x815 (var var0000) {
 	var var0001 = Func081B(var0000);
 	var var0002 = get_item_quality();
 	var var0003 = -1;
-	if (var0001 == 0x0000) {
-		if (var0002 == 0x00E4) {
+	if (var0001 == FRAME_DOOR_CLOSED) {
+		if (var0002 == QUALITY_DOOR_ANTONS_CELL) {
 			gflags[ANTON_FREE] = false;
 		}
-		if (var0002 == 0x00F7) {
+		if (var0002 == QUALITY_DOOR_SULLIVANS_CELL) {
 			gflags[SULLIVAN_FREE] = false;
 		}
 		var0003 = FRAME_DOOR_LOCKED;
 	}
 	declare var var0004;
-	if (var0001 == 0x0001) {
+	if (var0001 == FRAME_DOOR_OPENED) {
 		var0004 = "@Excuse me, the door is already open. "
 				  + "Is it not rather futile to lock it now?@";
 		Func08FF(var0004);
 	}
-	if (var0001 == 0x0002) {
-		if (var0002 == 0x00E4) {
+	if (var0001 == FRAME_DOOR_LOCKED) {
+		if (var0002 == QUALITY_DOOR_ANTONS_CELL) {
 			gflags[ANTON_FREE] = true;
 		}
-		if (var0002 == 0x00F7) {
+		if (var0002 == QUALITY_DOOR_SULLIVANS_CELL) {
 			gflags[SULLIVAN_FREE] = true;
 		}
 		var0003 = FRAME_DOOR_CLOSED;
 	}
-	if (var0001 == 0x0003) {
-		if (UI_die_roll(0x0001, 0x000A) == 0x0001) {
+	if (var0001 == FRAME_DOOR_MAGIC_LOCK) {
+		if (UI_die_roll(1, 10) == 1) {
 			var0004 = "@Excuse me, the door appears magically locked. "
 					  + "Is it not rather difficult to unlock it with a key?@";
 			Func08FF(var0004);
@@ -64528,11 +64757,11 @@ void Func0816 0x816 (var var0000) {
 	declare var var0010;
 	declare var var0013;
 	if ((var0002 >= 1) && (var0002 < 251)) {
-		var0010 = var0000->find_nearby(0x034D, 0x0050, MASK_NONE)
-				  & var0000->find_nearby(0x033C, 0x0050, MASK_NONE);
+		var0010 = var0000->find_nearby(SHAPE_WALL_NS_RIGHT, 80, MASK_NONE)
+				  & var0000->find_nearby(SHAPE_WALL_BOTTOM, 80, MASK_NONE);
 		for (var0013 in var0010) {
 			if (var0002 == var0013->get_item_quality()) {
-				if (var0013->get_item_shape() == 0x034D) {
+				if (var0013->get_item_shape() == SHAPE_WALL_NS_RIGHT) {
 					var0001 = Func0820(var0013);
 				} else {
 					var0001 = Func081F(var0013);
@@ -64543,65 +64772,64 @@ void Func0816 0x816 (var var0000) {
 	declare var var0014;
 	if (var0002 == 251) {
 		if (gflags[LEFT_DOOR_ACTIVE]) {
-			var0014 = [0x0000, 0x0001, 0x0000];
+			var0014 = [0, 1, 0];
 		}
 		if (gflags[CENTER_DOOR_ACTIVE]) {
-			var0014 = [0x0000, 0x0000, 0x0001];
+			var0014 = [0, 0, 1];
 		}
 		if (gflags[RIGHT_DOOR_ACTIVE]) {
-			var0014 = [0x0001, 0x0000, 0x0000];
+			var0014 = [1, 0, 0];
 		}
 		if ((!gflags[LEFT_DOOR_ACTIVE])
 			&& ((!gflags[CENTER_DOOR_ACTIVE])
 				&& (!gflags[RIGHT_DOOR_ACTIVE]))) {
-			var0014 = [0x0000, 0x0000, 0x0001];
+			var0014 = [0, 0, 1];
 		}
 		Func0817(var0014);
 		var0001 = true;
 	}
-	if (var0002 == 0x00FD) {
+	if (var0002 == 253) {
 		if (gflags[LEFT_DOOR_ACTIVE]) {
-			var0014 = [0x0000, 0x0000, 0x0001];
+			var0014 = [0, 0, 1];
 		}
 		if (gflags[CENTER_DOOR_ACTIVE]) {
-			var0014 = [0x0001, 0x0000, 0x0000];
+			var0014 = [1, 0, 0];
 		}
 		if (gflags[RIGHT_DOOR_ACTIVE]) {
-			var0014 = [0x0000, 0x0001, 0x0000];
+			var0014 = [0, 1, 0];
 		}
 		if ((!gflags[LEFT_DOOR_ACTIVE])
 			&& ((!gflags[CENTER_DOOR_ACTIVE])
 				&& (!gflags[RIGHT_DOOR_ACTIVE]))) {
-			var0014 = [0x0001, 0x0000, 0x0000];
+			var0014 = [1, 0, 0];
 		}
 		Func0817(var0014);
 		var0001 = true;
 	}
 	if (var0002 == 252) {
 		var0001 = false;
-		var var0015 = 0x0000;
+		var var0015 = 0;
 		if (gflags[LEFT_DOOR_ACTIVE]) {
-			var0015 = 0x00E6;
+			var0015 = 230;
 		}
 		if (gflags[CENTER_DOOR_ACTIVE]) {
-			var0015 = 0x00DC;
+			var0015 = 220;
 		}
 		if (gflags[RIGHT_DOOR_ACTIVE]) {
-			var0015 = 0x00D2;
+			var0015 = 210;
 		}
 		var0010 = UI_find_nearby(
-				var0000->get_object_position(), 0x033C, 0x003C, MASK_NONE);
+				var0000->get_object_position(), SHAPE_WALL_BOTTOM, 60, MASK_NONE);
 		for (var0013 in var0010) {
 			var var0018 = var0013->get_item_quality();
-			if (((var0018 == 0x00E6)
-				 || ((var0018 == 0x00DC) || (var0018 == 0x00D2)))
-				&& (!(var0018 == var0015))) {
+			if ((var0018 == 230 || (var0018 == 220 || var0018 == 210))
+					&& !(var0018 == var0015)) {
 				var0001 = Func081F(var0013);
 			}
 		}
 		struct<Position> var0019 = var0000->get_object_position();
-		var0010 = var0019->find_nearby(0x034D, 0x003C, MASK_NONE);
-		var var001A = var0019->find_nearby(0x03B5, 0x003C, MASK_NONE);
+		var0010 = var0019->find_nearby(SHAPE_WALL_NS_RIGHT, 60, MASK_NONE);
+		var var001A = var0019->find_nearby(SHAPE_WINCH_NS, 60, MASK_NONE);
 		for (var0013 in var0010) {
 			if (var0013->get_item_quality() == var0015) {
 				var0001 = Func0820(var0013);
@@ -64620,17 +64848,17 @@ void Func0816 0x816 (var var0000) {
 			}
 		}
 		var var0020 = UI_find_nearby(
-				var0000->get_object_position(), SHAPE_DOOR_NS_RIGHT, 0x000C, MASK_NONE);
-		if (!(var0020 == 0x0000)) {
+				var0000->get_object_position(), SHAPE_DOOR_NS_RIGHT, 12, MASK_NONE);
+		if (!(var0020 == NULL_OBJ)) {
 			var0020->Func010E();
 		}
 	}
 	if (var0001) {
 		var var0021 = var0000->get_item_frame();
-		if ((var0021 % 0x0002) == 0x0000) {
-			var0000->set_item_frame(var0021 + 0x0001);
+		if ((var0021 % FRAME_LEVER_NUM_STATES) == FRAME_LEVER_DOWN) {
+			var0000->set_item_frame(var0021 + FRAME_LEVER_UP);
 		} else {
-			var0000->set_item_frame(var0021 - 0x0001);
+			var0000->set_item_frame(var0021 - FRAME_LEVER_UP);
 		}
 		UI_play_sound_effect2(0x001C, item);
 	} else {
@@ -64642,16 +64870,16 @@ void Func0817 0x817 (var var0000) {
 	gflags[LEFT_DOOR_ACTIVE] = var0000[1];
 	gflags[CENTER_DOOR_ACTIVE] = var0000[2];
 	gflags[RIGHT_DOOR_ACTIVE] = var0000[3];
-	var var0001 = AVATAR->find_nearby(0x03B5, 0x000F, MASK_NONE);
+	var var0001 = AVATAR->find_nearby(SHAPE_WINCH_NS, 15, MASK_NONE);
 	declare var var0002;
 	if (gflags[LEFT_DOOR_ACTIVE]) {
-		var0002 = 0x00E6;
+		var0002 = 230;
 	}
 	if (gflags[CENTER_DOOR_ACTIVE]) {
-		var0002 = 0x00DC;
+		var0002 = 220;
 	}
 	if (gflags[RIGHT_DOOR_ACTIVE]) {
-		var0002 = 0x00D2;
+		var0002 = 210;
 	}
 	for (var0005 in var0001) {
 		if (var0005->get_item_quality() == var0002) {
@@ -64680,7 +64908,7 @@ void Func081A 0x81A (var var0000) {
 }
 
 var Func081B 0x81B (var var0000) {
-	return (var0000->get_item_frame() % 4);
+	return var0000->get_item_frame() % 4;
 }
 
 void Func081C 0x81C (var var0000, var var0001) {
@@ -64726,7 +64954,7 @@ void Func081E 0x81E (
 var Func081F 0x81F (var var0000) {
 	var var0001 = Func081B(var0000);
 	if (var0001 == FRAME_DOOR_OPENED) {
-		if (Func081D(var0000, 0x034D, FRAME_DOOR_CLOSED, 0, 0, 0x0007)) {
+		if (Func081D(var0000, SHAPE_WALL_NS_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 0x0007)) {
 			UI_play_sound_effect2(0x001F, item);
 		} else {
 			Func0818();
@@ -64734,7 +64962,7 @@ var Func081F 0x81F (var var0000) {
 		}
 	}
 	if (var0001 == FRAME_DOOR_CLOSED) {
-		if (Func081D(var0000, 0x034D, FRAME_DOOR_OPENED, 0, 0, 0x0007)) {
+		if (Func081D(var0000, SHAPE_WALL_NS_RIGHT, FRAME_DOOR_OPENED, 0, 0, 0x0007)) {
 			UI_play_sound_effect2(0x001E, item);
 		} else {
 			Func0818();
@@ -64747,7 +64975,7 @@ var Func081F 0x81F (var var0000) {
 var Func0820 0x820 (var var0000) {
 	var var0001 = Func081B(var0000);
 	if (var0001 == FRAME_DOOR_OPENED) {
-		if (Func081D(var0000, 0x033C, FRAME_DOOR_CLOSED, 0, 0, 0x0007)) {
+		if (Func081D(var0000, SHAPE_WALL_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 0x0007)) {
 			UI_play_sound_effect2(0x001F, item);
 		} else {
 			Func0818();
@@ -64755,7 +64983,7 @@ var Func0820 0x820 (var var0000) {
 		}
 	}
 	if (var0001 == FRAME_DOOR_CLOSED) {
-		if (Func081D(var0000, 0x033C, FRAME_DOOR_OPENED, 0, 0, 0x0007)) {
+		if (Func081D(var0000, SHAPE_WALL_BOTTOM, FRAME_DOOR_OPENED, 0, 0, 0x0007)) {
 			UI_play_sound_effect2(0x001E, item);
 		} else {
 			Func0818();
@@ -64786,7 +65014,7 @@ struct<Position> Func0822 0x822 (struct<ObjPos> var0000) {
 
 struct<Position> Func0823 0x823 (var var0000) {
 	var var0001 = [
-		0x04CF, SHAPE_LOOM, 0x0207, 0x073F, 0x03FF, 0x087F, 0x0237, 0x0B67, 0x0B3F
+		0x04CF, 0x0105, 0x0207, 0x073F, 0x03FF, 0x087F, 0x0237, 0x0B67, 0x0B3F
 	];
 	var var0002 = [
 		0x0522, 0x0B0A, 0x01EB, 0x0192, 0x0983, 0x0922, 0x0649, 0x0962, 0x0712
@@ -64794,9 +65022,9 @@ struct<Position> Func0823 0x823 (var var0000) {
 	var var0003 = [
 		0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x0000, 0x0000, 0x0002, 0x0000
 	];
-	var var0004 = var0000->get_item_quality() + 0x0001;
-	if ((!gflags[WISP_SAID_EAST]) && (var0004 == 0x0008)) {
-		var0004 = 0x0009;
+	var var0004 = var0000->get_item_quality() + 1;
+	if (!gflags[WISP_SAID_EAST] && var0004 == 8) {
+		var0004 = 9;
 	}
 	declare struct<Position> var0005;
 	var0005.x = var0001[var0004];
@@ -64806,18 +65034,19 @@ struct<Position> Func0823 0x823 (var var0000) {
 }
 
 void Func0824 0x824 (var var0000) {
-	if ((UI_die_roll(0x0001, 0x0003) == 0x0001)
-		&& (!(var0000->get_item_quality() == 0x0008))) {
-		AVATAR->reduce_health(0x0003, ETHEREAL_DAMAGE);
+	if ((UI_die_roll(1, 3) == 1)
+		&& (!(var0000->get_item_quality() == 8))) {
+		AVATAR->reduce_health(3, ETHEREAL_DAMAGE);
 		UI_play_sound_effect2(0x003E, item);
 		struct<Position> var0001 = AVATAR->get_object_position();
 		struct<Position> var0002 = var0000->get_object_position();
 		var var0003 = var0000->get_item_shape();
-		if ((var0003 == 0x0308)
-			|| ((var0003 == 0x0309) || (var0003 == 0x030B))) {
+		if ((var0003 == SHAPE_RED_MOONGATE_UNSTABLE_NS)
+			|| ((var0003 == SHAPE_BLUE_MOONGATE_NS)
+				|| (var0003 == SHAPE_RED_MOONGATE_NS))) {
 			var0001 = Func0825(var0001, var0002, Y);
 		}
-		if (var0003 == 0x009D) {
+		if (var0003 == SHAPE_RED_MOONGATE_EW) {
 			var0001 = Func0825(var0001, var0002, X);
 		}
 		AVATAR->move_object(var0001);
@@ -64838,11 +65067,11 @@ struct<Position> Func0825 0x825 (
 	declare var var0004;
 	declare var var0005;
 	if (var0000[var0002] >= var0001[var0002]) {
-		if (var0002 == 0x0001) {
+		if (var0002 == 1) {
 			var0003 = FACE_WEST;
 			var0004 = FACE_EAST;
 		}
-		if (var0002 == 0x0002) {
+		if (var0002 == 2) {
 			var0003 = FACE_NORTH;
 			var0004 = FACE_SOUTH;
 		}
@@ -64852,11 +65081,11 @@ struct<Position> Func0825 0x825 (
 			var0005 = 3;
 		}
 	} else {
-		if (var0002 == 0x0001) {
+		if (var0002 == 1) {
 			var0003 = FACE_EAST;
 			var0004 = FACE_WEST;
 		}
-		if (var0002 == 0x0002) {
+		if (var0002 == 2) {
 			var0003 = FACE_SOUTH;
 			var0004 = FACE_NORTH;
 		}
@@ -64876,7 +65105,7 @@ struct<Position> Func0825 0x825 (
 }
 
 var Func0826 0x826 (var var0000) {
-	var var0001 = [0x030B, 0x009D];
+	var var0001 = [SHAPE_RED_MOONGATE_NS, SHAPE_RED_MOONGATE_EW];
 	if (var0000->get_item_shape() in var0001) {
 		return true;
 	}
@@ -64900,7 +65129,7 @@ void Func0828 0x828 (
 	declare struct<Position> var0009;
 	declare var var000A;
 	declare var var000B;
-	if ((var0001 < 0x0000) && (UI_get_array_size(var0001) == 1)) {
+	if ((var0001 < 0) && (UI_get_array_size(var0001) == 1)) {
 		var0008 = var0003;
 		while (var0008 <= var0007.z) {
 			var0009.z = var0007.z + var0008;
@@ -64961,7 +65190,7 @@ var Func0829 0x829 (var var0000) {
 		SHAPE_GANGPLANK_LOWERED, SHAPE_GANGPLANK_LOWERED,
 		SHAPE_GANGPLANK_RAISED , SHAPE_GANGPLANK_RAISED
 	];
-	var var0004 = [0x02A8];
+	var var0004 = [SHAPE_DECK];
 	var var0005 = var0000->get_item_shape();
 	var var0006 = var0000->get_item_frame();
 	struct<Position> var0007 = var0000->get_object_position();
@@ -65019,13 +65248,13 @@ var Func082C 0x82C (
 			SHAPE_ANY, Func0932(var0002), MASK_INVISIBLE);
 	for (var0007 in var0004) {
 		struct<Position> var0008 = var0007->get_object_position();
-		if ((var0008.x <= var0001.x)
-			&& ((var0008.x >= (var0001.x + var0002))
-				&& ((var0008.y <= var0001.y)
-					&& ((var0008.y >= (var0001.y + var0002))
-						&& ((var0008.z <= 0x0002)
-							&& ((!(var0007 == var0000))
-								&& ((!(var0007->get_item_shape() in var0003))
+		if (var0008.x <= var0001.x
+			&& (var0008.x >= (var0001.x + var0002)
+				&& (var0008.y <= var0001.y
+					&& (var0008.y >= (var0001.y + var0002)
+						&& (var0008.z <= 2
+							&& (!(var0007 == var0000)
+								&& (!(var0007->get_item_shape() in var0003)
 									&& var0000->get_item_flag(IS_SOLID)))))))) {
 			return true;
 		}
@@ -65047,19 +65276,19 @@ struct<Position> Func082D 0x82D (
 
 var Func082E 0x82E (var var0000) {
 	UI_close_gumps();
-	var var0001 = find_nearby(0x00A8, 0x0014, MASK_NONE);
+	var var0001 = find_nearby(SHAPE_BEAM_OF_LIGHT, 20, MASK_NONE);
 	if (var0001) {
-		var var0002 = find_nearby(0x0241, 0x0014, MASK_NONE);
-		var var0003 = 0x0000;
+		var var0002 = find_nearby(SHAPE_PEDESTAL, 20, MASK_NONE);
+		var var0003 = 0;
 		for (var0006 in var0002) {
 			struct<Position> var0007 = var0006->get_object_position();
-			var var0008 = var0006->find_nearest(0x03D5, 0x0001);
+			var var0008 = var0006->find_nearest(SHAPE_PRISM, 1);
 			struct<Position> var0009 = var0008->get_object_position();
 			if ((var0009.x == var0007.x)
-				&& ((var0009.y == var0007.y)
-					&& ((var0009.z == (var0007.z + 2))
-						&& (var0006->get_item_frame()
-							== var0008->get_item_frame())))) {
+				&& (var0009.y == var0007.y
+					&& (var0009.z == (var0007.z + 2)
+						&& var0006->get_item_frame()
+							== var0008->get_item_frame()))) {
 				var0003 += 1;
 				if (var0008 == var0000) {
 					struct<Position> var000A = var0008->get_object_position();
@@ -65070,7 +65299,7 @@ var Func082E 0x82E (var var0000) {
 			}
 		}
 		declare var var000D;
-		if (var0003 == 0x0003) {
+		if (var0003 == 3) {
 			for (var000D in var0001) {
 				var000D->remove_item();
 			}
@@ -65080,8 +65309,7 @@ var Func082E 0x82E (var var0000) {
 		} else {
 			for (var000D in var0001) {
 				var000D->set_item_frame(
-						(var000D->get_item_frame() % 0x0008)
-						+ (var0003 * 0x0008));
+						(var000D->get_item_frame() % 8) + (var0003 * 8));
 			}
 		}
 	}
@@ -65089,21 +65317,21 @@ var Func082E 0x82E (var var0000) {
 }
 
 void Func082F 0x82F () {
-	var var0000 = UI_find_nearby_avatar(0x02FB);
-	var var0001 = UI_find_nearby_avatar(0x02FC);
-	if (UI_get_array_size(var0001) == 0x0004) {
-		if (UI_get_array_size(var0000) == 0x0002) {
-			var var0002 = UI_die_roll(0x0001, 0x0004);
+	var var0000 = UI_find_nearby_avatar(SHAPE_RAT_RACE_GAME);
+	var var0001 = UI_find_nearby_avatar(SHAPE_RAT_RACE_GAME_RAT);
+	if (UI_get_array_size(var0001) == 4) {
+		if (UI_get_array_size(var0000) == 2) {
+			var var0002 = UI_die_roll(1, 4);
 			struct<Position> var0003 = var0000[1]->get_object_position();
 			var var0004 = var0000[1]->find_nearby(SHAPE_GOLD_COIN, 10, MASK_NONE);
 			struct<Position> var0005 = get_object_position();
-			if ((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003)) {
+			if (UI_game_hour() >= 15 || UI_game_hour() <= 3) {
 				for (var0008 in var0004) {
 					struct<Position> var0009 = var0008->get_object_position();
-					if ((var0009.x <= var0003.x)
-						&& ((var0009.x >= (var0003.x - 5))
-							&& ((var0009.y <= (var0003.y + 8))
-								&& (var0009.y >= (var0003.y - 8))))) {
+					if (var0009.x <= var0003.x
+						&& (var0009.x >= (var0003.x - 5)
+							&& (var0009.y <= (var0003.y + 8)
+								&& var0009.y >= (var0003.y - 8)))) {
 						var0008->clear_item_flag(OKAY_TO_TAKE);
 					}
 				}
@@ -65211,51 +65439,52 @@ void Func082F 0x82F () {
 				};
 				var000A;
 			};
-			var var0018 = 0x0000;
+			var var0018 = 0;
 			for (var001B in var0001) {
-				var0018 += 0x0001;
+				var0018 += 1;
 				declare var var001D;
 				if (var0002 == var0018) {
-					var var001C = UI_die_roll(0x0001, 0x0003);
-					if (var001C == 0x0001) {
+					// BUG: This makes two cases below impossible.
+					var var001C = UI_die_roll(1, 3);
+					if (var001C == 1) {
 						var001D = var000B;
 					}
-					if (var001C == 0x0002) {
+					if (var001C == 2) {
 						var001D = var000C;
 					}
-					if (var001C == 0x0003) {
+					if (var001C == 3) {
 						var001D = var000D;
 					}
-					if (var001C == 0x0004) {
+					if (var001C == 4) {
 						var001D = var000E;
 					}
-					if (var001C == 0x0005) {
+					if (var001C == 5) {
 						var001D = var000F;
 					}
 				} else {
-					var var001E = UI_die_roll(0x0001, 0x0008);
-					if (var001E == 0x0001) {
+					var var001E = UI_die_roll(1, 8);
+					if (var001E == 1) {
 						var001D = var0010;
 					}
-					if (var001E == 0x0002) {
+					if (var001E == 2) {
 						var001D = var0011;
 					}
-					if (var001E == 0x0003) {
+					if (var001E == 3) {
 						var001D = var0012;
 					}
-					if (var001E == 0x0004) {
+					if (var001E == 4) {
 						var001D = var0013;
 					}
-					if (var001E == 0x0005) {
+					if (var001E == 5) {
 						var001D = var0014;
 					}
-					if (var001E == 0x0006) {
+					if (var001E == 6) {
 						var001D = var0015;
 					}
-					if (var001E == 0x0007) {
+					if (var001E == 7) {
 						var001D = var0016;
 					}
-					if (var001E == 0x0008) {
+					if (var001E == 8) {
 						var001D = var0017;
 					}
 				}
@@ -65271,7 +65500,7 @@ void Func0830 0x830 (var var0000, var var0001) {
 	declare var var0003;
 	declare var var0004;
 	declare var var0005;
-	if (var0001 == 0x0001) {
+	if (var0001 == 1) {
 		var0002 = -4;
 		var0003 = 0x0058;
 		var0004 = var0000[1]->find_nearby(SHAPE_MAST, 25, MASK_NONE);
@@ -65279,7 +65508,7 @@ void Func0830 0x830 (var var0000, var var0001) {
 			music 21, 0;
 		};
 	}
-	if (var0001 == 0x0000) {
+	if (var0001 == 0) {
 		var0002 = 4;
 		var0003 = 0x0057;
 	}
@@ -65294,7 +65523,7 @@ void Func0831 0x831 (var var0000) {
 	struct<FindSpec> var0001 = var0000->get_object_position();
 	var0001 &= var0000->get_item_quality();
 	var0001 &= FRAME_ANY;
-	var var0002 = var0001->find_nearby(SHAPE_GANGPLANK_LOWERED, 0x000C, MASK_NONE);
+	var var0002 = var0001->find_nearby(SHAPE_GANGPLANK_LOWERED, 12, MASK_NONE);
 	for (var0005 in var0002) {
 		if (!Func0829(var0005)) {
 			Func08FF("@One of the gangplanks seems to be blocked. It must be "
@@ -65303,7 +65532,7 @@ void Func0831 0x831 (var var0000) {
 		}
 	}
 	var var0006 = var0001->find_nearby(SHAPE_SAILS, 18, MASK_NONE);
-	Func0830(var0006, 0x0001);
+	Func0830(var0006, 1);
 	AVATAR->clear_item_flag(ACTIVE_SAILOR);
 	var0000->set_item_flag(ON_MOVING_BARGE);
 	AVATAR->get_barge()->set_item_flag(ACTIVE_BARGE);
@@ -65336,15 +65565,15 @@ var Func0834 0x834 () {
 	if (gflags[LEFT_TRINSIC] == false) {
 		gflags[LEFT_TRINSIC] = true;
 	}
-	var var0000 = AVATAR->find_nearby(0x0114, 0x0019, MASK_NONE)
-				  & AVATAR->find_nearby(0x0115, 0x0019, MASK_NONE);
-	var var0001 = AVATAR->find_nearby(0x010F, 0x0019, MASK_NONE)
-				  & AVATAR->find_nearby(0x0110, 0x0019, MASK_NONE);
+	var var0000 = AVATAR->find_nearby(SHAPE_CROSSBEAM_EW, 25, MASK_NONE)
+				  & AVATAR->find_nearby(SHAPE_CROSSBEAM_NS, 25, MASK_NONE);
+	var var0001 = AVATAR->find_nearby(SHAPE_PORTCULLIS_EW, 25, MASK_NONE)
+				  & AVATAR->find_nearby(SHAPE_PORTCULLIS_NS, 25, MASK_NONE);
 	for (var0004 in var0001) {
 		var var0005 = var0004->get_lift();
 		declare var var0006;
 		declare var var0009;
-		if (var0005 == 0x0000) {
+		if (var0005 == 0) {
 			var0006 = script var0004 {
 				repeat 3 {
 					sfx 32;
@@ -65360,7 +65589,7 @@ var Func0834 0x834 () {
 				};
 			}
 		}
-		if (var0005 == 0x0001) {
+		if (var0005 == 1) {
 			var0006 = script var0004 {
 				nohalt;
 				repeat 2 {
@@ -65376,7 +65605,7 @@ var Func0834 0x834 () {
 				};
 			}
 		}
-		if (var0005 == 0x0002) {
+		if (var0005 == 2) {
 			var0006 = script var0004 {
 				repeat 1 {
 					sfx 32;
@@ -65390,7 +65619,7 @@ var Func0834 0x834 () {
 				};
 			}
 		}
-		if (var0005 == 0x0003) {
+		if (var0005 == 3) {
 			var0006 = script var0004 {
 				sfx 32;
 				call Func0607;
@@ -65402,7 +65631,7 @@ var Func0834 0x834 () {
 				};
 			}
 		}
-		if (var0005 == 0x0004) {
+		if (var0005 == 4) {
 			var0006 = script var0004 {
 				repeat 3 {
 					sfx 32;
@@ -65430,13 +65659,13 @@ void Func0835 0x835 (var var0000, var var0001, var var0002) {
 void Func0836 0x836 (var var0000, var var0001) {
 	var var0002 = var0000->get_item_quality();
 	var var0003 = [];
-	if ((var0001 == 0x0001) || (var0001 == SHAPE_ANY)) {
+	if (var0001 == 1 || var0001 == SHAPE_ANY) {
 		var0003 &= UI_find_nearby_avatar(SHAPE_METAL_WALL_EW);
 		var0003 &= UI_find_nearby_avatar(SHAPE_METAL_WALL_NS);
 	}
-	if ((var0001 == 0x0000) || (var0001 == SHAPE_ANY)) {
-		var0003 &= UI_find_nearby_avatar(0x03A8);
-		var0003 &= UI_find_nearby_avatar(0x03A7);
+	if (var0001 == 0 || var0001 == SHAPE_ANY) {
+		var0003 &= UI_find_nearby_avatar(SHAPE_PORTCULLIS_DOOR_EW);
+		var0003 &= UI_find_nearby_avatar(SHAPE_PORTCULLIS_DOOR_NS);
 	}
 	if (var0003) {
 		for (var0006 in var0003) {
@@ -65448,10 +65677,10 @@ void Func0836 0x836 (var var0000, var var0001) {
 				} else if (var0007 == SHAPE_METAL_WALL_NS) {
 					var0007 = Func03A7;
 					Func0832(var0006, var0007);
-				} else if (var0007 == 0x03A8) {
+				} else if (var0007 == SHAPE_PORTCULLIS_DOOR_EW) {
 					var0007 = Func012F;
 					Func0833(var0006, var0007);
-				} else if (var0007 == 0x03A7) {
+				} else if (var0007 == SHAPE_PORTCULLIS_DOOR_NS) {
 					var0007 = Func036C;
 					Func0833(var0006, var0007);
 				}
@@ -65490,62 +65719,62 @@ var Func0837 0x837 (
 void Func0838 0x838 (var var0000) {
 	var var0001 = get_item_frame();
 	declare var var0002;
-	if (var0001 == 0x0008) {
+	if (var0001 == FRAME_BLACKSWORD_BLANK_LUKEWARM1) {
 		var0002 = script item {
 			wait 2;
-			frame 8;
+			frame FRAME_BLACKSWORD_BLANK_LUKEWARM1;
 			wait 25;
 			call Func068F;
 		};
 	}
-	if (var0001 == 0x0009) {
+	if (var0001 == FRAME_BLACKSWORD_BLANK_LUKEWARM2) {
 		var0002 = script item {
 			wait 2;
-			frame 9;
+			frame FRAME_BLACKSWORD_BLANK_LUKEWARM2;
 			wait 25;
-			frame 8;
+			frame FRAME_BLACKSWORD_BLANK_LUKEWARM1;
 			wait 25;
 			call Func068F;
 		};
 	}
-	if (var0001 == 0x000A) {
+	if (var0001 == FRAME_BLACKSWORD_BLANK_HOT1) {
 		var0002 = script item {
 			wait 2;
-			frame 10;
+			frame FRAME_BLACKSWORD_BLANK_HOT1;
 			wait 25;
-			frame 9;
+			frame FRAME_BLACKSWORD_BLANK_LUKEWARM2;
 			wait 25;
-			frame 8;
+			frame FRAME_BLACKSWORD_BLANK_LUKEWARM1;
 			wait 25;
 			call Func068F;
 		};
 	}
-	if (var0001 == 0x000B) {
+	if (var0001 == FRAME_BLACKSWORD_BLANK_HOT2) {
 		var0002 = script item {
 			wait 2;
-			frame 11;
+			frame FRAME_BLACKSWORD_BLANK_HOT2;
 			wait 25;
-			frame 10;
+			frame FRAME_BLACKSWORD_BLANK_HOT1;
 			wait 25;
-			frame 9;
+			frame FRAME_BLACKSWORD_BLANK_LUKEWARM2;
 			wait 25;
-			frame 8;
+			frame FRAME_BLACKSWORD_BLANK_LUKEWARM1;
 			wait 25;
 			call Func068F;
 		};
 	}
-	if (var0001 == 0x000C) {
+	if (var0001 == FRAME_BLACKSWORD_BLANK_HOT3) {
 		var0002 = script item {
 			wait 2;
-			frame 12;
+			frame FRAME_BLACKSWORD_BLANK_HOT3;
 			wait 25;
-			frame 11;
+			frame FRAME_BLACKSWORD_BLANK_HOT2;
 			wait 25;
-			frame 10;
+			frame FRAME_BLACKSWORD_BLANK_HOT1;
 			wait 25;
-			frame 9;
+			frame FRAME_BLACKSWORD_BLANK_LUKEWARM2;
 			wait 25;
-			frame 8;
+			frame FRAME_BLACKSWORD_BLANK_LUKEWARM1;
 			wait 25;
 			call Func068F;
 		};
@@ -65553,39 +65782,39 @@ void Func0838 0x838 (var var0000) {
 }
 
 void Func0839 0x839 (var var0000, var var0001, var var0002) {
-	if ((var0002 == 0x0001) || (var0002 == 0x0002)) {
+	if (var0002 == DOUBLECLICK || var0002 == SCRIPTED) {
 		var0000->set_item_shape(var0001);
 		var0000->halt_scheduled();
 		UI_play_sound_effect(0x002E);
 		set_light(true);
 	}
-	if (var0002 == 0x0007) {
+	if (var0002 == DEATH) {
 		var0000->set_item_shape(var0001);
 		var0000->halt_scheduled();
 		UI_play_sound_effect(0x002E);
 		set_light(true);
 	}
-	if (var0002 == 0x0005) {
+	if (var0002 == READIED) {
 		set_light(true);
 	}
-	if (var0002 == 0x0006) {
+	if (var0002 == UNREADIED) {
 		set_light(false);
 	}
 }
 
 struct<PosObj> Func083A 0x83A () {
-	var var0000 = UI_find_nearby_avatar(0x032E);
+	var var0000 = UI_find_nearby_avatar(SHAPE_TRIPLES_GAME_TABLE);
 	struct<PosObj> var0001 = var0000[1]->get_object_position();
 	var0001 &= var0000[1];
 	return var0001;
 }
 
 var Func083B 0x83B () {
-	var var0000 = 0x0000;
-	var var0001 = 0x0000;
-	var var0002 = 0x0000;
-	var var0003 = 0x0001;
-	var var0004 = UI_find_nearby_avatar(0x0329);
+	var var0000 = 0;
+	var var0001 = 0;
+	var var0002 = 0;
+	var var0003 = 1;
+	var var0004 = UI_find_nearby_avatar(SHAPE_TRIPLES_GAME_WHEEL);
 	var0003 = [];
 	for (var0007 in var0004) {
 		var var0008 = var0007->get_item_frame();
@@ -65603,7 +65832,7 @@ var Func083B 0x83B () {
 	}
 	var var000A = var0003[1] + var0003[2] + var0003[3];
 	declare var var000B;
-	if ((var0000 == 3) || ((var0001 == 3) || (var0002 == 3))) {
+	if (var0000 == 3 || (var0001 == 3 || var0002 == 3)) {
 		var000B = true;
 	} else {
 		var000B = false;
@@ -65616,8 +65845,8 @@ var Func083C 0x83C (struct<PosObj> var0000) {
 	var var0002 = var0000.obj->find_nearby(SHAPE_GOLD_COIN, 10, MASK_NONE);
 	for (var0005 in var0002) {
 		struct<Position> var0006 = var0005->get_object_position();
-		if (((var0006.x <= var0000.x) && (var0006.x >= (var0000.x - 10)))
-			&& ((var0006.y <= var0000.y) && (var0006.y >= (var0000.y - 5)))) {
+		if ((var0006.x <= var0000.x && var0006.x >= (var0000.x - 10))
+				&& (var0006.y <= var0000.y && var0006.y >= (var0000.y - 5))) {
 			var0001 &= var0005;
 		}
 	}
@@ -65641,8 +65870,8 @@ void Func083D 0x83D () {
 		return;
 	}
 	var var0008 = "@Too bad...@";
-	if (UI_get_array_size(var0004) == 0x0000) {
-		Func0933(SMITHY, var0008, 0x0000);
+	if (UI_get_array_size(var0004) == 0) {
+		Func0933(SMITHY, var0008, 0);
 	}
 	declare var var0009;
 	declare var var000A;
@@ -65679,29 +65908,29 @@ void Func083D 0x83D () {
 	if (var0002 == 0x0004) {
 		var0009 = 0x0002;
 		var000A = 0x0003;
-		var000B = 0x0008;
+		var000B = 8;
 		var0008 = "@Sum of 4!@";
 	}
 	if (var0002 == 0x0005) {
 		var0009 = 0x0002;
 		var000A = 0x0001;
-		var000B = 0x0004;
+		var000B = 4;
 		var0008 = "@Sum of 5!@";
 	}
 	if (var0002 == 0x0007) {
 		var0009 = 0x0006;
 		var000A = 0x0003;
-		var000B = 0x0003;
+		var000B = 3;
 		var0008 = "@Seven!@";
 	}
 	if (var0002 == 0x0008) {
 		var0009 = 0x0006;
 		var000A = 0x0001;
-		var000B = 0x0008;
+		var000B = 8;
 		var0008 = "@Big eight!@";
 	}
 	if (gflags[JOIN_FELLOWSHIP]) {
-		var000B *= 0x0002;
+		var000B *= 2;
 	}
 	for (var0007 in var0004) {
 		var var000E = 0;
@@ -65734,20 +65963,20 @@ void Func083D 0x83D () {
 		}
 		var0007->remove_item();
 	}
-	Func0933(SMITHY, var0008, 0x0000);
+	Func0933(SMITHY, var0008, 0);
 }
 
 void Func083E 0x83E (var var0000, var var0001) {
-	if (var0001 == 0x0001) {
+	if (var0001 == DOUBLECLICK) {
 		if (var0000->in_usecode()) {
 			return;
 		}
 		Func0828(var0000, -2, -2, -1, Func0631, var0000, BG_PATH_SUCCESS);
 	}
-	if (var0001 == 0x0002) {
+	if (var0001 == SCRIPTED) {
 		var var0002 = get_item_quality();
-		var var0003 = find_nearby(0x0366, 0x000F, MASK_NONE);
-		var var0004 = find_nearby(0x0203, 0x000F, MASK_NONE);
+		var var0003 = find_nearby(SHAPE_DRAWBRIDGE, 15, MASK_NONE);
+		var var0004 = find_nearby(SHAPE_CLOSED_DRAWBRIDGE, 15, MASK_NONE);
 		var0003 &= var0004;
 		var0004 = [];
 		for (var0007 in var0003) {
@@ -65771,7 +66000,8 @@ void Func083E 0x83E (var var0000, var var0001) {
 }
 
 void Func083F 0x83F (var var0000, var var0001) {
-	var var0002 = UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110);
+	var var0002 = UI_find_nearby_avatar(SHAPE_PORTCULLIS_EW)
+			& UI_find_nearby_avatar(SHAPE_PORTCULLIS_NS);
 	var var0003 = false;
 	declare var var0007;
 	for (var0006 in var0002) {
@@ -65814,11 +66044,13 @@ void Func0840 0x840 () {
 			say("\"Very well. Dost thou promise to return my notebook?\"");
 			var var0002 = Func090A();
 			if (var0002) {
-				if (PARTY->count_objects(SHAPE_KEY, QUALITY_DOOR_ALAGNER_STORAGE, FRAME_ANY)) {
+				if (PARTY->count_objects(
+						SHAPE_KEY, QUALITY_DOOR_ALAGNER_STORAGE, FRAME_ANY)) {
 					say("\"Then go find it! Thou hast the key!\"");
 				} else {
 					var var0003 = UI_add_party_items(
-							1, SHAPE_KEY, QUALITY_DOOR_ALAGNER_STORAGE, FRAME_ANY, false);
+							1, SHAPE_KEY, QUALITY_DOOR_ALAGNER_STORAGE,
+							FRAME_ANY, false);
 					if (var0003) {
 						say("\"Very well. I am counting on thee to return it "
 							"to me personally. No telling what misfortune may "
@@ -65854,7 +66086,9 @@ void Func0841 0x841 () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "mutton rations", "cake", "ham", "wine", "ale"];
-	var var0002 = [0x0000, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE];
+	var var0002 = [
+		NULL_OBJ, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE
+	];
 	var var0003 = [
 		FRAME_ANY, FRAME_JERKY, FRAME_PIE, FRAME_HAM, FRAME_BOTTLE_WINE,
 		FRAME_BOTTLE_ALE
@@ -65918,7 +66152,8 @@ void Func0842 0x842 () {
 		"wine", "ale"
 	];
 	var var0004 = [
-		0x0000, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE
+		NULL_OBJ, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD,
+		SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE
 	];
 	var var0005 = [
 		FRAME_ANY, FRAME_MUTTON, FRAME_BREAD, FRAME_BOTTLE_MEAD, FRAME_FLOUNDER,
@@ -66007,7 +66242,7 @@ var Func0844 0x844 (var var0000) {
 			return var0003;
 		}
 	}
-	return 0x0000;
+	return NULL_OBJ;
 }
 
 void Func0845 0x845 (var var0000) {
@@ -66036,13 +66271,15 @@ void Func0845 0x845 (var var0000) {
 }
 
 var Func0846 0x846 () {
-	if (!AVATAR->get_npc_object()->is_readied(BG_WEAPON_HAND, SHAPE_SWORD_BLANK, FRAME_BLACKSWORD_BLANK_COLD3)) {
+	if (!AVATAR->get_npc_object()->is_readied(
+			BG_WEAPON_HAND, SHAPE_SWORD_BLANK, FRAME_BLACKSWORD_BLANK_COLD3)) {
 		if (!AVATAR->get_npc_object()->is_readied(
 					BG_SHIELD_HAND, SHAPE_SWORD_BLANK, FRAME_BLACKSWORD_BLANK_COLD3)) {
 			return 0;
 		}
 	}
-	if (!AVATAR->get_npc_object()->is_readied(BG_WEAPON_HAND, SHAPE_GEM, FRAME_GEM_ARCADION)) {
+	if (!AVATAR->get_npc_object()->is_readied(
+			BG_WEAPON_HAND, SHAPE_GEM, FRAME_GEM_ARCADION)) {
 		if (!AVATAR->get_npc_object()->is_readied(
 					BG_SHIELD_HAND, SHAPE_GEM, FRAME_GEM_ARCADION)) {
 			return 0;
@@ -66052,22 +66289,22 @@ var Func0846 0x846 () {
 }
 
 var Func0847 0x847 (var var0000) {
-	if (var0000 == 0x0190) {
+	if (var0000 == SHAPE_BODY1) {
 		return 1;
 	}
-	if (var0000 == 0x019E) {
+	if (var0000 == SHAPE_BODY2) {
 		return 1;
 	}
-	if (var0000 == 0x037C) {
+	if (var0000 == SHAPE_BODY5) {
 		return 1;
 	}
-	if (var0000 == 0x02FA) {
+	if (var0000 == SHAPE_BODY3) {
 		return 1;
 	}
-	if (var0000 == 0x030A) {
+	if (var0000 == SHAPE_BODY4) {
 		return 1;
 	}
-	if (var0000 == 0x01FB) {
+	if (var0000 == SHAPE_CORPSE) {
 		return 1;
 	}
 	return 0;
@@ -66077,52 +66314,52 @@ var Func0848 0x848 (var var0000) {
 	if (var0000 == SHAPE_DRAGON) {
 		return 1;
 	}
-	if (var0000 == 0x01F9) {
+	if (var0000 == SHAPE_DRAKE) {
 		return 1;
 	}
-	if (var0000 == 0x00E6) {
+	if (var0000 == SHAPE_ETHEREAL_MONSTER) {
 		return 1;
 	}
-	if (var0000 == 0x017D) {
+	if (var0000 == SHAPE_THREE_HEADED_HYDRA) {
 		return 1;
 	}
-	if (var0000 == 0x0177) {
+	if (var0000 == SHAPE_UNICORN) {
 		return 1;
 	}
-	if (var0000 == 0x017E) {
+	if (var0000 == SHAPE_KISSME) {
 		return 1;
 	}
 	if (var0000 == SHAPE_WISP) {
 		return 1;
 	}
-	if (var0000 == 0x01F5) {
+	if (var0000 == SHAPE_CYCLOPS_MONSTER) {
 		return 1;
 	}
-	if (var0000 == 0x017C) {
+	if (var0000 == SHAPE_CYCLOPS) {
 		return 1;
 	}
-	if (var0000 == 0x01E0) {
+	if (var0000 == SHAPE_DRAXINUSOM) {
 		return 1;
 	}
 	if (var0000 == SHAPE_IOLO) {
 		return 1;
 	}
-	if (var0000 == 0x01E7) {
+	if (var0000 == SHAPE_SHAMINO) {
 		return 1;
 	}
-	if (var0000 == 0x01E8) {
+	if (var0000 == SHAPE_DUPRE) {
 		return 1;
 	}
-	if (var0000 == 0x01E9) {
+	if (var0000 == SHAPE_SPARK) {
 		return 1;
 	}
 	if (var0000 == SHAPE_HOOK) {
 		return 1;
 	}
-	if (var0000 == 0x01BD) {
+	if (var0000 == SHAPE_MAGE_MALE) {
 		return 1;
 	}
-	if (var0000 == 0x01BE) {
+	if (var0000 == SHAPE_MAGE_FEMALE) {
 		return 1;
 	}
 	if (var0000 == SHAPE_MONSTER_MAGE) {
@@ -66132,22 +66369,22 @@ var Func0848 0x848 (var var0000) {
 }
 
 var Func0849 0x849 (var var0000) {
-	if (var0000 == 0x0207) {
+	if (var0000 == SHAPE_LICHE_HORANCE) {
 		return 1;
 	}
-	if (var0000 == 0x0162) {
+	if (var0000 == SHAPE_LICHE) {
 		return 1;
 	}
-	if (var0000 == 0x0210) {
+	if (var0000 == SHAPE_SKELETON) {
 		return 1;
 	}
-	if (var0000 == 0x0151) {
+	if (var0000 == SHAPE_GHOST) {
 		return 1;
 	}
-	if (var0000 == 0x013D) {
+	if (var0000 == SHAPE_MALE_GHOST) {
 		return 1;
 	}
-	if (var0000 == 0x012B) {
+	if (var0000 == SHAPE_FEMALE_GHOST) {
 		return 1;
 	}
 	return 0;
@@ -66179,9 +66416,8 @@ void Func084A 0x84A () {
 }
 
 var Func084B 0x84B (var var0000) {
-	var var0001
-			= UI_input_numeric_value(0, var0000, 1, var0000 / 2);
-	if ((var0001 >= 50) && (var0001 >= (var0000 / 2))) {
+	var var0001 = UI_input_numeric_value(0, var0000, 1, var0000 / 2);
+	if (var0001 >= 50 && var0001 >= (var0000 / 2)) {
 		var var0002 = UI_remove_party_items(
 				var0001, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 		return true;
@@ -66196,11 +66432,13 @@ void Func084C 0x84C () {
 		"nothing", "torch", "oil flasks", "shovel", "powder keg", "bucket",
 		"jar", "cloth"
 	];
-	var var0002 =
-			[0x0000, SHAPE_TORCH, 0x030E, 0x0271, SHAPE_POWDER_KEG, SHAPE_BUCKET, 0x0338, SHAPE_CLOTH];
+	var var0002 = [
+		NULL_OBJ, SHAPE_TORCH, SHAPE_FLAMING_OIL, SHAPE_SHOVEL,
+		SHAPE_POWDER_KEG, SHAPE_BUCKET, SHAPE_PITCHER, SHAPE_CLOTH
+	];
 	var var0003 = [
-		FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_BUCKET_EMPTY, 0x0000,
-		FRAME_ANY
+		FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY,
+		FRAME_BUCKET_EMPTY, FRAME_PITCHER_JAR, FRAME_ANY
 	];
 	var var0004 =
 			[0x0000, 0x0004, 0x003C, 0x000C, 0x0019, 0x0004, 0x0002, 0x0003];
@@ -66225,8 +66463,8 @@ void Func084C 0x84C () {
 			var var000D = Func090A();
 			if (var000D) {
 				if ((var0002[var0008] == SHAPE_TORCH)
-					|| (var0002[var0008] == 0x030E)) {
-					if (var0002[var0008] == 0x030E) {
+					|| (var0002[var0008] == SHAPE_FLAMING_OIL)) {
+					if (var0002[var0008] == SHAPE_FLAMING_OIL) {
 						say("\"To want to buy how many sets of twelve?\"");
 					} else {
 						say("\"To want to buy how many?\"");
@@ -66634,7 +66872,8 @@ void Func084F 0x84F () {
 			"wide that our newest member is none other than the Avatar!\"");
 		say("The other Fellowship members cheer with pleasure.");
 		var var0013 = UI_add_party_items(
-				0x0001, 0x03BB, QUALITY_ANY, 0x0001, false);
+				1, SHAPE_AMULET, QUALITY_ANY,
+				FRAME_AMULET_FELLOWSHIP_MEDALLION, false);
 		gflags[CEREMONY_DONE] = true;
 		gflags[JOIN_FELLOWSHIP] = true;
 		Func0911(500);
@@ -66817,7 +67056,7 @@ void Func0851 0x851 () {
 	}
 	var var0000 = Func090A();
 	if (var0000) {
-		var var0001 = BATLIN->find_object(0x031E, QUALITY_ANY, FRAME_ANY);
+		var var0001 = BATLIN->find_object(SHAPE_SEALED_BOX, QUALITY_ANY, FRAME_ANY);
 		var var0002 = var0001->set_last_created();
 		var var0003 = AVATAR->give_last_created();
 		if (var0003) {
@@ -66951,9 +67190,11 @@ void Func0853 0x853 () {
 		"nothing", "torch", "oil flasks", "bag", "shovel", "powder keg",
 		"bucket", "jar", "jug", "wing scratcher", "nail file", "horn polish"
 	];
+	// BUG: Should be 'SHAPE_PITCHER' instead of '6'.
 	var var0002 = [
-		0x0000, SHAPE_TORCH, 0x030E, 0x0322, 0x0271, SHAPE_POWDER_KEG, SHAPE_BUCKET, 0x02A9, 0x0006,
-		0x03A9, 0x03A9, 0x03A9
+		NULL_OBJ, SHAPE_TORCH, SHAPE_FLAMING_OIL, SHAPE_BAG, SHAPE_SHOVEL,
+		SHAPE_POWDER_KEG, SHAPE_BUCKET, SHAPE_JAR, 6, SHAPE_GARGOYLE_JEWELRY,
+		SHAPE_GARGOYLE_JEWELRY, SHAPE_GARGOYLE_JEWELRY
 	];
 	var var0003 = [
 		0x0000, 0x0004, 0x0048, 0x0006, 0x000E, 0x0023, 0x0003, 0x0003, 0x0002,
@@ -66967,7 +67208,8 @@ void Func0853 0x853 () {
 	];
 	var var0007 = [
 		0x0000, FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY,
-		FRAME_ANY, FRAME_ANY, FRAME_ANY, 0x0000, 0x0001, 0x0003
+		FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_GARGOYLE_JEWELRY_WING_SCRATCHER,
+		FRAME_GARGOYLE_JEWELRY_NAIL_FILE, FRAME_GARGOYLE_JEWELRY_HORN_POLISH
 	];
 	var var0008 = [
 		0x0000, 0x0001, 0x000C, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001,
@@ -66988,8 +67230,8 @@ void Func0853 0x853 () {
 			var var000C = Func090A();
 			if (var000C) {
 				if ((var0002[var0009] == SHAPE_TORCH)
-					|| (var0002[var0009] == 0x030E)) {
-					if (var0002[var0009] == 0x030E) {
+					|| (var0002[var0009] == SHAPE_FLAMING_OIL)) {
+					if (var0002[var0009] == SHAPE_FLAMING_OIL) {
 						say("\"To want how many sets of twelve?\"");
 					} else {
 						say("\"To want how many?\"");
@@ -67024,13 +67266,13 @@ void Func0854 0x854 () {
 	declare var var0001;
 	forever {
 		say("\"How many portions wouldst thou wish to sell?\"");
-		var0001 = UI_input_numeric_value(0x0000, 0x000A, 0x0001, 0x0000);
-		if (var0001 == 0x0000) {
+		var0001 = UI_input_numeric_value(0, 10, 1, 0);
+		if (var0001 == 0) {
 			say("\"Oh, my. We truly do need the meat. Well, perhaps next "
 				"time.\"");
 			return;
 		}
-		var var0002 = PARTY->count_objects(SHAPE_FOOD, QUALITY_ANY, 0x0008);
+		var var0002 = PARTY->count_objects(SHAPE_FOOD, QUALITY_ANY, FRAME_MUTTON);
 		if (var0002 >= var0001) {
 			break;
 		}
@@ -67038,14 +67280,14 @@ void Func0854 0x854 () {
 	}
 	say("\"Excellent! I accept the trade, ", var0000, ". Here is thy gold.\"");
 	var var0003 = var0001 * 5;
-	var var0004
-			= UI_add_party_items(var0003, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
+	var var0004 = UI_add_party_items(
+			var0003, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 	if (!var0004) {
 		say("\"Oh, dear. Thou cannot possibly carry this much gold! Perhaps "
 			"thou mayest return when thou hast dropped something else.\"");
 	} else {
 		var var0005 = UI_remove_party_items(
-				var0001, SHAPE_FOOD, QUALITY_ANY, 0x0008, true);
+				var0001, SHAPE_FOOD, QUALITY_ANY, FRAME_MUTTON, true);
 	}
 }
 
@@ -67054,7 +67296,10 @@ void Func0855 0x855 () {
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = ["nothing", "jerky", "mead", "fish", "ale", "wine"];
-	var var0003 = [0x0000, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE];
+	var var0003 = [
+		NULL_OBJ, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_BOTTLE,
+		SHAPE_BOTTLE
+	];
 	var var0004 = [
 		FRAME_ANY, FRAME_JERKY, FRAME_BOTTLE_MEAD, FRAME_TROUT,
 		FRAME_BOTTLE_ALE, FRAME_BOTTLE_WINE];
@@ -67123,17 +67368,18 @@ void Func0856 0x856 (var var0000, var var0001) {
 			var0001 /= 0x0002;
 			say("\"I cannot charge a master such as thyself full price.\"");
 		}
-		var var0004 = 0x0002;
+		var var0004 = 2;
 		var var0005 = Func0922(var0000, var0001, var0002, var0004);
-		if (var0005 == 0x0000) {
+		if (var0005 == TRAIN_MISSING_SKILL) {
 			say("After a bit of target practice, he says, \"I am sorry to say "
 				"this, but thou dost need more practice before I will be able "
 				"to train thee. Perhaps at a later time thou wilt be in a "
 				"better position to receive mine instruction.\"");
 			return;
 		}
-		if (var0005 == 0x0001) {
-			var var0006 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+		if (var0005 == TRAIN_MISSING_GOLD) {
+			var var0006 = PARTY->count_objects(
+					SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0006, " gold altogether.");
 			if (var0006 < var0001) {
@@ -67141,7 +67387,7 @@ void Func0856 0x856 (var var0000, var var0001) {
 				return;
 			}
 		}
-		if (var0005 == 0x0002) {
+		if (var0005 == TRAIN_OVER_SKILLED) {
 			say("After a few target shots, he exclaims, \"Thou art already as "
 				"proficient as I! I can do nothing to improve thy coordination "
 				"of hand and eye!\"");
@@ -67182,14 +67428,16 @@ void Func0856 0x856 (var var0000, var var0001) {
 
 void Func0857 0x857 () {
 	UI_push_answers();
-	var var0000 = 0x0001;
-	var var0001 = 0x0001;
+	var var0000 = 1;
+	var var0001 = 1;
 	say("\"Excellent! Hast thou brought some pumpkins for me?\"");
 	var var0002 = Func090A();
 	if (var0002) {
 		say("\"Very good! Let me see how many thou dost have...\"");
-		var var0003 = PARTY->count_objects(SHAPE_FOOD, QUALITY_ANY, FRAME_PUMPKIN_LARGE);
-		var var0004 = PARTY->count_objects(SHAPE_FOOD, QUALITY_ANY, FRAME_PUMPKIN_SMALL);
+		var var0003 = PARTY->count_objects(
+				SHAPE_FOOD, QUALITY_ANY, FRAME_PUMPKIN_LARGE);
+		var var0004 = PARTY->count_objects(
+				SHAPE_FOOD, QUALITY_ANY, FRAME_PUMPKIN_SMALL);
 		var var0005 = var0003 + var0004;
 		if (var0005 == 0) {
 			say("\"But thou dost not have a single one in thy possession! Thou "
@@ -67225,8 +67473,10 @@ void Func0858 0x858 () {
 		"nothing", "club", "dagger", "bow", "sword", "halberd", "arrows",
 		"bolts"
 	];
-	var var0002 =
-			[0x0000, 0x024E, 0x0252, 0x0255, 0x0257, 0x025B, 0x02D2, 0x02D3];
+	var var0002 = [
+		NULL_OBJ, SHAPE_CLUB, SHAPE_DAGGER, SHAPE_BOW, SHAPE_SWORD,
+		SHAPE_HALBERD, SHAPE_ARROW, SHAPE_BOLT
+	];
 	var var0003 = FRAME_ANY;
 	var var0004 =
 			[0x0000, 0x0014, 0x0014, 0x0028, 0x0064, 250, 0x0019, 0x001E];
@@ -67250,8 +67500,8 @@ void Func0858 0x858 () {
 			say("\"^", var000A, " Art thou still interested?\"");
 			var var000C = Func090A();
 			if (var000C) {
-				if ((var0002[var0009] == 0x02D2)
-					|| (var0002[var0009] == 0x02D3)) {
+				if ((var0002[var0009] == SHAPE_ARROW)
+					|| (var0002[var0009] == SHAPE_BOLT)) {
 					say("\"How many dozen wouldst thou like?\"");
 					var000B = Func08F8(
 							var0002[var0009], var0003, var0008[var0009],
@@ -67283,7 +67533,10 @@ void Func0859 0x859 () {
 		"nothing", "great helm", "plate armour", "plate leggings", "gorget",
 		"scale armour", "gauntlets"
 	];
-	var var0002 = [0x0000, 0x021D, 0x023D, 0x0240, 0x024A, 0x023A, 0x0244];
+	var var0002 = [
+		NULL_OBJ, SHAPE_GREAT_HELM, SHAPE_PLATE_ARMOR, SHAPE_PLATE_LEGGINGS,
+		SHAPE_GORGET, SHAPE_SCALE_ARMOR, SHAPE_GAUNTLETS
+	];
 	var var0003 = FRAME_ANY;
 	var var0004 = [0x0000, 0x00C8, 0x0145, 0x00C8, 0x0028, 0x0064, 0x0019];
 	var var0005 = ["", "a ", "", "", "a ", "", ""];
@@ -67335,7 +67588,7 @@ void Func085A 0x85A () {
 	declare var var0008;
 	if (gflags[SOLD_LUSTY_WENCH]) {
 		var0001 = ["nothing", "torch", "lockpick"];
-		var0002 = [0x0000, SHAPE_TORCH, SHAPE_LOCKPICK];
+		var0002 = [NULL_OBJ, SHAPE_TORCH, SHAPE_LOCKPICK];
 		var0003 = [FRAME_ANY, FRAME_ANY, FRAME_ANY];
 		var0004 = [0x0000, 0x0005, 0x0001];
 		var0005 = ["", "a ", "a "];
@@ -67344,7 +67597,7 @@ void Func085A 0x85A () {
 		var0008 = 0x0001;
 	} else {
 		var0001 = ["Nothing", "Torch", "Lockpick"];
-		var0002 = [0x0000, SHAPE_TORCH, SHAPE_LOCKPICK];
+		var0002 = [NULL_OBJ, SHAPE_TORCH, SHAPE_LOCKPICK];
 		var0003 = [FRAME_ANY, FRAME_ANY, FRAME_ANY];
 		var0004 = [0x0000, 0x0005, 0x000A];
 		var0005 = ["", "a ", "a "];
@@ -67418,12 +67671,17 @@ void Func085C 0x85C () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "heavy cloak", "tunic", "pants", "dress", "hood"];
-	var var0002 = [0x0000, 0x011D, 0x00F9, 0x02E2, 0x00F9, 0x01BC];
+	var var0002 = [
+		NULL_OBJ, SHAPE_CLOAK, SHAPE_TOP, SHAPE_PANTS, SHAPE_TOP, SHAPE_HOOD
+	];
 	var var0003 = [0x0000, 0x0032, 0x001E, 0x001E, 0x002D, 0x000A];
 	var var0004 = ["", "a ", "a ", "", "a ", "a "];
 	var var0005 = [0x0000, 0x0000, 0x0000, 0x0001, 0x0000, 0x0000];
 	var var0006 = ["", "", "", " per pair", "", ""];
-	var var0007 = [FRAME_ANY, 0x0001, 0x0000, 0x0001, 0x0001, 0x0001];
+	var var0007 = [
+		FRAME_ANY, FRAME_CLOAK_HEAVY_CLOAK, FRAME_TOP_TUNIC, 1,
+		FRAME_TOP_DRESS, FRAME_HOOD_BEIGE
+	];
 	var var0008 = 0x0001;
 	say("\"What article wouldst thou like to buy?\"");
 	while (var0000) {
@@ -67465,7 +67723,9 @@ void Func085D 0x85D () {
 	var var0001 = true;
 	var var0002 =
 			["nothing", "mutton rations", "trout", "Silverleaf", "cake", "ham"];
-	var var0003 = [0x0000, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD];
+	var var0003 = [
+		NULL_OBJ, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD
+	];
 	var var0004 = [FRAME_ANY, FRAME_JERKY, FRAME_TROUT, FRAME_SILVERLEAF, FRAME_PIE, FRAME_HAM];
 	var var0005 = [0, 12, 2, 25, 2, 10];
 	var var0006 = "";
@@ -67529,7 +67789,7 @@ void Func085E 0x85E () {
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = ["nothing", "wine", "ale"];
-	var var0003 = [0x0000, SHAPE_BOTTLE, SHAPE_BOTTLE];
+	var var0003 = [NULL_OBJ, SHAPE_BOTTLE, SHAPE_BOTTLE];
 	var var0004 = [FRAME_ANY, FRAME_BOTTLE_WINE, FRAME_BOTTLE_ALE];
 	var var0005 = [0x0000, 0x0004, 0x0003];
 	var var0006 = "";
@@ -67584,17 +67844,18 @@ void Func085F 0x85F (var var0000, var var0001) {
 	}
 	var var0006 = Func0920();
 	var var0007 = var0006->get_npc_name();
-	if (var0006 != 0x0000) {
-		var var0008 = 0x0003;
+	if (var0006 != INVALID_NPC) {
+		var var0008 = 3;
 		var var0009 = Func0922(var0000, var0001, var0006, var0008);
-		if (var0009 == 0x0000) {
+		if (var0009 == TRAIN_MISSING_SKILL) {
 			say("\"It seems that thou dost need a little more time to hone thy "
 				"reflexes. If thou dost wish to return later, when thou hast "
 				"more experience, I would be most happy to train thee.\"");
 			return;
 		}
-		if (var0009 == 0x0001) {
-			var var000A = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+		if (var0009 == TRAIN_MISSING_GOLD) {
+			var var000A = PARTY->count_objects(
+					SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var000A, " gold altogether.");
 			if (var000A < var0001) {
@@ -67603,7 +67864,7 @@ void Func085F 0x85F (var var0000, var var0001) {
 				return;
 			}
 		}
-		if (var0009 == 0x0002) {
+		if (var0009 == TRAIN_OVER_SKILLED) {
 			say("\"Zounds! Thou art quick. Too quick, in fact, for me to be "
 				"able to help thee become faster. I am sorry, ",
 				var0005, ".\"");
@@ -67674,10 +67935,10 @@ void Func0860 0x860 (var var0000, var var0001, var var0002) {
 			declare var var000B;
 			if (var0006 == "resurrect") {
 				var var000A = UI_get_avatar_ref();
-				var000B = var000A->find_nearest(0x0190, 0x0019);
-				if (var000B == 0x0000) {
-					var000B = var000A->find_nearest(0x019E, 0x0019);
-					if (var000B == 0x0000) {
+				var000B = var000A->find_nearest(SHAPE_BODY1, 25);
+				if (var000B == NULL_OBJ) {
+					var000B = var000A->find_nearest(SHAPE_BODY2, 25);
+					if (var000B == NULL_OBJ) {
 						say("\"I apologize, ", var0003,
 							", but I do not see anyone who is in need of "
 							"resurrection. I must be able to see the body to "
@@ -67694,8 +67955,8 @@ void Func0860 0x860 (var var0000, var var0001, var var0002) {
 			say("\"My price is ", var0008, " gold. Is this satisfactory?\"");
 			var var000C = Func090A();
 			if (var000C) {
-				var var000D
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var000D = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var000D >= var0008) {
 					if (var0006 == "heal") {
 						Func091D(var0009, var0008);
@@ -67797,7 +68058,8 @@ void Func0862 0x862 () {
 			say("Chuckles holds his hand up. \"'Tis not right. I give thee a "
 				"clue for free. 'Tis here in this scroll.\"");
 			var0006 = UI_add_party_items(
-					1, SHAPE_SCROLL, QUALITY_SCROLL_SCROLL_OF_CHUCKLES, FRAME_ANY, false);
+					1, SHAPE_SCROLL, QUALITY_SCROLL_SCROLL_OF_CHUCKLES,
+					FRAME_ANY, false);
 			if (var0006) {
 				gflags[CHUCKLES_GAVE_SCROLL] = true;
 				Func0911(0x0032);
@@ -67814,7 +68076,8 @@ void Func0862 0x862 () {
 			say("\"How nice! All right! I shall give thee a clue. 'Tis here in "
 				"this scroll.\"");
 			var0006 = UI_add_party_items(
-					1, SHAPE_SCROLL, QUALITY_SCROLL_SCROLL_OF_CHUCKLES, FRAME_ANY, false);
+					1, SHAPE_SCROLL, QUALITY_SCROLL_SCROLL_OF_CHUCKLES,
+					FRAME_ANY, false);
 			if (var0006) {
 				gflags[CHUCKLES_GAVE_SCROLL] = true;
 				Func0911(0x0032);
@@ -67840,7 +68103,10 @@ void Func0863 0x863 () {
 	var var0001 = [
 		"nothing", "bow", "crossbow", "triple crossbow", "arrows", "bolts"
 	];
-	var var0002 = [0x0000, 0x0255, 0x0256, 0x0287, 0x02D2, 0x02D3];
+	var var0002 = [
+		NULL_OBJ, SHAPE_BOW, SHAPE_CROSSBOW, SHAPE_TRIPLE_CROSSBOW,
+		SHAPE_ARROW, SHAPE_BOLT
+	];
 	var var0003 = FRAME_ANY;
 	var var0004 = [0x0000, 0x0028, 0x007D, 0x0190, 0x0019, 0x001E];
 	var var0005 = ["", "a ", "a ", "a ", "", ""];
@@ -67861,8 +68127,8 @@ void Func0863 0x863 () {
 			say("\"^", var000A, " Wouldst thou still like to buy?\"");
 			var var000C = Func090A();
 			if (var000C) {
-				if ((var0002[var0009] == 0x02D2)
-					|| (var0002[var0009] == 0x02D3)) {
+				if ((var0002[var0009] == SHAPE_ARROW)
+					|| (var0002[var0009] == SHAPE_BOLT)) {
 					say("\"How many dozen wouldst thou like?\"");
 					var000B = Func08F8(
 							var0002[var0009], var0003, var0008[var0009],
@@ -68268,7 +68534,7 @@ var Func086D 0x86D () {
 																  & ("rock "
 																	 "critic"
 																	 & "*"))))))))))))))))));
-	var var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000) / 2);
+	var var0001 = UI_die_roll(1, UI_get_array_size(var0000) / 2);
 	var var0002 = var0000[var0001 * 2 - 1];
 	var var0003 = var0000[var0001 * 2];
 	if (var0003 == "*") {
@@ -68297,7 +68563,7 @@ var Func086E 0x86E () {
 														& ("smartypants"
 														   & "Spankamia"
 															 "h")))))))))))))));
-	var var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
+	var var0001 = UI_die_roll(1, UI_get_array_size(var0000));
 	var var0002 = var0000[var0001];
 	return var0002;
 }
@@ -68600,10 +68866,10 @@ void Func0870 0x870 (var var0000, var var0001, var var0002) {
 			declare var var000A;
 			if (var0005 == "resurrect") {
 				var var0009 = UI_get_avatar_ref();
-				var000A = var0009->find_nearest(0x0190, 0x0019);
-				if (var000A == 0x0000) {
-					var000A = var0009->find_nearest(0x019E, 0x0019);
-					if (var000A == 0x0000) {
+				var000A = var0009->find_nearest(SHAPE_BODY1, 25);
+				if (var000A == NULL_OBJ) {
+					var000A = var0009->find_nearest(SHAPE_BODY2, 25);
+					if (var000A == NULL_OBJ) {
 						say("\"I do not see anyone who needs resurrecting. I "
 							"must be able to see the body to resurrect. If "
 							"thou art carrying thy friend, pray lay them on "
@@ -68618,8 +68884,8 @@ void Func0870 0x870 (var var0000, var var0001, var var0002) {
 			say("\"My price is ", var0007, " gold. Is this price agreeable?\"");
 			var var000B = Func090A();
 			if (var000B) {
-				var var000C
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var000C = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var000C >= var0007) {
 					if (var0005 == "heal") {
 						Func091D(var0008, var0007);
@@ -68649,8 +68915,10 @@ void Func0871 0x871 () {
 	var var0002 = [
 		"nothing", "jerky", "mead", "fish", "ham", "silverleaf", "ale", "wine"
 	];
-	var var0003 =
-			[0x0000, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE];
+	var var0003 = [
+		NULL_OBJ, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD,
+		SHAPE_BOTTLE, SHAPE_BOTTLE
+	];
 	var var0004 = [
 		FRAME_ANY, FRAME_JERKY, FRAME_BOTTLE_MEAD, FRAME_FLOUNDER, FRAME_HAM,
 		FRAME_SILVERLEAF, FRAME_BOTTLE_ALE, FRAME_BOTTLE_WINE
@@ -68730,8 +68998,9 @@ void Func0872 0x872 () {
 		"2-handed sword", "club", "sling", "bow", "arrows", "bolts"
 	];
 	var var0002 = [
-		0x0000, 0x0252, 0x0293, 0x0257, 0x0258, 0x025A, 0x024E, 0x01DA, 0x0255,
-		0x02D2, 0x02D3
+		NULL_OBJ, SHAPE_DAGGER, SHAPE_MACE, SHAPE_SWORD,
+		SHAPE_TWO_HANDED_HAMMER, SHAPE_TWO_HANDED_SWORD, SHAPE_CLUB,
+		SHAPE_SLING, SHAPE_BOW, SHAPE_ARROW, SHAPE_BOLT
 	];
 	var var0003 = FRAME_ANY;
 	var var0004 = [
@@ -68762,7 +69031,7 @@ void Func0872 0x872 () {
 					var0004[var0009], var0007[var0009]);
 			var var000B = 0x0000;
 			say("\"^", var000A, " Is that acceptable?\"");
-			if ((var0002[var0009] == 0x02D2) || (var0002[var0009] == 0x02D3)) {
+			if ((var0002[var0009] == SHAPE_ARROW) || (var0002[var0009] == SHAPE_BOLT)) {
 				var var000C = Func090A();
 				if (var000C) {
 					say("\"How many sets wouldst thou like?\"");
@@ -68801,7 +69070,10 @@ void Func0873 0x873 () {
 		"nothing", "leather helm", "wooden shield", "leather leggings",
 		"chain leggings", "leather armour"
 	];
-	var var0002 = [0x0000, 0x03EC, 0x023C, 0x023E, 0x023F, 0x0239];
+	var var0002 = [
+		NULL_OBJ, SHAPE_LEATHER_HELM, SHAPE_WOODEN_SHIELD,
+		SHAPE_LEATHER_LEGGINGS, SHAPE_CHAIN_LEGGINGS, SHAPE_LEATHER_ARMOR
+	];
 	var var0003 = FRAME_ANY;
 	var var0004 = [0x0000, 0x0019, 0x000F, 0x0019, 0x0046, 0x0028];
 	var var0005 = ["", "a ", "a ", "", "", ""];
@@ -68849,7 +69121,10 @@ void Func0874 0x874 () {
 		"nothing", "torch", "backpack", "lockpicks", "bucket", "swamp boots",
 		"bedroll"
 	];
-	var var0002 = [0x0000, SHAPE_TORCH, 0x0321, SHAPE_LOCKPICK, SHAPE_BUCKET, 0x024C, SHAPE_BED_ROLL];
+	var var0002 = [
+		NULL_OBJ, SHAPE_TORCH, SHAPE_BACKPACK, SHAPE_LOCKPICK, SHAPE_BUCKET,
+		SHAPE_SWAMP_BOOTS, SHAPE_BED_ROLL
+	];
 	var var0003 = FRAME_ANY;
 	var var0004 = [0x0000, 0x0004, 0x000C, 0x0008, 0x0002, 0x0028, 0x000F];
 	var var0005 = ["a ", "a ", "a ", "some ", "a ", "a pair of ", "a "];
@@ -68908,16 +69183,17 @@ void Func0875 0x875 (var var0000, var var0001) {
 		var0003 = "you";
 	}
 	if (var0002 != 0x0000) {
-		var var0005 = 0x0003;
+		var var0005 = 3;
 		var var0006 = Func0922(var0000, var0001, var0002, var0005);
-		if (var0006 == 0x0000) {
+		if (var0006 == TRAIN_MISSING_SKILL) {
 			say("\"I am sorry, but thou dost not have enough practical "
 				"experience to train at this time. If thou couldst return at a "
 				"later date, I would be most happy to train thee.\"");
 			return;
 		}
-		if (var0006 == 0x0001) {
-			var var0007 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+		if (var0006 == TRAIN_MISSING_GOLD) {
+			var var0007 = PARTY->count_objects(
+					SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0007, " gold altogether.");
 			if (var0007 < var0001) {
@@ -68927,7 +69203,7 @@ void Func0875 0x875 (var var0000, var var0001) {
 				return;
 			}
 		}
-		if (var0006 == 0x0002) {
+		if (var0006 == TRAIN_OVER_SKILLED) {
 			say("\"Thou art already as proficient as I! I am afraid that thou "
 				"cannot be trained further in this.\"");
 			return;
@@ -68993,8 +69269,9 @@ void Func0876 0x876 () {
 		"cheese", "mead", "wine", "ale", "milk"
 	];
 	var var0003 = [
-		0x0000, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE,
-		SHAPE_BOTTLE, SHAPE_BOTTLE, SHAPE_BOTTLE
+		NULL_OBJ, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD,
+		SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE, SHAPE_BOTTLE,
+		SHAPE_BOTTLE
 	];
 	var var0004 = [
 		FRAME_ANY, FRAME_JERKY, FRAME_BREAD, FRAME_TROUT, FRAME_HAM, FRAME_PIE,
@@ -69100,15 +69377,16 @@ void Func0877 0x877 () {
 void Func0878 0x878 (var var0000, var var0001) {
 	var var0002 = Func0920();
 	if (var0002 != 0x0000) {
-		var var0003 = 0x0002;
+		var var0003 = 2;
 		var var0004 = Func0922(var0000, var0001, var0002, var0003);
-		if (var0004 == 0x0000) {
+		if (var0004 == TRAIN_MISSING_SKILL) {
 			say("\"Thou dost not have enough practical experience to study "
 				"fighting with me at this time!\" he scoffs.");
 			return;
 		}
-		if (var0004 == 0x0001) {
-			var var0005 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+		if (var0004 == TRAIN_MISSING_GOLD) {
+			var var0005 = PARTY->count_objects(
+					SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0005, " gold altogether.");
 			if (var0005 < var0001) {
@@ -69118,7 +69396,7 @@ void Func0878 0x878 (var var0000, var var0001) {
 				return;
 			}
 		}
-		if (var0004 == 0x0002) {
+		if (var0004 == TRAIN_OVER_SKILLED) {
 			say("\"Thou art already close in skill to me! Thou hast peaked in "
 				"thine own potential. There is nothing further I can do for "
 				"thee.\"");
@@ -69179,11 +69457,11 @@ void Func0879 0x879 (var var0000, var var0001, var var0002) {
 			declare var var000A;
 			if (var0005 == "resurrect") {
 				var var0009 = UI_get_avatar_ref();
-				var000A = var0009->find_nearest(0x0190, 0x0019);
-				if (var000A == 0x0000) {
-					var000A = var0009->find_nearest(0x019E, 0x0019);
+				var000A = var0009->find_nearest(SHAPE_BODY1, 25);
+				if (var000A == NULL_OBJ) {
+					var000A = var0009->find_nearest(SHAPE_BODY2, 25);
 				}
-				if (var000A == 0x0000) {
+				if (var000A == NULL_OBJ) {
 					say("\"Well, I do not seem to see anyone who needs mine "
 						"assistance. Unless thou art carrying someone in thy "
 						"packs....\" He laughs.*");
@@ -69194,8 +69472,8 @@ void Func0879 0x879 (var var0000, var var0001, var var0002) {
 			say("\"My price is ", var0007, " gold. Dost thou agree?\"");
 			var var000B = Func090A();
 			if (var000B) {
-				var var000C
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var000C = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var000C >= var0007) {
 					if (var0005 == "heal") {
 						Func091D(var0008, var0007);
@@ -69228,8 +69506,8 @@ void Func087A 0x87A () {
 		"powder keg", "pick", "bedroll"
 	];
 	var var0002 = [
-		0x0000, SHAPE_TORCH, 0x030E, 0x0321, 0x0322, 0x0271, 0x0272, SHAPE_POWDER_KEG, SHAPE_PICK,
-		SHAPE_BED_ROLL
+		NULL_OBJ, SHAPE_TORCH, SHAPE_FLAMING_OIL, SHAPE_BACKPACK, SHAPE_BAG,
+		SHAPE_SHOVEL, SHAPE_HOE, SHAPE_POWDER_KEG, SHAPE_PICK, SHAPE_BED_ROLL
 	];
 	var var0003 = [
 		0x0000, 0x0003, 0x0030, 0x000A, 0x0003, 0x000A, 0x000A, 0x001E, 0x000C,
@@ -69258,8 +69536,8 @@ void Func087A 0x87A () {
 			var var000C = Func090A();
 			if (var000C) {
 				if ((var0002[var0009] == SHAPE_TORCH)
-					|| (var0002[var0009] == 0x030E)) {
-					if (var0002[var0009] == 0x030E) {
+					|| (var0002[var0009] == SHAPE_FLAMING_OIL)) {
+					if (var0002[var0009] == SHAPE_FLAMING_OIL) {
 						say("\"How many sets of twelve wouldst thou like?\"");
 					} else {
 						say("\"How many wouldst thou like?\"");
@@ -69422,17 +69700,17 @@ void Func087C 0x87C () {
 
 void Func087D 0x87D () {
 	AVATAR->get_npc_object()->set_item_flag(DONT_RENDER);
-	var var0000 = UI_create_new_object(0x0356);
+	var var0000 = UI_create_new_object(SHAPE_STATUE);
 	if (!UI_is_pc_female()) {
-		if (AVATAR->get_npc_object()->get_item_frame() < 0x0010) {
-			var0000->set_item_frame(0x0012);
+		if (AVATAR->get_npc_object()->get_item_frame() < STAND_SOUTH) {
+			var0000->set_item_frame(FRAME_STATUE_MALE_AVATAR_NORTH);
 		} else {
-			var0000->set_item_frame(0x0013);
+			var0000->set_item_frame(FRAME_STATUE_MALE_AVATAR_SOUTH);
 		}
-	} else if (AVATAR->get_npc_object()->get_item_frame() < 0x0010) {
-		var0000->set_item_frame(0x0014);
+	} else if (AVATAR->get_npc_object()->get_item_frame() < STAND_SOUTH) {
+		var0000->set_item_frame(FRAME_STATUE_FEMALE_AVATAR_NORTH);
 	} else {
-		var0000->set_item_frame(0x0015);
+		var0000->set_item_frame(FRAME_STATUE_FEMALE_AVATAR_SOUTH);
 	}
 	struct<Position> var0001 = AVATAR->get_npc_object()->get_object_position();
 	var var0002 = UI_update_last_created(var0001);
@@ -69449,8 +69727,8 @@ void Func087E 0x87E (
 			if (var0009.x >= var0000.x) {
 				if (var0009.y <= var0002.y) {
 					if (var0009.y >= var0000.y) {
-						if (var0009.z < 0x0005) {
-							if (!(var0008 == 0x00BD)) {
+						if (var0009.z < 5) {
+							if (!(var0008 == SHAPE_FLOOR_BD)) {
 								if (!var0007->is_npc()) {
 									Func087F(var0007);
 								} else {
@@ -69473,7 +69751,7 @@ void Func087F 0x87F (var var0000) {
 		struct<Position> var0007 = var0004->get_object_position();
 		if ((var0005 == 10) && (var0006 == FRAME_EGG_PATH)) {
 			var var0008 = var0004->find_nearby(ANY_SHAPE, 1, MASK_NONE);
-			var var0009 = 0x0000;
+			var var0009 = NULL_OBJ;
 			declare var var000D;
 			declare struct<Position> var000E;
 			declare var var000F;
@@ -69489,7 +69767,7 @@ void Func087F 0x87F (var var0000) {
 						if ((var000E.x == var0007.x)
 							&& (var000E.y == var0007.y)) {
 							var0009 = var000C;
-							var000F = var0009->set_item_quality(0x0064);
+							var000F = var0009->set_item_quality(100);
 						}
 					}
 				}
@@ -69603,19 +69881,19 @@ void Func0880 0x880 (var var0000, struct<Position> var0001) {
 
 var Func0881 0x881 () {
 	var var0000
-			= AVATAR->get_npc_object()->find_nearby(0x0356, 0x0000, MASK_NONE);
+			= AVATAR->get_npc_object()->find_nearby(SHAPE_STATUE, 0, MASK_NONE);
 	for (var0003 in var0000) {
-		if ((var0003->get_item_frame() >= 0x0012)
-			&& (var0003->get_item_frame() <= 0x0015)) {
+		if ((var0003->get_item_frame() >= FRAME_STATUE_MALE_AVATAR_NORTH)
+			&& (var0003->get_item_frame() <= FRAME_STATUE_FEMALE_AVATAR_SOUTH)) {
 			return var0003;
 		}
 	}
-	return 0x0000;
+	return NULL_OBJ;
 }
 
 void Func0882 0x882 (var var0000) {
 	if (var0000->get_barge()) {
-		var var0001 = var0000->find_nearby(0x03C1, 0x000A, MASK_EGG);
+		var var0001 = var0000->find_nearby(SHAPE_BARGE, 10, MASK_EGG);
 		if (var0001) {
 			if (Func080D() && AVATAR->get_barge()) {
 				var0001->Func061C();
@@ -70099,10 +70377,10 @@ void Func0888 0x888 (var var0000) {
 	var var0001 = false;
 	var var0002 = false;
 	var var0003 = false;
-	var var0004 = var0000->find_nearby(ANY_SHAPE, 0x0005, MASK_NPC2);
+	var var0004 = var0000->find_nearby(ANY_SHAPE, 5, MASK_NPC2);
 	declare var var0007;
 	for (var0007 in var0004) {
-		var var0008 = UI_die_roll(0x000F, 0x0014);
+		var var0008 = UI_die_roll(15, 20);
 		var var0009 = UI_apply_damage(
 				var0007->get_npc_prop(STRENGTH), var0008, MAGIC_DAMAGE,
 				var0007);
@@ -70117,12 +70395,12 @@ void Func0888 0x888 (var var0000) {
 			var0003 = true;
 		}
 	}
-	var0004 = var0000->find_nearby(ANY_SHAPE, 0x0050, MASK_NPC2);
+	var0004 = var0000->find_nearby(ANY_SHAPE, 80, MASK_NPC2);
 	declare var var000D;
 	if (var0001 || var0002) {
 		for (var0007 in var0004) {
 			var000D = var0007->get_item_shape();
-			if (!((var000D == 0x02D1) || (var000D == 0x03DD))) {
+			if (!((var000D == SHAPE_MALE_AVATAR) || (var000D == SHAPE_FEMALE_AVATAR))) {
 				var0007->set_schedule_type(IN_COMBAT);
 			}
 		}
@@ -70130,13 +70408,13 @@ void Func0888 0x888 (var var0000) {
 	if (var0003) {
 		for (var0007 in var0004) {
 			var000D = var0007->get_item_shape();
-			if (!((var000D == 0x02D1) || (var000D == 0x03DD))) {
+			if (!((var000D == SHAPE_MALE_AVATAR) || (var000D == SHAPE_FEMALE_AVATAR))) {
 				var0007->set_alignment(EVIL);
 				var0007->set_schedule_type(IN_COMBAT);
 			}
 		}
 	}
-	var var0010 = var0000->find_nearby(SHAPE_DOOR_NS_RIGHT, 0x0005, MASK_NONE);
+	var var0010 = var0000->find_nearby(SHAPE_DOOR_NS_RIGHT, 5, MASK_NONE);
 	for (var0013 in var0010) {
 		struct<Position> var0014 = var0013->get_object_position();
 		if (var0014.x == 2809) {
@@ -70157,8 +70435,8 @@ void Func0889 0x889 () {
 		"milk", "mead", "ale", "wine"
 	];
 	var var0002 = [
-		0x0000, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE,
-		SHAPE_BOTTLE, SHAPE_BOTTLE
+		NULL_OBJ, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD,
+		SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE, SHAPE_BOTTLE, SHAPE_BOTTLE
 	];
 	var var0003 = [
 		FRAME_ANY, FRAME_JERKY, FRAME_FLOUNDER, FRAME_HAM, FRAME_BREAD,
@@ -70254,8 +70532,8 @@ void Func088A 0x88A () {
 }
 
 void Func088B 0x88B () {
-	var var0000 = AVATAR->find_nearby(0x02EC, 0x000A, MASK_NONE);
-	var var0001 = 0x000F;
+	var var0000 = AVATAR->find_nearby(SHAPE_WELL_OF_SOULS, 10, MASK_NONE);
+	var var0001 = 15 * TICK;
 	var var0002 = -3;
 	var var0003 = -3;
 	UI_earthquake(var0001);
@@ -70360,11 +70638,13 @@ void Func088E 0x88E () {
 		"nothing", "shoes", "kidney belt", "leather boots", "tunic", "dress",
 		"pants", "swamp boots"
 	];
-	var var0002 =
-			[0x0000, 0x0249, 0x0248, 0x024B, 0x00F9, 0x00F9, 0x02E2, 0x024C];
+	var var0002 = [
+		NULL_OBJ, SHAPE_SHOES, SHAPE_KIDNEY_BELT, SHAPE_BOOTS, SHAPE_TOP,
+		SHAPE_TOP, SHAPE_PANTS, SHAPE_SWAMP_BOOTS
+	];
 	var var0003 = [
-		FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, 0x0000, 0x0001, 0x0000,
-		FRAME_ANY
+		FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_TOP_TUNIC,
+		FRAME_TOP_DRESS, 0, FRAME_ANY
 	];
 	var var0004 =
 			[0x0000, 0x0014, 0x0014, 0x0028, 0x001E, 0x001E, 0x001E, 0x0032];
@@ -70412,7 +70692,7 @@ void Func088F 0x88F () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "wine", "ale"];
-	var var0002 = [0x0000, SHAPE_BOTTLE, SHAPE_BOTTLE];
+	var var0002 = [NULL_OBJ, SHAPE_BOTTLE, SHAPE_BOTTLE];
 	var var0003 = [FRAME_ANY, FRAME_BOTTLE_WINE, FRAME_BOTTLE_ALE];
 	var var0004 = [0x0000, 0x0005, 0x0005];
 	var var0005 = "";
@@ -70560,7 +70840,9 @@ void Func0890 0x890 () {
 	case "what next"(remove):
 		say("\"Dost thou have the book entitled, `The Stone of Castambre?'\"");
 		if (Func090A()) {
-			var0000 = Func0931(PARTY, 1, SHAPE_BOOK, 0x0090, FRAME_ANY);
+			var0000 = Func0931(
+					PARTY, 1, SHAPE_BOOK, QUALITY_BOOK_STONE_OF_CASTAMBRE,
+					FRAME_ANY);
 			if (var0000) {
 				say("His eyes reveal his hope. As he takes the book from you, "
 					"it almost appears as if he is smiling.\"");
@@ -70585,7 +70867,9 @@ void Func0890 0x890 () {
 		if (Func090A()) {
 			say("\"Dost thou have it with thee?\"");
 			if (Func090A()) {
-				var0000 = Func0931(PARTY, 1, SHAPE_BOOK, 0x0090, FRAME_ANY);
+				var0000 = Func0931(
+						PARTY, 1, SHAPE_BOOK, QUALITY_BOOK_STONE_OF_CASTAMBRE,
+						FRAME_ANY);
 				if (var0000) {
 					say("His eyes reveal his hope. As he takes the book from "
 						"you, it almost appears as if he is smiling.\"");
@@ -70671,8 +70955,8 @@ void Func0892 0x892 () {
 				"heart and opens a panel on the front of his chest. Reaching "
 				"inside with his other hand, he brings forth a beautiful "
 				"yellow talisman.");
-			var0000 = UI_create_new_object(0x03BB);
-			var0000->set_item_frame(0x000A);
+			var0000 = UI_create_new_object(SHAPE_AMULET);
+			var0000->set_item_frame(FRAME_AMULET_TALISMAN_OF_LOVE);
 			var var0001 = Func0907(AVATAR->get_npc_object());
 			if (var0001) {
 				say("He places the Talisman in your palm. ~\"Thou hast earned "
@@ -70757,9 +71041,9 @@ void Func0894 0x894 (var var0000) {
 					 "creature!@");
 			say("Slowly, as if with great effort, it raises it head.");
 			BOLLUX->show_npc_face(0x0000);
-			var var0001
-					= AVATAR->find_nearest(0x019E, 0x0028)->get_item_frame();
-			if (!((var0001 == 0x0004) || (var0001 == 0x0005))) {
+			var var0001 = AVATAR->find_nearest(SHAPE_BODY2, 40)->get_item_frame();
+			if (!(var0001 == FRAME_BODY2_GOLEM1
+					|| var0001 == FRAME_BODY2_GOLEM2)) {
 				say("\"What dost thou... want?\" it asks slowly.");
 			} else {
 				say("\"Help him?\" it asks carefully, pointing to the fallen "
@@ -70846,7 +71130,8 @@ void Func0894 0x894 (var var0000) {
 				say("\"I have a book here that Adjhar said told about... "
 					"our... creation. This might help bring Adjhar back.\"");
 				var0004 = UI_add_party_items(
-						1, SHAPE_BOOK, 0x0090, FRAME_ANY, false);
+						1, SHAPE_BOOK, QUALITY_BOOK_STONE_OF_CASTAMBRE,
+						FRAME_ANY, false);
 				if (var0004) {
 					say("He hands to you a very old tome. It is evident the "
 						"book has seen much use, for the leather covering is "
@@ -70876,7 +71161,8 @@ void Func0894 0x894 (var var0000) {
 				say("\"I have a book here that Adjhar said told about... "
 					"our... creation. This might help bring him back.\"");
 				var0004 = UI_add_party_items(
-						1, SHAPE_BOOK, 0x0090, FRAME_ANY, false);
+						1, SHAPE_BOOK, QUALITY_BOOK_STONE_OF_CASTAMBRE,
+						FRAME_ANY, false);
 				if (var0004) {
 					say("He hands to you a very old tome. It is evident the "
 						"book has seen much use, for the leather covering is "
@@ -70912,9 +71198,9 @@ void Func0895 0x895 () {
 	BOLLUX->say("Bollux stares ahead, almost vacantly. Despite his features "
 				"and lack of motion, it is apparent by his expression that "
 				"some of Castambre's magic still resides within.");
-	var var0000 = find_nearby(0x03F7, 0x0028, MASK_NONE);
+	var var0000 = find_nearby(SHAPE_GOLEM, 40, MASK_NONE);
 	for (var0003 in var0000) {
-		if (get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, 4)
+		if (get_cont_items(SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, FRAME_SCROLL_INVISIBLE)
 			|| (find_nearby(SHAPE_SCROLL, 1, MASK_ALL_UNSEEN)->get_item_quality()
 				== QUALITY_SCROLL_ADJHAR)) {
 			say("\"Bollux turns to see Adjar standing nearby, quite alive. "
@@ -70977,7 +71263,10 @@ void Func0897 0x897 () {
 		"nothing", "crested helm", "spiked shield", "leather armour",
 		"chain armour", "plate armour", "leather gloves"
 	];
-	var var0002 = [0x0000, 0x021E, 0x0242, 0x0239, 0x023B, 0x023D, 0x0243];
+	var var0002 = [
+		NULL_OBJ, SHAPE_CRESTED_HELM, SHAPE_SPIKED_SHIELD, SHAPE_LEATHER_ARMOR,
+		SHAPE_CHAIN_ARMOR, SHAPE_PLATE_ARMOR, SHAPE_LEATHER_GLOVES
+	];
 	var var0003 = FRAME_ANY;
 	var var0004 = [0x0000, 0x004B, 0x003C, 0x0032, 150, 0x012C, 0x0014];
 	var var0005 = ["", "a ", "a ", "", "", "", ""];
@@ -71025,7 +71314,9 @@ void Func0898 0x898 () {
 		"2-handed axe", "2-handed sword"
 	];
 	var var0002 = [
-		0x0000, 0x01DA, 0x0252, 0x0250, 0x0293, 0x0257, 0x0251, 0x0259, 0x025A
+		NULL_OBJ, SHAPE_SLING, SHAPE_DAGGER, SHAPE_SPEAR, SHAPE_MACE,
+		SHAPE_SWORD, SHAPE_THROWING_AXE, SHAPE_TWO_HANDED_AXE,
+		SHAPE_TWO_HANDED_SWORD
 	];
 	var var0003 = FRAME_ANY;
 	var var0004 = [
@@ -71055,8 +71346,8 @@ void Func0898 0x898 () {
 			say("\"^", var000A, " A fair price, yes?\"");
 			var var000C = Func090A();
 			if (var000C) {
-				if ((var0002[var0009] == 0x02D2)
-					|| (var0002[var0009] == 0x02D3)) {
+				if ((var0002[var0009] == SHAPE_ARROW)
+					|| (var0002[var0009] == SHAPE_BOLT)) {
 					say("\"How many dozen wouldst thou like?\"");
 					var000B = Func08F8(
 							var0002[var0009], var0003, var0008[var0009],
@@ -71090,8 +71381,8 @@ void Func0899 0x899 () {
 		"powder keg", "lockpick", "hoe", "bucket"
 	];
 	var var0002 = [
-		0x0000, SHAPE_TORCH, 0x030E, 0x0321, 0x0322, 0x0271, SHAPE_POWDER_KEG, SHAPE_LOCKPICK, 0x0272,
-		SHAPE_BUCKET
+		NULL_OBJ, SHAPE_TORCH, SHAPE_FLAMING_OIL, SHAPE_BACKPACK, SHAPE_BAG,
+		SHAPE_SHOVEL, SHAPE_POWDER_KEG, SHAPE_LOCKPICK, SHAPE_HOE, SHAPE_BUCKET
 	];
 	var var0003 = FRAME_ANY;
 	var var0004 = [
@@ -71122,10 +71413,10 @@ void Func0899 0x899 () {
 			say("\"^", var000A, " That is a fair price, is it not?\"");
 			var var000C = Func090A();
 			if (var000C) {
-				if ((var0002[var0009] == 0x030E)
+				if ((var0002[var0009] == SHAPE_FLAMING_OIL)
 					|| ((var0002[var0009] == SHAPE_TORCH)
 						|| (var0002[var0009] == SHAPE_LOCKPICK))) {
-					if (var0002[var0009] == 0x030E) {
+					if (var0002[var0009] == SHAPE_FLAMING_OIL) {
 						say("\"How many sets of twelve wouldst thou like?\"");
 					} else {
 						say("\"How many wouldst thou like?\"");
@@ -71157,13 +71448,13 @@ void Func089A 0x89A (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
 	if (var0002 != 0x0000) {
-		var var0004 = 0x0003;
+		var var0004 = 3;
 		var var0005 = Func0922(var0000, var0001, var0002, var0004);
-		if (var0005 == 0x0000) {
+		if (var0005 == TRAIN_MISSING_SKILL) {
 			say("\"To see you need more experience to train at this time.\"");
 			return;
 		}
-		if (var0005 == 0x0001) {
+		if (var0005 == TRAIN_MISSING_GOLD) {
 			var var0006 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0006, " gold altogether.");
@@ -71172,7 +71463,7 @@ void Func089A 0x89A (var var0000, var var0001) {
 				return;
 			}
 		}
-		if (var0005 == 0x0002) {
+		if (var0005 == TRAIN_OVER_SKILLED) {
 			say("After asking a few questions, he exclaims, \"To be already as "
 				"well-educated as I. To apologize for my inability to increase "
 				"your knowledge, but there is nothing I can do.\"");
@@ -71214,14 +71505,14 @@ void Func089B 0x89B (var var0000, var var0001) {
 		var0004 = "their";
 	}
 	if (var0002 != 0x0000) {
-		var var0005 = 0x0003;
+		var var0005 = 3;
 		var var0006 = Func0922(var0000, var0001, var0002, var0005);
-		if (var0006 == 0x0000) {
+		if (var0006 == TRAIN_MISSING_SKILL) {
 			say("\"To be without the practical experience required to train at "
 				"this time.\"");
 			return;
 		}
-		if (var0006 == 0x0001) {
+		if (var0006 == TRAIN_MISSING_GOLD) {
 			var var0007 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0007, " gold altogether.");
@@ -71230,7 +71521,7 @@ void Func089B 0x89B (var var0000, var var0001) {
 				return;
 			}
 		}
-		if (var0006 == 0x0002) {
+		if (var0006 == TRAIN_OVER_SKILLED) {
 			say("After examining ", var0004,
 				" muscles, he says, \"To be stronger than I. To need no "
 				"further training in combat.\"");
@@ -71270,7 +71561,9 @@ void Func089C 0x89C () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "throwing axe", "two-handed axe", "boomerang"];
-	var var0002 = [0x0000, 0x0251, 0x0259, 0x025D];
+	var var0002 = [
+		NULL_OBJ, SHAPE_THROWING_AXE, SHAPE_TWO_HANDED_AXE, SHAPE_BOOMERANG
+	];
 	var var0003 = FRAME_ANY;
 	var var0004 = [0x0000, 0x0012, 0x0032, 0x000C];
 	var var0005 = "a ";
@@ -71341,9 +71634,9 @@ void Func089D 0x89D (var var0000, var var0001, var var0002) {
 			}
 			if (var0005 == "resurrect") {
 				var var0009 = UI_get_avatar_ref();
-				var000A = var0009->find_nearest(0x0190, 0x0019);
+				var000A = var0009->find_nearest(SHAPE_BODY1, 25);
 				if (var000A == NULL_OBJ) {
-					var000A = var0009->find_nearest(0x019E, 0x0019);
+					var000A = var0009->find_nearest(SHAPE_BODY2, 25);
 					if (var000A == NULL_OBJ) {
 						say("\"To not see anyone who is in need of "
 							"resurrection. To have to see the body to save the "
@@ -71468,10 +71761,10 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 			declare var var0016;
 			if (var0007 == "resurrect") {
 				var var0015 = UI_get_avatar_ref();
-				var0016 = var0015->find_nearest(0x0190, 0x0019);
-				if (var0016 == 0x0000) {
-					var0016 = var0015->find_nearest(0x019E, 0x0019);
-					if (var0016 == 0x0000) {
+				var0016 = var0015->find_nearest(SHAPE_BODY1, 25);
+				if (var0016 == NULL_OBJ) {
+					var0016 = var0015->find_nearest(SHAPE_BODY2, 25);
+					if (var0016 == NULL_OBJ) {
 						say("\"I do believe I am going blind. I do not see "
 							"anyone who is in need of resurrection. Art thou "
 							"fooling me again, or art thou hiding the injured "
@@ -71486,9 +71779,9 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 					"here, and I will heal them to the best of mine "
 					"abilities.\"");
 				if (var0003 in var0004) {
-					var0002 = 0x0000;
+					var0002 = 0;
 				} else {
-					var0002 = 0x0190;
+					var0002 = 400;
 				}
 				var0009 = var0002;
 			}
@@ -71548,16 +71841,16 @@ void Func089F 0x89F (var var0000, var var0001) {
 	}
 	breakable {
 		if (var0002 != 0x0000) {
-			var var0005 = 0x0002;
+			var var0005 = 2;
 			var var0006 = Func0922(var0000, var0001, var0002, var0005);
-			if (var0006 == 0x0000) {
+			if (var0006 == TRAIN_MISSING_SKILL) {
 				say("Jakher looks into your eyes, sizing you up "
 					"intellectually. \"Thou dost need to learn more on the "
 					"field of battle. If we spoke now I would be wasting my "
 					"breath. Thou wouldst not understand a word I said.\"");
 				break;
 			}
-			if (var0006 == 0x0001) {
+			if (var0006 == TRAIN_MISSING_GOLD) {
 				var var0007
 						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it, finding that you have ",
@@ -71569,7 +71862,7 @@ void Func089F 0x89F (var var0000, var var0001) {
 					break;
 				}
 			}
-			if (var0006 == 0x0002) {
+			if (var0006 == TRAIN_OVER_SKILLED) {
 				say("\"Thou art already well-versed in the tactics of the "
 					"battlefield. I am afraid that I am unable to train thee "
 					"further in this.\"");
@@ -71610,8 +71903,8 @@ void Func08A0 0x8A0 () {
 		"bread", "cake", "ale", "wine"
 	];
 	var var0003 = [
-		0x0000, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD,
-		SHAPE_BOTTLE, SHAPE_BOTTLE
+		NULL_OBJ, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD,
+		SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE
 	];
 	var var0004 = [
 		FRAME_ANY, FRAME_MUTTON, FRAME_BEEF, FRAME_BOTTLE_MEAD, FRAME_TROUT,
@@ -71689,16 +71982,17 @@ void Func08A1 0x8A1 () {
 		"nothing", "torch", "oil flasks", "backpack", "lockpick", "powder keg",
 		"jug", "cannon balls"
 	];
-	var var0003 =
-			[0x0000, SHAPE_TORCH, 0x030E, 0x0321, SHAPE_LOCKPICK, SHAPE_POWDER_KEG, 0x0006, 0x02BF];
-	var var0004 =
-			[0x0000, 0x0004, 0x003C, 0x000D, 0x000A, 0x001E, 0x0003, 0x000A];
+	// BUG: Should be 'SHAPE_PITCHER' instead of '6'.
+	var var0003 = [
+		NULL_OBJ, SHAPE_TORCH, SHAPE_FLAMING_OIL, SHAPE_BACKPACK,
+		SHAPE_LOCKPICK, SHAPE_POWDER_KEG, 6, SHAPE_CANNON_BALL
+	];
+	var var0004 = [0, 4, 60, 13, 10, 30, 3, 10];
 	var var0005 = ["", "a ", "", "a ", "a ", "a ", "a ", ""];
-	var var0006 =
-			[0x0000, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001];
+	var var0006 = [0, 0, 1, 0, 0, 0, 0, 1];
 	var var0007 = ["", "", " for a dozen", "", "", "", "", " each"];
 	var var0008 = FRAME_ANY;
-	var var0009 = 0x0001;
+	var var0009 = 1;
 	say("\"What dost thou want to buy?\"");
 	while (var0001) {
 		var var000A = Func090C(var0002);
@@ -71710,13 +72004,13 @@ void Func08A1 0x8A1 () {
 					var0005[var000A], var0002[var000A], var0006[var000A],
 					var0004[var000A], var0007[var000A]);
 			var var000C = 0x0000;
-			if ((var0003[var000A] == 0x030E)
+			if ((var0003[var000A] == SHAPE_FLAMING_OIL)
 				|| ((var0003[var000A] == SHAPE_TORCH)
 					|| (var0003[var000A] == SHAPE_LOCKPICK))) {
 				say("\"^", var000B, " Dost thou agree?\"");
 				var var000D = Func090A();
 				if (var000D) {
-					if (var0003[var000A] == 0x030E) {
+					if (var0003[var000A] == SHAPE_FLAMING_OIL) {
 						say("\"How many sets of twelve wouldst thou like?\"");
 					} else {
 						say("\"How many wouldst thou like?\"");
@@ -71753,16 +72047,16 @@ void Func08A2 0x8A2 (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
 	if (var0002 != 0x0000) {
-		var var0004 = 0x0002;
+		var var0004 = 2;
 		var var0005 = Func0922(var0000, var0001, var0002, var0004);
-		if (var0005 == 0x0000) {
+		if (var0005 == TRAIN_MISSING_SKILL) {
 			say("\"I am sorry, but it appears thou dost not have enough "
 				"knowledge of elementary studies to train at this time. If "
 				"thou couldst return at a future date, I could instruct thee "
 				"then.\"");
 			return;
 		}
-		if (var0005 == 0x0001) {
+		if (var0005 == TRAIN_MISSING_GOLD) {
 			var var0006 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0006, " gold altogether.");
@@ -71772,7 +72066,7 @@ void Func08A2 0x8A2 (var var0000, var var0001) {
 				return;
 			}
 		}
-		if (var0005 == 0x0002) {
+		if (var0005 == TRAIN_OVER_SKILLED) {
 			say("After giving a few test questions, she exclaims, \"Thou art "
 				"easily as well educated as I! There is nothing I have that "
 				"could help thee.\"");
@@ -71814,7 +72108,7 @@ void Func08A3 0x8A3 () {
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = ["nothing", "arrows", "bolts"];
-	var var0003 = [0x0000, 0x02D2, 0x02D3];
+	var var0003 = [NULL_OBJ, SHAPE_ARROW, SHAPE_BOLT];
 	var var0004 = FRAME_ANY;
 	var var0005 = 0x0014;
 	var var0006 = "";
@@ -71860,7 +72154,10 @@ void Func08A4 0x8A4 () {
 	var var0001 = true;
 	var var0002 =
 			["nothing", "bow", "crossbow", "triple crossbow", "magic bow"];
-	var var0003 = [0x0000, 0x0255, 0x0256, 0x0287, 0x025E];
+	var var0003 = [
+		NULL_OBJ, SHAPE_BOW, SHAPE_CROSSBOW, SHAPE_TRIPLE_CROSSBOW,
+		SHAPE_MAGIC_BOW
+	];
 	var var0004 = FRAME_ANY;
 	var var0005 = [0x0000, 0x0023, 0x006E, 0x015E, 0x0190];
 	var var0006 = "a ";
@@ -71946,16 +72243,17 @@ void Func08A6 0x8A6 (var var0000, var var0001) {
 				var0006 = "his";
 			}
 		}
-		var var0008 = 0x0003;
+		var var0008 = 3;
 		var var0009 = Func0922(var0000, var0001, var0002, var0008);
-		if (var0009 == 0x0000) {
+		if (var0009 == TRAIN_MISSING_SKILL) {
 			say("Karenna looks at ", var0004,
 				" and gives a small laugh. \"Thou art not without skill, but "
 				"thou art not ready yet.\"");
 			return;
 		}
-		if (var0009 == 0x0001) {
-			var var000A = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+		if (var0009 == TRAIN_MISSING_GOLD) {
+			var var000A = PARTY->count_objects(
+					SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var000A, " gold altogether.");
 			if (var000A < var0001) {
@@ -71964,7 +72262,7 @@ void Func08A6 0x8A6 (var var0000, var var0001) {
 				return;
 			}
 		}
-		if (var0009 == 0x0002) {
+		if (var0009 == TRAIN_OVER_SKILLED) {
 			say("Karenna glares at ", var0004,
 				". \"Thou dost but waste my time. Thou art as swift and "
 				"cunning as I, and I would wager that thou didst know it. I "
@@ -71999,8 +72297,14 @@ void Func08A7 0x8A7 () {
 	var var0001 = [
 		"nothing", "eggs", "apple", "banana", "carrot", "pumpkin", "grapes"
 	];
-	var var0002 = [0x0000, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD];
-	var var0003 = [FRAME_ANY, FRAME_EGG, FRAME_APPLE, FRAME_BANANA, FRAME_CARROT, FRAME_PUMPKIN_SMALL, FRAME_GRAPES];
+	var var0002 = [
+		NULL_OBJ, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD,
+		SHAPE_FOOD
+	];
+	var var0003 = [
+		FRAME_ANY, FRAME_EGG, FRAME_APPLE, FRAME_BANANA, FRAME_CARROT,
+		FRAME_PUMPKIN_SMALL, FRAME_GRAPES
+	];
 	var var0004 = [0x0000, 0x000C, 0x0003, 0x0003, 0x0003, 0x0004, 0x0003];
 	var var0005 = ["", "", "an ", "a ", "a ", "a ", ""];
 	var var0006 = [0x0000, 0x000C, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001];
@@ -72105,8 +72409,10 @@ void Func08A9 0x8A9 () {
 		"nothing", "club", "main gauche", "dagger", "mace", "morning star",
 		"sword", "halberd"
 	];
-	var var0002 =
-			[0x0000, 0x024E, 0x024F, 0x0252, 0x0293, 0x0254, 0x0257, 0x025B];
+	var var0002 = [
+		NULL_OBJ, SHAPE_CLUB, SHAPE_MAIN_GAUCHE, SHAPE_DAGGER, SHAPE_MACE,
+		SHAPE_MORNING_STAR, SHAPE_SWORD, SHAPE_HALBERD
+	];
 	var var0003 =
 			[0x0000, 0x0005, 0x0014, 0x000A, 0x000F, 0x000F, 0x003C, 150];
 	var var0004 = ["", "a ", "a ", "a ", "a ", "a ", "a ", "a "];
@@ -72130,7 +72436,7 @@ void Func08A9 0x8A9 () {
 			say("\"^", var000A, " Is that acceptable?\"");
 			var var000C = Func090A();
 			if (var000C) {
-				if (var0002[var0009] == 0x02D3) {
+				if (var0002[var0009] == SHAPE_BOLT) {
 					say("\"How many dozen dost thou want?\"");
 					var000B = Func08F8(
 							var0002[var0009], var0008, var0007[var0009],
@@ -72160,7 +72466,9 @@ void Func08AA 0x8AA () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "crested helm", "scale armour", "gorget"];
-	var var0002 = [0x0000, 0x021E, 0x023A, 0x024A];
+	var var0002 = [
+		NULL_OBJ, SHAPE_CRESTED_HELM, SHAPE_SCALE_ARMOR, SHAPE_GORGET
+	];
 	var var0003 = [0x0000, 150, 0x0078, 0x001E];
 	var var0004 = ["", "a ", "", "a "];
 	var var0005 = 0x0000;
@@ -72310,10 +72618,10 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002) {
 			declare var var000A;
 			if (var0005 == "resurrect") {
 				var0009 = UI_get_avatar_ref();
-				var000A = var0009->find_nearest(0x0190, 0x0019);
-				if (var000A == 0x0000) {
-					var000A = var0009->find_nearest(0x019E, 0x0019);
-					if (var000A == 0x0000) {
+				var000A = var0009->find_nearest(SHAPE_BODY1, 25);
+				if (var000A == NULL_OBJ) {
+					var000A = var0009->find_nearest(SHAPE_BODY2, 25);
+					if (var000A == NULL_OBJ) {
 						say("\"There seems to be no one who needs such "
 							"assistance. Perhaps, if I have overlooked anyone, "
 							"thou couldst set him or her before me.\"*");
@@ -72326,8 +72634,8 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002) {
 			say("\"My price is ", var0007, " gold. Art thou interested?\"");
 			var var000B = Func090A();
 			if (var000B) {
-				var var000C
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var000C = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var000C >= var0007) {
 					if (var0005 == "heal") {
 						Func091D(var0008, var0007);
@@ -72507,9 +72815,9 @@ void Func08B1 0x8B1 () {
 		"defender of Britannia and the innocent. I cannot adequately express "
 		"my gratitude; however, please take this small token of my thanks. I "
 		"hope it will help thee in thy quest.\"");
-	var var0001 = UI_create_new_object(0x0229);
+	var var0001 = UI_create_new_object(SHAPE_FIREDOOM_STAFF);
 	if (var0001) {
-		var var0002 = var0001->set_item_quality(0x0064);
+		var var0002 = var0001->set_item_quality(100);
 		if (Func0907(AVATAR->get_npc_object())) {
 			say("He hands you his personal staff. It appears to be magical.");
 		} else {
@@ -72585,7 +72893,7 @@ var Func08B3 0x8B3 (var var0000) {
 	declare var var000B;
 	for (var000B in var0006) {
 		if (var000B->get_barge() == var0005) {
-			if ((!var0003) && (var000B->get_item_quality() == 0x00FF)) {
+			if (!var0003 && var000B->get_item_quality() == 255) {
 				AVATAR->sit_down(var000B);
 				var0004 = Func093C(AVATAR->get_npc_object(), var0004);
 				var0003 = true;
@@ -72600,7 +72908,7 @@ var Func08B3 0x8B3 (var var0000) {
 	for (var000B in var0007) {
 		if (var000C >= var0001) {
 			var0004[var0001]->sit_down(var000B);
-			var0001 += 0x0001;
+			var0001 += 1;
 		} else {
 			return true;
 		}
@@ -72644,11 +72952,11 @@ void Func08B4 0x8B4 (var var0000, var var0001, var var0002) {
 			if (var0005 == "resurrect") {
 				var var0009 = Func0908();
 				var var000A = UI_get_avatar_ref();
-				var000B = var000A->find_nearest(0x0190, 0x0019);
-				if (var000B == 0x0000) {
-					var000B = var000A->find_nearest(0x019E, 0x0019);
+				var000B = var000A->find_nearest(SHAPE_BODY1, 25);
+				if (var000B == NULL_OBJ) {
+					var000B = var000A->find_nearest(SHAPE_BODY2, 25);
 				}
-				if (var000B == 0x0000) {
+				if (var000B == NULL_OBJ) {
 					say("\"I do apologize, ", var0009,
 						", but I do not see anyone who must be resurrected. I "
 						"must be able to see the body. If thou art carrying "
@@ -72686,7 +72994,7 @@ void Func08B5 0x8B5 () {
 		"Ankh. Please, feel free to use it for as long as thou hast need of "
 		"it.\"");
 	var var0000 = UI_create_new_object(SHAPE_SCROLL);
-	var0000->set_item_frame(1);
+	var0000->set_item_frame(FRAME_SCROLL_OPENED);
 	var var0001 = var0000->set_item_quality(QUALITY_SCROLL_SHIP_DEED_GOLDEN_ANKH);
 	var var0002 = AVATAR->get_npc_object()->give_last_created();
 	var var0003 = false;
@@ -72725,16 +73033,17 @@ void Func08B5 0x8B5 () {
 void Func08B6 0x8B6 (var var0000, var var0001) {
 	var var0002 = Func0920();
 	if (var0002 != 0x0000) {
-		var var0003 = 0x0001;
+		var var0003 = 1;
 		var var0004 = Func0922(var0000, var0001, var0002, var0003);
-		if (var0004 == 0x0000) {
+		if (var0004 == TRAIN_MISSING_SKILL) {
 			say("\"Ah! But thou hast not the practical experience to train "
 				"with me at this time! Go and experience life and return "
 				"later.\"");
 			return;
 		}
-		if (var0004 == 0x0001) {
-			var var0005 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+		if (var0004 == TRAIN_MISSING_GOLD) {
+			var var0005 = PARTY->count_objects(
+					SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0005, " gold altogether.");
 			if (var0005 < var0001) {
@@ -72744,7 +73053,7 @@ void Func08B6 0x8B6 (var var0000, var var0001) {
 				return;
 			}
 		}
-		if (var0004 == 0x0002) {
+		if (var0004 == TRAIN_OVER_SKILLED) {
 			say("\"Thou art already as talented as I! Thou hast no need of my "
 				"services!\"");
 			return;
@@ -72761,7 +73070,8 @@ void Func08B6 0x8B6 (var var0000, var var0001) {
 			"possibly be under. Finally, he shows how to use saliva to weight "
 			"the dice so that they always turn up lucky.");
 		if (var0002 == AVATAR) {
-			var var0007 = Func0931(PARTY, 0x0001, 0x03BB, QUALITY_ANY, 0x0000);
+			var var0007 = Func0931(
+				PARTY, 1, SHAPE_AMULET, QUALITY_ANY, FRAME_AMULET_ANKH);
 			declare var var0008;
 			declare var var0009;
 			declare var var000A;
@@ -72793,8 +73103,8 @@ void Func08B7 0x8B7 () {
 		"bread", "cake", "ale", "wine"
 	];
 	var var0003 = [
-		0x0000, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD,
-		SHAPE_BOTTLE, SHAPE_BOTTLE
+		NULL_OBJ, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD,
+		SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE
 	];
 	var var0004 = [
 		FRAME_ANY, FRAME_MUTTON, FRAME_BEEF, FRAME_BOTTLE_MEAD, FRAME_TROUT,
@@ -72866,14 +73176,14 @@ void Func08B7 0x8B7 () {
 
 void Func08B8 0x8B8 () {
 	UI_push_answers();
-	var var0000 = 0x0001;
-	var var0001 = 0x0001;
+	var var0000 = 1;
+	var var0001 = 1;
 	say("\"Excellent! Dost thou have some eggs for me?\"");
 	var var0002 = Func090A();
 	if (var0002) {
 		say("\"Very good! Let me see how many thou dost have...\"");
 		var var0003 = PARTY->count_objects(SHAPE_FOOD, QUALITY_ANY, FRAME_EGG);
-		if (var0003 == 0x0000) {
+		if (var0003 == NULL_OBJ) {
 			say("\"But thou dost not have a single one in thy possession! Thou "
 				"dost waste my time!\"*");
 			abort;
@@ -72905,7 +73215,10 @@ void Func08B9 0x8B9 () {
 	var var0002 = [
 		"nothing", "mutton", "bread", "flounder", "Silverleaf", "wine", "ale"
 	];
-	var var0003 = [0x0000, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE];
+	var var0003 = [
+		NULL_OBJ, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE,
+		SHAPE_BOTTLE
+	];
 	var var0004 = [
 		FRAME_ANY, FRAME_MUTTON, FRAME_ROLLS, FRAME_FLOUNDER, FRAME_SILVERLEAF,
 		FRAME_BOTTLE_WINE, FRAME_BOTTLE_ALE
@@ -73157,8 +73470,15 @@ void Func08BC 0x8BC (var var0000) {
 			"Nothing", "Garlic", "Ginseng", "Mandrake Root", "Nightshade",
 			"Black Pearl"
 		];
-		var0003 = [0x0000, 0x034A, 0x034A, 0x034A, 0x034A, 0x034A];
-		var0004 = [FRAME_ANY, 0x0004, 0x0005, 0x0003, 0x0002, 0x0000];
+		var0003 = [
+			NULL_OBJ, SHAPE_REAGENT, SHAPE_REAGENT, SHAPE_REAGENT,
+			SHAPE_REAGENT, SHAPE_REAGENT
+		];
+		var0004 = [
+			FRAME_ANY, FRAME_REAGENT_GARLIC, FRAME_REAGENT_GINSENG,
+			FRAME_REAGENT_MANDRAKE_ROOT, FRAME_REAGENT_NIGHTSHADE,
+			FRAME_REAGENT_BLACK_PEARL
+		];
 		var0005 = [0x0000, 0x0001, 0x0002, 0x0007, 0x0006, 0x0008];
 		var0006 = "";
 		var0007 = [
@@ -73167,7 +73487,7 @@ void Func08BC 0x8BC (var var0000) {
 		];
 	} else {
 		var0002 = ["nothing", "orange potion", "black potion"];
-		var0003 = [0x0000, SHAPE_POTION, SHAPE_POTION];
+		var0003 = [NULL_OBJ, SHAPE_POTION, SHAPE_POTION];
 		var0004 = [FRAME_ANY, FRAME_POTION_AWAKEN, FRAME_POTION_INVISIBILITY];
 		var0005 = [0, 15, 90];
 		// BUG: This likely should have been var0006 instead.
@@ -73228,18 +73548,18 @@ void Func08BD 0x8BD (var var0000, var var0001) {
 			} else {
 				var0004 = var0003;
 			}
-			var var0005 = 0x0001;
+			var var0005 = 1;
 			var var0006 = Func0922(var0000, var0001, var0002, var0005);
-			if (var0006 == 0x0000) {
+			if (var0006 == TRAIN_MISSING_SKILL) {
 				say("\"I am afraid thou dost not have enough practical "
 					"experience to train at this time. If thou couldst return "
 					"at a later date, I would be most happy to provide thee "
 					"with my services.\"");
 				break;
 			}
-			if (var0006 == 0x0001) {
-				var var0007
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+			if (var0006 == TRAIN_MISSING_GOLD) {
+				var var0007 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it. You have ", var0007,
 					" altogether.");
 				if (var0007 < var0001) {
@@ -73251,7 +73571,7 @@ void Func08BD 0x8BD (var var0000, var var0001) {
 				}
 			}
 			say("You pay ", var0001, " gold, and the training session begins.");
-			if (var0006 == 0x0002) {
+			if (var0006 == TRAIN_OVER_SKILLED) {
 				say("Markus blinks and seems to come out of his boredom. "
 					"\"Thou art already as proficient as I! Thou cannot be "
 					"trained further here.\"~~Markus returns the gold.");
@@ -73283,17 +73603,17 @@ void Func08BE 0x8BE (var var0000, var var0001) {
 	var var0002 = Func0920();
 	breakable {
 		if (var0002 != 0x0000) {
-			var var0003 = 0x0003;
+			var var0003 = 3;
 			var var0004 = Func0922(var0000, var0001, var0002, var0003);
-			if (var0004 == 0x0000) {
+			if (var0004 == TRAIN_MISSING_SKILL) {
 				say("\"I am sorry, but thou dost not have enough practical "
 					"experience with weights to train at this time. Perhaps in "
 					"the future, when thou art ready, I could train thee.\"");
 				break;
 			}
-			if (var0004 == 0x0001) {
-				var var0005
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+			if (var0004 == TRAIN_MISSING_GOLD) {
+				var var0005 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it, finding that you have ",
 					var0005, " gold altogether.");
 				if (var0005 < var0001) {
@@ -73311,7 +73631,7 @@ void Func08BE 0x8BE (var var0000, var var0001) {
 				var0007 = var0006 + " begins";
 				var0008 = var0006 + "'s";
 			}
-			if (var0004 == 0x0002) {
+			if (var0004 == TRAIN_OVER_SKILLED) {
 				say("\"Thou art already as strong as I!\" he exclaims, "
 					"noticing ",
 					var0008,
@@ -73816,8 +74136,15 @@ void Func08C4 0x8C4 () {
 		"nothing", "Garlic", "Blood Moss", "Spider Silk", "Mandrake Root",
 		"Nightshade"
 	];
-	var var0002 = [0x0000, 0x034A, 0x034A, 0x034A, 0x034A, 0x034A];
-	var var0003 = [FRAME_ANY, 0x0004, 0x0001, 0x0006, 0x0003, 0x0002];
+	var var0002 = [
+		NULL_OBJ, SHAPE_REAGENT, SHAPE_REAGENT, SHAPE_REAGENT, SHAPE_REAGENT,
+		SHAPE_REAGENT
+	];
+	var var0003 = [
+		FRAME_ANY, FRAME_REAGENT_GARLIC, FRAME_REAGENT_BLOOD_MOSS,
+		FRAME_REAGENT_SPIDER_SILK, FRAME_REAGENT_MANDRAKE_ROOT,
+		FRAME_REAGENT_NIGHTSHADE
+	];
 	var var0004 = [0x0000, 0x0002, 0x0003, 0x0003, 0x0005, 0x0005];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
@@ -73976,8 +74303,15 @@ void Func08C6 0x8C6 () {
 		"nothing", "Ginseng", "Blood Moss", "Sulfurous Ash", "Mandrake Root",
 		"Black Pearl"
 	];
-	var var0002 = [0x0000, 0x034A, 0x034A, 0x034A, 0x034A, 0x034A];
-	var var0003 = [FRAME_ANY, 0x0005, 0x0001, 0x0007, 0x0003, 0x0000];
+	var var0002 = [
+		NULL_OBJ, SHAPE_REAGENT, SHAPE_REAGENT, SHAPE_REAGENT, SHAPE_REAGENT,
+		SHAPE_REAGENT
+	];
+	var var0003 = [
+		FRAME_ANY, FRAME_REAGENT_GINSENG, FRAME_REAGENT_BLOOD_MOSS,
+		FRAME_REAGENT_SULFUROUS_ASH, FRAME_REAGENT_MANDRAKE_ROOT,
+		FRAME_REAGENT_BLACK_PEARL
+	];
 	var var0004 = [0x0000, 0x0004, 0x0006, 0x0008, 0x000A, 0x000A];
 	var var0005 = "";
 	var var0006 = 0x0000;
@@ -74121,17 +74455,17 @@ void Func08C8 0x8C8 (var var0000, var var0001) {
 	var var0003 = var0002->get_npc_name();
 	breakable {
 		if (var0002 != 0x0000) {
-			var var0004 = 0x0002;
+			var var0004 = 2;
 			var var0005 = Func0922(var0000, var0001, var0002, var0004);
-			if (var0005 == 0x0000) {
+			if (var0005 == TRAIN_MISSING_SKILL) {
 				say("\"I am sorry, but thou hast overextended thy muscles. If "
 					"thou couldst return at a later date, I would be quite "
 					"willing to train thee.\"");
 				return;
 			}
-			if (var0005 == 0x0001) {
-				var var0006
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+			if (var0005 == TRAIN_MISSING_GOLD) {
+				var var0006 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it, finding that you have ",
 					var0006, " gold altogether.");
 				if (var0006 < var0001) {
@@ -74141,7 +74475,7 @@ void Func08C8 0x8C8 (var var0000, var var0001) {
 					return;
 				}
 			}
-			if (var0005 == 0x0002) {
+			if (var0005 == TRAIN_OVER_SKILLED) {
 				say("She seems amazed.~~\"Thou art already stronger than I! I "
 					"am sorry, but I cannot help thee grow any further.\"");
 				return;
@@ -74185,9 +74519,9 @@ void Func08C8 0x8C8 (var var0000, var var0001) {
 }
 
 var Func08C9 0x8C9 () {
-	var var0000 = find_nearby(0x02CE, 40, MASK_NONE);
+	var var0000 = find_nearby(SHAPE_PEDESTAL2, 40, MASK_NONE);
 	var var0001 = find_nearby(SHAPE_BLACKROCK, 40, MASK_NONE);
-	var var0002 = 0x0000;
+	var var0002 = 0;
 	for (var0005 in var0000) {
 		struct<Position> var0006 = var0005->get_object_position();
 		var var0007 = var0006.x;
@@ -74198,15 +74532,15 @@ var Func08C9 0x8C9 () {
 			var var000E = var000D.x;
 			var var000F = var000D.y;
 			if ((!var0009)
-				&& ((Func0932(var000E - var0007) <= 0x0001)
-					&& (Func0932(var000F - var0008) <= 0x0001))) {
-				var0002 += 0x0001;
+				&& ((Func0932(var000E - var0007) <= 1)
+					&& (Func0932(var000F - var0008) <= 1))) {
+				var0002 += 1;
 				var000C->clear_item_flag(TEMPORARY);
 				var0009 = true;
 			}
 		}
 	}
-	if (var0002 == 0x0004) {
+	if (var0002 == 4) {
 		return true;
 	}
 	return false;
@@ -74216,18 +74550,18 @@ void Func08CA 0x8CA (var var0000, var var0001) {
 	var var0002 = Func0920();
 	breakable {
 		if (var0002 != 0x0000) {
-			var var0003 = 0x0003;
+			var var0003 = 3;
 			var var0004 = Func0922(var0000, var0001, var0002, var0003);
-			if (var0004 == 0x0000) {
+			if (var0004 == TRAIN_MISSING_SKILL) {
 				say("After a few moments of questioning, he says, \"I am "
 					"sorry, but thou dost not have a strong enough grasp of my "
 					"theories for me to be able to instruct thee. Perhaps when "
 					"thou hast had more time to study...\"");
 				return;
 			}
-			if (var0004 == 0x0001) {
-				var var0005
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+			if (var0004 == TRAIN_MISSING_GOLD) {
+				var var0005 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it, finding that you have ",
 					var0005, " gold altogether.");
 				if (var0005 < var0001) {
@@ -74237,7 +74571,7 @@ void Func08CA 0x8CA (var var0000, var var0001) {
 					return;
 				}
 			}
-			if (var0004 == 0x0002) {
+			if (var0004 == TRAIN_OVER_SKILLED) {
 				say("After a few moments of questioning, he says, \"Thou art "
 					"already past my tutelage. I must humbly apologize, for "
 					"there is nothing new I can teach thee.\"");
@@ -74288,7 +74622,9 @@ void Func08CB 0x8CB () {
 	var var0001 = true;
 	var var0002 =
 			["nothing", "mutton rations", "trout", "Silverleaf", "cake", "ham"];
-	var var0003 = [0x0000, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD];
+	var var0003 = [
+		NULL_OBJ, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD
+	];
 	var var0004 = [FRAME_ANY, FRAME_JERKY, FRAME_TROUT, FRAME_SILVERLEAF, FRAME_PIE, FRAME_HAM];
 	var var0005 = [0x0000, 0x000C, 0x0002, 0x0019, 0x0002, 0x000A];
 	var var0006 = ["", "", "", "", "", ""];
@@ -74348,7 +74684,7 @@ void Func08CC 0x8CC () {
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = ["nothing", "wine", "ale"];
-	var var0003 = [0x0000, SHAPE_BOTTLE, SHAPE_BOTTLE];
+	var var0003 = [NULL_OBJ, SHAPE_BOTTLE, SHAPE_BOTTLE];
 	var var0004 = [FRAME_ANY, FRAME_BOTTLE_WINE, FRAME_BOTTLE_ALE];
 	var var0005 = [0x0000, 0x0004, 0x0003];
 	var var0006 = ["", "", ""];
@@ -74393,8 +74729,10 @@ void Func08CD 0x8CD () {
 	var var0001 = [
 		"nothing", "jerky", "mead", "grapes", "cheese", "bread", "ale", "wine"
 	];
-	var var0002 =
-			[0x0000, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE];
+	var var0002 = [
+		NULL_OBJ, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD,
+		SHAPE_BOTTLE, SHAPE_BOTTLE
+	];
 	var var0003 = [
 		FRAME_ANY, FRAME_JERKY, FRAME_BOTTLE_MEAD, FRAME_GRAPES,
 		FRAME_CHEESE_WEDGE, FRAME_BREAD, FRAME_BOTTLE_ALE, FRAME_BOTTLE_WINE
@@ -74574,24 +74912,24 @@ void Func08D0 0x8D0 (var var0000, var var0001) {
 	}
 	breakable {
 		if (var0002 != 0x0000) {
-			var var0007 = 0x0003;
+			var var0007 = 3;
 			var var0008 = Func0922(var0000, var0001, var0002, var0007);
-			if (var0008 == 0x0000) {
+			if (var0008 == TRAIN_MISSING_SKILL) {
 				say("\"I am sorry, but thou dost not have enough experience to "
 					"train at this time. Return at a later date and I would be "
 					"most happy to lead a session.\"");
 				return;
 			}
-			if (var0008 == 0x0001) {
-				var var0009
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+			if (var0008 == TRAIN_MISSING_GOLD) {
+				var var0009 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var0009 < var0001) {
 					say("\"It seems that thou hast not enough gold. Do return "
 						"when thou art a bit wealthier.\"");
 					return;
 				}
 			}
-			if (var0008 == 0x0002) {
+			if (var0008 == TRAIN_OVER_SKILLED) {
 				say("\"I am amazed! Thou art already as experienced as I! Thou "
 					"cannot be trained further by me.\"");
 				return;
@@ -74718,11 +75056,11 @@ void Func08D2 0x8D2 (var var0000, var var0001, var var0002) {
 			declare var var000B;
 			if (var0006 == "resurrection") {
 				var var000A = UI_get_avatar_ref();
-				var000B = var000A->find_nearest(0x0190, 0x0019);
+				var000B = var000A->find_nearest(SHAPE_BODY1, 25);
 				var0008 = var0002;
-				if (var000B == 0x0000) {
-					var000B = var000A->find_nearest(0x019E, 0x0019);
-					if (var000B == 0x0000) {
+				if (var000B == NULL_OBJ) {
+					var000B = var000A->find_nearest(SHAPE_BODY2, 25);
+					if (var000B == NULL_OBJ) {
 						say("\"I am sorry, but thou hast not presented anyone "
 							"to me who requires mine assistance. If there is "
 							"someone who truly needs my skills, I must have a "
@@ -74735,8 +75073,8 @@ void Func08D2 0x8D2 (var var0000, var var0001, var var0002) {
 				" gold. Is this price agreeable?\"");
 			var var000C = Func090A();
 			if (var000C) {
-				var var000D
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+				var var000D = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var000D >= var0008) {
 					if (var0006 == "healing") {
 						Func091D(var0009, var0008);
@@ -74771,8 +75109,10 @@ void Func08D3 0x8D3 () {
 		"nothing", "dagger", "spear", "morning star", "mace", "sword",
 		"two-handed sword", "halberd"
 	];
-	var var0003 =
-			[0x0000, 0x0252, 0x0250, 0x0254, 0x0293, 0x0257, 0x025A, 0x025B];
+	var var0003 = [
+		NULL_OBJ, SHAPE_DAGGER, SHAPE_SPEAR, SHAPE_MORNING_STAR, SHAPE_MACE,
+		SHAPE_SWORD, SHAPE_TWO_HANDED_SWORD, SHAPE_HALBERD
+	];
 	var var0004 =
 			[0x0000, 0x000C, 0x0019, 0x0019, 0x0014, 0x0041, 0x00AF, 0x00C8];
 	var var0005 = "a ";
@@ -74824,7 +75164,9 @@ void Func08D4 0x8D4 () {
 		"spiked shield", "great helm", "plate leggings", "gorget"
 	];
 	var var0003 = [
-		0x0000, 0x0161, 0x0244, 0x021F, 0x0221, 0x0242, 0x021D, 0x0240, 0x024A
+		NULL_OBJ, SHAPE_GREAVES, SHAPE_GAUNTLETS, SHAPE_BUCKLER,
+		SHAPE_CURVED_HEATER, SHAPE_SPIKED_SHIELD, SHAPE_GREAT_HELM,
+		SHAPE_PLATE_LEGGINGS, SHAPE_GORGET
 	];
 	var var0004 = [
 		0x0000, 0x0028, 0x0012, 0x0012, 0x0023, 0x0016, 150, 0x00A0, 0x00AF,
@@ -75072,7 +75414,7 @@ void Func08D8 0x8D8 () {
 			", wouldst thou take this ring to him and tell him that I still "
 			"love him. Mayhaps it will restore him to the beloved Trent I "
 			"knew.\"");
-		var var0003 = UI_create_new_object(0x0127);
+		var var0003 = UI_create_new_object(SHAPE_WEDDING_RING);
 		if (Func0907(AVATAR->get_npc_object())) {
 			say("She takes a ring from her slender finger and places it in "
 				"your hand. You expect it to pass right through, but it rests "
@@ -75229,8 +75571,15 @@ void Func08DC 0x8DC () {
 		"nothing", "Ginseng", "Blood Moss", "Sulfurous Ash", "Mandrake Root",
 		"Black Pearl"
 	];
-	var var0002 = [0x0000, 0x034A, 0x034A, 0x034A, 0x034A, 0x034A];
-	var var0003 = [FRAME_ANY, 0x0005, 0x0001, 0x0007, 0x0003, 0x0000];
+	var var0002 = [
+		NULL_OBJ, SHAPE_REAGENT, SHAPE_REAGENT, SHAPE_REAGENT, SHAPE_REAGENT,
+		SHAPE_REAGENT
+	];
+	var var0003 = [
+		FRAME_ANY, FRAME_REAGENT_GINSENG, FRAME_REAGENT_BLOOD_MOSS,
+		FRAME_REAGENT_SULFUROUS_ASH, FRAME_REAGENT_MANDRAKE_ROOT,
+		FRAME_REAGENT_BLACK_PEARL
+	];
 	var var0004 = [0x0000, 0x0002, 0x0003, 0x0004, 0x0005, 0x0005];
 	var var0005 = "";
 	var var0006 = 0x0000;
@@ -75271,16 +75620,16 @@ void Func08DC 0x8DC () {
 
 void Func08DD 0x8DD () {
 	halt_scheduled();
-	var var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
-	var var0001 = 0x0006;
+	var var0000 = find_nearby(SHAPE_ANY, 40, MASK_NPC2);
+	var var0001 = 6;
 	if (!AVATAR->get_item_flag(ON_MOVING_BARGE)) {
 		for (var0004 in var0000) {
-			var var0005 = 0x0000;
+			var var0005 = 0;
 			var var0006 = "";
 			while (var0005 < var0001) {
-				var var0007 = UI_die_roll(0x0000, 0x0008);
+				var var0007 = UI_die_roll(0, 8);
 				declare var var0008;
-				if (var0007 == 0x0000) {
+				if (var0007 == 0) {
 					var0008 = new script {
 						actor frame kneeling;
 						actor frame bowing;
@@ -75288,7 +75637,7 @@ void Func08DD 0x8DD () {
 					};
 					var0006 = [var0006, var0008];
 				}
-				if (var0007 == 0x0001) {
+				if (var0007 == 1) {
 					var0008 = new script {
 						actor frame kneeling;
 						actor frame standing;
@@ -75296,7 +75645,7 @@ void Func08DD 0x8DD () {
 					};
 					var0006 = [var0006, var0008];
 				}
-				if (var0007 == 0x0002) {
+				if (var0007 == 2) {
 					var0008 = new script {
 						actor frame bowing;
 						actor frame sleeping;
@@ -75304,7 +75653,7 @@ void Func08DD 0x8DD () {
 					};
 					var0006 = [var0006, var0008];
 				}
-				if (var0007 == 0x0003) {
+				if (var0007 == 3) {
 					var0008 = new script {
 						actor frame standing;
 						actor frame standing;
@@ -75312,7 +75661,7 @@ void Func08DD 0x8DD () {
 					};
 					var0006 = [var0006, var0008];
 				}
-				if (var0007 == 0x0004) {
+				if (var0007 == 4) {
 					var0008 = new script {
 						actor frame kneeling;
 						actor frame ready;
@@ -75320,7 +75669,7 @@ void Func08DD 0x8DD () {
 					};
 					var0006 = [var0006, var0008];
 				}
-				if (var0007 == 0x0005) {
+				if (var0007 == 5) {
 					var0008 = new script {
 						actor frame ready;
 						actor frame kneeling;
@@ -75329,9 +75678,8 @@ void Func08DD 0x8DD () {
 					var0006 = [var0006, var0008];
 				}
 				declare var var0009;
-				if (var0007 == 0x0006) {
-					var0009 = FACE_NORTH
-							  + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+				if (var0007 == 6) {
+					var0009 = FACE_NORTH + (UI_die_roll(0, 3) * 2);
 					var0008 = new script {
 						face var0009;
 						actor frame bowing;
@@ -75339,9 +75687,8 @@ void Func08DD 0x8DD () {
 					};
 					var0006 = [var0006, var0008];
 				}
-				if (var0007 == 0x0007) {
-					var0009 = FACE_NORTH
-							  + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+				if (var0007 == 7) {
+					var0009 = FACE_NORTH + (UI_die_roll(0, 3) * 2);
 					var0008 = new script {
 						face var0009;
 						actor frame kneeling;
@@ -75349,9 +75696,8 @@ void Func08DD 0x8DD () {
 					};
 					var0006 = [var0006, var0008];
 				}
-				if (var0007 == 0x0008) {
-					var0009 = FACE_NORTH
-							  + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+				if (var0007 == 8) {
+					var0009 = FACE_NORTH + (UI_die_roll(0, 3) * 2);
 					var0008 = new script {
 						face var0009;
 						actor frame ready;
@@ -75359,13 +75705,13 @@ void Func08DD 0x8DD () {
 					};
 					var0006 = [var0006, var0008];
 				}
-				var0005 += 0x0001;
+				var0005 += 1;
 			}
 			var0004->halt_scheduled();
 			var var000A = var0004->run_script(var0006);
 		}
 	}
-	UI_earthquake(var0001 * 0x0003);
+	UI_earthquake(var0001 * (3 * TICK));
 }
 
 void Func08DE 0x8DE () {
@@ -75376,8 +75722,10 @@ void Func08DE 0x8DE () {
 		"nothing", "cheese", "mead", "grapes", "silverleaf", "bread", "ale",
 		"wine"
 	];
-	var var0003 =
-			[0x0000, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE];
+	var var0003 = [
+		NULL_OBJ, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD,
+		SHAPE_BOTTLE, SHAPE_BOTTLE
+	];
 	var var0004 = [
 		FRAME_ANY, FRAME_CHEESE_WHEEL, FRAME_BOTTLE_MEAD, FRAME_GRAPES,
 		FRAME_SILVERLEAF, FRAME_ROLLS, FRAME_BOTTLE_ALE, FRAME_BOTTLE_WINE
@@ -75500,8 +75848,17 @@ void Func08E1 0x8E1 () {
 		"nothing", "gold horncaps", "gold chain", "gold earring",
 		"gold clawring", "black potion", "white potion"
 	];
-	var var0002 = [0x0000, 0x03A9, 0x03A9, 0x03A9, 0x03A9, SHAPE_POTION, SHAPE_POTION];
-	var var0003 = [FRAME_ANY, 0x0002, 0x0004, 0x0005, 0x0006, FRAME_POTION_INVISIBILITY, FRAME_POTION_LIGHT];
+	var var0002 = [
+		NULL_OBJ, SHAPE_GARGOYLE_JEWELRY, SHAPE_GARGOYLE_JEWELRY,
+		SHAPE_GARGOYLE_JEWELRY, SHAPE_GARGOYLE_JEWELRY, SHAPE_POTION,
+		SHAPE_POTION
+	];
+	var var0003 = [
+		FRAME_ANY, FRAME_GARGOYLE_JEWELRY_GOLD_HORNCAPS,
+		FRAME_GARGOYLE_JEWELRY_GOLD_CHAIN, FRAME_GARGOYLE_JEWELRY_GOLD_EARRING,
+		FRAME_GARGOYLE_JEWELRY_GOLD_CLAWRING, FRAME_POTION_INVISIBILITY,
+		FRAME_POTION_LIGHT
+	];
 	var var0004 = [0, 30, 20, 5, 10, 60, 110];
 	var var0005 = ["", "", "a ", "a ", "a ", "a ", "a "];
 	var var0006 = [0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
@@ -75544,8 +75901,13 @@ void Func08E2 0x8E2 () {
 	var var0000 = true;
 	var var0001 =
 			["nothing", "blood moss", "garlic", "ginseng", "sulfurous ash"];
-	var var0002 = [0x0000, 0x034A, 0x034A, 0x034A, 0x034A];
-	var var0003 = [FRAME_ANY, 0x0001, 0x0004, 0x0005, 0x0007];
+	var var0002 = [
+		NULL_OBJ, SHAPE_REAGENT, SHAPE_REAGENT, SHAPE_REAGENT, SHAPE_REAGENT
+	];
+	var var0003 = [
+		FRAME_ANY, FRAME_REAGENT_BLOOD_MOSS, FRAME_REAGENT_GARLIC,
+		FRAME_REAGENT_GINSENG, FRAME_REAGENT_SULFUROUS_ASH
+	];
 	var var0004 = [0x0000, 0x0002, 0x0001, 0x0001, 0x0003];
 	var var0005 = "";
 	var var0006 = 0x0000;
@@ -75587,8 +75949,11 @@ void Func08E3 0x8E3 () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "gem", "gold ring", "wedding ring", "ankh"];
-	var var0002 = [0x0000, SHAPE_GEM, 0x0280, 0x0280, 0x03BB];
-	var var0003 = [FRAME_ANY, FRAME_ANY, 0x0000, 0x0001, 0x0000];
+	var var0002 = [NULL_OBJ, SHAPE_GEM, SHAPE_RING, SHAPE_RING, SHAPE_AMULET];
+	var var0003 = [
+		FRAME_ANY, FRAME_ANY, FRAME_RING_GOLD_RING, FRAME_RING_WEDDING_RING,
+		FRAME_AMULET_ANKH
+	];
 	var var0004 = [0x0000, 0x004B, 0x0064, 150, 0x00C8];
 	var var0005 = "a ";
 	var var0006 = 0x0000;
@@ -75639,18 +76004,18 @@ void Func08E5 0x8E5 (var var0000, var var0001) {
 		var0003 = false;
 	}
 	breakable {
-		if (var0002 != 0x0000) {
-			var var0004 = 0x0001;
+		if (var0002 != INVALID_NPC) {
+			var var0004 = 1;
 			var var0005 = Func0922(var0000, var0001, var0002, var0004);
-			if (var0005 == 0x0000) {
+			if (var0005 == TRAIN_MISSING_SKILL) {
 				say("\"I am sorry, but thou dost not have enough practical "
 					"experience to train at this time. Return another day "
 					"after thou hast slain a few more creatures.\"");
 				return;
 			}
-			if (var0005 == 0x0001) {
-				var var0006
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+			if (var0005 == TRAIN_MISSING_GOLD) {
+				var var0006 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var0006 < var0001) {
 					say("\"I regret that thou dost not seem to have enough "
 						"gold to train here. Mayhaps at another time, when thy "
@@ -75658,7 +76023,7 @@ void Func08E5 0x8E5 (var var0000, var var0001) {
 					return;
 				}
 			}
-			if (var0005 == 0x0002) {
+			if (var0005 == TRAIN_OVER_SKILLED) {
 				say("\"Thou art already as proficient as I! I am afraid that "
 					"thou cannot be trained further by me!\"");
 				return;
@@ -75751,41 +76116,42 @@ var Func08E7 0x8E7 () {
 var Func08E8 0x8E8 (var var0000) {
 	var var0001 = UI_get_party_list();
 	for (var0004 in var0001) {
-		var var0005 = var0004->get_cont_items(0x03BB, QUALITY_ANY, var0000);
+		var var0005 = var0004->get_cont_items(
+			SHAPE_AMULET, QUALITY_ANY, var0000);
 		if (var0005) {
 			return var0005;
 		}
 	}
-	return 0x0000;
+	return 0;
 }
 
 var Func08E9 0x8E9 (var var0000) {
 	var var0001 = var0000->get_item_shape();
 	var var0002 = var0000->get_item_frame();
 	if (AVATAR->is_readied(BG_WEAPON_HAND, var0001, var0002)) {
-		return 0x0001;
+		return 1;
 	}
 	if (AVATAR->is_readied(BG_SHIELD_HAND, var0001, var0002)) {
-		return 0x0001;
+		return 1;
 	}
 	if (AVATAR->is_readied(BG_BOTH_HANDS, var0001, var0002)) {
-		return 0x0001;
+		return 1;
 	}
-	return 0x0000;
+	return 0;
 }
 
 var Func08EA 0x8EA (var var0000) {
 	var var0001 = var0000->get_item_shape();
 	var var0002 = var0000->get_item_frame();
 	if (AVATAR->is_readied(BG_BACKPACK, var0001, var0002)) {
-		return 0x0001;
+		return 1;
 	}
-	return 0x0000;
+	return 0;
 }
 
 void Func08EB 0x8EB (var var0000, var var0001, var var0002) {
-	var var0003 = 0x0004;
-	var var0004 = 0x0000;
+	var var0003 = 4;
+	var var0004 = 0;
 	struct<Position> var0005 = get_object_position();
 	struct<Position> var0006 = var0005;
 	declare var var0007;
@@ -75793,7 +76159,7 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002) {
 	declare struct<Position> var000B;
 	declare var var000C;
 	if (var0001 == SHAPE_MONSTER_MAGE) {
-		var0007 = find_nearby(ANY_SHAPE, 0x0000, MASK_NONE);
+		var0007 = find_nearby(ANY_SHAPE, 0, MASK_NONE);
 		for (var000A in var0007) {
 			var000B = var000A->get_object_position();
 			if (var000B.z < 5) {
@@ -75813,8 +76179,8 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002) {
 			}
 		}
 	}
-	if (var0001 == 0x03F7) {
-		var0007 = find_nearby(ANY_SHAPE, 0x0001, MASK_NONE);
+	if (var0001 == SHAPE_GOLEM) {
+		var0007 = find_nearby(ANY_SHAPE, 1, MASK_NONE);
 		for (var000A in var0007) {
 			var000B = var000A->get_object_position();
 			if (var000B.z < 5) {
@@ -75838,8 +76204,8 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002) {
 		for (var000A in var0007) {
 			var000B = var000A->get_object_position();
 			if ((var000B.z < 5)
-				&& ((!(var000A->get_item_shape() == 0x014B))
-					&& (!(var000A->get_item_shape() == 0x00E0)))) {
+				&& ((!(var000A->get_item_shape() == SHAPE_ROCK))
+					&& (!(var000A->get_item_shape() == SHAPE_DUST)))) {
 				if ((var000B.x == var0005.x) && (var000B.y == var0005.y)) {
 					var000B.x -= 4;
 					var000B.y -= 4;
@@ -75960,7 +76326,7 @@ void Func08EE 0x8EE () {
 }
 
 void Func08EF 0x8EF () {
-	var var0000 = TRENT->find_nearest(0x02EB, ON_SCREEN);
+	var var0000 = TRENT->find_nearest(SHAPE_SOUL_CAGE, ON_SCREEN);
 	var var0001 = Func0909();
 	if (!gflags[CAME_FROM_DEFAULT]) {
 		if (gflags[CAGE_MADE]) {
@@ -76024,7 +76390,7 @@ void Func08EF 0x8EF () {
 		remove("free");
 		fallthrough;
 	case "What next?":
-		var var0004 = Func0931(PARTY, 0x0001, 0x0108, QUALITY_ANY, FRAME_ANY);
+		var var0004 = Func0931(PARTY, 1, SHAPE_IRON_BARS, QUALITY_ANY, FRAME_ANY);
 		if (gflags[CAGE_MADE]) {
 			say("\"Why, I beg thee to please help in the return my lovely "
 				"Rowena to me,\" he pleads.");
@@ -76036,7 +76402,7 @@ void Func08EF 0x8EF () {
 			say("\"Ah, I'll need the iron bar that thou dost carry.\" He holds "
 				"out his hand and takes the iron bar from you.");
 			var var0005 = UI_remove_party_items(
-					0x0001, 0x0108, QUALITY_ANY, FRAME_ANY, false);
+					1, SHAPE_IRON_BARS, QUALITY_ANY, FRAME_ANY, false);
 			say("\"With this, I will finish it shortly. Wait here whilst I "
 				"tend to the cage.\"");
 			say("\"Take the cage to Mistress Mordra and she will tell thee "
@@ -76102,7 +76468,7 @@ var Func08F1 0x8F1 (var var0000) {
 	];
 	var var0002 = var0000;
 	while (var0002 == var0000) {
-		var0002 = var0001[UI_die_roll(0x0001, UI_get_array_size(var0001))];
+		var0002 = var0001[UI_die_roll(1, UI_get_array_size(var0001))];
 	}
 	return var0002;
 }
@@ -76114,7 +76480,7 @@ void Func08F2 0x8F2 (var var0000, var var0001) {
 	var var0004 = Func08F1("");
 	say("\"", var0001, "! Thou ", var0004, "!\"");
 	var var0005 = ["blood", "head", "life"];
-	var var0006 = var0005[UI_die_roll(0x0001, UI_get_array_size(var0005))];
+	var var0006 = var0005[UI_die_roll(1, UI_get_array_size(var0005))];
 	say("\"Shall I have my apology, or thy ", var0006, "?\"");
 	var var0007 = "Forgive me";
 	var var0008 = "Suffer my wrath";
@@ -76329,7 +76695,7 @@ var Func08F5 0x8F5 (var var0000, var var0001) {
 	var0003 &= var0002;
 	var var0007 = false;
 	var var0008 = UI_get_array_size(var0003);
-	while (var0008 > 0x0001) {
+	while (var0008 > 1) {
 		var var0009 = Func090C(var0003);
 		if (var0009 == var0008) {
 			break;
@@ -76409,7 +76775,7 @@ var Func08F5 0x8F5 (var var0000, var var0001) {
 		var0008 = UI_get_array_size(var0003);
 	}
 	UI_pop_answers();
-	if (var0008 == 0x0001) {
+	if (var0008 == 1) {
 		gflags[TSERAMED_INTRO] = true;
 	}
 	return var0001;
@@ -76440,38 +76806,38 @@ var Func08F8 0x8F8 (
 		var var0005, var var0006) {
 	var var0007 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 	declare var var0008;
-	if (var0004 == 0x0000) {
+	if (var0004 == 0) {
 		var0008 = 1;
 	} else {
 		var0008 = UI_input_numeric_value(var0005, var0004, 1, 1);
 	}
 	declare var var0009;
-	if (var0002 > 0x0001) {
+	if (var0002 > 1) {
 		var0009 = var0002 * var0008;
 	} else {
 		var0009 = var0008;
 	}
 	declare var var000A;
-	if (var0008 == 0x0000) {
+	if (var0008 == 0) {
 		var000A = 0x0000;
 	} else if (var0007 >= (var0003 * var0008)) {
 		var var000B = UI_add_party_items(
 				var0009, var0000, QUALITY_ANY, var0001, var0006);
-		if (!(var000B == 0x0000)) {
+		if (!(var000B == 0)) {
 			var000A = 0x0001;
 			var var000C = UI_remove_party_items(
 					var0003 * var0008, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
-			var var000D = 0x0000;
+			var var000D = 0;
 			var var000E = false;
 			for (var0011 in var000B) {
 				var var0012 = var0011->get_npc_number();
 				if (!(var0012 == AVATAR)) {
-					var000D += 0x0001;
+					var000D += 1;
 					var0012->show_npc_face(0x0000);
 					var000E = true;
-					if (var0002 == 0x0001) {
+					if (var0002 == 1) {
 						say("\"I will carry that.\"");
-					} else if (var000D == 0x0001) {
+					} else if (var000D == 1) {
 						say("\"I will carry some.\"");
 					} else {
 						say("\"I will carry some, as well.\"");
@@ -76966,10 +77332,10 @@ var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003) {
 	var var0005 = Func0910(var0002, TRAINING);
 	var var0006 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 	if (!(var0006 > var0001)) {
-		return 0x0001;
+		return TRAIN_MISSING_GOLD;
 	}
 	if (!(var0005 >= var0003)) {
-		return 0x0000;
+		return TRAIN_MISSING_SKILL;
 	}
 	for (var0009 in var0000) {
 		var var000A = Func0910(var0002, var0009);
@@ -76978,9 +77344,9 @@ var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003) {
 		}
 	}
 	if (var0004 == false) {
-		return 0x0002;
+		return TRAIN_OVER_SKILLED;
 	}
-	return 0x0003;
+	return TRAIN_CAN_TRAIN;
 }
 
 var Func0923 0x923 (var var0000, var var0001) {
@@ -76990,7 +77356,7 @@ var Func0923 0x923 (var var0000, var var0001) {
 	if (!Func090A()) {
 		var0003 = 0x0000;
 	} else if (var0002 >= var0001) {
-		var var0004 = PARTY->find_object(0x02F9, QUALITY_ANY, FRAME_ANY);
+		var var0004 = PARTY->find_object(SHAPE_SPELLBOOK, QUALITY_ANY, FRAME_ANY);
 		if (var0004) {
 			if (UI_add_spell(var0000, 0x0000, var0004)) {
 				var0003 = 0x0001;
@@ -77015,7 +77381,7 @@ var Func0924 0x924 (var var0000, var var0001) {
 	if (!Func090A()) {
 		var0003 = 0x0000;
 	} else if (var0002 >= var0001) {
-		var var0004 = PARTY->find_object(0x02F9, QUALITY_ANY, FRAME_ANY);
+		var var0004 = PARTY->find_object(SHAPE_SPELLBOOK, QUALITY_ANY, FRAME_ANY);
 		if (var0004) {
 			if (UI_add_spell(var0000, 0x0000, var0004)) {
 				var0003 = 0x0001;
@@ -77070,25 +77436,25 @@ void Func0926 0x926 (var var0000) {
 void Func0927 0x927 (var var0000) {
 	Func08FA(var0000);
 	var var0001 = var0000->get_item_frame();
-	if (var0001 == 0x0000) {
+	if (var0001 == 0) {
 		Func08FF(["I bet that would work much better if thou wouldst put some "
 				  "liquid in it..."]);
 		Func0903(DUPRE, "Perhaps some BEER for instance.");
 		Func0903(SHAMINO, "Or maybe some WINE>>>");
 	} else {
-		var0000->set_item_frame(0x0000);
+		var0000->set_item_frame(0);
 		var var0002 = [
 			"water", "blood", "wine", "beer", "ale", "stuff", "stuff", "stuff",
 			"stuff", "stuff", "last stuff"
 		];
 		UI_play_sound_effect(0x005A);
-		var var0003 = UI_die_roll(0x0001, 0x000A);
+		var var0003 = UI_die_roll(1, 10);
 		var var0004 = var0002[var0001];
 		var var0005 = "Gee, I bet that " + var0004 + " was pretty good....";
-		if (var0003 == 0x0001) {
+		if (var0003 == 1) {
 			var var0006 = "mmmm... I bet that would sure wet a body's whistle.";
 		}
-		if (var0003 == 0x0002) {
+		if (var0003 == 2) {
 			var var0007 = Func0908();
 			var0005 = "Why dost thou not wait until dinner to drink that "
 					  + var0004 + ", " + var0007 + ".";
@@ -77099,8 +77465,8 @@ void Func0927 0x927 (var var0000) {
 
 void Func0928 0x928 (var var0000) {
 	Func08FA(var0000);
-	var var0001 = var0000->get_item_frame() % 0x0002;
-	if (var0001 == 0x0000) {
+	var var0001 = var0000->get_item_frame() % 2;
+	if (var0001 == 0) {
 		Func08FF(["I bet that would work much better if thou wouldst put some "
 				  "liquid in it..."]);
 		Func0903(DUPRE, "Perhaps some BEER for instance.");
@@ -77110,28 +77476,28 @@ void Func0928 0x928 (var var0000) {
 			"water", "blood", "wine", "beer", "ale", "stuff", "stuff", "stuff",
 			"stuff", "stuff", "laststuff"
 		];
-		var var0003 = 0x0000;
+		var var0003 = 0;
 		var var0004 = get_item_quality();
 		declare var var0008;
 		for (var0007 in var0002) {
-			var0003 += 0x0001;
+			var0003 += 1;
 			if (var0004 == var0003) {
 				var0008 = "Gee, I bet that " + var0007 + " was pretty good....";
 			}
 		}
 		UI_play_sound_effect(0x005A);
-		var var0009 = UI_die_roll(0x0001, 0x000A);
-		if (var0009 == 0x0001) {
+		var var0009 = UI_die_roll(1, 10);
+		if (var0009 == 1) {
 			Func08FF("mmmm... I bet that would sure wet a body's whistle.");
 		}
-		if (var0009 == 0x0002) {
+		if (var0009 == 2) {
 			var var000A = var0002[var0001];
 			var var000B = Func0908();
 			var0008 = "Why dost thou not wait until dinner to drink that "
 					  + var000A + ", " + var000B + ".";
 			Func08FF(var0008);
 		}
-		if (var0009 > 0x0002) {
+		if (var0009 > 2) {
 			Func08FF(var0008);
 		}
 	}
@@ -77462,7 +77828,7 @@ void Func093A 0x93A (var var0000, var var0001) {
 	var0007 &= var0001->find_nearby(SHAPE_LIT_LIGHT_SOURCE, 30, MASK_NONE);
 	for (var000A in var0007) {
 		var var000B = var000A->get_item_quality();
-		if (var000B < (var0000 * 0x001E)) {
+		if (var000B < (var0000 * 30)) {
 			var000A->halt_scheduled();
 			var var000C = var000A->get_item_shape();
 			if (var000C == SHAPE_LIT_LIGHT_SOURCE) {
@@ -77499,7 +77865,7 @@ struct<Position> Func093C 0x93C (var var0000, struct<ObjPos> var0001) {
 
 var Func093D 0x93D (var var0000, var var0001) {
 	var var0002 = UI_get_array_size(var0000);
-	if (var0002 > 0x0001) {
+	if (var0002 > 1) {
 		var var0003 = true;
 		while (var0003) {
 			var0003 = false;
@@ -77554,16 +77920,16 @@ void Func0941 0x941 (var var0000) {
 void Func0942 0x942 (var var0000, var var0001) {
 	var var0002 = var0000->get_item_frame();
 	if (!var0000->get_item_quality()) {
-		var var0003 = var0000->set_item_quality(UI_die_roll(0x001E, 0x003C));
+		var var0003 = var0000->set_item_quality(UI_die_roll(30, 60));
 	}
 	if (var0000->get_item_shape() == SHAPE_TORCH) {
-		if (var0000->get_item_quality() == 0x00FF) {
+		if (var0000->get_item_quality() == 255) {
 			var0000->item_say("Spent");
 			return;
 		}
 	}
 	var var0004 = var0000->get_container();
-	if ((var0004 == 0x0000) || var0004->is_npc()) {
+	if ((var0004 == NULL_OBJ) || var0004->is_npc()) {
 		set_item_shape(var0001);
 		var var0005 = UI_get_party_list();
 		if (var0004 in var0005) {
@@ -77607,7 +77973,7 @@ void Func0946 0x946 () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "bread", "cake", "rolls", "pastry"];
-	var var0002 = [0x0000, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD];
+	var var0002 = [NULL_OBJ, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD];
 	var var0003 = [FRAME_ANY, FRAME_ROLLS, FRAME_PIE, FRAME_BAGUETTE, FRAME_PASTRY];
 	var var0004 = [0x0000, 0x0004, 0x0003, 0x0004, 0x0003];
 	var var0005 = "";
@@ -77657,7 +78023,7 @@ void Func0947 0x947 () {
 		var var0001 = AVATAR->find_nearby(SHAPE_FOOD, 25, MASK_NONE);
 		var var0002 = UI_get_party_list();
 		for (var0005 in var0002) {
-			var0001 &= var0005->get_cont_items(SHAPE_FOOD, QUALITY_ANY, 0x0000);
+			var0001 &= var0005->get_cont_items(SHAPE_FOOD, QUALITY_ANY, FRAME_BREAD);
 		}
 		var var0006 = 0;
 		var var0007 = [];
@@ -77710,9 +78076,15 @@ void Func0948 0x948 () {
 	var var0002 = Func090A();
 	if (var0002) {
 		say("\"Very good! Let me see how many sacks thou dost have...\"");
-		var var0003 = PARTY->count_objects(0x035F, QUALITY_ANY, 0x000E);
-		var var0004 = PARTY->count_objects(0x035F, QUALITY_ANY, 0x000F);
-		if ((var0003 == 0x0000) || (var0004 == 0x0000)) {
+		var var0003 = PARTY->count_objects(
+				SHAPE_KITCHEN_ITEMS, QUALITY_ANY,
+				FRAME_KITCHEN_ITEMS_FLOUR_CLOSED2);
+		// BUG: This should have been FRAME_KITCHEN_ITEMS_FLOUR_CLOSED1 instead
+		// of FRAME_KITCHEN_ITEMS_BUTTER_CHURN.
+		var var0004 = PARTY->count_objects(
+				SHAPE_KITCHEN_ITEMS, QUALITY_ANY,
+				FRAME_KITCHEN_ITEMS_BUTTER_CHURN);
+		if (var0003 == 0 || var0004 == 0) {
 			say("\"But thou dost not have a single one in thy possession! Art "
 				"thou trying to trick me? Get out of my shoppe!\"*");
 			abort;
@@ -77724,9 +78096,13 @@ void Func0948 0x948 () {
 				var0005, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 		if (var0006) {
 			var var0007 = UI_remove_party_items(
-					var0003, 0x035F, QUALITY_ANY, 0x000E, true);
+					var0003, SHAPE_KITCHEN_ITEMS, QUALITY_ANY,
+					FRAME_KITCHEN_ITEMS_FLOUR_CLOSED2, true);
+			// BUG: This should have been FRAME_KITCHEN_ITEMS_FLOUR_CLOSED1
+			// instead of FRAME_KITCHEN_ITEMS_BUTTER_CHURN.
 			var var0008 = UI_remove_party_items(
-					var0004, 0x035F, QUALITY_ANY, 0x000F, true);
+					var0004, SHAPE_KITCHEN_ITEMS, QUALITY_ANY,
+					FRAME_KITCHEN_ITEMS_BUTTER_CHURN, true);
 			say("\"Come back and work for me at any time!\"*");
 			abort;
 		}
@@ -77744,7 +78120,9 @@ void Func0949 0x949 () {
 	var var0001 = [
 		"nothing", "blue potion", "purple potion", "red potion", "orange potion"
 	];
-	var var0002 = [0x0000, SHAPE_POTION, SHAPE_POTION, SHAPE_POTION, SHAPE_POTION];
+	var var0002 = [
+		NULL_OBJ, SHAPE_POTION, SHAPE_POTION, SHAPE_POTION, SHAPE_POTION
+	];
 	var var0003 = [
 		FRAME_ANY, FRAME_POTION_SLEEP, FRAME_POTION_PROTECTION,
 		FRAME_POTION_CURING, FRAME_POTION_AWAKEN
@@ -77814,8 +78192,15 @@ void Func094A 0x94A () {
 		"nothing", "blood moss", "spider silk", "sulfurous ash",
 		"mandrake root", "black pearl"
 	];
-	var var0002 = [0x0000, 0x034A, 0x034A, 0x034A, 0x034A, 0x034A];
-	var var0003 = [FRAME_ANY, 0x0001, 0x0006, 0x0007, 0x0003, 0x0000];
+	var var0002 = [
+		NULL_OBJ, SHAPE_REAGENT, SHAPE_REAGENT, SHAPE_REAGENT, SHAPE_REAGENT,
+		SHAPE_REAGENT
+	];
+	var var0003 = [
+		FRAME_ANY, FRAME_REAGENT_BLOOD_MOSS, FRAME_REAGENT_SPIDER_SILK,
+		FRAME_REAGENT_SULFUROUS_ASH, FRAME_REAGENT_MANDRAKE_ROOT,
+		FRAME_REAGENT_BLACK_PEARL
+	];
 	var var0004 = [0x0000, 0x0004, 0x0005, 0x0006, 0x0008, 0x0008];
 	var var0005 = [0x0000, 0x0010, 0x0014, 0x0019, 0x0020, 0x0022];
 	var var0006 = "";
@@ -78174,17 +78559,17 @@ void Func094F 0x94F (var var0000, var var0001) {
 	var var0003 = var0002->get_npc_name();
 	breakable {
 		if (var0002 != 0x0000) {
-			var var0004 = 0x0003;
+			var var0004 = 3;
 			var var0005 = Func0922(var0000, var0001, var0002, var0004);
-			if (var0005 == 0x0000) {
+			if (var0005 == TRAIN_MISSING_SKILL) {
 				say("After a very quick run, he turns and says, \"Thou dost "
 					"not yet have the stamina. If thou so wishest, I could "
 					"train thee at a later date.\"");
 				break;
 			}
-			if (var0005 == 0x0001) {
-				var var0006
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+			if (var0005 == TRAIN_MISSING_GOLD) {
+				var var0006 = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it, finding that you have ",
 					var0006, " gold altogether.");
 				if (var0006 < var0001) {
@@ -78193,7 +78578,7 @@ void Func094F 0x94F (var var0000, var var0001) {
 					break;
 				}
 			}
-			if (var0005 == 0x0002) {
+			if (var0005 == TRAIN_OVER_SKILLED) {
 				say("After a short run, he turns and says, \"Thou art already "
 					"as strong as I! I am afraid that there is nothing further "
 					"I can show thee.\"");
@@ -78274,18 +78659,18 @@ void Func0950 0x950 (var var0000, var var0001) {
 	}
 	breakable {
 		if (var0002 != 0x0000) {
-			var var000D = 0x0002;
+			var var000D = 2;
 			var var000E = Func0922(var0000, var0001, var0002, var000D);
-			if (var000E == 0x0000) {
+			if (var000E == TRAIN_MISSING_SKILL) {
 				say("\"It appears that thou dost not have enough practical "
 					"experience to train at this time. If thou couldst return "
 					"later after thou hast gained more experience, I can help "
 					"thee.\"");
 				break;
 			}
-			if (var000E == 0x0001) {
-				var var000F
-						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+			if (var000E == TRAIN_MISSING_GOLD) {
+				var var000F = PARTY->count_objects(
+						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it, finding that you have ",
 					var000F, " gold altogether.");
 				if (var000F < var0001) {
@@ -78295,7 +78680,7 @@ void Func0950 0x950 (var var0000, var var0001) {
 					break;
 				}
 			}
-			if (var000E == 0x0002) {
+			if (var000E == TRAIN_OVER_SKILLED) {
 				say("\"It appears that thou art already as proficient as I! I "
 					"am afraid that thou cannot be trained further here.\"");
 				break;
@@ -78337,7 +78722,8 @@ void Func0951 0x951 () {
 		"wine", "ale"
 	];
 	var var0003 = [
-		0x0000, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE
+		NULL_OBJ, SHAPE_FOOD, SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_FOOD, SHAPE_FOOD,
+		SHAPE_FOOD, SHAPE_BOTTLE, SHAPE_BOTTLE
 	];
 	var var0004 = [
 		FRAME_ANY, FRAME_MUTTON, FRAME_ROLLS, FRAME_BOTTLE_MEAD, FRAME_TROUT,
@@ -78413,7 +78799,10 @@ void Func0952 0x952 () {
 		"nothing", "throwing axe", "dagger", "mace", "sword", "2-handed sword",
 		"2-handed axe"
 	];
-	var var0002 = [0x0000, 0x0251, 0x0252, 0x0293, 0x0257, 0x025A, 0x0259];
+	var var0002 = [
+		NULL_OBJ, SHAPE_THROWING_AXE, SHAPE_DAGGER, SHAPE_MACE, SHAPE_SWORD,
+		SHAPE_TWO_HANDED_SWORD, SHAPE_TWO_HANDED_AXE
+	];
 	var var0003 = [0x0000, 0x0014, 0x000C, 0x000F, 0x0046, 0x007D, 0x0046];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
@@ -78460,16 +78849,14 @@ void Func0953 0x953 () {
 		"great helm", "plate armour", "plate leggings", "crested helm"
 	];
 	var var0002 = [
-		0x0000, 0x021B, 0x023B, 0x023F, 0x0244, 0x021D, 0x023D, 0x0240, 0x021E
+		NULL_OBJ, SHAPE_CHAIN_COIF, SHAPE_CHAIN_ARMOR, SHAPE_CHAIN_LEGGINGS,
+		SHAPE_GAUNTLETS, SHAPE_GREAT_HELM, SHAPE_PLATE_ARMOR,
+		SHAPE_PLATE_LEGGINGS, SHAPE_CRESTED_HELM
 	];
-	var var0003 = [
-		0x0000, 0x0050, 0x0064, 0x0032, 0x0014, 150, 0x012C, 0x0078, 0x003C
-	];
+	var var0003 = [0, 80, 100, 50, 20, 150, 300, 120, 60];
 	var var0004 = FRAME_ANY;
 	var var0005 = ["", "a ", "", "", "", "a ", "", "", "a "];
-	var var0006 = [
-		0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0000, 0x0000, 0x0001, 0x0000
-	];
+	var var0006 = [0, 0, 0, 1, 1, 0, 0, 1, 0];
 	var var0007 = [
 		"", "", "", " for a pair", " for a pair", "", "", " for a pair", ""
 	];
