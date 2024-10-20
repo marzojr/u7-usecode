@@ -11,16 +11,16 @@
 void FuncGangplank shape#(SHAPE_GANGPLANK_LOWERED) () {
 	if (event == DOUBLECLICK) {
 		if (get_item_flag(ON_MOVING_BARGE)) {
-			Func08FF("@The sails must be furled before the planks are raised.@");
-		} else if (!Func0829(item)) {
-			Func08FF("@I think the gangplank is blocked.@");
+			partySpeak("@The sails must be furled before the planks are raised.@");
+		} else if (!handleGangplank(item)) {
+			partySpeak("@I think the gangplank is blocked.@");
 		} else if (UI_in_gump_mode()) {
 			UI_close_gumps();
 		}
 	}
 }
 
-void Func009A shape#(SHAPE_MONSTER_MAGE) () {
+void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 	declare var var0009;
 	if (event == PROXIMITY) {
 		var var0000 = find_nearest(SHAPE_LIGHT_SOURCE, 1);
@@ -65,7 +65,7 @@ void Func009A shape#(SHAPE_MONSTER_MAGE) () {
 				if (var000A) {
 					item_say("@My door, at last.@");
 					event = DOUBLECLICK;
-					var000A->Func01B0();
+					var000A->FuncDoorNsLeft();
 					return;
 				}
 				if (var000B) {
@@ -103,7 +103,7 @@ void Func009A shape#(SHAPE_MONSTER_MAGE) () {
 			var0009 = script item {
 				actor frame standing;
 				face var0012;
-				call Func009A;
+				call FuncMonsterMage;
 			};
 		} else {
 			abort;
@@ -217,7 +217,7 @@ void Func009A shape#(SHAPE_MONSTER_MAGE) () {
 					"that name. If only I could remember where I put it. Dost "
 					"thou by chance have the parchment entitled Scroll of "
 					"Infinity with thee?");
-				if (Func090A()) {
+				if (askYesNo()) {
 					if (!PARTY->count_objects(
 								SHAPE_SCROLL, QUALITY_SCROLL_OF_INFINITY,
 								FRAME_SCROLL_OPENED)) {
@@ -259,7 +259,7 @@ void Func009A shape#(SHAPE_MONSTER_MAGE) () {
 			} else {
 				say("\"Dost thou have the Scroll of Infinity amongst thy "
 					"possessions?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					if (!PARTY->count_objects(
 								SHAPE_SCROLL, QUALITY_SCROLL_OF_INFINITY,
 								FRAME_SCROLL_OPENED)) {
@@ -541,7 +541,7 @@ void Func009A shape#(SHAPE_MONSTER_MAGE) () {
 				"its location.");
 			say("It was reputedly a great item of magic. Didst thou find it "
 				"so?\" He cocks his head to one side as he asks the question.");
-			var var0018 = Func090A();
+			var var0018 = askYesNo();
 			if (var0018) {
 				say("\"Yes, 'tis a pity to lose such an item of antiquity. "
 					"Perhaps as time unfolds it will turn up. These things "
@@ -709,7 +709,7 @@ void Func009A shape#(SHAPE_MONSTER_MAGE) () {
 	}
 }
 
-void Func009B shape#(SHAPE_FERRYMAN) () {
+void FuncFerryman shape#(SHAPE_FERRYMAN) () {
 	if (event == DOUBLECLICK) {
 		FERRYMAN->show_npc_face(DEFAULT_FACE);
 		var var0000 = Func08F7(SPARK);
@@ -808,7 +808,7 @@ void Func009B shape#(SHAPE_FERRYMAN) () {
 			declare var var0004;
 			if (!gflags[ISLAND_DOCK]) {
 				say("\"Wilt thou pay my price... for passage to Skara Brae?\"");
-				var0004 = Func090A();
+				var0004 = askYesNo();
 				if (var0004) {
 					var var0005 = UI_remove_party_items(
 							2, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -825,7 +825,7 @@ void Func009B shape#(SHAPE_FERRYMAN) () {
 				}
 			} else {
 				say("\"Dost thou wish... to return to the mainland?\"");
-				var0004 = Func090A();
+				var0004 = askYesNo();
 				if (var0004) {
 					var var0006 = ROWENA->get_npc_object();
 					var var0007 = UI_get_party_list();
@@ -873,7 +873,7 @@ void Func009B shape#(SHAPE_FERRYMAN) () {
 	}
 }
 
-void Func009F shape#(SHAPE_POCKETWATCH) () {
+void FuncPocketwatch shape#(SHAPE_POCKETWATCH) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = UI_game_hour();
 		var var0001 = "am";
@@ -898,13 +898,13 @@ void Func009F shape#(SHAPE_POCKETWATCH) () {
 	}
 }
 
-void Func00B2 shape#(SHAPE_CLOTH_MAP) () {
+void FuncClothMap shape#(SHAPE_CLOTH_MAP) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = UI_display_map();
 	}
 }
 
-void Func00D2 shape#(SHAPE_CHICKEN_COOP) () {
+void FuncChickenCoop shape#(SHAPE_CHICKEN_COOP) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_quality();
 		if (var0000 == UI_part_of_day()) {
@@ -927,7 +927,7 @@ void Func00D2 shape#(SHAPE_CHICKEN_COOP) () {
 	}
 }
 
-void Func00E1 shape#(SHAPE_ABBEY_DOOR_CLOSED_RIGHT) () {
+void FuncAbbeyDoorClosedRight shape#(SHAPE_ABBEY_DOOR_CLOSED_RIGHT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -960,7 +960,7 @@ void Func00E1 shape#(SHAPE_ABBEY_DOOR_CLOSED_RIGHT) () {
 	}
 }
 
-void Func00F6 shape#(SHAPE_ABBEY_DOOR_CLOSED_LEFT) () {
+void FuncAbbeyDoorClosedLeft shape#(SHAPE_ABBEY_DOOR_CLOSED_LEFT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -993,7 +993,7 @@ void Func00F6 shape#(SHAPE_ABBEY_DOOR_CLOSED_LEFT) () {
 	}
 }
 
-void Func00FA shape#(SHAPE_ABBEY_DOOR_OPEN_LEFT) () {
+void FuncAbbeyDoorOpenLeft shape#(SHAPE_ABBEY_DOOR_OPEN_LEFT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -1026,7 +1026,7 @@ void Func00FA shape#(SHAPE_ABBEY_DOOR_OPEN_LEFT) () {
 	}
 }
 
-void Func00FB shape#(SHAPE_SAILS) () {
+void FuncSails shape#(SHAPE_SAILS) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -1044,10 +1044,10 @@ void Func00FB shape#(SHAPE_SAILS) () {
 			var var0003 = PARTY->count_objects(SHAPE_SCROLL, var0002, FRAME_ANY);
 			if (!var0003) {
 				if (UI_get_array_size(UI_get_party_list()) == 1) {
-					Func08FF("@The deed for this vessel must first be "
+					partySpeak("@The deed for this vessel must first be "
 							 "purchased.@");
 				} else {
-					Func08FF("@We must purchase the deed for this vessel "
+					partySpeak("@We must purchase the deed for this vessel "
 							 "before we sail her.@");
 				}
 				return;
@@ -1068,7 +1068,7 @@ void Func00FB shape#(SHAPE_SAILS) () {
 	}
 }
 
-void Func00FC shape#(SHAPE_GRANDFATHER_CLOCK_EW) () {
+void FuncGrandfatherClockEw shape#(SHAPE_GRANDFATHER_CLOCK_EW) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = UI_game_hour();
 		if (var0000 > 12) {
@@ -1086,11 +1086,11 @@ void Func00FC shape#(SHAPE_GRANDFATHER_CLOCK_EW) () {
 	}
 }
 
-void Func0102 shape#(SHAPE_KEG) () {
+void FuncKeg shape#(SHAPE_KEG) () {
 	if (event == DOUBLECLICK) {
 		if (in_usecode()) {
 			halt_scheduled();
-			Func08FE("@It is about time!@");
+			partyUtters("@It is about time!@");
 		} else {
 			item->Func0628();
 		}
@@ -1116,7 +1116,7 @@ void Func0102 shape#(SHAPE_KEG) () {
 	}
 }
 
-void Func0105 shape#(SHAPE_LOOM) () {
+void FuncLoom shape#(SHAPE_LOOM) () {
 	declare var var0000;
 	if (event == BG_PATH_SUCCESS) {
 		halt_scheduled();
@@ -1127,7 +1127,7 @@ void Func0105 shape#(SHAPE_LOOM) () {
 				continue;
 				sfx SFX_ROTATING_WOOSH;
 			};
-			call Func0105;
+			call FuncLoom;
 		};
 		var var0001 = Func0827(AVATAR, item);
 		var0000 = script AVATAR {
@@ -1158,17 +1158,17 @@ void Func0105 shape#(SHAPE_LOOM) () {
 		}
 	}
 	if (event == DOUBLECLICK) {
-		Func08FF("@I believe that one threads a loom before using it.@");
+		partySpeak("@I believe that one threads a loom before using it.@");
 	}
 }
 
-void Func010B shape#(SHAPE_MYSTERIOUS_CRAFT) () {
+void FuncMysteriousCraft shape#(SHAPE_MYSTERIOUS_CRAFT) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(MUSIC_PRINCE_THRAKHATHS_THEME, item);
 	}
 }
 
-void Func010E shape#(SHAPE_DOOR_NS_RIGHT) () {
+void FuncDoorNsRight shape#(SHAPE_DOOR_NS_RIGHT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -1199,7 +1199,7 @@ void Func010E shape#(SHAPE_DOOR_NS_RIGHT) () {
 	}
 }
 
-void Func011C shape#(SHAPE_SUNDIAL) () {
+void FuncSundial shape#(SHAPE_SUNDIAL) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = UI_game_hour();
 		if ((var0000 >= 6) && (var0000 <= 11)) {
@@ -1222,25 +1222,25 @@ void Func011C shape#(SHAPE_SUNDIAL) () {
 		// interpolation was never done.
 		// In the equivalent of this function from Spanish SI, var0001 is called
 		// "avatar", all lowercase.
-		Func08FF("@^<Avatar>, I believe the key word in sundial is `sun'.@");
+		partySpeak("@^<Avatar>, I believe the key word in sundial is `sun'.@");
 	}
 }
 
-void Func0122 shape#(SHAPE_CLOSED_SHUTTERS_NS) () {
+void FuncClosedShuttersNs shape#(SHAPE_CLOSED_SHUTTERS_NS) () {
 	if (event == DOUBLECLICK) {
 		set_item_shape(SHAPE_OPEN_SHUTTERS_NS);
 		UI_play_sound_effect2(SFX_BLADE_SWING, item);
 	}
 }
 
-void Func0123 shape#(SHAPE_CLOSED_SHUTTERS_EW) () {
+void FuncClosedShuttersEw shape#(SHAPE_CLOSED_SHUTTERS_EW) () {
 	if (event == DOUBLECLICK) {
 		set_item_shape(SHAPE_OPEN_SHUTTERS_EW);
 		UI_play_sound_effect2(SFX_BLADE_SWING, item);
 	}
 }
 
-void Func0124 shape#(SHAPE_SEAT) () {
+void FuncSeat shape#(SHAPE_SEAT) () {
 	declare var var0001;
 	if (event == DOUBLECLICK) {
 		if (get_barge()) {
@@ -1248,10 +1248,10 @@ void Func0124 shape#(SHAPE_SEAT) () {
 			if ((var0000 == SHAPE_CART_PIECE) || (var0000 == SHAPE_FLYING_CARPET)) {
 				if (get_item_flag(ON_MOVING_BARGE)) {
 					if (var0000 == SHAPE_CART_PIECE) {
-						item->Func028C();
+						item->FuncCartPiece();
 					}
 					if (var0000 == SHAPE_FLYING_CARPET) {
-						item->Func0348();
+						item->FuncFlyingCarpet();
 					}
 				} else {
 					var0001 = Func08B3(item);
@@ -1262,7 +1262,7 @@ void Func0124 shape#(SHAPE_SEAT) () {
 			var var0002 = get_distance(AVATAR) + 15;
 			var0001 = script item after var0002 ticks {
 				nohalt;
-				call Func0124;
+				call FuncSeat;
 			};
 		}
 	}
@@ -1329,7 +1329,7 @@ void Func0124 shape#(SHAPE_SEAT) () {
 	}
 }
 
-void Func0128 shape#(SHAPE_RING_OF_INVISIBILITY) () {
+void FuncRingOfInvisibility shape#(SHAPE_RING_OF_INVISIBILITY) () {
 	declare var var0000;
 	if ((event == READIED) || (event == UNREADIED)) {
 		var0000 = get_container();
@@ -1349,7 +1349,7 @@ void Func0128 shape#(SHAPE_RING_OF_INVISIBILITY) () {
 	}
 }
 
-void Func012A shape#(SHAPE_RING_OF_REGENERATION) () {
+void FuncRingOfRegeneration shape#(SHAPE_RING_OF_REGENERATION) () {
 	declare var var0000;
 	declare var var0001;
 	if (event == READIED) {
@@ -1357,7 +1357,7 @@ void Func012A shape#(SHAPE_RING_OF_REGENERATION) () {
 		if (var0000 && var0000->is_npc()) {
 			halt_scheduled();
 			var0001 = script item after 100 ticks {
-				call Func012A;
+				call FuncRingOfRegeneration;
 			};
 		} else {
 			UI_flash_mouse(CURSOR_HAND);
@@ -1380,19 +1380,19 @@ void Func012A shape#(SHAPE_RING_OF_REGENERATION) () {
 				}
 			}
 			var0001 = script item after 100 ticks {
-				call Func012A;
+				call FuncRingOfRegeneration;
 			};
 		}
 	}
 }
 
-void Func012D shape#(SHAPE_CART) () {
+void FuncCart shape#(SHAPE_CART) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
 
-void Func012F shape#(SHAPE_METAL_WALL_EW) () {
+void FuncMetalWallEw shape#(SHAPE_METAL_WALL_EW) () {
 	if (event == SCRIPTED) {
 		set_item_shape(SHAPE_METAL_WALL_EW);
 		abort;
@@ -1401,10 +1401,10 @@ void Func012F shape#(SHAPE_METAL_WALL_EW) () {
 		UI_flash_mouse(CURSOR_HAND);
 		return;
 	}
-	Func0833(item, Func03A8);
+	Func0833(item, FuncPortcullisDoorEw);
 }
 
-void Func0133 shape#(SHAPE_LABORATORY_BURNER) () {
+void FuncLaboratoryBurner shape#(SHAPE_LABORATORY_BURNER) () {
 	if (event == DOUBLECLICK) {
 		if (get_item_frame() == FRAME_LAB_BURNER_OFF) {
 			struct<Position> var0000 = get_object_position();
@@ -1505,14 +1505,14 @@ void Func0133 shape#(SHAPE_LABORATORY_BURNER) () {
 	}
 }
 
-void Func0142 shape#(SHAPE_OPEN_SHUTTERS_EW) () {
+void FuncOpenShuttersEw shape#(SHAPE_OPEN_SHUTTERS_EW) () {
 	if (event == DOUBLECLICK) {
 		set_item_shape(SHAPE_CLOSED_SHUTTERS_EW);
 		UI_play_sound_effect2(SFX_BLADE_SWING, item);
 	}
 }
 
-void Func0149 shape#(SHAPE_KITE) () {
+void FuncKite shape#(SHAPE_KITE) () {
 	declare var var0002;
 	if (in_usecode()) {
 		return;
@@ -1535,7 +1535,7 @@ void Func0149 shape#(SHAPE_KITE) () {
 		var var0003 = -1;
 		var var0004 = -1;
 		var var0005 = -2;
-		Func0828(item, var0003, var0004, var0005, Func0149, item,
+		Func0828(item, var0003, var0004, var0005, FuncKite, item,
 				 BG_PATH_SUCCESS);
 	}
 	if (event == BG_PATH_SUCCESS) {
@@ -1570,18 +1570,18 @@ void Func0149 shape#(SHAPE_KITE) () {
 				};
 			};
 		} else {
-			Func08FE("@Try it outside!@");
+			partyUtters("@Try it outside!@");
 		}
 	}
 }
 
-void Func0150 shape#(SHAPE_LIGHT_SOURCE) () {
+void FuncLightSource shape#(SHAPE_LIGHT_SOURCE) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		Func0942(item, SHAPE_LIT_LIGHT_SOURCE);
 	}
 }
 
-void Func0152 shape#(SHAPE_LIT_LIGHT_SOURCE) () {
+void FuncLitLightSource shape#(SHAPE_LIT_LIGHT_SOURCE) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		set_item_shape(SHAPE_LIGHT_SOURCE);
 		halt_scheduled();
@@ -1601,7 +1601,7 @@ void Func0152 shape#(SHAPE_LIT_LIGHT_SOURCE) () {
 	}
 }
 
-void Func0154 shape#(SHAPE_POTION) () {
+void FuncPotion shape#(SHAPE_POTION) () {
 	if (event == DOUBLECLICK) {
 		Func08FA(item);
 		var var0000 = get_item_frame();
@@ -1644,7 +1644,7 @@ void Func0154 shape#(SHAPE_POTION) () {
 				var0001->set_item_flag(INVISIBLE);
 			}
 			if (var0000 >= FRAME_POTION_MANDRAKE_ESSENCE) {
-				Func08FF("@What is this!@");
+				partySpeak("@What is this!@");
 				abort;
 			}
 		} else {
@@ -1658,7 +1658,7 @@ void Func0154 shape#(SHAPE_POTION) () {
 				// TYPO: Should be "please"
 				var var0005 = "@Those are expensive, <Gender>! "
 							  + "Plese waste them not!@";
-				Func08FF(var0005);
+				partySpeak(var0005);
 			} else {
 				Func08FD(CURSOR_X_INVALID);
 				return;
@@ -1668,14 +1668,14 @@ void Func0154 shape#(SHAPE_POTION) () {
 	}
 }
 
-void Func0174 shape#(SHAPE_OPEN_SHUTTERS_NS) () {
+void FuncOpenShuttersNs shape#(SHAPE_OPEN_SHUTTERS_NS) () {
 	if (event == DOUBLECLICK) {
 		set_item_shape(SHAPE_CLOSED_SHUTTERS_NS);
 		UI_play_sound_effect2(SFX_BLADE_SWING, item);
 	}
 }
 
-void Func0178 shape#(SHAPE_DOOR_EW_BOTTOM) () {
+void FuncDoorEwBottom shape#(SHAPE_DOOR_EW_BOTTOM) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -1706,7 +1706,7 @@ void Func0178 shape#(SHAPE_DOOR_EW_BOTTOM) () {
 	}
 }
 
-void Func0179 shape#(SHAPE_FOOD) () {
+void FuncFood shape#(SHAPE_FOOD) () {
 	var var0000 = [
 		 4,  6,  2,  5,  3,  3,  1, 12,
 		24, 16, 24, 24,  4,  8, 16,  6,
@@ -1717,7 +1717,7 @@ void Func0179 shape#(SHAPE_FOOD) () {
 	Func0813(item, var0001, SFX_GULP);
 }
 
-void Func017B shape#(SHAPE_SIGN) () {
+void FuncSign shape#(SHAPE_SIGN) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -2015,7 +2015,7 @@ void Func017B shape#(SHAPE_SIGN) () {
 	}
 }
 
-void Func0188 shape#(SHAPE_ABBEY_DOOR_OPEN_RIGHT) () {
+void FuncAbbeyDoorOpenRight shape#(SHAPE_ABBEY_DOOR_OPEN_RIGHT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -2048,7 +2048,7 @@ void Func0188 shape#(SHAPE_ABBEY_DOOR_OPEN_RIGHT) () {
 	}
 }
 
-void Func018A shape#(SHAPE_GUARD1) () {
+void FuncGuard1 shape#(SHAPE_GUARD1) () {
 	// BUG: this should probably have been 'item' instead of SHAPE_GUARD1
 	var var0000 = SHAPE_GUARD1->get_npc_object()->get_schedule_type();
 	if (event == DOUBLECLICK) {
@@ -2095,7 +2095,7 @@ void Func018A shape#(SHAPE_GUARD1) () {
 	}
 }
 
-void Func019A shape#(SHAPE_MINING_MACHINE) () {
+void FuncMiningMachine shape#(SHAPE_MINING_MACHINE) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var var0000 = find_nearby(SHAPE_CONVEYER_BELT, 10, MASK_NONE);
@@ -2136,7 +2136,7 @@ void Func019A shape#(SHAPE_MINING_MACHINE) () {
 	}
 }
 
-void Func01A2 shape#(SHAPE_GIANT_BONES) () {
+void FuncGiantBones shape#(SHAPE_GIANT_BONES) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_quality();
 		if (!(var0000 == UI_game_hour())) {
@@ -2160,13 +2160,13 @@ void Func01A2 shape#(SHAPE_GIANT_BONES) () {
 	}
 }
 
-void Func01AF shape#(SHAPE_BELLOWS) () {
+void FuncBellows shape#(SHAPE_BELLOWS) () {
 	var var0000 = get_item_frame();
 	declare var var0002;
 	if (var0000 >= FRAME_MAGIC_BELLOWS_OPEN
 			&& var0000 <= FRAME_MAGIC_BELLOWS_FLAT) {
 		if (event == DOUBLECLICK) {
-			Func0828(item, 1, 0, -1, Func01AF, item, BG_PATH_SUCCESS);
+			Func0828(item, 1, 0, -1, FuncBellows, item, BG_PATH_SUCCESS);
 		}
 		if (event == BG_PATH_SUCCESS) {
 			var var0001 = script item {
@@ -2319,7 +2319,7 @@ void Func01AF shape#(SHAPE_BELLOWS) () {
 	} else {
 		if (event == DOUBLECLICK) {
 			halt_scheduled();
-			Func0828(item, 1, 0, -1, Func01AF, item, BG_PATH_SUCCESS);
+			Func0828(item, 1, 0, -1, FuncBellows, item, BG_PATH_SUCCESS);
 		}
 		if (event == BG_PATH_SUCCESS) {
 			halt_scheduled();
@@ -2430,7 +2430,7 @@ void Func01AF shape#(SHAPE_BELLOWS) () {
 	}
 }
 
-void Func01B0 shape#(SHAPE_DOOR_NS_LEFT) () {
+void FuncDoorNsLeft shape#(SHAPE_DOOR_NS_LEFT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -2461,7 +2461,7 @@ void Func01B0 shape#(SHAPE_DOOR_NS_LEFT) () {
 	}
 }
 
-void Func01B1 shape#(SHAPE_DOOR_EW_TOP) () {
+void FuncDoorEwTop shape#(SHAPE_DOOR_EW_TOP) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -2492,11 +2492,11 @@ void Func01B1 shape#(SHAPE_DOOR_EW_TOP) () {
 	}
 }
 
-void Func01B2 shape#(SHAPE_CASK) () {
+void FuncCask shape#(SHAPE_CASK) () {
 	if (event == DOUBLECLICK) {
 		if (in_usecode()) {
 			halt_scheduled();
-			Func08FE("@It is about time!@");
+			partyUtters("@It is about time!@");
 		} else {
 			item->Func0629();
 		}
@@ -2523,7 +2523,7 @@ void Func01B2 shape#(SHAPE_CASK) () {
 	}
 }
 
-void Func01B3 shape#(SHAPE_LIT_SCONCE) () {
+void FuncLitSconce shape#(SHAPE_LIT_SCONCE) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		set_item_shape(SHAPE_SCONCE);
 		halt_scheduled();
@@ -2540,25 +2540,25 @@ void Func01B3 shape#(SHAPE_LIT_SCONCE) () {
 	}
 }
 
-void Func01BF shape#(SHAPE_WOUNDED_MAN) () {
+void FuncWoundedMan shape#(SHAPE_WOUNDED_MAN) () {
 	if (event == DOUBLECLICK) {
 		item_say("Arghh");
 	}
 }
 
-void Func01D6 shape#(SHAPE_WELL) () {
+void FuncWell shape#(SHAPE_WELL) () {
 	var var0000 = AVATAR->get_npc_object()->get_cont_items(
 			SHAPE_BUCKET, QUALITY_ANY, FRAME_BUCKET_EMPTY);
 	if (var0000) {
 		var var0001 = [-5, -5];
 		var var0002 = [-1, -1];
 		Func0828(
-				item, var0001, var0002, 0, Func032A, var0000,
+				item, var0001, var0002, 0, FuncBucket, var0000,
 				PATH_SUCCESS_9);
 	}
 }
 
-void Func01DF shape#(SHAPE_EMP) () {
+void FuncEmp shape#(SHAPE_EMP) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = Func0931(PARTY, 1, SHAPE_HONEY, QUALITY_ANY, FRAME_ANY);
 		RANDOM_EMP->show_npc_face(DEFAULT_FACE);
@@ -2578,7 +2578,7 @@ void Func01DF shape#(SHAPE_EMP) () {
 				"says, \"You are greeted, human.\"");
 		}
 		say("\"Is more honey had by you?\" The Emp asks hopefully.");
-		var var0001 = Func090A();
+		var var0001 = askYesNo();
 		if (var0001) {
 			if (var0000) {
 				Func087C();
@@ -2600,7 +2600,7 @@ void Func01DF shape#(SHAPE_EMP) () {
 				for (var0007 in var0004) {
 					var var0008 = get_npc_prop(MANA);
 					if (var0008 in var0003) {
-						var0003 = Func093C(var0008, var0003);
+						var0003 = filterArray(var0008, var0003);
 					}
 				}
 				forever {
@@ -2658,13 +2658,13 @@ void Func01DF shape#(SHAPE_EMP) () {
 	}
 }
 
-void Func01E1 shape#(SHAPE_SCONCE) () {
+void FuncSconce shape#(SHAPE_SCONCE) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		Func0942(item, SHAPE_LIT_SCONCE);
 	}
 }
 
-void Func01EF shape#(SHAPE_CAT) () {
+void FuncCat shape#(SHAPE_CAT) () {
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Here kitty, kitty@");
 		set_schedule_type(IN_COMBAT);
@@ -2682,7 +2682,7 @@ void Func01EF shape#(SHAPE_CAT) () {
 	}
 }
 
-void Func01F0 shape#(SHAPE_DOG) () {
+void FuncDog shape#(SHAPE_DOG) () {
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Good doggy.@");
 		set_schedule_type(HOUND);
@@ -2698,7 +2698,7 @@ void Func01F0 shape#(SHAPE_DOG) () {
 	}
 }
 
-void Func01F4 shape#(SHAPE_COW) () {
+void FuncCow shape#(SHAPE_COW) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = UI_get_party_list();
 		for (var0003 in var0000) {
@@ -2717,7 +2717,7 @@ void Func01F4 shape#(SHAPE_COW) () {
 	}
 }
 
-void Func01F7 shape#(SHAPE_PUPPET_SHOW) () {
+void FuncPuppetShow shape#(SHAPE_PUPPET_SHOW) () {
 	if (event == DOUBLECLICK) {
 		if (in_usecode()) {
 			return;
@@ -2726,7 +2726,7 @@ void Func01F7 shape#(SHAPE_PUPPET_SHOW) () {
 			CARROCIO->say("\"Now is the time for the young and the old to dig "
 						  "in their pockets and give up the gold. * Dost thou "
 						  "wish to donate a gold piece?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				var var0000 = UI_remove_party_items(
 						1, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, TEMPORARY_ANY);
 				var0000 = script item {
@@ -2757,7 +2757,7 @@ void Func01F7 shape#(SHAPE_PUPPET_SHOW) () {
 	}
 }
 
-void Func01F8 shape#(SHAPE_DRAGON) () {
+void FuncDragon shape#(SHAPE_DRAGON) () {
 	if (event == DOUBLECLICK) {
 		return;
 	}
@@ -2834,7 +2834,7 @@ void Func01F8 shape#(SHAPE_DRAGON) () {
 						repeat 3 {
 							previous frame cycle;
 						};
-						call Func03A7;
+						call FuncPortcullisDoorNs;
 					};
 				}
 			}
@@ -2854,7 +2854,7 @@ void Func01F8 shape#(SHAPE_DRAGON) () {
 			declare var var000C;
 			declare var var000D;
 			declare var var000E;
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("As you place your hand in the furnace that is the "
 					"dragon's maw, you can't help but wonder if a small gem is "
 					"worth the risk.");
@@ -2905,7 +2905,7 @@ void Func01F8 shape#(SHAPE_DRAGON) () {
 	}
 }
 
-void Func01FA shape#(SHAPE_HOOK) () {
+void FuncHook shape#(SHAPE_HOOK) () {
 	if (event == SCRIPTED) {
 		BATLIN->say(
 				"Batlin watches Hook's death with icy resignation. Time seems "
@@ -2923,13 +2923,13 @@ void Func01FA shape#(SHAPE_HOOK) () {
 	}
 }
 
-void Func020A shape#(SHAPE_LOCKED_CHEST) () {
+void FuncLockedChest shape#(SHAPE_LOCKED_CHEST) () {
 	if (event == DOUBLECLICK) {
 		item_say("Locked");
 	}
 }
 
-void Func020E shape#(SHAPE_LIT_LAMP) () {
+void FuncLitLamp shape#(SHAPE_LIT_LAMP) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		var var0000 = find_nearby(SHAPE_LIGHT, 10, MASK_TRANSLUCENT);
 		struct<Position> var0001 = get_object_position();
@@ -2947,11 +2947,11 @@ void Func020E shape#(SHAPE_LIT_LAMP) () {
 	}
 }
 
-void Func0216 shape#(SHAPE_WISP) () {
+void FuncWisp shape#(SHAPE_WISP) () {
 	item->FuncXorinia();
 }
 
-void Func0247 shape#(SHAPE_BED_ROLL) () {
+void FuncBedRoll shape#(SHAPE_BED_ROLL) () {
 	declare var var0001;
 	if ((event == DOUBLECLICK) && (!get_container())) {
 		struct<Position> var0000 = get_object_position();
@@ -2966,11 +2966,11 @@ void Func0247 shape#(SHAPE_BED_ROLL) () {
 					var var0004 = [1, 0, -1, 1, 0, -1, 1, 0, -1];
 					AVATAR->halt_scheduled();
 					Func0828(
-							item, var0003, var0004, -1, Func0247, item,
+							item, var0003, var0004, -1, FuncBedRoll, item,
 							BG_PATH_SUCCESS);
 				} else {
 					var0000.y -= 5;
-					Func08FF("@There is no room for thy bedroll there.@");
+					partySpeak("@There is no room for thy bedroll there.@");
 				}
 			}
 		}
@@ -2983,7 +2983,7 @@ void Func0247 shape#(SHAPE_BED_ROLL) () {
 		};
 		var0001 = script item {
 			wait 2;
-			call Func0247;
+			call FuncBedRoll;
 		};
 	}
 	if (event == SCRIPTED) {
@@ -2992,17 +2992,17 @@ void Func0247 shape#(SHAPE_BED_ROLL) () {
 	}
 }
 
-void Func0253 shape#(SHAPE_TORCH) () {
+void FuncTorch shape#(SHAPE_TORCH) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		Func0942(item, SHAPE_LIT_TORCH);
 	}
 }
 
-void Func0268 shape#(SHAPE_BOTTLE) () {
+void FuncBottle shape#(SHAPE_BOTTLE) () {
 	Func0813(item, 1, SFX_QUAFF);
 }
 
-void Func0269 shape#(SHAPE_TIME_LORD) () {
+void FuncTimeLord shape#(SHAPE_TIME_LORD) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
@@ -3075,7 +3075,7 @@ void Func0269 shape#(SHAPE_TIME_LORD) () {
 		Func0911(200);
 	} else if (!gflags[TIME_LORD_GAVE_MISSION]) {
 		say("\"Hast thou decided if thou wilt help me?\"");
-		var0001 = Func090A();
+		var0001 = askYesNo();
 		if (var0001) {
 			say("The Time Lord looks relieved.");
 			say("\"Then I have a mission for thee.\"");
@@ -3152,7 +3152,7 @@ void Func0269 shape#(SHAPE_TIME_LORD) () {
 		say("\"Thou -must- free me and we must work together in battling The "
 			"Guardian. The fate of thy people depends upon it. Dost thou "
 			"accept?\"");
-		var var0002 = Func090A();
+		var var0002 = askYesNo();
 		if (var0002) {
 			say("\"Then I have a mission for thee.\"");
 			add("mission");
@@ -3160,7 +3160,7 @@ void Func0269 shape#(SHAPE_TIME_LORD) () {
 			say("\"Then thou shalt be doomed to never finish thy quest. Art "
 				"thou sure? I give thee one more chance. Dost thou want to "
 				"help?\"");
-			var0001 = Func090A();
+			var0001 = askYesNo();
 			if (var0001) {
 				say("\"Then I have a mission for thee.\"");
 			} else {
@@ -3316,7 +3316,7 @@ void Func0269 shape#(SHAPE_TIME_LORD) () {
 	say("\"Farewell, Avatar. Good luck to thee.\"*");
 }
 
-void Func026F shape#(SHAPE_HAMMER) () {
+void FuncHammer shape#(SHAPE_HAMMER) () {
 	if (event == DOUBLECLICK) {
 		if (!AVATAR->is_readied(BG_WEAPON_HAND, SHAPE_HAMMER, FRAME_ANY)) {
 			UI_flash_mouse(CURSOR_OUT_OF_RANGE);
@@ -3349,7 +3349,7 @@ void Func026F shape#(SHAPE_HAMMER) () {
 								&& (var0005 <= FRAME_BLACKSWORD_BLANK_COLD3)) {
 								Func0828(
 										var0002, 0, 2, 0,
-										Func026F, var0002, BG_PATH_SUCCESS);
+										FuncHammer, var0002, BG_PATH_SUCCESS);
 							}
 						}
 					}
@@ -3393,10 +3393,10 @@ void Func026F shape#(SHAPE_HAMMER) () {
 	}
 }
 
-void Func0270 shape#(SHAPE_PICK) () {
+void FuncPick shape#(SHAPE_PICK) () {
 	if (event == DOUBLECLICK) {
 		if (!AVATAR->is_readied(BG_WEAPON_HAND, SHAPE_PICK, FRAME_ANY)) {
-			Func08FF("@Thou must hold that in thine hand.@");
+			partySpeak("@Thou must hold that in thine hand.@");
 			return;
 		}
 		struct<ObjPos> var0000 = UI_click_on_item();
@@ -3412,10 +3412,10 @@ void Func0270 shape#(SHAPE_PICK) () {
 						BG_PATH_SUCCESS);
 				UI_close_gumps();
 			} else {
-				Func08FF("It seems the tree will yield nothing of value.");
+				partySpeak("It seems the tree will yield nothing of value.");
 			}
 		} else {
-			Func08FF("It seems that a pick is not needed for that.");
+			partySpeak("It seems that a pick is not needed for that.");
 		}
 	}
 	declare var var0008;
@@ -3439,7 +3439,7 @@ void Func0270 shape#(SHAPE_PICK) () {
 			wait 2;
 			actor frame strike_1h;
 			wait 1;
-			call Func0270;
+			call FuncPick;
 		};
 	}
 	if (event == SCRIPTED) {
@@ -3480,7 +3480,7 @@ void Func0270 shape#(SHAPE_PICK) () {
 	}
 }
 
-void Func0273 shape#(SHAPE_LOCKPICK) () {
+void FuncLockpick shape#(SHAPE_LOCKPICK) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		UI_play_sound_effect2(SFX_KEY_CLICK, item);
@@ -3531,16 +3531,16 @@ void Func0273 shape#(SHAPE_LOCKPICK) () {
 						return;
 					}
 				} else {
-					Func08FE("@Strange that did not work.@");
+					partyUtters("@Strange that did not work.@");
 					return;
 				}
 			}
 		}
-		Func08FF("@Try those on a locked chest or door.@");
+		partySpeak("@Try those on a locked chest or door.@");
 	}
 }
 
-void Func0275 shape#(SHAPE_LIGHTNING_WAND) () {
+void FuncLightningWand shape#(SHAPE_LIGHTNING_WAND) () {
 	declare struct<ObjPos> var0000;
 	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
@@ -3558,7 +3558,7 @@ void Func0275 shape#(SHAPE_LIGHTNING_WAND) () {
 	var0001 = AVATAR->set_to_attack(var0000, SHAPE_LIGHTNING_WAND);
 }
 
-void Func0276 shape#(SHAPE_FIRE_WAND) () {
+void FuncFireWand shape#(SHAPE_FIRE_WAND) () {
 	declare struct<ObjPos> var0000;
 	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
@@ -3577,7 +3577,7 @@ void Func0276 shape#(SHAPE_FIRE_WAND) () {
 	var0001 = AVATAR->set_to_attack(var0000, SHAPE_FIRE_WAND);
 }
 
-void Func0281 shape#(SHAPE_KEY) () {
+void FuncKey shape#(SHAPE_KEY) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		UI_play_sound_effect2(SFX_KEY_CLICK, item);
@@ -3621,7 +3621,7 @@ void Func0281 shape#(SHAPE_KEY) () {
 	}
 }
 
-void Func0282 shape#(SHAPE_BOOK) () {
+void FuncBook shape#(SHAPE_BOOK) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = QUALITY_BOOK_CHICKEN_RAISING;
 		UI_play_sound_effect2(SFX_GUMP, item);
@@ -4797,60 +4797,60 @@ void Func0282 shape#(SHAPE_BOOK) () {
 	}
 }
 
-void Func0284 shape#(SHAPE_GOLD_COIN) () {
+void FuncGoldCoin shape#(SHAPE_GOLD_COIN) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		UI_play_sound_effect2(SFX_BELL_DING, item);
-		if (!(Func0937(AVATAR) || (!Func0937(IOLO)))) {
+		if (!(canTalk(AVATAR) || (!canTalk(IOLO)))) {
 			return;
 		}
 		if (Func08F7(IOLO)) {
-			Func0933(AVATAR, "@Call it.@", 0);
+			delayedBark(AVATAR, "@Call it.@", 0);
 			var var0000 = UI_die_roll(1, 2);
 			if (var0000 == 1) {
-				Func0933(IOLO, "@Tails.@", 16);
-				Func0933(AVATAR, "@It is heads.@", 32);
+				delayedBark(IOLO, "@Tails.@", 16);
+				delayedBark(AVATAR, "@It is heads.@", 32);
 			} else {
-				Func0933(IOLO, "@Heads.@", 16);
-				Func0933(AVATAR, "@It is tails.@", 32);
+				delayedBark(IOLO, "@Heads.@", 16);
+				delayedBark(AVATAR, "@It is tails.@", 32);
 			}
 			if (UI_die_roll(1, 3) == 1) {
-				Func0933(IOLO, "@Again!@", 48);
+				delayedBark(IOLO, "@Again!@", 48);
 			}
 		}
 	}
 }
 
-void Func0285 shape#(SHAPE_GOLD_NUGGET) () {
+void FuncGoldNugget shape#(SHAPE_GOLD_NUGGET) () {
 	if (event == DOUBLECLICK) {
 		// TYPO: Should be "Britain"
 		var var0000 = "@I believe that the current exchange rate is "
 					  + "ten crowns per nugget at the mint in Britian.@";
-		Func08FF(var0000);
+		partySpeak(var0000);
 	}
 }
 
-void Func0286 shape#(SHAPE_GOLD_BAR) () {
+void FuncGoldBar shape#(SHAPE_GOLD_BAR) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = "@I believe the current exchange rate is "
 					  + "one hundred crowns per bar at the Britannian mint.@";
-		Func08FF(var0000);
+		partySpeak(var0000);
 	}
 }
 
-void Func0288 shape#(SHAPE_SLEEPING_POWDER) () {
+void FuncSleepingPowder shape#(SHAPE_SLEEPING_POWDER) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
 			var0000->set_item_flag(ASLEEP);
 		} else {
-			Func08FE("@Do not waste that!@");
+			partyUtters("@Do not waste that!@");
 		}
 		Func0925(item);
 	}
 }
 
-void Func0289 shape#(SHAPE_VENOM) () {
+void FuncVenom shape#(SHAPE_VENOM) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
@@ -4889,32 +4889,32 @@ void Func0289 shape#(SHAPE_VENOM) () {
 	}
 }
 
-void Func028A shape#(SHAPE_SEXTANT) () {
+void FuncSextant shape#(SHAPE_SEXTANT) () {
 	if (event == DOUBLECLICK) {
 		struct<Position> var0000 = AVATAR->get_object_position();
 		var var0001 = (var0000.x - 933) / 10;
 		var var0002 = (var0000.y - 1134) / 10;
 		declare var var0003;
 		if (var0001 < 0) {
-			var0003 = " " + Func0932(var0001) + " West";
+			var0003 = " " + absoluteValueOf(var0001) + " West";
 		} else {
-			var0003 = " " + Func0932(var0001) + " East";
+			var0003 = " " + absoluteValueOf(var0001) + " East";
 		}
 		declare var var0004;
 		if (var0002 < 0) {
-			var0004 = " " + Func0932(var0002) + " North";
+			var0004 = " " + absoluteValueOf(var0002) + " North";
 		} else {
-			var0004 = " " + Func0932(var0002) + " South";
+			var0004 = " " + absoluteValueOf(var0002) + " South";
 		}
 		if (!UI_is_pc_inside()) {
 			item_say(var0004 + var0003);
-		} else if (Func0937(IOLO)) {
+		} else if (canTalk(IOLO)) {
 			IOLO->item_say("@'Twill not function under a roof!@");
 		}
 	}
 }
 
-void Func028B shape#(SHAPE_SPINNING_WHEEL) () {
+void FuncSpinningWheel shape#(SHAPE_SPINNING_WHEEL) () {
 	declare var var0002;
 	if (event == BG_PATH_SUCCESS) {
 		var var0000 = AVATAR->find_nearby(SHAPE_CHAIR, 1, MASK_NONE);
@@ -4937,7 +4937,7 @@ void Func028B shape#(SHAPE_SPINNING_WHEEL) () {
 				continue;
 				sfx SFX_ROTATING_WOOSH;
 			};
-			call Func028B;
+			call FuncSpinningWheel;
 		};
 		return;
 	}
@@ -4962,17 +4962,17 @@ void Func028B shape#(SHAPE_SPINNING_WHEEL) () {
 	if (event == DOUBLECLICK) {
 		var var0006 = "@I suspect spinning the wool will be more fruitful "
 					  + "than spinning an empty wheel.@";
-		Func08FF(var0006);
+		partySpeak(var0006);
 	}
 }
 
-void Func028C shape#(SHAPE_CART_PIECE) () {
+void FuncCartPiece shape#(SHAPE_CART_PIECE) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
 
-void Func028D shape#(SHAPE_BALE_OF_WOOL) () {
+void FuncBaleOfWool shape#(SHAPE_BALE_OF_WOOL) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_container();
 		if (var0000 == AVATAR->get_npc_object()) {
@@ -5005,7 +5005,7 @@ void Func028D shape#(SHAPE_BALE_OF_WOOL) () {
 	}
 }
 
-void Func028E shape#(SHAPE_SPINDLE_OF_THREAD) () {
+void FuncSpindleOfThread shape#(SHAPE_SPINDLE_OF_THREAD) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_container();
 		if (var0000 == AVATAR->get_npc_object()) {
@@ -5036,7 +5036,7 @@ void Func028E shape#(SHAPE_SPINDLE_OF_THREAD) () {
 	}
 }
 
-void Func0291 shape#(SHAPE_CURTAINS_NS) () {
+void FuncCurtainsNs shape#(SHAPE_CURTAINS_NS) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		declare var var0001;
@@ -5050,7 +5050,7 @@ void Func0291 shape#(SHAPE_CURTAINS_NS) () {
 	}
 }
 
-void Func0292 shape#(SHAPE_DOUGH) () {
+void FuncDough shape#(SHAPE_DOUGH) () {
 	declare var var0003;
 	declare struct<Position> var0004;
 	if (event == DOUBLECLICK) {
@@ -5068,10 +5068,10 @@ void Func0292 shape#(SHAPE_DOUGH) () {
 					if (var0003) {
 						var0003 = script item after 60 ticks {
 							nohalt;
-							call Func0292;
+							call FuncDough;
 						};
 						if (UI_die_roll(1, 2) == 1) {
-							Func08FE("@Do not over cook it!@");
+							partyUtters("@Do not over cook it!@");
 						}
 					}
 				}
@@ -5093,10 +5093,10 @@ void Func0292 shape#(SHAPE_DOUGH) () {
 				if (var0003) {
 					var var0007 = UI_die_roll(1, 3);
 					if (var0007 == 1) {
-						Func08FE("@I believe the bread is ready.@");
+						partyUtters("@I believe the bread is ready.@");
 					}
 					if (var0007 == 2) {
-						Func08FE("@Mmm... Smells good.@");
+						partyUtters("@Mmm... Smells good.@");
 					}
 				}
 			}
@@ -5104,13 +5104,13 @@ void Func0292 shape#(SHAPE_DOUGH) () {
 	}
 }
 
-void Func0294 shape#(SHAPE_CART_PIECE2) () {
+void FuncCartPiece2 shape#(SHAPE_CART_PIECE2) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
 
-void Func0296 shape#(SHAPE_FISHING_ROD) () {
+void FuncFishingRod shape#(SHAPE_FISHING_ROD) () {
 	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		UI_close_gumps();
 		struct<ObjPos> var0000 = UI_click_on_item();
@@ -5146,40 +5146,40 @@ void Func0296 shape#(SHAPE_FISHING_ROD) () {
 				var0009 = UI_die_roll(1, 3);
 				if (var0009 == 1) {
 					// TYPO: Should be "Indeed".
-					Func08FE("@Indded, a whopper!@");
+					partyUtters("@Indded, a whopper!@");
 					if (SPARK->npc_nearby()) {
-						Func0933(SPARK, "@I have seen bigger.@", 16);
+						delayedBark(SPARK, "@I have seen bigger.@", 16);
 					}
 				}
 				if (var0009 == 2) {
-					Func08FE("@What a meal!@");
+					partyUtters("@What a meal!@");
 				}
 				if (var0009 == 3) {
-					Func08FE(["@That fish does not", "look right.@"]);
+					partyUtters(["@That fish does not", "look right.@"]);
 				}
 			}
 		} else {
 			var0009 = UI_die_roll(1, 4);
 			if (var0009 == 1) {
-				Func0933(AVATAR, "@Not even a bite!@", 0);
+				delayedBark(AVATAR, "@Not even a bite!@", 0);
 			}
 			if (var0009 == 2) {
-				Func0933(AVATAR, "@It got away!@", 0);
+				delayedBark(AVATAR, "@It got away!@", 0);
 				if (IOLO->npc_nearby()) {
-					Func0933(IOLO, "@It was the Big One!@", 16);
+					delayedBark(IOLO, "@It was the Big One!@", 16);
 				}
 			}
 			if (var0009 == 3) {
-				Func0933(AVATAR, "@I've lost my bait.@", 0);
+				delayedBark(AVATAR, "@I've lost my bait.@", 0);
 			}
 			if (var0009 == 4) {
-				Func0933(AVATAR, "@I felt a nibble.@", 0);
+				delayedBark(AVATAR, "@I felt a nibble.@", 0);
 			}
 		}
 	}
 }
 
-void Func029C shape#(SHAPE_SWORD_BLANK) () {
+void FuncSwordBlank shape#(SHAPE_SWORD_BLANK) () {
 	declare var var0003;
 	declare var var0008;
 	if (event == DOUBLECLICK) {
@@ -5193,7 +5193,7 @@ void Func029C shape#(SHAPE_SWORD_BLANK) () {
 						if (var0001.z == (var0002.z + 1)) {
 							var0003 = get_item_frame();
 							if ((var0003 >= FRAME_BLACKSWORD_BLANK_HOT1) && (var0003 <= FRAME_BLACKSWORD_BLANK_HOT3)) {
-								var0000->Func026F();
+								var0000->FuncHammer();
 								return;
 							}
 						}
@@ -5210,19 +5210,19 @@ void Func029C shape#(SHAPE_SWORD_BLANK) () {
 				var0005 = [0, 1, -1, 1];
 				var0006 = [2, 1, 2, 0];
 				Func0828(
-						item, var0005, var0006, -3, Func029C, item,
+						item, var0005, var0006, -3, FuncSwordBlank, item,
 						BG_PATH_SUCCESS);
 			} else if (!Func0944(item)) {
 				var var0007 = Func0945(item);
 				var0005 = [0, 1, -1, 1];
 				var0006 = [2, 1, 2, 0];
 				Func0828(
-						var0007, var0005, var0006, -3, Func029C, var0007,
+						var0007, var0005, var0006, -3, FuncSwordBlank, var0007,
 						BG_PATH_SUCCESS);
 			} else {
 				var0008 = script item {
 					wait 2;
-					call Func029C;
+					call FuncSwordBlank;
 				};
 			}
 		}
@@ -5235,7 +5235,7 @@ void Func029C shape#(SHAPE_SWORD_BLANK) () {
 			actor frame bowing;
 			wait 3;
 			actor frame standing;
-			call Func029C;
+			call FuncSwordBlank;
 		};
 		var0008 = script item {
 			wait 3;
@@ -5252,7 +5252,7 @@ void Func029C shape#(SHAPE_SWORD_BLANK) () {
 			if (var000C == SHAPE_ANVIL) {
 				if (var000B->get_item_frame() == FRAME_MAGIC_ANVIL) {
 					Func0828(
-							var000B, 0, 2, 0, Func029C, var000B,
+							var000B, 0, 2, 0, FuncSwordBlank, var000B,
 							BG_PATH_FAILURE);
 				}
 			}
@@ -5260,7 +5260,7 @@ void Func029C shape#(SHAPE_SWORD_BLANK) () {
 				if ((var000B->get_item_frame() >= FRAME_MAGIC_FIREPIT_COLD)
 					&& (var000B->get_item_frame() <= FRAME_MAGIC_FIREPIT_FLAME)) {
 					Func0828(
-							var000B, 1, 0, 0, Func029C, var000B,
+							var000B, 1, 0, 0, FuncSwordBlank, var000B,
 							PATH_SUCCESS_9);
 				}
 			}
@@ -5269,7 +5269,7 @@ void Func029C shape#(SHAPE_SWORD_BLANK) () {
 				if ((var0003 >= FRAME_BLACKSWORD_BLANK_LUKEWARM1)
 					&& (var0003 <= FRAME_BLACKSWORD_BLANK_HOT3)) {
 					Func0828(
-							var000B, 0, 1, 0, Func029C, var000B,
+							var000B, 0, 1, 0, FuncSwordBlank, var000B,
 							PATH_SUCCESS);
 				} else {
 					AVATAR->get_npc_object()->item_say(
@@ -5324,7 +5324,7 @@ void Func029C shape#(SHAPE_SWORD_BLANK) () {
 	}
 }
 
-void Func02A3 shape#(SHAPE_DESK_ITEMS) () {
+void FuncDeskItems shape#(SHAPE_DESK_ITEMS) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		declare var var0002;
@@ -5443,7 +5443,7 @@ void Func02A3 shape#(SHAPE_DESK_ITEMS) () {
 	}
 }
 
-void Func02A6 shape#(SHAPE_CURTAINS_EW) () {
+void FuncCurtainsEw shape#(SHAPE_CURTAINS_EW) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		declare var var0001;
@@ -5457,31 +5457,31 @@ void Func02A6 shape#(SHAPE_CURTAINS_EW) () {
 	}
 }
 
-void Func02B1 shape#(SHAPE_HARPSICORD) () {
+void FuncHarpsicord shape#(SHAPE_HARPSICORD) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(MUSIC_HARPSICHORD, item);
 	}
 }
 
-void Func02B2 shape#(SHAPE_XYLOPHONE) () {
+void FuncXylophone shape#(SHAPE_XYLOPHONE) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(MUSIC_XYLOPHONE, item);
 	}
 }
 
-void Func02B3 shape#(SHAPE_LYRE) () {
+void FuncLyre shape#(SHAPE_LYRE) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(MUSIC_HARP, item);
 	}
 }
 
-void Func02B4 shape#(SHAPE_LUTE) () {
+void FuncLute shape#(SHAPE_LUTE) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(MUSIC_LUTE, item);
 	}
 }
 
-void Func02B5 shape#(SHAPE_WHISTLE) () {
+void FuncWhistle shape#(SHAPE_WHISTLE) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(MUSIC_WISP_CALL, item);
 		if (get_item_frame() == FRAME_WHISTLE_WISP_WHISTLE) {
@@ -5494,19 +5494,19 @@ void Func02B5 shape#(SHAPE_WHISTLE) () {
 	}
 }
 
-void Func02B7 shape#(SHAPE_GRANDFATHER_CLOCK_NS) () {
+void FuncGrandfatherClockNs shape#(SHAPE_GRANDFATHER_CLOCK_NS) () {
 	if (event == DOUBLECLICK) {
-		item->Func00FC();
+		item->FuncGrandfatherClockEw();
 	}
 }
 
-void Func02B8 shape#(SHAPE_BED_EW) () {
+void FuncBedEw shape#(SHAPE_BED_EW) () {
 	if (event == DOUBLECLICK) {
 		Func0800(item);
 	}
 }
 
-void Func02BA shape#(SHAPE_SHEARS) () {
+void FuncShears shape#(SHAPE_SHEARS) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		var var0001 = var0000.obj->get_item_shape();
@@ -5514,13 +5514,13 @@ void Func02BA shape#(SHAPE_SHEARS) () {
 			var0000->set_item_shape(SHAPE_BANDAGES);
 			var0000->set_item_frame(UI_die_roll(0, 2));
 		} else {
-			Func08FF("@Might not those come in handy for cutting cloth into "
+			partySpeak("@Might not those come in handy for cutting cloth into "
 					 "bandages?@");
 		}
 	}
 }
 
-void Func02BD shape#(SHAPE_LIT_TORCH) () {
+void FuncLitTorch shape#(SHAPE_LIT_TORCH) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		Func0839(item, SHAPE_TORCH, event);
 	}
@@ -5539,17 +5539,17 @@ void Func02BD shape#(SHAPE_LIT_TORCH) () {
 	}
 }
 
-void Func02BE shape#(SHAPE_CANNON) () {
+void FuncCannon shape#(SHAPE_CANNON) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var var0000 = find_nearby(SHAPE_POWDER_KEG, 10, MASK_NONE);
 		var var0001 = find_nearby(SHAPE_CANNON_BALL, 10, MASK_NONE);
 		if (!var0000) {
-			Func08FE("@It needs powder!@");
+			partyUtters("@It needs powder!@");
 			return;
 		}
 		if (!var0001) {
-			Func08FE("@It needs cannon balls!@");
+			partyUtters("@It needs cannon balls!@");
 			return;
 		}
 		Func0925(var0000[1]);
@@ -5559,7 +5559,7 @@ void Func02BE shape#(SHAPE_CANNON) () {
 		var var0004 = var0002.x - var0003.x;
 		var var0005 = var0002.y - var0003.y;
 		declare var var0006;
-		if (Func0932(var0004) > Func0932(var0005)) {
+		if (absoluteValueOf(var0004) > absoluteValueOf(var0005)) {
 			if (var0004 > 0) {
 				var0006 = EAST;
 			} else {
@@ -5580,7 +5580,7 @@ void Func02BE shape#(SHAPE_CANNON) () {
 		if (var0007 == SHAPE_POWDER_KEG) {
 			var var0009 = script item after 1 ticks {
 				nohalt;
-				call Func02C0;
+				call FuncPowderKeg;
 			};
 			return;
 		}
@@ -5596,15 +5596,15 @@ void Func02BE shape#(SHAPE_CANNON) () {
 				remove_item();
 				// TODO: this should be a return.
 				// Need to make UCC optimize this.
-				goto labelFunc02BE_01A6;
+				goto labelFuncCannon_01A6;
 			}
 		}
 	}
-labelFunc02BE_01A6:
+labelFuncCannon_01A6:
 	return;
 }
 
-void Func02C0 shape#(SHAPE_POWDER_KEG) () {
+void FuncPowderKeg shape#(SHAPE_POWDER_KEG) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		var var0000 = get_container();
 		if (!var0000->is_npc()) {
@@ -5615,7 +5615,7 @@ void Func02C0 shape#(SHAPE_POWDER_KEG) () {
 	}
 }
 
-void Func02C3 shape#(SHAPE_BLACK_SWORD) () {
+void FuncBlackSword shape#(SHAPE_BLACK_SWORD) () {
 	if (event == DOUBLECLICK) {
 		item->Func06F6();
 	}
@@ -5624,13 +5624,13 @@ void Func02C3 shape#(SHAPE_BLACK_SWORD) () {
 			UI_fade_palette(12 * TICK, 1, FADE_TO_BLACK);
 			var var0000 = script item {
 				wait 3;
-				call Func03DE;
+				call FuncDarkCore;
 			};
 		}
 	}
 }
 
-void Func02C4 shape#(SHAPE_STOCKS) () {
+void FuncStocks shape#(SHAPE_STOCKS) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		var var0001 = var0000;
@@ -5645,25 +5645,25 @@ void Func02C4 shape#(SHAPE_STOCKS) () {
 	}
 }
 
-void Func02C5 shape#(SHAPE_GUILLOTINE_PLATFORM) () {
+void FuncGuillotinePlatform shape#(SHAPE_GUILLOTINE_PLATFORM) () {
 	if (event == DOUBLECLICK) {
 		struct<Position> var0000 = get_object_position();
 		var var0001 = find_nearby(SHAPE_GUILLOTINE, 4, MASK_NONE);
 		for (var0004 in var0001) {
 			struct<Position> var0005 = var0004->get_object_position();
 			if (var0005.x == var0000) {
-				var0004->Func02DE();
+				var0004->FuncGuillotine();
 				// TODO: this should be a return.
 				// Need to make UCC optimize this.
-				goto labelFunc02C5_004E;
+				goto labelFuncGuillotinePlatform_004E;
 			}
 		}
 	}
-labelFunc02C5_004E:
+labelFuncGuillotinePlatform_004E:
 	return;
 }
 
-void Func02CB shape#(SHAPE_TOMBSTONE) () {
+void FuncTombstone shape#(SHAPE_TOMBSTONE) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -6248,7 +6248,7 @@ void Func02CB shape#(SHAPE_TOMBSTONE) () {
 	}
 }
 
-void Func02CF shape#(SHAPE_WATER_TROUGH_EW) () {
+void FuncWaterTroughEw shape#(SHAPE_WATER_TROUGH_EW) () {
 	var var0000 = AVATAR->get_npc_object()->get_cont_items(
 			SHAPE_BUCKET, QUALITY_ANY, FRAME_BUCKET_WATER);
 	declare var var0001;
@@ -6256,7 +6256,7 @@ void Func02CF shape#(SHAPE_WATER_TROUGH_EW) () {
 	if (var0000) {
 		var0001 = [1, 1, -2, -2, 0, -1, 0, -1];
 		var0002 = [-1, -2, -1, -2, 1, 1, -4, -4];
-		Func0828(item, var0001, var0002, 0, Func032A, var0000, BG_PATH_SUCCESS);
+		Func0828(item, var0001, var0002, 0, FuncBucket, var0000, BG_PATH_SUCCESS);
 	} else {
 		var0000 = AVATAR->get_npc_object()->get_cont_items(
 				SHAPE_BUCKET, QUALITY_ANY, FRAME_BUCKET_EMPTY);
@@ -6264,13 +6264,13 @@ void Func02CF shape#(SHAPE_WATER_TROUGH_EW) () {
 			var0001 = [1, 1, -2, -2, 0, -1, 0, -1];
 			var0002 = [-1, -2, -1, -2, 1, 1, -4, -4];
 			Func0828(
-					item, var0001, var0002, 0, Func032A, var0000,
+					item, var0001, var0002, 0, FuncBucket, var0000,
 					BG_PATH_SUCCESS);
 		}
 	}
 }
 
-void Func02D3 shape#(SHAPE_BOLT) () {
+void FuncBolt shape#(SHAPE_BOLT) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = Func0908();
 		if (IOLO->npc_nearby()) {
@@ -6285,7 +6285,7 @@ void Func02D3 shape#(SHAPE_BOLT) () {
 	}
 }
 
-void Func02D5 shape#(SHAPE_VIRTUE_ROULETTE_WHEEL) () {
+void FuncVirtueRouletteWheel shape#(SHAPE_VIRTUE_ROULETTE_WHEEL) () {
 	if ((event == DOUBLECLICK) && (!in_usecode())) {
 		var var0000 = UI_die_roll(1, 16);
 		halt_scheduled();
@@ -6323,8 +6323,8 @@ void Func02D5 shape#(SHAPE_VIRTUE_ROULETTE_WHEEL) () {
 			call Func060A;
 		};
 		if ((UI_game_hour() >= 15) || (UI_game_hour() <= 3)) {
-			if (Func0937(SMITHY)) {
-				Func0904(SMITHY, ["@Place your bets.@", "@Round she goes!@"]);
+			if (canTalk(SMITHY)) {
+				makeNpcSay(SMITHY, ["@Place your bets.@", "@Round she goes!@"]);
 			}
 			SMITHY->set_schedule_type(HOUND);
 			var var0002 = find_nearby(SHAPE_VIRTUE_ROULETTE_TABLE, 7, MASK_NONE);
@@ -6336,7 +6336,7 @@ void Func02D5 shape#(SHAPE_VIRTUE_ROULETTE_WHEEL) () {
 	}
 }
 
-void Func02D8 shape#(SHAPE_CADDELITE_CHUNKS) () {
+void FuncCaddeliteChunks shape#(SHAPE_CADDELITE_CHUNKS) () {
 	if (event == DOUBLECLICK) {
 		if (SPARK->npc_nearby()) {
 			SPARK->say("\"Thou dost need a blacksmith to do that. I wager my "
@@ -6347,7 +6347,7 @@ void Func02D8 shape#(SHAPE_CADDELITE_CHUNKS) () {
 	}
 }
 
-void Func02D9 shape#(SHAPE_CRYSTAL_BALL) () {
+void FuncCrystalBall shape#(SHAPE_CRYSTAL_BALL) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var var0000 = get_item_quality();
@@ -6388,17 +6388,17 @@ void Func02D9 shape#(SHAPE_CRYSTAL_BALL) () {
 	}
 }
 
-void Func02DA shape#(SHAPE_BABY) () {
+void FuncBaby shape#(SHAPE_BABY) () {
 	if (event == DOUBLECLICK) {
 		if (get_item_frame() == FRAME_BABY_RIKY) {
 			var var0000 = "@Praise All! The child is still alive. He must"
 						  + " be returned to Lady Tory immediately!@";
-			Func08FF(var0000);
+			partySpeak(var0000);
 		} else {
 			struct<ObjPos> var0001 = UI_click_on_item();
 			var var0002 = var0001->get_item_shape();
 			if (var0002 == SHAPE_BABY_IN_A_CRADLE) {
-				Func08FF("@Pardon me my friend, dost thou not think that would "
+				partySpeak("@Pardon me my friend, dost thou not think that would "
 						 "be a little crowded?@");
 			} else if (var0002 == SHAPE_CRADLE) {
 				var0001->set_item_shape(SHAPE_BABY_IN_A_CRADLE);
@@ -6410,7 +6410,7 @@ void Func02DA shape#(SHAPE_BABY) () {
 	}
 }
 
-void Func02DE shape#(SHAPE_GUILLOTINE) () {
+void FuncGuillotine shape#(SHAPE_GUILLOTINE) () {
 	if (event == DOUBLECLICK) {
 		if (!in_usecode()) {
 			declare var var0000;
@@ -6451,18 +6451,18 @@ void Func02DE shape#(SHAPE_GUILLOTINE) () {
 	}
 }
 
-void Func02DF shape#(SHAPE_ARCHERY_TARGET) () {
+void FuncArcheryTarget shape#(SHAPE_ARCHERY_TARGET) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = "@I believe those are for the trainers to use.*"
 					  + "If thou art in need of practice, why not "
 					  + "seek out a trainer?@";
-		Func08FF(var0000);
+		partySpeak(var0000);
 	}
 }
 
-void Func02E3 shape#(SHAPE_FIREPIT) () {}
+void FuncFirepit shape#(SHAPE_FIREPIT) () {}
 
-void Func02E4 shape#(SHAPE_WELL_PULLEY) () {
+void FuncWellPulley shape#(SHAPE_WELL_PULLEY) () {
 	var var0000 = AVATAR->get_npc_object()->get_cont_items(
 			SHAPE_BUCKET, QUALITY_ANY, FRAME_BUCKET_EMPTY);
 	if (var0000) {
@@ -6471,13 +6471,13 @@ void Func02E4 shape#(SHAPE_WELL_PULLEY) () {
 		var var0003 = find_nearest(SHAPE_WELL, 5);
 		if (var0003) {
 			Func0828(
-					var0003, var0001, var0002, 0, Func032A, var0000,
+					var0003, var0001, var0002, 0, FuncBucket, var0000,
 					PATH_SUCCESS_9);
 		}
 	}
 }
 
-void Func02E5 shape#(SHAPE_WATER_TROUGH_NS) () {
+void FuncWaterTroughNs shape#(SHAPE_WATER_TROUGH_NS) () {
 	var var0000 = AVATAR->get_npc_object()->get_cont_items(
 			SHAPE_BUCKET, QUALITY_ANY, FRAME_BUCKET_WATER);
 	declare var var0001;
@@ -6485,7 +6485,7 @@ void Func02E5 shape#(SHAPE_WATER_TROUGH_NS) () {
 	if (var0000) {
 		var0001 = [-1, -2, -1, -2, 1, 1, -4, -4];
 		var0002 = [1, 1, -2, -2, 0, -1, 0, -1];
-		Func0828(item, var0001, var0002, 0, Func032A, var0000, BG_PATH_SUCCESS);
+		Func0828(item, var0001, var0002, 0, FuncBucket, var0000, BG_PATH_SUCCESS);
 	} else {
 		var0000 = AVATAR->get_npc_object()->get_cont_items(
 				SHAPE_BUCKET, QUALITY_ANY, FRAME_BUCKET_EMPTY);
@@ -6493,28 +6493,28 @@ void Func02E5 shape#(SHAPE_WATER_TROUGH_NS) () {
 			var0001 = [-1, -2, -1, -2, 1, 1, -4, -4];
 			var0002 = [1, 1, -2, -2, 0, -1, 0, -1];
 			Func0828(
-					item, var0001, var0002, 0, Func032A, var0000,
+					item, var0001, var0002, 0, FuncBucket, var0000,
 					BG_PATH_SUCCESS);
 		}
 	}
 }
 
-void Func02E6 shape#(SHAPE_STUFFED_TOY) () {
+void FuncStuffedToy shape#(SHAPE_STUFFED_TOY) () {
 	if (event == DOUBLECLICK) {
-		if (SPARK->npc_nearby() && Func0937(SPARK)) {
+		if (SPARK->npc_nearby() && canTalk(SPARK)) {
 			SPARK->item_say("@Gee, is that neat.@");
 		}
 	}
 }
 
-void Func02E7 shape#(SHAPE_STRENGTH_TESTER) () {
+void FuncStrengthTester shape#(SHAPE_STRENGTH_TESTER) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var var0000 = [0, -1, 1];
 		var var0001 = [1, 1, 1];
 		var var0002 = -1;
 		Func0828(
-				item, var0000, var0001, var0002, Func02E7, item,
+				item, var0000, var0001, var0002, FuncStrengthTester, item,
 				BG_PATH_SUCCESS);
 	}
 	if (event == BG_PATH_SUCCESS) {
@@ -6564,7 +6564,7 @@ void Func02E7 shape#(SHAPE_STRENGTH_TESTER) () {
 				nohalt;
 				sfx SFX_BELL_DONG;
 			};
-			if (CARROCIO->npc_nearby() && Func0937(CARROCIO)) {
+			if (CARROCIO->npc_nearby() && canTalk(CARROCIO)) {
 				var0004 = script CARROCIO after 15 ticks {
 					nohalt;
 					say "@Avatar wins a Dragon!@";
@@ -6588,7 +6588,7 @@ void Func02E7 shape#(SHAPE_STRENGTH_TESTER) () {
 	}
 }
 
-void Func02E8 shape#(SHAPE_TELESCOPE) () {
+void FuncTelescope shape#(SHAPE_TELESCOPE) () {
 	if (event == DOUBLECLICK) {
 		// BUG: UI_wizard_eye only takes one parameter, the duration of the
 		// effect. This makes a very long lasting wizard eye, and the second
@@ -6599,13 +6599,13 @@ void Func02E8 shape#(SHAPE_TELESCOPE) () {
 	}
 }
 
-void Func02E9 shape#(SHAPE_HARP) () {
+void FuncHarp shape#(SHAPE_HARP) () {
 	if (event == DOUBLECLICK) {
 		UI_play_music(MUSIC_HARP, item);
 	}
 }
 
-void Func02EB shape#(SHAPE_SOUL_CAGE) () {
+void FuncSoulCage shape#(SHAPE_SOUL_CAGE) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		struct<ObjPos> var0001 = UI_click_on_item();
@@ -6634,7 +6634,7 @@ void Func02EB shape#(SHAPE_SOUL_CAGE) () {
 	}
 }
 
-void Func02F0 shape#(SHAPE_MUSIC_BOX) () {
+void FuncMusicBox shape#(SHAPE_MUSIC_BOX) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		if (var0000 == FRAME_MUSIC_BOX_CLOSED) {
@@ -6651,7 +6651,7 @@ void Func02F0 shape#(SHAPE_MUSIC_BOX) () {
 	}
 }
 
-void Func02F2 shape#(SHAPE_VIAL) () {
+void FuncVial shape#(SHAPE_VIAL) () {
 	if (event == DOUBLECLICK) {
 		if (get_item_frame() == FRAME_VIAL_FULL) {
 			struct<ObjPos> var0000 = UI_click_on_item();
@@ -6680,7 +6680,7 @@ void Func02F2 shape#(SHAPE_VIAL) () {
 					}
 					var0003 = script AVATAR {
 						wait 28;
-						call Func02F2;
+						call FuncVial;
 					};
 				}
 			}
@@ -6703,13 +6703,13 @@ void Func02F2 shape#(SHAPE_VIAL) () {
 	}
 }
 
-void Func02F5 shape#(SHAPE_CART_PIECE3) () {
+void FuncCartPiece3 shape#(SHAPE_CART_PIECE3) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
 
-void Func02F8 shape#(SHAPE_GEM) () {
+void FuncGem shape#(SHAPE_GEM) () {
 	var var0000 = get_item_frame();
 	declare var var0003;
 	if (event == DOUBLECLICK) {
@@ -6717,7 +6717,7 @@ void Func02F8 shape#(SHAPE_GEM) () {
 			var var0001
 					= "@Those are beautiful. I am sure that they would fetch "
 					  + "a high price at the jewelers' in Britain.@";
-			Func08FF(var0001);
+			partySpeak(var0001);
 		} else {
 			if (var0000 == FRAME_GEM_CASTLE_OF_FIRE_LOCATOR) {
 				if (!Func08E7()) {
@@ -6742,14 +6742,14 @@ void Func02F8 shape#(SHAPE_GEM) () {
 				if (var0000 == FRAME_GEM_DRACOTHRAXUS) {
 					if (!AVATAR->is_readied(BG_WEAPON_HAND, SHAPE_GEM,
 							FRAME_GEM_DRACOTHRAXUS)) {
-						Func08FF("@I believe the gem must be held in the "
+						partySpeak("@I believe the gem must be held in the "
 								 "weapon hand to break the mirror.@");
 						return;
 					}
 					UI_close_gumps();
 					var0003 = script item {
 						wait 2;
-						call Func02F8;
+						call FuncGem;
 					};
 				}
 			}
@@ -6761,7 +6761,7 @@ void Func02F8 shape#(SHAPE_GEM) () {
 		var var0006 = var0004->get_item_frame();
 		if (var0005 == SHAPE_MIRROR_NS) {
 			if (var0006 == FRAME_MIRROR_MAGIC) {
-				Func0828(var0004, 0, 2, -2, Func02F8, var0004, BG_PATH_SUCCESS);
+				Func0828(var0004, 0, 2, -2, FuncGem, var0004, BG_PATH_SUCCESS);
 			}
 		}
 	}
@@ -6787,14 +6787,14 @@ void Func02F8 shape#(SHAPE_GEM) () {
 			wait 10;
 			frame FRAME_GEM_ARCADION;
 			wait 2;
-			call Func0350;
+			call FuncMirrorNs;
 		};
 		gflags[MET_ARCADION] = false;
 		gflags[TALKED_ARCADION_WITH_GEM] = false;
 	}
 }
 
-void Func02FB shape#(SHAPE_RAT_RACE_GAME) () {
+void FuncRatRaceGame shape#(SHAPE_RAT_RACE_GAME) () {
 	if ((!in_usecode()) && (event == DOUBLECLICK)) {
 		if ((UI_game_hour() >= 15) || (UI_game_hour() <= 3)) {
 			SMITHY->set_schedule_type(HOUND);
@@ -6803,7 +6803,7 @@ void Func02FB shape#(SHAPE_RAT_RACE_GAME) () {
 	}
 }
 
-void Func0301 shape#(SHAPE_SMOKE_BOMB) () {
+void FuncSmokeBomb shape#(SHAPE_SMOKE_BOMB) () {
 	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		UI_close_gumps();
 		var var0000 = find_nearby(SHAPE_BEE, 300, MASK_NONE);
@@ -6827,7 +6827,7 @@ void Func0301 shape#(SHAPE_SMOKE_BOMB) () {
 	}
 }
 
-void Func0302 shape#(SHAPE_ORRERY_VIEWER) () {
+void FuncOrreryViewer shape#(SHAPE_ORRERY_VIEWER) () {
 	if ((event == DOUBLECLICK) && Func0906()) {
 		UI_close_gumps();
 		UI_view_tile([0x0B4C, 0x058C]);
@@ -6837,7 +6837,7 @@ void Func0302 shape#(SHAPE_ORRERY_VIEWER) () {
 	}
 }
 
-void Func0303 shape#(SHAPE_RUDYOMS_WAND) () {
+void FuncRudyomsWand shape#(SHAPE_RUDYOMS_WAND) () {
 	declare struct<ObjPos> var0000;
 	if (event == WEAPON) {
 		var0000 = item;
@@ -6881,32 +6881,32 @@ void Func0303 shape#(SHAPE_RUDYOMS_WAND) () {
 	}
 }
 
-void Func0305 shape#(SHAPE_CART_PIECE4) () {
+void FuncCartPiece4 shape#(SHAPE_CART_PIECE4) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
 
-void Func0306 shape#(SHAPE_CART_PIECE5) () {
+void FuncCartPiece5 shape#(SHAPE_CART_PIECE5) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
 
-void Func030D shape#(SHAPE_GANGPLANK_RAISED) () {
+void FuncGangplankRaised shape#(SHAPE_GANGPLANK_RAISED) () {
 	if (event == DOUBLECLICK) {
 		if (get_item_flag(ON_MOVING_BARGE)) {
-			Func08FF("@The sails must be furled before the planks can be "
+			partySpeak("@The sails must be furled before the planks can be "
 					 "lowered.@");
-		} else if (!Func0829(item)) {
-			Func08FF("@I think the gangplank is blocked.@");
+		} else if (!handleGangplank(item)) {
+			partySpeak("@I think the gangplank is blocked.@");
 		}
 	}
 }
 
-void Func030E shape#(SHAPE_FLAMING_OIL) () {
+void FuncFlamingOil shape#(SHAPE_FLAMING_OIL) () {
 	if (event == DOUBLECLICK) {
-		Func08FF("@Perhaps thou shouldst attack with it.@");
+		partySpeak("@Perhaps thou shouldst attack with it.@");
 	}
 	if (event == WEAPON) {
 		struct<ObjPos> var0000 = UI_click_on_item();
@@ -6936,10 +6936,10 @@ void Func030E shape#(SHAPE_FLAMING_OIL) () {
 	}
 }
 
-void Func0311 shape#(SHAPE_ORB_OF_THE_MOONS) () {
+void FuncOrbOfTheMoons shape#(SHAPE_ORB_OF_THE_MOONS) () {
 	if (event == DOUBLECLICK) {
 		if (gflags[BROKE_SPHERE]) {
-			Func08FE(["@How odd!@", "@It work before.@"]);
+			partyUtters(["@How odd!@", "@It work before.@"]);
 			return;
 		}
 		if (gflags[LEFT_TRINSIC] || (!Func093E())) {
@@ -7019,9 +7019,9 @@ void Func0311 shape#(SHAPE_ORB_OF_THE_MOONS) () {
 				}
 				var0001[var0003] += var000E;
 				var000A = UI_path_run_usecode(
-						var0001, Func0311, var0009, BG_PATH_SUCCESS);
+						var0001, FuncOrbOfTheMoons, var0009, BG_PATH_SUCCESS);
 				if (var000A) {
-					UI_set_path_failure(Func0311, var0009, BG_PATH_FAILURE);
+					UI_set_path_failure(FuncOrbOfTheMoons, var0009, BG_PATH_FAILURE);
 					var var000F = get_container();
 					var var0010 = UI_get_party_list();
 					forever {
@@ -7046,7 +7046,7 @@ void Func0311 shape#(SHAPE_ORB_OF_THE_MOONS) () {
 	if (event == BG_PATH_FAILURE) {
 		if (Func0826(item)) {
 			Func0821(item);
-			Func08FE(["@No, Avatar.@", "@Let thyself enter.@"]);
+			partyUtters(["@No, Avatar.@", "@Let thyself enter.@"]);
 		}
 	}
 	if (event == BG_PATH_SUCCESS) {
@@ -7057,14 +7057,14 @@ void Func0311 shape#(SHAPE_ORB_OF_THE_MOONS) () {
 	}
 }
 
-void Func0313 shape#(SHAPE_LEVER) () {
+void FuncLever shape#(SHAPE_LEVER) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var var0000 = -1;
 		var var0001 = -1;
 		var var0002 = -3;
 		Func0828(
-				item, var0000, var0001, var0002, Func0313, item,
+				item, var0000, var0001, var0002, FuncLever, item,
 				BG_PATH_SUCCESS);
 	}
 	if (event == BG_PATH_SUCCESS) {
@@ -7082,14 +7082,14 @@ void Func0313 shape#(SHAPE_LEVER) () {
 	}
 }
 
-void Func0314 shape#(SHAPE_SWITCH) () {
+void FuncSwitch shape#(SHAPE_SWITCH) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var var0000 = -1;
 		var var0001 = -1;
 		var var0002 = -3;
 		Func0828(
-				item, var0000, var0001, var0002, Func0314, item,
+				item, var0000, var0001, var0002, FuncSwitch, item,
 				BG_PATH_SUCCESS);
 	}
 	if ((event == BG_PATH_SUCCESS) || (event == SCRIPTED)) {
@@ -7125,7 +7125,7 @@ void Func0314 shape#(SHAPE_SWITCH) () {
 	}
 }
 
-void Func0316 shape#(SHAPE_INVISIBILITY_DUST) () {
+void FuncInvisibilityDust shape#(SHAPE_INVISIBILITY_DUST) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
@@ -7134,20 +7134,20 @@ void Func0316 shape#(SHAPE_INVISIBILITY_DUST) () {
 			if (var0000->get_item_flag(TEMPORARY)) {
 				var0000->set_item_flag(INVISIBLE);
 			}
-			Func08FE("@Do not waste that!@");
+			partyUtters("@Do not waste that!@");
 		}
 		UI_play_sound_effect2(SFX_WIZARD_MAGIC, item);
 		Func0925(item);
 	}
 }
 
-void Func031C shape#(SHAPE_DRAFT_HORSE) () {
+void FuncDraftHorse shape#(SHAPE_DRAFT_HORSE) () {
 	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
 
-void Func031D shape#(SHAPE_SCROLL) () {
+void FuncScroll shape#(SHAPE_SCROLL) () {
 	var var0000 = get_item_quality();
 	if (var0000 == QUALITY_SCROLL_OF_CASTAMBRE) {
 		item->Func0710();
@@ -7625,14 +7625,14 @@ void Func031D shape#(SHAPE_SCROLL) () {
 	}
 }
 
-void Func031E shape#(SHAPE_SEALED_BOX) () {
+void FuncSealedBox shape#(SHAPE_SEALED_BOX) () {
 	if (event == DOUBLECLICK) {
 		set_item_shape(SHAPE_UNSEALED_BOX);
 		UI_play_sound_effect2(SFX_GUMP, item);
 	}
 }
 
-void Func0326 shape#(SHAPE_GUARD3) () {
+void FuncGuard3 shape#(SHAPE_GUARD3) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
@@ -7659,7 +7659,7 @@ void Func0326 shape#(SHAPE_GUARD3) () {
 		if (gflags[GOT_TRINSIC_PASSWORD]) {
 			var0001 &= "Blackbird";
 		}
-		var var0002 = Func090B(var0001);
+		var var0002 = askForResponse(var0001);
 		if (var0002 == "Blackbird") {
 			var var0003 = Func0834();
 			var0003 = true;
@@ -7681,7 +7681,7 @@ void Func0326 shape#(SHAPE_GUARD3) () {
 
 // BUG: This function has stack underflows due to incorrect extern entries.
 // This version is patched to fix said underflows.
-void Func0329 shape#(SHAPE_TRIPLES_GAME_WHEEL) () {
+void FuncTriplesGameWheel shape#(SHAPE_TRIPLES_GAME_WHEEL) () {
 	if ((event == DOUBLECLICK) && (!in_usecode())) {
 		UI_close_gumps();
 		var var0000 = Func083C(Func083A());
@@ -7700,7 +7700,7 @@ void Func0329 shape#(SHAPE_TRIPLES_GAME_WHEEL) () {
 					gflags[WHEEL_1] = false;
 					gflags[WHEEL_2] = false;
 					gflags[WHEEL_3] = false;
-					Func0933(AVATAR, "@Spin baby!@", 0);
+					delayedBark(AVATAR, "@Spin baby!@", 0);
 					for (var0009 in var0005) {
 						var var000A = UI_die_roll(0, 2) * 8;
 						var0009->halt_scheduled();
@@ -7722,7 +7722,7 @@ void Func0329 shape#(SHAPE_TRIPLES_GAME_WHEEL) () {
 	}
 }
 
-void Func032A shape#(SHAPE_BUCKET) () {
+void FuncBucket shape#(SHAPE_BUCKET) () {
 	declare var var0000;
 	declare var var0001;
 	declare var var0002;
@@ -7737,18 +7737,18 @@ void Func032A shape#(SHAPE_BUCKET) () {
 		if (!get_container()) {
 			var0001 = [0, 1, 1, 1, -1, -1, 0, -1];
 			var0002 = [1, 1, 0, -1, 1, 0, -1, -1];
-			Func0828(item, var0001, var0002, -3, Func032A, item, EGG);
+			Func0828(item, var0001, var0002, -3, FuncBucket, item, EGG);
 		} else if (!Func0944(item)) {
 			UI_close_gumps();
 			var0003 = Func0945(item);
 			var0001 = [0, 1, -1, 1];
 			var0002 = [2, 1, 2, 0];
-			Func0828(var0003, var0001, var0002, -3, Func032A, item, EGG);
+			Func0828(var0003, var0001, var0002, -3, FuncBucket, item, EGG);
 		} else {
 			UI_close_gumps();
 			var0004 = script item {
 				wait 2;
-				call Func032A;
+				call FuncBucket;
 			};
 		}
 	}
@@ -7767,7 +7767,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 				wait 3;
 				call Func0692;
 				wait 2;
-				call Func032A;
+				call FuncBucket;
 			};
 		} else {
 			var0004 = script AVATAR->get_npc_object() {
@@ -7780,7 +7780,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 				wait 3;
 				call Func0692;
 				wait 2;
-				call Func032A;
+				call FuncBucket;
 			};
 		}
 	}
@@ -7814,7 +7814,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 					};
 				};
 				Func0828(
-						var0006, var0001, var0002, 0, Func032A, var0006,
+						var0006, var0001, var0002, 0, FuncBucket, var0006,
 						WEAPON);
 			}
 		}
@@ -7822,14 +7822,14 @@ void Func032A shape#(SHAPE_BUCKET) () {
 			var0001 = [-1, -2, -1, -2, 1, 1, -4, -4];
 			var0002 = [1, 1, -2, -2, 0, -1, 0, -1];
 			Func0828(
-					var0006, var0001, var0002, 0, Func032A, item,
+					var0006, var0001, var0002, 0, FuncBucket, item,
 					BG_PATH_SUCCESS);
 		}
 		if (var0007 == SHAPE_WATER_TROUGH_EW) {
 			var0001 = [1, 1, -2, -2, 0, -1, 0, -1];
 			var0002 = [-1, -2, -1, -2, 1, 1, -4, -4];
 			Func0828(
-					var0006, var0001, var0002, 0, Func032A, item,
+					var0006, var0001, var0002, 0, FuncBucket, item,
 					BG_PATH_SUCCESS);
 		}
 		if (var0007 == SHAPE_FIREPIT) {
@@ -7846,7 +7846,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 				}
 				if (var0000 == FRAME_BUCKET_WATER) {
 					Func0828(
-							var0006, var0001, var0002, 0, Func032A, var0006,
+							var0006, var0001, var0002, 0, FuncBucket, var0006,
 							BG_PATH_FAILURE);
 				}
 			} else {
@@ -7867,7 +7867,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 			}
 			if (var0000 == FRAME_BUCKET_WATER) {
 				Func0828(
-						var0006, var0001, var0002, -5, Func032A, var0006,
+						var0006, var0001, var0002, -5, FuncBucket, var0006,
 						BG_PATH_FAILURE);
 			}
 		}
@@ -7878,7 +7878,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 					var0001 = [-5, -5];
 					var0002 = [-1, -1];
 					Func0828(
-							var0008, var0001, var0002, 0, Func032A, item,
+							var0008, var0001, var0002, 0, FuncBucket, item,
 							PATH_SUCCESS_9);
 				}
 			} else {
@@ -7890,7 +7890,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 				var0001 = [-5, -5];
 				var0002 = [-1, -1];
 				Func0828(
-						var0006, var0001, var0002, 0, Func032A, item,
+						var0006, var0001, var0002, 0, FuncBucket, item,
 						PATH_SUCCESS_9);
 			} else {
 				AVATAR->get_npc_object()->item_say("@The bucket is full.@");
@@ -7903,19 +7903,19 @@ void Func032A shape#(SHAPE_BUCKET) () {
 				AVATAR->get_npc_object()->item_say("@The bucket is empty.@");
 				return;
 			}
-			pos = Func093C(var0006.obj, var0006);
+			pos = filterArray(var0006.obj, var0006);
 			pos.x = pos.x;
 			pos.y += 1;
-			var0009 = UI_path_run_usecode(pos, Func032A, item, PATH_SUCCESS);
+			var0009 = UI_path_run_usecode(pos, FuncBucket, item, PATH_SUCCESS);
 		}
 		if (pos.x == 0) {
 			if (var0000 == FRAME_BUCKET_EMPTY) {
 				AVATAR->get_npc_object()->item_say("@The bucket is empty.@");
 				return;
 			}
-			pos = Func093C(var0006.obj, var0006);
+			pos = filterArray(var0006.obj, var0006);
 			pos.y += 1;
-			var0009 = UI_path_run_usecode(pos, Func032A, item, PATH_SUCCESS);
+			var0009 = UI_path_run_usecode(pos, FuncBucket, item, PATH_SUCCESS);
 		}
 	}
 	declare var var000A;
@@ -8207,7 +8207,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 	}
 }
 
-void Func0334 shape#(SHAPE_PLAQUE) () {
+void FuncPlaque shape#(SHAPE_PLAQUE) () {
 	var var0000 = item;
 	var var0001 = var0000->get_item_quality();
 	declare var var0007;
@@ -8215,7 +8215,7 @@ void Func0334 shape#(SHAPE_PLAQUE) () {
 	if (event == EGG) {
 		if (get_item_shape() != SHAPE_PLAQUE) {
 			var0000 = var0000->find_nearby(SHAPE_PLAQUE, 5, MASK_ALL_UNSEEN);
-			var0000 = Func093D(var0000, var0000);
+			var0000 = sortArraysBySecondArray(var0000, var0000);
 			if (!var0000) {
 				abort;
 			}
@@ -8295,7 +8295,7 @@ void Func0334 shape#(SHAPE_PLAQUE) () {
 		var000A = [
 			"pick\{dot}item", "carefully", "to\{dot}k\{ee}p", "goi\{ng}"
 		];
-		Func08FF([
+		partySpeak([
 			"By Jove, I think thou art on the right track!",
 			"The sign appears to have changed!", "Look at it now!"
 		]);
@@ -8387,8 +8387,8 @@ void Func0334 shape#(SHAPE_PLAQUE) () {
 	} else if (var0001 == QUALITY_PLAQUE_THRONE_ROOM_OF_LORD_BRITISH) {
 		var0008 = get_object_position();
 		struct<Position> var000B = LORD_BRITISH->get_object_position();
-		if ((Func0932(var0008.x - var000B.x) <= 2)
-			&& (Func0932(var0008.y - var000B.y) <= 2)) {
+		if ((absoluteValueOf(var0008.x - var000B.x) <= 2)
+			&& (absoluteValueOf(var0008.y - var000B.y) <= 2)) {
 			var0007 = script item {
 				call Func0609;
 				call Func0609;
@@ -8403,9 +8403,9 @@ void Func0334 shape#(SHAPE_PLAQUE) () {
 				sfx SFX_HEAVY_THUD;
 				continue;
 				actor frame sleeping;
-				call Func0334;
+				call FuncPlaque;
 			};
-			Func08FE(["", "@He's dead, Avatar!@", "@Yancey-Hausman will pay!@"]);
+			partyUtters(["", "@He's dead, Avatar!@", "@Yancey-Hausman will pay!@"]);
 			var0007 = script AVATAR {
 				nohalt;
 				speech SPEECH_GUARDIAN_PRECISELY;
@@ -8458,7 +8458,7 @@ void Func0334 shape#(SHAPE_PLAQUE) () {
 	UI_display_runes(GUMP_GOLDEN_PLAQUE, var000A);
 }
 
-void Func0336 shape#(SHAPE_DIAPER) () {
+void FuncDiaper shape#(SHAPE_DIAPER) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		declare struct<ObjPos> var0001;
@@ -8472,7 +8472,7 @@ void Func0336 shape#(SHAPE_DIAPER) () {
 					Func0925(item);
 				}
 			} else {
-				Func08FE("@Those are for babies.@");
+				partyUtters("@Those are for babies.@");
 			}
 		}
 		if (var0000 == FRAME_DIAPER_DIRTY) {
@@ -8489,16 +8489,16 @@ void Func0336 shape#(SHAPE_DIAPER) () {
 			}
 		}
 		if (var0000 == FRAME_DIAPER_BASKET) {
-			Func08FE("@That is for dirty diapers.@");
+			partyUtters("@That is for dirty diapers.@");
 		}
 	}
 }
 
-void Func0337 shape#(SHAPE_ARTISTS_EQUIPMENT) () {
+void FuncArtistsEquipment shape#(SHAPE_ARTISTS_EQUIPMENT) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		if (var0000 < FRAME_ARTISTS_PAINTBRUSH_NS) {
-			Func08FE("@Finger-painting again?@");
+			partyUtters("@Finger-painting again?@");
 		} else {
 			struct<ObjPos> var0001 = UI_click_on_item();
 			var var0002 = var0001->get_item_shape();
@@ -8524,37 +8524,37 @@ void Func0337 shape#(SHAPE_ARTISTS_EQUIPMENT) () {
 						if (var0004 == 5) {
 							var0005 = "@What is it?@";
 						}
-						Func08FE(var0005);
+						partyUtters(var0005);
 						if (var0003 < 7) {
 							var0001->set_item_frame(
 									var0001->get_item_frame() + 1);
 						}
 					} else if (var0001->is_npc()) {
-						Func08FE("@Tattooing?@");
+						partyUtters("@Tattooing?@");
 					} else {
-						Func08FE(["@The stain will", "never come out.@"]);
+						partyUtters(["@The stain will", "never come out.@"]);
 					}
 				}
 			} else {
-				Func08FE("@Use pigments!@");
+				partyUtters("@Use pigments!@");
 			}
 		}
 	}
 }
 
-void Func033B shape#(SHAPE_BANDAGES) () {
+void FuncBandages shape#(SHAPE_BANDAGES) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
 			var var0001 = var0000->get_npc_prop(STRENGTH);
 			var var0002 = var0000->get_npc_prop(HEALTH);
 			if (var0002 == var0001) {
-				Func08FF("@It does not appear as though a bandage is needed.@");
+				partySpeak("@It does not appear as though a bandage is needed.@");
 			} else {
 				declare var var0003;
 				if (var0000->get_npc_number() == AVATAR) {
-					Func08FE("@Much better.@");
-				} else if (Func0937(var0000)) {
+					partyUtters("@Much better.@");
+				} else if (canTalk(var0000)) {
 					var0003 = UI_die_roll(1, 3);
 					if (var0003 == 1) {
 						var0000->item_say("@Ah, much better!@");
@@ -8574,12 +8574,12 @@ void Func033B shape#(SHAPE_BANDAGES) () {
 				Func0925(item);
 			}
 		} else {
-			Func08FE("@Do not soil the bandages.@");
+			partyUtters("@Do not soil the bandages.@");
 		}
 	}
 }
 
-void Func033C shape#(SHAPE_WALL_BOTTOM) () {
+void FuncWallBottom shape#(SHAPE_WALL_BOTTOM) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -8588,29 +8588,29 @@ void Func033C shape#(SHAPE_WALL_BOTTOM) () {
 	}
 }
 
-void Func0345 shape#(SHAPE_EASEL) () {
+void FuncEasel shape#(SHAPE_EASEL) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = "@Thou shouldst use the brush and pigments, " + Func0908()
 					  + ".@";
-		Func08FF(var0000);
+		partySpeak(var0000);
 	}
 }
 
-void Func0347 shape#(SHAPE_HOURGLASS) () {
+void FuncHourglass shape#(SHAPE_HOURGLASS) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		if (var0000 == FRAME_HOURGLASS_ENCHANTED) {
 			if (gflags[BROKE_SPHERE]) {
 				// BUG: this should probably have been 'item' instead of
 				// SHAPE_TIME_LORD
-				SHAPE_TIME_LORD->get_npc_object()->Func0269();
+				SHAPE_TIME_LORD->get_npc_object()->FuncTimeLord();
 				UI_play_sound_effect2(SFX_WIZARD_MAGIC, item);
 			}
 		}
 	}
 }
 
-void Func0348 shape#(SHAPE_FLYING_CARPET) () {
+void FuncFlyingCarpet shape#(SHAPE_FLYING_CARPET) () {
 	var var0000 = get_barge();
 	if ((event == DOUBLECLICK) && (!(var0000 == NULL_OBJ))) {
 		if (!get_item_flag(ON_MOVING_BARGE)) {
@@ -8630,18 +8630,18 @@ void Func0348 shape#(SHAPE_FLYING_CARPET) () {
 			};
 			UI_play_music(MUSIC_STOP, NULL_OBJ);
 		} else {
-			Func08FF("@I do not believe that we can land here safely.@");
+			partySpeak("@I do not believe that we can land here safely.@");
 		}
 	}
 }
 
-void Func034A shape#(SHAPE_REAGENT) () {
+void FuncReagent shape#(SHAPE_REAGENT) () {
 	if (get_item_frame() == FRAME_REAGENT_GARLIC) {
 		Func0813(item, 2, SFX_GULP);
 	}
 }
 
-void Func034D shape#(SHAPE_WALL_NS_RIGHT) () {
+void FuncWallNsRight shape#(SHAPE_WALL_NS_RIGHT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
@@ -8650,7 +8650,7 @@ void Func034D shape#(SHAPE_WALL_NS_RIGHT) () {
 	}
 }
 
-void Func0350 shape#(SHAPE_MIRROR_NS) () {
+void FuncMirrorNs shape#(SHAPE_MIRROR_NS) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		if (var0000 == FRAME_MIRROR_MAGIC) {
@@ -8672,17 +8672,17 @@ void Func0350 shape#(SHAPE_MIRROR_NS) () {
 	}
 }
 
-void Func0353 shape#(SHAPE_CLOTH) () {
+void FuncCloth shape#(SHAPE_CLOTH) () {
 	if (event == DOUBLECLICK) {
 		// TYPO: Should be "perhaps"
 		var var0000 = "@That appears to be fine cloth, no doubt it would fetch "
 					  + "a fair price in Minoc. Or, perhapse, thou couldst cut "
 					  + "it into bandages with shears.@";
-		Func08FF(var0000);
+		partySpeak(var0000);
 	}
 }
 
-void Func0356 shape#(SHAPE_STATUE) () {
+void FuncStatue shape#(SHAPE_STATUE) () {
 	declare var var0000;
 	declare var var0001;
 	if (event == DOUBLECLICK) {
@@ -8714,7 +8714,7 @@ void Func0356 shape#(SHAPE_STATUE) () {
 				say("The Shrine of Truth speaks. \"Greetings, seeker. Once "
 					"again I ask thee, Dost thou seek my enlightenment?\"");
 			}
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"Very well. Prepare thyself.\" The voice falls silent.*");
 				var0001 = script item {
 					wait 1;
@@ -8815,7 +8815,7 @@ void Func0356 shape#(SHAPE_STATUE) () {
 		};
 		var0001 = script item {
 			wait 8;
-			call Func0356;
+			call FuncStatue;
 		};
 	}
 	if (event == SCRIPTED) {
@@ -8847,7 +8847,7 @@ void Func0356 shape#(SHAPE_STATUE) () {
 				gflags[DID_SHRINE_OF_TRUTH] = true;
 				var0006 = script item {
 					wait 15;
-					call Func0356;
+					call FuncStatue;
 				};
 			} else {
 				SHRINE_OF_PRINCIPLE->say(
@@ -8882,7 +8882,7 @@ void Func0356 shape#(SHAPE_STATUE) () {
 				gflags[DID_SHRINE_OF_LOVE] = true;
 				var0006 = script item {
 					wait 15;
-					call Func0356;
+					call FuncStatue;
 				};
 			} else {
 				SHRINE_OF_PRINCIPLE->show_npc_face(SHRINE_OF_LOVE);
@@ -8918,7 +8918,7 @@ void Func0356 shape#(SHAPE_STATUE) () {
 				gflags[DID_SHRINE_OF_COURAGE] = true;
 				var0006 = script item {
 					wait 15;
-					call Func0356;
+					call FuncStatue;
 				};
 				return;
 			}
@@ -8934,7 +8934,7 @@ void Func0356 shape#(SHAPE_STATUE) () {
 	}
 }
 
-void Func035F shape#(SHAPE_KITCHEN_ITEMS) () {
+void FuncKitchenItems shape#(SHAPE_KITCHEN_ITEMS) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		declare struct<ObjPos> var0001;
@@ -8956,7 +8956,7 @@ void Func035F shape#(SHAPE_KITCHEN_ITEMS) () {
 				var0006 = var0002.z + 2;
 			}
 			if (var0004 == -1) {
-				Func08FF("@Why not put the flour on the table first?@");
+				partySpeak("@Why not put the flour on the table first?@");
 			} else {
 				struct<Position> var0007 = UI_create_new_object(SHAPE_DOUGH);
 				if (var0007) {
@@ -8975,7 +8975,7 @@ void Func035F shape#(SHAPE_KITCHEN_ITEMS) () {
 					var0001->set_item_frame(FRAME_DOUGH_FLAT_BREAD);
 				}
 			}
-			Func0933(var0001, "@Hey! That really hurt!@", 0);
+			delayedBark(var0001, "@Hey! That really hurt!@", 0);
 		}
 		if (var0000 == FRAME_KITCHEN_ITEMS_FLOUR_CLOSED1
 				|| var0000 == FRAME_KITCHEN_ITEMS_FLOUR_CLOSED2) {
@@ -8984,7 +8984,7 @@ void Func035F shape#(SHAPE_KITCHEN_ITEMS) () {
 	}
 }
 
-void Func0369 shape#(SHAPE_CHAIR) () {
+void FuncChair shape#(SHAPE_CHAIR) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_container();
 		if (var0000) {
@@ -8994,7 +8994,7 @@ void Func0369 shape#(SHAPE_CHAIR) () {
 	}
 }
 
-void Func036C shape#(SHAPE_METAL_WALL_NS) () {
+void FuncMetalWallNs shape#(SHAPE_METAL_WALL_NS) () {
 	if (event == SCRIPTED) {
 		set_item_shape(SHAPE_METAL_WALL_NS);
 		abort;
@@ -9003,15 +9003,15 @@ void Func036C shape#(SHAPE_METAL_WALL_NS) () {
 		UI_flash_mouse(CURSOR_HAND);
 		return;
 	}
-	Func0833(item, Func03A7);
+	Func0833(item, FuncPortcullisDoorNs);
 }
 
-void Func0378 shape#(SHAPE_HORN) () {
+void FuncHorn shape#(SHAPE_HORN) () {
 	if (event == DOUBLECLICK) {
 		if (get_item_frame() == FRAME_HORN_FERRYMAN) {
 			UI_play_music(MUSIC_SHRINE_OF_SPIRITUALITY, item);
 			struct<Position> var0000
-					= Func093C(item, find_nearby(SHAPE_HORN, 125, MASK_NONE));
+					= filterArray(item, find_nearby(SHAPE_HORN, 125, MASK_NONE));
 			if (UI_get_array_size(var0000) == 1) {
 				struct<Position> var0001 = get_object_position();
 				struct<Position> var0002 = var0000->get_object_position();
@@ -9042,7 +9042,7 @@ void Func0378 shape#(SHAPE_HORN) () {
 	}
 }
 
-void Func0379 shape#(SHAPE_LAMP_POST) () {
+void FuncLampPost shape#(SHAPE_LAMP_POST) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		var var0000 = UI_create_new_object(SHAPE_LIGHT);
 		if (var0000) {
@@ -9058,7 +9058,7 @@ void Func0379 shape#(SHAPE_LAMP_POST) () {
 	}
 }
 
-void Func037D shape#(SHAPE_POOL_OF_WATER) () {
+void FuncPoolOfWater shape#(SHAPE_POOL_OF_WATER) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_quality();
 		struct<ObjPos> var0001 = UI_click_on_item();
@@ -9096,7 +9096,7 @@ void Func037D shape#(SHAPE_POOL_OF_WATER) () {
 	}
 }
 
-void Func03A7 shape#(SHAPE_PORTCULLIS_DOOR_NS) () {
+void FuncPortcullisDoorNs shape#(SHAPE_PORTCULLIS_DOOR_NS) () {
 	if (event == SCRIPTED) {
 		set_item_shape(SHAPE_PORTCULLIS_DOOR_NS);
 		abort;
@@ -9105,10 +9105,10 @@ void Func03A7 shape#(SHAPE_PORTCULLIS_DOOR_NS) () {
 		UI_flash_mouse(CURSOR_HAND);
 		return;
 	}
-	Func0832(item, Func036C);
+	Func0832(item, FuncMetalWallNs);
 }
 
-void Func03A8 shape#(SHAPE_PORTCULLIS_DOOR_EW) () {
+void FuncPortcullisDoorEw shape#(SHAPE_PORTCULLIS_DOOR_EW) () {
 	if (event == SCRIPTED) {
 		set_item_shape(SHAPE_PORTCULLIS_DOOR_EW);
 		abort;
@@ -9117,13 +9117,13 @@ void Func03A8 shape#(SHAPE_PORTCULLIS_DOOR_EW) () {
 		UI_flash_mouse(CURSOR_HAND);
 		return;
 	}
-	Func0832(item, Func012F);
+	Func0832(item, FuncMetalWallEw);
 }
 
-void Func03B0 shape#(SHAPE_POT) () {
+void FuncPot shape#(SHAPE_POT) () {
 	if (event == DOUBLECLICK) {
 		if (get_item_frame()) {
-			if (Func0937(AVATAR)) {
+			if (canTalk(AVATAR)) {
 				AVATAR->item_say("ptui!");
 				if (!UI_in_gump_mode()) {
 					var var0000 = script item after 3 ticks {
@@ -9135,7 +9135,7 @@ void Func03B0 shape#(SHAPE_POT) () {
 	}
 }
 
-void Func03B2 shape#(SHAPE_GUARD4) () {
+void FuncGuard4 shape#(SHAPE_GUARD4) () {
 	var var0000 = get_npc_object()->get_schedule_type();
 	if (event == PROXIMITY) {
 		abort;
@@ -9158,17 +9158,17 @@ void Func03B2 shape#(SHAPE_GUARD4) () {
 	say("\"Goodbye.\"*");
 }
 
-void Func03B5 shape#(SHAPE_WINCH_NS) () {
+void FuncWinchNs shape#(SHAPE_WINCH_NS) () {
 	UI_close_gumps();
 	Func083E(item, event);
 }
 
-void Func03B6 shape#(SHAPE_WINCH_EW) () {
+void FuncWinchEw shape#(SHAPE_WINCH_EW) () {
 	UI_close_gumps();
 	Func083E(item, event);
 }
 
-void Func03C8 shape#(SHAPE_ENCLOSED_PRISM) () {
+void FuncEnclosedPrism shape#(SHAPE_ENCLOSED_PRISM) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_frame();
 		if (var0000 == FRAME_PRISM_SPHERE) {
@@ -9189,7 +9189,7 @@ void Func03C8 shape#(SHAPE_ENCLOSED_PRISM) () {
 	}
 }
 
-void Func03D5 shape#(SHAPE_PRISM) () {
+void FuncPrism shape#(SHAPE_PRISM) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		var var0001 = var0000->get_item_shape();
@@ -9209,7 +9209,7 @@ void Func03D5 shape#(SHAPE_PRISM) () {
 	}
 }
 
-void Func03DB shape#(SHAPE_BABY_IN_A_CRADLE) () {
+void FuncBabyIn_ACradle shape#(SHAPE_BABY_IN_A_CRADLE) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		// Equivalent code to everything up to, and including, the call
@@ -9266,7 +9266,7 @@ void Func03DB shape#(SHAPE_BABY_IN_A_CRADLE) () {
 	}
 }
 
-void Func03DE shape#(SHAPE_DARK_CORE) () {
+void FuncDarkCore shape#(SHAPE_DARK_CORE) () {
 	declare var var0000;
 	if (event == DOUBLECLICK) {
 		if (!gflags[PSYCHE_PROBED_AVATAR]) {
@@ -9293,7 +9293,7 @@ void Func03DE shape#(SHAPE_DARK_CORE) () {
 			};
 			var0000 = script item {
 				wait 5;
-				call Func02C3;
+				call FuncBlackSword;
 			};
 		} else {
 			AVATAR->show_npc_face(UI_is_pc_female());
@@ -9315,7 +9315,7 @@ void Func03DE shape#(SHAPE_DARK_CORE) () {
 	}
 }
 
-void Func03DF shape#(SHAPE_ANVIL) () {
+void FuncAnvil shape#(SHAPE_ANVIL) () {
 	if (event == DOUBLECLICK) {
 		if (AVATAR->is_readied(BG_WEAPON_HAND, SHAPE_HAMMER, FRAME_ANY)) {
 			var var0000 = find_nearest(SHAPE_SWORD_BLANK, 3);
@@ -9327,7 +9327,7 @@ void Func03DF shape#(SHAPE_ANVIL) () {
 						if (var0001.z == (var0002.z + 1)) {
 							var var0003 = var0000->get_item_frame();
 							if ((var0003 >= FRAME_BLACKSWORD_BLANK_HOT1) && (var0003 <= FRAME_BLACKSWORD_BLANK_HOT3)) {
-								item->Func026F();
+								item->FuncHammer();
 							}
 						}
 					}
@@ -9337,7 +9337,7 @@ void Func03DF shape#(SHAPE_ANVIL) () {
 	}
 }
 
-void Func03E0 shape#(SHAPE_CRADLE) () {
+void FuncCradle shape#(SHAPE_CRADLE) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		// Equivalent code to everything up to, and including, the call
@@ -9381,13 +9381,13 @@ void Func03E0 shape#(SHAPE_CRADLE) () {
 	}
 }
 
-void Func03F3 shape#(SHAPE_BED) () {
+void FuncBed shape#(SHAPE_BED) () {
 	if (event == DOUBLECLICK) {
 		Func0800(item);
 	}
 }
 
-void Func03F5 shape#(SHAPE_ROCKING_HORSE) () {
+void FuncRockingHorse shape#(SHAPE_ROCKING_HORSE) () {
 	if (event == DOUBLECLICK) {
 		if (!in_usecode()) {
 			// Equivalent code to everything up to, and including, the call
@@ -9433,7 +9433,7 @@ void Func03F5 shape#(SHAPE_ROCKING_HORSE) () {
 	}
 }
 
-void Func03F7 shape#(SHAPE_GOLEM) () {
+void FuncGolem shape#(SHAPE_GOLEM) () {
 	if (event == DOUBLECLICK) {
 		if (get_cont_items(
 				SHAPE_SCROLL, QUALITY_SCROLL_ADJHAR, FRAME_SCROLL_INVISIBLE)) {
@@ -9453,7 +9453,7 @@ void Func03F7 shape#(SHAPE_GOLEM) () {
 						// TYPO: Should be "possession"
 						say("\"Hast thou in thy possesion the book on the "
 							"Stone of Castambre?\"");
-						if (Func090A()) {
+						if (askYesNo()) {
 							say("His eyes reveal his hope. As he takes the "
 								"book from you, it almost appears as if he is "
 								"smiling.\"");
@@ -9496,7 +9496,7 @@ void Func03F7 shape#(SHAPE_GOLEM) () {
 				Func0890();
 			} else {
 				say("\"Art thou here to aid me in healing my brother?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"Very good. I am pleased to call thee friend.\"");
 					gflags[AGREED_TO_HEAL_BOLLUX] = true;
 					Func0890();
@@ -9516,9 +9516,9 @@ void Func03F7 shape#(SHAPE_GOLEM) () {
 	}
 }
 
-void Func03FD shape#(SHAPE_TIME_BARRIER) () {
+void FuncTimeBarrier shape#(SHAPE_TIME_BARRIER) () {
 	// BUG: this should probably have been 'item' instead of SHAPE_TIME_LORD
-	SHAPE_TIME_LORD->get_npc_object()->Func0269();
+	SHAPE_TIME_LORD->get_npc_object()->FuncTimeLord();
 }
 
 void FuncIolo object#(FIRST_NPC_FUNCTION - IOLO)() {
@@ -9780,7 +9780,7 @@ void FuncIolo object#(FIRST_NPC_FUNCTION - IOLO)() {
 			} else {
 				say("\"I am sure we shall find him somewhere. Last I heard, he "
 					"was in Jhelom. Didst thou know he was knighted?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"Hard to believe, is it not?\"");
 				} else {
 					say("\"It's true! Lord British knighted him recently. Why "
@@ -9858,12 +9858,12 @@ void FuncIolo object#(FIRST_NPC_FUNCTION - IOLO)() {
 			fallthrough;
 		case "leave":
 			say("Iolo looks hurt. \"Thou dost really want me to leave?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				say("\"Dost thou want me to wait here or dost thou want me to "
 					"go home to Yew?\"");
 				UI_clear_answers();
-				var var000E = Func090B(["wait here", "go home"]);
+				var var000E = askForResponse(["wait here", "go home"]);
 				if (var000E == "wait here") {
 					say("\"Very well. I shall wait here until thou dost return "
 						"and ask me to rejoin.\"*");
@@ -9958,7 +9958,7 @@ void FuncSpark object#(FIRST_NPC_FUNCTION - SPARK)() {
 			say("\"Who art thou and what dost thou want?\" You realize the boy "
 				"has a sling in hand.");
 			say("You face the boy and tell him who you are.");
-			var000A = Func090B([var0000, var0001]);
+			var000A = askForResponse([var0000, var0001]);
 			if (var000A == var0000) {
 				say("\"So? What makes thee so special?\"*");
 				var0008 = var0000;
@@ -10043,7 +10043,7 @@ void FuncSpark object#(FIRST_NPC_FUNCTION - SPARK)() {
 				say("\"I am sure thou canst find the man who killed Father!\"");
 				say("\"Dost thou want me to repeat everything I know about the "
 					"murder?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"What dost thou want to know about?\"");
 					add(["my story", "key", "chest"]);
 				} else {
@@ -10142,7 +10142,7 @@ void FuncSpark object#(FIRST_NPC_FUNCTION - SPARK)() {
 							"out of the air. ");
 					}
 					say("\"I told thee I am good! May I join?\"");
-					var var000C = Func090A();
+					var var000C = askYesNo();
 					if (var000C) {
 						SPARK->hide();
 						SPARK->say("\"Hooray!\" the boy leaps with delight.");
@@ -10183,14 +10183,14 @@ void FuncSpark object#(FIRST_NPC_FUNCTION - SPARK)() {
 		case "leave":
 			say("\"Don't make me go!\" Spark cries. \"Dost thou really want me "
 				"to go?\" He looks at you with puppy-dog eyes.");
-			var var0011 = Func090A();
+			var var0011 = askYesNo();
 			if (var0011) {
 				SPARK->hide();
 				SPARK->show_npc_face(SPARK_SAD);
 				say("\"Well, should I just wait here or dost thou want me to "
 					"go home to Trinsic?\"");
 				UI_clear_answers();
-				var000A = Func090B(["wait here", "go home"]);
+				var000A = askForResponse(["wait here", "go home"]);
 				if (var000A == "wait here") {
 					say("\"All right. I shall wait here until thou dost return "
 						"and ask me to rejoin.\"*");
@@ -10488,7 +10488,7 @@ void FuncShamino object#(FIRST_NPC_FUNCTION - SHAMINO)() {
 			say("\"Hmmm. Dost thou merely want me to wait here or dost thou "
 				"want me to go home?\"");
 			UI_clear_answers();
-			var var000B = Func090B(["wait here", "go home"]);
+			var var000B = askForResponse(["wait here", "go home"]);
 			if (var000B == "wait here") {
 				say("\"Very well. I shall await thy return.\"*");
 				SHAMINO->remove_from_party();
@@ -10670,7 +10670,7 @@ void FuncDupre object#(FIRST_NPC_FUNCTION - DUPRE)() {
 			say("\"Dost thou want me to wait here or dost thou truly want me "
 				"to leave and go home?\"");
 			UI_clear_answers();
-			var var0013 = Func090B(["wait here", "go home"]);
+			var var0013 = askForResponse(["wait here", "go home"]);
 			if (var0013 == "wait here") {
 				say("\"Very well. I shall await thy return.\"*");
 				DUPRE->remove_from_party();
@@ -10947,7 +10947,7 @@ void FuncJaana object#(FIRST_NPC_FUNCTION - JAANA)() {
 		case "leave":
 			say("\"Dost thou want me to wait here or should I go home?\"");
 			UI_clear_answers();
-			var var0009 = Func090B(["wait here", "go home"]);
+			var var0009 = askForResponse(["wait here", "go home"]);
 			if (var0009 == "wait here") {
 				say("\"Very well. I shall wait until thou dost return.\"*");
 				JAANA->remove_from_party();
@@ -11037,7 +11037,7 @@ void FuncJaana object#(FIRST_NPC_FUNCTION - JAANA)() {
 				DUPRE->say(
 						"\"Art thou going to let her get away with that, ",
 						var0002, "?\"");
-				var var000E = Func090A();
+				var var000E = askYesNo();
 				if (var000E) {
 					say("Dupre is speechless and turns away in a huff.*");
 					DUPRE->hide();
@@ -11095,7 +11095,7 @@ void FuncTrellek object#(FIRST_NPC_FUNCTION - TRELLEK)() {
 				say("The ape-like creature peers at you intently for a few "
 					"minutes. Then, shrugging, it walks cautiously up to you. "
 					"\"I am Trellek. Your name is?\"");
-				var0008 = Func090B([var0000, var0001]);
+				var0008 = askForResponse([var0000, var0001]);
 				if (var0008 == var0000) {
 					gflags[TOLD_TRELLEK_NAME] = true;
 				}
@@ -11108,7 +11108,7 @@ void FuncTrellek object#(FIRST_NPC_FUNCTION - TRELLEK)() {
 				say("The Emp peers at you intensely for a few minutes. Then, "
 					"shrugging, it walks cautiously up to you. \"I am Trellek. "
 					"Your name is?\"");
-				var0008 = Func090B([var0000, var0001]);
+				var0008 = askForResponse([var0000, var0001]);
 				if (var0008 == var0000) {
 					gflags[TOLD_TRELLEK_NAME] = true;
 					var0007 = var0000;
@@ -11150,7 +11150,7 @@ void FuncTrellek object#(FIRST_NPC_FUNCTION - TRELLEK)() {
 		case "job":
 			say("He gives you a puzzled look.~~\"The meaning of `job' is not "
 				"clear to me. Is `work' the word meant by you?\"");
-			var var0009 = Func090A();
+			var var0009 = askYesNo();
 			if (var0009) {
 				say("\"I am a gatherer of food.\"");
 				add("gatherer");
@@ -11244,7 +11244,7 @@ void FuncTrellek object#(FIRST_NPC_FUNCTION - TRELLEK)() {
 		case "talk to wisps":
 			say("\"Your statement is a mystery. For me to talk to wisps is "
 				"what you want?\"");
-			var var000B = Func090A();
+			var var000B = askYesNo();
 			if (var000B) {
 				say("He looks around, apparently surveying the area.~~ \"No "
 					"wisps are here for conversation.\"");
@@ -11266,7 +11266,7 @@ void FuncTrellek object#(FIRST_NPC_FUNCTION - TRELLEK)() {
 			fallthrough;
 		case "join", "go there":
 			say("\"Your wish is for me to travel with you?\"");
-			var0003 = Func090A();
+			var0003 = askYesNo();
 			if (var0003) {
 				say("\"My wish is that also. But that is not the wish of "
 					"Saralek, my wife. Permission from her must first be "
@@ -11385,7 +11385,7 @@ void FuncSentri object#(FIRST_NPC_FUNCTION - SENTRI)() {
 		case "leave":
 			say("\"Dost thou want me to wait here or go home?\"");
 			UI_clear_answers();
-			var var000A = Func090B(["wait here", "go home"]);
+			var var000A = askForResponse(["wait here", "go home"]);
 			if (var000A == "wait here") {
 				say("\"Very good. I shall wait here until thou dost "
 					"return.\"*");
@@ -11425,7 +11425,7 @@ void FuncSentri object#(FIRST_NPC_FUNCTION - SENTRI)() {
 					|| ((var0005 == LOITER) || (var0005 == WAIT))) {
 					say("\"My fee is 30 gold for a training session. Is this "
 						"all right?\"");
-					if (Func090A()) {
+					if (askYesNo()) {
 						Func08E5(DEXTERITY, 30);
 					} else {
 						say("\"Then I shall rob someone else!\" Sentri laughs "
@@ -11617,10 +11617,10 @@ void FuncJulia object#(FIRST_NPC_FUNCTION - JULIA)() {
 			fallthrough;
 		case "leave":
 			say("\"Art thou sure thou dost want me to leave?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"Dost thou want me to wait here or should I go home?\"");
 				UI_clear_answers();
-				var var0009 = Func090B(["wait here", "go home"]);
+				var var0009 = askForResponse(["wait here", "go home"]);
 				if (var0009 == "wait here") {
 					say("\"Very well. I shall wait here until thou dost "
 						"return.\"*");
@@ -11865,7 +11865,7 @@ void FuncKatrina object#(FIRST_NPC_FUNCTION - KATRINA)() {
 		case "leave":
 			say("\"Dost thou want me to wait here or shall I go on home?\"");
 			UI_clear_answers();
-			var var000B = Func090B(["wait here", "go home"]);
+			var var000B = askForResponse(["wait here", "go home"]);
 			if (var000B == "wait here") {
 				say("\"I shall be happy to wait here until thou dost "
 					"return.\"*");
@@ -12005,7 +12005,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 		var var0000 = Func0908();
 		var var0001 = Func0909();
 		var var0002 = UI_get_party_list();
-		var var0003 = Func093C(AVATAR->get_npc_object(), var0002);
+		var var0003 = filterArray(AVATAR->get_npc_object(), var0002);
 		var var0004 = TSERAMED->get_npc_object();
 		var var0005 = TRELLEK->get_npc_object();
 		declare var var0006;
@@ -12307,7 +12307,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 				"by it and reap its natural harvest. I cast in a line when I "
 				"may.");
 			say("Dost thou wonder what mysteries the sea must hold?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"I also wonder. But the doings of those who travel upon "
 					"it are more familiar to me. I have seen pirates land upon "
 					"the northern coast.\"");
@@ -12411,7 +12411,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 			}
 			if (var0022 != "") {
 				say(var0022, "");
-				if (Func090A()) {
+				if (askYesNo()) {
 					var var0025 = UI_add_party_items(
 							var0023, SHAPE_TSERAMED_ARROW, QUALITY_ANY,
 							FRAME_ANY, false);
@@ -12453,7 +12453,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 			var0027 = true;
 			say("\"Dost thou want me to wait here or should I go home?\"");
 			UI_clear_answers();
-			var var0028 = Func090B(["wait here", "go home"]);
+			var var0028 = askForResponse(["wait here", "go home"]);
 			if (var0028 == "wait here") {
 				say("\"Very well! I shall wait for thee!\"*");
 				TSERAMED->remove_from_party();
@@ -12503,7 +12503,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 			if ((var000E && var000F) && (!var0010)) {
 				say("\"This puts me in mind of a story. Wouldst thou like to "
 					"hear it?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"One day while walking along the edge of the swamp I "
 						"happened upon a strange sight. A fox was held at bay "
 						"on a small hillock in the midst of the swamp, and all "
@@ -12560,7 +12560,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 						"once saw.  'Twas a likeness of the ancient hero known "
 						"as the Avatar.");
 					say("Art thou not that same honorable soul?\"");
-					if (Func090A()) {
+					if (askYesNo()) {
 						var var002A = "That sculptor did thee justice.";
 						if (UI_is_pc_female() == 1) {
 							var002A = "Thou art more fair by far than any "
@@ -12616,7 +12616,7 @@ void FuncPetre object#(FIRST_NPC_FUNCTION - PETRE)() {
 		if (!gflags[MET_PETRE]) {
 			say("You see a distraught peasant. \"Art thou really the "
 				"Avatar?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				say("Petre bows before you. \"^", var0000, ".\"");
 				gflags[MET_PETRE] = true;
@@ -12688,7 +12688,7 @@ void FuncPetre object#(FIRST_NPC_FUNCTION - PETRE)() {
 		case "carriage":
 			say("\"The horse and carriage combination sells for 60 gold. Dost "
 				"thou want a title?\"");
-			var var0005 = Func090A();
+			var var0005 = askYesNo();
 			if (var0005) {
 				var var0006 = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -12762,14 +12762,14 @@ void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN)() {
 			if ((gflags[EXPECTED_TO_LOOK_IN_STABLES] == true)
 				&& (gflags[REPORTED_CHRISTOPHERS_KEY] == false)) {
 				say("\"Hast thou properly searched the stables?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"What didst thou find?\"");
 					UI_clear_answers();
 					var var0004 = ["nothing", "a bucket", "a body"];
 					if (gflags[ENTERED_STABLES]) {
 						var0004 &= "a key";
 					}
-					var0005 = Func090B(var0004);
+					var0005 = askForResponse(var0004);
 					if (var0005 == "a key") {
 						if (!var0002) {
 							say("\"Hmmm, a key. Perhaps if thou dost ask "
@@ -12808,7 +12808,7 @@ void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN)() {
 			if (gflags[REFUSED_MURDER_INVESTIGATION]) {
 				say("\"Hmmm. Hast thou reconsidered mine offer to investigate "
 					"the murder?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"Splendid. Then thou must really be the Avatar after "
 						"all!\"");
 					gflags[REFUSED_MURDER_INVESTIGATION] = false;
@@ -12863,7 +12863,7 @@ void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN)() {
 					"better if thou takest this matter into thine hands. Thou "
 					"shalt be handsomely rewarded if thou dost discover the "
 					"name of the killer. Dost thou accept?\"");
-				var0005 = Func090A();
+				var0005 = askYesNo();
 				if (var0005) {
 					var var0007 = Func08F7(PETRE);
 					if (var0007) {
@@ -13003,7 +13003,7 @@ void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN)() {
 			} else if (!gflags[STARTED_MURDER_REPORT]) {
 				say("\"Art thou ready to answer some questions concerning the "
 					"investigation?\"");
-				var var000A = Func090A();
+				var var000A = askYesNo();
 				if (var000A) {
 					gflags[STARTED_MURDER_REPORT] = true;
 					Func0884();
@@ -13012,7 +13012,7 @@ void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN)() {
 				}
 			} else {
 				say("\"Shall we continue thy report?\"");
-				var var000B = Func090A();
+				var var000B = askYesNo();
 				if (var000B) {
 					Func0884();
 				} else {
@@ -13055,7 +13055,7 @@ void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN)() {
 			if (gflags[FINISHED_MURDER_INVESTIGATION]
 				&& (!gflags[GOT_TRINSIC_PASSWORD])) {
 				say("\"Oh, dost thou want the password now?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					if (Func0886()) {
 						say("\"Excellent! I have no doubts now that thou art "
 							"the one true Avatar!\"");
@@ -13200,7 +13200,7 @@ void FuncGilberto object#(FIRST_NPC_FUNCTION - GILBERTO)() {
 		if (gflags[GOT_TRINSIC_PASSWORD]) {
 			var0001 &= "Blackbird";
 		}
-		var var0002 = Func090B(var0001);
+		var var0002 = askForResponse(var0001);
 		if (var0002 == "Blackbird") {
 			var var0003 = Func0834();
 			if (var0003) {
@@ -13297,7 +13297,7 @@ void FuncJohnson object#(FIRST_NPC_FUNCTION - JOHNSON)() {
 		fallthrough;
 	case "Fellowship":
 		say("\"Yes, I am a member. Wouldst thou like to join?\"");
-		var0002 = Func090A();
+		var0002 = askYesNo();
 		if (var0002) {
 			say("\"Then thou shouldst go to see Batlin in Britain.\"");
 		} else {
@@ -13321,7 +13321,7 @@ void FuncJohnson object#(FIRST_NPC_FUNCTION - JOHNSON)() {
 		if (gflags[GOT_TRINSIC_PASSWORD]) {
 			var0003 &= "Blackbird";
 		}
-		var0002 = Func090B(var0003);
+		var0002 = askForResponse(var0003);
 		if (var0002 == "Blackbird") {
 			var var0004 = Func0834();
 			if (var0004) {
@@ -13736,7 +13736,7 @@ void FuncDell object#(FIRST_NPC_FUNCTION - DELL)() {
 					"something.\"");
 			}
 			say("\"Who might I be addressing?\"");
-			var var0006 = Func090B([var0002, var0004]);
+			var var0006 = askForResponse([var0002, var0004]);
 			if (var0006 == var0002) {
 				say("\"Hmph. My name is Dell.\"");
 			} else {
@@ -13915,7 +13915,7 @@ void FuncApollonia object#(FIRST_NPC_FUNCTION - APOLLONIA)() {
 		case "room":
 			say("\"Our rooms are cheap. Only 6 gold per person per night. Want "
 				"a room?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				var var0006 = UI_get_party_list();
 				var var0007 = 0;
 				for (var000A in var0006) {
@@ -14010,7 +14010,7 @@ void FuncMarkus object#(FIRST_NPC_FUNCTION - MARKUS)() {
 			if (var0001 == TEND_SHOP) {
 				say("\"The cost to train with me is 20 gold. Too costly, "
 					"right?\"");
-				if (!Func090A()) {
+				if (!askYesNo()) {
 					Func08BD(COMBAT, 20);
 				} else {
 					say("Markus yawns. \"Very well.\"");
@@ -14095,7 +14095,7 @@ void FuncGargan object#(FIRST_NPC_FUNCTION - GARGAN)() {
 			} else {
 				say("\"I sell sextants for 80 gold. Want one?\"~Gargan clears "
 					"his throat.");
-				if (Func090A()) {
+				if (askYesNo()) {
 					var0003 = PARTY->count_objects(
 							SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 					if (var0003 >= 80) {
@@ -14141,7 +14141,7 @@ void FuncGargan object#(FIRST_NPC_FUNCTION - GARGAN)() {
 				} else {
 					say("\"The deed I can sell thee is for the ship 'The Scaly "
 						"Eel.' It goes for 600 gold. Interested?\"");
-					var var0005 = Func090A();
+					var var0005 = askYesNo();
 					if (var0005) {
 						var0003 = PARTY->count_objects(
 								SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -14501,7 +14501,7 @@ void FuncLordBritish object#(FIRST_NPC_FUNCTION - LORD_BRITISH)() {
 					"began. In fact, none of the Moongates have been working "
 					"reliably for quite a while!");
 				say("\"Didst thou bring thine Orb of the Moons?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"Really? Where is it? Thou dost not have it on "
 						"thee! ");
 				} else {
@@ -14560,7 +14560,7 @@ void FuncLordBritish object#(FIRST_NPC_FUNCTION - LORD_BRITISH)() {
 				say("\"Murder? In Trinsic?\" The ruler looks concerned.~~\"I "
 					"have heard nothing about it. Art thou investigating "
 					"it?\"");
-				var var000A = Func090A();
+				var var000A = askYesNo();
 				if (var000A) {
 					say("\"Very good. It pleases me that thou art concerned "
 						"about my people.\"");
@@ -14991,7 +14991,7 @@ void FuncNystul object#(FIRST_NPC_FUNCTION - NYSTUL)() {
 		fallthrough;
 	case "spells":
 		say("\"Dost thou wish to buy some spells?\"");
-		var var0001 = Func090A();
+		var var0001 = askYesNo();
 		if (var0001) {
 			Func08C5();
 		} else {
@@ -15000,7 +15000,7 @@ void FuncNystul object#(FIRST_NPC_FUNCTION - NYSTUL)() {
 		fallthrough;
 	case "reagents":
 		say("\"Dost thou wish to buy some reagents?\"");
-		var var0002 = Func090A();
+		var var0002 = askYesNo();
 		if (var0002) {
 			Func08C6();
 		} else {
@@ -15055,7 +15055,7 @@ void FuncChuckles object#(FIRST_NPC_FUNCTION - CHUCKLES)() {
 		case "clue":
 			if (!gflags[CHUCKLES_GAVE_SCROLL]) {
 				say("\"Art thou sure thou canst play The Game?\"");
-				var var0000 = Func090A();
+				var var0000 = askYesNo();
 				if (var0000) {
 					Func0862();
 				} else {
@@ -15094,7 +15094,7 @@ void FuncChuckles object#(FIRST_NPC_FUNCTION - CHUCKLES)() {
 			say("\"Then just play it!\"");
 			remove("I know the Game");
 			UI_clear_answers();
-			var var0001 = Func090B([
+			var var0001 = askForResponse([
 				"What do we converse about?", "About what do we talk?",
 				"Of what do we speak?"
 			]);
@@ -15141,7 +15141,7 @@ void FuncChuckles object#(FIRST_NPC_FUNCTION - CHUCKLES)() {
 			say("\"There is good food at the pub! As for me, I like to eat on "
 				"the floor of my room!\"");
 			UI_clear_answers();
-			var var0002 = Func090B([
+			var var0002 = askForResponse([
 				"Where is the tavern?", "Where is the Blue Boar?",
 				"The pub serves mutton?", "Is there liquor?"
 			]);
@@ -15229,7 +15229,7 @@ void FuncBatlin object#(FIRST_NPC_FUNCTION - BATLIN)() {
 		if (gflags[FAILED_BATLIN]) {
 			say("\"Art thou ready to answer questions from the Book of "
 				"Fellowship?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				Func0852();
 				if (!gflags[FAILED_BATLIN]) {
 					if (var0000 == PREACH) {
@@ -15528,10 +15528,10 @@ void FuncBatlin object#(FIRST_NPC_FUNCTION - BATLIN)() {
 		case "package delivered":
 			say("\"Avatar, didst thou deliver the package to Elynor of "
 				"Minoc?\"");
-			var var000B = Func090A();
+			var var000B = askYesNo();
 			if (var000B) {
 				say("\"Didst thou open the package?\"");
-				var var000C = Func090A();
+				var var000C = askYesNo();
 				if (var000C) {
 					say("\"Thou knew that thou wast instructed not to open it. "
 						"We put trust in thee to carry out our instructions to "
@@ -15553,7 +15553,7 @@ void FuncBatlin object#(FIRST_NPC_FUNCTION - BATLIN)() {
 			} else {
 				say("Batlin's eyes open wide in surprise.");
 				say("\"What has happened? Hast thou lost the package?\"");
-				var var000D = Func090A();
+				var var000D = askYesNo();
 				if (var000D) {
 					say("\"Tsk. Tsk. Tsk. That is most unfortunate. We put "
 						"trust in thee to deliver the package and that trust "
@@ -15662,7 +15662,7 @@ void FuncBatlin object#(FIRST_NPC_FUNCTION - BATLIN)() {
 			fallthrough;
 		case "test":
 			say("\"Oh, art thou ready to join The Fellowship?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				Func084D();
 			} else {
 				say("\"Until thou art ready to join, I cannot tell thee any "
@@ -15718,7 +15718,7 @@ void FuncRaymundo object#(FIRST_NPC_FUNCTION - RAYMUNDO)() {
 		case "job":
 			say("\"Why, I am famous throughout the land! Hast thou not heard "
 				"of me?\"");
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				say("\"I told thee so!");
 			} else {
@@ -15742,7 +15742,7 @@ void FuncRaymundo object#(FIRST_NPC_FUNCTION - RAYMUNDO)() {
 				"history.\" The artist looks you up and down.");
 			say("\"Hmmm. Thou dost have a certain quality... hast thou ever "
 				"acted on stage?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				say("\"I thought so!");
 			} else {
@@ -15752,7 +15752,7 @@ void FuncRaymundo object#(FIRST_NPC_FUNCTION - RAYMUNDO)() {
 			say("\"Officially, auditions have closed and the play is already "
 				"cast. However, we need someone to understudy the role of the "
 				"Avatar. Wouldst thou like to audition?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				say("\"Excellent! What thou needest to do is to visit Gaye's "
 					"Clothier Shoppe and purchase an Avatar costume. I can "
@@ -15779,7 +15779,7 @@ void FuncRaymundo object#(FIRST_NPC_FUNCTION - RAYMUNDO)() {
 				"on the support of individuals such as thyself. Wouldst thou "
 				"like to make a modest contribution of, say, ten gold pieces "
 				"to our theatre company?\"");
-			var var0005 = Func090A();
+			var var0005 = askYesNo();
 			if (var0005) {
 				var var0006 = UI_remove_party_items(
 						10, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -16704,7 +16704,7 @@ void FuncCsil object#(FIRST_NPC_FUNCTION - CSIL)() {
 				"'antibiotics'. What dost thou think, Avatar? Am I on the "
 				"right track?\"");
 			remove("theory");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				say("\"Good. I thought so.\"");
 			} else {
@@ -16720,7 +16720,7 @@ void FuncCsil object#(FIRST_NPC_FUNCTION - CSIL)() {
 				"We do not get along at all. I think they have something "
 				"against healers which goes beyond simple distrust. Dost thou "
 				"know whom I mean?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				say("Csil nods. \"I thought so. The Fellowship is not... quite "
 					"what they seem.\"");
@@ -16816,7 +16816,7 @@ void FuncZella object#(FIRST_NPC_FUNCTION - ZELLA)() {
 		case "train":
 			if (var0001 == PATROL) {
 				say("\"My price for training is 45 gold. Is this all right?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					Func0950([DEXTERITY, COMBAT], 45);
 				} else {
 					say("\"Then mayest thou find more inexpensive training "
@@ -16861,7 +16861,7 @@ void FuncLucy object#(FIRST_NPC_FUNCTION - LUCY)() {
 		if (!gflags[MET_LUCY]) {
 			say("You see an attractive woman in her fifties. She has a warm "
 				"smile. \"Welcome! Who art thou, stranger?\"");
-			var var0006 = Func090B([var0000, var0001]);
+			var var0006 = askForResponse([var0000, var0001]);
 			if (var0006 == var0000) {
 				say("\"Well, hello, ", var0000, ".\"");
 				gflags[TOLD_LUCY_NAME] = true;
@@ -17620,7 +17620,7 @@ void FuncCynthia object#(FIRST_NPC_FUNCTION - CYNTHIA)() {
 			if (var0003 == DESK_WORK) {
 				say("\"Dost thou have some gold that thou wouldst like to "
 					"exchange?\"");
-				var var0004 = Func090A();
+				var var0004 = askYesNo();
 				if (var0004) {
 					var var0005 = Func0931(
 							PARTY, 1, SHAPE_GOLD_NUGGET, QUALITY_ANY, FRAME_ANY);
@@ -18071,7 +18071,7 @@ void FuncCarrocio object#(FIRST_NPC_FUNCTION - CARROCIO)() {
 			if (!gflags[CHARLES_MAD]) {
 				say("He looks at you awaiting some sort of indication. Will "
 					"you keep his secret?");
-				var var0005 = Func090A();
+				var var0005 = askYesNo();
 				if (var0005) {
 					say("\"Thou dost walk with honor,~\"I know thou wilt not "
 						"tell,~\"Of dignity's stains I do not bother,~\"My "
@@ -18107,7 +18107,7 @@ void FuncCarrocio object#(FIRST_NPC_FUNCTION - CARROCIO)() {
 				var var0006 = UI_find_nearby_avatar(SHAPE_PUPPET_SHOW);
 				var0006[1]->halt_scheduled();
 				var var0007 = script var0006[1] after 15 ticks {
-					call Func01F7;
+					call FuncPuppetShow;
 				};
 			}
 			remove("see");
@@ -18265,7 +18265,7 @@ void FuncFigg object#(FIRST_NPC_FUNCTION - FIGG)() {
 		case "observer":
 			say("\"Yes, I do consider myself to be a more than passable judge "
 				"of character. And dost thou know how I became so?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				say("\"Oh, then art thou not the clever one!\"");
 			} else {
@@ -18311,7 +18311,7 @@ void FuncFigg object#(FIRST_NPC_FUNCTION - FIGG)() {
 			say("\"I can do thee a favor as well. Wouldst thou like to buy one "
 				"of these beautiful apples for the merest pittance of five "
 				"gold coins?\"");
-			var var0006 = Func090A();
+			var var0006 = askYesNo();
 			if (var0006) {
 				var var0007 = UI_remove_party_items(
 						5, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY,
@@ -18339,7 +18339,7 @@ void FuncFigg object#(FIRST_NPC_FUNCTION - FIGG)() {
 					"few are offered. In fact, eh, I would appreciate it if "
 					"thou wouldst not mention our little chat to anyone. "
 					"Agreed?\"");
-				var var0009 = Func090A();
+				var var0009 = askYesNo();
 				if (var0009) {
 					say("\"Ah, I knew thou wert a good 'un.\"");
 				} else {
@@ -18491,7 +18491,7 @@ void FuncJames object#(FIRST_NPC_FUNCTION - JAMES)() {
 				say("\"Oh, I suppose thou wouldst like a room now! There, that "
 					"is just what I mean! It is ten gold pieces per person for "
 					"a night. Thou dost want a room, dost thou not?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					var var0003 = UI_get_party_list();
 					var var0004 = 0;
 					for (var0007 in var0003) {
@@ -18851,7 +18851,7 @@ void FuncDenby object#(FIRST_NPC_FUNCTION - DENBY)() {
 			if (var0001 == TEND_SHOP) {
 				say("\"My fee for training is 75 gold. Does this meet with the "
 					"approval of thy purse strings?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					Func0875([DEXTERITY, INTELLIGENCE, MAX_MANA], 75);
 				} else {
 					say("Denby bows. \"I am sorry my fee is too high for thee. "
@@ -18942,7 +18942,7 @@ void FuncFred object#(FIRST_NPC_FUNCTION - FRED)() {
 				say("\"Thou must return when the Farmer's Market is open.\"");
 			} else {
 				say("\"Wouldst thou like to buy some meats?\"");
-				var var0003 = Func090A();
+				var var0003 = askYesNo();
 				if (var0003) {
 					say("\"We have a fine selection of meats for thee today, ",
 						var0000, ".\"");
@@ -19073,7 +19073,7 @@ void FuncKelly object#(FIRST_NPC_FUNCTION - KELLY)() {
 					"vegetables? We have plenty of delicious fresh eggs here "
 					"for thee. And our vegetables are sure to keep thee in "
 					"good health.\"");
-				var var0003 = Func090A();
+				var var0003 = askYesNo();
 				if (var0003) {
 					say("\"I am sure we have something here that will be to "
 						"thy liking.\"");
@@ -19161,11 +19161,11 @@ void FuncWilly object#(FIRST_NPC_FUNCTION - WILLY)() {
 			if (var0002 == BAKE) {
 				say("\"Hast thou had a chance to sample any of my bread "
 					"yet?\"");
-				var var0007 = Func090A();
+				var var0007 = askYesNo();
 				if (var0007) {
 					say("\"Ah, then thou dost agree it is the sweetest, dost "
 						"thou not?\"");
-					var var0008 = Func090A();
+					var var0008 = askYesNo();
 					if (var0008) {
 						say("\"Ha! Thou dost see, then? Everyone agrees! That "
 							"should be proof enough!\"");
@@ -19194,7 +19194,7 @@ void FuncWilly object#(FIRST_NPC_FUNCTION - WILLY)() {
 						"sweetest bread thou hast ever tasted? It is, is it "
 						"not?!\" You chew as fast as you can in order to "
 						"answer him.");
-					var var0009 = Func090A();
+					var var0009 = askYesNo();
 					if (var0009) {
 						say("He grabs your face by the cheeks and plants a big "
 							"kiss on your forehead. \"Thou art truly a person "
@@ -19297,7 +19297,7 @@ void FuncWilly object#(FIRST_NPC_FUNCTION - WILLY)() {
 					"rolls as well. The most delicious baked goods thou "
 					"couldst ever wish to pop into thy mouth! Wouldst thou "
 					"like to buy some?\"");
-				var var000A = Func090A();
+				var var000A = askYesNo();
 				if (var000A) {
 					Func0946();
 				} else {
@@ -19318,12 +19318,12 @@ void FuncWilly object#(FIRST_NPC_FUNCTION - WILLY)() {
 					"gold per sack.\"");
 				say("\"Dost thou wish to work here in the shoppe for me?\" "
 					"Willy asks hopefully.");
-				var var000B = Func090A();
+				var var000B = askYesNo();
 				if (var000B) {
 					say("\"Excellent! Thou canst start work immediately! I "
 						"shall pay thee 5 gold for every five loaves of bread "
 						"thou dost make. All right?\"");
-					var var000C = Func090A();
+					var var000C = askYesNo();
 					if (var000C) {
 						gflags[WILLY_HIRED] = true;
 						say("\"First thou must make dough from the flour. "
@@ -19445,7 +19445,7 @@ void FuncGaye object#(FIRST_NPC_FUNCTION - GAYE)() {
 				say("\"Do not tell me! Raymundo sent thee to get an Avatar "
 					"costume! They cost thirty gold coins. Dost thou want "
 					"one?\"");
-				var var0005 = Func090A();
+				var var0005 = askYesNo();
 				if (var0005) {
 					say("She looks you up and down. \"Yes, I think we might be "
 						"able to find something for thee.\"~~After several "
@@ -19484,7 +19484,7 @@ void FuncGaye object#(FIRST_NPC_FUNCTION - GAYE)() {
 				}
 			} else {
 				say("\"Wouldst thou like to buy some clothing today?\"");
-				var var0009 = Func090A();
+				var var0009 = askYesNo();
 				if (var0009) {
 					say("\"We have many nice clothes to choose from.\"");
 					Func088E();
@@ -19768,7 +19768,7 @@ void FuncGrayson object#(FIRST_NPC_FUNCTION - GRAYSON)() {
 				"thou art sufficiently protected in what thou art wearing? In "
 				"truth I fear for thy safety if thou shouldst become involved "
 				"in combat. Are thou interested in buying something today?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				Func0897();
 			} else {
 				say("\"Another time, then.\"");
@@ -19780,7 +19780,7 @@ void FuncGrayson object#(FIRST_NPC_FUNCTION - GRAYSON)() {
 			say("After looking at you, Grayson says, \"I can see that thou art "
 				"in sore need of weaponry. Dost thou want to buy something "
 				"today?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				Func0898();
 			} else {
 				say("\"Another time, then.\"");
@@ -19903,7 +19903,7 @@ void FuncDiane object#(FIRST_NPC_FUNCTION - DIANE)() {
 			say("\"The horse and carriage combination sells for 120 gold. Thou "
 				"shalt find it in a small shelter just south of the stables, "
 				"across the street. Dost thou want a title?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				var var0004 = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -20058,7 +20058,7 @@ void FuncClint object#(FIRST_NPC_FUNCTION - CLINT)() {
 			} else {
 				say("\"The deed to the ship 'The Beast' costs eight hundred "
 					"gold pieces. Dost thou wish to purchase her?\"");
-				var var0004 = Func090A();
+				var var0004 = askYesNo();
 				if (var0004) {
 					var var0005 = UI_remove_party_items(
 							800, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -20087,7 +20087,7 @@ void FuncClint object#(FIRST_NPC_FUNCTION - CLINT)() {
 		case "buy sextant":
 			say("\"A sextant costs one hundred gold pieces. Does thou wish to "
 				"buy one?\"");
-			var var0007 = Func090A();
+			var var0007 = askYesNo();
 			if (var0007) {
 				var var0008 = UI_remove_party_items(
 						100, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -20202,7 +20202,7 @@ void FuncGordon object#(FIRST_NPC_FUNCTION - GORDON)() {
 			say("\"I have the best fish and chips thou shalt taste in all of "
 				"Britannia. My price is only 8 gold coins per serving. Wouldst "
 				"thou like to have some?\"");
-			var var0005 = Func090A();
+			var var0005 = askYesNo();
 			if (var0005) {
 				var var0006 = UI_remove_party_items(
 						8, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -20252,7 +20252,7 @@ void FuncGordon object#(FIRST_NPC_FUNCTION - GORDON)() {
 			if (var0001) {
 				say("\"I am glad to see that thou art a member. Will I see "
 					"thee at the next meeting?\"");
-				var var0008 = Func090A();
+				var var0008 = askYesNo();
 				if (var0008) {
 					say("\"Then I shall see thee at nine o'clock sharp!\"");
 				} else {
@@ -20403,11 +20403,11 @@ void FuncSean object#(FIRST_NPC_FUNCTION - SEAN)() {
 					"Come back later!\"");
 			} else {
 				say("\"Dost thou have a gem for sale?\"");
-				var var0005 = Func090A();
+				var var0005 = askYesNo();
 				if (var0005) {
 					say("\"I will pay thee 30 gold coins per gem. Is that "
 						"price agreeable?\"");
-					var var0006 = Func090A();
+					var var0006 = askYesNo();
 					if (var0006) {
 						var var0007 = [FRAME_GEM_DRACOTHRAXUS, FRAME_GEM_ARCADION];
 						for (var000A in var0007) {
@@ -20482,7 +20482,7 @@ void FuncSean object#(FIRST_NPC_FUNCTION - SEAN)() {
 			fallthrough;
 		case "philosophy":
 			say("\"Thou art really interested in hearing more?\"");
-			var var0010 = Func090A();
+			var var0010 = askYesNo();
 			if (var0010) {
 				Func091A();
 			} else {
@@ -20500,7 +20500,7 @@ void FuncSean object#(FIRST_NPC_FUNCTION - SEAN)() {
 		case "buy":
 			if (var0002 == TEND_SHOP) {
 				say("\"Wouldst thou like to buy something?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					Func08E3();
 				} else {
 					say("\"Then please browse if thou dost like.\"");
@@ -20653,7 +20653,7 @@ void FuncBrownie object#(FIRST_NPC_FUNCTION - BROWNIE)() {
 				"me by bringing the pumpkins to me, I will gladly pay thee for "
 				"thy work. How does one gold coin for every pumpkin carried "
 				"sound?\"");
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				say("\"How nice! A helper! Please, feel free to start work at "
 					"any time!\"");
@@ -20760,7 +20760,7 @@ void FuncMack object#(FIRST_NPC_FUNCTION - MACK)() {
 			}
 			say("\"I told thee I was not a looney! Didst thou see the "
 				"proof?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (!var0001) {
 				say("\"Thou must go and look at what is in my field! Then come "
 					"back here, for I must talk about this with someone who "
@@ -20878,7 +20878,7 @@ void FuncMack object#(FIRST_NPC_FUNCTION - MACK)() {
 				"down it scared them all so much that they cannot stop laying "
 				"eggs! Wilt thou work for me? I will pay thee 1 gold per "
 				"egg.\"");
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				say("\"Fine! Thou wilt find the chickens out back. Thou must "
 					"feel around in the nest to find the eggs that are there. "
@@ -20935,7 +20935,7 @@ void FuncSnaz object#(FIRST_NPC_FUNCTION - SNAZ)() {
 			fallthrough;
 		case "tell a joke":
 			say("\"Dost thou wish to hear one?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				var var0002 = UI_remove_party_items(
 						1, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -20975,7 +20975,7 @@ void FuncSnaz object#(FIRST_NPC_FUNCTION - SNAZ)() {
 		case "Lord British joke":
 			say("\"For a gold coin I will tell thee another. Dost thou wish to "
 				"hear it?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (!var0003) {
 				say("\"I see I have reached the limits of thy sense of "
 					"humor.\"");
@@ -21012,7 +21012,7 @@ void FuncSnaz object#(FIRST_NPC_FUNCTION - SNAZ)() {
 		case "Weston joke":
 			say("\"For a gold coin I will tell thee another. Dost thou wish to "
 				"hear it?\"");
-			var var0005 = Func090A();
+			var var0005 = askYesNo();
 			if (!var0005) {
 				say("\"Very well. If thou didst not get the first two there is "
 					"no good reason for me to continue now.\"");
@@ -21045,7 +21045,7 @@ void FuncSnaz object#(FIRST_NPC_FUNCTION - SNAZ)() {
 		case "mage joke":
 			say("\"For a gold coin I will tell thee another. Dost thou wish to "
 				"hear it?\"");
-			var var0007 = Func090A();
+			var var0007 = askYesNo();
 			if (!var0007) {
 				say("\"Thou art wise. Thou shouldst save thy gold to pay a "
 					"healer to cure that ache in thy side.\"");
@@ -21080,7 +21080,7 @@ void FuncSnaz object#(FIRST_NPC_FUNCTION - SNAZ)() {
 			fallthrough;
 		case "Sullivan joke":
 			say("\"Thou art a brave Avatar! Dost thou wish to hear another?\"");
-			var var0009 = Func090A();
+			var var0009 = askYesNo();
 			if (!var0009) {
 				say("\"Aha! Not as brave as I thought!\"");
 				remove("joke five");
@@ -21111,7 +21111,7 @@ void FuncSnaz object#(FIRST_NPC_FUNCTION - SNAZ)() {
 		case "gold joke":
 			say("\"I have amused thee so far! Wouldst thou like to hear "
 				"another? It is a joke about gold!\"");
-			var var000B = Func090A();
+			var var000B = askYesNo();
 			if (var000B) {
 				var var000C = UI_remove_party_items(
 						1, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -21123,7 +21123,7 @@ void FuncSnaz object#(FIRST_NPC_FUNCTION - SNAZ)() {
 							"would be my pleasure to repeat it.\"");
 						say("\"Wouldst thou like to hear the gold joke "
 							"again?\"");
-						var var000D = Func090A();
+						var var000D = askYesNo();
 						if (var000D) {
 							say("\"Now listen carefully...\"");
 							var var000E = UI_remove_party_items(
@@ -21236,7 +21236,7 @@ void FuncMillie object#(FIRST_NPC_FUNCTION - MILLIE)() {
 					"wrinkles in displeasure.");
 			} else {
 				say("\"Dost thou know what The Fellowship is?\"");
-				var var0004 = Func090A();
+				var var0004 = askYesNo();
 				if (var0004) {
 					say("\"Oh, I think thou dost not really know!\"");
 					Func0919();
@@ -21469,7 +21469,7 @@ void FuncWislem object#(FIRST_NPC_FUNCTION - WISLEM)() {
 				"who Inamo's parent gargoyle is. To recommend you relay this "
 				"news as soon as possible.~~\"To go soon and tell Draxinusom "
 				"about Inamo?\"");
-			var var0000 = Func090A();
+			var var0000 = askYesNo();
 			if (var0000) {
 				say("\"To know you are reliable.\"");
 			} else {
@@ -21544,14 +21544,14 @@ void FuncSherry object#(FIRST_NPC_FUNCTION - SHERRY)() {
 			say("\"Well, cheese is my favorite. If thou dost ever have cheese "
 				"to give away, I will gladly eat it. But I will generally eat "
 				"most anything. Dost thou have any cheese for me?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				var var0003
 						= Func0931(PARTY, 1, SHAPE_FOOD, QUALITY_ANY, FRAME_CHEESE_WHEEL);
 				var var0004
 						= Func0931(PARTY, 1, SHAPE_FOOD, QUALITY_ANY, FRAME_CHEESE_WEDGE);
 				if (var0003 || var0004) {
 					say("\"Want to give me some?\"");
-					if (Func090A()) {
+					if (askYesNo()) {
 						var var0005 = UI_remove_party_items(
 								1, SHAPE_FOOD, QUALITY_ANY, FRAME_CHEESE_WHEEL, true);
 						var var0006 = UI_remove_party_items(
@@ -21578,7 +21578,7 @@ void FuncSherry object#(FIRST_NPC_FUNCTION - SHERRY)() {
 		case "story":
 			say("\"Dost thou want to hear the story? It is called 'Hubert's "
 				"Hair-Raising Adventure'.\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("Sherry stands on her hind legs, takes a deep breath, and "
 					"then recites -- from memory -- very, very fast:");
 				UI_push_answers();
@@ -21681,7 +21681,7 @@ void FuncBoots object#(FIRST_NPC_FUNCTION - BOOTS)() {
 			say("\"That is right, we do not have enough. If thou couldst bring "
 				"me mutton from the slaughterhouse, I will pay thee 5 gold for "
 				"every portion thou canst bring. All right?\"");
-			var var0000 = Func090A();
+			var var0000 = askYesNo();
 			if (var0000) {
 				say("\"Good, I will be awaiting thy return!\"");
 				gflags[MEAT_QUEST] = true;
@@ -21747,7 +21747,7 @@ void FuncBennie object#(FIRST_NPC_FUNCTION - BENNIE)() {
 				"give thee a very un-Avatar-like figure!");
 			if ((var0001 == MORNING) || (var0001 == EVENING)) {
 				say("\"Wouldst thou like to order a meal?\"");
-				var var0003 = Func090A();
+				var var0003 = askYesNo();
 				if (var0003) {
 					declare var var0004;
 					if (gflags[BENNIE_SERVED_ONCE]) {
@@ -21986,7 +21986,7 @@ void FuncWeston object#(FIRST_NPC_FUNCTION - WESTON)() {
 		say("\"Wouldst thou speak with Lord British about me? I would bet that "
 			"he is completely unaware of my case! Please! Wilt thou speak with "
 			"him?\"");
-		if (Func090A()) {
+		if (askYesNo()) {
 			say("\"Oh, I thank thee, Avatar! My fate and the fates of my wife "
 				"and daughter are in thine hands!\"");
 			gflags[WESTON_QUEST] = true;
@@ -22094,7 +22094,7 @@ void FuncMiranda object#(FIRST_NPC_FUNCTION - MIRANDA)() {
 			fallthrough;
 		case "Cove":
 			say("\"Art thou travelling to Cove?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				say("\"That is good news! Perhaps thou couldst do us a great "
 					"favor. We need this bill delivered to Lord Heather in "
@@ -22102,7 +22102,7 @@ void FuncMiranda object#(FIRST_NPC_FUNCTION - MIRANDA)() {
 					"it. I know thou hast far more important things to do than "
 					"running errands, but it would be greatly appreciated. "
 					"Wilt thou do it?\"");
-				var var0004 = Func090A();
+				var var0004 = askYesNo();
 				if (var0004) {
 					say("\"Wonderful! Here is the bill. Please bring it back "
 						"to me when it is signed. And we thank thee.\"");
@@ -22127,7 +22127,7 @@ void FuncMiranda object#(FIRST_NPC_FUNCTION - MIRANDA)() {
 			fallthrough;
 		case "signed":
 			say("\"Didst thou have Lord Heather sign the bill?\"");
-			var var0006 = Func090A();
+			var var0006 = askYesNo();
 			if (var0006) {
 				say("\"Excellent! Let me see it.\"");
 				if (gflags[BILL_QUEST_DONE]) {
@@ -22295,7 +22295,7 @@ void FuncNell object#(FIRST_NPC_FUNCTION - NELL)() {
 		if (!gflags[MET_NELL]) {
 			say("You see a servant girl who looks at you in wonder. \"Thou "
 				"dost look familiar. Who art thou?\"");
-			var var0003 = Func090B([var0000, var0001]);
+			var var0003 = askForResponse([var0000, var0001]);
 			if (var0003 == var0000) {
 				say("\"Oh. Hello. I am Nell.\"");
 				gflags[TOLD_NELL_NAME] = true;
@@ -22365,7 +22365,7 @@ void FuncNell object#(FIRST_NPC_FUNCTION - NELL)() {
 				"be...? Hmmm. That would be interesting! Wait! What am I "
 				"saying? The father is most definitely Carrocio! Please do not "
 				"tell anyone. 'Twould be embarrassing. All right?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				say("\"I know I can trust thee, ", var0002, ".\"");
 			} else {
@@ -22470,7 +22470,7 @@ void FuncCharles object#(FIRST_NPC_FUNCTION - CHARLES)() {
 		case "child":
 			say("You remember what Nell told you about her 'condition'. Do you "
 				"mention it to Charles?");
-			var var0000 = Func090A();
+			var var0000 = askYesNo();
 			if (var0000) {
 				say("You tell Charles what Nell revealed in confidence.");
 				say("Charles is wide-eyed and shocked. \"Why, that hussy! My "
@@ -22486,7 +22486,7 @@ void FuncCharles object#(FIRST_NPC_FUNCTION - CHARLES)() {
 			fallthrough;
 		case "wine":
 			say("\"Wouldst thou like some wine?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				var var0002 = UI_get_party_list();
 				var var0003 = 0;
@@ -22578,7 +22578,7 @@ void FuncRudyom object#(FIRST_NPC_FUNCTION - RUDYOM)() {
 		fallthrough;
 	case "spells":
 		say("\"Dost thou wish to buy some spells?\"");
-		var var0000 = Func090A();
+		var var0000 = askYesNo();
 		if (var0000) {
 			Func08DB();
 		} else {
@@ -22587,7 +22587,7 @@ void FuncRudyom object#(FIRST_NPC_FUNCTION - RUDYOM)() {
 		fallthrough;
 	case "reagents":
 		say("\"Dost thou wish to buy some reagents?\"");
-		var var0001 = Func090A();
+		var var0001 = askYesNo();
 		if (var0001) {
 			Func08DC();
 		} else {
@@ -22770,13 +22770,13 @@ void FuncNastassia object#(FIRST_NPC_FUNCTION - NASTASSIA)() {
 	case "Yew":
 		say("\"My father died in the Great Forest there. Some wild animal or "
 			"something killed him. Art thou perhaps travelling to Yew?\"");
-		var var0007 = Func090A();
+		var var0007 = askYesNo();
 		if (var0007) {
 			say("\"Oh, ", var0005,
 				", I do wish thou wouldst try to find out something about my "
 				"father. How did he die? What happened? Please! Wilt thou "
 				"search for the truth and come back and tell me?\"");
-			var var0008 = Func090A();
+			var var0008 = askYesNo();
 			if (var0008) {
 				say("\"Bless thee! I shall be waiting here for thee.\"");
 				if (var0004) {
@@ -22942,7 +22942,7 @@ void FuncRayburt object#(FIRST_NPC_FUNCTION - RAYBURT)() {
 			if (var0001 == DUEL) {
 				say("\"I charge 60 gold for a session, but thou wilt benefit "
 					"greatly. Is this agreeable?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					Func08D0([DEXTERITY, INTELLIGENCE, COMBAT], 60);
 				} else {
 					say("\"It is not the first time I have been accused of "
@@ -23156,7 +23156,7 @@ void FuncPamela object#(FIRST_NPC_FUNCTION - PAMELA)() {
 		case "room":
 			say("\"The room is quite inexpensive. Only 8 gold per person. Want "
 				"one?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				var var0001 = UI_get_party_list();
 				var var0002 = 0;
 				for (var0005 in var0001) {
@@ -23331,7 +23331,7 @@ void FuncDeMaria object#(FIRST_NPC_FUNCTION - DE_MARIA)() {
 		case "tale", "song", "folks":
 			say("\"What if I combine all three? Shall I sing a song which is a "
 				"tale about the people of Cove?\"");
-			var var0000 = Func090A();
+			var var0000 = askYesNo();
 			if (var0000) {
 				say("\"Very well, then!\"");
 				UI_push_answers();
@@ -23344,7 +23344,7 @@ void FuncDeMaria object#(FIRST_NPC_FUNCTION - DE_MARIA)() {
 			fallthrough;
 		case "Nastassia":
 			say("\"Ah, dear Nastassia. Wouldst thou like to hear her tale?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				say("\"Very well, then!\"");
 				UI_push_answers();
@@ -23430,7 +23430,7 @@ void FuncElynor object#(FIRST_NPC_FUNCTION - ELYNOR)() {
 				if (!gflags[TEST_GIVEN]) {
 					say("\"Perhaps thou wouldst wish to join our "
 						"Fellowship?\"");
-					if (Func090A()) {
+					if (askYesNo()) {
 						say("\"This is indeed a great day for The Fellowship! "
 							"Seek out Batlin in Britain.\tHe is our founder. "
 							"Such a great honor as the acceptance of the "
@@ -23525,7 +23525,7 @@ void FuncElynor object#(FIRST_NPC_FUNCTION - ELYNOR)() {
 					"you.~~\"Surely thou hast been instructed not to open\tthe "
 					"package. Hast thou opened it nonetheless?\"");
 				declare var var000A;
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"Thou knowest well that thou wert instructed to "
 						"deliver the package unopened. As a Fellowship member, "
 						"thou dost understand that we must be worthy of the "
@@ -23912,7 +23912,7 @@ void FuncMargareta object#(FIRST_NPC_FUNCTION - MARGARETA)() {
 		gflags[MET_MARGARETA] = true;
 	} else {
 		say("\"Thou vishest to speak vith me again?\" Margareta asks.");
-		var var0001 = Func090A();
+		var var0001 = askYesNo();
 		if (var0001) {
 			say("\"Very vell.\"");
 		} else {
@@ -24152,7 +24152,7 @@ void FuncGladstone object#(FIRST_NPC_FUNCTION - GLADSTONE)() {
 				"consider us to be indisposed toward Unity.\"");
 			if (var0001) {
 				say("\"Dost thou think of us as thine enemy?\"");
-				var var0002 = Func090A();
+				var var0002 = askYesNo();
 				if (var0002) {
 					say("\"Then get out of my sight! I do not wish to speak "
 						"with thee!\"");
@@ -24294,7 +24294,7 @@ void FuncXanthia object#(FIRST_NPC_FUNCTION - XANTHIA)() {
 				"Xanthia. Her eyes widen with recognition. \"Yes, that is one "
 				"of the candelabras I made. 'Twas in the sawmill at the murder "
 				"site?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				say("Xanthia looks shocked. \"How horrible! I swear I do not "
 					"know how it could have gotten there! Thou shouldst "
@@ -24963,7 +24963,7 @@ void FuncOwen object#(FIRST_NPC_FUNCTION - OWEN)() {
 						"thou couldst commission me to build one for thee. A "
 						"deed to one of the ships I build costs 1000 gold "
 						"coins. Dost thou wish to buy one?\"");
-					var var0006 = Func090A();
+					var var0006 = askYesNo();
 					if (var0006) {
 						var var0007 = UI_remove_party_items(
 								1000, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -25006,7 +25006,7 @@ void FuncOwen object#(FIRST_NPC_FUNCTION - OWEN)() {
 					"sextant? I have one which I would be willing to part with "
 					"for a fine bargain. The price is 150 gold. Art thou "
 					"interested?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"Excellent! I knew that thou wouldst appreciate "
 						"owning the sextant of Owen the shipwright. Thou art a "
 						"fine person, able to discern those quality items "
@@ -25051,7 +25051,7 @@ void FuncOwen object#(FIRST_NPC_FUNCTION - OWEN)() {
 				"made in the methods of ship-building. It is very advanced but "
 				"I have tried to write it so that it is accessible to the "
 				"layman. Wouldst thou be interested in purchasing a copy?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				say("\"Yes, of course thou wouldst.\"");
 				var var000E = UI_remove_party_items(
@@ -25384,7 +25384,7 @@ void FuncBurnside object#(FIRST_NPC_FUNCTION - BURNSIDE)() {
 			say("\"I was given an honorary membership when the Fellowship "
 				"branch was first opened in Minoc. I do not attend regular "
 				"meetings. I hope thou'rt not disappointed in me?\"");
-			var0005 = Func090A();
+			var0005 = askYesNo();
 			if (var0005) {
 				say("\"I am sorry, Avatar. I will try to do well and be a more "
 					"valuable member of the Fellowship. I beg thee, do not "
@@ -25401,7 +25401,7 @@ void FuncBurnside object#(FIRST_NPC_FUNCTION - BURNSIDE)() {
 			fallthrough;
 		case "feelings":
 			say("\"Avatar, may I tell thee a secret?\"");
-			var0005 = Func090A();
+			var0005 = askYesNo();
 			if (var0005) {
 				say("\"Avatar, I must confess to thee that I feel The "
 					"Fellowship promotes a philosophy that is dubious at best, "
@@ -25531,7 +25531,7 @@ void FuncRutherford object#(FIRST_NPC_FUNCTION - RUTHERFORD)() {
 			if (var0002 == WAITER) {
 				say("\"A room for the night is quite reasonable. Only 8 gold "
 					"per person. Want one?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					var var0004 = UI_get_party_list();
 					var var0005 = 0;
 					for (var0008 in var0004) {
@@ -25597,7 +25597,7 @@ void FuncRutherford object#(FIRST_NPC_FUNCTION - RUTHERFORD)() {
 			say("\"Say, thou be not from around here?\" He looks at you "
 				"skeptically. \"Thou art not from the Fellowship by any "
 				"chance, art thou?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				say("\"I thought so!\"");
 				add(["murders", "Fellowship"]);
@@ -25738,7 +25738,7 @@ void FuncWilliam object#(FIRST_NPC_FUNCTION - WILLIAM)() {
 					"town that I worry about.\"");
 			} else {
 				say("\"Wouldst thou like to know more of The Fellowship?\"");
-				var var0005 = Func090A();
+				var var0005 = askYesNo();
 				if (var0005) {
 					Func0919();
 				} else {
@@ -25849,7 +25849,7 @@ void FuncKarenna object#(FIRST_NPC_FUNCTION - KARENNA)() {
 					"all the lessons of life without losing it in the process. "
 					"Combat!~~\"I would charge thee 20 gold for each training "
 					"session. Art thou still interested?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					Func08A6([DEXTERITY, COMBAT], 20);
 				} else {
 					say("\"Very well. If thou art fortunate thou wilt not have "
@@ -25967,7 +25967,7 @@ void FuncJakher object#(FIRST_NPC_FUNCTION - JAKHER)() {
 			if (var0002 == DUEL) {
 				say("\"My price is 20 gold for each training session. Art thou "
 					"still interested?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					Func089F([INTELLIGENCE, STRENGTH], 20);
 				} else {
 					say("\"The true value of what I teach is beyond measure. "
@@ -26368,7 +26368,7 @@ void FuncSaralek object#(FIRST_NPC_FUNCTION - SARALEK)() {
 			fallthrough;
 		case "join party":
 			say("\"To join you is his desire?\"");
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				say("She thinks for a moment. \"His going away is not desired "
 					"by me.\" She turns to look directly at you. \"But, "
@@ -26410,7 +26410,7 @@ void FuncSaralek object#(FIRST_NPC_FUNCTION - SARALEK)() {
 			fallthrough;
 		case "wisps":
 			say("She smiles excitedly.~~\"Your wish is to meet wisps?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				say("\"An idea how you can be helped by Trellek is had by me. "
 					"Wisps are contacted by Trellek's whistling. A whistle for "
@@ -26537,7 +26537,7 @@ void FuncTavenor object#(FIRST_NPC_FUNCTION - TAVENOR)() {
 				"gathered by me and my family.\" He watches you carefully. "
 				"\"Your job is to cut down Silverleaf trees, yes?\"");
 			gflags[TAV_EXPLAIN] = true;
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				say("\"That is as I expected. You are a menace. You are asked "
 					"to stop, please.\" He turns away from you.*");
@@ -26678,11 +26678,11 @@ void FuncSalamon object#(FIRST_NPC_FUNCTION - SALAMON)() {
 		case "sweet":
 			say("\"Sweet things are desired by Emps. Honey is sweetest! More "
 				"honey is had by you?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				say("Her eyes widen and her lips part around a very large and "
 					"hopeful smile.~~\"More honey will be given by you?\"");
-				var var0002 = Func090A();
+				var var0002 = askYesNo();
 				if (var0002) {
 					var var0003 = Func0931(
 							PARTY, 1, SHAPE_HONEY, QUALITY_ANY, FRAME_ANY);
@@ -26865,7 +26865,7 @@ void FuncNicodemus object#(FIRST_NPC_FUNCTION - NICODEMUS)() {
 		fallthrough;
 	case "spells":
 		say("\"Dost thou wish to buy some spells?\"");
-		var var0003 = Func090A();
+		var var0003 = askYesNo();
 		if (var0003) {
 			Func08C3();
 		} else {
@@ -26874,7 +26874,7 @@ void FuncNicodemus object#(FIRST_NPC_FUNCTION - NICODEMUS)() {
 		fallthrough;
 	case "reagents":
 		say("\"Dost thou wish to buy some reagents?\"");
-		var var0004 = Func090A();
+		var var0004 = askYesNo();
 		if (var0004) {
 			Func08C4();
 		} else {
@@ -26894,7 +26894,7 @@ void FuncNicodemus object#(FIRST_NPC_FUNCTION - NICODEMUS)() {
 				"invisibility potion.");
 		}
 		say("\"Dost thou want it for, say, 75 gold?\"");
-		var var0005 = Func090A();
+		var var0005 = askYesNo();
 		if (var0005) {
 			var var0006 = PARTY->count_objects(
 					SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -26924,7 +26924,7 @@ void FuncNicodemus object#(FIRST_NPC_FUNCTION - NICODEMUS)() {
 				"Does he have a big black mustache and three pairs of pants? "
 				"No! I know who he is. He's the fellow who came to fix my "
 				"sundial the other day, right?\"");
-			var var0009 = Func090A();
+			var var0009 = askYesNo();
 			if (var0009) {
 				say("\"I thought so! Tell him that bloody thing still doesn't "
 					"work! It gives me three shadows! Dadows badows whoopeee! "
@@ -27091,7 +27091,7 @@ void FuncThad object#(FIRST_NPC_FUNCTION - THAD)() {
 				"this wicked spell and will slay the entire organization "
 				"should that prove necessary!~~ \"Thou, also, hast taken up a "
 				"similar cause, I expect. Yes?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				say("\"Excellent.\" He shakes your hand. \"Thou art indeed a "
 					"worthy warrior, ",
@@ -27099,7 +27099,7 @@ void FuncThad object#(FIRST_NPC_FUNCTION - THAD)() {
 			} else {
 				say("\"No?\" He seems genuinely surprised. \"Then perhaps thou "
 					"wilt consider taking up my quest in thine own manner.\"");
-				var var0005 = Func090A();
+				var var0005 = askYesNo();
 				if (var0005) {
 					say("\"I expected as much. Thou art truly an honorable "
 						"warrior.\"");
@@ -27212,7 +27212,7 @@ void FuncBradman object#(FIRST_NPC_FUNCTION - BRADMAN)() {
 		case "train":
 			say("\"If thou wantest to train, my charge is 30 gold. Art thou "
 				"still interested?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				Func0856(DEXTERITY, 30);
 			} else {
 				say("\"I understand, ", var0000, ".\"");
@@ -27286,7 +27286,7 @@ void FuncSirJeff object#(FIRST_NPC_FUNCTION - SIR_JEFF)() {
 				"already know he is not trustworthy. There is something "
 				"obviously unscrupulous about him. He is not a friend of "
 				"thine, is he?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				say("\"I suspected as much.\" He turns away from you.*");
 				abort;
@@ -27391,7 +27391,7 @@ void FuncTiery object#(FIRST_NPC_FUNCTION - TIERY)() {
 				var0001,
 				", but Oi like 'im just the same. Anyone else ye'd like to "
 				"know about?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"Well, that Perrin fellow'd be a better one to ask than "
 					"Oi'd be, ",
 					var0001, ". 'E knows a lot, that one does.\"");
@@ -27461,7 +27461,7 @@ void FuncIskander object#(FIRST_NPC_FUNCTION - ISKANDER)() {
 	case "thee":
 		say("\"Thou dost know my name, but I still do not know the name of "
 			"thee. I like to know to whom I am speaking. What is thy name?\"");
-		var var0003 = Func090B([var0001, var0000]);
+		var var0003 = askForResponse([var0001, var0000]);
 		if (var0003 == var0001) {
 			say("\"I have heard of thee, Avatar. Thou hast come into conflict "
 				"against our kind before, I know. But I have also heard the "
@@ -28023,7 +28023,7 @@ void FuncGarok object#(FIRST_NPC_FUNCTION - GAROK)() {
 	case "name":
 		say("The mage stares at you a moment. \"Art thou from the Britannian "
 			"Tax Council?\"");
-		var var0000 = Func090A();
+		var var0000 = askYesNo();
 		if (var0000) {
 			say("\"Then I am nobody!\"*");
 			abort;
@@ -28117,7 +28117,7 @@ void FuncGarok object#(FIRST_NPC_FUNCTION - GAROK)() {
 		fallthrough;
 	case "way out":
 		say("\"Dost thou know the way out?\"");
-		var var0001 = Func090A();
+		var var0001 = askYesNo();
 		if (var0001) {
 			say("You tell Garok how to get out of the dungeon.~~\"Why, it "
 				"sounds so simple! My marbles must be losing me!~~ \"I thank "
@@ -28128,7 +28128,7 @@ void FuncGarok object#(FIRST_NPC_FUNCTION - GAROK)() {
 				"like to have some useless reagents? By useless, I mean they "
 				"are useless to me. They are probably perfectly good reagents. "
 				"Thou art welcome to have them. Dost thou want them?\"");
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				var var0003 = UI_add_party_items(
 						6, SHAPE_REAGENT, QUALITY_ANY,
@@ -28241,7 +28241,7 @@ void FuncGharl object#(FIRST_NPC_FUNCTION - GHARL)() {
 		case "offer food":
 			say("\"You give me food?\" His face displays a mixture of surprise "
 				"and hope. \"You give me food, I tell you secret. Yes?\"");
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				var var0003 = UI_remove_party_items(
 						1, SHAPE_FOOD, QUALITY_ANY, FRAME_ANY, 0);
@@ -28336,9 +28336,9 @@ void FuncDRel object#(FIRST_NPC_FUNCTION - D_REL)() {
 		case "care":
 			say("\"Ye care, do ye? All right, then. I'll tell ye my name if ye "
 				"tell me thine, deal?\"");
-			var var0005 = Func090A();
+			var var0005 = askYesNo();
 			if (var0005) {
-				var var0006 = Func090B([var0000, var0003, var0004]);
+				var var0006 = askForResponse([var0000, var0003, var0004]);
 				say("\"", var0006,
 					", eh. Very well, a deal's a deal. I'm D'Rel.\"");
 			} else {
@@ -28430,7 +28430,7 @@ void FuncSmith object#(FIRST_NPC_FUNCTION - SMITH)() {
 				"Baker extraordinaire.~~\"Actually, I have gotten quite good "
 				"at interior decorating. See how I arranged my abode? You like "
 				"it, don't you?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				say("\"Good. I will let you continue talking to me then! Which "
 					"do you prefer, my living room or my bedroom?\"");
@@ -28455,7 +28455,7 @@ void FuncSmith object#(FIRST_NPC_FUNCTION - SMITH)() {
 			}
 			say("\"Yep, that's what I told you to call me. Oh, I get it! You ",
 				var0004, " something from me, don't you?");
-			var var0005 = Func090A();
+			var var0005 = askYesNo();
 			if (var0005) {
 				say("\"I thought as much. You've always been a selfish one. "
 					"What do you want? Now, let's see... Money? "
@@ -28517,7 +28517,7 @@ void FuncSmith object#(FIRST_NPC_FUNCTION - SMITH)() {
 			say("\"Threats, huh? And how do you expect me to respond to that? "
 				"With courtesy and open hooves?~~ \"Tell you what: you go away "
 				"and leave me alone, and I'll tell you a clue. Fair?\"");
-			var var0006 = Func090A();
+			var var0006 = askYesNo();
 			if (var0006) {
 				say("\"Now we're talking! Done deal. Here we go.\" He checks "
 					"around to make sure no else is within earshot. \"The "
@@ -28623,10 +28623,10 @@ void FuncAimi object#(FIRST_NPC_FUNCTION - AIMI)() {
 			fallthrough;
 		case "buy":
 			say("\"Thou wishest to buy a bouquet?\"");
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				say("\"Dost thou have anyone to give these flowers to?\"");
-				var var0003 = Func090A();
+				var var0003 = askYesNo();
 				if (var0003) {
 					if (gflags[ASKED_REYNA_ABOUT_MOTHER]
 						&& (!gflags[MOMS_FLOWERS])) {
@@ -28642,7 +28642,7 @@ void FuncAimi object#(FIRST_NPC_FUNCTION - AIMI)() {
 						say("\"Good. 'Tis always best to have someone to "
 							"receive flowers. The flowers will cost 10 gold. "
 							"Dost thou still want them?\"");
-						var var0005 = Func090A();
+						var var0005 = askYesNo();
 						if (var0005) {
 							var var0006 = Func0931(
 									PARTY, 10, SHAPE_GOLD_COIN, QUALITY_ANY,
@@ -28765,7 +28765,7 @@ void FuncPenni object#(FIRST_NPC_FUNCTION - PENNI)() {
 			if (var0004 == TEND_SHOP) {
 				say("\"Art thou interested in training? My price is 35 gold "
 					"for each training session.\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					Func08C8([STRENGTH, COMBAT], 35);
 				} else {
 					say("\"Perhaps next time.\"");
@@ -28799,10 +28799,10 @@ void FuncPenni object#(FIRST_NPC_FUNCTION - PENNI)() {
 			say("\"Addom is mine husband. But how did...?\" She appears "
 				"confused, but suddenly directs her gaze at you. \"Hast thou "
 				"seen him?\"");
-			var var0006 = Func090A();
+			var var0006 = askYesNo();
 			if (var0006) {
 				say("\"Is he in good health?\"");
-				var var0007 = Func090A();
+				var var0007 = askYesNo();
 				if (var0007) {
 					say("\"Thank goodness!\" she sighs in relief.");
 				} else {
@@ -28887,14 +28887,14 @@ void FuncBen object#(FIRST_NPC_FUNCTION - BEN)() {
 				var0000,
 				"?~~\"Oh, I see,\" he grins, \"Thou wants some for thyself, "
 				"ay?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				say("\"I am sorry, ", var0000,
 					", I do not know 'ow to prepare it. Perhaps thou shouldst "
 					"try a pub.\"");
 			} else {
 				say("\"Thou'st got another reason for askin'?\"");
-				var var0002 = Func090A();
+				var var0002 = askYesNo();
 				if (var0002) {
 					UI_push_answers();
 					add("Emps");
@@ -29030,7 +29030,7 @@ void FuncGoth object#(FIRST_NPC_FUNCTION - GOTH)() {
 			fallthrough;
 		case "prisoners":
 			say("\"I will tell thee for 5 gold. Interested?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				var var0004 = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -29051,7 +29051,7 @@ void FuncGoth object#(FIRST_NPC_FUNCTION - GOTH)() {
 			fallthrough;
 		case "another prisoner":
 			say("\"Another, eh. Hast thou 5 more gold for me?\"");
-			var var0006 = Func090A();
+			var var0006 = askYesNo();
 			if (var0006) {
 				var var0007 = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -29075,7 +29075,7 @@ void FuncGoth object#(FIRST_NPC_FUNCTION - GOTH)() {
 		case "buy keys":
 			say("\"Thou dost want these, eh?\" he asks, holding up keys. "
 				"\"'Twill cost thee... 20 gold. Still want them?\"");
-			var var0009 = Func090A();
+			var var0009 = askYesNo();
 			if (var0009) {
 				var var000A = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -29210,7 +29210,7 @@ void FuncCarlyn object#(FIRST_NPC_FUNCTION - CARLYN)() {
 					|| ((var0001 == AFTERNOON) || (var0001 == EVENING)))) {
 				say("\"Yes, I love sewing clothing. Wouldst thou be interested "
 					"in seeing or purchasing some of my creations?\"");
-				var var0004 = Func090A();
+				var var0004 = askYesNo();
 				if (var0004) {
 					Func085C();
 				} else {
@@ -29323,7 +29323,7 @@ void FuncDeSnel object#(FIRST_NPC_FUNCTION - DE_SNEL)() {
 				"at you. He cannot conceal his surprise.~\"From where didst "
 				"thou get that dagger?\"");
 			UI_push_answers();
-			var var0009 = Func090B(["found it", "murder site"]);
+			var var0009 = askForResponse(["found it", "murder site"]);
 			if (var0009 == "found it") {
 				say("De Snel peers at you, obviously aware you are lying.");
 			}
@@ -29336,7 +29336,7 @@ void FuncDeSnel object#(FIRST_NPC_FUNCTION - DE_SNEL)() {
 				"I have no further knowledge of it.\"");
 			say("\"By the way, hast thou had a demonstration of my training "
 				"technique?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"Then perhaps thou shouldst have another.\"");
 			} else {
 				say("\"Then perhaps thou shouldst try one.\"");
@@ -29357,7 +29357,7 @@ void FuncDeSnel object#(FIRST_NPC_FUNCTION - DE_SNEL)() {
 			say("\"I must apologize for the discourtesy, but mine unequaled "
 				"talents demand that I charge thee 40 gold for a training "
 				"demonstration. Wilt thou accept?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				Func0878(COMBAT, 40);
 			} else {
 				say("\"Very well, then!\" His scowl indicates his displeasure. "
@@ -29384,7 +29384,7 @@ void FuncDeSnel object#(FIRST_NPC_FUNCTION - DE_SNEL)() {
 				"\"Outstanding! I am a man who values nothing higher than the "
 				"application of skill. I salute thee on thy victory. Perhaps "
 				"thou wouldst like to join our group?\"");
-			var var000A = Func090A();
+			var var000A = askYesNo();
 			if (var000A) {
 				if (gflags[AVATAR_SHOWED_DAGGER]) {
 					say("\"Thy companions and thee look fit enough for an "
@@ -29754,7 +29754,7 @@ void FuncKliftin object#(FIRST_NPC_FUNCTION - KLIFTIN)() {
 		case "honor flag":
 			say("\"Dost thou want me to make an honor flag that can be given "
 				"to the Library of Scars so the duels can be stopped?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				if (gflags[AVATAR_CHAMPION]) {
 					say("\"Then thou must be sure to come pick it up from me "
@@ -29940,7 +29940,7 @@ void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA)() {
 			if (var0003 == MAJOR_SIT) {
 				say("\"For naught more than 5 gold thou canst get a lovely "
 					"room. Dost thou wish to stay the night?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					var var0009 = UI_get_party_list();
 					var var000A = 0;
 					for (var000D in var0009) {
@@ -30026,7 +30026,7 @@ void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA)() {
 			} else {
 				say("\"I am taking wagers on Sprellic's duels. Wouldst thou "
 					"like to place a bet?\"");
-				var var0012 = Func090A();
+				var var0012 = askYesNo();
 				if (var0012) {
 					say("\"How much wouldst thou like to bet that Sprellic "
 						"defeats all three of his challengers?\"");
@@ -30041,7 +30041,7 @@ void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA)() {
 						}
 						say("\"Thou wouldst bet ", var0012,
 							" gold that Sprellic will win?\"");
-						var var0013 = Func090A();
+						var var0013 = askYesNo();
 						if (var0013) {
 							break;
 						}
@@ -30273,7 +30273,7 @@ void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE)() {
 				say("\"In fact, I am taking bets on the upcoming duels. Dost "
 					"thou wish to bet that Sprellic will lose to any of the "
 					"three other duellists?\"");
-				var var000A = Func090A();
+				var var000A = askYesNo();
 				if (var000A) {
 					say("\"How much wouldst thou like to bet?\"");
 					declare var var000B;
@@ -30288,7 +30288,7 @@ void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE)() {
 						}
 						say("\"Thou wouldst bet ", var000B,
 							" gold that Sprellic will lose?\"");
-						var var000C = Func090A();
+						var var000C = askYesNo();
 						if (var000C) {
 							break;
 						}
@@ -30457,7 +30457,7 @@ void FuncSprellic object#(FIRST_NPC_FUNCTION - SPRELLIC)() {
 		case "story":
 			say("\"My tale is a strange one. It may disturb and puzzle thee. "
 				"Art thou certain thou wouldst like to hear it?\"");
-			var var0006 = Func090A();
+			var var0006 = askYesNo();
 			if (!var0006) {
 				say("\"Well, then I hope I was of some assistance to thee. "
 					"Farewell forever, ",
@@ -30619,7 +30619,7 @@ void FuncSprellic object#(FIRST_NPC_FUNCTION - SPRELLIC)() {
 			fallthrough;
 		case "champion":
 			say("\"Wouldst thou be my champion, Avatar?\"");
-			var var0007 = Func090A();
+			var var0007 = askYesNo();
 			if (var0007) {
 				say("Sprellic falls to his knees before you in gratitude. "
 					"\"Avatar, thou hast saved my life! I cannot thank thee "
@@ -31126,7 +31126,7 @@ void FuncIriale object#(FIRST_NPC_FUNCTION - IRIALE)() {
 	converse(0) {
 	case "name":
 		say("\"I am called Iriale Silvermist. Who art thou?\"");
-		var var0001 = Func090B([var0000, "The Avatar"]);
+		var var0001 = askForResponse([var0000, "The Avatar"]);
 		if (var0001 == var0000) {
 			say("\"I do not know thee!\"");
 		}
@@ -31166,7 +31166,7 @@ void FuncIriale object#(FIRST_NPC_FUNCTION - IRIALE)() {
 			"-him-. -He- does not want thee here. I give thee only one chance "
 			"to turn around and leave.");
 		say("\"Wilt thou leave?\"");
-		if (Func090A()) {
+		if (askYesNo()) {
 			say("\"Do so and I shall spare thee!\" She watches as you turn "
 				"away.*");
 			IRIALE->get_npc_object()->set_schedule_type(TEND_SHOP);
@@ -31230,7 +31230,7 @@ void FuncRussell object#(FIRST_NPC_FUNCTION - RUSSELL)() {
 				} else {
 					say("\"Thou wishest to purchase my ship 'The Nymphet'? The "
 						"deed will cost thee 600 gold.\"");
-					var var0004 = Func090A();
+					var var0004 = askYesNo();
 					if (var0004) {
 						var var0005 = PARTY->count_objects(
 								SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -31268,7 +31268,7 @@ void FuncRussell object#(FIRST_NPC_FUNCTION - RUSSELL)() {
 			if (var0002 == TEND_SHOP) {
 				say("\"Thou wishest to purchase one of my fine sextants? "
 					"'Twill cost thee 40 gold.\"");
-				var var0008 = Func090A();
+				var var0008 = askYesNo();
 				if (var0008) {
 					var var0009 = Func0931(
 							PARTY, 40, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -31407,7 +31407,7 @@ void FuncBoris object#(FIRST_NPC_FUNCTION - BORIS)() {
 		}
 		if (gflags[BILL_NOT_PAID]) {
 			say("\"Art thou ready to pay thy bill?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				// I see no way other than this
 				goto labelFuncBoris_00E5;
 			}
@@ -31431,7 +31431,7 @@ void FuncBoris object#(FIRST_NPC_FUNCTION - BORIS)() {
 							   "speak with thee or anyone else with thee.\"");
 					DUPRE->say("Dupre looks embarrassed. He turns to you. \"My "
 							   "friend, wilt thou help me out?\"");
-					if (Func090A()) {
+					if (askYesNo()) {
 					labelFuncBoris_00E5:
 						var var0004 = PARTY->count_objects(
 								SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -31504,7 +31504,7 @@ void FuncBoris object#(FIRST_NPC_FUNCTION - BORIS)() {
 		case "room":
 			say("\"Why dost thou not stay the night? For but 3 gold thou canst "
 				"let one of our rooms. Dost thou wish to stay the night?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				var var0006 = UI_get_party_list();
 				var var0007 = 0;
 				for (var000A in var0006) {
@@ -31755,11 +31755,11 @@ void FuncMagenta object#(FIRST_NPC_FUNCTION - MAGENTA)() {
 		case "carousing":
 			say("\"Say, dost thou think that Boris could have meant to give "
 				"this locket to someone else?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				say("Magenta's eyes widen in shock. \"Who?\"");
 				UI_push_answers();
-				var var0002 = Func090B(["Constance", "don't know who"]);
+				var var0002 = askForResponse(["Constance", "don't know who"]);
 				if (var0002 == "Constance") {
 					say("\"I cannot possibly wear a piece of jewelry meant for "
 						"another woman. As mayor, I charge thee, Avatar, with "
@@ -31798,7 +31798,7 @@ void FuncMagenta object#(FIRST_NPC_FUNCTION - MAGENTA)() {
 					"expensive gift. But how could he ever have afforded "
 					"it?\"");
 				UI_push_answers();
-				var var0004 = Func090B(["stolen", "don't know how"]);
+				var var0004 = askForResponse(["stolen", "don't know how"]);
 				if (var0004 == "stolen") {
 					say("Although Magenta struggles to retain her dignity, she "
 						"cannot hide her disappointment. \"As Mayor, I charge "
@@ -31939,7 +31939,7 @@ void FuncHenry object#(FIRST_NPC_FUNCTION - HENRY)() {
 			say("\"I noticed I had lost the locket right after I spoke with "
 				"those three strangers yesterday. Wouldst thou help me find "
 				"it?\"");
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				say("\"Oh, thank thee, ", var0000,
 					"! If not for thee, I would be lost.\"");
@@ -32035,7 +32035,7 @@ void FuncConstance object#(FIRST_NPC_FUNCTION - CONSTANCE)() {
 		case "well of humility":
 			say("\"The water from the well is pure and cool. If thou wouldst "
 				"like I will pour thee some.\"");
-			var var0006 = Func090A();
+			var var0006 = askYesNo();
 			if (var0006) {
 				say("With a big smile Constance takes a\tdipper and submerges "
 					"it in the cool water of her bucket. She draws out the "
@@ -32327,7 +32327,7 @@ void FuncRobin object#(FIRST_NPC_FUNCTION - ROBIN)() {
 			say("\"Thou art a member of The Fellowship! For years I have been "
 				"seeing Fellowship members winning heavy stakes at the House "
 				"of Games. Canst thou tell me their secret?\"");
-			var var0006 = Func090A();
+			var var0006 = askYesNo();
 			if (var0006) {
 				say("\"Of course thou canst. But I do not suspect that thou "
 					"wilt.\" Robin shrugs his shoulders.");
@@ -32342,7 +32342,7 @@ void FuncRobin object#(FIRST_NPC_FUNCTION - ROBIN)() {
 			say("\"But say, thou must have gotten here in some manner! Dost "
 				"thou have some manner of ship on which we could leave the "
 				"island?\"");
-			var var0007 = Func090A();
+			var var0007 = askYesNo();
 			if (var0007) {
 				say("\"I could pay thee well if thou wouldst\ttake us back to "
 					"Buccaneer's Den.\"");
@@ -32369,7 +32369,7 @@ void FuncRobin object#(FIRST_NPC_FUNCTION - ROBIN)() {
 		case "something":
 			say("\"Before I tell thee what it is, wilt thou promise to take me "
 				"and my mates back to Buccaneer's Den?\"");
-			var var0008 = Func090A();
+			var var0008 = askYesNo();
 			if (var0008) {
 				var var0009 = true;
 				say("Robin looks you in the eye. \"Thou art truly a kind "
@@ -32414,7 +32414,7 @@ void FuncRobin object#(FIRST_NPC_FUNCTION - ROBIN)() {
 				"immediately. My lads and I shall get Constance and then we "
 				"shall join thee. But wilt thou tell me where thy boat is "
 				"located?\"");
-			var var000A = Func090A();
+			var var000A = askYesNo();
 			if (var000A) {
 				say("You give Robin the location of your boat. He slowly "
 					"breaks into an evil laugh. \"I thank thee, friend. All "
@@ -32811,7 +32811,7 @@ void FuncSam object#(FIRST_NPC_FUNCTION - SAM)() {
 			say("\"My name is Sam. I am the Flower Man. And what is thy "
 				"name?\"");
 			UI_push_answers();
-			var var0007 = Func090B([var0000, var0004]);
+			var var0007 = askForResponse([var0000, var0004]);
 			if (var0007 == var0000) {
 				say("\"It is nice to meet thee.\"");
 				gflags[TOLD_SAM_NAME] = true;
@@ -32895,11 +32895,11 @@ void FuncSam object#(FIRST_NPC_FUNCTION - SAM)() {
 						"they will simply ignore thee!");
 				}
 				say("\"Surely thou dost wish to purchase some?\"");
-				var var0009 = Func090A();
+				var var0009 = askYesNo();
 				if (var0009) {
 					say("\"A bouquet costs 12 gold. Art thou still "
 						"interested?\"");
-					var var000A = Func090A();
+					var var000A = askYesNo();
 					if (var000A) {
 						var var000B = PARTY->count_objects(
 								SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -33189,7 +33189,7 @@ void FuncGorn object#(FIRST_NPC_FUNCTION - GORN)() {
 		fallthrough;
 	case "find Brom":
 		say("\"Wouldst thou help me find Brom?\"");
-		var var0006 = Func090A();
+		var var0006 = askYesNo();
 		if (var0006) {
 			say("Gorn seems distracted for a moment. He places his hand to his "
 				"ear as if he is listening to something. He looks back at you "
@@ -34050,7 +34050,7 @@ void FuncMordra object#(FIRST_NPC_FUNCTION - MORDRA)() {
 					"townsfolk that could be of use to thee,\" she says, "
 					"adding a smile.");
 			}
-			var var0014 = Func090A();
+			var var0014 = askYesNo();
 			if (var0014) {
 				Func08C0();
 			} else {
@@ -34360,7 +34360,7 @@ void FuncPaulette object#(FIRST_NPC_FUNCTION - PAULETTE)() {
 			fallthrough;
 		case "buy":
 			say("\"Thou dost wish to purchase something?\"");
-			var var0008 = Func090A();
+			var var0008 = askYesNo();
 			if (var0008) {
 				say("\"I am sorry, ", var0000,
 					",\" she giggles, \"but all we serve here are... "
@@ -34426,7 +34426,7 @@ void FuncPaulette object#(FIRST_NPC_FUNCTION - PAULETTE)() {
 			if (!gflags[ASKED_PAULETTE_SACRIFICE]) {
 				say("\"Thou wantest me to... to jump in a well?\" Her eyes "
 					"widen with astonishment.");
-				var var000B = Func090A();
+				var var000B = askYesNo();
 				if (var000B) {
 					say("\"Well, thou canst go jump in a lake!\" She crosses "
 						"her arms on her buxom chest and turns away from you "
@@ -35380,11 +35380,11 @@ void FuncPenumbra object#(FIRST_NPC_FUNCTION - PENUMBRA)() {
 			"waves. There must be a material we could use!\"~~ Penumbra "
 			"clutches her temples. She is obviously in great pain.");
 		say("\"Dost thou know of a material that is impenetrable?\"");
-		var var0003 = Func090A();
+		var var0003 = askYesNo();
 		if (var0003) {
 			say("\"What is it?\"");
 			UI_push_answers();
-			var0004 = Func090B(["iron ore", "gold", "blackrock", "lead"]);
+			var0004 = askForResponse(["iron ore", "gold", "blackrock", "lead"]);
 			if (var0004 == "blackrock") {
 				say("\"Yes! That is what we need!");
 			} else {
@@ -35455,7 +35455,7 @@ void FuncPenumbra object#(FIRST_NPC_FUNCTION - PENUMBRA)() {
 					say("Penumbra thinks a moment. \"By the way. How didst "
 						"thou happen to know to come to me about this "
 						"problem?\"");
-					var0004 = Func090B(["Nicodemus", "Time Lord"]);
+					var0004 = askForResponse(["Nicodemus", "Time Lord"]);
 					if ((var0004 == "Nicodemus") || (var0004 == "Time Lord")) {
 						say("You tell Penumbra the story of how you need to "
 							"get the hourglass enchanted.");
@@ -35654,7 +35654,7 @@ void FuncKissme object#(FIRST_NPC_FUNCTION - KISSME)() {
 				DUPRE->hide();
 			}
 			KISSME->say("Do you allow Kissme to kiss you?");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("Kissme places the wettest, sloppiest, oozingest, and "
 					"mushiest smack you have ever felt on your mouth. ~~\"Oh, "
 					"yes! That was fun! I love thee! Yes, it's true!\"");
@@ -35812,7 +35812,7 @@ void FuncZelda object#(FIRST_NPC_FUNCTION - ZELDA)() {
 			} else {
 				var0004 = "his";
 			}
-			var var0005 = Func090A();
+			var var0005 = askYesNo();
 			if (var0005) {
 				say("\"We discovered the tome in the lower depths of the "
 					"basement. We have no way to account for the accuracy of "
@@ -35861,7 +35861,7 @@ void FuncZelda object#(FIRST_NPC_FUNCTION - ZELDA)() {
 				" wilt aid me?\" she asks, hopefully. \"Wilt thou agree to "
 				"tell him for me, ",
 				var0001, "?\"");
-			var var0007 = Func090A();
+			var var0007 = askYesNo();
 			if (var0007) {
 				say("\"Thank thee, ", var0001, ". Thank thee.\" She blushes.");
 				var var0008 = UI_add_party_items(
@@ -36099,7 +36099,7 @@ void FuncGrod object#(FIRST_NPC_FUNCTION - GROD)() {
 			var var0006 = UI_wearing_fellowship();
 			if (var0006) {
 				say("\"I Grod. Why you want know? Is voice unhappy?\"");
-				var var0007 = Func090A();
+				var var0007 = askYesNo();
 				if (var0007) {
 					say("He seems truly worried.~~\"I will do job better. I "
 						"promise! I beat harder and more often!\"");
@@ -36130,7 +36130,7 @@ void FuncGrod object#(FIRST_NPC_FUNCTION - GROD)() {
 				say("\"I Grod. Who you?\"");
 				var0005 = Func0908();
 				var var0009 = "the Avatar";
-				var var000A = Func090B([var0005, var0009, var0004]);
+				var var000A = askForResponse([var0005, var0009, var0004]);
 				if (var000A == var0005) {
 					say("\"I not know you.\" He shrugs.");
 				}
@@ -36160,7 +36160,7 @@ void FuncGrod object#(FIRST_NPC_FUNCTION - GROD)() {
 			var var000B = UI_wearing_fellowship();
 			if (var000B) {
 				say("\"Want to help?\"");
-				var var000C = Func090A();
+				var var000C = askYesNo();
 				if (var000C) {
 					if (var0003 && var0002) {
 						say("He points to one of the prisoners.~~\"He not fun "
@@ -36841,7 +36841,7 @@ void FuncJillian object#(FIRST_NPC_FUNCTION - JILLIAN)() {
 			if ((var0002 >= MORNING) || (var0002 <= EVENING)) {
 				say("\"My price is 35 gold for each training session. Art thou "
 					"willing to pay that?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					Func08A2([MAX_MANA, INTELLIGENCE], 35);
 				} else {
 					say("\"Then I really should return to my studies.\"");
@@ -36902,7 +36902,7 @@ void FuncEffrem object#(FIRST_NPC_FUNCTION - EFFREM)() {
 				". I am but a simple resident of Moonglow.");
 			if (!gflags[TOLD_EFFREM_NAME]) {
 				say("\"What is thy name?\"");
-				var var0009 = Func090B([var0000, var0002, var0001]);
+				var var0009 = askForResponse([var0000, var0002, var0001]);
 				if (var0009 == var0000) {
 					say("\"Hello, ", var0000,
 						".\" He turns to the baby.~~ \"Say `hello' to ",
@@ -37027,7 +37027,7 @@ void FuncChad object#(FIRST_NPC_FUNCTION - CHAD)() {
 			say("\"Chad, at thy service, ", var0001,
 				". And what is thy name?\"");
 			remove("name");
-			var var0004 = Func090B([var0000, var0002, var0001]);
+			var var0004 = askForResponse([var0000, var0002, var0001]);
 			if (var0004 == var0000) {
 				say("\"Greetings, ", var0000, ". I am at thy service.\"");
 				gflags[TOLD_CHAD_NAME] = true;
@@ -37092,7 +37092,7 @@ void FuncChad object#(FIRST_NPC_FUNCTION - CHAD)() {
 					"time for drink!\"");
 			} else {
 				say("\"Wilt thou pay the 45 gold for the training session?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					Func085F([DEXTERITY, COMBAT], 45);
 				} else {
 					say("\"Well, mayhap next time thou wilt be willing.\"");
@@ -37280,7 +37280,7 @@ void FuncPhearcy object#(FIRST_NPC_FUNCTION - PHEARCY)() {
 		if (gflags[ZELDA_LOVE]) {
 			if (!gflags[GOT_FOOD]) {
 				say("\"Hast thou discovered the reason for Zelda's moods?\"");
-				var var0006 = Func090A();
+				var var0006 = askYesNo();
 				if (var0006) {
 					say("\"Excellent. Thou canst tell me while I get thy "
 						"refreshment.\" As he prepares your meal, you tell him "
@@ -37601,7 +37601,7 @@ void FuncAddom object#(FIRST_NPC_FUNCTION - ADDOM)() {
 				"but, alas, they have no use for it. Dost thou want it, "
 				"perhaps?\" he asks, hopefully. \"I will sell it to thee for "
 				"20 gold.\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				var var0004 = UI_add_party_items(
 						1, SHAPE_ORRERY_CRYSTAL, QUALITY_ANY, FRAME_ANY, false);
@@ -37817,7 +37817,7 @@ void FuncThurston object#(FIRST_NPC_FUNCTION - THURSTON)() {
 			if (var0002 == TEND_SHOP) {
 				say("\"A sack will cost thee 12 gold. Art thou interested in "
 					"purchasing some?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					forever {
 						var var0004 = PARTY->count_objects(
 								SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -37833,7 +37833,7 @@ void FuncThurston object#(FIRST_NPC_FUNCTION - THURSTON)() {
 									say("\"Here it is,\" he says, handing you "
 										"the sack. \"Wouldst thou wish "
 										"another?\"*");
-									var var0007 = Func090A();
+									var var0007 = askYesNo();
 									if (var0007) {
 										continue;
 									}
@@ -38051,7 +38051,7 @@ void FuncFeridwyn object#(FIRST_NPC_FUNCTION - FERIDWYN)() {
 		case "Fellowship":
 			if (!(var0001 && (!gflags[JOIN_FELLOWSHIP]))) {
 				say("\"Wouldst thou like to join?\"");
-				var var0006 = Func090A();
+				var var0006 = askYesNo();
 				if (var0006) {
 					say("\"Then thou must see Batlin of Britain. He is the "
 						"founder of The Fellowship.\"");
@@ -38348,7 +38348,7 @@ void FuncBrita object#(FIRST_NPC_FUNCTION - BRITA)() {
 			say("\"We hear about everything that goes on in Paws. If I do not "
 				"know about it then mine husband does. Is there anyone in "
 				"particular thou dost wish to know about?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				say("\"I know about these people:\"");
 				add(["Alina", "Camille", "Polly"]);
@@ -38585,7 +38585,7 @@ void FuncMerrick object#(FIRST_NPC_FUNCTION - MERRICK)() {
 		if (!gflags[MET_MERRICK]) {
 			say("You see a nervous man who constantly blinks. He sees you and "
 				"looks like he is in a snit. \"Who art thou?\"");
-			var var0005 = Func090B([var0000, var0001, var0002]);
+			var var0005 = askForResponse([var0000, var0001, var0002]);
 			if (var0005 == var0000) {
 				say("\"Very well, ", var0000, ". What dost thou want?\"");
 				var0004 = var0000;
@@ -38796,7 +38796,7 @@ void FuncGarritt object#(FIRST_NPC_FUNCTION - GARRITT)() {
 			say("\"My father says the poor are weak of character and that is "
 				"why they are poor. They do not have to be. They are just too "
 				"lazy to work. Dost thou agree?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				say("\"I was not so sure, but since that is what my father "
 					"says, it must be true.\"");
@@ -38836,7 +38836,7 @@ void FuncGarritt object#(FIRST_NPC_FUNCTION - GARRITT)() {
 				"philosophy. We follow the Triad of Inner Strength and do let "
 				"personal failures get in our way or slow us down.\"");
 			say("\"Dost thou want to join?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				say("\"I got another one!\" he says gleefully. \"Thou must "
 					"speak with my father right away!\"");
@@ -38883,7 +38883,7 @@ void FuncGarritt object#(FIRST_NPC_FUNCTION - GARRITT)() {
 			fallthrough;
 		case "parents":
 			say("\"Wilt thou tell my parents?\"");
-			var var0005 = Func090A();
+			var var0005 = askYesNo();
 			if (var0005) {
 				if (var0001) {
 					say("\"But I, like thee, am a member of The Fellowship. "
@@ -38979,7 +38979,7 @@ void FuncMorfin object#(FIRST_NPC_FUNCTION - MORFIN)() {
 				"up and down. \"Oh, there must be a travelling show in town!\" "
 				"he says sniggering. \"That is a very nice clown costume! Who "
 				"art thou?\"*");
-			var var0008 = Func090B([var0000, var0002, var0003]);
+			var var0008 = askForResponse([var0000, var0002, var0003]);
 			if (var0008 == var0000) {
 				say("\"Very well, ", var0000, ". What dost thou want?\"");
 				gflags[TOLD_MORFIN_NAME] = true;
@@ -39075,7 +39075,7 @@ void FuncMorfin object#(FIRST_NPC_FUNCTION - MORFIN)() {
 			fallthrough;
 		case "mutton":
 			say("\"'Twill cost thee 3 gold each. Still interested?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"How many dost thou want?\"");
 				var var0009 = UI_input_numeric_value(1, 20, 1, 1);
 				var var000A = var0009 * 3;
@@ -39102,7 +39102,7 @@ void FuncMorfin object#(FIRST_NPC_FUNCTION - MORFIN)() {
 			fallthrough;
 		case "beef":
 			say("\"'Twill cost thee 2 gold each. Still interested?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"How many dost thou want?\"");
 				var var000E = UI_input_numeric_value(1, 20, 1, 1);
 				var var000F = var000E * 2;
@@ -39129,7 +39129,7 @@ void FuncMorfin object#(FIRST_NPC_FUNCTION - MORFIN)() {
 			fallthrough;
 		case "ham":
 			say("\"'Twill cost thee 4 gold each. Still interested?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"How many dost thou want?\"");
 				var var0013 = UI_input_numeric_value(1, 20, 1, 1);
 				var var0014 = var0013 * 4;
@@ -39161,7 +39161,7 @@ void FuncMorfin object#(FIRST_NPC_FUNCTION - MORFIN)() {
 			if (!gflags[GARRITT_GUILTY]) {
 				say("\"I would be thine humble servant shouldst thou help "
 					"investigate the matter. Wilt thou?\"");
-				var var0018 = Func090A();
+				var var0018 = askYesNo();
 				if (var0018) {
 					say("\"Then I shall cooperate fully, ", var0001,
 						".\" He bows.");
@@ -39363,7 +39363,7 @@ void FuncBeverlea object#(FIRST_NPC_FUNCTION - BEVERLEA)() {
 				"canst see that there is a crack in its side proving that even "
 				"as a child Gorn was a strong little tyke. I can let thee take "
 				"it for ten gold coins. Dost thou wish to buy the cradle?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				var var0005 = UI_remove_party_items(
 						10, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -39385,7 +39385,7 @@ void FuncBeverlea object#(FIRST_NPC_FUNCTION - BEVERLEA)() {
 				"finest equestriennes to ever sit upon a horse. I could let "
 				"thee have this rare and unusual piece for twelve gold. Dost "
 				"thou wish to buy it?\"");
-			var var0006 = Func090A();
+			var var0006 = askYesNo();
 			if (var0006) {
 				var var0007 = UI_remove_party_items(
 						12, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -39406,7 +39406,7 @@ void FuncBeverlea object#(FIRST_NPC_FUNCTION - BEVERLEA)() {
 				"was rung to announce that court was in session. I can sell "
 				"thee that interesting conversation piece for six gold "
 				"coins.\tDost thou wish to buy it?\"");
-			var var0008 = Func090A();
+			var var0008 = askYesNo();
 			if (var0008) {
 				var var0009 = UI_remove_party_items(
 						6, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -39429,7 +39429,7 @@ void FuncBeverlea object#(FIRST_NPC_FUNCTION - BEVERLEA)() {
 					"this old man who was so daft that he could not recall how "
 					"to use it! I will sell it to thee for five gold pieces. "
 					"Dost thou wish to buy it?\"");
-				var var000A = Func090A();
+				var var000A = askYesNo();
 				if (var000A) {
 					var var000B = UI_remove_party_items(
 							5, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -39457,7 +39457,7 @@ void FuncBeverlea object#(FIRST_NPC_FUNCTION - BEVERLEA)() {
 			say("\"I also have an old spittoon. It was once used by... a great "
 				"many people. Thou mayest have it for a gold piece. Take it! "
 				"Please!\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var var000D = UI_remove_party_items(
 						1, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -39480,7 +39480,7 @@ void FuncBeverlea object#(FIRST_NPC_FUNCTION - BEVERLEA)() {
 			say("\"I have a lute for sale that once belonged to a travelling "
 				"bard who lost it in a game of dice. I am asking twenty gold "
 				"coins for it. A song! Wouldst thou like to buy it?\"");
-			var var000E = Func090A();
+			var var000E = askYesNo();
 			if (var000E) {
 				var var000F = UI_remove_party_items(
 						20, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -39508,7 +39508,7 @@ void FuncBeverlea object#(FIRST_NPC_FUNCTION - BEVERLEA)() {
 				"retire. He obviously did not realize the value of this item. "
 				"But I can let thee have it for twenty gold pieces. Dost thou "
 				"wish to buy it?\"");
-			var var0010 = Func090A();
+			var var0010 = askYesNo();
 			if (var0010) {
 				var var0011 = UI_remove_party_items(
 						20, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -39659,10 +39659,10 @@ void FuncKomor object#(FIRST_NPC_FUNCTION - KOMOR)() {
 			fallthrough;
 		case "give":
 			say("\"Wilt thou give me a bit of money?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("How much?");
 				UI_push_answers();
-				var var0002 = Func090B(["0", "1", "2", "3", "4", "5"]);
+				var var0002 = askForResponse(["0", "1", "2", "3", "4", "5"]);
 				var var0003 = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if (var0003 >= var0002) {
@@ -39859,10 +39859,10 @@ void FuncFenn object#(FIRST_NPC_FUNCTION - FENN)() {
 			fallthrough;
 		case "give":
 			say("\"Wilt thou give me a bit of money?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("How much?");
 				UI_push_answers();
-				var var0002 = Func090B(["O", "1", "2", "3", "4", "5"]);
+				var var0002 = askForResponse(["O", "1", "2", "3", "4", "5"]);
 				var var0003 = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 				if ((var0003 >= var0002) && (var0002 != "0")) {
@@ -39953,7 +39953,7 @@ void FuncAndrew object#(FIRST_NPC_FUNCTION - ANDREW)() {
 			if (var0002 == TEND_SHOP) {
 				say("\"A gallon will cost thee 3 gold. Art thou interested in "
 					"buying some?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					forever {
 						var var0004 = UI_remove_party_items(
 								3, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -39964,7 +39964,7 @@ void FuncAndrew object#(FIRST_NPC_FUNCTION - ANDREW)() {
 							if (var0005) {
 								say("\"Here it is,\" he says, handing you the "
 									"jug. \"Wouldst thou like another?\"*");
-								var var0006 = Func090A();
+								var var0006 = askYesNo();
 								if (var0006) {
 									continue;
 								}
@@ -39993,7 +39993,7 @@ void FuncAndrew object#(FIRST_NPC_FUNCTION - ANDREW)() {
 		case "cheese":
 			if (var0002 == TEND_SHOP) {
 				say("\"I sell wedges for 2 gold each. Still interested?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"How many dost thou want?\"");
 					var var0008 = UI_input_numeric_value(1, 20, 1, 1);
 					var var0009 = var0008 * 2;
@@ -40162,7 +40162,7 @@ void FuncCamille object#(FIRST_NPC_FUNCTION - CAMILLE)() {
 			say("\"I believe my carrots are especially tasty. Wouldst thou "
 				"like to purchase some? They would only cost thee one gold for "
 				"three.\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				say("\"How many dost thou desire?\"");
 				var var0002 = UI_input_numeric_value(3, 30, 3, 3);
@@ -40206,7 +40206,7 @@ void FuncCamille object#(FIRST_NPC_FUNCTION - CAMILLE)() {
 			say("\"That reminds me. This package needs to be taken to the mill "
 				"today. If thou canst deliver it for me, Thurston will pay "
 				"thee for it. Wilt thou?\"");
-			var var0008 = Func090A();
+			var var0008 = askYesNo();
 			if (var0008) {
 				var var0009 = UI_add_party_items(
 						1, SHAPE_SACK_OF_WHEAT, QUALITY_ANY, FRAME_ANY, true);
@@ -40349,7 +40349,7 @@ void FuncTobias object#(FIRST_NPC_FUNCTION - TOBIAS)() {
 			fallthrough;
 		case "Avatar":
 			say("\"Art thou truly the Avatar?\"");
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				if (gflags[GARRITT_GUILTY]) {
 					say("\"Yes, I do believe thou art the true Avatar.\" "
@@ -40546,7 +40546,7 @@ void FuncPolly object#(FIRST_NPC_FUNCTION - POLLY)() {
 		case "room":
 			say("\"For but 5 gold thou canst let one of our lovely rooms. Dost "
 				"thou wish to stay here for the night?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				var var0003 = UI_get_party_list();
 				var var0004 = 0;
 				for (var0007 in var0003) {
@@ -40713,7 +40713,7 @@ void FuncDraxinusom object#(FIRST_NPC_FUNCTION - DRAXINUSOM)() {
 				"the tension between the altar worshippers and The Fellowship. "
 				"To have been angry and distrustful of The Fellowship. To have "
 				"news of him?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				say("\"To be excellent! To have seen him? To know how he is "
 					"faring? To be well?\"");
@@ -40866,7 +40866,7 @@ void FuncInforlem object#(FIRST_NPC_FUNCTION - INFORLEM)() {
 		case "warrior":
 			say("\"To charge 50 gold for each training session. To be all "
 				"right?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				Func089B([STRENGTH, DEXTERITY, COMBAT], 50);
 			} else {
 				say("\"To apologize, but I must charge that amount!\"");
@@ -40875,7 +40875,7 @@ void FuncInforlem object#(FIRST_NPC_FUNCTION - INFORLEM)() {
 		case "mage":
 			say("\"To charge 50 gold for each training session. To be "
 				"acceptable?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				Func089A([MAX_MANA, INTELLIGENCE], 50);
 			} else {
 				say("\"To apologize, but I must charge that amount!\"");
@@ -41112,7 +41112,7 @@ void FuncTeregus object#(FIRST_NPC_FUNCTION - TEREGUS)() {
 		case "evidence":
 			say("\"To have brought me something, some evidence about the "
 				"rumors?\"");
-			var0002 = Func090A();
+			var0002 = askYesNo();
 			if (var0002) {
 				say("\"To be wonderful! To see it, please.\"~~You hand him the "
 					"note from Runeb that you found in Sarpling's shop.~~\"Ah. "
@@ -41161,10 +41161,10 @@ void FuncTeregus object#(FIRST_NPC_FUNCTION - TEREGUS)() {
 					"Fellowship. To have felt it safer for him to leave.\"~~He "
 					"sighs, then looks up hopefully.~~\"To have news of "
 					"him?\"");
-				var0002 = Func090A();
+				var0002 = askYesNo();
 				if (var0002) {
 					say("\"To be well?\"");
-					var var0004 = Func090A();
+					var var0004 = askYesNo();
 					if (var0004) {
 						say("\"To be good. To be hoping to hear from him "
 							"soon.\"");
@@ -41203,7 +41203,7 @@ void FuncTeregus object#(FIRST_NPC_FUNCTION - TEREGUS)() {
 		case "altars"(remove):
 			say("\"To be caretaker and group leader for the altars of the "
 				"three principles. To wish to make a donation?\"");
-			var0002 = Func090A();
+			var0002 = askYesNo();
 			if (var0002) {
 				say("\"Excellent. To which altar do you wish to donate?\"");
 				UI_push_answers();
@@ -41216,7 +41216,7 @@ void FuncTeregus object#(FIRST_NPC_FUNCTION - TEREGUS)() {
 			say("\"To be an excellent choice. To meditate at the shrine for "
 				"you for a donation of 5 gold. To be willing to donate 5 "
 				"gold?\"");
-			var0002 = Func090A();
+			var0002 = askYesNo();
 			if (var0002) {
 				var var0005 = UI_remove_party_items(
 						5, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -41789,7 +41789,7 @@ void FuncSarpling object#(FIRST_NPC_FUNCTION - SARPLING)() {
 			say("\"To know Quan is the Fellowship leader. To believe he gives "
 				"good guidance.\" He appears thoughtful.~~ \"To have spoken to "
 				"Draxinusom?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				say("\"To see Forbrak or Quaeven, then. To know they see all "
 					"the citizens regularly.\"");
@@ -41964,7 +41964,7 @@ void FuncForbrak object#(FIRST_NPC_FUNCTION - FORBRAK)() {
 		case "residents":
 			say("\"To know many gargoyles. To want to know about some of "
 				"them?\"");
-			var var0005 = Func090A();
+			var var0005 = askYesNo();
 			if (var0005) {
 				say("\"To be sure you already know our leader. To wonder if "
 					"you have met Teregus, or the learning center head.~~\"To "
@@ -42059,7 +42059,7 @@ void FuncBetra object#(FIRST_NPC_FUNCTION - BETRA)() {
 		converse(0) {
 		case "name":
 			say("\"To be named Betra. To be new to Terfin?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				say("\"To tell you to talk to Teregus, the sage or Forbrak, "
 					"the tavernkeeper, for information about town. To help "
@@ -42178,7 +42178,7 @@ void FuncMartingo object#(FIRST_NPC_FUNCTION - MARTINGO)() {
 				"eye.~~\"Who in blazes art thou?\" the man asks. His attitude "
 				"is that of someone who was just interrupted from something "
 				"terribly important.");
-			var var0002 = Func090B([var0001, "I am the Avatar"]);
+			var var0002 = askForResponse([var0001, "I am the Avatar"]);
 			if (var0002 == var0001) {
 				say("Martingo shakes your hand but acts thoroughly "
 					"disinterested. \"I'm thrilled.\"");
@@ -42235,7 +42235,7 @@ void FuncMartingo object#(FIRST_NPC_FUNCTION - MARTINGO)() {
 		case "Sultan":
 			say("\"Come on, do not insult mine intelligence. Surely thou dost "
 				"know what a Sultan is! Canst not thou see mine harem?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				say("\"Lovely, are they not?");
 			} else {
@@ -42251,7 +42251,7 @@ void FuncMartingo object#(FIRST_NPC_FUNCTION - MARTINGO)() {
 			if (var0000) {
 				say("Martingo looks you up and down lecherously. \"Hmmm. "
 					"Wouldst thou like to join mine harem?\"");
-				var var0004 = Func090A();
+				var var0004 = askYesNo();
 				if (var0004) {
 					say("Your answer takes Martingo by surprise. \"Thou "
 						"wouldst?\" He looks around nervously. \"Oh, uhm, I "
@@ -42286,11 +42286,11 @@ void FuncMartingo object#(FIRST_NPC_FUNCTION - MARTINGO)() {
 		case "banana":
 			if (!gflags[SOLD_BANANA]) {
 				say("\"Oh, forgive my manners! Wouldst thou like a banana?\"");
-				var var0006 = Func090A();
+				var var0006 = askYesNo();
 				if (var0006) {
 					say("\"Well, it shall cost thee 3 gold coins. Still want "
 						"one?\"");
-					var var0007 = Func090A();
+					var var0007 = askYesNo();
 					if (var0007) {
 						// BUG: there is a bug here: Martingo only checks if
 						// you have enough gold to buy his banana, but then,
@@ -42425,7 +42425,7 @@ void FuncMenion object#(FIRST_NPC_FUNCTION - MENION)() {
 		case "train":
 			if (var0001 == TEND_SHOP) {
 				say("\"I will train thee for 45 gold. Wilt thou pay?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					Func08BE([STRENGTH, COMBAT], 45);
 				} else {
 					say("\"Fine.\"");
@@ -42439,7 +42439,7 @@ void FuncMenion object#(FIRST_NPC_FUNCTION - MENION)() {
 			say("\"Dost thou wish to make a sword?\"");
 			if ((var0002 == MORNING)
 				|| ((var0002 == NOON) || (var0002 == AFTERNOON))) {
-				var var0003 = Func090A();
+				var var0003 = askYesNo();
 				if (!var0003) {
 					say("\"Perhaps sometime when thou hast more time.\"");
 				} else {
@@ -42630,7 +42630,7 @@ void FuncJehanne object#(FIRST_NPC_FUNCTION - JEHANNE)() {
 				"remained was rebuilt into an even finer ship, `The Dragon's "
 				"Breath?' Art thou interested in purchasing it for 600 "
 				"gold?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				var var0004 = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -42708,7 +42708,7 @@ void FuncJehanne object#(FIRST_NPC_FUNCTION - JEHANNE)() {
 			var0008 = JEHANNE->get_npc_object()->get_schedule_type();
 			if (var0008 == TEND_SHOP) {
 				say("\"Thou wishest to buy something?\"");
-				var var0009 = Func090A();
+				var var0009 = askYesNo();
 				if (var0009) {
 					Func08A1();
 				} else {
@@ -42824,7 +42824,7 @@ void FuncJohnPaul object#(FIRST_NPC_FUNCTION - JOHN_PAUL)() {
 		case "name":
 			say("\"I am Lord John-Paul of Serpent's Hold. Thou art ", var0000,
 				", the Avatar, correct?\"");
-			var var0005 = Func090A();
+			var var0005 = askYesNo();
 			if (var0005) {
 				if (gflags[STARTED_HOLD_INVESTIGATION]
 					&& (!gflags[AVATAR_REFUSED])) {
@@ -42919,7 +42919,7 @@ void FuncJohnPaul object#(FIRST_NPC_FUNCTION - JOHN_PAUL)() {
 					"you hopefully, \"thou couldst help track down the "
 					"villain?\"");
 				gflags[JOHN_PAUL_ASKED] = true;
-				var var0006 = Func090A();
+				var var0006 = askYesNo();
 				if (var0006) {
 					say("\"Very good. The best way to begin is by speaking "
 						"with Sir Denton, the tavernkeeper at the Hallowed "
@@ -43033,7 +43033,7 @@ void FuncRichter object#(FIRST_NPC_FUNCTION - RICHTER)() {
 		if (!gflags[MET_RICHTER]) {
 			say("You see a dashing young man, who turns to greet you.~~\"I am "
 				"Richter, a knight of the Hold. Who wouldst thou be?\"");
-			var var0005 = Func090B([var0001, var0002]);
+			var var0005 = askForResponse([var0001, var0002]);
 			if (var0005 == var0001) {
 				say("\"I am happy to meet thee, ", var0001, ".\"");
 				var0004 = var0001;
@@ -43199,7 +43199,7 @@ void FuncRichter object#(FIRST_NPC_FUNCTION - RICHTER)() {
 				"reward!\"~~After a moment, he calms down.");
 			if (!gflags[GOT_CHIPS]) {
 				say("\"Art thou investigating this crime against mankind?\"");
-				var var0008 = Func090A();
+				var var0008 = askYesNo();
 				if (var0008) {
 					say("\"Then let me give thee these.\" He holds up some "
 						"stone chips. \"They were found at the base of the "
@@ -43360,7 +43360,7 @@ void FuncJordan object#(FIRST_NPC_FUNCTION - JORDAN)() {
 		if (!gflags[MET_JORDAN]) {
 			say("You see a man who, despite being blind, quickly acknowledges "
 				"you.~~\"I am Jordan. Sir Jordan. And thou art?\"");
-			var var0006 = Func090B([var0001, var0002]);
+			var var0006 = askForResponse([var0001, var0002]);
 			if (var0006 == var0001) {
 				say("\"My pleasure, ", var0001, ".\" He shakes your hand.");
 				gflags[TOLD_JORDAN_NAME] = true;
@@ -43634,7 +43634,7 @@ void FuncDenton object#(FIRST_NPC_FUNCTION - DENTON)() {
 		case "humor":
 			say("\"My jokes are very bad. If thou wouldst like, I will tell "
 				"thee one.\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				say("\"Why did the chicken cross the road?\"");
 				var var0004 = Func08F7(IOLO);
@@ -43665,7 +43665,7 @@ void FuncDenton object#(FIRST_NPC_FUNCTION - DENTON)() {
 			remove("humor");
 			say("He gives a partial smile.~~\"To get to the other side. Didst "
 				"thou think that was funny?\"");
-			var var0006 = Func090A();
+			var var0006 = askYesNo();
 			if (var0006) {
 				say("He appears confused. \"That is odd, no one else thinks "
 					"that joke is humorous.~~\"Perhaps I am more funny than I "
@@ -43709,7 +43709,7 @@ void FuncDenton object#(FIRST_NPC_FUNCTION - DENTON)() {
 			if (var0007) {
 				say("He looks at your medallion.~~\"Is mine information "
 					"correct?\"");
-				var var0008 = Func090A();
+				var var0008 = askYesNo();
 				if (var0008) {
 					say("\"I thank thee. I always endeavor to be correct.\"");
 				} else {
@@ -43790,7 +43790,7 @@ void FuncTory object#(FIRST_NPC_FUNCTION - TORY)() {
 		case "Riky":
 			if (gflags[BABY_GONE]) {
 				say("\"Hast thou found my child?\"");
-				var var0003 = Func090A();
+				var var0003 = askYesNo();
 				if (var0003) {
 					var var0004 = Func0931(
 							PARTY, 1, SHAPE_BABY, QUALITY_ANY, FRAME_BABY_RIKY);
@@ -43831,7 +43831,7 @@ void FuncTory object#(FIRST_NPC_FUNCTION - TORY)() {
 					var0001,
 					", thou wilt help me get my child back. Oh, please, wilt "
 					"thou?\"");
-				var var0006 = Func090A();
+				var var0006 = askYesNo();
 				if (var0006) {
 					say("\"I cannot thank thee enough for helping me!\" She "
 						"appears to have cheered up greatly.");
@@ -43853,7 +43853,7 @@ void FuncTory object#(FIRST_NPC_FUNCTION - TORY)() {
 		case "Hold":
 			say("\"I sense that thou wishest to know about the residents here "
 				"at Serpent's Hold. Is this correct?\"");
-			var var0007 = Func090A();
+			var var0007 = askYesNo();
 			if (!var0007) {
 				say("\"Very well. Come to me if thou changest thy mind.\"");
 			} else {
@@ -44170,7 +44170,7 @@ void FuncIan object#(FIRST_NPC_FUNCTION - IAN)() {
 			if (gflags[JOIN_FELLOWSHIP]) {
 				say("\"Oh, wouldst thou like to meditate with us, fellow "
 					"brother?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					var var0001 = UI_add_party_items(
 							1, SHAPE_KEY, QUALITY_DOOR_FELLOWSHIP_RETREAT, 7, false);
 					if (var0001) {
@@ -44185,7 +44185,7 @@ void FuncIan object#(FIRST_NPC_FUNCTION - IAN)() {
 			} else {
 				say("\"Art thou a Fellowship member?\"");
 				declare var var0002;
-				if (Func090A()) {
+				if (askYesNo()) {
 					var0002 = "@I do not believe thee. Thou ";
 				} else {
 					var0002 = "@Then thou ";
@@ -44252,7 +44252,7 @@ void FuncCador object#(FIRST_NPC_FUNCTION - CADOR)() {
 			say("The man shakes your hand. \"I am Cador.\"");
 			if (var0006 == EAT_AT_INN) {
 				say("\"And thy name is?\"");
-				var var0008 = Func090B([var0001, var0002, var0000]);
+				var var0008 = askForResponse([var0001, var0002, var0000]);
 				if (var0008 == var0002) {
 					say("\"What? Dost thou mean to tell me that thou art the "
 						"one who brought those gargoyles to our precious "
@@ -44375,7 +44375,7 @@ void FuncMara object#(FIRST_NPC_FUNCTION - MARA)() {
 				"M'name's Mara.\"");
 			if (var0006 == EAT_AT_INN) {
 				say("\"What is thine?\"");
-				var var0008 = Func090B([var0001, var0002, var0000]);
+				var var0008 = askForResponse([var0001, var0002, var0000]);
 				if (var0008 == var0002) {
 					say("\"The Avatar!\" she shouts angrily. \"Why thou art "
 						"the one responsible for bringing those wretched "
@@ -44531,7 +44531,7 @@ void FuncZaksam object#(FIRST_NPC_FUNCTION - ZAKSAM)() {
 		case "train":
 			if (var0002 == TEND_SHOP) {
 				say("\"I can train thee for 40 gold. Is this all right?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					Func094F([STRENGTH, COMBAT], 40);
 				} else {
 					say("\"Perhaps next time, ", var0001, ".\"");
@@ -44744,7 +44744,7 @@ void FuncYongi object#(FIRST_NPC_FUNCTION - YONGI)() {
 			remove("name");
 			if (var0006) {
 				say("\"And ye are?\"");
-				var var0007 = Func090B([var0000, var0002, var0001]);
+				var var0007 = askForResponse([var0000, var0002, var0001]);
 				if (var0007 == var0002) {
 					say("\"Aye, ", var0001,
 						". Right ye are. If ye dinna care ta tell me, I don't "
@@ -44928,7 +44928,7 @@ void FuncBlorn object#(FIRST_NPC_FUNCTION - BLORN)() {
 		case "gargoyles":
 			say("A growl escapes his throat.~~\"What about the bloody "
 				"gargoyles? Don't tell me thou art a gargoyle lover.\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				say("\"Thou art disgusting, swine!\" He spits on your boot.*");
 				abort;
@@ -44940,7 +44940,7 @@ void FuncBlorn object#(FIRST_NPC_FUNCTION - BLORN)() {
 				"honor, ",
 				var0000,
 				", if thou wouldst agree to avenge me! Art thou willing?\"");
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				say("\"I thank thee, ", var0000,
 					", thank thee. But I must warn thee, he is a very violent "
@@ -44976,7 +44976,7 @@ void FuncBlorn object#(FIRST_NPC_FUNCTION - BLORN)() {
 			fallthrough;
 		case "Lap-Lem":
 			say("\"Thou hast killed the jackal?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				say("\"Wonderful! Thou art truly a trusted friend. I thank "
 					"thee for thine assistance!\" He grins at you.");
@@ -45354,7 +45354,7 @@ void FuncLapLem object#(FIRST_NPC_FUNCTION - LAP_LEM)() {
 			fallthrough;
 		case "Blorn":
 			say("\"To know of incident?");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (!var0001) {
 				say("\"To be very sorry for attack, but was in defense of "
 					"possession.\" He lowers his head as if ashamed.");
@@ -45421,7 +45421,7 @@ void FuncYvella object#(FIRST_NPC_FUNCTION - YVELLA)() {
 				"face.~~\"Good day, ",
 				var0001,
 				". I am Yvella.\" She curtseys. \"Might I know thy name?\"");
-			var var0006 = Func090B([var0000, var0004]);
+			var var0006 = askForResponse([var0000, var0004]);
 			if (var0006 == var0000) {
 				say("\"Pleased to meet thee, ", var0000, ".\"");
 				gflags[TOLD_YVELLA_NAME] = true;
@@ -45505,7 +45505,7 @@ void FuncYvella object#(FIRST_NPC_FUNCTION - YVELLA)() {
 				var0001,
 				". What dost thou think? Wouldst thou like to run for "
 				"mayor?\"");
-			var var0008 = Func090A();
+			var var0008 = askYesNo();
 			if (var0008) {
 				say("\"I agree, thou ought to consider it.\"");
 			} else {
@@ -45543,10 +45543,10 @@ void FuncYvella object#(FIRST_NPC_FUNCTION - YVELLA)() {
 			fallthrough;
 		case "Catherine at noon":
 			say("\"Thou knowest where my daughter doth go at noon?\"");
-			var var000A = Func090A();
+			var var000A = askYesNo();
 			if (var000A) {
 				say("\"Wilt thou tell me?\"");
-				var var000B = Func090A();
+				var var000B = askYesNo();
 				if (var000B) {
 					if (gflags[CATHERINE_CAUGHT]) {
 						say("After you tell her, she responds, \"I knew it! "
@@ -45735,7 +45735,7 @@ void FuncForLem object#(FIRST_NPC_FUNCTION - FOR_LEM)() {
 				"during the day only. To have been asked by her!\" His eyes "
 				"widen.~~ \"To ask you not to tell her parents, for they will "
 				"punish her.\" He looks hopeful. \"To tell not, agreed?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				say("\"To be making the right decision.\" He appears relieved. "
 					"\"To thank you, human.\" He smiles.");
@@ -45796,7 +45796,7 @@ void FuncAnsikart object#(FIRST_NPC_FUNCTION - ANSIKART)() {
 		case "others":
 			say("\"To know all the gargoyles in Vesper. To want to know about "
 				"specific ones?\"");
-			var var0001 = Func090A();
+			var var0001 = askYesNo();
 			if (var0001) {
 				say("\"To want information, perhaps, about the provisioner or "
 					"the sage?");
@@ -45978,7 +45978,7 @@ void FuncWisSur object#(FIRST_NPC_FUNCTION - WIS_SUR)() {
 					"as if he is unsure whether to sell to you.~~\"To be "
 					"possible,\" he says, nodding. \"To ask what you need?\"");
 				var var0000 = ["nothing", "spells", "reagents", "potions"];
-				var var0001 = Func090B(var0000);
+				var var0001 = askForResponse(var0000);
 				if (var0001 == "nothing") {
 					say("\"To suspect you are wasting my time!\"");
 				}
@@ -46028,7 +46028,7 @@ void FuncAnmanivas object#(FIRST_NPC_FUNCTION - ANMANIVAS)() {
 				say("\"To have no desire to tell you. To demand to know who "
 					"you are!\"");
 				remove("name");
-				var var0007 = Func090B([var0002, var0004, var0003]);
+				var var0007 = askForResponse([var0002, var0004, var0003]);
 				if (var0007 == var0004) {
 					say("As the gargoyle looks up at you, anger crosses his "
 						"face. He stands quickly, overturning his drink.");
@@ -46115,7 +46115,7 @@ void FuncForanamo object#(FIRST_NPC_FUNCTION - FORANAMO)() {
 				say("\"To have no desire to tell you. To demand to know who "
 					"you are!\"");
 				remove("name");
-				var var0007 = Func090B([var0002, var0004, var0003]);
+				var var0007 = askForResponse([var0002, var0004, var0003]);
 				if (var0007 == var0004) {
 					var var0008 = 0;
 					var var0009 = UI_get_party_list();
@@ -46282,7 +46282,7 @@ void FuncSullivan object#(FIRST_NPC_FUNCTION - SULLIVAN)() {
 			say("\"I am Sullivan, ", var0000,
 				",\" he says pleasantly. \"Who wouldst thou be?\"*");
 			var var0006 = "the Avatar";
-			var var0007 = Func090B([var0001, var0006, var0000]);
+			var var0007 = askForResponse([var0001, var0006, var0000]);
 			if (var0007 == var0001) {
 				say("\"Pleased to meet thee, ", var0001,
 					".\" He moves his hand to shake yours but is prevented by "
@@ -46480,7 +46480,7 @@ void FuncWench object#(FIRST_NPC_FUNCTION - WENCH)() {
 		} else {
 			say("\"Hello. Art thou sure thou dost not really want to speak "
 				"with Roberto?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"Fine, sweetheart. Whatever makes thy blood boil... ");
 			} else {
 				say("\"Then thou hadst best speak with Roberto! He is probably "
@@ -46489,7 +46489,7 @@ void FuncWench object#(FIRST_NPC_FUNCTION - WENCH)() {
 			}
 		}
 		say("Who art thou?\"");
-		var var0009 = Func090B([var0002, var0003]);
+		var var0009 = askForResponse([var0002, var0003]);
 		if (var0009 == var0002) {
 			if (!var0004) {
 				say("\"Well, I am very pleased to meet thee, ", var0002, ".\"");
@@ -46546,7 +46546,7 @@ void FuncWench object#(FIRST_NPC_FUNCTION - WENCH)() {
 		fallthrough;
 	case "Community Room":
 		say("\"Thou dost want to join me in the Community Room?\"");
-		if (Func090A()) {
+		if (askYesNo()) {
 			say("Wench leads you into a private room.~~\"It really isn't a "
 				"Community Room at all. We shall be all alone,\" she giggles. "
 				"~~\"By the way, it is a good thing thou didst choose me. "
@@ -46581,7 +46581,7 @@ void FuncWench object#(FIRST_NPC_FUNCTION - WENCH)() {
 	case "talk":
 		say("Wench shrugs. \"Fine with me! What shall we talk about? I know! "
 			"Want to know a secret?\"");
-		if (Func090A()) {
+		if (askYesNo()) {
 			say("\"Didst thou know that there are secret passages in the "
 				"mountains connecting the buildings on Buccaneer's Den? 'Tis "
 				"true! I am fairly sure the entrance is through the House of "
@@ -46632,7 +46632,7 @@ void FuncGlenno object#(FIRST_NPC_FUNCTION - GLENNO)() {
 				say("\"The entrance fee is 300 gold. Everything is included in "
 					"this fixed price. No tips are necessary. Dost thou want "
 					"to enter?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					var var0002 = PARTY->count_objects(
 							SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 					if (var0002 >= 300) {
@@ -46832,7 +46832,7 @@ void FuncMartine object#(FIRST_NPC_FUNCTION - MARTINE)() {
 		} else {
 			say("\"Hello, dear. Art thou sure thou dost not want to speak with "
 				"Roberto?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"All right, honey. Whatever heats thy blood...\"");
 			} else {
 				say("\"Then thou had best speak with him! He is probably more "
@@ -46841,7 +46841,7 @@ void FuncMartine object#(FIRST_NPC_FUNCTION - MARTINE)() {
 			}
 		}
 		say("\"What is thy name?\"");
-		var var0009 = Func090B([var0002, var0003]);
+		var var0009 = askForResponse([var0002, var0003]);
 		if (var0009 == var0002) {
 			if (!var0004) {
 				say("\"How art thou, ", var0002,
@@ -46902,7 +46902,7 @@ void FuncMartine object#(FIRST_NPC_FUNCTION - MARTINE)() {
 		fallthrough;
 	case "Community Room":
 		say("\"Thou dost want to join me in the Community Room?\"");
-		if (Func090A()) {
+		if (askYesNo()) {
 			say("Martine leads you into a private room.~~\"It really is not a "
 				"Community Room at all. We shall be all alone!\"~~ A while "
 				"later, after the woman has shown you more tricks than a "
@@ -46998,7 +46998,7 @@ void FuncRoberto object#(FIRST_NPC_FUNCTION - ROBERTO)() {
 		} else {
 			say("\"Hello. Uhm, art thou sure thou dost not really want to "
 				"speak with Wench or Martine?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"Fine, sailor, whatever makes thy blood boil...");
 			} else {
 				say("\"Then thou hadst best speak with one of them. They are "
@@ -47007,7 +47007,7 @@ void FuncRoberto object#(FIRST_NPC_FUNCTION - ROBERTO)() {
 			}
 		}
 		say("\"What is thy name?\"");
-		var var0009 = Func090B([var0002, var0003]);
+		var var0009 = askForResponse([var0002, var0003]);
 		if (var0009 == var0002) {
 			if (var0004) {
 				say("\"Well, I am very pleased to meet thee, ", var0002, ".\"");
@@ -47065,7 +47065,7 @@ void FuncRoberto object#(FIRST_NPC_FUNCTION - ROBERTO)() {
 		fallthrough;
 	case "Community Room":
 		say("\"Thou dost want to join me in the Community Room?\"");
-		if (Func090A()) {
+		if (askYesNo()) {
 			say("Roberto leads you into a private room.~~\"It really isn't a "
 				"Community Room at all. We shall be all alone!\" ~~A while "
 				"later, after you have received the man's full attention, you "
@@ -47216,7 +47216,7 @@ void FuncSintag object#(FIRST_NPC_FUNCTION - SINTAG)() {
 			fallthrough;
 		case "key":
 			say("\"Dost thou want the key?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				var var0003 = UI_add_party_items(
 						1, SHAPE_KEY, QUALITY_DOOR_HOUSE_OF_GAMES_SECRET, 10, false);
 				if (var0003) {
@@ -47283,7 +47283,7 @@ void FuncBlacktooth object#(FIRST_NPC_FUNCTION - BLACKTOOTH)() {
 			say("This tall, middle-aged pirate looks at you with "
 				"suspicion.~~\"Before I will look twice at thee, I must know "
 				"who thou art.\" His voice is menacing.");
-			var var0005 = Func090B([var0000, var0002]);
+			var var0005 = askForResponse([var0000, var0002]);
 			if (var0005 == var0000) {
 				say("The pirate chews on something in his mouth before "
 					"replying. \"Hi,\" he finally says.");
@@ -47483,7 +47483,7 @@ void FuncMole object#(FIRST_NPC_FUNCTION - MOLE)() {
 			fallthrough;
 		case "story":
 			say("\"Thou dost really want to hear it? 'Tis very long.\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"All right. I was born in a cave. So my mother named me "
 					"Mole.\"*");
 				var var0003 = Func08F7(IOLO);
@@ -47671,7 +47671,7 @@ void FuncLucky object#(FIRST_NPC_FUNCTION - LUCKY)() {
 			if (var0001 == TEND_SHOP) {
 				say("\"I charge 35 gold for a training session. Doth this meet "
 					"with thine approval?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					Func08B6(INTELLIGENCE, 35);
 				} else {
 					say("Lucky shrugs. \"Thou wilt not find another trainer on "
@@ -47805,7 +47805,7 @@ void FuncBudo object#(FIRST_NPC_FUNCTION - BUDO)() {
 					"She is beautiful, my friend. She is guaranteed to last "
 					"and is the sleekest vessel on the seas! She goes for 800 "
 					"gold. Want her?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					var var0008 = PARTY->count_objects(
 							SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 					if (var0008 >= 800) {
@@ -47961,7 +47961,7 @@ void FuncGordy object#(FIRST_NPC_FUNCTION - GORDY)() {
 					"sign the book so that we may verify thy proclaimed "
 					"worth.\" Which name do you sign?");
 				var var0006 = [var0003, var0004, var0005];
-				var var0007 = Func090B(var0006);
+				var var0007 = askForResponse(var0006);
 				if (var0007 == var0003) {
 					say("You sign your name. \"Very good, ", var0003,
 						". Welcome to the House of Games!\" Gordy spreads his "
@@ -47973,7 +47973,7 @@ void FuncGordy object#(FIRST_NPC_FUNCTION - GORDY)() {
 						"eh? We just had one of them a week ago. He was caught "
 						"cheating at the tables!\" He takes a step back and "
 						"glowers. \"Art thou going to give us trouble?\"");
-					if (Func090A()) {
+					if (askYesNo()) {
 						say("\"Then thou canst not enter!\"*");
 						abort;
 					}
@@ -48147,7 +48147,7 @@ void FuncMandy object#(FIRST_NPC_FUNCTION - MANDY)() {
 			say("\"Our rooms are 10 gold per person. The only one available "
 				"now is the southwest room. The other two already have "
 				"occupants. Dost thou want one?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				var var0005 = UI_get_party_list();
 				var var0006 = 0;
 				for (var0009 in var0005) {
@@ -48403,9 +48403,9 @@ void FuncSmithy object#(FIRST_NPC_FUNCTION - SMITHY)() {
 			say("\"There are three games that thou canst play. The first is "
 				"Virtue Roulette. The second is The Rat Race. The third is "
 				"Triples. Wouldst thou like to hear any rules?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"For which game dost thou want to hear the rules?\"");
-				var var0003 = Func090B(
+				var var0003 = askForResponse(
 						["None", "Virtue Roulette", "The Rat Race", "Triples"]);
 				if (var0003 == "None") {
 					say("\"That is all right.\"");
@@ -48502,7 +48502,7 @@ void FuncPaul object#(FIRST_NPC_FUNCTION - PAUL)() {
 					"the stage area during normal hours.\"");
 			} else {
 				say("\"Wouldst thou like to see our Passion Play?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					var var0001 = Func08F7(MERYL);
 					var var0002 = Func08F7(DUSTIN);
 					if (var0001 && var0002) {
@@ -48847,7 +48847,7 @@ void FuncKessler object#(FIRST_NPC_FUNCTION - KESSLER)() {
 				say("He looks up at you and nods. \"This is indeed silver "
 					"snake venom. I shall pay thee 50 gold coins per vial. All "
 					"right?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					var var0007 = UI_remove_party_items(
 							var0005, SHAPE_VENOM, QUALITY_ANY, FRAME_ANY, true);
 					if (var0007) {
@@ -48879,7 +48879,7 @@ void FuncKessler object#(FIRST_NPC_FUNCTION - KESSLER)() {
 				say("\"I always keep a fresh stock of ingredients and an "
 					"inventory of prepared potions in case anyone should be in "
 					"need of them. Wouldst thou like to buy one?\"");
-				var var0009 = Func090A();
+				var var0009 = askYesNo();
 				if (var0009) {
 					Func08A8();
 				} else {
@@ -48920,12 +48920,12 @@ void FuncPerrin object#(FIRST_NPC_FUNCTION - PERRIN)() {
 		case "job":
 			say("\"I am a scholar, ", var0001,
 				". Dost thou want training in the realm of books?\"");
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				say("\"My price is 45 gold for each training session, but I "
 					"will also teach thee what little I know about magic. Is "
 					"this acceptable?\"");
-				var var0003 = Func090A();
+				var var0003 = askYesNo();
 				if (var0003) {
 					Func08CA([INTELLIGENCE, MAX_MANA], 45);
 				} else {
@@ -49469,7 +49469,7 @@ void FuncPapa object#(FIRST_NPC_FUNCTION - PAPA)() {
 			if (var0001) {
 				say("The man sees Tseramed and frowns. He points at you "
 					"accusingly. \"Hunt bees?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"Go away!\" The man spits at you and turns away.*");
 					gflags[HUNTING_BEES] = true;
 					abort;
@@ -49706,7 +49706,7 @@ void FuncTaylor object#(FIRST_NPC_FUNCTION - TAYLOR)() {
 			if (!var0003) {
 				say("\"If thou wishest, I can give thee a smoke bomb that will "
 					"repel the bees for a short time. Dost thou want it?\"");
-				var var0004 = Func090A();
+				var var0004 = askYesNo();
 				if (var0004) {
 					var var0005 = UI_add_party_items(
 							1, SHAPE_SMOKE_BOMB, QUALITY_ANY, FRAME_ANY, true);
@@ -49850,7 +49850,7 @@ void FuncMalloy object#(FIRST_NPC_FUNCTION - MALLOY)() {
 	case "special project":
 		say("\"Owings and myself are now involved in a very important special "
 			"project, but it is a secret. Can we trust thee?\"");
-		var var0005 = Func090A();
+		var var0005 = askYesNo();
 		if (!var0005) {
 			say("\"In that case I thank thee for thine honesty. I do not "
 				"really mind if a person is untrustworthy. But someone who is "
@@ -50128,7 +50128,7 @@ void FuncKreg object#(FIRST_NPC_FUNCTION - KREG)() {
 				"\"Wouldst thou be willing to obtain a potion for my studies? "
 				"It is likely that thou couldst find one easily at the mage, "
 				"Nicodemus'.\"");
-			var var0006 = Func090A();
+			var var0006 = askYesNo();
 			if (var0006) {
 				say("He sighs, obviously relieved. \"Thank thee, ", var0000,
 					".\"");
@@ -50197,7 +50197,7 @@ void FuncAlagner object#(FIRST_NPC_FUNCTION - ALAGNER)() {
 			say("The sage smiles and nods his head. \"My name is Alagner. And "
 				"who art thou?\"");
 			UI_push_answers();
-			var var0002 = Func090B([var0000, "Avatar"]);
+			var var0002 = askForResponse([var0000, "Avatar"]);
 			if (var0002 == var0000) {
 				say("\"I see. Nice to meet thee. Go away. I am busy.\"*");
 				abort;
@@ -50315,7 +50315,7 @@ void FuncAlagner object#(FIRST_NPC_FUNCTION - ALAGNER)() {
 		case "learn":
 			say("\"Very well. Dost thou know the answers to the questions of "
 				"Life and Death?\"");
-			var var0003 = Func090A();
+			var var0003 = askYesNo();
 			if (var0003) {
 				if (gflags[CAINE_GAVE_ANSWER]) {
 					Func0840();
@@ -50354,7 +50354,7 @@ void FuncAlagner object#(FIRST_NPC_FUNCTION - ALAGNER)() {
 		case "answers":
 			say("\"Thou hast spoken to the Tortured One and learned the "
 				"answers to the questions of Life and Death?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				say("\"Then what are the answers?\"");
 				Func0840();
@@ -50505,7 +50505,7 @@ void FuncCaine object#(FIRST_NPC_FUNCTION - CAINE)() {
 			say("\"Thou trusts me to tell thee the formula! After what I have "
 				"done to this town? Art thou mad? I hope at least, that thou "
 				"hast checked with Mordra for the correct proportions, yes?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				say("He shakes his head in disbelief.~~\"Thou art truly "
 					"insane. But,\" he shrugs, \"thou hast nothing to lose but "
@@ -50590,7 +50590,7 @@ void FuncCaine object#(FIRST_NPC_FUNCTION - CAINE)() {
 				say("The ghost looks at you with a hint of amusement. \"Thou "
 					"art looking for the answers to the questions of life and "
 					"death?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("The Tortured One looks hard at you. After a pause, he "
 						"speaks. \"I will tell thee what I know if thou dost "
 						"agree to help me. Free me. Free all of us. Free us "
@@ -50605,7 +50605,7 @@ void FuncCaine object#(FIRST_NPC_FUNCTION - CAINE)() {
 				say("\"Thou hast freed us from the Liche. Thou art entitled to "
 					"mine half of the bargain.~~\"So thou dost want to know "
 					"the answers to the questions of life and death?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("The Tortured One looks hard at you. Then, smiling, he "
 						"shakes his head. \"I have no secrets, my foolish "
 						"friend. Thou art a fool. There are -no- answers. Only "
@@ -50631,7 +50631,7 @@ void FuncCaine object#(FIRST_NPC_FUNCTION - CAINE)() {
 				"sucks the life forces -- the little that remain -- from our "
 				"souls. Please, thou must free us from his power. Wilt thou "
 				"try?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("The Tortured One's eyes brighten somewhat, as he sees the "
 					"light at the end of a long, dark tunnel. \"Then thou hast "
 					"given me hope. To begin, speak with Mistress Mordra. She "
@@ -50875,7 +50875,7 @@ void FuncBrion object#(FIRST_NPC_FUNCTION - BRION)() {
 			say("Wouldst thou like to have this to view mine orrery and better "
 				"predict the planet's position?\"");
 			gflags[BRION_CRY] = true;
-			var var000E = Func090A();
+			var var000E = askYesNo();
 			if (var000E) {
 				say("He smiles proudly. \"I thought thou wouldst. However, "
 					"there is one problem. I still need one more crystal to "
@@ -51283,7 +51283,7 @@ void FuncRankin object#(FIRST_NPC_FUNCTION - RANKIN)() {
 		case "liqueur":
 			say("\"Yes, I told thee the merchant brought it from Britain. "
 				"Didst thou give it to her?");
-			var var0006 = Func090A();
+			var var0006 = askYesNo();
 			if (var0006) {
 				say("\"What then,\" he asks, \"is the problem?\"");
 				UI_push_answers();
@@ -51318,7 +51318,7 @@ void FuncRankin object#(FIRST_NPC_FUNCTION - RANKIN)() {
 				"cause to kill her? That is absurd!\" He appears thoughtful.~ "
 				"\"Or perhaps not. Mayhaps we will look into that, what sayest "
 				"thou?\"");
-			var var0007 = Func090A();
+			var var0007 = askYesNo();
 			if (var0007) {
 				say("\"Excellent. Let me know if thou dost find any "
 					"information. Meanwhile, I will make arrangements for her "
@@ -51333,7 +51333,7 @@ void FuncRankin object#(FIRST_NPC_FUNCTION - RANKIN)() {
 		case "merchant":
 			say("\"Dost thou have any news of the travelling merchant who "
 				"killed Balayna?");
-			var var0008 = Func090A();
+			var var0008 = askYesNo();
 			if (var0008) {
 				say("\"Very good, ", var0000, ". What is thy news?\"");
 				UI_push_answers();
@@ -51444,7 +51444,7 @@ void FuncRankin object#(FIRST_NPC_FUNCTION - RANKIN)() {
 					"chance to give it to her. Wouldst thou be willing to "
 					"deliver it to her for me, ",
 					var0000, "?\"");
-				var var000A = Func090A();
+				var var000A = askYesNo();
 				if (var000A) {
 					say("\"Excellent, my friend.\"");
 					var var000B = UI_add_party_items(
@@ -51793,7 +51793,7 @@ void FuncKallibrus object#(FIRST_NPC_FUNCTION - KALLIBRUS)() {
 		case "sex":
 			say("\"To know nothing about this word. To mean something similar "
 				"to reproduce?\"");
-			var var0004 = Func090A();
+			var var0004 = askYesNo();
 			if (var0004) {
 				say("\"To tell you gargoyles reproduce differently than humans "
 					"seem to, but to explain too poorly to be useful.\"");
@@ -51966,7 +51966,7 @@ void FuncLasher object#(FIRST_NPC_FUNCTION - LASHER)() {
 	case "unicorn":
 		say("Lasher stares at you, stupefied. \"Tell me, dost thou know what a "
 			"unicorn is?\"");
-		var var0001 = Func090A();
+		var var0001 = askYesNo();
 		if (!var0001) {
 			say("Lasher stares blankly at you. His mouth hangs open. \"Very "
 				"well. Then I shall tell thee what a unicorn is.");
@@ -52056,7 +52056,7 @@ void FuncLasher object#(FIRST_NPC_FUNCTION - LASHER)() {
 	case "avoid":
 		say("\"Yes, well, I did not wish to get this personal with thee, but "
 			"if thou does not mind, art thou a virgin?\"");
-		var var0002 = Func090A();
+		var var0002 = askYesNo();
 		if (!var0002) {
 			if (gflags[HAD_WENCH]
 				|| (gflags[HAD_MARTINE] || gflags[HAD_ROBERTO])) {
@@ -52412,7 +52412,7 @@ void FuncXorinia object#(FIRST_NPC_FUNCTION - XORINIA)() {
 			"'you' bring the 'notebook' here, the Undrian Council will release "
 			"information useful to 'you'. Do 'you' agree to the trade?\"");
 		gflags[WISP_SAID_ALAGNER] = true;
-		var var0003 = Func090A();
+		var var0003 = askYesNo();
 		if (var0003) {
 			say("\"'Xorinia' recognizes 'your' usefulness. 'I' shall be here. "
 				"Human entities will call 'my' activity 'waiting'.\"");
@@ -52468,7 +52468,7 @@ void FuncXorinia object#(FIRST_NPC_FUNCTION - XORINIA)() {
 			"Guardian'.~~\"'The Guardian' lives in another dimension. "
 			"'Xorinia' sometimes trades information with this entity. Do 'you' "
 			"want to know more about 'The Guardian'?\"");
-		var var0004 = Func090A();
+		var var0004 = askYesNo();
 		// BUG: This should probably be var0004
 		if (Func0614) {
 			say("\"'Xorinia' has digested information about 'The Guardian' and "
@@ -52513,35 +52513,35 @@ void FuncXorinia object#(FIRST_NPC_FUNCTION - XORINIA)() {
 }
 
 void FuncDoug object#(FIRST_NPC_FUNCTION - DOUG)() {
-	item->Func0326();
+	item->FuncGuard3();
 }
 
 void FuncBob object#(FIRST_NPC_FUNCTION - BOB)() {
-	item->Func0326();
+	item->FuncGuard3();
 }
 
 void FuncRodric object#(FIRST_NPC_FUNCTION - RODRIC)() {
-	item->Func03B2();
+	item->FuncGuard4();
 }
 
 void FuncStanley object#(FIRST_NPC_FUNCTION - STANLEY)() {
-	item->Func03B2();
+	item->FuncGuard4();
 }
 
 void FuncMicael object#(FIRST_NPC_FUNCTION - MICAEL)() {
-	item->Func03B2();
+	item->FuncGuard4();
 }
 
 void FuncJohn object#(FIRST_NPC_FUNCTION - JOHN)() {
-	item->Func03B2();
+	item->FuncGuard4();
 }
 
 void FuncBrennon object#(FIRST_NPC_FUNCTION - BRENNON)() {
-	item->Func03B2();
+	item->FuncGuard4();
 }
 
 void FuncDaniel object#(FIRST_NPC_FUNCTION - DANIEL)() {
-	item->Func03B2();
+	item->FuncGuard4();
 }
 
 void Func0600 object#(0x600) () {
@@ -52584,7 +52584,7 @@ void Func0603 object#(0x603) () {
 	if (var0003 < 1) {
 		Func0835(item, DEXTERITY, 1);
 	}
-	Func08FE("@Thou dost not look well.@");
+	partyUtters("@Thou dost not look well.@");
 }
 
 void Func0606 object#(0x606) () {
@@ -52725,7 +52725,7 @@ void Func060A object#(0x60A) () {
 		var0008 = [];
 		var0009 = "";
 	} else {
-		Func08FE("@Didst thou win?@");
+		partyUtters("@Didst thou win?@");
 	}
 	declare var var000A;
 	if (gflags[JOIN_FELLOWSHIP]) {
@@ -52755,16 +52755,16 @@ void Func060A object#(0x60A) () {
 				var0011 = var0008->set_item_quantity(var0010);
 				var0011 = UI_update_last_created(var000E);
 			}
-			if (Func0937(SMITHY)) {
-				Func0904(SMITHY, "@A winner on " + var0006 + ".@");
+			if (canTalk(SMITHY)) {
+				makeNpcSay(SMITHY, "@A winner on " + var0006 + ".@");
 			}
 			var0007 = true;
 		}
 		var000D->remove_item();
 	}
 	if (!var0007) {
-		if (Func0937(SMITHY)) {
-			Func0904(SMITHY, "@It is " + var0006 + ".@");
+		if (canTalk(SMITHY)) {
+			makeNpcSay(SMITHY, "@It is " + var0006 + ".@");
 		}
 	}
 }
@@ -52851,9 +52851,9 @@ void Func060C object#(0x60C) () {
 						var000D = UI_update_last_created(var0011);
 					}
 					var0010->set_item_flag(OKAY_TO_TAKE);
-					var var0014 = Func0932((var000B.y - var0005.y) - 4);
+					var var0014 = absoluteValueOf((var000B.y - var0005.y) - 4);
 					var var0015 = "@A winnah in lane " + var0014 + "!@";
-					Func0933(SMITHY, var0015, 1);
+					delayedBark(SMITHY, var0015, 1);
 				}
 				var0010->remove_item();
 			}
@@ -52946,7 +52946,7 @@ void Func060E object#(0x60E) () {
 					[0x0383, 0x06FF, 0]);
 			if (gflags[NEAR_SHELTER]) {
 				var var0007 = AVATAR->find_nearby(SHAPE_ANY, 90, MASK_NPC);
-				var0007 = Func093C(AVATAR->get_npc_object(), var0007);
+				var0007 = filterArray(AVATAR->get_npc_object(), var0007);
 				for (var000A in var0007) {
 					if (var000A->get_schedule_type() == IN_COMBAT) {
 						var var000B = var000A->get_alignment();
@@ -53003,11 +53003,11 @@ void Func060E object#(0x60E) () {
 			var var001A = var0017;
 			if (!((FERIDWYN->get_schedule_type() == IN_COMBAT)
 				  || (BRITA->get_schedule_type() == IN_COMBAT))) {
-				if (!Func0938(FERIDWYN)) {
+				if (!isNpcIncapacitated(FERIDWYN)) {
 					var001A &= FERIDWYN->get_npc_object();
 					FERIDWYN->set_schedule_type(LOITER);
 				}
-				if (!Func0938(BRITA)) {
+				if (!isNpcIncapacitated(BRITA)) {
 					var001A &= BRITA->get_npc_object();
 					BRITA->set_schedule_type(LOITER);
 				}
@@ -53358,7 +53358,7 @@ void Func061B object#(0x61B) () {
 		SHAPE_TIME_LORD->set_schedule_type(WAIT);
 		var var0001 = script SHAPE_TIME_LORD after 25 ticks {
 			nohalt;
-			call Func0269;
+			call FuncTimeLord;
 		};
 	}
 }
@@ -53399,7 +53399,7 @@ void Func061D object#(0x61D) () {
 		// BUG: This is likely meant to be 'item' instead of SHAPE_TIME_LORD.
 		var var0001 = script SHAPE_TIME_LORD after 25 ticks {
 			nohalt;
-			call Func0269;
+			call FuncTimeLord;
 		};
 	}
 }
@@ -53668,7 +53668,7 @@ void Func0621 object#(0x621) () {
 			}
 		}
 		if (var0002 == PARTY) {
-			var0002 = Func0900();
+			var0002 = getNearbyPartyMember();
 			if (var0002 == AVATAR) {
 				abort;
 			}
@@ -53694,7 +53694,7 @@ void Func0621 object#(0x621) () {
 void Func0622 object#(0x622) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = UI_get_party_list();
-		var var0001 = Func0900();
+		var var0001 = getNearbyPartyMember();
 		declare var var0002;
 		declare var var0008;
 		if (var0001 == AVATAR) {
@@ -53734,8 +53734,8 @@ void Func0622 object#(0x622) () {
 		}
 		UI_fade_palette(12 * TICK, 1, FADE_TO_BLACK);
 		var var0009 = var0002 * HOUR;
-		Func093A(var0002, item);
-		var0000 = Func093C(AVATAR->get_npc_object(), var0000);
+		handleSleepEffects(var0002, item);
+		var0000 = filterArray(AVATAR->get_npc_object(), var0000);
 		for (var0008 in var0000) {
 			Func093F(var0008, LOITER);
 		}
@@ -53753,7 +53753,7 @@ void Func0622 object#(0x622) () {
 
 void Func0623 object#(0x623) () {
 	if (event == SCRIPTED) {
-		var var0000 = Func0900();
+		var var0000 = getNearbyPartyMember();
 		if (!(var0000 == AVATAR)) {
 			var0000->show_npc_face(DEFAULT_FACE);
 			var var0001 = AVATAR->get_npc_name();
@@ -53836,7 +53836,7 @@ void Func0625 object#(0x625) () {
 			say("You see an angry guard. \"Cease and desist "
 				"immediately!.~~Dost thou wish to avoid the unpleasantries of "
 				"a lengthy trial?\"");
-			var var0005 = Func090A();
+			var var0005 = askYesNo();
 			if (var0005) {
 				say("\"What is your liberty worth?\"");
 				breakable {
@@ -53880,7 +53880,7 @@ void Func0625 object#(0x625) () {
 		} else {
 			say("You see an angry guard. \"Cease and desist "
 				"immediately!.~~Wilt thou come quietly?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("\"Very well. Thou shalt remain in prison until we see fit "
 					"to release thee.\"");
 				BOB->hide();
@@ -53924,14 +53924,14 @@ void Func0626 object#(0x626) () {
 	var var0000 = get_item_shape();
 	if (var0000 == SHAPE_GLASS_COUNTER_TOPS) {
 		UI_call_guards();
-		var var0001 = Func093C(item,
+		var var0001 = filterArray(item,
 				find_nearby(SHAPE_GLASS_COUNTER_TOPS, 6, MASK_NONE));
 		var var0002 = [];
 		declare var var0005;
 		for (var0005 in var0001) {
 			var0002 &= var0005->get_distance(item);
 		}
-		var0001 = Func093D(var0001, var0002);
+		var0001 = sortArraysBySecondArray(var0001, var0002);
 		struct<Position> var0006 = get_object_position();
 		var var0007 = 1;
 		for (var0005 in var0001) {
@@ -53939,8 +53939,8 @@ void Func0626 object#(0x626) () {
 			var var000B = 1;
 			while (var000B <= var0007) {
 				var var000C = ((var000B - 1) * 3) + 1;
-				if ((Func0932(var000A.x - var0006[var000C]) <= 2)
-					&& (Func0932(var000A.y - var0006[var000C + 1]) <= 2)) {
+				if ((absoluteValueOf(var000A.x - var0006[var000C]) <= 2)
+					&& (absoluteValueOf(var000A.y - var0006[var000C + 1]) <= 2)) {
 					var0005->remove_item();
 					var0006 &= var000A;
 					var0007 += 1;
@@ -54021,10 +54021,10 @@ void Func0628 object#(0x628) () {
 		var0007 = UI_update_last_created(var0001);
 		var var0008 = UI_die_roll(1, 2);
 		if (var0008 == 1) {
-			Func08FE("@Turn it off!@");
+			partyUtters("@Turn it off!@");
 		}
 		if (var0008 == 2) {
-			Func08FE("@Thou art wasting it!@");
+			partyUtters("@Thou art wasting it!@");
 		}
 		if (DUPRE->npc_nearby()) {
 			DUPRE->item_say("@That is perfectly good beer!@");
@@ -54064,10 +54064,10 @@ void Func0629 object#(0x629) () {
 		var0007 = UI_update_last_created(var0001);
 		var var0008 = UI_die_roll(1, 2);
 		if (var0008 == 1) {
-			Func08FE("@Turn it off!@");
+			partyUtters("@Turn it off!@");
 		}
 		if (var0008 == 2) {
-			Func08FE("@Thou art wasting it!@");
+			partyUtters("@Thou art wasting it!@");
 		}
 		halt_scheduled();
 		var0007 = script item after 16 ticks {
@@ -54168,11 +54168,11 @@ void Func062D object#(0x62D) () {
 			var var0007 = [0, 0];
 			var var0008 = -1;
 			Func0828(
-					var0004, var0006, var0007, var0008, Func028B, var0004,
+					var0004, var0006, var0007, var0008, FuncSpinningWheel, var0004,
 					BG_PATH_SUCCESS);
 		} else {
 			var var0009 = "@Why dost thou not spin that wool into thread?@";
-			Func08FF(var0009);
+			partySpeak(var0009);
 		}
 	}
 }
@@ -54214,12 +54214,12 @@ void Func062E object#(0x62E) () {
 			var var0007 = [1, 1, 1];
 			var var0008 = -1;
 			Func0828(
-					var0004, var0006, var0007, var0008, Func0105, var0004,
+					var0004, var0006, var0007, var0008, FuncLoom, var0004,
 					BG_PATH_SUCCESS);
 		} else {
 			var var0009 = "@Why dost thou not weave cloth with that thread on "
 						  "the loom?@";
-			Func08FF(var0009);
+			partySpeak(var0009);
 		}
 	}
 }
@@ -54257,7 +54257,7 @@ void Func0631 object#(0x631) () {
 		declare var var0007;
 		if (gflags[GOT_TRINSIC_PASSWORD]) {
 			if (Func08F7(JOHNSON) && (!gflags[LEFT_TRINSIC])) {
-				if (Func0937(JOHNSON) && Func0937(AVATAR)) {
+				if (canTalk(JOHNSON) && canTalk(AVATAR)) {
 					var0006 = script JOHNSON->get_npc_object() after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
@@ -54278,7 +54278,7 @@ void Func0631 object#(0x631) () {
 				return;
 			}
 			if (Func08F7(RAYMUNDO) && (!gflags[LEFT_TRINSIC])) {
-				if (Func0937(RAYMUNDO) && Func0937(AVATAR)) {
+				if (canTalk(RAYMUNDO) && canTalk(AVATAR)) {
 					var0006 = script RAYMUNDO->get_npc_object() after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
@@ -54301,7 +54301,7 @@ void Func0631 object#(0x631) () {
 			if (AVATAR->find_nearest(SHAPE_GUARD3, ON_SCREEN)
 				&& (!gflags[LEFT_TRINSIC])) {
 				var0007 = find_nearest(SHAPE_GUARD3, 20);
-				if (Func0937(var0007) && Func0937(AVATAR)) {
+				if (canTalk(var0007) && canTalk(AVATAR)) {
 					var0006 = script var0007 after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
@@ -54323,7 +54323,7 @@ void Func0631 object#(0x631) () {
 			}
 			Func083F(item, true);
 		} else {
-			if (Func0937(JOHNSON)) {
+			if (canTalk(JOHNSON)) {
 				if (Func08F7(JOHNSON) && (!gflags[LEFT_TRINSIC])) {
 					var0006 = script JOHNSON->get_npc_object() after 1 ticks {
 						nohalt;
@@ -54332,7 +54332,7 @@ void Func0631 object#(0x631) () {
 				}
 			}
 			if (Func08F7(RAYMUNDO) && (!gflags[LEFT_TRINSIC])) {
-				if (Func0937(RAYMUNDO)) {
+				if (canTalk(RAYMUNDO)) {
 					var0006 = script JOHNSON->get_npc_object() after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
@@ -54342,7 +54342,7 @@ void Func0631 object#(0x631) () {
 			if (AVATAR->find_nearest(SHAPE_GUARD3, ON_SCREEN)
 				&& (!gflags[LEFT_TRINSIC])) {
 				var0007 = find_nearest(SHAPE_GUARD3, 20);
-				if (Func0937(var0007)) {
+				if (canTalk(var0007)) {
 					var0006 = script var0007 after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
@@ -54382,21 +54382,21 @@ void Func0633 object#(0x633) () {
 	if (event == DOUBLECLICK) {
 		item->Func063A();
 		if (UI_die_roll(1, 8) == 1) {
-			if (DUPRE->get_item_flag(IN_PARTY) && Func0937(DUPRE)) {
+			if (DUPRE->get_item_flag(IN_PARTY) && canTalk(DUPRE)) {
 				DUPRE->item_say("@I am leaving!@");
 				DUPRE->remove_from_party();
 				Func093F(DUPRE, WANDER);
 				gflags[DUPRE_PISSED] = true;
 				return;
 			}
-			if (SHAMINO->get_item_flag(IN_PARTY) && Func0937(SHAMINO)) {
+			if (SHAMINO->get_item_flag(IN_PARTY) && canTalk(SHAMINO)) {
 				SHAMINO->item_say("@I am leaving!@");
 				gflags[SHAMINO_PISSED] = true;
 				SHAMINO->remove_from_party();
 				Func093F(SHAMINO, WANDER);
 				return;
 			}
-			if (IOLO->get_item_flag(IN_PARTY) && Func0937(IOLO)) {
+			if (IOLO->get_item_flag(IN_PARTY) && canTalk(IOLO)) {
 				IOLO->item_say("@I am leaving!@");
 				gflags[IOLO_PISSED] = true;
 				IOLO->remove_from_party();
@@ -54414,7 +54414,7 @@ void Func0634 object#(0x634) () {
 			Func0812(var0000);
 		}
 		if (var0001 == SHAPE_CART_PIECE) {
-			item->Func028C();
+			item->FuncCartPiece();
 		}
 		if (var0001 == SHAPE_MAST) {
 			var var0002 = AVATAR->find_nearby(SHAPE_FERRYMAN, 25, MASK_NONE);
@@ -54445,7 +54445,7 @@ void Func0635 object#(0x635) () {
 				call Func0635;
 			};
 			if (UI_die_roll(1, 2) == 1) {
-				Func08FE("@Do not over cook it!@");
+				partyUtters("@Do not over cook it!@");
 			}
 		}
 	}
@@ -54464,10 +54464,10 @@ void Func0635 object#(0x635) () {
 				if (var0001) {
 					var var0005 = UI_die_roll(1, 3);
 					if (var0005 == 1) {
-						Func08FE("@I believe the bread is ready.@");
+						partyUtters("@I believe the bread is ready.@");
 					}
 					if (var0005 == 2) {
-						Func08FE("@Mmm... Smells good.@");
+						partyUtters("@Mmm... Smells good.@");
 					}
 				}
 			}
@@ -54498,7 +54498,7 @@ void Func0638 object#(0x638) () {
 	if (event == SCRIPTED) {
 		if (var0000 == QUALITY_BOOK_STONE_OF_CASTAMBRE
 				&& get_item_shape() == SHAPE_BOOK) {
-			Func08FF("@Odd. The page is smudged with dirt here. I cannot make "
+			partySpeak("@Odd. The page is smudged with dirt here. I cannot make "
 					 "out this text.@");
 			var0001 = set_item_quality(QUALITY_BOOK_STONE_OF_CASTAMBRE2);
 			var0001 = script item {
@@ -54509,7 +54509,7 @@ void Func0638 object#(0x638) () {
 		if (item == AVATAR->get_npc_object()) {
 			if (!gflags[PAGE_FELL_FROM_BOOK]) {
 				gflags[PAGE_FELL_FROM_BOOK] = true;
-				Func08FF("@Why, a page has fallen out of the book!@");
+				partySpeak("@Why, a page has fallen out of the book!@");
 			}
 			return;
 		}
@@ -55395,13 +55395,13 @@ void Func063A object#(0x63A) () {
 			return;
 		}
 		if (var0001 == 2) {
-			Func08FE("@Must we do this?@");
+			partyUtters("@Must we do this?@");
 		}
 		if (var0001 == 3) {
-			Func08FE("@Is that virtuous?@");
+			partyUtters("@Is that virtuous?@");
 		}
 		if (var0001 == 4) {
-			Func08FE("@Avatar?!@");
+			partyUtters("@Avatar?!@");
 		}
 	}
 }
@@ -55411,7 +55411,7 @@ void Func063C object#(0x63C) () {
 	var var0000 = AVATAR->find_nearby(SHAPE_DOOR_EW_BOTTOM, 6, MASK_NONE);
 	if (var0000) {
 		var var0001 = script var0000 after 1 ticks {
-			call Func010E;
+			call FuncDoorNsRight;
 			frame FRAME_DOOR_JAIL_LOCKED;
 		};
 	}
@@ -56031,15 +56031,15 @@ void Func064E object#(0x64E) () {
 		var var0003 = (var0001.y - 1134) / 10;
 		declare var var0004;
 		if (var0002 < 0) {
-			var0004 = " " + Func0932(var0002) + " West";
+			var0004 = " " + absoluteValueOf(var0002) + " West";
 		} else {
-			var0004 = " " + Func0932(var0002) + " East";
+			var0004 = " " + absoluteValueOf(var0002) + " East";
 		}
 		declare var var0005;
 		if (var0003 < 0) {
-			var0005 = " " + Func0932(var0003) + " North";
+			var0005 = " " + absoluteValueOf(var0003) + " North";
 		} else {
-			var0005 = " " + Func0932(var0003) + " South";
+			var0005 = " " + absoluteValueOf(var0003) + " South";
 		}
 		item_say(var0005 + var0004);
 	}
@@ -57101,7 +57101,7 @@ void Func0669 object#(0x669) () {
 				];
 				var var0009 = UI_die_roll(1, 7);
 				var var000A = UI_die_roll(10, 40);
-				Func0933(var0005, var0008[var0009], var000A);
+				delayedBark(var0005, var0008[var0009], var000A);
 				var000A = UI_die_roll(50, 75);
 				var0000 = script var0005 after var000A ticks {
 					nohalt;
@@ -58597,7 +58597,7 @@ void Func0690 object#(0x690) () {
 	if (event == DOUBLECLICK) {
 		var0001 = script item {
 			wait 1;
-			call Func026F;
+			call FuncHammer;
 		};
 	}
 	if (event == SCRIPTED) {
@@ -59934,7 +59934,7 @@ void Func06A3 object#(0x6A3) () {
 					if (var0018->get_cont_items(
 							SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS,
 							FRAME_SCROLL_INVISIBLE)) {
-						item->Func01F8();
+						item->FuncDragon();
 					}
 				}
 			}
@@ -60052,7 +60052,7 @@ void Func06A5 object#(0x6A5) () {
 	if (event == EGG) {
 		if (gflags[JOIN_FELLOWSHIP]) {
 			THAD->get_npc_object()->set_schedule_type(IN_COMBAT);
-			Func0904(THAD, "@Fellowship scum!@");
+			makeNpcSay(THAD, "@Fellowship scum!@");
 		} else {
 			THAD->get_npc_object()->FuncThad();
 		}
@@ -60141,7 +60141,7 @@ void Func06AC object#(0x6AC) () {
 
 void Func06AD object#(0x6AD) () {
 	if (event == EGG) {
-		item->Func02C0();
+		item->FuncPowderKeg();
 	}
 }
 
@@ -60210,15 +60210,15 @@ void Func06B2 object#(0x6B2) () {
 		var var0001 = find_nearby(SHAPE_LIGHT_SOURCE, var0000, MASK_NONE);
 		declare var var0004;
 		for (var0004 in var0001) {
-			var0004->Func0150();
+			var0004->FuncLightSource();
 		}
 		var0001 = find_nearby(SHAPE_TORCH, var0000, MASK_NONE);
 		for (var0004 in var0001) {
-			var0004->Func0253();
+			var0004->FuncTorch();
 		}
 		var0001 = find_nearby(SHAPE_LAMP_POST, var0000, MASK_NONE);
 		for (var0004 in var0001) {
-			var0004->Func0379();
+			var0004->FuncLampPost();
 		}
 	}
 }
@@ -60231,15 +60231,15 @@ void Func06B3 object#(0x6B3) () {
 		var var0001 = find_nearby(SHAPE_LIT_LIGHT_SOURCE, var0000, MASK_NONE);
 		declare var var0004;
 		for (var0004 in var0001) {
-			var0004->Func0152();
+			var0004->FuncLitLightSource();
 		}
 		var0001 = find_nearby(SHAPE_LIT_TORCH, var0000, MASK_NONE);
 		for (var0004 in var0001) {
-			var0004->Func02BD();
+			var0004->FuncLitTorch();
 		}
 		var0001 = find_nearby(SHAPE_LIT_LAMP, var0000, MASK_NONE);
 		for (var0004 in var0001) {
-			var0004->Func020E();
+			var0004->FuncLitLamp();
 		}
 	}
 }
@@ -60265,7 +60265,7 @@ void Func06B5 object#(0x6B5) () {
 		for (var0004 in var0000) {
 			var0001 &= get_distance(var0004);
 		}
-		var0000 = Func093D(var0000, var0001);
+		var0000 = sortArraysBySecondArray(var0000, var0001);
 		var var0005 = 1;
 		forever {
 			var0004 = var0000[var0005];
@@ -60281,10 +60281,10 @@ void Func06B5 object#(0x6B5) () {
 		}
 		var var0006 = var0004->get_item_shape();
 		if (var0006 == SHAPE_DOOR_NS_RIGHT) {
-			var0004->Func010E();
+			var0004->FuncDoorNsRight();
 		}
 		if (var0006 == SHAPE_DOOR_EW_BOTTOM) {
-			var0004->Func0178();
+			var0004->FuncDoorEwBottom();
 		}
 	}
 labelFunc06B5_00BE:
@@ -60301,7 +60301,7 @@ void Func06B6 object#(0x6B6) () {
 		for (var0004 in var0000) {
 			var0001 &= var0004->get_distance(item);
 		}
-		var0000 = Func093D(var0000, var0001);
+		var0000 = sortArraysBySecondArray(var0000, var0001);
 		var0004 = var0000[1];
 		if (var0004) {
 			var var0005 = var0004->get_item_frame();
@@ -60389,8 +60389,8 @@ void Func06BA object#(0x6BA) () {
 					wait 4;
 					actor frame standing;
 				};
-				if (Func0937(var0004)) {
-					Func0904(
+				if (canTalk(var0004)) {
+					makeNpcSay(
 							var0004,
 							["@Ohh!@", "@Eeehhh!@", "@Oh no!@", "@Yuk!@"]);
 				}
@@ -60845,7 +60845,7 @@ void Func06D6 object#(0x6D6) () {
 		for (var0004 in var0000) {
 			var0001 &= var0004->get_distance(item);
 		}
-		var0000 = Func093D(var0000, var0001);
+		var0000 = sortArraysBySecondArray(var0000, var0001);
 		if (Func082E(var0000[1])) {
 			var var0005 = find_nearby(SHAPE_EGG, 20, MASK_EGG);
 			for (var0008 in var0005) {
@@ -61106,7 +61106,7 @@ void Func06F6 object#(0x6F6) () {
 				"the idle rantings of thy tongue.\" He appears at first "
 				"nonchallant, then his expression becomes intense, \"That is "
 				"unless thou hast reconsidered my offer... Hast thou?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("A wicked look of triumph flickers across Arcadion's face "
 					"to be quickly replaced by a ludicrous semblance of "
 					"gratitude, \"Thou art truly courageous to vow to "
@@ -61191,7 +61191,7 @@ void Func06F6 object#(0x6F6) () {
 				"assist me to free myself of this unwanted bondage. I could "
 				"prove an invaluable\tally.\" The daemon pauses to let his "
 				"offer sink in, then, \"Well, mortal. Wilt thou help me?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				say("A wicked look of triumph flickers across Arcadion's face "
 					"to be quickly replaced by a ludicrous semblance of "
 					"gratitude, \"Thou art truly courageous to vow to release "
@@ -61394,7 +61394,7 @@ void Func06F6 object#(0x6F6) () {
 			if (!gflags[TALKED_ARCADION_WITH_GEM]) {
 				say("You hear a faint sigh, then, \"Wouldst thou care to "
 					"partake of my power?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("Arcadion sounds disappointed, \"It is as I knew it "
 						"would be. I am forever meant to be the slave of "
 						"weak-willed mortals. Very well then, prepare thyself "
@@ -61418,7 +61418,7 @@ void Func06F6 object#(0x6F6) () {
 			} else {
 				say("\"Thou hast need of my energies again?\" Arcadion asks a "
 					"little petulantly.");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"Very well, prepare thyself.\" The gem glows.");
 					Func0845(false);
 					if (!var0009) {
@@ -61770,7 +61770,7 @@ void Func06F6 object#(0x6F6) () {
 				say("\"Ah... home again. I never tire of rocky little islands. "
 					"Dost thou truly wish to go to the forsaken Isle of "
 					"Fire?\"");
-				if (Func090A()) {
+				if (askYesNo()) {
 					say("\"I see. Very well, master. But let us not forget "
 						"this little favor...\" The gem in the hilt of the "
 						"sword glows brightly then everything dims.*");
@@ -61942,7 +61942,7 @@ void Func06F7 object#(0x6F7) () {
 			var var000E = script var000D {
 				finish;
 				wait 2;
-				call Func01F8;
+				call FuncDragon;
 			};
 			return;
 		}
@@ -62377,15 +62377,15 @@ void Func06F8 object#(0x6F8) () {
 	if (event == SCRIPTED) {
 		if (gflags[BANISHED_EXODUS]) {
 			if (!gflags[ERETHIAN_IS_DEAD]) {
-				Func08FF("@'Tis sad that Erethian's lust for power has brought "
+				partySpeak("@'Tis sad that Erethian's lust for power has brought "
 						 "him to this evil pass.@");
-				Func08FF("@Perhaps, at last, he is at rest.@");
+				partySpeak("@Perhaps, at last, he is at rest.@");
 			}
 			if (!LORD_BRITISH->is_dead()) {
-				Func08FF("@I am sure that Lord British even now awaits news of "
+				partySpeak("@I am sure that Lord British even now awaits news of "
 						 "Exodus' exile.@");
 			}
-			Func08FF("@It is time to leave this barren island behind.@");
+			partySpeak("@It is time to leave this barren island behind.@");
 			abort;
 		}
 		var0005 = get_object_position();
@@ -62636,7 +62636,7 @@ void Func06F9 object#(0x6F9) () {
 				}
 			}
 			event = WEAPON;
-			var0003->Func0356();
+			var0003->FuncStatue();
 		}
 		return;
 	}
@@ -62944,11 +62944,11 @@ void Func06F9 object#(0x6F9) () {
 
 void Func06FA object#(0x6FA) () {
 	if (get_item_shape() == SHAPE_EGG) {
-		Func08FF("@It would seem the nearby island is not at all stable.@");
+		partySpeak("@It would seem the nearby island is not at all stable.@");
 	}
 	if (get_item_shape() == SHAPE_MALE_AVATAR
 			|| get_item_shape() == SHAPE_FEMALE_AVATAR) {
-		Func08FF("@All is not right in Britannia. Perhaps Lord British will "
+		partySpeak("@All is not right in Britannia. Perhaps Lord British will "
 				 "know the reason behind this tremor.@");
 	}
 }
@@ -63580,7 +63580,7 @@ void Func070D object#(0x70D) () {
 						repeat 3 {
 							previous frame cycle;
 						};
-						call Func03A8;
+						call FuncPortcullisDoorEw;
 					};
 				}
 			}
@@ -63589,7 +63589,7 @@ void Func070D object#(0x70D) () {
 			for (var0007 in var0000) {
 				if (var0007->get_item_quality() == 12) {
 					var0008 = script var0007 {
-						call Func012F;
+						call FuncMetalWallEw;
 						sfx SFX_PORTCULLIS_OPEN;
 						repeat 3 {
 							next frame cycle;
@@ -63616,7 +63616,7 @@ void Func070D object#(0x70D) () {
 						repeat 3 {
 							previous frame cycle;
 						};
-						call Func03A8;
+						call FuncPortcullisDoorEw;
 					};
 				}
 			}
@@ -63625,7 +63625,7 @@ void Func070D object#(0x70D) () {
 			for (var0007 in var0000) {
 				if (var0007->get_item_quality() == 11) {
 					var0008 = script var0007 {
-						call Func012F;
+						call FuncMetalWallEw;
 						sfx SFX_PORTCULLIS_OPEN;
 						repeat 3 {
 							next frame cycle;
@@ -63869,14 +63869,14 @@ void Func0710 object#(0x710) () {
 			}
 		}
 		if (gflags[ADJHAR_IS_ALIVE] && (!gflags[BOLLUX_IS_DEAD])) {
-			Func08FE("@All the golems are alive now.@");
+			partyUtters("@All the golems are alive now.@");
 			say("*");
 			abort;
 		}
 		var var0006 = false;
 		var var0007 = Func0814();
 		if (!var0007) {
-			Func08FE([
+			partyUtters([
 				"@The golem must be centered", "in the pentacle of stones.@"
 			]);
 		} else {
@@ -63901,9 +63901,9 @@ void Func0710 object#(0x710) () {
 						var000D = " rocks are";
 					}
 					var var000E = "@Only " + var0008 + var000D + " covered.@";
-					Func08FE(var000E);
+					partyUtters(var000E);
 				} else {
-					Func08FE("@Blood must cover the rocks.@");
+					partyUtters("@Blood must cover the rocks.@");
 				}
 			}
 		}
@@ -63940,7 +63940,7 @@ void Func0710 object#(0x710) () {
 		var0010.y -= 1;
 		var0010.z += 2;
 		var0012 = UI_update_last_created(var0010);
-		Func08FF("@He gave up his heart... so that Adjhar may live!* Well, not "
+		partySpeak("@He gave up his heart... so that Adjhar may live!* Well, not "
 				 "to be morbid, but I suppose the incantation should work "
 				 "now.@");
 		AVATAR->halt_scheduled();
@@ -64016,10 +64016,10 @@ void Func0714 object#(0x714) () {
 			var0000 = var000C->find_nearby(SHAPE_SMALL_ROCK, 30, MASK_NONE);
 			if (var0000
 				|| Func0931(PARTY, 1, SHAPE_SMALL_ROCK, QUALITY_ANY, FRAME_GOLEM_HEART)) {
-				Func08FF("@The heart must be placed in the body.@");
+				partySpeak("@The heart must be placed in the body.@");
 				abort;
 			}
-			Func08FF("@According to the tome, a `heart' will be necessary to "
+			partySpeak("@According to the tome, a `heart' will be necessary to "
 					 "perform this ritual.@");
 			if (!gflags[BOLLUX_IS_DEAD]) {
 				BOLLUX->say("\"I will give him mine!\"");
@@ -64058,7 +64058,7 @@ void Func0714 object#(0x714) () {
 			}
 			abort;
 		}
-		Func0904(AVATAR, [
+		makeNpcSay(AVATAR, [
 			"@In Ylem...@", "@In Grav...@", "@In Mani...@", "@Kal Por...@",
 			"@Vas Flam Uus...@"
 		]);
@@ -64190,7 +64190,7 @@ void Func0717 object#(0x717) () {
 void Func0800 0x800 (var var0000) {
 	UI_close_gumps();
 	gflags[INSIDE_PUT_THE_AVATAR_TO_BED] = false;
-	var var0001 = Func0900();
+	var var0001 = getNearbyPartyMember();
 	if (UI_in_combat()) {
 		var0001->show_npc_face(DEFAULT_FACE);
 		var var0002 = var0001->get_npc_name();
@@ -64226,7 +64226,7 @@ void Func0800 0x800 (var var0000) {
 				music MUSIC_CAMPING, PLAY_ONCE;
 			};
 		}
-		var var000C = Func093C(AVATAR->get_npc_object(), UI_get_party_list());
+		var var000C = filterArray(AVATAR->get_npc_object(), UI_get_party_list());
 		AVATAR->set_schedule_type(SLEEP);
 		var0000->nap_time();
 	}
@@ -64323,7 +64323,7 @@ void Func0806 0x806 (var var0000, var var0001) {
 			repeat 6 {
 				next frame cycle;
 			};
-			call Func03C8;
+			call FuncEnclosedPrism;
 		};
 	}
 	UI_earthquake(7 * TICK);
@@ -64346,7 +64346,7 @@ void Func0807 0x807 (var var0000) {
 }
 
 void Func0808 0x808 () {
-	var var0000 = Func093C(AVATAR->get_npc_object(), UI_get_party_list());
+	var var0000 = filterArray(AVATAR->get_npc_object(), UI_get_party_list());
 	var var0001 = AVATAR->get_npc_object()->get_schedule_type();
 	for (var0004 in var0000) {
 		gflags[INSIDE_GENERATOR] = false;
@@ -64360,7 +64360,7 @@ void Func0809 0x809 (var var0000) {
 		if (var0000->get_item_flag(ON_MOVING_BARGE)) {
 			var0000->clear_item_flag(ON_MOVING_BARGE);
 			var0000->clear_item_flag(ACTIVE_BARGE);
-			Func0904(AVATAR, "@Whoa!@");
+			makeNpcSay(AVATAR, "@Whoa!@");
 		} else {
 			var var0002 = var0000->find_nearby(SHAPE_DRAFT_HORSE, 16, MASK_NONE);
 			if (var0002) {
@@ -64370,15 +64370,15 @@ void Func0809 0x809 (var var0000) {
 					if (Func080D()) {
 						var0000->set_item_flag(ON_MOVING_BARGE);
 						var0001->set_item_flag(ACTIVE_BARGE);
-						Func0904(AVATAR, "@Giddy-up!@");
+						makeNpcSay(AVATAR, "@Giddy-up!@");
 					} else {
 						var var0004 = Func08B3(var0000);
 					}
 				} else if (UI_get_array_size(UI_get_party_list()) == 1) {
-					Func08FF("@The title for this cart must first be "
+					partySpeak("@The title for this cart must first be "
 							 "purchased.@");
 				} else {
-					Func08FF("@We must first purchase the title for this "
+					partySpeak("@We must first purchase the title for this "
 							 "cart.@");
 				}
 			}
@@ -64489,7 +64489,7 @@ var Func080E 0x80E (var var0000) {
 						&& (var0004.x >= (var0005 - 3))) {
 						if ((var0004.y <= var0006)
 							&& (var0004.y >= (var0006 - 6))) {
-							Func08FF("I believe the bridge is blocked.");
+							partySpeak("I believe the bridge is blocked.");
 							return false;
 						}
 					}
@@ -64589,7 +64589,7 @@ void Func0810 0x810 (var var0000, var var0001) {
 }
 
 void Func0811 0x811 () {
-	var var0000 = Func093C(AVATAR->get_npc_object(), UI_get_party_list());
+	var var0000 = filterArray(AVATAR->get_npc_object(), UI_get_party_list());
 	for (var0003 in var0000) {
 		gflags[INSIDE_GENERATOR] = true;
 		var0003->set_schedule_type(WAIT);
@@ -64670,7 +64670,7 @@ void Func0813 0x813 (var var0000, var var0001, var var0002) {
 			}
 		}
 		if (!(var0007 == "")) {
-			if (Func0937(var0003)) {
+			if (canTalk(var0003)) {
 				var0003->item_say(var0007);
 			}
 		}
@@ -64712,7 +64712,7 @@ void Func0815 0x815 (var var0000) {
 	if (var0001 == FRAME_DOOR_OPENED) {
 		var0004 = "@Excuse me, the door is already open. "
 				  + "Is it not rather futile to lock it now?@";
-		Func08FF(var0004);
+		partySpeak(var0004);
 	}
 	if (var0001 == FRAME_DOOR_LOCKED) {
 		if (var0002 == QUALITY_DOOR_ANTONS_CELL) {
@@ -64727,7 +64727,7 @@ void Func0815 0x815 (var var0000) {
 		if (UI_die_roll(1, 10) == 1) {
 			var0004 = "@Excuse me, the door appears magically locked. "
 					  + "Is it not rather difficult to unlock it with a key?@";
-			Func08FF(var0004);
+			partySpeak(var0004);
 		}
 	}
 	if (var0003 != -1) {
@@ -64866,7 +64866,7 @@ void Func0816 0x816 (var var0000) {
 		var var0020 = UI_find_nearby(
 				var0000->get_object_position(), SHAPE_DOOR_NS_RIGHT, 12, MASK_NONE);
 		if (!(var0020 == NULL_OBJ)) {
-			var0020->Func010E();
+			var0020->FuncDoorNsRight();
 		}
 	}
 	if (var0001) {
@@ -64912,7 +64912,7 @@ void Func0817 0x817 (var var0000) {
 }
 
 void Func0818 0x818 () {
-	Func08FF("@The door appears blocked.@");
+	partySpeak("@The door appears blocked.@");
 }
 
 void Func0819 0x819 (var var0000) {
@@ -65198,95 +65198,143 @@ void Func0828 0x828 (
 	}
 }
 
-var Func0829 0x829 (var var0000) {
-	var var0001 = [-3, 0, 1, 0];
-	var var0002 = [0, -3, 0, 1];
-	var var0003 = [
+/**
+ * Handles the gangplank object by adjusting its position and shape.
+ *
+ * This will either raise or lower the gangplank depending on its current state.
+ *
+ * @param gangplank The gangplank object to be handled.
+ * @returns Returns true if the gangplank is not blocked and was updated.
+ */
+
+var handleGangplank 0x829 (var gangplank) {
+	var xOffsets = [-3, 0, 1, 0];
+	var yOffsets = [0, -3, 0, 1];
+	var shapeStates = [
 		SHAPE_GANGPLANK_LOWERED, SHAPE_GANGPLANK_LOWERED,
 		SHAPE_GANGPLANK_RAISED , SHAPE_GANGPLANK_RAISED
 	];
-	var var0004 = [SHAPE_DECK];
-	var var0005 = var0000->get_item_shape();
-	var var0006 = var0000->get_item_frame();
-	struct<Position> var0007 = var0000->get_object_position();
-	var var0008 = var0003[var0006 + 1];
-	declare struct<Position> var0009;
-	var0009.x = var0001[var0006 + 1];
-	var0009.y = var0002[var0006 + 1];
-	var0009.z = 1;
-	if (var0005 == var0008) {
-		if (Func082C(var0000, var0007, -3, var0004)) {
+	var blockedShapes = [SHAPE_DECK];
+	var curShape = gangplank->get_item_shape();
+	var curFrame = gangplank->get_item_frame();
+	struct<Position> curPos = gangplank->get_object_position();
+	var targetShape = shapeStates[curFrame + 1];
+	declare struct<Position> offset;
+	offset.x = xOffsets[curFrame + 1];
+	offset.y = yOffsets[curFrame + 1];
+	offset.z = 1;
+	if (curShape == targetShape) {
+		if (isObjBlocked(gangplank, curPos, -3, blockedShapes)) {
 			return false;
 		}
-		var0007 = Func082D(var0007, var0009, var0005);
+		curPos = adjustGangplankPosition(curPos, offset, curShape);
 	} else {
-		var0007 = Func082D(var0007, var0009, var0005);
-		if (Func082C(var0000, var0007, -3, var0004)) {
+		curPos = adjustGangplankPosition(curPos, offset, curShape);
+		if (isObjBlocked(gangplank, curPos, -3, blockedShapes)) {
 			return false;
 		}
 	}
-	if (var0005 == SHAPE_GANGPLANK_LOWERED) {
-		var0000->set_item_shape(SHAPE_GANGPLANK_RAISED);
+	if (curShape == SHAPE_GANGPLANK_LOWERED) {
+		gangplank->set_item_shape(SHAPE_GANGPLANK_RAISED);
 	} else {
-		var0000->set_item_shape(SHAPE_GANGPLANK_LOWERED);
+		gangplank->set_item_shape(SHAPE_GANGPLANK_LOWERED);
 	}
-	var var000A = var0000->set_last_created();
-	if (var000A) {
-		var000A = UI_update_last_created(var0007);
+	var lastCreated = gangplank->set_last_created();
+	if (lastCreated) {
+		lastCreated = UI_update_last_created(curPos);
 		return true;
 	}
 	return false;
 }
 
-struct<Position> Func082A 0x82A (
-		struct<Position> var0000, struct<Position> var0001, var var0002) {
-	var var0003 = 0;
+/**
+ * Adds an offset to each element of an array.
+ *
+ * @param base The base array to which the offset will be added.
+ * @param offset The array containing offset values to be added to the base array.
+ * @param size The size of the arrays.
+ * @returns The modified base array with offsets added.
+ */
+
+var addOffsetArray 0x82A (var base, var offset, var size) {
+	var index = 0;
 	do {
-		var0003 += 1;
-		var0000[var0003] += var0001[var0003];
-	} while (!(var0003 == var0002));
-	return var0000;
+		index += 1;
+		base[index] += offset[index];
+	} while (!(index == size));
+	return base;
 }
 
-struct<Position> Func082B 0x82B (struct<Position> var0000, var var0001) {
-	var var0002 = 0;
+/**
+ * Inverts the values of an array.
+ *
+ * This function takes an array and its size, then multiplies each element by -1,
+ * effectively inverting the values of the array.
+ *
+ * @param base The array to be inverted.
+ * @param size The size of the array.
+ * @returns The inverted array.
+ */
+
+var invertArray 0x82B (var base, var size) {
+	var index = 0;
 	do {
-		var0002 += 1;
-		var0000[var0002] *= -1;
-	} while (!(var0002 == var0001));
-	return var0000;
+		index += 1;
+		base[index] *= -1;
+	} while (!(index == size));
+	return base;
 }
 
-var Func082C 0x82C (
-		var var0000, struct<Position> var0001, var var0002, var var0003) {
-	var var0004 = var0000->find_nearby(
-			SHAPE_ANY, Func0932(var0002), MASK_INVISIBLE);
-	for (var0007 in var0004) {
-		struct<Position> var0008 = var0007->get_object_position();
-		if (var0008.x <= var0001.x
-			&& (var0008.x >= (var0001.x + var0002)
-				&& (var0008.y <= var0001.y
-					&& (var0008.y >= (var0001.y + var0002)
-						&& (var0008.z <= 2
-							&& (!(var0007 == var0000)
-								&& (!(var0007->get_item_shape() in var0003)
-									&& var0000->get_item_flag(IS_SOLID)))))))) {
+/**
+ * Checks if an object is blocked by any nearby objects.
+ *
+ * @param obj The object to check for blockage.
+ * @param objPos The position of the object.
+ * @param delta The delta value to determine the range of nearby objects.
+ * @param shapeList A list of shapes to exclude from the blockage check.
+ * @return true if the object is blocked by any nearby objects, false otherwise.
+ *
+ * @note There is a known bug where the code incorrectly uses `obj` instead of
+ * `foundObj` when checking the item flag for solidity.
+ */
+
+var isObjBlocked 0x82C (
+		var obj, struct<Position> objPos, var delta, var shapeList) {
+	var nearbyObjects = obj->find_nearby(
+			SHAPE_ANY, absoluteValueOf(delta), MASK_INVISIBLE);
+	for (foundObj in nearbyObjects) {
+		struct<Position> pos = foundObj->get_object_position();
+		if (pos.x <= objPos.x && (pos.x >= (objPos.x + delta)
+				&& (pos.y <= objPos.y && (pos.y >= (objPos.y + delta)
+						&& (pos.z <= 2 && (!(foundObj == obj)
+								&& (!(foundObj->get_item_shape() in shapeList)
+									// BUG: This should use foundObj, not obj
+									&& obj->get_item_flag(IS_SOLID)))))))) {
 			return true;
 		}
 	}
 	return false;
 }
 
-struct<Position> Func082D 0x82D (
-		struct<Position> var0000, struct<Position> var0001, var var0002) {
-	if (var0002 == SHAPE_GANGPLANK_RAISED) {
-		var0001 = Func082B(var0001, Z);
-		var0000 = Func082A(var0000, var0001, Z);
+/**
+ * Adjusts the position of a gangplank based on its current shape.
+ *
+ * @param pos The current position of the gangplank.
+ * @param offset The offset to be applied to the position.
+ * @param shapeNum The shape identifier of the gangplank.
+ * @return The adjusted position of the gangplank.
+ */
+
+struct<Position> adjustGangplankPosition 0x82D (
+		struct<Position> pos, struct<Position> offset, var shapeNum) {
+	if (shapeNum == SHAPE_GANGPLANK_RAISED) {
+		offset = invertArray(offset, Z);
+		pos = addOffsetArray(pos, offset, Z);
 	}
-	if (var0002 == SHAPE_GANGPLANK_LOWERED) {
-		var0000 = Func082A(var0000, var0001, Z);
+	if (shapeNum == SHAPE_GANGPLANK_LOWERED) {
+		pos = addOffsetArray(pos, offset, Z);
 	}
-	return var0000;
+	return pos;
 }
 
 var Func082E 0x82E (var var0000) {
@@ -65540,8 +65588,8 @@ void Func0831 0x831 (var var0000) {
 	var0001 &= FRAME_ANY;
 	var var0002 = var0001->find_nearby(SHAPE_GANGPLANK_LOWERED, 12, MASK_NONE);
 	for (var0005 in var0002) {
-		if (!Func0829(var0005)) {
-			Func08FF("@One of the gangplanks seems to be blocked. It must be "
+		if (!handleGangplank(var0005)) {
+			partySpeak("@One of the gangplanks seems to be blocked. It must be "
 					 "lowered to sail.@");
 			return;
 		}
@@ -65687,16 +65735,16 @@ void Func0836 0x836 (var var0000, var var0001) {
 			if (var0006->get_item_quality() == var0002) {
 				var var0007 = var0006->get_item_shape();
 				if (var0007 == SHAPE_METAL_WALL_EW) {
-					var0007 = Func03A8;
+					var0007 = FuncPortcullisDoorEw;
 					Func0832(var0006, var0007);
 				} else if (var0007 == SHAPE_METAL_WALL_NS) {
-					var0007 = Func03A7;
+					var0007 = FuncPortcullisDoorNs;
 					Func0832(var0006, var0007);
 				} else if (var0007 == SHAPE_PORTCULLIS_DOOR_EW) {
-					var0007 = Func012F;
+					var0007 = FuncMetalWallEw;
 					Func0833(var0006, var0007);
 				} else if (var0007 == SHAPE_PORTCULLIS_DOOR_NS) {
-					var0007 = Func036C;
+					var0007 = FuncMetalWallNs;
 					Func0833(var0006, var0007);
 				}
 			}
@@ -65886,7 +65934,7 @@ void Func083D 0x83D () {
 	}
 	var var0008 = "@Too bad...@";
 	if (UI_get_array_size(var0004) == 0) {
-		Func0933(SMITHY, var0008, 0);
+		delayedBark(SMITHY, var0008, 0);
 	}
 	declare var var0009;
 	declare var var000A;
@@ -65978,7 +66026,7 @@ void Func083D 0x83D () {
 		}
 		var0007->remove_item();
 	}
-	Func0933(SMITHY, var0008, 0);
+	delayedBark(SMITHY, var0008, 0);
 }
 
 void Func083E 0x83E (var var0000, var var0001) {
@@ -66045,7 +66093,7 @@ void Func083F 0x83F (var var0000, var var0001) {
 
 void Func0840 0x840 () {
 	UI_push_answers();
-	var var0000 = Func090B([
+	var var0000 = askForResponse([
 		"Be Good", "No Answers", "Strive for Unity", "Have Faith",
 		"I don't know"
 	]);
@@ -66054,10 +66102,10 @@ void Func0840 0x840 () {
 			"enlightenment. As thou hast heard, all is not what one has been "
 			"taught by one's teachers. 'Tis a pity. Now I suppose thou dost "
 			"want to borrow the notebook?\"");
-		var var0001 = Func090A();
+		var var0001 = askYesNo();
 		if (var0001) {
 			say("\"Very well. Dost thou promise to return my notebook?\"");
-			var var0002 = Func090A();
+			var var0002 = askYesNo();
 			if (var0002) {
 				if (PARTY->count_objects(
 						SHAPE_KEY, QUALITY_DOOR_ALAGNER_STORAGE, FRAME_ANY)) {
@@ -66118,17 +66166,17 @@ void Func0841 0x841 () {
 	var var0008 = [0, 10, 1, 1, 1, 1];
 	say("\"To make what purchase?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"To be all right.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091C(
+			var var000A = gargoyleProposeSellPrice(
 					var0005, var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " To be an acceptable price?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				if (var0002 == SHAPE_BOTTLE) {
 					var000B = Func08F8(
@@ -66149,7 +66197,7 @@ void Func0841 0x841 () {
 				say("\"To be without enough gold!\"");
 			}
 			say("\"To want another item?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -66183,7 +66231,7 @@ void Func0842 0x842 () {
 	var var000A = 1;
 	say("\"What wouldst thou like?\"");
 	while (var0002) {
-		var var000B = Func090C(var0003);
+		var var000B = chooseFromMenu2(var0003);
 		if (var000B == 1) {
 			say("\"Nothing at all? Well, alright.\"");
 			if (!var0001) {
@@ -66200,12 +66248,12 @@ void Func0842 0x842 () {
 					break;
 				}
 			}
-			var var000C = Func091B(
+			var var000C = humanProposeSellPrice(
 					var0007, var0003[var000B], var0008, var0006[var000B],
 					var0009[var000B]);
 			var var000D = BUYING_NOTHING;
 			say("\"^", var000C, " Is that price all right?\"");
-			var var000E = Func090A();
+			var var000E = askYesNo();
 			if (var000E) {
 				if (var0004[var000B] == SHAPE_FOOD) {
 					say("\"How many wouldst thou like?\"");
@@ -66227,7 +66275,7 @@ void Func0842 0x842 () {
 			}
 		}
 		say("\"Wouldst thou like something else?\"");
-		var0002 = Func090A();
+		var0002 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -66456,19 +66504,19 @@ void Func084C 0x84C () {
 	var var0007 = [0, 1, 12, 1, 1, 1, 1, 1];
 	say("\"To purchase what item?\"");
 	while (var0000) {
-		var var0008 = Func090C(var0001);
+		var var0008 = chooseFromMenu2(var0001);
 		if (var0008 == 1) {
 			say("\"To be fine.\"");
 			var0000 = false;
 		} else {
 			var var0009 = 1;
 			var var000A = 1;
-			var var000B = Func091C(
+			var var000B = gargoyleProposeSellPrice(
 					var0005[var0008], var0001[var0008], var0009,
 					var0004[var0008], var0006[var0008]);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, ". To be acceptable?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				if ((var0002[var0008] == SHAPE_TORCH)
 					|| (var0002[var0008] == SHAPE_FLAMING_OIL)) {
@@ -66496,7 +66544,7 @@ void Func084C 0x84C () {
 				say("\"To have not the right amount of gold!\"");
 			}
 			say("\"To buy something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -66510,7 +66558,7 @@ void Func084D 0x84D () {
 			"shall forget it, shall we?");
 		say("\"Now that thou hast worked a little for The Fellowship, and hast "
 			"learned what we stand for, dost thou still wish to join?\"");
-		var var0001 = Func090A();
+		var var0001 = askYesNo();
 		if (var0001) {
 			gflags[INVITED_TO_JOIN] = true;
 			say("\"Then thou art most welcome to The Fellowship. ");
@@ -66535,7 +66583,7 @@ void Func084D 0x84D () {
 		say("\"Ah, but first things first. I recommend that thou takest our "
 			"Examination to determine if thou art truly in need of The "
 			"Fellowship's teachings. Dost thou want to take the test?\"");
-		var var0002 = Func090A();
+		var var0002 = askYesNo();
 		if (var0002) {
 			UI_push_answers();
 			Func084E();
@@ -66554,7 +66602,7 @@ void Func084E 0x84E () {
 		"upset thee.~~\"Question One: Thou art feeling depressed right now. Is "
 		"it more likely because -~A: Thou hast disappointed a friend, or~B: A "
 		"friend has disappointed thee?\"");
-	var var0001 = Func090B(
+	var var0001 = askForResponse(
 			["A: I disappointed a friend", "B: Friend has disappointed me"]);
 	if (var0001 == "A: I disappointed a friend") {
 		say("\"I can tell from thine answer that thou art a person who takes "
@@ -66573,7 +66621,7 @@ void Func084E 0x84E () {
 		"served is little more than swill, and thou dost notice that the other "
 		"guests certainly think so. When thine host asks if thou dost like the "
 		"food, dost thou~A: tell the truth, or~B: lie to him?\"");
-	var var0002 = Func090B(["A: Tell the truth", "B: Lie to him"]);
+	var var0002 = askForResponse(["A: Tell the truth", "B: Lie to him"]);
 	if (var0002 == "A: Tell the truth") {
 		say("\"Thy response shows thou art a bluntly honest person, who mayest "
 			"occasionally say things that people may not like hearing, but "
@@ -66593,7 +66641,7 @@ void Func084E 0x84E () {
 		"before reposing in it, or~B: dost thou just go to sleep, letting the "
 		"room remain as thou hast found it?\"");
 	var var0003
-			= Func090B(["A: Clean the room myself", "B: Leave the room as is"]);
+			= askForResponse(["A: Clean the room myself", "B: Leave the room as is"]);
 	if (var0003 == "A: Clean the room myself") {
 		say("\"Thou hast revealed that thou art a person who instinctively "
 			"believes they are responsible for anything that goes wrong and "
@@ -66611,7 +66659,7 @@ void Func084E 0x84E () {
 		"Didst thou tell this comedic story because~A: thou didst enjoy the "
 		"response that thou didst receive from thine audience, or~B: because "
 		"thou didst want to please thy friends?\"");
-	var var0004 = Func090B(
+	var var0004 = askForResponse(
 			["A: I enjoyed the response", "B: I wanted to please friends"]);
 	if (var0004 == "A: I enjoyed the response") {
 		say("\"Thine answer shows thou art a person who instinctively sees "
@@ -66629,7 +66677,7 @@ void Func084E 0x84E () {
 		"money of others, or~B: thou hadst discovered an infallible method of "
 		"illicitly duplicating the coin of the realm?\"");
 	var var0005
-			= Func090B(["A: I stole the money", "B: I duplicated the coin"]);
+			= askForResponse(["A: I stole the money", "B: I duplicated the coin"]);
 	if (var0005 == "A: I stole the money") {
 		say("\"From Question Five we learn that thou art a person who "
 			"instinctively believes that they are incapable of achieving "
@@ -66649,7 +66697,7 @@ void Func084E 0x84E () {
 		"from his injury and asks thee not to let the healer amputate his arm. "
 		"Dost thou~A: heed the words of the healer, or~B: respect the wishes "
 		"of the injured man?\"");
-	var var0006 = Func090B(["A: Heed the healer", "B: Respect the man"]);
+	var var0006 = askForResponse(["A: Heed the healer", "B: Respect the man"]);
 	if (var0006 == "A: Heed the healer") {
 		say("\"By thine answer thou art a person who believes in mercy even "
 			"when it is not an easy thing, and a person who tries to have the "
@@ -66665,7 +66713,7 @@ void Func084E 0x84E () {
 		"rock at it. Is it more likely that thou hast done this because~A: the "
 		"dog was going to attack thee, or~B: the dog was going to attack "
 		"someone else?\"");
-	var var0007 = Func090B(
+	var var0007 = askForResponse(
 			["A: It was to attack me", "B: It was to attack another"]);
 	if (var0007 == "A: It was to attack me") {
 		say("\"This question tells us that thou art an overly defensive "
@@ -66683,7 +66731,7 @@ void Func084E 0x84E () {
 		"mother. The boat capsizes. In the choppy waters thou canst only save "
 		"thyself and one other person. Who dost thou save from drowning,~A: "
 		"thy betrothed, or~B: thy mother?\"");
-	var var0008 = Func090B(["A: My betrothed", "B: My mother"]);
+	var var0008 = askForResponse(["A: My betrothed", "B: My mother"]);
 	if (var0008 == "A: My betrothed") {
 		say("\"While risking thy life to save the life of thy betrothed is "
 			"admirable, I cannot help but wonder what suppressed hostility "
@@ -66732,7 +66780,7 @@ void Func084F 0x84F () {
 		IOLO->say(
 				"Iolo whispers to you. \"Art thou quite certain, ", var0000,
 				", that thou dost wish to join with these people?\"");
-		var var0003 = Func090A();
+		var var0003 = askYesNo();
 		if (var0003) {
 			say("\"I am not certain if thou art brave or simply foolish.\"*");
 		} else {
@@ -66819,7 +66867,7 @@ void Func084F 0x84F () {
 				var0001,
 				", before one of us does something they may later regret? Let "
 				"us leave these premises, all right?\"");
-		var var000E = Func090A();
+		var var000E = askYesNo();
 		if (var000E) {
 			say("\"I am glad thou dost see it my way. We can leave whenever "
 				"thou art ready.\"*");
@@ -66857,7 +66905,7 @@ void Func084F 0x84F () {
 					   "see Dupre as he whispers in your ear. \"I know a much "
 					   "better place to get a drink than this one. Perhaps "
 					   "thou wouldst like to join thy comrades there?\"");
-			var var0012 = Func090A();
+			var var0012 = askYesNo();
 			if (var0012) {
 				say("\"Then let us be off. Now!\"*");
 				abort;
@@ -67062,7 +67110,7 @@ void Func0851 0x851 () {
 		say("\"Hast thou reconsidered thy task? Wilt thou deliver the package "
 			"to Elynor in Minoc?\"");
 	}
-	var var0000 = Func090A();
+	var var0000 = askYesNo();
 	if (var0000) {
 		var var0001 = BATLIN->find_object(SHAPE_SEALED_BOX, QUALITY_ANY, FRAME_ANY);
 		var var0002 = var0001->set_last_created();
@@ -67217,17 +67265,17 @@ void Func0853 0x853 () {
 	var var0008 = [0, 1, 12, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 	say("\"To make what purchase?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"To be acceptable.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091C(
+			var var000A = gargoyleProposeSellPrice(
 					var0004[var0009], var0001[var0009], var0005,
 					var0003[var0009], var0006[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, ". To be an acceptable price?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				if ((var0002[var0009] == SHAPE_TORCH)
 					|| (var0002[var0009] == SHAPE_FLAMING_OIL)) {
@@ -67255,7 +67303,7 @@ void Func0853 0x853 () {
 				say("\"To have not the money for that!\"");
 			}
 			say("\"To make another purchase?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -67313,17 +67361,17 @@ void Func0855 0x855 () {
 	var var0009 = [0, 10, 1, 1, 1, 1];
 	say("\"What dost thou want for thy refreshment?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"Fine.\"");
 			var0001 = false;
 		} else {
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0006, var0002[var000A], var0007, var0005[var000A],
 					var0008[var000A]);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, " Art thou still interested?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				if (var0003[var000A] == SHAPE_FOOD) {
 					var000B = "How many ";
@@ -67349,7 +67397,7 @@ void Func0855 0x855 () {
 				say("\"Thou dost not have enough gold, ", var0000, ".\"");
 			}
 			say("\"Wouldst thou care for something else?\"");
-			var0001 = Func090A();
+			var0001 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -67429,7 +67477,7 @@ void Func0857 0x857 () {
 	var var0000 = 1;
 	var var0001 = 1;
 	say("\"Excellent! Hast thou brought some pumpkins for me?\"");
-	var var0002 = Func090A();
+	var var0002 = askYesNo();
 	if (var0002) {
 		say("\"Very good! Let me see how many thou dost have...\"");
 		var var0003 = PARTY->count_objects(
@@ -67483,17 +67531,17 @@ void Func0858 0x858 () {
 	var var0008 = [0, 1, 1, 1, 1, 1, 12, 12];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Tsk tsk... I am broken-hearted...\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Art thou still interested?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				if ((var0002[var0009] == SHAPE_ARROW)
 					|| (var0002[var0009] == SHAPE_BOLT)) {
@@ -67515,7 +67563,7 @@ void Func0858 0x858 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -67540,17 +67588,17 @@ void Func0859 0x859 () {
 	var var0008 = 1;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Tsk tsk... I am broken-hearted...\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Is that acceptable?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000B = Func08F8(
 						var0002[var0009], var0003, var0008, var0004[var0009],
@@ -67564,7 +67612,7 @@ void Func0859 0x859 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -67602,17 +67650,17 @@ void Func085A 0x85A () {
 	}
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Tsk tsk... I am broken-hearted...\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006,
 					var0004[var0009], var0007);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Art thou still interested?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				if ((var0002[var0009] == SHAPE_LOCKPICK)
 					|| (var0002[var0009] == SHAPE_TORCH)) {
@@ -67634,7 +67682,7 @@ void Func085A 0x85A () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -67680,17 +67728,17 @@ void Func085C 0x85C () {
 	var var0008 = 1;
 	say("\"What article wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine!\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0004[var0009], var0001[var0009], var0005[var0009],
 					var0003[var0009], var0006[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Art thou willing to pay my price?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000B = Func08F8(
 						var0002[var0009], var0007[var0009], var0008,
@@ -67706,7 +67754,7 @@ void Func085C 0x85C () {
 					"Perhaps in the near future.\"");
 			}
 			say("\"Is there something else thou wouldst like to see?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -67735,7 +67783,7 @@ void Func085D 0x85D () {
 	var var0009 = [0, 10, 1, 1, 1, 1];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"Very well, ", var0000, ".\"");
 			var0001 = false;
@@ -67751,12 +67799,12 @@ void Func085D 0x85D () {
 					break;
 				}
 			}
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0006, var0002[var000A], var0007[var000A],
 					var0005[var000A], var0008[var000A]);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, " Dost thou accept my price?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				var000B = "How many ";
 				// NOTE: Other places would check "var0009[var000A] > 1" here.
@@ -67778,7 +67826,7 @@ void Func085D 0x85D () {
 			}
 		}
 		say("\"Wouldst thou like something else?\"");
-		var0001 = Func090A();
+		var0001 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -67797,17 +67845,17 @@ void Func085E 0x85E () {
 	var var0009 = 1;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"Very well, ", var0000, ".\"");
 			var0001 = false;
 		} else {
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0006, var0002[var000A], var0007, var0005[var000A],
 					var0008);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, " Dost thou accept my price?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				var000C = Func08F8(
 						var0003[var000A], var0004[var000A], var0009,
@@ -67821,7 +67869,7 @@ void Func085E 0x85E () {
 				say("\"Thou hast not the gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0001 = Func090A();
+			var0001 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -67904,12 +67952,12 @@ void Func0860 0x860 (var var0000, var var0001, var var0002) {
 	say("\"I am able to heal, cure poison, and resurrect. Art thou in need of "
 		"one of these services?\"");
 	UI_push_answers();
-	var var0004 = Func090A();
+	var var0004 = askYesNo();
 	breakable {
 		if (var0004) {
 			say("\"Which of my services dost thou need?\"");
 			var var0005 = ["heal", "cure poison", "resurrect"];
-			var var0006 = Func090B(var0005);
+			var var0006 = askForResponse(var0005);
 			declare var var0008;
 			declare var var0009;
 			if ((var0006 == "heal") || (var0006 == "cure poison")) {
@@ -67952,7 +68000,7 @@ void Func0860 0x860 (var var0000, var var0001, var var0002) {
 				var0008 = var0002;
 			}
 			say("\"My price is ", var0008, " gold. Is this satisfactory?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var var000D = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -67995,7 +68043,7 @@ void Func0862 0x862 () {
 	var var0004 = false;
 	say("\"Then prove it. Talk to me.\"");
 	UI_clear_answers();
-	var var0005 = Func090B(
+	var var0005 = askForResponse(
 			["Hello, Chuckles", "Hello, Fool", "Hi, Chuckles", "Hi, Chuck"]);
 	if (var0005 == "Hi, Chuck") {
 		say("\"Hi there! What is on thy mind?\"");
@@ -68005,7 +68053,7 @@ void Func0862 0x862 () {
 		Func0861();
 	}
 	if (var0001 == true) {
-		var0005 = Func090B(
+		var0005 = askForResponse(
 				["trouble", "too much", "many problems", "I need answers"]);
 		if (var0005 == "too much") {
 			say("\"Ah, I do know what thou dost mean! Thou dost need help, "
@@ -68017,7 +68065,7 @@ void Func0862 0x862 () {
 		}
 	}
 	if (var0002 == true) {
-		var0005 = Func090B([
+		var0005 = askForResponse([
 			"Yes, I do", "Absolutely", "Canst thou help?", "Most assuredly"
 		]);
 		if ((var0005 == "Yes, I do") || (var0005 == "Canst thou help?")) {
@@ -68034,7 +68082,7 @@ void Func0862 0x862 () {
 		}
 	}
 	if (var0003 == true) {
-		var0005 = Func090B([
+		var0005 = askForResponse([
 			"That would be big of thee", "I need it immediately",
 			"That would be worthwhile", "I wish thou wouldst"
 		]);
@@ -68048,7 +68096,7 @@ void Func0862 0x862 () {
 		}
 	}
 	if (var0004 == true) {
-		var0005 = Func090B([
+		var0005 = askForResponse([
 			"I shan't murder thee", "gold", "my friendship", "a smile",
 			"nothing"
 		]);
@@ -68114,17 +68162,17 @@ void Func0863 0x863 () {
 	var var0008 = [0, 1, 1, 1, 12, 12];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Wouldst thou still like to buy?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				if ((var0002[var0009] == SHAPE_ARROW)
 					|| (var0002[var0009] == SHAPE_BOLT)) {
@@ -68146,7 +68194,7 @@ void Func0863 0x863 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -68837,12 +68885,12 @@ void Func0870 0x870 (var var0000, var var0001, var var0002) {
 	say("\"I am qualified to heal, cure poison, and resurrect. Art thou "
 		"interested in one of these services?\"");
 	UI_push_answers();
-	var var0003 = Func090A();
+	var var0003 = askYesNo();
 	breakable {
 		if (var0003) {
 			say("\"Which of my services dost thou have need of?\"");
 			var var0004 = ["heal", "cure poison", "resurrect"];
-			var var0005 = Func090B(var0004);
+			var var0005 = askForResponse(var0004);
 			declare var var0007;
 			declare var var0008;
 			if ((var0005 == "heal") || (var0005 == "cure poison")) {
@@ -68881,7 +68929,7 @@ void Func0870 0x870 (var var0000, var var0001, var var0002) {
 				var0007 = var0002;
 			}
 			say("\"My price is ", var0007, " gold. Is this price agreeable?\"");
-			var var000B = Func090A();
+			var var000B = askYesNo();
 			if (var000B) {
 				var var000C = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -68932,7 +68980,7 @@ void Func0871 0x871 () {
 	var var0009 = [0, 10, 1, 1, 1, 1, 1, 1];
 	say("\"What wouldst thou like?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"Very well.\"");
 			var0001 = false;
@@ -68946,12 +68994,12 @@ void Func0871 0x871 () {
 					break;
 				}
 			}
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0006, var0002[var000A], var0007, var0005[var000A],
 					var0008[var000A]);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, " Is that all right?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				if (var0003[var000A] == SHAPE_BOTTLE) {
 					var000C = Func08F8(
@@ -68980,7 +69028,7 @@ void Func0871 0x871 () {
 			}
 		}
 		say("\"Wouldst thou like something else?\"");
-		var0001 = Func090A();
+		var0001 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -69007,18 +69055,18 @@ void Func0872 0x872 () {
 	var var0008 = [0, 1, 1, 1, 1, 1, 1, 1, 1, 12, 12];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Is that acceptable?\"");
 			if ((var0002[var0009] == SHAPE_ARROW) || (var0002[var0009] == SHAPE_BOLT)) {
-				var var000C = Func090A();
+				var var000C = askYesNo();
 				if (var000C) {
 					say("\"How many sets wouldst thou like?\"");
 					var000B = Func08F8(
@@ -69026,7 +69074,7 @@ void Func0872 0x872 () {
 							var0004[var0009], 20, 1, true);
 				}
 			} else {
-				var var000D = Func090A();
+				var var000D = askYesNo();
 				if (var000D) {
 					var000B = Func08F8(
 							var0002[var0009], var0003, var0008[var0009],
@@ -69042,7 +69090,7 @@ void Func0872 0x872 () {
 					"from my shop without enough gold in thy possession!\"");
 			}
 			say("\"Anything else for thee today?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -69068,17 +69116,17 @@ void Func0873 0x873 () {
 	var var0008 = 1;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Is that acceptable?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000B = Func08F8(
 						var0002[var0009], var0003, var0008, var0004[var0009],
@@ -69093,7 +69141,7 @@ void Func0873 0x873 () {
 					"from my shop without enough gold in thy possession!\"");
 			}
 			say("\"Anything else for thee today?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -69119,18 +69167,18 @@ void Func0874 0x874 () {
 	var var0008 = 1;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Is that acceptable?\"");
 			if ((var0002[var0009] == SHAPE_LOCKPICK) || (var0002[var0009] == SHAPE_TORCH)) {
-				var var000C = Func090A();
+				var var000C = askYesNo();
 				if (var000C) {
 					say("\"How many wouldst thou like?\"");
 					var000B = Func08F8(
@@ -69138,7 +69186,7 @@ void Func0874 0x874 () {
 							var0004[var0009], 5, 1, true);
 				}
 			} else {
-				var var000D = Func090A();
+				var var000D = askYesNo();
 				if (var000D) {
 					var000B = Func08F8(
 							var0002[var0009], var0003, var0008,
@@ -69154,7 +69202,7 @@ void Func0874 0x874 () {
 					"from my shop without enough gold in thy possession!\"");
 			}
 			say("\"Anything else for thee today?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -69274,18 +69322,18 @@ void Func0876 0x876 () {
 	var var0008 = [0, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 	say("\"What wouldst thou choose to buy, ", var0000, "?\"");
 	while (var0001) {
-		var var0009 = Func090C(var0002);
+		var var0009 = chooseFromMenu2(var0002);
 		if (var0009 == 1) {
 			say("\"Very well, ", var0000, ".\"");
 			var0001 = false;
 		} else {
 			var var000A = "";
 			var var000B = BUYING_NOTHING;
-			var var000C = Func091B(
+			var var000C = humanProposeSellPrice(
 					var000A, var0002[var0009], var0006[var0009],
 					var0005[var0009], var0007[var0009]);
 			say("\"^", var000C, ". Dost thou find the price acceptable?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				if (var0003[var0009] == SHAPE_BOTTLE) {
 					var000B = Func08F8(
@@ -69308,7 +69356,7 @@ void Func0876 0x876 () {
 					"that!\"");
 			}
 			say("\"Wouldst thou care to buy something else?\"");
-			var0001 = Func090A();
+			var0001 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -69403,12 +69451,12 @@ void Func0878 0x878 (var var0000, var var0001) {
 void Func0879 0x879 (var var0000, var var0001, var var0002) {
 	say("\"Art thou in need of healing, curing, or resurrection?\"");
 	UI_push_answers();
-	var var0003 = Func090A();
+	var var0003 = askYesNo();
 	breakable {
 		if (var0003) {
 			say("\"Which of my services dost thou have need of?\"");
 			var var0004 = ["heal", "cure poison", "resurrect"];
-			var var0005 = Func090B(var0004);
+			var var0005 = askForResponse(var0004);
 			declare var var0007;
 			declare var var0008;
 			if ((var0005 == "heal") || (var0005 == "cure poison")) {
@@ -69445,7 +69493,7 @@ void Func0879 0x879 (var var0000, var var0001, var var0002) {
 				var0007 = var0002;
 			}
 			say("\"My price is ", var0007, " gold. Dost thou agree?\"");
-			var var000B = Func090A();
+			var var000B = askYesNo();
 			if (var000B) {
 				var var000C = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -69492,17 +69540,17 @@ void Func087A 0x87A () {
 	var var0008 = [0, 1, 12, 1, 1, 1, 1, 1, 1, 1];
 	say("\"What can I sell to thee?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Very good.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0004[var0009], var0001[var0009], var0005,
 					var0003[var0009], var0006);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, ". Is that acceptable?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				if ((var0002[var0009] == SHAPE_TORCH)
 					|| (var0002[var0009] == SHAPE_FLAMING_OIL)) {
@@ -69531,7 +69579,7 @@ void Func087A 0x87A () {
 					"a bush.\"");
 			}
 			say("\"Wouldst thou care to purchase something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -69643,7 +69691,7 @@ void Func087C 0x87C () {
 	converse(["Want honey?", "Go away!"]) {
 	case "Want honey?":
 		say("\"Honey will be given by you to me?\"");
-		var var0000 = Func090A();
+		var var0000 = askYesNo();
 		if (var0000) {
 			var var0001 = UI_remove_party_items(
 					1, SHAPE_HONEY, QUALITY_ANY, FRAME_ANY, true);
@@ -69901,7 +69949,7 @@ void Func0884 0x884 () {
 	declare var var0001;
 	if (!gflags[QUESTION_ONE]) {
 		say("\"Very well. What was Christopher's occupation?\"");
-		var0001 = Func090B(["tailor", "blacksmith", "provisioner", "barkeep"]);
+		var0001 = askForResponse(["tailor", "blacksmith", "provisioner", "barkeep"]);
 		if (var0001 == "blacksmith") {
 			gflags[QUESTION_ONE] = true;
 		} else {
@@ -69912,7 +69960,7 @@ void Func0884 0x884 () {
 	if (!gflags[QUESTION_TWO]) {
 		UI_clear_answers();
 		say("\"What didst thou find at the murder site?\"");
-		var0001 = Func090B(["nothing", "a body", "a key", "a bucket"]);
+		var0001 = askForResponse(["nothing", "a body", "a key", "a bucket"]);
 		if (var0001 == "a key") {
 			gflags[QUESTION_TWO] = true;
 		}
@@ -69936,7 +69984,7 @@ void Func0884 0x884 () {
 	if (!gflags[QUESTION_THREE]) {
 		UI_clear_answers();
 		say("\"What did the key open?\"");
-		var0001 = Func090B(["a book", "a door", "a trap door", "a chest"]);
+		var0001 = askForResponse(["a book", "a door", "a trap door", "a chest"]);
 		if (var0001 == "a chest") {
 			gflags[QUESTION_THREE] = true;
 		} else {
@@ -69947,13 +69995,13 @@ void Func0884 0x884 () {
 	if (!gflags[QUESTION_FOUR]) {
 		UI_clear_answers();
 		say("\"What didst thou find in the chest?\"");
-		var0001 = Func090B([
+		var0001 = askForResponse([
 			"gold", "a medallion", "a scroll", "none of these", "all of these"
 		]);
 		if (var0001 == "all of these") {
 			UI_clear_answers();
 			say("\"Dost thou have a suspect?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				gflags[QUESTION_FOUR] = true;
 			} else {
 				say("\"Well, continue to gather information until thou dost "
@@ -69980,7 +70028,7 @@ void Func0884 0x884 () {
 		if (gflags[SPARK_SAID_HOOK]) {
 			var0002 &= "hook";
 		}
-		var var0003 = Func090B(var0002);
+		var var0003 = askForResponse(var0002);
 		if (var0003 == "hook") {
 			gflags[QUESTION_FIVE] = true;
 		} else {
@@ -69996,7 +70044,7 @@ void Func0884 0x884 () {
 		if (gflags[GILBERTO_SAID_CROWN]) {
 			var0002 &= "Crown Jewel";
 		}
-		var var0004 = Func090B(var0002);
+		var var0004 = askForResponse(var0002);
 		if (var0004 == "Crown Jewel") {
 			gflags[QUESTION_SIX] = true;
 			say("The Mayor is pleased.~~\"It seems that thou art pursuing "
@@ -70022,7 +70070,7 @@ void Func0884 0x884 () {
 			}
 			say("\"Dost thou need the password?\"");
 			gflags[ASKED_FOR_PASSWORD] = true;
-			if (Func090A()) {
+			if (askYesNo()) {
 				if (Func0886()) {
 					say("\"Excellent! I have no doubt now that thou art the "
 						"one true Avatar!\"");
@@ -70040,7 +70088,7 @@ void Func0884 0x884 () {
 			say("\"All right then. Thou dost know that thou must have the "
 				"password to leave or enter our town? I ask again -- dost thou "
 				"wish to know the password?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				if (Func0886()) {
 					say("\"Excellent! I have no doubt now that thou art the "
 						"one true Avatar!\"");
@@ -70067,14 +70115,14 @@ void Func0884 0x884 () {
 }
 
 void Func0885 0x885 () {
-	if (Func090A()) {
+	if (askYesNo()) {
 		say("\"What didst thou find?\"");
 		UI_clear_answers();
 		var var0000 = ["nothing", "a bucket", "a body"];
 		if (gflags[ENTERED_STABLES]) {
 			var0000 &= "a key";
 		}
-		var var0001 = Func090B(var0000);
+		var var0001 = askForResponse(var0000);
 		if (var0001 == "a key") {
 			say("\"Hmmm, a key. Perhaps if thou dost ask Christopher's son "
 				"about it, he may know what it is for.\"");
@@ -70418,17 +70466,17 @@ void Func0889 0x889 () {
 	var var0008 = [0, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 	say("\"To desire what item?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"To understand.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091C(
+			var var000A = gargoyleProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " To agree to the price?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				if (var0002 == SHAPE_BOTTLE) {
 					var000B = Func08F8(
@@ -70449,7 +70497,7 @@ void Func0889 0x889 () {
 				say("\"To be without enough gold!\"");
 			}
 			say("\"To request something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -70530,17 +70578,17 @@ void Func088C 0x88C () {
 	var var0008 = [0, 1, 1, 1, 1, 1, 1, 1, 10];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005, var0001[var0009], var0006, var0004[var0009],
 					var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Does that sound like a fair price?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000A = "How many ";
 				if (var0008[var0009] > 1) {
@@ -70560,7 +70608,7 @@ void Func088C 0x88C () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -70605,17 +70653,17 @@ void Func088E 0x88E () {
 	var var0008 = 1;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			say("\"^", var000A, " Is that acceptable?\"");
 			var var000B = BUYING_NOTHING;
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000B = Func08F8(
 						var0002[var0009], var0003[var0009], var0008,
@@ -70629,7 +70677,7 @@ void Func088E 0x88E () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -70648,17 +70696,17 @@ void Func088F 0x88F () {
 	var var0008 = 1;
 	say("\"What wouldst thou like to whet thy palate?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine choice.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005, var0001[var0009], var0006, var0004[var0009],
 					var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Dost thou think it worth the cost?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				say("\"Thou art correct!\"");
 				var000B = Func08F8(
@@ -70673,7 +70721,7 @@ void Func088F 0x88F () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -70701,7 +70749,7 @@ void Func0890 0x890 () {
 			"his tone is affectionate.");
 		remove(["Don't know", "sacrificed"]);
 		say("\"I must help him, as he helped me! Wilt thou assist?\"");
-		if (Func090A()) {
+		if (askYesNo()) {
 			say("\"Very good,\" he says, noticeably relieved. \"I thank thee "
 				"in advance.\"");
 			gflags[AGREED_TO_HEAL_BOLLUX] = true;
@@ -70724,7 +70772,7 @@ void Func0890 0x890 () {
 			"words are insulting but his tone is affectionate.");
 		remove(["Don't know", "sacrificed"]);
 		say("\"I must help him, as he helped me! Wilt thou assist?\"");
-		if (Func090A()) {
+		if (askYesNo()) {
 			say("\"Very good,\" he says, notably relieved. \"I thank thee in "
 				"advance.\"");
 			gflags[AGREED_TO_HEAL_BOLLUX] = true;
@@ -70763,7 +70811,7 @@ void Func0890 0x890 () {
 			"and then part of the wall crumbling atop me, crushing my legs. I "
 			"suppose Bollux was more forunate. Was it he who carried me "
 			"here?\"");
-		if (Func090A()) {
+		if (askYesNo()) {
 			say("\"Then it is imperative that we find a way to bring him back! "
 				"If nothing else, I owe him my gratitude.\"");
 		} else {
@@ -70786,7 +70834,7 @@ void Func0890 0x890 () {
 		fallthrough;
 	case "what next"(remove):
 		say("\"Dost thou have the book entitled, `The Stone of Castambre?'\"");
-		if (Func090A()) {
+		if (askYesNo()) {
 			var0000 = Func0931(
 					PARTY, 1, SHAPE_BOOK, QUALITY_BOOK_STONE_OF_CASTAMBRE,
 					FRAME_ANY);
@@ -70811,9 +70859,9 @@ void Func0890 0x890 () {
 		say("\"Poor Bollux did not know of the Stone of Castambre. His "
 			"sacrifice was, perhaps, unnecessary. Hast thou, perchance, come "
 			"across MacCuth's \"The Stone of Castambre?\"");
-		if (Func090A()) {
+		if (askYesNo()) {
 			say("\"Dost thou have it with thee?\"");
-			if (Func090A()) {
+			if (askYesNo()) {
 				var0000 = Func0931(
 						PARTY, 1, SHAPE_BOOK, QUALITY_BOOK_STONE_OF_CASTAMBRE,
 						FRAME_ANY);
@@ -70856,7 +70904,7 @@ void Func0891 0x891 () {
 		"nothing, for once I was gone Bollux would simply repeat his act.\" "
 		"You hear a sigh come from the golem.");
 	ADJHAR->hide();
-	Func08FF("I don't mean to be irreverent, but did the matter not involve "
+	partySpeak("I don't mean to be irreverent, but did the matter not involve "
 			 "death, 'twould be a humorous sight: the two golems popping up "
 			 "and down as each one passed the `heart' to the other...@");
 	ADJHAR->say(
@@ -70894,7 +70942,7 @@ void Func0892 0x892 () {
 	case "Talisman":
 		say("\"Dost thou want the Talisman of Love?\"");
 		remove("Talisman");
-		if (Func090A()) {
+		if (askYesNo()) {
 			say("\"I was put here to protect the Shrines and prevent any from "
 				"acquiring the Talisman. Any except the Avatar who "
 				"demonstrated knowledge and understanding of Love. The "
@@ -70984,7 +71032,7 @@ void Func0894 0x894 (var var0000) {
 			say("The stone statue stands with a lowered head. Despite its "
 				"granite features, a downcast look is apparent on its face. "
 				"Surprisingly, it turns to speak with you.");
-			Func08FF("@Why, by the stars, I believe it \r\n\t\t\t\tis a "
+			partySpeak("@Why, by the stars, I believe it \r\n\t\t\t\tis a "
 					 "creature!@");
 			say("Slowly, as if with great effort, it raises it head.");
 			BOLLUX->show_npc_face(DEFAULT_FACE);
@@ -71222,17 +71270,17 @@ void Func0897 0x897 () {
 	var var0008 = 1;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " A fair price, yes?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000B = Func08F8(
 						var0002[var0009], var0003, var0008, var0004[var0009],
@@ -71246,7 +71294,7 @@ void Func0897 0x897 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -71273,17 +71321,17 @@ void Func0898 0x898 () {
 	var var0008 = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " A fair price, yes?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				if ((var0002[var0009] == SHAPE_ARROW)
 					|| (var0002[var0009] == SHAPE_BOLT)) {
@@ -71305,7 +71353,7 @@ void Func0898 0x898 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -71331,17 +71379,17 @@ void Func0899 0x899 () {
 	var var0008 = [0, 1, 12, 1, 1, 1, 1, 1, 1, 1];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " That is a fair price, is it not?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				if ((var0002[var0009] == SHAPE_FLAMING_OIL)
 					|| ((var0002[var0009] == SHAPE_TORCH)
@@ -71368,7 +71416,7 @@ void Func0899 0x899 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -71502,17 +71550,17 @@ void Func089C 0x89C () {
 	var var0008 = 1;
 	say("\"To purchase what item?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"To be accepted.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091C(
+			var var000A = gargoyleProposeSellPrice(
 					var0005, var0001[var0009], var0006, var0004[var0009],
 					var0007);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " To be agreeable?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000B = Func08F8(
 						var0002[var0009], var0003, var0008, var0004[var0009],
@@ -71526,7 +71574,7 @@ void Func089C 0x89C () {
 				say("\"To have less than enough gold for that.\"");
 			}
 			say("\"To want something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -71536,12 +71584,12 @@ void Func089D 0x89D (var var0000, var var0001, var var0002) {
 	say("\"To be able to heal, cure poison, and resurrect. To be interested in "
 		"one of these services?\"");
 	UI_push_answers();
-	var var0003 = Func090A();
+	var var0003 = askYesNo();
 	breakable {
 		if (var0003) {
 			say("\"To need which of my services?\"");
 			var var0004 = ["heal", "cure poison", "resurrect"];
-			var var0005 = Func090B(var0004);
+			var var0005 = askForResponse(var0004);
 			declare var var0007;
 			declare var var0008;
 			declare var var000A;
@@ -71580,7 +71628,7 @@ void Func089D 0x89D (var var0000, var var0001, var var0002) {
 				var0007 = var0002;
 			}
 			say("\"To charge ", var0007, " gold. To still want my services?\"");
-			var var000B = Func090A();
+			var var000B = askYesNo();
 			if (var000B) {
 				var var000C
 						= PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -71644,12 +71692,12 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 	say("\"I am able to heal, cure poison, and resurrect. Art thou interested "
 		"in one of these services?\"");
 	UI_push_answers();
-	var var0005 = Func090A();
+	var var0005 = askYesNo();
 	breakable {
 		if (var0005) {
 			say("\"Which of my services dost thou have need of?\"");
 			var var0006 = ["heal", "cure poison", "resurrect"];
-			var var0007 = Func090B(var0006);
+			var var0007 = askForResponse(var0006);
 			declare var var0009;
 			declare var var0014;
 			if ((var0007 == "heal") || (var0007 == "cure poison")) {
@@ -71674,7 +71722,7 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 					}
 				}
 				var var0011 = [NULL_OBJ, var000D];
-				var var0012 = Func090C(["Nobody", var000C]);
+				var var0012 = chooseFromMenu2(["Nobody", var000C]);
 				var var0013 = var0011[var0012];
 				if (var0013 == NULL_OBJ) {
 					var0014 = INVALID_NPC;
@@ -71734,7 +71782,7 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 			} else {
 				say("\"My price is ", var0009,
 					" gold. Is this price agreeable?\"");
-				var0005 = Func090A();
+				var0005 = askYesNo();
 				if (var0005) {
 					var var0017 = PARTY->count_objects(
 							SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -71852,7 +71900,7 @@ void Func08A0 0x8A0 () {
 	var var0009 = 1;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"Fine.\"");
 			var0001 = false;
@@ -71869,12 +71917,12 @@ void Func08A0 0x8A0 () {
 					break;
 				}
 			}
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0006, var0002[var000A], var0007, var0005[var000A],
 					var0008[var000A]);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, " Does that sound like a fair price?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				if (var0003[var000A] == SHAPE_FOOD) {
 					say("\"How many wouldst thou like?\"");
@@ -71896,7 +71944,7 @@ void Func08A0 0x8A0 () {
 			}
 		}
 		say("\"Wouldst thou like something else?\"");
-		var0001 = Func090A();
+		var0001 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -71922,12 +71970,12 @@ void Func08A1 0x8A1 () {
 	var var0009 = 1;
 	say("\"What dost thou want to buy?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"Fine, ", var0000, ".\"");
 			var0001 = false;
 		} else {
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0005[var000A], var0002[var000A], var0006[var000A],
 					var0004[var000A], var0007[var000A]);
 			var var000C = BUYING_NOTHING;
@@ -71935,7 +71983,7 @@ void Func08A1 0x8A1 () {
 				|| ((var0003[var000A] == SHAPE_TORCH)
 					|| (var0003[var000A] == SHAPE_LOCKPICK))) {
 				say("\"^", var000B, " Dost thou agree?\"");
-				var var000D = Func090A();
+				var var000D = askYesNo();
 				if (var000D) {
 					if (var0003[var000A] == SHAPE_FLAMING_OIL) {
 						say("\"How many sets of twelve wouldst thou like?\"");
@@ -71948,7 +71996,7 @@ void Func08A1 0x8A1 () {
 				}
 			} else {
 				say("\"^", var000B, ". Is that acceptable?\"");
-				var var000E = Func090A();
+				var var000E = askYesNo();
 				if (var000E) {
 					var000C = Func08F8(
 							var0003[var000A], var0008, var0009,
@@ -71964,7 +72012,7 @@ void Func08A1 0x8A1 () {
 				say("\"I am sorry, but thou hast not enough gold for that!\"");
 			}
 			say("\"Wouldst thou care to purchase something else?\"");
-			var0001 = Func090A();
+			var0001 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -72044,16 +72092,16 @@ void Func08A3 0x8A3 () {
 	var var0009 = 12;
 	say("\"What dost thou wish to buy?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"All right.\"");
 			var0001 = false;
 		} else {
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0006, var0002[var000A], var0007, var0005, var0008);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, " Is that agreeable?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				say("\"How many dozen wouldst thou like?\"");
 				var000C = Func08F8(
@@ -72068,7 +72116,7 @@ void Func08A3 0x8A3 () {
 				say("\"Thou dost not have the gold for that!\"");
 			}
 			say("\"Wouldst thou like to buy something else?\"");
-			var0001 = Func090A();
+			var0001 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -72093,17 +72141,17 @@ void Func08A4 0x8A4 () {
 	var var0009 = 1;
 	say("\"What dost thou wish to buy?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"All right.\"");
 			var0001 = false;
 		} else {
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0006, var0002[var000A], var0007, var0005[var000A],
 					var0008);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, " Is that agreeable?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				var000C = Func08F8(
 						var0003[var000A], var0004, var0009, var0005[var000A],
@@ -72117,7 +72165,7 @@ void Func08A4 0x8A4 () {
 				say("\"Thou dost not have the gold for that!\"");
 			}
 			say("\"Wouldst thou like to buy something else?\"");
-			var0001 = Func090A();
+			var0001 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -72239,17 +72287,17 @@ void Func08A7 0x8A7 () {
 	var var0008 = [0, 12, 1, 1, 1, 1, 1];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Wilt thou pay my price?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000A = "How many ";
 				if (var0008[var0009] > 1) {
@@ -72270,7 +72318,7 @@ void Func08A7 0x8A7 () {
 				say("\"Thou dost not have enough coin to pay for that!\"");
 			}
 			say("\"Wouldst thou like to purchase something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -72296,17 +72344,17 @@ void Func08A8 0x8A8 () {
 	var var0008 = 1;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006,
 					var0004[var0009], var0007);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Dost thou still wish to trade?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				say("\"How many wouldst thou like?\"");
 				var000B = Func08F8(
@@ -72321,7 +72369,7 @@ void Func08A8 0x8A8 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -72346,17 +72394,17 @@ void Func08A9 0x8A9 () {
 	var var0008 = FRAME_ANY;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0004[var0009], var0001[var0009], var0005[var0009],
 					var0003[var0009], var0006[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Is that acceptable?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				if (var0002[var0009] == SHAPE_BOLT) {
 					say("\"How many dozen dost thou want?\"");
@@ -72377,7 +72425,7 @@ void Func08A9 0x8A9 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -72399,17 +72447,17 @@ void Func08AA 0x8AA () {
 	var var0008 = FRAME_ANY;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0004[var0009], var0001[var0009], var0005,
 					var0003[var0009], var0006);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Is that acceptable?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000B = Func08F8(
 						var0002[var0009], var0008, var0007, var0003[var0009],
@@ -72423,7 +72471,7 @@ void Func08AA 0x8AA () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -72511,12 +72559,12 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002) {
 	say("\"I am qualified to heal, cure poison, and resurrect. Art thou "
 		"interested in one of these services?\"");
 	UI_push_answers();
-	var var0003 = Func090A();
+	var var0003 = askYesNo();
 	breakable {
 		if (var0003) {
 			say("\"Which of my services dost thou have need of?\"");
 			var var0004 = ["heal", "cure poison", "resurrect"];
-			var var0005 = Func090B(var0004);
+			var var0005 = askForResponse(var0004);
 			declare var var0007;
 			declare var var0008;
 			if ((var0005 == "heal") || (var0005 == "cure poison")) {
@@ -72554,7 +72602,7 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002) {
 				say("\"Indeed, this individual needs restoration!\"");
 			}
 			say("\"My price is ", var0007, " gold. Art thou interested?\"");
-			var var000B = Func090A();
+			var var000B = askYesNo();
 			if (var000B) {
 				var var000C = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -72659,7 +72707,7 @@ void Func08AD 0x8AD () {
 }
 
 void Func08AE 0x8AE (var var0000) {
-	var var0001 = Func090A();
+	var var0001 = askYesNo();
 	if (!var0001) {
 		say("\"", var0000,
 			", I am sure that some brave soul will eventually come this way. "
@@ -72682,14 +72730,14 @@ void Func08AF 0x8AF () {
 	var var0000 = UI_get_party_list();
 	if (!(FORSYTHE->get_npc_object() in var0000)) {
 		say("\"Is there a problem? Art thou confounded by thy task?\"");
-		var var0001 = Func090A();
+		var var0001 = askYesNo();
 		if (!var0001) {
 			say("\"Well then, I suggest that thou hasten to finish thy task, "
 				"lest the souls of the well perish before thou art done.*\"");
 			abort;
 		}
 		say("\"Canst thou not find the spirits of the town?\"");
-		var var0002 = Func090A();
+		var var0002 = askYesNo();
 		if (var0002) {
 			say("\"Well then, I suggest that thou make haste, lest the souls "
 				"of the well perish.\"*");
@@ -72817,7 +72865,7 @@ var Func08B3 0x8B3 (var var0000) {
 		if (var000B->get_barge() == var0005) {
 			if (!var0003 && var000B->get_item_quality() == 255) {
 				AVATAR->sit_down(var000B);
-				var0004 = Func093C(AVATAR->get_npc_object(), var0004);
+				var0004 = filterArray(AVATAR->get_npc_object(), var0004);
 				var0003 = true;
 			} else {
 				var0008 &= var000B->get_distance(AVATAR);
@@ -72826,7 +72874,7 @@ var Func08B3 0x8B3 (var var0000) {
 		}
 	}
 	var var000C = UI_get_array_size(var0004);
-	var0007 = Func093D(var0007, var0008);
+	var0007 = sortArraysBySecondArray(var0007, var0008);
 	for (var000B in var0007) {
 		if (var000C >= var0001) {
 			var0004[var0001]->sit_down(var000B);
@@ -72842,7 +72890,7 @@ void Func08B4 0x8B4 (var var0000, var var0001, var var0002) {
 	say("\"I can still heal, cure poison, and sometimes resurrect. Art thou in "
 		"need of one of these?\"");
 	UI_push_answers();
-	var var0003 = Func090A();
+	var var0003 = askYesNo();
 	breakable {
 		declare var var0005;
 		declare var var0006;
@@ -72852,7 +72900,7 @@ void Func08B4 0x8B4 (var var0000, var var0001, var var0002) {
 		if (var0003) {
 			say("\"Of which service dost thou have need?\"");
 			var var0004 = ["heal", "cure poison", "resurrect"];
-			var0005 = Func090B(var0004);
+			var0005 = askForResponse(var0004);
 			if ((var0005 == "heal") || (var0005 == "cure poison")) {
 				if (var0005 == "heal") {
 					var0006 = "healed";
@@ -73045,7 +73093,7 @@ void Func08B7 0x8B7 () {
 	var var000A = LUCY;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0001) {
-		var var000B = Func090C(var0002);
+		var var000B = chooseFromMenu2(var0002);
 		if (var000B == 1) {
 			say("\"Fine.\"");
 			var0001 = false;
@@ -73061,12 +73109,12 @@ void Func08B7 0x8B7 () {
 					break;
 				}
 			}
-			var var000C = Func091B(
+			var var000C = humanProposeSellPrice(
 					var0006, var0002[var000B], var0007, var0005[var000B],
 					var0008[var000B]);
 			var var000D = BUYING_NOTHING;
 			say("\"^", var000C, " Dost thou still want it?\"");
-			var var000E = Func090A();
+			var var000E = askYesNo();
 			if (var000E) {
 				if (var0003[var000B] == SHAPE_FOOD) {
 					say("\"How many wouldst thou like?\"");
@@ -73088,7 +73136,7 @@ void Func08B7 0x8B7 () {
 			}
 		}
 		say("\"Wouldst thou like something else?\"");
-		var0001 = Func090A();
+		var0001 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -73098,7 +73146,7 @@ void Func08B8 0x8B8 () {
 	var var0000 = 1;
 	var var0001 = 1;
 	say("\"Excellent! Dost thou have some eggs for me?\"");
-	var var0002 = Func090A();
+	var var0002 = askYesNo();
 	if (var0002) {
 		say("\"Very good! Let me see how many thou dost have...\"");
 		var var0003 = PARTY->count_objects(SHAPE_FOOD, QUALITY_ANY, FRAME_EGG);
@@ -73152,7 +73200,7 @@ void Func08B9 0x8B9 () {
 	var var0009 = 1;
 	say("\"What suits thy fancy?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"Mmmm. Thou wilt love it.\"");
 			var0001 = false;
@@ -73164,12 +73212,12 @@ void Func08B9 0x8B9 () {
 						"my supply has diminished.\"");
 				}
 			}
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0006, var0002[var000A], var0007, var0005[var000A],
 					var0008[var000A]);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, " Too rich for thy blood?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (!var000D) {
 				if (var0003[var000A] == SHAPE_FOOD) {
 					say("\"How many wouldst thou like?\"");
@@ -73190,7 +73238,7 @@ void Func08B9 0x8B9 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0001 = Func090A();
+			var0001 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -73199,7 +73247,7 @@ void Func08B9 0x8B9 () {
 void Func08BA 0x8BA () {
 	var var0000 = UI_is_pc_female();
 	say("\"The fortune vill cost thee 20 gold. All right?\"");
-	var var0001 = Func090A();
+	var var0001 = askYesNo();
 	if (var0001) {
 		var var0002 = UI_remove_party_items(
 				20, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
@@ -73271,7 +73319,7 @@ void Func08BB 0x8BB (var var0000) {
 	var var0002 = [20, 40, 60, 80, 100, 130, 150, 180];
 	while (var0001) {
 		say("\"Which circle art thou interested in?\"");
-		var var0003 = Func090C([
+		var var0003 = chooseFromMenu2([
 			"nothing", "First", "Second", "Third", "Fourth", "Fifth", "Sixth",
 			"Seventh", "Eighth"
 		]);
@@ -73346,7 +73394,7 @@ void Func08BB 0x8BB (var var0000) {
 			];
 		}
 		say("\"What spell wouldst thou like to buy?\"");
-		var var0006 = Func090C(var0004);
+		var var0006 = chooseFromMenu2(var0004);
 		if (var0006 == 1) {
 			say("\"Fine.\"");
 			break;
@@ -73368,7 +73416,7 @@ void Func08BB 0x8BB (var var0000) {
 			say("\"Thou dost already have that spell!\"");
 		}
 		say("\"Wouldst thou like another spell?\"");
-		var0001 = Func090A();
+		var0001 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -73417,17 +73465,17 @@ void Func08BC 0x8BC (var var0000) {
 	var var000B = MARIAH;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0001) {
-		var var000C = Func090C(var0002);
+		var var000C = chooseFromMenu2(var0002);
 		if (var000C == 1) {
 			say("\"Fine.\"");
 			var0001 = false;
 		} else {
-			var var000D = Func091B(
+			var var000D = humanProposeSellPrice(
 					var0006, var0002[var000C], var0009, var0005[var000C],
 					var0007[var000C]);
 			var var000E = BUYING_NOTHING;
 			say("\"", var000D, " Dost thou like the price?\"");
-			var var000F = Func090A();
+			var var000F = askYesNo();
 			if (var000F) {
 				if (var0000 == "Reagents") {
 					say("\"How many dost thou want?\"");
@@ -73449,7 +73497,7 @@ void Func08BC 0x8BC (var var0000) {
 			} else {
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0001 = Func090A();
+			var0001 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -73944,7 +73992,7 @@ void Func08C3 0x8C3 () {
 	var var0001 = [25, 45, 65, 85, 115, 135, 155, 185];
 	while (var0000) {
 		say("\"In which circle dost thou wish to study?\"");
-		var var0002 = Func090C([
+		var var0002 = chooseFromMenu2([
 			"none", "First", "Second", "Third", "Fourth", "Fifth", "Sixth",
 			"Seventh", "Eighth"
 		]);
@@ -74019,7 +74067,7 @@ void Func08C3 0x8C3 () {
 			];
 		}
 		say("\"What spell wouldst thou like to buy?\"");
-		var var0005 = Func090C(var0003);
+		var var0005 = chooseFromMenu2(var0003);
 		if (var0005 == 1) {
 			say("\"Fine.\"");
 			break;
@@ -74041,7 +74089,7 @@ void Func08C3 0x8C3 () {
 			say("\"Thou dost already have that spell!\"");
 		}
 		say("\"Wouldst thou like another spell?\"");
-		var0000 = Func090A();
+		var0000 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -74065,7 +74113,7 @@ void Func08C4 0x8C4 () {
 	var var0004 = [0, 2, 3, 3, 5, 5];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0005 = Func090C(var0001);
+		var var0005 = chooseFromMenu2(var0001);
 		if (var0005 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
@@ -74074,12 +74122,12 @@ void Func08C4 0x8C4 () {
 			var var0007 = 0;
 			var var0008 = "";
 			var var0009 = 1;
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0006, var0001[var0005], var0007, var0004[var0005],
 					var0008);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Okey-dokey?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				say("\"How many wouldst thou like?\"");
 				var000B = Func08F8(
@@ -74094,7 +74142,7 @@ void Func08C4 0x8C4 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -74107,7 +74155,7 @@ void Func08C5 0x8C5 () {
 			[35, 55, 85, 95, 125, 145, 165, 195];
 	while (var0000) {
 		say("\"In which circle dost thou wish to study?\"");
-		var var0002 = Func090C([
+		var var0002 = chooseFromMenu2([
 			"none", "First", "Second", "Third", "Fourth", "Fifth", "Sixth",
 			"Seventh", "Eighth"
 		]);
@@ -74186,7 +74234,7 @@ void Func08C5 0x8C5 () {
 			];
 		}
 		say("\"What spell wouldst thou like to buy?\"");
-		var var0005 = Func090C(var0003);
+		var var0005 = chooseFromMenu2(var0003);
 		if (var0005 == 1) {
 			say("\"Fine.\"");
 			break;
@@ -74208,7 +74256,7 @@ void Func08C5 0x8C5 () {
 			say("\"Thou dost already have that spell!\"");
 		}
 		say("\"Would you like another spell?\"");
-		var0000 = Func090A();
+		var0000 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -74236,17 +74284,17 @@ void Func08C6 0x8C6 () {
 	var var0008 = 1;
 	say("\"What reagent wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005, var0001[var0009], var0006, var0004[var0009],
 					var0007);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Art thou willing to pay that much?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				say("\"How many wouldst thou like?\"");
 				var000B = Func08F8(
@@ -74261,7 +74309,7 @@ void Func08C6 0x8C6 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -74449,8 +74497,8 @@ var Func08C9 0x8C9 () {
 			var var000E = var000D.x;
 			var var000F = var000D.y;
 			if ((!var0009)
-				&& ((Func0932(var000E - var0007) <= 1)
-					&& (Func0932(var000F - var0008) <= 1))) {
+				&& ((absoluteValueOf(var000E - var0007) <= 1)
+					&& (absoluteValueOf(var000F - var0008) <= 1))) {
 				var0002 += 1;
 				var000C->clear_item_flag(TEMPORARY);
 				var0009 = true;
@@ -74553,7 +74601,7 @@ void Func08CB 0x8CB () {
 	var var0009 = [0, 10, 1, 1, 1, 1];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"Very well, ", var0000, ".\"");
 			var0001 = false;
@@ -74569,12 +74617,12 @@ void Func08CB 0x8CB () {
 					break;
 				}
 			}
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0006[var000A], var0002[var000A], var0007[var000A],
 					var0005[var000A], var0008[var000A]);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, ". Art thou happy with the price?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			declare var var000E;
 			if (var000D) {
 				say("\"How many dost thou want?\"");
@@ -74591,7 +74639,7 @@ void Func08CB 0x8CB () {
 			}
 		}
 		say("\"Wouldst thou like something else?\"");
-		var0001 = Func090A();
+		var0001 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -74610,17 +74658,17 @@ void Func08CC 0x8CC () {
 	var var0009 = [0, 1, 1];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"Very well, ", var0000, ".\"");
 			var0001 = false;
 		} else {
 			var var000B = BUYING_NOTHING;
-			var var000C = Func091B(
+			var var000C = humanProposeSellPrice(
 					var0006[var000A], var0002[var000A], var0007[var000A],
 					var0005[var000A], var0008[var000A]);
 			say("\"^", var000C, ". Is that price agreeable?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				var000B = Func08F8(
 						var0003[var000A], var0004[var000A], var0009[var000A],
@@ -74634,7 +74682,7 @@ void Func08CC 0x8CC () {
 				say("\"Thou hast not the gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0001 = Func090A();
+			var0001 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -74664,17 +74712,17 @@ void Func08CD 0x8CD () {
 	var var0008 = [0, 10, 1, 1, 1, 1, 1, 1];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"All right.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005, var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Canst thou afford my price?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				if (var0002[var0009] == SHAPE_BOTTLE) {
 					var000B = Func08F8(
@@ -74700,7 +74748,7 @@ void Func08CD 0x8CD () {
 				say("\"Thou dost not have the gold for that!\"");
 			}
 			say("\"Is there something else thou mayest wish to buy?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -74787,7 +74835,7 @@ void Func08CF 0x8CF () {
 	if (var0002) {
 		IOLO->say("Iolo leans toward you.~~ \"I believe we have heard enough "
 				  "of this, no?\"*");
-		var var0004 = Func090A();
+		var var0004 = askYesNo();
 		if (var0004) {
 			say("\"Good. Let us leave.\"*");
 			abort;
@@ -74938,12 +74986,12 @@ void Func08D2 0x8D2 (var var0000, var var0001, var var0002) {
 	var var0003 = Func0909();
 	say("\"Dost thou want mine aid?\"");
 	UI_push_answers();
-	var var0004 = Func090A();
+	var var0004 = askYesNo();
 	breakable {
 		if (var0004) {
 			say("\"What is thy need?\"");
 			var var0005 = ["healing", "curing", "resurrection"];
-			var var0006 = Func090B(var0005);
+			var var0006 = askForResponse(var0005);
 			declare var var0007;
 			declare var var0008;
 			declare var var0009;
@@ -74982,7 +75030,7 @@ void Func08D2 0x8D2 (var var0000, var var0001, var var0002) {
 			}
 			say("\"I must charge thee ", var0008,
 				" gold. Is this price agreeable?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var var000D = PARTY->count_objects(
 						SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -75032,19 +75080,19 @@ void Func08D3 0x8D3 () {
 	var var0009 = FRAME_ANY;
 	say("\"What weapon wouldst thou like to buy?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"I completely understand, ", var0000,
 				". Ever since the Britannian Tax Council set such outrageous "
 				"taxes, prices have risen throughout the land.\"");
 			var0001 = false;
 		} else {
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0005, var0002[var000A], var0006, var0004[var000A],
 					var0007);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, ".\" Is this price acceptable to thee?");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				var000C = Func08F8(
 						var0003[var000A], var0009, var0008, var0004[var000A],
@@ -75059,7 +75107,7 @@ void Func08D3 0x8D3 () {
 				say("\"Thou hast not enough gold for that!\"");
 			}
 			say("\"Dost thou want for anything else?\"");
-			var0001 = Func090A();
+			var0001 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -75087,17 +75135,17 @@ void Func08D4 0x8D4 () {
 	var var0009 = 1;
 	say("\"What form of protection wouldst thou like to buy?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"Very well.\"");
 			var0001 = false;
 		} else {
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0005[var000A], var0002[var000A], var0006[var000A],
 					var0004[var000A], var0007[var000A]);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, " Art thou still interested?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				var000C = Func08F8(
 						var0003[var000A], var0008, var0009, var0004[var000A],
@@ -75112,7 +75160,7 @@ void Func08D4 0x8D4 () {
 				say("\"Thou hast not enough gold for that!\"");
 			}
 			say("\"Dost thou want for anything else?\"");
-			var0001 = Func090A();
+			var0001 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -75252,7 +75300,7 @@ void Func08D7 0x8D7 () {
 	} else {
 		say("\"This place is horrible. Wouldst thou be so kind as to take me "
 			"to mine husband, Trent? He has a tendency to worry about me.\"");
-		var var0004 = Func090A();
+		var var0004 = askYesNo();
 		if (var0004) {
 			var var0005 = false;
 			say("Rowena smiles radiantly, \"Thank thee, ", var0000,
@@ -75371,7 +75419,7 @@ void Func08DB 0x8DB () {
 	var var0001 = [25, 45, 65, 85, 115, 135, 155, 185];
 	while (var0000) {
 		say("\"In which circle dost thou wish to study?\"");
-		var var0002 = Func090C([
+		var var0002 = chooseFromMenu2([
 			"none", "First", "Second", "Third", "Fourth", "Fifth", "Sixth",
 			"Seventh", "Eighth"
 		]);
@@ -75441,7 +75489,7 @@ void Func08DB 0x8DB () {
 			];
 		}
 		say("\"What spell wouldst thou like to buy?\"");
-		var var0005 = Func090C(var0003);
+		var var0005 = chooseFromMenu2(var0003);
 		if (var0005 == 1) {
 			say("\"Fine.\"");
 			break;
@@ -75463,7 +75511,7 @@ void Func08DB 0x8DB () {
 			say("\"Thou dost already have that spell!\"");
 		}
 		say("\"Wouldst thou like another spell?\"");
-		var0000 = Func090A();
+		var0000 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -75491,17 +75539,17 @@ void Func08DC 0x8DC () {
 	var var0008 = 1;
 	say("\"What reagent wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005, var0001[var0009], var0006, var0004[var0009],
 					var0007);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Art thou willing to pay that much?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				say("\"How many wouldst thou like?\"");
 				var000B = Func08F8(
@@ -75516,7 +75564,7 @@ void Func08DC 0x8DC () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -75644,7 +75692,7 @@ void Func08DE 0x8DE () {
 	var var0009 = 1;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"Fine.\"");
 			var0001 = false;
@@ -75659,12 +75707,12 @@ void Func08DE 0x8DE () {
 					break;
 				}
 			}
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0006, var0002[var000A], var0007[var000A],
 					var0005[var000A], var0008[var000A]);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, " Dost thou still want it?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				if (var0003[var000A] == SHAPE_FOOD) {
 					say("\"How many wouldst thou like?\"");
@@ -75686,7 +75734,7 @@ void Func08DE 0x8DE () {
 			}
 		}
 		say("\"Wouldst thou like to purchase anything else?\"");
-		var0001 = Func090A();
+		var0001 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -75698,7 +75746,7 @@ void Func08DF 0x8DF () {
 	converse(["Want honey?", "Go away!"]) {
 	case "Want honey?":
 		say("\"Honey will be given by you to me?\"");
-		var var0000 = Func090A();
+		var var0000 = askYesNo();
 		if (var0000) {
 			var var0001 = UI_remove_party_items(
 					1, SHAPE_HONEY, QUALITY_ANY, FRAME_ANY, true);
@@ -75724,7 +75772,7 @@ void Func08E0 0x8E0 () {
 	converse(["Want honey?", "Go away!"]) {
 	case "Want honey?":
 		say("\"Honey will be given by you to me?\"");
-		var var0000 = Func090A();
+		var var0000 = askYesNo();
 		if (var0000) {
 			var var0001 = UI_remove_party_items(
 					1, SHAPE_HONEY, QUALITY_ANY, FRAME_ANY, true);
@@ -75768,17 +75816,17 @@ void Func08E1 0x8E1 () {
 	var var0008 = 1;
 	say("\"To want to buy what item?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"To be acceptable.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091C(
+			var var000A = gargoyleProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, ". To be an acceptable price?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000B = Func08F8(
 						var0002[var0009], var0003[var0009], var0008,
@@ -75792,7 +75840,7 @@ void Func08E1 0x8E1 () {
 				say("\"To have not enough gold for that!\"");
 			}
 			say("\"To desire another item?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -75816,17 +75864,17 @@ void Func08E2 0x8E2 () {
 	var var0007 = ["", " per spell use", " per use", " per use", " per use"];
 	var var0008 = 1;
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"To be acceptable.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091C(
+			var var000A = gargoyleProposeSellPrice(
 					var0005, var0001[var0009], var0006, var0004[var0009],
 					var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, ". To agree to this price?'");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				say("\"To want to purchase how many?\"");
 				var000B = Func08F8(
@@ -75841,7 +75889,7 @@ void Func08E2 0x8E2 () {
 				say("\"To have not enough gold for that!\"");
 			}
 			say("\"To desire another item?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -75863,17 +75911,17 @@ void Func08E3 0x8E3 () {
 	var var0008 = 1;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005, var0001[var0009], var0006, var0004[var0009],
 					var0007);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Art thou willing to pay my price?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000B = Func08F8(
 						var0002[var0009], var0003[var0009], var0008,
@@ -75887,7 +75935,7 @@ void Func08E3 0x8E3 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -76181,7 +76229,7 @@ void Func08ED 0x8ED () {
 	converse(["Want honey?", "Go away!"]) {
 	case "Want honey?":
 		say("\"Honey will be given by you to me?\"");
-		var var0000 = Func090A();
+		var var0000 = askYesNo();
 		if (var0000) {
 			var var0001 = UI_remove_party_items(
 					1, SHAPE_HONEY, QUALITY_ANY, FRAME_ANY, true);
@@ -76208,7 +76256,7 @@ void Func08EE 0x8EE () {
 	converse(["Want honey?", "Go away!"]) {
 	case "Want honey?":
 		say("\"Honey will be given by you to me?\"");
-		var var0000 = Func090A();
+		var var0000 = askYesNo();
 		if (var0000) {
 			var var0001 = UI_remove_party_items(
 					1, SHAPE_HONEY, QUALITY_ANY, FRAME_ANY, true);
@@ -76278,7 +76326,7 @@ void Func08EF 0x8EF () {
 	case "free":
 		say("\"Yes, thou wilt help me free her, wilt thou not?\" A tinge of "
 			"the edge comes back to his voice.");
-		var var0003 = Func090A();
+		var var0003 = askYesNo();
 		if (var0003) {
 			say("His grip on the haft of his hammer relaxes and he smiles with "
 				"gratitude.~~\"Thou cannot know how much this means to me. I "
@@ -76400,7 +76448,7 @@ void Func08F2 0x8F2 (var var0000, var var0001) {
 	case "My lie":
 		remove(["My lie", "My deed", "My crime"]);
 		say("\"Of what lie speakest thou? Art thou not ", var0001, "?\"");
-		if (Func090A()) {
+		if (askYesNo()) {
 			break;
 		}
 		var0004 = Func08F1("");
@@ -76598,14 +76646,14 @@ var Func08F5 0x8F5 (var var0000, var var0001) {
 	var var0007 = false;
 	var var0008 = UI_get_array_size(var0003);
 	while (var0008 > 1) {
-		var var0009 = Func090C(var0003);
+		var var0009 = chooseFromMenu2(var0003);
 		if (var0009 == var0008) {
 			break;
 		}
 		var var000A = var0001[var0009];
 		var var000B = var000A->get_npc_number();
-		var0001 = Func093C(var000A, var0001);
-		var0003 = Func093C(var0003[var0009], var0003);
+		var0001 = filterArray(var000A, var0001);
+		var0003 = filterArray(var0003[var0009], var0003);
 		var var000C = false;
 		declare var var000D;
 		declare var var000E;
@@ -76800,80 +76848,143 @@ void Func08FD 0x8FD (var var0000) {
 	UI_flash_mouse(var0000);
 }
 
-void Func08FE 0x8FE (var var0000) {
-	var var0001 = Func0900();
-	Func0904(var0001, var0000);
+/**
+ * Makes a nearby party member NPC say specified lines.
+ *
+ * @param lines The lines of dialogue that the NPC will say.
+ */
+
+void partyUtters 0x8FE (var lines) {
+	var npc = getNearbyPartyMember();
+	makeNpcSay(npc, lines);
 }
 
-void Func08FF 0x8FF (var var0000) {
-	var var0001 = Func0900();
-	Func0903(var0001, var0000);
+/**
+ * Makes a nearby party member NPC say specified lines.
+ * Failing the copy protection questions will affect this speech.
+ *
+ * @param lines The lines of dialogue that the NPC will say.
+ */
+
+void partySpeak 0x8FF (var lines) {
+	var npc = getNearbyPartyMember();
+	handleNpcSpeech(npc, lines);
 }
 
-var Func0900 0x900 () {
+/**
+ * This function performs a die roll between 1 and 10. If the result is less than 4,
+ * it returns a nearby party NPC. Otherwise, it returns a random nearby party member.
+ *
+ * @return A nearby party NPC if the die roll is less than 4.
+ * @return A random nearby party member if the die roll is 4 or greater.
+ */
+
+var getNearbyPartyMember 0x900 () {
 	if (UI_die_roll(1, 10) < 4) {
-		return Func0902();
+		return findNearbyPartyNPC();
 	}
-	return Func0901();
+	return getNearbyRandomPartyMember();
 }
 
-var Func0901 0x901 () {
-	var var0000 = UI_get_party_list();
-	var0000 = Func093C(AVATAR->get_npc_object(), var0000);
-	var var0001 = UI_get_array_size(var0000);
-	if (var0001 != 0) {
-		var var0002 = var0000[UI_get_random(var0001)]->get_npc_number();
-		if (var0002->npc_nearby()) {
-			return var0002;
+/**
+ * Retrieves a random nearby party member.
+ *
+ * This function fetches the list of party members, filters out the avatar's
+ * NPC object, and selects a random NPC from the filtered list. If the selected
+ * NPC is nearby, it returns that NPC. If no NPCs are nearby or the party list
+ * is empty, it returns the avatar.
+ *
+ * @return A random nearby party member, or the avatar if none are around.
+ */
+
+var getNearbyRandomPartyMember 0x901 () {
+	var partyList = UI_get_party_list();
+	partyList = filterArray(AVATAR->get_npc_object(), partyList);
+	var partySize = UI_get_array_size(partyList);
+	if (partySize != 0) {
+		var randomNPC = partyList[UI_get_random(partySize)]->get_npc_number();
+		if (randomNPC->npc_nearby()) {
+			return randomNPC;
 		}
 	}
 	return AVATAR;
 }
 
-var Func0902 0x902 () {
-	var var0000 = [
+/**
+ * This function iterates through a list of NPCs and checks if any of them are
+ * are in the current party list and nearby.
+ *
+ * @return The first NPC from the list who is in the party and nearby.
+ * @return If no such NPC is found, returns the avatar.
+ */
+
+var findNearbyPartyNPC 0x902 () {
+	var companions = [
 		IOLO, SHAMINO, DUPRE, JAANA, SENTRI, JULIA, KATRINA, SPARK, TSERAMED
 	];
-	var var0001 = UI_get_party_list();
-	for (var0004 in var0000) {
-		if (var0004->get_npc_object() in var0001) {
-			if (var0004->npc_nearby()) {
-				return var0004;
+	var party_list = UI_get_party_list();
+	for (npc in companions) {
+		if (npc->get_npc_object() in party_list) {
+			if (npc->npc_nearby()) {
+				return npc;
 			}
 		}
 	}
 	return AVATAR;
 }
 
-void Func0903 0x903 (var var0000, var var0001) {
-	if (var0000->npc_nearby()) {
-		declare var var0002;
-		if (var0000 == AVATAR) {
-			var0002 = UI_is_pc_female();
+/**
+ * @brief Handles NPC interaction and displays appropriate messages.
+ *
+ * This function checks if the specified NPC is nearby. If the NPC is the avatar,
+ * it determines the face number based on the avatar's gender. It then shows the
+ * NPC's face and displays a message. If the NPC is confused, it says "Oink".
+ * Otherwise, it iterates through the provided messages and displays each one.
+ * Finally, it hides the NPC's face.
+ *
+ * @param npc The NPC that will speak.
+ * @param messages The list of messages to display.
+ */
+
+void handleNpcSpeech 0x903 (var npc, var messages) {
+	if (npc->npc_nearby()) {
+		declare var facenum;
+		if (npc == AVATAR) {
+			facenum = UI_is_pc_female();
 		} else {
-			var0002 = 0;
+			facenum = 0;
 		}
-		var0000->show_npc_face(var0002);
+		npc->show_npc_face(facenum);
 		if (get_item_flag(CONFUSED)) {
 			say("\"Oink\"");
 		} else {
-			for (var0005 in var0001) {
-				say(var0005, "");
+			for (msg in messages) {
+				say(msg, "");
 			}
 		}
-		var0000->hide();
+		npc->hide();
 	}
 }
 
-void Func0904 0x904 (var var0000, var var0001) {
-	if (var0000->npc_nearby()) {
+/**
+ * If the NPC is not nearby, does nothing.
+ * Otherwise if the "CONFUSED" flag is set, the NPC will say "@Oink@".
+ * Otherwise, it iterates over a list of items and calls the `delayedBark`
+ * function for each item with a delay.
+ *
+ * @param npc An object that has a method `npc_nearby()`.
+ * @param lines A list of items to be processed.
+ */
+
+void makeNpcSay 0x904 (var npc, var lines) {
+	if (npc->npc_nearby()) {
 		if (get_item_flag(CONFUSED)) {
 			item_say("@Oink@");
 		} else {
-			var var0002 = 0;
-			for (var0005 in var0001) {
-				Func0933(var0000, var0005, var0002);
-				var0002 += 17;
+			var delay = 0;
+			for (line in lines) {
+				delayedBark(npc, line, delay);
+				delay += 17;
 			}
 		}
 	}
@@ -76911,7 +77022,13 @@ var Func0909 0x909 () {
 	return "milady";
 }
 
-var Func090A 0x90A () {
+/**
+ * Prompts the user with a yes/no question and returns their response.
+ *
+ * @return The user's response: `true` for "Yes" and `false` for "No`.
+ */
+
+var askYesNo 0x90A () {
 	UI_push_answers();
 	converse(["Yes", "No"]) {
 	case "Yes":
@@ -76924,27 +77041,47 @@ var Func090A 0x90A () {
 	return 0;
 }
 
-var Func090B 0x90B (var var0000) {
+/**
+ * This function pushes the current replies onto the stack, adds the given
+ * answers and prompts the player to select an option from a menu, and then
+ * pops the pushed answers from the stack.
+ *
+ * @param options The options to present for the player.
+ *
+ * @return The text option chosen.
+ */
+
+var askForResponse 0x90B (var options) {
 	UI_push_answers();
-	add(var0000);
-	var var0001 = UI_select_from_menu();
+	add(options);
+	var reply = UI_select_from_menu();
 	UI_pop_answers();
-	return var0001;
+	return reply;
 }
 
-var Func090C 0x90C (var var0000) {
+/**
+ * This function pushes the current replies onto the stack, adds the given
+ * answers and prompts the player to select an option from a menu, and then
+ * pops the pushed answers from the stack.
+ *
+ * @param options The options to present for the player.
+ *
+ * @return The index (1-n) of the option chosen.
+ */
+
+var chooseFromMenu2 0x90C (var options) {
 	UI_push_answers();
-	add(var0000);
-	var var0001 = UI_select_from_menu2();
+	add(options);
+	var reply = UI_select_from_menu2();
 	UI_pop_answers();
-	return var0001;
+	return reply;
 }
 
 var Func090D 0x90D () {
 	var var0000 = Func08FB();
 	var var0001 = UI_get_party_list();
 	var var0002 = [INVALID_NPC, var0001];
-	var var0003 = Func090C(["Nobody", var0000]);
+	var var0003 = chooseFromMenu2(["Nobody", var0000]);
 	var var0004 = var0002[var0003];
 	if (var0004 == INVALID_NPC) {
 		return INVALID_NPC;
@@ -76956,7 +77093,7 @@ var Func090E 0x90E () {
 	var var0000 = UI_get_party_list2()->get_npc_name();
 	var var0001 = UI_get_party_list2();
 	var var0002 = [INVALID_NPC, var0001];
-	var var0003 = Func090C(["Nobody", var0000]);
+	var var0003 = chooseFromMenu2(["Nobody", var0000]);
 	var var0004 = var0002[var0003];
 	if (var0004 == INVALID_NPC) {
 		return INVALID_NPC;
@@ -77115,7 +77252,7 @@ void Func091A 0x91A () {
 	var var0000 = UI_wearing_fellowship();
 	if (!var0000) {
 		say("\"Dost thou want to join?\"");
-		var var0001 = Func090A();
+		var var0001 = askYesNo();
 		if (var0001) {
 			say("\"Then thou shouldst go immediately to see Batlin at the "
 				"Fellowship Hall headquarters in Britain.\"");
@@ -77130,23 +77267,45 @@ void Func091A 0x91A () {
 	}
 }
 
-var Func091B 0x91B (
-		var var0000, var var0001, var var0002, var var0003, var var0004) {
-	var var0005 = var0000 + var0001 + " ";
-	if (var0002 == 1) {
-		var0005 += "sell ";
+/**
+ * Generates a description for a human proposing a sell price for an item.
+ *
+ * @param article The article to use before the item name (e.g., "a", "an", "the").
+ * @param itemName The name of the item being sold.
+ * @param isPlural A flag indicating if the item is singular (0) or plural (1).
+ * @param price The price of the item in gold.
+ * @param suffix Any additional suffix to append to the price (e.g., " each").
+ * @return A description of the item being sold with the proposed price.
+ */
+
+var humanProposeSellPrice 0x91B (
+		var article, var itemName, var isPlural, var price, var suffix) {
+	var description = article + itemName + " ";
+	if (isPlural == 1) {
+		description += "sell ";
 	} else {
-		var0005 += "sells ";
+		description += "sells ";
 	}
-	var0005 = var0005 + "for " + var0003 + " gold" + var0004 + ".";
-	return var0005;
+	description = description + "for " + price + " gold" + suffix + ".";
+	return description;
 }
 
-var Func091C 0x91C (
-		var var0000, var var0001, var var0002, var var0003, var var0004) {
-	var var0005 = "To sell " + var0000 + var0001 + " for " + var0003 + " gold"
-				  + var0004 + ".";
-	return var0005;
+/**
+ * Generates a description for a gargoyle proposing a sell price for an item.
+ *
+ * @param article The article to use before the item name (e.g., "a", "an", "the").
+ * @param itemName The name of the item being sold.
+ * @param isPlural A flag indicating if the item is singular (0) or plural (1).
+ * @param price The price of the item in gold.
+ * @param suffix Any additional suffix to append to the price (e.g., " each").
+ * @return A description of the item being sold with the proposed price.
+ */
+
+var gargoyleProposeSellPrice 0x91C (
+		var article, var itemName, var isPlural, var price, var suffix) {
+	var description = "To sell " + article + itemName + " for " + price + " gold"
+				  + suffix + ".";
+	return description;
 }
 
 void Func091D 0x91D (var var0000, var var0001) {
@@ -77198,7 +77357,7 @@ var Func0920 0x920 () {
 
 var Func0921 0x921 (var var0000) {
 	say("\"One of you wishes to train?\"");
-	var var0001 = Func090A();
+	var var0001 = askYesNo();
 	declare var var000C;
 	if (var0001) {
 		say("\"Which of you wishes to train?\"");
@@ -77215,7 +77374,7 @@ var Func0921 0x921 (var var0000) {
 		var0002 = var0004;
 		var0003 = var0005;
 		var var0009 = [INVALID_NPC, var0003];
-		var var000A = Func090C(["Nobody", var0002]);
+		var var000A = chooseFromMenu2(["Nobody", var0002]);
 		var var000B = var0009[var000A];
 		if (var000B == INVALID_NPC) {
 			var000C = INVALID_NPC;
@@ -77255,7 +77414,7 @@ var Func0923 0x923 (var var0000, var var0001) {
 	var var0002 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 	declare var var0003;
 	say("\"Agreeable?\"");
-	if (!Func090A()) {
+	if (!askYesNo()) {
 		var0003 = BUYING_NOTHING;
 	} else if (var0002 >= var0001) {
 		var var0004 = PARTY->find_object(SHAPE_SPELLBOOK, QUALITY_ANY, FRAME_ANY);
@@ -77280,7 +77439,7 @@ var Func0924 0x924 (var var0000, var var0001) {
 	var var0002 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 	declare var var0003;
 	say("\"To be agreeable?\"");
-	if (!Func090A()) {
+	if (!askYesNo()) {
 		var0003 = BUYING_NOTHING;
 	} else if (var0002 >= var0001) {
 		var var0004 = PARTY->find_object(SHAPE_SPELLBOOK, QUALITY_ANY, FRAME_ANY);
@@ -77339,10 +77498,10 @@ void Func0927 0x927 (var var0000) {
 	Func08FA(var0000);
 	var var0001 = var0000->get_item_frame();
 	if (var0001 == 0) {
-		Func08FF(["I bet that would work much better if thou wouldst put some "
+		partySpeak(["I bet that would work much better if thou wouldst put some "
 				  "liquid in it..."]);
-		Func0903(DUPRE, "Perhaps some BEER for instance.");
-		Func0903(SHAMINO, "Or maybe some WINE>>>");
+		handleNpcSpeech(DUPRE, "Perhaps some BEER for instance.");
+		handleNpcSpeech(SHAMINO, "Or maybe some WINE>>>");
 	} else {
 		var0000->set_item_frame(0);
 		var var0002 = [
@@ -77361,7 +77520,7 @@ void Func0927 0x927 (var var0000) {
 			var0005 = "Why dost thou not wait until dinner to drink that "
 					  + var0004 + ", " + var0007 + ".";
 		}
-		Func08FF(var0005);
+		partySpeak(var0005);
 	}
 }
 
@@ -77369,10 +77528,10 @@ void Func0928 0x928 (var var0000) {
 	Func08FA(var0000);
 	var var0001 = var0000->get_item_frame() % 2;
 	if (var0001 == 0) {
-		Func08FF(["I bet that would work much better if thou wouldst put some "
+		partySpeak(["I bet that would work much better if thou wouldst put some "
 				  "liquid in it..."]);
-		Func0903(DUPRE, "Perhaps some BEER for instance.");
-		Func0903(SHAMINO, "Or maybe some WINE>>>");
+		handleNpcSpeech(DUPRE, "Perhaps some BEER for instance.");
+		handleNpcSpeech(SHAMINO, "Or maybe some WINE>>>");
 	} else {
 		var var0002 = [
 			"water", "blood", "wine", "beer", "ale", "stuff", "stuff", "stuff",
@@ -77390,17 +77549,17 @@ void Func0928 0x928 (var var0000) {
 		UI_play_sound_effect(SFX_QUAFF);
 		var var0009 = UI_die_roll(1, 10);
 		if (var0009 == 1) {
-			Func08FF("mmmm... I bet that would sure wet a body's whistle.");
+			partySpeak("mmmm... I bet that would sure wet a body's whistle.");
 		}
 		if (var0009 == 2) {
 			var var000A = var0002[var0001];
 			var var000B = Func0908();
 			var0008 = "Why dost thou not wait until dinner to drink that "
 					  + var000A + ", " + var000B + ".";
-			Func08FF(var0008);
+			partySpeak(var0008);
 		}
 		if (var0009 > 2) {
-			Func08FF(var0008);
+			partySpeak(var0008);
 		}
 	}
 }
@@ -77409,7 +77568,7 @@ void Func0929 0x929 () {
 	var var0000 = Func0908();
 	var var0001 = UI_die_roll(1, 3);
 	if (var0001 == 1) {
-		Func08FF([
+		partySpeak([
 			"Thou miayest have more success if thou wert to put that in",
 			"thy hand and hit somebody with it... Somebody else that is."
 		]);
@@ -77449,7 +77608,7 @@ var Func092D 0x92D (var var0000) {
 
 void Func092E 0x92E (var var0000) {
 	var var0001 = var0000->get_npc_object();
-	if (!Func0937(var0001)) {
+	if (!canTalk(var0001)) {
 		return;
 	}
 	var var0002 = var0001->get_schedule_type();
@@ -77547,7 +77706,7 @@ void Func092E 0x92E (var var0000) {
 
 void Func092F 0x92F (var var0000) {
 	var var0001 = var0000->get_npc_object();
-	if (!Func0937(var0001)) {
+	if (!canTalk(var0001)) {
 		return;
 	}
 	var var0002 = var0001->get_schedule_type();
@@ -77629,18 +77788,26 @@ var Func0931 0x931 (
 	return false;
 }
 
-var Func0932 0x932 (var var0000) {
-	if (var0000 < 0) {
-		var0000 *= -1;
+var absoluteValueOf 0x932 (var value) {
+	if (value < 0) {
+		value *= -1;
 	}
-	return var0000;
+	return value;
 }
 
-void Func0933 0x933 (var var0000, var var0001, var var0002) {
-	if (Func0937(var0000)) {
-		var var0003 = script var0000->get_npc_object() after var0002 ticks {
+/**
+ * Executes a function that makes an NPC talk after a specified number of ticks.
+ *
+ * @param npc The NPC that will talk.
+ * @param line The message to be spoken by the NPC.
+ * @param delay The number of ticks to wait before the NPC speaks.
+ */
+
+void delayedBark 0x933 (var npc, var line, var delay) {
+	if (canTalk(npc)) {
+		var var0003 = script npc->get_npc_object() after delay ticks {
 			nohalt;
-			say var0001;
+			say line;
 		};
 	}
 }
@@ -77674,119 +77841,201 @@ void Func0936 0x936 (var var0000, var var0001) {
 	var0000->reduce_health(var0001, NORMAL_DAMAGE);
 }
 
-var Func0937 0x937 (var var0000) {
-	if ((var0000->get_npc_prop(INTELLIGENCE) >= 10)
-		&& ((!var0000->get_item_flag(ASLEEP))
-			&& ((!var0000->get_item_flag(PARALYZED))
-				&& ((!var0000->get_item_flag(DEAD))
-					&& ((var0000->get_npc_prop(HEALTH) > 0)
-						&& var0000->is_npc()))))) {
+/**
+ * Determines if an NPC can talk based on various conditions.
+ *
+ * The NPC can talk if:
+ * - The NPC's intelligence is 10 or higher.
+ * - The NPC is not asleep.
+ * - The NPC is not paralyzed.
+ * - The NPC is not dead.
+ * - The NPC's health is greater than 0.
+ * - The NPC is indeed an NPC.
+ *
+ * @param npc The NPC object to check.
+ * @return True if the NPC can talk, false otherwise.
+ */
+
+var canTalk 0x937 (var npc) {
+	if ((npc->get_npc_prop(INTELLIGENCE) >= 10)
+		&& ((!npc->get_item_flag(ASLEEP))
+			&& ((!npc->get_item_flag(PARALYZED))
+				&& ((!npc->get_item_flag(DEAD))
+					&& (npc->get_npc_prop(HEALTH) > 0
+						&& npc->is_npc()))))) {
 		return true;
 	}
 	return false;
 }
 
-var Func0938 0x938 (var var0000) {
-	var0000 = Func0939(var0000);
-	if (var0000->get_item_flag(ASLEEP)
-		|| (var0000->get_item_flag(PARALYZED)
-			|| (var0000->get_item_flag(DEAD)
-				|| (var0000->get_npc_prop(HEALTH) <= 0)))) {
+/**
+ * Checks if an NPC is incapacitated.
+ *
+ * This function determines if an NPC is incapacitated by checking if the NPC
+ * is asleep, paralyzed, dead, or has health less than or equal to zero.
+ *
+ * @param npc The ID of the NPC to check.
+ * @return true if the NPC is incapacitated, otherwise false.
+ */
+
+var isNpcIncapacitated 0x938 (var npc) {
+	npc = getNpcById(npc);
+	if (npc->get_item_flag(ASLEEP)
+		|| (npc->get_item_flag(PARALYZED)
+			|| (npc->get_item_flag(DEAD)
+				|| (npc->get_npc_prop(HEALTH) <= 0)))) {
 		return true;
 	}
 	return false;
 }
 
-var Func0939 0x939 (var var0000) {
-	declare var var0001;
-	if ((var0000 < INVALID_NPC) && (var0000 >= AVATAR)) {
-		var0001 = var0000->get_npc_object();
+/**
+ * Retrieves an NPC object by its ID.
+ *
+ * @param npcId - The ID of the NPC to retrieve.
+ * @return The NPC object for the given ID or the ID itself if it is invalid.
+ */
+
+var getNpcById 0x939 (var npcId) {
+	declare var npc;
+	if ((npcId < INVALID_NPC) && (npcId >= AVATAR)) {
+		npc = npcId->get_npc_object();
 	} else {
-		var0001 = var0000;
+		npc = npcId;
 	}
-	return var0001;
+	return npc;
 }
 
-void Func093A 0x93A (var var0000, var var0001) {
-	var var0002 = UI_get_party_list2();
-	declare var var0006;
-	for (var0005 in var0002) {
-		if (var0005->get_npc_prop(FOODLEVEL) >= 10) {
-			if (!(var0005 == AVATAR->get_npc_object())) {
-				var0005->clear_item_flag(ASLEEP);
+/**
+ * Handles the effects of sleep on party members and nearby torches.
+ *
+ * @param sleepTime The duration of sleep.
+ * @param bed The bed object where the sleep occurs.
+ *
+ * This function performs the following actions:
+ * - Iterates through the party list and clears various status effects (ASLEEP, POISONED, PARALYZED, CURSED, CHARMED, INVISIBLE, PROTECTION)
+ *   from party members who have a FOODLEVEL of 10 or more.
+ * - Calls `restorePropertyAfterSleep` to adjust health and mana of each party
+ *   member based on the sleep time.
+ * - Reduces the FOODLEVEL of each party member by the sleep time.
+ * - Finds nearby torches and light sources within a 30-unit radius of the bed.
+ * - Adjusts the quality of nearby torches and light sources based on the sleep
+ *   time. If the quality is less than the sleep time multiplied by 30, the
+ *   torch or light source is extinguished and its shape is changed accordingly.
+ */
+
+void handleSleepEffects 0x93A (var sleepTime, var bed) {
+	var partyList = UI_get_party_list2();
+	declare var result;
+	for (partyMember in partyList) {
+		if (partyMember->get_npc_prop(FOODLEVEL) >= 10) {
+			if (!(partyMember == AVATAR->get_npc_object())) {
+				partyMember->clear_item_flag(ASLEEP);
 			}
-			var0005->clear_item_flag(POISONED);
-			var0005->clear_item_flag(PARALYZED);
-			var0005->clear_item_flag(CURSED);
-			var0005->clear_item_flag(CHARMED);
-			var0005->clear_item_flag(INVISIBLE);
-			var0005->clear_item_flag(PROTECTION);
-			Func093B(var0005, HEALTH, STRENGTH, var0000);
-			Func093B(var0005, MANA, MAX_MANA, var0000);
-			var0006 = var0005->set_npc_prop(FOODLEVEL, var0000 * -1);
+			partyMember->clear_item_flag(POISONED);
+			partyMember->clear_item_flag(PARALYZED);
+			partyMember->clear_item_flag(CURSED);
+			partyMember->clear_item_flag(CHARMED);
+			partyMember->clear_item_flag(INVISIBLE);
+			partyMember->clear_item_flag(PROTECTION);
+			restorePropertyAfterSleep(partyMember, HEALTH, STRENGTH, sleepTime);
+			restorePropertyAfterSleep(partyMember, MANA, MAX_MANA, sleepTime);
+			result = partyMember->set_npc_prop(FOODLEVEL, sleepTime * -1);
 		}
 	}
-	var var0007 = var0001->find_nearby(SHAPE_LIT_TORCH, 30, MASK_NONE);
-	var0007 &= var0001->find_nearby(SHAPE_LIT_LIGHT_SOURCE, 30, MASK_NONE);
-	for (var000A in var0007) {
-		var var000B = var000A->get_item_quality();
-		if (var000B < (var0000 * 30)) {
-			var000A->halt_scheduled();
-			var var000C = var000A->get_item_shape();
-			if (var000C == SHAPE_LIT_LIGHT_SOURCE) {
-				var000A->set_item_shape(SHAPE_SPENT_LIGHT_SOURCE);
+	var nearbyTorches = bed->find_nearby(SHAPE_LIT_TORCH, 30, MASK_NONE);
+	nearbyTorches &= bed->find_nearby(SHAPE_LIT_LIGHT_SOURCE, 30, MASK_NONE);
+	for (torch in nearbyTorches) {
+		var torchQuality = torch->get_item_quality();
+		if (torchQuality < (sleepTime * 30)) {
+			torch->halt_scheduled();
+			var torchShape = torch->get_item_shape();
+			if (torchShape == SHAPE_LIT_LIGHT_SOURCE) {
+				torch->set_item_shape(SHAPE_SPENT_LIGHT_SOURCE);
 			}
-			if (var000C == SHAPE_LIT_TORCH) {
-				var000A->set_item_shape(SHAPE_TORCH);
+			if (torchShape == SHAPE_LIT_TORCH) {
+				torch->set_item_shape(SHAPE_TORCH);
 			}
-			var0006 = var000A->set_item_quality(QUALITY_SPENT_TORCH);
+			result = torch->set_item_quality(QUALITY_SPENT_TORCH);
 		} else {
-			var0006 = var000A->set_item_quality(var000B - (var0000 * 30));
+			result = torch->set_item_quality(torchQuality - (sleepTime * 30));
 		}
 	}
 }
 
-void Func093B 0x93B (var var0000, var var0001, var var0002, var var0003) {
-	var var0004 = var0000->get_npc_prop(var0001);
-	var var0005 = var0004 + (2 * var0003);
-	if (var0005 > var0000->get_npc_prop(var0002)) {
-		var0005 = var0000->get_npc_prop(var0002);
+/**
+ * Restores a property of an NPC after a sleep period.
+ *
+ * @param npc The NPC whose property is to be restored.
+ * @param prop The property to be restored.
+ * @param maxProp The maximum value the property can have.
+ * @param sleepTime The duration of the sleep period.
+ *
+ * The function calculates the new value of the property by adding twice the
+ * sleep time to the current property value.
+ * If the new value exceeds the maximum property value, it is capped at the
+ * maximum value.
+ * Finally, the NPC's property is updated with the new value.
+ */
+
+void restorePropertyAfterSleep 0x93B (var npc, var prop, var maxProp, var sleepTime) {
+	var currentProp = npc->get_npc_prop(prop);
+	var newProp = currentProp + (2 * sleepTime);
+	if (newProp > npc->get_npc_prop(maxProp)) {
+		newProp = npc->get_npc_prop(maxProp);
 	}
-	var var0006 = var0000->set_npc_prop(var0001, var0005 - var0004);
+	var result = npc->set_npc_prop(prop, newProp - currentProp);
 }
 
-struct<Position> Func093C 0x93C (var var0000, struct<ObjPos> var0001) {
-	var var0002 = [];
-	for (var0005 in var0001) {
-		if (!(var0005 == var0000)) {
-			var0002 &= var0005;
+/**
+ * Filters out the target value from the input array.
+ *
+ * @param targetValue The value to be filtered out from the array.
+ * @param inputArray The array from which the target value will be filtered out.
+ * @return A new array with all elements except the target value.
+ */
+
+var filterArray 0x93C (var targetValue, var inputArray) {
+	var resultArray = [];
+	for (element in inputArray) {
+		if (!(element == targetValue)) {
+			resultArray &= element;
 		}
 	}
-	return var0002;
+	return resultArray;
 }
 
-var Func093D 0x93D (var var0000, var var0001) {
-	var var0002 = UI_get_array_size(var0000);
-	if (var0002 > 1) {
-		var var0003 = true;
-		while (var0003) {
-			var0003 = false;
-			var var0004 = 1;
-			while (var0004 < var0002) {
-				if (var0001[var0004] > var0001[var0004 + 1]) {
-					var var0005 = var0001[var0004];
-					var0001[var0004] = var0001[var0004 + 1];
-					var0001[var0004 + 1] = var0005;
-					var0005 = var0000[var0004];
-					var0000[var0004] = var0000[var0004 + 1];
-					var0000[var0004 + 1] = var0005;
-					var0003 = true;
+/**
+ * Sorts the `valueArray` based on the order of `keyArray` using an inneficient
+ * bubble sort algorithm.
+ *
+ * @param valueArray The array of values to be sorted.
+ * @param keyArray The array of keys used to determine the order of `valueArray`.
+ * @return The sorted `valueArray`.
+ */
+
+var sortArraysBySecondArray 0x93D (var valueArray, var keyArray) {
+	var size = UI_get_array_size(valueArray);
+	if (size > 1) {
+		var swapped = true;
+		while (swapped) {
+			swapped = false;
+			var i = 1;
+			while (i < size) {
+				if (keyArray[i] > keyArray[i + 1]) {
+					var temp = keyArray[i];
+					keyArray[i] = keyArray[i + 1];
+					keyArray[i + 1] = temp;
+					temp = valueArray[i];
+					valueArray[i] = valueArray[i + 1];
+					valueArray[i + 1] = temp;
+					swapped = true;
 				}
-				var0004 += 1;
+				i += 1;
 			}
 		}
 	}
-	return var0000;
+	return valueArray;
 }
 
 var Func093E 0x93E () {
@@ -77797,7 +78046,7 @@ var Func093E 0x93E () {
 
 void Func093F 0x93F (var var0000, var var0001) {
 	var var0002 = UI_get_party_list();
-	if ((Func0939(var0000) in var0002) && gflags[INSIDE_GENERATOR]) {
+	if ((getNpcById(var0000) in var0002) && gflags[INSIDE_GENERATOR]) {
 		return;
 	}
 	var0000->set_schedule_type(var0001);
@@ -77825,7 +78074,7 @@ void Func0942 0x942 (var var0000, var var0001) {
 		var var0003 = var0000->set_item_quality(UI_die_roll(30, 60));
 	}
 	if (var0000->get_item_shape() == SHAPE_TORCH) {
-		if (var0000->get_item_quality() == 255) {
+		if (var0000->get_item_quality() == QUALITY_SPENT_TORCH) {
 			var0000->item_say("Spent");
 			return;
 		}
@@ -77886,17 +78135,17 @@ void Func0946 0x946 () {
 	var var0008 = 1;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005, var0001[var0009], var0006[var0009],
 					var0004[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " A fair price, wouldst thou not agree?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				say("\"How many wouldst thou like?\"");
 				var000B = Func08F8(
@@ -77911,7 +78160,7 @@ void Func0946 0x946 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -77920,7 +78169,7 @@ void Func0946 0x946 () {
 void Func0947 0x947 () {
 	UI_push_answers();
 	say("\"Excellent! Dost thou have some loaves for me?\"");
-	var var0000 = Func090A();
+	var var0000 = askYesNo();
 	if (var0000) {
 		say("\"Very good! Let me see how many thou dost have...\"");
 		var var0001 = AVATAR->find_nearby(SHAPE_FOOD, 25, MASK_NONE);
@@ -77976,7 +78225,7 @@ void Func0948 0x948 () {
 	var var0000 = 4;
 	var var0001 = 1;
 	say("\"Excellent! Dost thou have some flour for me?\"");
-	var var0002 = Func090A();
+	var var0002 = askYesNo();
 	if (var0002) {
 		say("\"Very good! Let me see how many sacks thou dost have...\"");
 		var var0003 = PARTY->count_objects(
@@ -78038,7 +78287,7 @@ void Func0949 0x949 () {
 	var var0009 = 1;
 	say("\"To want what item?\"");
 	while (var0000) {
-		var var000A = Func090C(var0001);
+		var var000A = chooseFromMenu2(var0001);
 		if (var000A == 1) {
 			if (gflags[BROKE_TETRA]) {
 				say("\"To understand.\"");
@@ -78052,13 +78301,13 @@ void Func0949 0x949 () {
 				declare var var000C;
 				if (gflags[BROKE_TETRA]) {
 					var000B = var0004[var000A];
-					var000C = Func091C(
+					var000C = gargoyleProposeSellPrice(
 							var0006[var000A], var0001[var000A], var0007,
 							var000B, var0008);
 				} else {
 					var000B = var0005[var000A];
 					var000B = Func094B(var000B, WIS_SUR);
-					var000C = Func091C(
+					var000C = gargoyleProposeSellPrice(
 							var0006[var000A], var0001[var000A], var0007,
 							var000B, var0008);
 					if (var000B == 0) {
@@ -78067,7 +78316,7 @@ void Func0949 0x949 () {
 				}
 				var var000D = BUYING_NOTHING;
 				say("\"", var000C, " To accept the price?\"");
-				var var000E = Func090A();
+				var var000E = askYesNo();
 				if (var000E) {
 					var000D = Func08F8(
 							var0002[var000A], var0003[var000A], var0009,
@@ -78082,7 +78331,7 @@ void Func0949 0x949 () {
 				}
 			}
 			say("\"To want something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -78112,7 +78361,7 @@ void Func094A 0x94A () {
 	var var0009 = 1;
 	say("\"To want what item?\"");
 	while (var0000) {
-		var var000A = Func090C(var0001);
+		var var000A = chooseFromMenu2(var0001);
 		if (var000A == 1) {
 			if (gflags[BROKE_TETRA]) {
 				say("\"To understand.\"");
@@ -78126,13 +78375,13 @@ void Func094A 0x94A () {
 				declare var var000C;
 				if (gflags[BROKE_TETRA]) {
 					var000B = var0004[var000A];
-					var000C = Func091C(
+					var000C = gargoyleProposeSellPrice(
 							var0006, var0001[var000A], var0007, var000B,
 							var0008);
 				} else {
 					var000B = var0005[var000A];
 					var000B = Func094B(var000B, WIS_SUR);
-					var000C = Func091C(
+					var000C = gargoyleProposeSellPrice(
 							var0006, var0001[var000A], var0007, var000B,
 							var0008);
 					if (var000B == 0) {
@@ -78141,7 +78390,7 @@ void Func094A 0x94A () {
 				}
 				var var000D = BUYING_NOTHING;
 				say("\"", var000C, " To agree to the cost?\"");
-				var var000E = Func090A();
+				var var000E = askYesNo();
 				if (var000E) {
 					say("\"To want how many?\"");
 					var000D = Func08F8(
@@ -78157,7 +78406,7 @@ void Func094A 0x94A () {
 				}
 			}
 			say("\"To want something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -78184,7 +78433,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 		var var000C = [var0009, var0003, var000A, var000B];
 		if (var0006) {
 			say("\"To accept?\"");
-			var0007 = Func090A();
+			var0007 = askYesNo();
 			if (var0007) {
 				say("\"To have a deal.\"");
 				return var0003;
@@ -78218,7 +78467,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 		if (var0004 >= var000C[3]) {
 			if (var0007 >= 90) {
 				var0006 = true;
-				var000D = Func0932((var0004 - var0002) * 2);
+				var000D = absoluteValueOf((var0004 - var0002) * 2);
 				var000D = UI_get_random(var000D);
 				if ((var0003 - var000D) <= var0004) {
 					var0003 = var0004 + 1;
@@ -78226,7 +78475,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 					var0003 -= var000D;
 				}
 			} else if (var0007 >= 30) {
-				var000D = Func0932((var0004 - var0002) * 2);
+				var000D = absoluteValueOf((var0004 - var0002) * 2);
 				var000D = UI_get_random(var000D);
 				if ((var0003 - var000D) <= var0004) {
 					var0003 = var0004 + 1;
@@ -78240,7 +78489,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 		} else if (var0004 >= var000C[4]) {
 			if (var0007 >= 40) {
 				var0006 = true;
-				var000D = Func0932((var0004 - var0002) * 2);
+				var000D = absoluteValueOf((var0004 - var0002) * 2);
 				var000D = UI_get_random(var000D);
 				if ((var0003 - var000D) <= var0004) {
 					var0003 = var0004 + 1;
@@ -78248,7 +78497,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 					var0003 -= var000D;
 				}
 			} else if (var0007 >= 15) {
-				var000D = Func0932((var0004 - var0002) * 2);
+				var000D = absoluteValueOf((var0004 - var0002) * 2);
 				var000D = UI_get_random(var000D);
 				if ((var0003 - var000D) <= var0004) {
 					var0003 = var0004 + 1;
@@ -78274,7 +78523,7 @@ void Func094C 0x94C () {
 	var var0001 = [30, 50, 70, 90, 120, 140];
 	while (var0000) {
 		say("\"To be interested in which circle?\"");
-		var var0002 = Func090C([
+		var var0002 = chooseFromMenu2([
 			"none", "First", "Second", "Third", "Fourth", "Fifth", "Sixth"
 		]);
 		var0002 -= 1;
@@ -78335,7 +78584,7 @@ void Func094C 0x94C () {
 			];
 		}
 		say("\"To buy which spell?\"");
-		var var0005 = Func090C(var0003);
+		var var0005 = chooseFromMenu2(var0003);
 		if (var0005 == 1) {
 			say("\"To be fine.\"");
 			break;
@@ -78357,7 +78606,7 @@ void Func094C 0x94C () {
 			say("\"To see you already have that spell.\"");
 		}
 		say("\"To be interested in another spell?\"");
-		var0000 = Func090A();
+		var0000 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -78375,19 +78624,19 @@ void Func094D 0x94D () {
 	var var0008 = [0, 10, 1, 1];
 	say("\"What would ye like?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"If ye say so. I know that blasted Britannian Tax Council or "
 				"what have ye has made the cost o' things too high! Maybe next "
 				"time!\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005, var0001[var0009], var0006[var0009],
 					var0002[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Is that acceptable?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				say("\"How much do ye want?\"");
 				var000B = Func08F8(
@@ -78403,7 +78652,7 @@ void Func094D 0x94D () {
 					"that!\"");
 			}
 			say("\"Anything else ye want?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -78424,19 +78673,19 @@ void Func094E 0x94E () {
 	var var0008 = 1;
 	say("\"What would ye like?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"If ye say so. I know that blasted Britannian Tax Council or "
 				"what have ye has made the cost o' things too high! Maybe next "
 				"time!\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005, var0001[var0009], var0006, var0002[var0009],
 					var0007);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, ". Do ye find the price agreeable?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000B = Func08F8(
 						var0003, var0004[var0009], var0008, var0002[var0009],
@@ -78451,7 +78700,7 @@ void Func094E 0x94E () {
 					"that!\"");
 			}
 			say("\"Anything else ye want?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -78643,7 +78892,7 @@ void Func0951 0x951 () {
 	var var0009 = 1;
 	say("\"What wouldst thou like?\"");
 	while (var0001) {
-		var var000A = Func090C(var0002);
+		var var000A = chooseFromMenu2(var0002);
 		if (var000A == 1) {
 			say("\"Fine.\"");
 			var0001 = false;
@@ -78661,12 +78910,12 @@ void Func0951 0x951 () {
 					break;
 				}
 			}
-			var var000B = Func091B(
+			var var000B = humanProposeSellPrice(
 					var0006, var0002[var000A], var0007, var0005[var000A],
 					var0008[var000A]);
 			var var000C = BUYING_NOTHING;
 			say("\"^", var000B, " That is a fair price, is it not?\"");
-			var var000D = Func090A();
+			var var000D = askYesNo();
 			if (var000D) {
 				if (var0003[var000A] == SHAPE_FOOD) {
 					say("\"How many wouldst thou like?\"");
@@ -78688,7 +78937,7 @@ void Func0951 0x951 () {
 			}
 		}
 		say("\"Wouldst thou like something else?\"");
-		var0001 = Func090A();
+		var0001 = askYesNo();
 	}
 	UI_pop_answers();
 }
@@ -78707,7 +78956,7 @@ void Func0952 0x952 () {
 	var var0003 = [0, 20, 12, 15, 70, 125, 70];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0004 = Func090C(var0001);
+		var var0004 = chooseFromMenu2(var0001);
 		if (var0004 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
@@ -78717,12 +78966,12 @@ void Func0952 0x952 () {
 			var var0007 = 0;
 			var var0008 = "";
 			var var0009 = 1;
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005, var0001[var0004], var0007, var0003[var0004],
 					var0008);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Wilt thou buy it at that price?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000B = Func08F8(
 						var0002[var0004], var0006, var0009, var0003[var0004],
@@ -78736,7 +78985,7 @@ void Func0952 0x952 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
@@ -78764,17 +79013,17 @@ void Func0953 0x953 () {
 	var var0008 = 1;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
-		var var0009 = Func090C(var0001);
+		var var0009 = chooseFromMenu2(var0001);
 		if (var0009 == 1) {
 			say("\"Fine.\"");
 			var0000 = false;
 		} else {
-			var var000A = Func091B(
+			var var000A = humanProposeSellPrice(
 					var0005[var0009], var0001[var0009], var0006[var0009],
 					var0003[var0009], var0007[var0009]);
 			var var000B = BUYING_NOTHING;
 			say("\"^", var000A, " Is that acceptable?\"");
-			var var000C = Func090A();
+			var var000C = askYesNo();
 			if (var000C) {
 				var000B = Func08F8(
 						var0002[var0009], var0004, var0008, var0003[var0009],
@@ -78788,7 +79037,7 @@ void Func0953 0x953 () {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
-			var0000 = Func090A();
+			var0000 = askYesNo();
 		}
 	}
 	UI_pop_answers();
