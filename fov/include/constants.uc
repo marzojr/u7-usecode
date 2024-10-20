@@ -2,6 +2,9 @@ const int NULL_OBJ = 0;
 
 const int FIRST_NPC_FUNCTION = 0x400;
 
+const int MAX_QUANTITY = 100;
+const int MAX_CHARGES = 100;
+
 enum intrinsics {
 	UI_UNKNOWN_70 = 0x70,
 	UI_UNKNOWN_83 = 0x83,
@@ -126,7 +129,9 @@ enum cursors {
 	CURSOR_OUT_OF_RANGE = 2,
 	CURSOR_OUT_OF_AMMO	= 3,
 	CURSOR_TOO_HEAVY	= 4,
-	CURSOR_WONT_FIT		= 5
+	CURSOR_WONT_FIT		= 5,
+	CURSOR_FIRST_INVALID = 6,
+	CURSOR_X_INVALID	= 0x3C,
 };
 
 enum weather_types {
@@ -155,7 +160,8 @@ enum damage_types {
 	STARVATION_DAMAGE	= 3,
 	FREEZING_DAMAGE		= 3,
 	ETHEREAL_DAMAGE		= 4,
-	SONIC_DAMAGE		= 5
+	SONIC_DAMAGE		= 5,
+	MAXIMUM_DAMAGE		= 127,
 };
 
 // tick multipliers, for use with UI_advance_time or script statements
@@ -187,7 +193,9 @@ enum directions {
 	SOUTH		= 4,
 	SOUTHWEST	= 5,
 	WEST		= 6,
-	NORTHWEST	= 7
+	NORTHWEST	= 7,
+	HALF_TURN	= 4,
+	FULL_TURN	= 8,
 };
 
 enum face_directions : byte {
@@ -779,4 +787,36 @@ enum Training_codes {
 	TRAIN_MISSING_GOLD = 1,
 	TRAIN_OVER_SKILLED = 2,
 	TRAIN_CAN_TRAIN = 3,
+};
+
+enum Buying_codes {
+	BUYING_NOTHING = 0,
+	BUYING_SUCCESS = 1,
+	BUYING_CANT_CARRY_ALL = 2,
+	BUYING_NO_SPELLBOOK = 2,
+	BUYING_CANT_AFFORD = 3,
+	BUYING_ALREADY_HAVE = 4,
+};
+
+enum Palette_fades {
+	FADE_TO_BLACK = 0,
+	FADE_FROM_BLACK = 1,
+};
+
+enum Timers {
+	TIMER_FLAG_FORGERY = 0,
+	TIMER_BENNIES_FREE_MEAL = 1,
+	TIMER_MARTINES_FUN_TIME = 2,
+	TIMER_ROBERTOS_FUN_TIME = 3,
+	TIMER_WENCHS_FUN_TIME = 4,
+	TIMER_CLEAR_SECOND_MURDER = 5,
+	TIMER_CLEAR_MAGINCIA_MURDER = 6,
+	TIMER_BALAYNA_LEAVE = 8,
+	TIMER_JAANA_HEAL_RECOVERY = 0xA,
+	TIMER_THIEVERY_FORGIVENESS = 0xB,
+};
+
+enum Wall_Find_flags {
+	FLAG_FIND_PORTCULLIS = 0,
+	FLAG_FIND_METAL_WALLS = 1,
 };

@@ -143,7 +143,9 @@ enum cursors {
 	CURSOR_OUT_OF_RANGE = 2,
 	CURSOR_OUT_OF_AMMO	= 3,
 	CURSOR_TOO_HEAVY	= 4,
-	CURSOR_WONT_FIT		= 5
+	CURSOR_WONT_FIT		= 5,
+	CURSOR_FIRST_INVALID = 6,
+	CURSOR_X_INVALID	= 0x3C,
 };
 
 enum weather_types {
@@ -211,7 +213,9 @@ enum directions {
 	SOUTH		= 4,
 	SOUTHWEST	= 5,
 	WEST		= 6,
-	NORTHWEST	= 7
+	NORTHWEST	= 7,
+	HALF_TURN	= 4,
+	FULL_TURN	= 8,
 };
 
 enum face_directions : byte {
