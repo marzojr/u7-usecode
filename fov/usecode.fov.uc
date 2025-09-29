@@ -8,6 +8,9 @@
 #include "include/npc_func.uc"
 #include "include/utils.uc"
 
+/**
+ * Handles the interaction with the gangplank when it is lowered.
+ */
 void FuncGangplank shape#(SHAPE_GANGPLANK_LOWERED) () {
 	if (event == DOUBLECLICK) {
 		if (get_item_flag(ON_MOVING_BARGE)) {
@@ -20,31 +23,37 @@ void FuncGangplank shape#(SHAPE_GANGPLANK_LOWERED) () {
 	}
 }
 
+/**
+ * Handles Erethian's dialog and overall behavior.
+ * "Erethian", in this case, means any monster mage
+ * carrying a scroll with a specific quality and frame.
+ */
+
 void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
-	declare var var0009;
+	declare var queuedScript;
 	if (event == PROXIMITY) {
-		var var0000 = find_nearest(SHAPE_LIGHT_SOURCE, 1);
-		var var0001 = find_nearest(SHAPE_LIT_LIGHT_SOURCE, 1);
-		var var0002 = find_nearest(SHAPE_SPENT_LIGHT_SOURCE, 1);
-		if (var0000 || (var0001 || var0002)) {
-			var var0003 = UI_get_random(100);
-			if (var0003 >= 60) {
+		var nearestLightSource = find_nearest(SHAPE_LIGHT_SOURCE, 1);
+		var nearestLitLightSource = find_nearest(SHAPE_LIT_LIGHT_SOURCE, 1);
+		var nearestSpentLightSource = find_nearest(SHAPE_SPENT_LIGHT_SOURCE, 1);
+		if (nearestLightSource || (nearestLitLightSource || nearestSpentLightSource)) {
+			var randomRoll = UI_get_random(100);
+			if (randomRoll >= 60) {
 				item_say("@Damn candles!@");
 				return;
 			}
-			if (var0003 <= 40) {
-				var var0004 = var0000;
-				var0004 &= var0001;
-				var0004 &= var0002;
-				for (var0007 in var0004) {
-					struct<Position> var0008 = var0007->get_object_position();
-					var0007->remove_item();
+			if (randomRoll <= 40) {
+				var matchingLightSet = nearestLightSource;
+				matchingLightSet &= nearestLitLightSource;
+				matchingLightSet &= nearestSpentLightSource;
+				for (candleItem in matchingLightSet) {
+					struct<Position> candlePos = candleItem->get_object_position();
+					candleItem->remove_item();
 					UI_sprite_effect(
-							ANIMATION_SMALL_BLAST, var0008.x - 1, var0008.y - 1,
+							ANIMATION_SMALL_BLAST, candlePos.x - 1, candlePos.y - 1,
 							0, 0, 0, LOOP_ONCE);
 					UI_play_sound_effect(SFX_EXPLOSION_MEDIUM);
 				}
-				var0009 = script item {
+				queuedScript = script item {
 					actor frame cast_up;
 					wait 1;
 					continue;
@@ -59,27 +68,27 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 			item_say("@I'm famished!@");
 			return;
 		} else {
-			var var000A = find_nearest(SHAPE_DOOR_NS_LEFT, 2);
-			var var000B = find_nearest(SHAPE_DOOR_EW_TOP, 2);
-			if (var000A || var000B) {
-				if (var000A) {
+			var doorNsLeft = find_nearest(SHAPE_DOOR_NS_LEFT, 2);
+			var doorEwTop = find_nearest(SHAPE_DOOR_EW_TOP, 2);
+			if (doorNsLeft || doorEwTop) {
+				if (doorNsLeft) {
 					item_say("@My door, at last.@");
 					event = DOUBLECLICK;
-					var000A->FuncDoorNsLeft();
+					doorNsLeft->FuncDoorNsLeft();
 					return;
 				}
-				if (var000B) {
+				if (doorEwTop) {
 					item_say("@My door, at last.@");
 					return;
 				}
 			} else {
-				var var000C = find_nearby(SHAPE_PATH_EGG, 0, MASK_EGG);
-				if (var000C) {
-					for (var000F in var000C) {
-						if ((var000F->get_item_frame() == FRAME_EGG_WEATHER)
+				var nearbyPathEggs = find_nearby(SHAPE_PATH_EGG, 0, MASK_EGG);
+				if (nearbyPathEggs) {
+					for (pathEgg in nearbyPathEggs) {
+						if ((pathEgg->get_item_frame() == FRAME_EGG_WEATHER)
 							&& (get_item_frame() >= 16)) {
 							item_say("@Ah, a wall.@");
-							var var0010 = script item after 18 ticks {
+							var followWallScript = script item after 18 ticks {
 								nohalt;
 								say "@I'll follow it.@";
 							};
@@ -97,12 +106,12 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 		return;
 	}
 	if (event == DOUBLECLICK) {
-		if (!Func0881()) {
-			var var0011 = Func092D(item);
-			var var0012 = (var0011 + HALF_TURN) % FULL_TURN;
-			var0009 = script item {
+		if (!findAvatarStatue()) {
+			var dirFromAvatar = directionFromAvatar(item);
+			var facingDir = (dirFromAvatar + HALF_TURN) % FULL_TURN;
+			queuedScript = script item {
 				actor frame standing;
-				face var0012;
+				face facingDir;
 				call FuncMonsterMage;
 			};
 		} else {
@@ -110,7 +119,7 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var var0013 = Func0908();
+		var avatarName = getAvatarName();
 		if (gflags[SCROLL_OF_INFINITY]) {
 			ERETHIAN->show_npc_face(ERETHIAN_MAD);
 			say("\"I'll speak to thee no more, Avatar!\" He ignores you.*");
@@ -120,7 +129,7 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 			ERETHIAN->say(
 					"At your approach, the old man straightens and looking "
 					"directly at you he says, \"Well met, ",
-					var0013,
+					avatarName,
 					". I am called Erethian. Although thou dost not know me, I "
 					"know thee well.");
 			say("I have seen thee destroy Mondain's power and so defeat that "
@@ -133,9 +142,9 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 			add(["name", "job", "Mondain", "Minax", "Exodus", "bye"]);
 		} else {
 			if (!(gflags[ERETHIAN_IS_ANGRY]
-				  || gflags[ERETHIAN_TURNED_GARGOYLE])) {
+					|| gflags[ERETHIAN_TURNED_GARGOYLE])) {
 				ERETHIAN->say(
-						"\"Greetings once again, ", var0013,
+						"\"Greetings once again, ", avatarName,
 						". How may I assist thee?\" The blind old man looks "
 						"unerringly in your direction.");
 			} else {
@@ -184,15 +193,15 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 		if (gflags[DID_SHRINE_OF_COURAGE]) {
 			add("Talisman of Infinity");
 		}
-		var var0014 = false;
-		var var0015 = false;
-		var var0016 = false;
-		var var0017 = false;
+		var willTransform = false;
+		var willPrepareForgeTeleport = false;
+		var mentionedPsyche = false;
+		var mentionedDarkCore = false;
 		converse(0) {
 		case "the Psyche returns":
 			ERETHIAN->say("\"Could this possibly be true?\" Erethian's blind "
-						  "eyes light up with unabashed glee. \"What an "
-						  "opportunity I have here.\"");
+							"eyes light up with unabashed glee. \"What an "
+							"opportunity I have here.\"");
 			ERETHIAN->show_npc_face(ERETHIAN_MAD);
 			say("He once again notices your presence. \"Now, do not let any "
 				"strange ideas of destruction enter thy mind, Avatar. I shan't "
@@ -309,7 +318,7 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 				"of forging equipment... And a place to put them... I know "
 				"just the spot. Come with me and I'll see what I can do to "
 				"help thee.\"*");
-			var0015 = true;
+			willPrepareForgeTeleport = true;
 			break;
 		case "black sword":
 			ERETHIAN->show_npc_face(ERETHIAN_MAD);
@@ -358,7 +367,7 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 		case "name":
 			say("The mage gives you a half smile, \"'Twould seem that thy "
 				"memory is failing thee, ",
-				var0013, ". As I have said, my name is Erethian.\"");
+				avatarName, ". As I have said, my name is Erethian.\"");
 			remove("name");
 			fallthrough;
 		case "job":
@@ -386,7 +395,7 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 			fallthrough;
 		case "blindness":
 			if (!gflags[ERETHIAN_TURNED_GARGOYLE]) {
-				var0014 = true;
+				willTransform = true;
 				break;
 			}
 			say("\"Thou art a tiresome child. Leave me be!\" He ignores your "
@@ -466,10 +475,10 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 			say("\"I believe 'twas the removal of the psyche from the Core "
 				"that caused this island to sink beneath the waves.\"");
 			add("gargoyles");
-			if (!var0016) {
+			if (!mentionedPsyche) {
 				add("psyche");
 			}
-			if (!var0017) {
+			if (!mentionedDarkCore) {
 				add("Dark Core");
 			}
 			remove("two parts");
@@ -484,10 +493,10 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 				"would the psyche return, or possibly be regenerated...\"");
 			say("As his\tidle musings begin to run toward possibly dangerous "
 				"conclusions, his mouth audibly snaps shut.");
-			if (!var0016) {
+			if (!mentionedPsyche) {
 				add("psyche");
 			}
-			if (!var0017) {
+			if (!mentionedDarkCore) {
 				add("Dark Core");
 			}
 			remove("interface");
@@ -507,7 +516,7 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 			say("\"Eventually, I shall turn my studies to that being. The "
 				"gargoyles have placed it within a statue, in a shrine they "
 				"dedicated to their principle of Diligence.");
-			var0016 = true;
+			mentionedPsyche = true;
 			remove("psyche");
 			fallthrough;
 		case "Dark Core":
@@ -532,7 +541,7 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 				"direction, \"Please, do be careful around it. Artifacts seem "
 				"to have a tendency to, shall we say, disappear around "
 				"thee.\"");
-			var0017 = true;
+			mentionedDarkCore = true;
 			remove("Dark Core");
 			fallthrough;
 		case "Enilno":
@@ -541,8 +550,8 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 				"its location.");
 			say("It was reputedly a great item of magic. Didst thou find it "
 				"so?\" He cocks his head to one side as he asks the question.");
-			var var0018 = askYesNo();
-			if (var0018) {
+			var reply = askYesNo();
+			if (reply) {
 				say("\"Yes, 'tis a pity to lose such an item of antiquity. "
 					"Perhaps as time unfolds it will turn up. These things "
 					"have a way of surfacing at the strangest times.\"");
@@ -645,15 +654,15 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 			remove("Test of Love");
 			fallthrough;
 		case "Test of Courage":
-			declare var var0019;
+			declare var genderHero;
 			if (UI_is_pc_female()) {
-				var0019 = "heroine's";
+				genderHero = "heroine's";
 			} else {
-				var0019 = "hero's";
+				genderHero = "hero's";
 			}
 			say("\"I believe 'twas set in motion by Lord British in order to "
 				"test...\" He gestures in your direction, \"A virtuous ",
-				var0019,
+				genderHero,
 				" fighting ability and courage. The statues in the back of "
 				"this castle can tell thee more about the tests, though.\" "
 				"Erethian grins mysteriously.");
@@ -700,11 +709,11 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 			}
 			abort;
 		}
-		if (var0014) {
-			item->Func0696();
+		if (willTransform) {
+			item->dialogErethianTransformation();
 		}
-		if (var0015) {
-			item->Func069A();
+		if (willPrepareForgeTeleport) {
+			item->erethianPrepareTeleportToForge();
 		}
 	}
 }
@@ -714,7 +723,7 @@ void FuncFerryman shape#(SHAPE_FERRYMAN) () {
 		FERRYMAN->show_npc_face(DEFAULT_FACE);
 		var var0000 = Func08F7(SPARK);
 		var var0001 = Func08F7(SHAMINO);
-		var var0002 = Func0908();
+		var var0002 = getAvatarName();
 		if (!gflags[SEANCE_FERRYMAN]) {
 			say("The hooded figure in the boat ignores you completely.*");
 			abort;
@@ -1215,7 +1224,7 @@ void FuncSundial shape#(SHAPE_SUNDIAL) () {
 			item_say(" " + var0000 + " o'clock");
 			return;
 		}
-		var var0001 = Func0908();
+		var var0001 = getAvatarName();
 		// BUG: Based on Agil documents, this ought to have been <var0001>
 		// instead of <Avatar>. It is likely that var0001 was called something
 		// akin to Avatar, likely with a typo, which is why the string
@@ -1535,7 +1544,7 @@ void FuncKite shape#(SHAPE_KITE) () {
 		var var0003 = -1;
 		var var0004 = -1;
 		var var0005 = -2;
-		Func0828(item, var0003, var0004, var0005, FuncKite, item,
+		tryPathRunUsecodeTo(item, var0003, var0004, var0005, FuncKite, item,
 				 BG_PATH_SUCCESS);
 	}
 	if (event == BG_PATH_SUCCESS) {
@@ -1650,7 +1659,7 @@ void FuncPotion shape#(SHAPE_POTION) () {
 		} else {
 			var0003 = UI_die_roll(1, 3);
 			if (var0003 == 1) {
-				var var0004 = Func0909();
+				var var0004 = getPoliteTitle();
 				// BUG: Based on Agil documents, this ought to have been
 				// <var0004> instead of <Gender>. It is likely that var0004 was
 				// called something akin to Gender, likely with a typo, which is
@@ -1721,7 +1730,7 @@ void FuncSign shape#(SHAPE_SIGN) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = Func0908();
+	var var0000 = getAvatarName();
 	var var0001 = get_item_quality();
 	if (var0001 > QUALITY_SIGN_FOLLOW_THE_FIRE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["THIS IS", "NOT A", "VALID", "SIGN"]);
@@ -2166,7 +2175,7 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 	if (var0000 >= FRAME_MAGIC_BELLOWS_OPEN
 			&& var0000 <= FRAME_MAGIC_BELLOWS_FLAT) {
 		if (event == DOUBLECLICK) {
-			Func0828(item, 1, 0, -1, FuncBellows, item, BG_PATH_SUCCESS);
+			tryPathRunUsecodeTo(item, 1, 0, -1, FuncBellows, item, BG_PATH_SUCCESS);
 		}
 		if (event == BG_PATH_SUCCESS) {
 			var var0001 = script item {
@@ -2180,7 +2189,7 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 				wait 1;
 				frame 3;
 			};
-			var0002 = Func092D(item);
+			var0002 = directionFromAvatar(item);
 			var0001 = script AVATAR->get_npc_object() {
 				face var0002;
 				actor frame bowing;
@@ -2319,7 +2328,7 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 	} else {
 		if (event == DOUBLECLICK) {
 			halt_scheduled();
-			Func0828(item, 1, 0, -1, FuncBellows, item, BG_PATH_SUCCESS);
+			tryPathRunUsecodeTo(item, 1, 0, -1, FuncBellows, item, BG_PATH_SUCCESS);
 		}
 		if (event == BG_PATH_SUCCESS) {
 			halt_scheduled();
@@ -2552,7 +2561,7 @@ void FuncWell shape#(SHAPE_WELL) () {
 	if (var0000) {
 		var var0001 = [-5, -5];
 		var var0002 = [-1, -1];
-		Func0828(
+		tryPathRunUsecodeTo(
 				item, var0001, var0002, 0, FuncBucket, var0000,
 				PATH_SUCCESS_9);
 	}
@@ -2965,7 +2974,7 @@ void FuncBedRoll shape#(SHAPE_BED_ROLL) () {
 					var var0003 = [-1, -1, -1, 0, 0, 0, 1, 1, 1];
 					var var0004 = [1, 0, -1, 1, 0, -1, 1, 0, -1];
 					AVATAR->halt_scheduled();
-					Func0828(
+					tryPathRunUsecodeTo(
 							item, var0003, var0004, -1, FuncBedRoll, item,
 							BG_PATH_SUCCESS);
 				} else {
@@ -3347,7 +3356,7 @@ void FuncHammer shape#(SHAPE_HAMMER) () {
 							var0005 = var0000->get_item_frame();
 							if ((var0005 >= FRAME_BLACKSWORD_BLANK_LUKEWARM1)
 								&& (var0005 <= FRAME_BLACKSWORD_BLANK_COLD3)) {
-								Func0828(
+								tryPathRunUsecodeTo(
 										var0002, 0, 2, 0,
 										FuncHammer, var0002, BG_PATH_SUCCESS);
 							}
@@ -3361,7 +3370,7 @@ void FuncHammer shape#(SHAPE_HAMMER) () {
 		var var0006 = AVATAR->get_npc_object()->find_nearest(SHAPE_SWORD_BLANK, 3);
 		var0005 = var0006->get_item_frame();
 		var var0007 = AVATAR->get_npc_object();
-		var var0008 = Func092D(item);
+		var var0008 = directionFromAvatar(item);
 		declare var var0009;
 		if ((var0005 >= FRAME_BLACKSWORD_BLANK_COLD1) && (var0005 <= FRAME_BLACKSWORD_BLANK_COLD3)) {
 			var0007->item_say("@The sword is not heated.@");
@@ -3407,7 +3416,7 @@ void FuncPick shape#(SHAPE_PICK) () {
 				var var0002 = [2, 1, 0];
 				var var0003 = [2, 2, 2];
 				var var0004 = [-5];
-				Func0828(
+				tryPathRunUsecodeTo(
 						var0000, var0002, var0003, var0004, SHAPE_PICK, item,
 						BG_PATH_SUCCESS);
 				UI_close_gumps();
@@ -3426,7 +3435,7 @@ void FuncPick shape#(SHAPE_PICK) () {
 		for (var0008 in var0005) {
 			var0009 = var0008->get_item_frame();
 			if ((var0009 == FRAME_TREE_OF_LIFE_FULL) || (var0009 == FRAME_TREE_OF_LIFE_WILTED)) {
-				var000A = Func092D(var0008);
+				var000A = directionFromAvatar(var0008);
 			}
 		}
 		var var000B = script AVATAR {
@@ -4999,7 +5008,7 @@ void FuncBaleOfWool shape#(SHAPE_BALE_OF_WOOL) () {
 		var var0002 = -1;
 		var var0003 = -1;
 		var var0004 = -1;
-		Func0828(
+		tryPathRunUsecodeTo(
 				item, var0002, var0003, var0004, Func062D, item,
 				BG_PATH_SUCCESS);
 	}
@@ -5030,7 +5039,7 @@ void FuncSpindleOfThread shape#(SHAPE_SPINDLE_OF_THREAD) () {
 		var var0002 = -1;
 		var var0003 = -1;
 		var var0004 = -1;
-		Func0828(
+		tryPathRunUsecodeTo(
 				item, var0002, var0003, var0004, Func062E, item,
 				BG_PATH_SUCCESS);
 	}
@@ -5209,14 +5218,14 @@ void FuncSwordBlank shape#(SHAPE_SWORD_BLANK) () {
 			if (!get_container()) {
 				var0005 = [0, 1, -1, 1];
 				var0006 = [2, 1, 2, 0];
-				Func0828(
+				tryPathRunUsecodeTo(
 						item, var0005, var0006, -3, FuncSwordBlank, item,
 						BG_PATH_SUCCESS);
 			} else if (!Func0944(item)) {
 				var var0007 = Func0945(item);
 				var0005 = [0, 1, -1, 1];
 				var0006 = [2, 1, 2, 0];
-				Func0828(
+				tryPathRunUsecodeTo(
 						var0007, var0005, var0006, -3, FuncSwordBlank, var0007,
 						BG_PATH_SUCCESS);
 			} else {
@@ -5229,7 +5238,7 @@ void FuncSwordBlank shape#(SHAPE_SWORD_BLANK) () {
 	}
 	declare var var0009;
 	if (event == BG_PATH_SUCCESS) {
-		var0009 = Func092D(item);
+		var0009 = directionFromAvatar(item);
 		var0008 = script AVATAR->get_npc_object() {
 			face var0009;
 			actor frame bowing;
@@ -5251,7 +5260,7 @@ void FuncSwordBlank shape#(SHAPE_SWORD_BLANK) () {
 			var var000C = var000B->get_item_shape();
 			if (var000C == SHAPE_ANVIL) {
 				if (var000B->get_item_frame() == FRAME_MAGIC_ANVIL) {
-					Func0828(
+					tryPathRunUsecodeTo(
 							var000B, 0, 2, 0, FuncSwordBlank, var000B,
 							BG_PATH_FAILURE);
 				}
@@ -5259,7 +5268,7 @@ void FuncSwordBlank shape#(SHAPE_SWORD_BLANK) () {
 			if (var000C == SHAPE_FIREPIT) {
 				if ((var000B->get_item_frame() >= FRAME_MAGIC_FIREPIT_COLD)
 					&& (var000B->get_item_frame() <= FRAME_MAGIC_FIREPIT_FLAME)) {
-					Func0828(
+					tryPathRunUsecodeTo(
 							var000B, 1, 0, 0, FuncSwordBlank, var000B,
 							PATH_SUCCESS_9);
 				}
@@ -5268,7 +5277,7 @@ void FuncSwordBlank shape#(SHAPE_SWORD_BLANK) () {
 				var0003 = var000A->get_item_frame();
 				if ((var0003 >= FRAME_BLACKSWORD_BLANK_LUKEWARM1)
 					&& (var0003 <= FRAME_BLACKSWORD_BLANK_HOT3)) {
-					Func0828(
+					tryPathRunUsecodeTo(
 							var000B, 0, 1, 0, FuncSwordBlank, var000B,
 							PATH_SUCCESS);
 				} else {
@@ -5282,7 +5291,7 @@ void FuncSwordBlank shape#(SHAPE_SWORD_BLANK) () {
 		}
 	}
 	if (event == BG_PATH_FAILURE) {
-		var0009 = Func092D(item);
+		var0009 = directionFromAvatar(item);
 		var0008 = script AVATAR->get_npc_object() {
 			face var0009;
 			actor frame bowing;
@@ -5297,7 +5306,7 @@ void FuncSwordBlank shape#(SHAPE_SWORD_BLANK) () {
 		};
 	}
 	if (event == STARTED_TALKING) {
-		var0009 = Func092D(item);
+		var0009 = directionFromAvatar(item);
 		var0008 = script AVATAR->get_npc_object() {
 			face var0009;
 			actor frame bowing;
@@ -5312,7 +5321,7 @@ void FuncSwordBlank shape#(SHAPE_SWORD_BLANK) () {
 		};
 	}
 	if (event == PATH_SUCCESS) {
-		var0009 = Func092D(item);
+		var0009 = directionFromAvatar(item);
 		var0008 = script AVATAR->get_npc_object() {
 			face var0009;
 			actor frame bowing;
@@ -5667,7 +5676,7 @@ void FuncTombstone shape#(SHAPE_TOMBSTONE) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = Func0908();
+	var var0000 = getAvatarName();
 	var var0001 = get_item_quality();
 	if (var0001 > QUALITY_TOMBSTONE_BELOVED_FATHER) {
 		UI_display_runes(GUMP_TOMBSTONE, ["IS", "SIGN ZERO"]);
@@ -6256,14 +6265,14 @@ void FuncWaterTroughEw shape#(SHAPE_WATER_TROUGH_EW) () {
 	if (var0000) {
 		var0001 = [1, 1, -2, -2, 0, -1, 0, -1];
 		var0002 = [-1, -2, -1, -2, 1, 1, -4, -4];
-		Func0828(item, var0001, var0002, 0, FuncBucket, var0000, BG_PATH_SUCCESS);
+		tryPathRunUsecodeTo(item, var0001, var0002, 0, FuncBucket, var0000, BG_PATH_SUCCESS);
 	} else {
 		var0000 = AVATAR->get_npc_object()->get_cont_items(
 				SHAPE_BUCKET, QUALITY_ANY, FRAME_BUCKET_EMPTY);
 		if (var0000) {
 			var0001 = [1, 1, -2, -2, 0, -1, 0, -1];
 			var0002 = [-1, -2, -1, -2, 1, 1, -4, -4];
-			Func0828(
+			tryPathRunUsecodeTo(
 					item, var0001, var0002, 0, FuncBucket, var0000,
 					BG_PATH_SUCCESS);
 		}
@@ -6272,7 +6281,7 @@ void FuncWaterTroughEw shape#(SHAPE_WATER_TROUGH_EW) () {
 
 void FuncBolt shape#(SHAPE_BOLT) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		if (IOLO->npc_nearby()) {
 			IOLO->say(
 					"\"", var0000,
@@ -6470,7 +6479,7 @@ void FuncWellPulley shape#(SHAPE_WELL_PULLEY) () {
 		var var0002 = [-1, -1];
 		var var0003 = find_nearest(SHAPE_WELL, 5);
 		if (var0003) {
-			Func0828(
+			tryPathRunUsecodeTo(
 					var0003, var0001, var0002, 0, FuncBucket, var0000,
 					PATH_SUCCESS_9);
 		}
@@ -6485,14 +6494,14 @@ void FuncWaterTroughNs shape#(SHAPE_WATER_TROUGH_NS) () {
 	if (var0000) {
 		var0001 = [-1, -2, -1, -2, 1, 1, -4, -4];
 		var0002 = [1, 1, -2, -2, 0, -1, 0, -1];
-		Func0828(item, var0001, var0002, 0, FuncBucket, var0000, BG_PATH_SUCCESS);
+		tryPathRunUsecodeTo(item, var0001, var0002, 0, FuncBucket, var0000, BG_PATH_SUCCESS);
 	} else {
 		var0000 = AVATAR->get_npc_object()->get_cont_items(
 				SHAPE_BUCKET, QUALITY_ANY, FRAME_BUCKET_EMPTY);
 		if (var0000) {
 			var0001 = [-1, -2, -1, -2, 1, 1, -4, -4];
 			var0002 = [1, 1, -2, -2, 0, -1, 0, -1];
-			Func0828(
+			tryPathRunUsecodeTo(
 					item, var0001, var0002, 0, FuncBucket, var0000,
 					BG_PATH_SUCCESS);
 		}
@@ -6513,7 +6522,7 @@ void FuncStrengthTester shape#(SHAPE_STRENGTH_TESTER) () {
 		var var0000 = [0, -1, 1];
 		var var0001 = [1, 1, 1];
 		var var0002 = -1;
-		Func0828(
+		tryPathRunUsecodeTo(
 				item, var0000, var0001, var0002, FuncStrengthTester, item,
 				BG_PATH_SUCCESS);
 	}
@@ -6761,12 +6770,12 @@ void FuncGem shape#(SHAPE_GEM) () {
 		var var0006 = var0004->get_item_frame();
 		if (var0005 == SHAPE_MIRROR_NS) {
 			if (var0006 == FRAME_MIRROR_MAGIC) {
-				Func0828(var0004, 0, 2, -2, FuncGem, var0004, BG_PATH_SUCCESS);
+				tryPathRunUsecodeTo(var0004, 0, 2, -2, FuncGem, var0004, BG_PATH_SUCCESS);
 			}
 		}
 	}
 	if (event == BG_PATH_SUCCESS) {
-		var var0007 = Func092D(item);
+		var var0007 = directionFromAvatar(item);
 		var0003 = script AVATAR->get_npc_object() {
 			face var0007;
 			wait 2;
@@ -6848,7 +6857,7 @@ void FuncRudyomsWand shape#(SHAPE_RUDYOMS_WAND) () {
 		UI_close_gumps();
 		var var0001 = var0000->get_item_shape();
 		if (var0001 == SHAPE_BLACKROCK) {
-			var var0002 = Func092D(var0000);
+			var var0002 = directionFromAvatar(var0000);
 			var var0003 = script var0000 {
 				wait 5;
 				remove;
@@ -7063,7 +7072,7 @@ void FuncLever shape#(SHAPE_LEVER) () {
 		var var0000 = -1;
 		var var0001 = -1;
 		var var0002 = -3;
-		Func0828(
+		tryPathRunUsecodeTo(
 				item, var0000, var0001, var0002, FuncLever, item,
 				BG_PATH_SUCCESS);
 	}
@@ -7088,7 +7097,7 @@ void FuncSwitch shape#(SHAPE_SWITCH) () {
 		var var0000 = -1;
 		var var0001 = -1;
 		var var0002 = -3;
-		Func0828(
+		tryPathRunUsecodeTo(
 				item, var0000, var0001, var0002, FuncSwitch, item,
 				BG_PATH_SUCCESS);
 	}
@@ -7223,7 +7232,7 @@ void FuncScroll shape#(SHAPE_SCROLL) () {
 	}
 	declare var var0001;
 	if (var0000 == QUALITY_SCROLL_HOOKS_HIT_LIST) {
-		var0001 = Func0908();
+		var0001 = getAvatarName();
 		say("Finster - Britain (x)");
 		say("Duncan - Buccaneer's Den (x)");
 		say("Christopher - Trinsic (x)");
@@ -7472,7 +7481,7 @@ void FuncScroll shape#(SHAPE_SCROLL) () {
 		return;
 	}
 	if (var0000 == QUALITY_SCROLL_GWENNOS_LETTER) {
-		var0001 = Func0908();
+		var0001 = getAvatarName();
 		say("Dearest Iolo,~     In Buccaneer's Den I came across an old pirate "
 			"who told me he had sailed across the waters of Britannia more "
 			"times than I was summers old. On a gamble, I asked if he had ever "
@@ -7737,13 +7746,13 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 		if (!get_container()) {
 			var0001 = [0, 1, 1, 1, -1, -1, 0, -1];
 			var0002 = [1, 1, 0, -1, 1, 0, -1, -1];
-			Func0828(item, var0001, var0002, -3, FuncBucket, item, EGG);
+			tryPathRunUsecodeTo(item, var0001, var0002, -3, FuncBucket, item, EGG);
 		} else if (!Func0944(item)) {
 			UI_close_gumps();
 			var0003 = Func0945(item);
 			var0001 = [0, 1, -1, 1];
 			var0002 = [2, 1, 2, 0];
-			Func0828(var0003, var0001, var0002, -3, FuncBucket, item, EGG);
+			tryPathRunUsecodeTo(var0003, var0001, var0002, -3, FuncBucket, item, EGG);
 		} else {
 			UI_close_gumps();
 			var0004 = script item {
@@ -7755,7 +7764,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 	declare var var0005;
 	if (event == EGG) {
 		var0003 = Func0945(item);
-		var0005 = Func092D(var0003);
+		var0005 = directionFromAvatar(var0003);
 		if (var0003->is_npc()) {
 			var0004 = script AVATAR->get_npc_object() {
 				face var0005;
@@ -7813,7 +7822,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 						wait 1;
 					};
 				};
-				Func0828(
+				tryPathRunUsecodeTo(
 						var0006, var0001, var0002, 0, FuncBucket, var0006,
 						WEAPON);
 			}
@@ -7821,14 +7830,14 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 		if (var0007 == SHAPE_WATER_TROUGH_NS) {
 			var0001 = [-1, -2, -1, -2, 1, 1, -4, -4];
 			var0002 = [1, 1, -2, -2, 0, -1, 0, -1];
-			Func0828(
+			tryPathRunUsecodeTo(
 					var0006, var0001, var0002, 0, FuncBucket, item,
 					BG_PATH_SUCCESS);
 		}
 		if (var0007 == SHAPE_WATER_TROUGH_EW) {
 			var0001 = [1, 1, -2, -2, 0, -1, 0, -1];
 			var0002 = [-1, -2, -1, -2, 1, 1, -4, -4];
-			Func0828(
+			tryPathRunUsecodeTo(
 					var0006, var0001, var0002, 0, FuncBucket, item,
 					BG_PATH_SUCCESS);
 		}
@@ -7845,7 +7854,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 					return;
 				}
 				if (var0000 == FRAME_BUCKET_WATER) {
-					Func0828(
+					tryPathRunUsecodeTo(
 							var0006, var0001, var0002, 0, FuncBucket, var0006,
 							BG_PATH_FAILURE);
 				}
@@ -7866,7 +7875,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 				return;
 			}
 			if (var0000 == FRAME_BUCKET_WATER) {
-				Func0828(
+				tryPathRunUsecodeTo(
 						var0006, var0001, var0002, -5, FuncBucket, var0006,
 						BG_PATH_FAILURE);
 			}
@@ -7877,7 +7886,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 				if (var0008) {
 					var0001 = [-5, -5];
 					var0002 = [-1, -1];
-					Func0828(
+					tryPathRunUsecodeTo(
 							var0008, var0001, var0002, 0, FuncBucket, item,
 							PATH_SUCCESS_9);
 				}
@@ -7889,7 +7898,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 			if (var0000 == FRAME_BUCKET_EMPTY) {
 				var0001 = [-5, -5];
 				var0002 = [-1, -1];
-				Func0828(
+				tryPathRunUsecodeTo(
 						var0006, var0001, var0002, 0, FuncBucket, item,
 						PATH_SUCCESS_9);
 			} else {
@@ -7925,7 +7934,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 		var000A = AVATAR->get_npc_object()->get_cont_items(
 				SHAPE_BUCKET, QUALITY_ANY, FRAME_ANY);
 		var0000 = var000A->get_item_frame();
-		var var000B = Func092D(item);
+		var var000B = directionFromAvatar(item);
 		var var000C = (var000B + HALF_TURN) % FULL_TURN;
 		declare var var000D;
 		if (var0000 == FRAME_BUCKET_BLOOD) {
@@ -7986,7 +7995,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 				var0012 = var0011 - 1;
 				var0013 = 1;
 			}
-			var0005 = Func092D(var0010);
+			var0005 = directionFromAvatar(var0010);
 			var000E = script AVATAR->get_npc_object() {
 				face var0005;
 				actor frame bowing;
@@ -8041,7 +8050,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 					previous frame cycle;
 				};
 			}
-			var0005 = Func092D(item);
+			var0005 = directionFromAvatar(item);
 			var000E = script AVATAR->get_npc_object() {
 				face var0005;
 				actor frame bowing;
@@ -8056,7 +8065,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 			declare var var0019;
 			if (var0015 == FRAME_LIGHT_SPECIAL) {
 				var0018 = 2;
-				var0005 = Func092D(item);
+				var0005 = directionFromAvatar(item);
 				var000E = script AVATAR->get_npc_object() {
 					face var0005;
 					actor frame strike_1h;
@@ -8083,7 +8092,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 				var0004 = var001B->set_item_quality(var0019);
 				var001B->set_item_frame(var0015);
 				var var001C = UI_update_last_created(var0017);
-				var0005 = Func092D(item);
+				var0005 = directionFromAvatar(item);
 				var000E = script AVATAR->get_npc_object() {
 					face var0005;
 					actor frame strike_1h;
@@ -8124,7 +8133,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 			var var001E = script item {
 				frame 0;
 			};
-			var0005 = Func092D(item);
+			var0005 = directionFromAvatar(item);
 			var000E = script AVATAR->get_npc_object() {
 				face var0005;
 				actor frame bowing;
@@ -8138,7 +8147,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 		}
 		if (var0007 == SHAPE_DOUGH) {
 			if (var0015 == FRAME_DOUGH_FLOUR) {
-				var0005 = Func092D(item);
+				var0005 = directionFromAvatar(item);
 				var000E = script AVATAR->get_npc_object() {
 					face var0005;
 					actor frame bowing;
@@ -8269,7 +8278,7 @@ void FuncPlaque shape#(SHAPE_PLAQUE) () {
 		LORD_BRITISH->remove_npc();
 		return;
 	}
-	var var0009 = Func0908();
+	var var0009 = getAvatarName();
 	declare var var000A;
 	if (var0001 > QUALITY_PLAQUE_DO_NOT_WISH_TO_SEE_THIS) {
 		var000A = "This is not a valid plaque ";
@@ -8590,7 +8599,7 @@ void FuncWallBottom shape#(SHAPE_WALL_BOTTOM) () {
 
 void FuncEasel shape#(SHAPE_EASEL) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = "@Thou shouldst use the brush and pigments, " + Func0908()
+		var var0000 = "@Thou shouldst use the brush and pigments, " + getAvatarName()
 					  + ".@";
 		partySpeak(var0000);
 	}
@@ -9523,10 +9532,10 @@ void FuncTimeBarrier shape#(SHAPE_TIME_BARRIER) () {
 
 void FuncIolo object#(FIRST_NPC_FUNCTION - IOLO)() {
 	gflags[MET_IOLO] = true;
-	var var0000 = Func0908();
+	var var0000 = getAvatarName();
 	var var0001 = UI_get_party_list();
 	var var0002 = IOLO->get_npc_object();
-	var var0003 = Func0909();
+	var var0003 = getPoliteTitle();
 	var var0004 = UI_is_pc_female();
 	declare var var0005;
 	if (event == EGG) {
@@ -9644,10 +9653,10 @@ void FuncIolo object#(FIRST_NPC_FUNCTION - IOLO)() {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		var0000 = Func0908();
+		var0000 = getAvatarName();
 		var0001 = UI_get_party_list();
 		var0002 = IOLO->get_npc_object();
-		var0003 = Func0909();
+		var0003 = getPoliteTitle();
 		IOLO->show_npc_face(DEFAULT_FACE);
 		var var0008 = Func08F7(PETRE);
 		var var0009 = Func08F7(SHAMINO);
@@ -9926,7 +9935,7 @@ void FuncIolo object#(FIRST_NPC_FUNCTION - IOLO)() {
 
 void FuncSpark object#(FIRST_NPC_FUNCTION - SPARK)() {
 	if (event == DOUBLECLICK) {
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		var var0001 = "Avatar";
 		var var0002 = UI_get_party_list();
 		var var0003 = UI_is_pc_female();
@@ -9948,7 +9957,7 @@ void FuncSpark object#(FIRST_NPC_FUNCTION - SPARK)() {
 		if (gflags[TOLD_SPARK_AVATAR]) {
 			var0008 = var0001;
 		}
-		var var0009 = Func0909();
+		var var0009 = getPoliteTitle();
 		declare var var000A;
 		declare var var000B;
 		if (!gflags[MET_SPARK]) {
@@ -10317,7 +10326,7 @@ void FuncShamino object#(FIRST_NPC_FUNCTION - SHAMINO)() {
 		var var0000 = UI_is_pc_female();
 		var var0001 = UI_get_party_list();
 		var var0002 = SHAMINO->get_npc_object();
-		var var0003 = Func0908();
+		var var0003 = getAvatarName();
 		add(["name", "job", "bye"]);
 		if (gflags[SHAMINO_PISSED]) {
 			if (UI_get_timer(TIMER_THIEVERY_FORGIVENESS) < 1) {
@@ -10571,10 +10580,10 @@ void FuncDupre object#(FIRST_NPC_FUNCTION - DUPRE)() {
 			gflags[DUPRE_PISSED] = false;
 			abort;
 		}
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_get_party_list();
 		var var0002 = DUPRE->get_npc_object();
-		var var0003 = Func0908();
+		var var0003 = getAvatarName();
 		var var0004 = Func08F7(IOLO);
 		var var0005 = Func08F7(SHAMINO);
 		var var0006 = Func08F7(SPARK);
@@ -10857,9 +10866,9 @@ void FuncDupre object#(FIRST_NPC_FUNCTION - DUPRE)() {
 void FuncJaana object#(FIRST_NPC_FUNCTION - JAANA)() {
 	if (event == DOUBLECLICK) {
 		JAANA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = JAANA->get_npc_object();
-		var var0002 = Func0908();
+		var var0002 = getAvatarName();
 		add(["name", "job", "bye"]);
 		if (var0001 in UI_get_party_list()) {
 			add("leave");
@@ -11066,7 +11075,7 @@ void FuncJaana object#(FIRST_NPC_FUNCTION - JAANA)() {
 void FuncTrellek object#(FIRST_NPC_FUNCTION - TRELLEK)() {
 	declare var var0006;
 	if (event == DOUBLECLICK) {
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		var var0001 = "Avatar";
 		var var0002 = UI_get_party_list();
 		var var0003 = false;
@@ -11319,7 +11328,7 @@ void FuncSentri object#(FIRST_NPC_FUNCTION - SENTRI)() {
 		var var0001 = UI_is_pc_female();
 		var var0002 = UI_get_party_list();
 		var var0003 = SENTRI->get_npc_object();
-		var var0004 = Func0908();
+		var var0004 = getAvatarName();
 		var var0005 = SENTRI->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (var0003 in var0002) {
@@ -11530,10 +11539,10 @@ void FuncSentri object#(FIRST_NPC_FUNCTION - SENTRI)() {
 void FuncJulia object#(FIRST_NPC_FUNCTION - JULIA)() {
 	if (event == DOUBLECLICK) {
 		JULIA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_get_party_list();
 		var var0002 = JULIA->get_npc_object();
-		var var0003 = Func0908();
+		var var0003 = getAvatarName();
 		var var0004 = Func08F7(SPARK);
 		add(["name", "job", "bye"]);
 		if (gflags[KARL_TOLD_ABOUT_PLANS]) {
@@ -11776,10 +11785,10 @@ void FuncJulia object#(FIRST_NPC_FUNCTION - JULIA)() {
 void FuncKatrina object#(FIRST_NPC_FUNCTION - KATRINA)() {
 	if (event == DOUBLECLICK) {
 		KATRINA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_get_party_list();
 		var var0002 = KATRINA->get_npc_object();
-		var var0003 = Func0908();
+		var var0003 = getAvatarName();
 		var var0004 = Func08F7(SHAMINO);
 		var var0005 = Func08F7(IOLO);
 		var var0006 = Func08F7(DUPRE);
@@ -12002,8 +12011,8 @@ void FuncKatrina object#(FIRST_NPC_FUNCTION - KATRINA)() {
 void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 	if (event == DOUBLECLICK) {
 		TSERAMED->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = UI_get_party_list();
 		var var0003 = filterArray(AVATAR->get_npc_object(), var0002);
 		var var0004 = TSERAMED->get_npc_object();
@@ -12596,7 +12605,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 
 void FuncPetre object#(FIRST_NPC_FUNCTION - PETRE)() {
 	if (event == DOUBLECLICK) {
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_get_party_list();
 		var var0002 = UI_is_pc_female();
 		add(["name", "job", "bye"]);
@@ -12753,8 +12762,8 @@ void FuncPetre object#(FIRST_NPC_FUNCTION - PETRE)() {
 void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN)() {
 	if (event == DOUBLECLICK) {
 		FINNIGAN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
-		var var0001 = Func0908();
+		var var0000 = getPoliteTitle();
+		var var0001 = getAvatarName();
 		var var0002 = Func08F7(SPARK);
 		var var0003 = UI_is_pc_female();
 		breakable {
@@ -13355,7 +13364,7 @@ void FuncEiko object#(FIRST_NPC_FUNCTION - EIKO)() {
 		abort;
 	}
 	EIKO->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	var var0001 = Func08F7(AMANDA);
 	if (!gflags[MET_EIKO]) {
 		say("You see a stunningly attractive oriental woman. She is armed to "
@@ -13455,7 +13464,7 @@ void FuncEiko object#(FIRST_NPC_FUNCTION - EIKO)() {
 
 void FuncKlog object#(FIRST_NPC_FUNCTION - KLOG)() {
 	if (event == DOUBLECLICK) {
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		var var0001 = UI_part_of_day();
 		var var0002 = false;
 		var var0003 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
@@ -13628,7 +13637,7 @@ void FuncKlog object#(FIRST_NPC_FUNCTION - KLOG)() {
 void FuncChantu object#(FIRST_NPC_FUNCTION - CHANTU)() {
 	if (event == DOUBLECLICK) {
 		CHANTU->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		add(["name", "job", "murder", "services", "bye"]);
 		if (gflags[KNOWS_ABOUT_CHRISTOPERS_ARGUMENT]) {
@@ -13712,8 +13721,8 @@ void FuncDell object#(FIRST_NPC_FUNCTION - DELL)() {
 	if (event == DOUBLECLICK) {
 		DELL->show_npc_face(DEFAULT_FACE);
 		var0000 = UI_part_of_day();
-		var var0001 = Func0909();
-		var var0002 = Func0908();
+		var var0001 = getPoliteTitle();
+		var var0002 = getAvatarName();
 		var0003 = DELL->get_npc_object()->get_schedule_type();
 		var var0004 = "Avatar";
 		if (var0000 == NIGHT) {
@@ -13845,8 +13854,8 @@ void FuncDell object#(FIRST_NPC_FUNCTION - DELL)() {
 void FuncApollonia object#(FIRST_NPC_FUNCTION - APOLLONIA)() {
 	if (event == DOUBLECLICK) {
 		var var0000 = UI_part_of_day();
-		var var0001 = Func0908();
-		var var0002 = Func0909();
+		var var0001 = getAvatarName();
+		var var0002 = getPoliteTitle();
 		var var0003 = APOLLONIA->get_npc_object()->get_schedule_type();
 		var var0004 = UI_is_pc_female();
 		APOLLONIA->show_npc_face(DEFAULT_FACE);
@@ -14034,7 +14043,7 @@ void FuncMarkus object#(FIRST_NPC_FUNCTION - MARKUS)() {
 void FuncGargan object#(FIRST_NPC_FUNCTION - GARGAN)() {
 	if (event == DOUBLECLICK) {
 		GARGAN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = GARGAN->get_npc_object()->get_schedule_type();
 		add(["name", "job", "murder", "bye"]);
 		if (gflags[GILBERTO_SAID_CROWN]) {
@@ -14345,7 +14354,7 @@ void FuncLordBritish object#(FIRST_NPC_FUNCTION - LORD_BRITISH)() {
 	breakable {
 		if (event == DOUBLECLICK) {
 		labelFuncLordBritish_000C:
-			var0001 = Func0908();
+			var0001 = getAvatarName();
 			if (gflags[CAST_ARMAGEDDON]) {
 				LORD_BRITISH->say(
 						"\"Fool!! What possessed thee to cast that damned "
@@ -14869,7 +14878,7 @@ void FuncLordBritish object#(FIRST_NPC_FUNCTION - LORD_BRITISH)() {
 		}
 	}
 	if (var0000 == true) {
-		var var000B = Func092D(item);
+		var var000B = directionFromAvatar(item);
 		var var000C = (var000B + HALF_TURN) % FULL_TURN;
 		var var000D = script item {
 			face var000C;
@@ -14923,7 +14932,7 @@ void FuncLordBritish object#(FIRST_NPC_FUNCTION - LORD_BRITISH)() {
 			}
 		} else {
 			LORD_BRITISH->show_npc_face(DEFAULT_FACE);
-			var0001 = Func0908();
+			var0001 = getAvatarName();
 			say("\"I congratulate and thank thee, ", var0001,
 				". Thy deeds continue to speak well of thee.\"");
 			abort;
@@ -15282,11 +15291,11 @@ void FuncBatlin object#(FIRST_NPC_FUNCTION - BATLIN)() {
 			say("\"Come back when thou art ready.\"*");
 			abort;
 		}
-		var var0004 = Func0909();
+		var var0004 = getPoliteTitle();
 		var var0005 = UI_wearing_fellowship();
 		var var0006 = UI_part_of_day();
 		var0000 = BATLIN->get_npc_object()->get_schedule_type();
-		var var0007 = Func0908();
+		var var0007 = getAvatarName();
 		if (var0000 == PREACH) {
 			if (gflags[INVITED_TO_JOIN] && (!gflags[CEREMONY_DONE])) {
 				Func084F();
@@ -16841,11 +16850,11 @@ void FuncZella object#(FIRST_NPC_FUNCTION - ZELLA)() {
 void FuncLucy object#(FIRST_NPC_FUNCTION - LUCY)() {
 	if (event == DOUBLECLICK) {
 		LUCY->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		var var0001 = "Avatar";
 		var var0002 = UI_part_of_day();
 		var var0003 = LUCY->get_npc_object()->get_schedule_type();
-		var var0004 = Func0909();
+		var var0004 = getPoliteTitle();
 		declare var var0005;
 		if (gflags[TOLD_LUCY_NAME]) {
 			var0005 = var0000;
@@ -16993,7 +17002,7 @@ void FuncGreg object#(FIRST_NPC_FUNCTION - GREG)() {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		GREG->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var0001 = UI_part_of_day();
 		var0002 = GREG->get_npc_object()->get_schedule_type();
 		var var0003 = UI_wearing_fellowship();
@@ -17499,7 +17508,7 @@ void FuncCandice object#(FIRST_NPC_FUNCTION - CANDICE)() {
 void FuncCynthia object#(FIRST_NPC_FUNCTION - CYNTHIA)() {
 	if (event == DOUBLECLICK) {
 		CYNTHIA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		add(["name", "job", "bye"]);
 		if (gflags[CYNTHIA_SAID_EXCHANGE]) {
@@ -17925,7 +17934,7 @@ void FuncCarrocio object#(FIRST_NPC_FUNCTION - CARROCIO)() {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		CARROCIO->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var0001 = UI_part_of_day();
 		var0002 = CARROCIO->get_npc_object()->get_schedule_type();
 		var var0003 = UI_is_pc_female();
@@ -18152,7 +18161,7 @@ void FuncFigg object#(FIRST_NPC_FUNCTION - FIGG)() {
 	if (event == DOUBLECLICK) {
 		FIGG->show_npc_face(DEFAULT_FACE);
 		var var0000 = UI_part_of_day();
-		var var0001 = Func0909();
+		var var0001 = getPoliteTitle();
 		var var0002 = UI_wearing_fellowship();
 		var var0003 = Func08FC(FIGG, BATLIN);
 		if (var0000 == NIGHT) {
@@ -18362,7 +18371,7 @@ void FuncFigg object#(FIRST_NPC_FUNCTION - FIGG)() {
 void FuncJames object#(FIRST_NPC_FUNCTION - JAMES)() {
 	if (event == DOUBLECLICK) {
 		JAMES->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = JAMES->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
@@ -18665,7 +18674,7 @@ void FuncAmanda object#(FIRST_NPC_FUNCTION - AMANDA)() {
 		abort;
 	}
 	AMANDA->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	var var0001 = Func08F7(EIKO);
 	if (!gflags[MET_AMANDA]) {
 		say("You see an attractive woman dressed in armour and carrying a "
@@ -18879,7 +18888,7 @@ void FuncFred object#(FIRST_NPC_FUNCTION - FRED)() {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		FRED->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var0001 = UI_part_of_day();
 		var0002 = FRED->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
@@ -18989,7 +18998,7 @@ void FuncKelly object#(FIRST_NPC_FUNCTION - KELLY)() {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		KELLY->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var0001 = UI_part_of_day();
 		var0002 = KELLY->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
@@ -19119,8 +19128,8 @@ void FuncWilly object#(FIRST_NPC_FUNCTION - WILLY)() {
 	declare var var0003;
 	if (event == DOUBLECLICK) {
 		WILLY->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
-		var var0001 = Func0908();
+		var var0000 = getPoliteTitle();
+		var var0001 = getAvatarName();
 		var0002 = WILLY->get_npc_object()->get_schedule_type();
 		var0003 = UI_part_of_day();
 		var var0004 = Func08F7(SPARK);
@@ -19388,7 +19397,7 @@ void FuncGaye object#(FIRST_NPC_FUNCTION - GAYE)() {
 	declare var var0003;
 	if (event == DOUBLECLICK) {
 		GAYE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
 		var0003 = GAYE->get_npc_object()->get_schedule_type();
@@ -19549,8 +19558,8 @@ void FuncCoop object#(FIRST_NPC_FUNCTION - COOP)() {
 	declare var var0003;
 	if (event == DOUBLECLICK) {
 		COOP->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var0002 = UI_part_of_day();
 		var0003 = COOP->get_npc_object()->get_schedule_type();
 		declare var var0006;
@@ -19742,7 +19751,7 @@ void FuncGrayson object#(FIRST_NPC_FUNCTION - GRAYSON)() {
 				abort;
 			}
 		} else {
-			var0004 = Func0909();
+			var0004 = getPoliteTitle();
 		}
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_GRAYSON]) {
@@ -19862,7 +19871,7 @@ void FuncGrayson object#(FIRST_NPC_FUNCTION - GRAYSON)() {
 void FuncDiane object#(FIRST_NPC_FUNCTION - DIANE)() {
 	if (event == DOUBLECLICK) {
 		DIANE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		var var0002 = UI_part_of_day();
 		add(["name", "job", "bye"]);
@@ -19983,7 +19992,7 @@ void FuncClint object#(FIRST_NPC_FUNCTION - CLINT)() {
 		CLINT->show_npc_face(DEFAULT_FACE);
 		var var0000 = UI_part_of_day();
 		var0001 = CLINT->get_npc_object()->get_schedule_type();
-		var var0002 = Func0909();
+		var var0002 = getPoliteTitle();
 		var var0003 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (gflags[GARGAN_SAID_SAILED] || gflags[GILBERTO_SAID_CROWN]) {
@@ -20158,7 +20167,7 @@ void FuncGordon object#(FIRST_NPC_FUNCTION - GORDON)() {
 	declare var var0003;
 	if (event == DOUBLECLICK) {
 		GORDON->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
 		var0003 = GORDON->get_npc_object()->get_schedule_type();
@@ -20334,7 +20343,7 @@ void FuncSean object#(FIRST_NPC_FUNCTION - SEAN)() {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		SEAN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var0001 = UI_part_of_day();
 		var0002 = SEAN->get_npc_object()->get_schedule_type();
 		var var0003 = UI_wearing_fellowship();
@@ -20544,7 +20553,7 @@ void FuncSean object#(FIRST_NPC_FUNCTION - SEAN)() {
 void FuncBrownie object#(FIRST_NPC_FUNCTION - BROWNIE)() {
 	if (event == DOUBLECLICK) {
 		BROWNIE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (gflags[BROWNIE_HIRED]) {
@@ -20696,7 +20705,7 @@ void FuncBrownie object#(FIRST_NPC_FUNCTION - BROWNIE)() {
 void FuncMack object#(FIRST_NPC_FUNCTION - MACK)() {
 	if (event == DOUBLECLICK) {
 		MACK->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (gflags[AVATAR_SENT_TO_PROOF]) {
 			add("proof");
@@ -20907,7 +20916,7 @@ void FuncMack object#(FIRST_NPC_FUNCTION - MACK)() {
 void FuncSnaz object#(FIRST_NPC_FUNCTION - SNAZ)() {
 	if (event == DOUBLECLICK) {
 		SNAZ->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_SNAZ]) {
 			say("You see a filthy beggar who flashes you a grin as though you "
@@ -21185,7 +21194,7 @@ void FuncMillie object#(FIRST_NPC_FUNCTION - MILLIE)() {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		MILLIE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
 		if (var0002 == NIGHT) {
@@ -21327,7 +21336,7 @@ void FuncMillie object#(FIRST_NPC_FUNCTION - MILLIE)() {
 void FuncGeoffrey object#(FIRST_NPC_FUNCTION - GEOFFREY)() {
 	if (event == DOUBLECLICK) {
 		GEOFFREY->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		add(["name", "job", "bye"]);
 		if (gflags[MET_NYSTUL]) {
 			add("Nystul");
@@ -21489,8 +21498,8 @@ void FuncSherry object#(FIRST_NPC_FUNCTION - SHERRY)() {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		SHERRY->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_SHERRY]) {
 			say("You see a very large mouse with an air of superior "
@@ -21710,7 +21719,7 @@ void FuncBoots object#(FIRST_NPC_FUNCTION - BOOTS)() {
 void FuncBennie object#(FIRST_NPC_FUNCTION - BENNIE)() {
 	if (event == DOUBLECLICK) {
 		BENNIE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		add(["name", "job", "bye"]);
 		if (gflags[BOOTS_SAID_MEAT]) {
 			add("absent-minded");
@@ -21811,7 +21820,7 @@ void FuncWeston object#(FIRST_NPC_FUNCTION - WESTON)() {
 		abort;
 	}
 	WESTON->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	add(["name", "job", "bye"]);
 	var var0001 = AVATAR->find_nearest(SHAPE_GUARD1, ON_SCREEN);
 	if (!gflags[MET_WESTON]) {
@@ -22006,7 +22015,7 @@ void FuncWeston object#(FIRST_NPC_FUNCTION - WESTON)() {
 void FuncMiranda object#(FIRST_NPC_FUNCTION - MIRANDA)() {
 	if (event == DOUBLECLICK) {
 		MIRANDA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		var var0001 = UI_part_of_day();
 		add(["name", "job", "bye"]);
 		if (gflags[BILL_QUEST_DONE]) {
@@ -22278,7 +22287,7 @@ void FuncInwisloklem object#(FIRST_NPC_FUNCTION - INWISLOKLEM)() {
 
 void FuncNell object#(FIRST_NPC_FUNCTION - NELL)() {
 	if (event == DOUBLECLICK) {
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		var var0001 = "Avatar";
 		NELL->show_npc_face(DEFAULT_FACE);
 		declare var var0002;
@@ -22666,7 +22675,7 @@ void FuncNastassia object#(FIRST_NPC_FUNCTION - NASTASSIA)() {
 	var var0002 = false;
 	var var0003 = false;
 	var var0004 = UI_is_pc_female();
-	var var0005 = Func0908();
+	var var0005 = getAvatarName();
 	add(["name", "job", "bye"]);
 	if (gflags[DE_MARIA_TOLD_STORY]) {
 		if (!gflags[JULIUS_QUEST]) {
@@ -23386,7 +23395,7 @@ void FuncElynor object#(FIRST_NPC_FUNCTION - ELYNOR)() {
 		ELYNOR->show_npc_face(DEFAULT_FACE);
 		var var0000 = UI_wearing_fellowship();
 		var var0001 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
-		var var0002 = Func0909();
+		var var0002 = getPoliteTitle();
 		var var0003 = UI_part_of_day();
 		var var0004 = ELYNOR->get_npc_object()->get_schedule_type();
 		if (var0003 == NIGHT) {
@@ -23770,7 +23779,7 @@ void FuncGregor object#(FIRST_NPC_FUNCTION - GREGOR)() {
 				abort;
 			}
 		}
-		var var0003 = Func0909();
+		var var0003 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		var var0004 = Func08F7(ELYNOR);
 		if (var0004) {
@@ -24000,7 +24009,7 @@ void FuncSasha object#(FIRST_NPC_FUNCTION - SASHA)() {
 		abort;
 	}
 	SASHA->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	add(["name", "job", "bye"]);
 	if (!gflags[MET_SASHA]) {
 		say("You see a young gypsy lad. He is wearing a Fellowship medallion. "
@@ -24072,7 +24081,7 @@ void FuncSasha object#(FIRST_NPC_FUNCTION - SASHA)() {
 void FuncGladstone object#(FIRST_NPC_FUNCTION - GLADSTONE)() {
 	if (event == DOUBLECLICK) {
 		GLADSTONE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_GLADSTONE]) {
@@ -24228,7 +24237,7 @@ void FuncGladstone object#(FIRST_NPC_FUNCTION - GLADSTONE)() {
 void FuncXanthia object#(FIRST_NPC_FUNCTION - XANTHIA)() {
 	if (event == DOUBLECLICK) {
 		XANTHIA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		if (!gflags[MET_XANTHIA]) {
 			say("You see a cheerful woman with bright eyes and blonde hair.");
 			gflags[MET_XANTHIA] = true;
@@ -24350,7 +24359,7 @@ void FuncZorn object#(FIRST_NPC_FUNCTION - ZORN)() {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		ZORN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var0002 = ZORN->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
@@ -24547,7 +24556,7 @@ void FuncZorn object#(FIRST_NPC_FUNCTION - ZORN)() {
 void FuncSeara object#(FIRST_NPC_FUNCTION - SEARA)() {
 	if (event == DOUBLECLICK) {
 		SEARA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		var var0002 = UI_part_of_day();
 		add(["name", "job", "bye"]);
@@ -24692,7 +24701,7 @@ void FuncKarl object#(FIRST_NPC_FUNCTION - KARL)() {
 		abort;
 	}
 	KARL->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	var var0001 = false;
 	var var0002 = UI_wearing_fellowship();
 	add(["name", "job", "bye"]);
@@ -24844,7 +24853,7 @@ void FuncOwen object#(FIRST_NPC_FUNCTION - OWEN)() {
 		OWEN->show_npc_face(DEFAULT_FACE);
 		var var0000 = UI_part_of_day();
 		var var0001 = OWEN->get_npc_object()->get_schedule_type();
-		var var0002 = Func0909();
+		var var0002 = getPoliteTitle();
 		var var0003 = false;
 		var var0004 = UI_wearing_fellowship();
 		var0000 = UI_part_of_day();
@@ -24861,7 +24870,7 @@ void FuncOwen object#(FIRST_NPC_FUNCTION - OWEN)() {
 				abort;
 			}
 		}
-		var0002 = Func0909();
+		var0002 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (gflags[GILBERTO_SAID_CROWN]) {
 			if (gflags[OWEN_SAID_NAME]) {
@@ -25273,7 +25282,7 @@ void FuncBurnside object#(FIRST_NPC_FUNCTION - BURNSIDE)() {
 				abort;
 			}
 		}
-		var var0003 = Func0909();
+		var var0003 = getPoliteTitle();
 		var var0004 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (gflags[OWENS_PLANS_ARE_UNSAFE]) {
@@ -25460,7 +25469,7 @@ void FuncBurnside object#(FIRST_NPC_FUNCTION - BURNSIDE)() {
 void FuncRutherford object#(FIRST_NPC_FUNCTION - RUTHERFORD)() {
 	if (event == DOUBLECLICK) {
 		RUTHERFORD->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = RUTHERFORD->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
@@ -25671,7 +25680,7 @@ void FuncWilliam object#(FIRST_NPC_FUNCTION - WILLIAM)() {
 			}
 		}
 		var var0003 = UI_wearing_fellowship();
-		var var0004 = Func0909();
+		var var0004 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_WILLIAM]) {
 			say("You see a man with a very worried look on his face.");
@@ -25777,7 +25786,7 @@ void FuncWilliam object#(FIRST_NPC_FUNCTION - WILLIAM)() {
 void FuncKarenna object#(FIRST_NPC_FUNCTION - KARENNA)() {
 	if (event == DOUBLECLICK) {
 		KARENNA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = KARENNA->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye", "murders"]);
@@ -25923,7 +25932,7 @@ void FuncKarenna object#(FIRST_NPC_FUNCTION - KARENNA)() {
 void FuncJakher object#(FIRST_NPC_FUNCTION - JAKHER)() {
 	if (event == DOUBLECLICK) {
 		JAKHER->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = JAKHER->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
@@ -26088,7 +26097,7 @@ void FuncJergi object#(FIRST_NPC_FUNCTION - JERGI)() {
 		abort;
 	}
 	JERGI->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	add(["name", "job", "bye"]);
 	var var0001 = Func08F7(MARGARETA);
 	if (var0001) {
@@ -26220,7 +26229,7 @@ void FuncMikos object#(FIRST_NPC_FUNCTION - MIKOS)() {
 			"another time!\"*");
 		abort;
 	}
-	var var0002 = Func0909();
+	var var0002 = getPoliteTitle();
 	add(["name", "job", "bye"]);
 	if (gflags[FODUS_SAID_SILVERFLUID]) {
 		add("silver fluid");
@@ -26438,7 +26447,7 @@ void FuncFodus object#(FIRST_NPC_FUNCTION - FODUS)() {
 	}
 	if (event == DOUBLECLICK) {
 		FODUS->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		if (!gflags[MET_FODUS]) {
 			say("You see a wingless gargoyle with a terrible skin disease. It "
 				"looks as if his face is falling off in patches.");
@@ -26801,7 +26810,7 @@ void FuncNicodemus object#(FIRST_NPC_FUNCTION - NICODEMUS)() {
 		abort;
 	}
 	NICODEMUS->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0908();
+	var var0000 = getAvatarName();
 	add(["name", "job", "bye"]);
 	var var0001 = UI_get_party_list();
 	var var0002 = PARTY->count_objects(
@@ -27039,7 +27048,7 @@ void FuncThad object#(FIRST_NPC_FUNCTION - THAD)() {
 			var0001->set_schedule_type(IN_COMBAT);
 			abort;
 		}
-		var var0002 = Func0909();
+		var var0002 = getPoliteTitle();
 		var var0003 = false;
 		if (!gflags[MET_THAD]) {
 			say("Eyeing you carefully, the man before you takes an aggressive "
@@ -27135,7 +27144,7 @@ void FuncThad object#(FIRST_NPC_FUNCTION - THAD)() {
 void FuncBradman object#(FIRST_NPC_FUNCTION - BRADMAN)() {
 	if (event == DOUBLECLICK) {
 		BRADMAN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_BRADMAN]) {
 			say("You see a man leaning on a longbow.");
@@ -27238,7 +27247,7 @@ void FuncBradman object#(FIRST_NPC_FUNCTION - BRADMAN)() {
 void FuncSirJeff object#(FIRST_NPC_FUNCTION - SIR_JEFF)() {
 	if (event == DOUBLECLICK) {
 		SIR_JEFF->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_SIR_JEFF]) {
 			say("The man greets you with stern, suspicious eyes.");
@@ -27315,8 +27324,8 @@ void FuncSirJeff object#(FIRST_NPC_FUNCTION - SIR_JEFF)() {
 void FuncTiery object#(FIRST_NPC_FUNCTION - TIERY)() {
 	if (event == DOUBLECLICK) {
 		TIERY->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_TIERY]) {
 			say("You see an unkempt, yet dapper man talking to himself.");
@@ -27417,9 +27426,9 @@ void FuncIskander object#(FIRST_NPC_FUNCTION - ISKANDER)() {
 		abort;
 	}
 	ISKANDER->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0908();
+	var var0000 = getAvatarName();
 	var var0001 = "Avatar";
-	var var0002 = Func0909();
+	var var0002 = getPoliteTitle();
 	if (!gflags[MET_ISKANDER]) {
 		say("You see a large cyclops. It looks at you and blinks its eye in "
 			"irritation.");
@@ -27622,7 +27631,7 @@ void FuncIskander object#(FIRST_NPC_FUNCTION - ISKANDER)() {
 void FuncReyna object#(FIRST_NPC_FUNCTION - REYNA)() {
 	if (event == DOUBLECLICK) {
 		REYNA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = REYNA;
 		var var0003 = false;
@@ -27879,7 +27888,7 @@ void FuncReyna object#(FIRST_NPC_FUNCTION - REYNA)() {
 void FuncWayne object#(FIRST_NPC_FUNCTION - WAYNE)() {
 	if (event == DOUBLECLICK) {
 		WAYNE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_WAYNE]) {
 			say("You see a monk wandering around apparently without "
@@ -28198,8 +28207,8 @@ void FuncGarok object#(FIRST_NPC_FUNCTION - GAROK)() {
 void FuncGharl object#(FIRST_NPC_FUNCTION - GHARL)() {
 	if (event == DOUBLECLICK) {
 		GHARL->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_GHARL]) {
 			say("You see a troll, sulking in his cell. As he breathes, you can "
@@ -28277,8 +28286,8 @@ void FuncGharl object#(FIRST_NPC_FUNCTION - GHARL)() {
 void FuncDRel object#(FIRST_NPC_FUNCTION - D_REL)() {
 	if (event == DOUBLECLICK) {
 		D_REL->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = false;
 		var var0003 = "Nystul";
 		var var0004 = "Geoffrey";
@@ -28392,7 +28401,7 @@ void FuncDRel object#(FIRST_NPC_FUNCTION - D_REL)() {
 void FuncSmith object#(FIRST_NPC_FUNCTION - SMITH)() {
 	if (event == DOUBLECLICK) {
 		SMITH->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		var var0001 = Func08F7(IOLO);
 		var var0002 = false;
 		add(["name", "job", "bye"]);
@@ -28552,7 +28561,7 @@ void FuncSmith object#(FIRST_NPC_FUNCTION - SMITH)() {
 void FuncAimi object#(FIRST_NPC_FUNCTION - AIMI)() {
 	if (event == DOUBLECLICK) {
 		AIMI->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = false;
 		add(["name", "job", "bye"]);
 		if (gflags[REYNAGARDEN] && gflags[AIMI_TOLD_NAME]) {
@@ -28706,8 +28715,8 @@ void FuncAimi object#(FIRST_NPC_FUNCTION - AIMI)() {
 void FuncPenni object#(FIRST_NPC_FUNCTION - PENNI)() {
 	if (event == DOUBLECLICK) {
 		PENNI->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = false;
 		var var0003 = false;
 		var var0004 = PENNI->get_npc_object()->get_schedule_type();
@@ -28832,7 +28841,7 @@ void FuncPenni object#(FIRST_NPC_FUNCTION - PENNI)() {
 void FuncBen object#(FIRST_NPC_FUNCTION - BEN)() {
 	if (event == DOUBLECLICK) {
 		BEN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_BEN]) {
 			say("Resting an axe on his shoulder, a tall, broad-chested man "
@@ -28958,7 +28967,7 @@ void FuncBen object#(FIRST_NPC_FUNCTION - BEN)() {
 void FuncGoth object#(FIRST_NPC_FUNCTION - GOTH)() {
 	if (event == DOUBLECLICK) {
 		GOTH->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_GOTH]) {
 			say("The beady-eyed man sneers at you.");
@@ -29109,7 +29118,7 @@ void FuncGoth object#(FIRST_NPC_FUNCTION - GOTH)() {
 void FuncCarlyn object#(FIRST_NPC_FUNCTION - CARLYN)() {
 	if (event == DOUBLECLICK) {
 		CARLYN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = false;
 		add(["name", "job", "bye"]);
@@ -29237,7 +29246,7 @@ void FuncCarlyn object#(FIRST_NPC_FUNCTION - CARLYN)() {
 void FuncDeSnel object#(FIRST_NPC_FUNCTION - DE_SNEL)() {
 	if (event == DOUBLECLICK) {
 		DE_SNEL->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = DE_SNEL->get_npc_object()->get_schedule_type();
 		var var0003 = DE_SNEL->get_npc_object();
@@ -29428,7 +29437,7 @@ void FuncDeSnel object#(FIRST_NPC_FUNCTION - DE_SNEL)() {
 void FuncJoseph object#(FIRST_NPC_FUNCTION - JOSEPH)() {
 	if (event == DOUBLECLICK) {
 		JOSEPH->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (gflags[EA_GONE_TO_JHELOM]) {
@@ -29617,7 +29626,7 @@ void FuncKliftin object#(FIRST_NPC_FUNCTION - KLIFTIN)() {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		KLIFTIN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var0001 = UI_part_of_day();
 		var0002 = KLIFTIN->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
@@ -29841,7 +29850,7 @@ void FuncKliftin object#(FIRST_NPC_FUNCTION - KLIFTIN)() {
 void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA)() {
 	if (event == DOUBLECLICK) {
 		OPHELIA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_is_pc_female();
 		var var0002 = UI_part_of_day();
 		var var0003 = OPHELIA->get_npc_object()->get_schedule_type();
@@ -30152,7 +30161,7 @@ void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA)() {
 void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE)() {
 	if (event == DOUBLECLICK) {
 		DAPHNE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = DAPHNE->get_npc_object()->get_schedule_type();
 		var var0003 = Func08F7(OPHELIA);
@@ -30369,7 +30378,7 @@ void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE)() {
 void FuncSprellic object#(FIRST_NPC_FUNCTION - SPRELLIC)() {
 	if (event == DOUBLECLICK) {
 		SPRELLIC->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		var var0002 = false;
 		var var0003 = VOKES->get_npc_object()->is_dead();
@@ -30658,7 +30667,7 @@ void FuncSprellic object#(FIRST_NPC_FUNCTION - SPRELLIC)() {
 void FuncVokes object#(FIRST_NPC_FUNCTION - VOKES)() {
 	if (event == DOUBLECLICK) {
 		VOKES->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = VOKES->get_npc_object();
 		var var0003 = TIMMONS->get_npc_object();
@@ -30809,7 +30818,7 @@ void FuncVokes object#(FIRST_NPC_FUNCTION - VOKES)() {
 void FuncSyria object#(FIRST_NPC_FUNCTION - SYRIA)() {
 	if (event == DOUBLECLICK) {
 		SYRIA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = SYRIA->get_npc_object();
 		var var0003 = VOKES->get_npc_object();
@@ -31001,7 +31010,7 @@ void FuncSyria object#(FIRST_NPC_FUNCTION - SYRIA)() {
 void FuncTimmons object#(FIRST_NPC_FUNCTION - TIMMONS)() {
 	if (event == DOUBLECLICK) {
 		TIMMONS->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = TIMMONS->get_npc_object();
 		var var0003 = SYRIA->get_npc_object();
@@ -31110,7 +31119,7 @@ void FuncIriale object#(FIRST_NPC_FUNCTION - IRIALE)() {
 		abort;
 	}
 	IRIALE->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0908();
+	var var0000 = getAvatarName();
 	add(["name", "job", "bye"]);
 	if (gflags[MET_GORN]) {
 		add("Gorn");
@@ -31186,7 +31195,7 @@ void FuncIriale object#(FIRST_NPC_FUNCTION - IRIALE)() {
 void FuncRussell object#(FIRST_NPC_FUNCTION - RUSSELL)() {
 	if (event == DOUBLECLICK) {
 		RUSSELL->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = RUSSELL->get_npc_object()->get_schedule_type();
 		var var0003 = UI_wearing_fellowship();
@@ -31395,7 +31404,7 @@ void FuncRussell object#(FIRST_NPC_FUNCTION - RUSSELL)() {
 void FuncBoris object#(FIRST_NPC_FUNCTION - BORIS)() {
 	if (event == DOUBLECLICK) {
 		BORIS->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = BORIS->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
@@ -31661,7 +31670,7 @@ void FuncBoris object#(FIRST_NPC_FUNCTION - BORIS)() {
 void FuncMagenta object#(FIRST_NPC_FUNCTION - MAGENTA)() {
 	if (event == DOUBLECLICK) {
 		MAGENTA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (gflags[MAGENTA_FOUND_LOCKET] && (!gflags[AVATAR_HAS_LOCKET])) {
 			add("locket");
@@ -31847,7 +31856,7 @@ void FuncMagenta object#(FIRST_NPC_FUNCTION - MAGENTA)() {
 void FuncHenry object#(FIRST_NPC_FUNCTION - HENRY)() {
 	if (event == DOUBLECLICK) {
 		HENRY->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (gflags[THREE_STRANGERS]) {
 			add("strangers");
@@ -31997,7 +32006,7 @@ void FuncHenry object#(FIRST_NPC_FUNCTION - HENRY)() {
 void FuncConstance object#(FIRST_NPC_FUNCTION - CONSTANCE)() {
 	if (event == DOUBLECLICK) {
 		CONSTANCE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = Func08F7(SHAMINO);
 		var var0002 = Func08F7(IOLO);
 		var var0003 = Func08F7(DUPRE);
@@ -32197,7 +32206,7 @@ void FuncConstance object#(FIRST_NPC_FUNCTION - CONSTANCE)() {
 void FuncRobin object#(FIRST_NPC_FUNCTION - ROBIN)() {
 	if (event == DOUBLECLICK) {
 		ROBIN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = ROBIN->get_npc_object();
 		var var0002 = LEAVELL->get_npc_object();
 		var var0003 = BATTLES->get_npc_object();
@@ -32444,7 +32453,7 @@ void FuncRobin object#(FIRST_NPC_FUNCTION - ROBIN)() {
 void FuncBattles object#(FIRST_NPC_FUNCTION - BATTLES)() {
 	if (event == DOUBLECLICK) {
 		BATTLES->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = Func08F7(ROBIN);
 		var var0003 = Func08F7(LEAVELL);
@@ -32580,7 +32589,7 @@ void FuncBattles object#(FIRST_NPC_FUNCTION - BATTLES)() {
 void FuncLeavell object#(FIRST_NPC_FUNCTION - LEAVELL)() {
 	if (event == DOUBLECLICK) {
 		LEAVELL->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = Func08F7(ROBIN);
 		var var0003 = Func08F7(BATTLES);
@@ -32769,8 +32778,8 @@ void FuncSam object#(FIRST_NPC_FUNCTION - SAM)() {
 	declare var var0003;
 	if (event == DOUBLECLICK) {
 		SAM->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var0002 = UI_part_of_day();
 		var0003 = SAM->get_npc_object()->get_schedule_type();
 		var var0004 = "Avatar";
@@ -33017,8 +33026,8 @@ void FuncGorn object#(FIRST_NPC_FUNCTION - GORN)() {
 		abort;
 	}
 	GORN->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0908();
-	var var0001 = Func0909();
+	var var0000 = getAvatarName();
+	var var0001 = getPoliteTitle();
 	var var0002 = Func08F7(IOLO);
 	var var0003 = Func08F7(SHAMINO);
 	var var0004 = Func08F7(DUPRE);
@@ -33461,8 +33470,8 @@ void FuncHorance object#(FIRST_NPC_FUNCTION - HORANCE)() {
 						 "does not, or cannot, respond.*");
 			abort;
 		}
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = Func08F7(ROWENA);
 		var var0003 = false;
 		if (gflags[WELL_DESTROYED]) {
@@ -33672,7 +33681,7 @@ void FuncTrent object#(FIRST_NPC_FUNCTION - TRENT)() {
 	if (event == DOUBLECLICK) {
 		TRENT->show_npc_face(DEFAULT_FACE);
 		var var0000 = Func0931(PARTY, 1, SHAPE_WEDDING_RING, 0, FRAME_ANY);
-		var var0001 = Func0909();
+		var var0001 = getPoliteTitle();
 		var var0002 = TRENT->find_nearest(SHAPE_SOUL_CAGE, ON_SCREEN);
 		var var0003 = false;
 		if (gflags[LEFT_WHILE_TRENT_WORKING]) {
@@ -33854,8 +33863,8 @@ void FuncTrent object#(FIRST_NPC_FUNCTION - TRENT)() {
 void FuncMordra object#(FIRST_NPC_FUNCTION - MORDRA)() {
 	if (event == DOUBLECLICK) {
 		MORDRA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
-		var var0001 = Func0908();
+		var var0000 = getPoliteTitle();
+		var var0001 = getAvatarName();
 		var var0002 = false;
 		var var0003 = false;
 		var var0004 = false;
@@ -34152,7 +34161,7 @@ void FuncRowena object#(FIRST_NPC_FUNCTION - ROWENA)() {
 			add("sacrifice");
 		}
 		var var0000 = UI_is_pc_female();
-		var var0001 = Func0909();
+		var var0001 = getPoliteTitle();
 		if (gflags[REUNITED]) {
 			ROWENA->show_npc_face(ROWENA_HAPPY);
 			Func08D6();
@@ -34237,7 +34246,7 @@ void FuncRowena object#(FIRST_NPC_FUNCTION - ROWENA)() {
 void FuncPaulette object#(FIRST_NPC_FUNCTION - PAULETTE)() {
 	if (event == DOUBLECLICK) {
 		PAULETTE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_is_pc_female();
 		var var0002 = UI_part_of_day();
 		var var0003 = PAULETTE->get_schedule_type();
@@ -34469,7 +34478,7 @@ void FuncQuenton object#(FIRST_NPC_FUNCTION - QUENTON)() {
 			abort;
 		}
 		var var0000 = false;
-		var var0001 = Func0909();
+		var var0001 = getPoliteTitle();
 		var var0002 = Func08F7(MARKHAM);
 		declare var var0003;
 		if (gflags[MET_MARKHAM]) {
@@ -34787,7 +34796,7 @@ void FuncForsythe object#(FIRST_NPC_FUNCTION - FORSYTHE)() {
 				abort;
 			}
 		}
-		var var0005 = Func0909();
+		var var0005 = getPoliteTitle();
 		declare var var0006;
 		declare var var0007;
 		if (gflags[FIND_SACRIFICE]) {
@@ -35244,9 +35253,9 @@ void FuncPenumbra object#(FIRST_NPC_FUNCTION - PENUMBRA)() {
 	}
 	PENUMBRA->show_npc_face(DEFAULT_FACE);
 	gflags[BLACKROCK_DONE] = Func08C9();
-	var var0000 = Func0908();
+	var var0000 = getAvatarName();
 	var var0001 = Func0931(PARTY, 1, SHAPE_ETHEREAL_RING, QUALITY_ANY, FRAME_ANY);
-	var var0002 = Func0909();
+	var var0002 = getPoliteTitle();
 	add(["name", "job", "bye"]);
 	if (gflags[BLACKROCK_QUEST]) {
 		add("blackrock");
@@ -35496,7 +35505,7 @@ void FuncKissme object#(FIRST_NPC_FUNCTION - KISSME)() {
 		var var0001 = Func08F7(SPARK);
 		var var0002 = Func08F7(DUPRE);
 		var var0003 = Func08F7(SHAMINO);
-		var var0004 = Func0909();
+		var var0004 = getPoliteTitle();
 		var0005 = KISSME->get_npc_object()->get_schedule_type();
 		var var0006 = UI_is_pc_female();
 		add(["name", "job", "bye"]);
@@ -35695,8 +35704,8 @@ void FuncKissme object#(FIRST_NPC_FUNCTION - KISSME)() {
 void FuncZelda object#(FIRST_NPC_FUNCTION - ZELDA)() {
 	if (event == DOUBLECLICK) {
 		ZELDA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = false;
 		add(["name", "job", "bye"]);
 		var var0003 = UI_is_pc_female();
@@ -35911,8 +35920,8 @@ void FuncZelda object#(FIRST_NPC_FUNCTION - ZELDA)() {
 void FuncMariah object#(FIRST_NPC_FUNCTION - MARIAH)() {
 	if (event == DOUBLECLICK) {
 		MARIAH->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
-		var var0001 = Func0908();
+		var var0000 = getPoliteTitle();
+		var var0001 = getAvatarName();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_MARIAH]) {
 			say("You see your old friend Mariah.");
@@ -36084,8 +36093,8 @@ void FuncGrod object#(FIRST_NPC_FUNCTION - GROD)() {
 		var var0001 = Func08F7(SPARK);
 		var var0002 = Func08F7(ANTON);
 		var var0003 = Func08F7(SULLIVAN);
-		var var0004 = Func0909();
-		var var0005 = Func0908();
+		var var0004 = getPoliteTitle();
+		var var0005 = getAvatarName();
 		GROD->get_npc_object()->set_alignment(EVIL);
 		if (!gflags[MET_GROD]) {
 			say("The troll snarls at you, obviously displeased at your "
@@ -36128,7 +36137,7 @@ void FuncGrod object#(FIRST_NPC_FUNCTION - GROD)() {
 				}
 			} else {
 				say("\"I Grod. Who you?\"");
-				var0005 = Func0908();
+				var0005 = getAvatarName();
 				var var0009 = "the Avatar";
 				var var000A = askForResponse([var0005, var0009, var0004]);
 				if (var000A == var0005) {
@@ -36272,8 +36281,8 @@ void FuncGrod object#(FIRST_NPC_FUNCTION - GROD)() {
 void FuncCubolt object#(FIRST_NPC_FUNCTION - CUBOLT)() {
 	if (event == DOUBLECLICK) {
 		CUBOLT->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = false;
 		add(["name", "job", "bye"]);
 		var var0003 = UI_wearing_fellowship();
@@ -36391,8 +36400,8 @@ void FuncCubolt object#(FIRST_NPC_FUNCTION - CUBOLT)() {
 void FuncBalayna object#(FIRST_NPC_FUNCTION - BALAYNA)() {
 	if (event == DOUBLECLICK) {
 		BALAYNA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = UI_part_of_day();
 		var var0003 = false;
 		add(["name", "job", "Fellowship", "bye"]);
@@ -36590,7 +36599,7 @@ void FuncBalayna object#(FIRST_NPC_FUNCTION - BALAYNA)() {
 void FuncTolemac object#(FIRST_NPC_FUNCTION - TOLEMAC)() {
 	if (event == DOUBLECLICK) {
 		TOLEMAC->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		add(["name", "job", "Fellowship", "bye"]);
 		if (gflags[RECTOL]) {
@@ -36718,8 +36727,8 @@ void FuncTolemac object#(FIRST_NPC_FUNCTION - TOLEMAC)() {
 void FuncMorz object#(FIRST_NPC_FUNCTION - MORZ)() {
 	if (event == DOUBLECLICK) {
 		MORZ->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_MORZ]) {
 			say("The man before you shyly looks away.");
@@ -36797,8 +36806,8 @@ void FuncMorz object#(FIRST_NPC_FUNCTION - MORZ)() {
 void FuncJillian object#(FIRST_NPC_FUNCTION - JILLIAN)() {
 	if (event == DOUBLECLICK) {
 		JILLIAN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = UI_part_of_day();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_JILLIAN]) {
@@ -36865,8 +36874,8 @@ void FuncJillian object#(FIRST_NPC_FUNCTION - JILLIAN)() {
 void FuncEffrem object#(FIRST_NPC_FUNCTION - EFFREM)() {
 	if (event == DOUBLECLICK) {
 		EFFREM->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = "the Avatar";
 		var var0003 = UI_is_pc_female();
 		var var0004 = false;
@@ -37002,8 +37011,8 @@ void FuncEffrem object#(FIRST_NPC_FUNCTION - EFFREM)() {
 void FuncChad object#(FIRST_NPC_FUNCTION - CHAD)() {
 	if (event == DOUBLECLICK) {
 		CHAD->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = "Avatar";
 		add(["name", "job", "bye"]);
 		declare var var0003;
@@ -37112,8 +37121,8 @@ void FuncChad object#(FIRST_NPC_FUNCTION - CHAD)() {
 void FuncElad object#(FIRST_NPC_FUNCTION - ELAD)() {
 	if (event == DOUBLECLICK) {
 		ELAD->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_ELAD]) {
 			say("The man looks at you through smiling eyes.");
@@ -37246,8 +37255,8 @@ void FuncElad object#(FIRST_NPC_FUNCTION - ELAD)() {
 void FuncPhearcy object#(FIRST_NPC_FUNCTION - PHEARCY)() {
 	if (event == DOUBLECLICK) {
 		PHEARCY->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = Func08F7(DUPRE);
 		var var0003 = UI_part_of_day();
 		var var0004 = false;
@@ -37496,8 +37505,8 @@ void FuncPhearcy object#(FIRST_NPC_FUNCTION - PHEARCY)() {
 void FuncAddom object#(FIRST_NPC_FUNCTION - ADDOM)() {
 	if (event == DOUBLECLICK) {
 		ADDOM->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = false;
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_ADDOM]) {
@@ -37639,8 +37648,8 @@ void FuncAddom object#(FIRST_NPC_FUNCTION - ADDOM)() {
 void FuncFrank object#(FIRST_NPC_FUNCTION - FRANK)() {
 	if (event == DOUBLECLICK) {
 		FRANK->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = false;
 		add(["name", "job", "bye"]);
 		if (gflags[MET_FRANK]) {
@@ -37775,7 +37784,7 @@ void FuncFrank object#(FIRST_NPC_FUNCTION - FRANK)() {
 void FuncThurston object#(FIRST_NPC_FUNCTION - THURSTON)() {
 	if (event == DOUBLECLICK) {
 		THURSTON->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = THURSTON->get_npc_object()->get_schedule_type();
 		var var0003 = UI_wearing_fellowship();
@@ -37976,7 +37985,7 @@ void FuncThurston object#(FIRST_NPC_FUNCTION - THURSTON)() {
 void FuncFeridwyn object#(FIRST_NPC_FUNCTION - FERIDWYN)() {
 	if (event == DOUBLECLICK) {
 		FERIDWYN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		var var0002 = false;
 		var var0003 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
@@ -38276,7 +38285,7 @@ void FuncFeridwyn object#(FIRST_NPC_FUNCTION - FERIDWYN)() {
 void FuncBrita object#(FIRST_NPC_FUNCTION - BRITA)() {
 	if (event == DOUBLECLICK) {
 		BRITA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (gflags[HEARD_ABOUT_PAWS_THEFT] && (!gflags[GARRITT_GUILTY])) {
 			add("thief");
@@ -38449,7 +38458,7 @@ void FuncBrita object#(FIRST_NPC_FUNCTION - BRITA)() {
 void FuncAlina object#(FIRST_NPC_FUNCTION - ALINA)() {
 	if (event == DOUBLECLICK) {
 		ALINA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_ALINA]) {
@@ -38557,10 +38566,10 @@ void FuncAlina object#(FIRST_NPC_FUNCTION - ALINA)() {
 void FuncMerrick object#(FIRST_NPC_FUNCTION - MERRICK)() {
 	if (event == DOUBLECLICK) {
 		MERRICK->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		var var0001 = "Avatar";
 		var var0002 = "None of thy concern";
-		var var0003 = Func0909();
+		var var0003 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (gflags[HEARD_ABOUT_PAWS_THEFT]) {
 			add("thief");
@@ -38709,7 +38718,7 @@ void FuncMerrick object#(FIRST_NPC_FUNCTION - MERRICK)() {
 void FuncGarritt object#(FIRST_NPC_FUNCTION - GARRITT)() {
 	if (event == DOUBLECLICK) {
 		GARRITT->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (gflags[STREET_TROUBLE]) {
@@ -38943,8 +38952,8 @@ void FuncGarritt object#(FIRST_NPC_FUNCTION - GARRITT)() {
 void FuncMorfin object#(FIRST_NPC_FUNCTION - MORFIN)() {
 	if (event == DOUBLECLICK) {
 		MORFIN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = "Avatar";
 		var var0003 = "None of thy concern";
 		var var0004 = UI_part_of_day();
@@ -39297,7 +39306,7 @@ void FuncBeverlea object#(FIRST_NPC_FUNCTION - BEVERLEA)() {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		BEVERLEA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var0002 = BEVERLEA->get_npc_object()->get_schedule_type();
 		var var0003 = AVATAR->find_nearest(SHAPE_HOURGLASS, ON_SCREEN);
@@ -39556,7 +39565,7 @@ void FuncBeverlea object#(FIRST_NPC_FUNCTION - BEVERLEA)() {
 void FuncKomor object#(FIRST_NPC_FUNCTION - KOMOR)() {
 	if (event == DOUBLECLICK) {
 		KOMOR->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = Func08F7(FENN);
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_KOMOR]) {
@@ -39718,7 +39727,7 @@ void FuncKomor object#(FIRST_NPC_FUNCTION - KOMOR)() {
 void FuncFenn object#(FIRST_NPC_FUNCTION - FENN)() {
 	if (event == DOUBLECLICK) {
 		FENN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (gflags[HEARD_ABOUT_PAWS_THEFT]) {
 			add("thief");
@@ -39915,7 +39924,7 @@ void FuncFenn object#(FIRST_NPC_FUNCTION - FENN)() {
 void FuncAndrew object#(FIRST_NPC_FUNCTION - ANDREW)() {
 	if (event == DOUBLECLICK) {
 		ANDREW->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = ANDREW->get_npc_object()->get_schedule_type();
 		var var0003 = false;
@@ -40101,7 +40110,7 @@ void FuncAndrew object#(FIRST_NPC_FUNCTION - ANDREW)() {
 void FuncCamille object#(FIRST_NPC_FUNCTION - CAMILLE)() {
 	if (event == DOUBLECLICK) {
 		CAMILLE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		if (gflags[FERIDWYN_ACCUSED_TOBIAS] && (!gflags[CAMILLE_PLEADS])) {
 			say("\"Avatar! My son Tobias has been wrongly accused! He is no "
 				"thief! And I cannot believe a vial of venom was found in his "
@@ -40293,7 +40302,7 @@ void FuncCamille object#(FIRST_NPC_FUNCTION - CAMILLE)() {
 void FuncTobias object#(FIRST_NPC_FUNCTION - TOBIAS)() {
 	if (event == DOUBLECLICK) {
 		TOBIAS->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = TOBIAS->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[HEARD_ABOUT_PAWS_THEFT]) {
@@ -40496,7 +40505,7 @@ void FuncTobias object#(FIRST_NPC_FUNCTION - TOBIAS)() {
 void FuncPolly object#(FIRST_NPC_FUNCTION - POLLY)() {
 	if (event == DOUBLECLICK) {
 		POLLY->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = POLLY->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
@@ -40626,7 +40635,7 @@ void FuncPolly object#(FIRST_NPC_FUNCTION - POLLY)() {
 void FuncDraxinusom object#(FIRST_NPC_FUNCTION - DRAXINUSOM)() {
 	if (event == DOUBLECLICK) {
 		DRAXINUSOM->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		add(["name", "job", "bye"]);
 		if (gflags[DRAX_INAMO]) {
 			if (!gflags[DRAX_KNOWS]) {
@@ -41029,7 +41038,7 @@ void FuncInmanilem object#(FIRST_NPC_FUNCTION - INMANILEM)() {
 void FuncTeregus object#(FIRST_NPC_FUNCTION - TEREGUS)() {
 	if (event == DOUBLECLICK) {
 		TEREGUS->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_TEREGUS]) {
 			say("You see a winged gargoyle in his physical prime.~~\"Hail, "
@@ -41330,7 +41339,7 @@ void FuncRuneb object#(FIRST_NPC_FUNCTION - RUNEB)() {
 void FuncQuan object#(FIRST_NPC_FUNCTION - QUAN)() {
 	if (event == DOUBLECLICK) {
 		QUAN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		var var0001 = UI_part_of_day();
 		var var0002 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 		if (var0001 == NIGHT) {
@@ -42168,7 +42177,7 @@ void FuncMartingo object#(FIRST_NPC_FUNCTION - MARTINGO)() {
 	if (event == DOUBLECLICK) {
 		MARTINGO->show_npc_face(DEFAULT_FACE);
 		var var0000 = UI_is_pc_female();
-		var var0001 = Func0908();
+		var var0001 = getAvatarName();
 		add(["name", "job", "bye"]);
 		if (gflags[DRAX_SAID_SULTAN]) {
 			add(["Ethereal Ring"]);
@@ -42375,7 +42384,7 @@ void FuncMartingo object#(FIRST_NPC_FUNCTION - MARTINGO)() {
 void FuncMenion object#(FIRST_NPC_FUNCTION - MENION)() {
 	if (event == DOUBLECLICK) {
 		MENION->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = MENION->get_npc_object()->get_schedule_type();
 		var var0002 = UI_part_of_day();
 		add(["name", "job", "bye"]);
@@ -42476,7 +42485,7 @@ void FuncMenion object#(FIRST_NPC_FUNCTION - MENION)() {
 void FuncPendaran object#(FIRST_NPC_FUNCTION - PENDARAN)() {
 	if (event == DOUBLECLICK) {
 		PENDARAN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = false;
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_PENDARAN]) {
@@ -42587,8 +42596,8 @@ void FuncJehanne object#(FIRST_NPC_FUNCTION - JEHANNE)() {
 	declare var var0008;
 	if (event == DOUBLECLICK) {
 		JEHANNE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = false;
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_JEHANNE]) {
@@ -42790,8 +42799,8 @@ void FuncJehanne object#(FIRST_NPC_FUNCTION - JEHANNE)() {
 void FuncJohnPaul object#(FIRST_NPC_FUNCTION - JOHN_PAUL)() {
 	if (event == DOUBLECLICK) {
 		JOHN_PAUL->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = Func08F7(HORFFE);
 		var var0003 = false;
 		add(["name", "job", "bye"]);
@@ -43018,8 +43027,8 @@ void FuncJohnPaul object#(FIRST_NPC_FUNCTION - JOHN_PAUL)() {
 void FuncRichter object#(FIRST_NPC_FUNCTION - RICHTER)() {
 	if (event == DOUBLECLICK) {
 		RICHTER->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
-		var var0001 = Func0908();
+		var var0000 = getPoliteTitle();
+		var var0001 = getAvatarName();
 		var var0002 = "the Avatar";
 		var var0003 = RICHTER->get_npc_object()->get_schedule_type();
 		add(["name", "job", "Fellowship", "bye"]);
@@ -43344,8 +43353,8 @@ void FuncHorffe object#(FIRST_NPC_FUNCTION - HORFFE)() {
 void FuncJordan object#(FIRST_NPC_FUNCTION - JORDAN)() {
 	if (event == DOUBLECLICK) {
 		JORDAN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
-		var var0001 = Func0908();
+		var var0000 = getPoliteTitle();
+		var var0001 = getAvatarName();
 		var var0002 = "Avatar";
 		var var0003 = Func08F7(IOLO);
 		var var0004 = Func08F7(SHAMINO);
@@ -43490,8 +43499,8 @@ void FuncJordan object#(FIRST_NPC_FUNCTION - JORDAN)() {
 void FuncDenton object#(FIRST_NPC_FUNCTION - DENTON)() {
 	if (event == DOUBLECLICK) {
 		DENTON->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = Func08F7(DUPRE);
 		add(["name", "job", "bye"]);
 		if (gflags[STARTED_HOLD_INVESTIGATION]
@@ -43755,8 +43764,8 @@ void FuncDenton object#(FIRST_NPC_FUNCTION - DENTON)() {
 void FuncTory object#(FIRST_NPC_FUNCTION - TORY)() {
 	if (event == DOUBLECLICK) {
 		TORY->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = false;
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_TORY]) {
@@ -43968,7 +43977,7 @@ void FuncTory object#(FIRST_NPC_FUNCTION - TORY)() {
 void FuncLeigh object#(FIRST_NPC_FUNCTION - LEIGH)() {
 	if (event == DOUBLECLICK) {
 		LEIGH->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = LEIGH->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[GOT_CHIPS]) {
@@ -44225,8 +44234,8 @@ void FuncIan object#(FIRST_NPC_FUNCTION - IAN)() {
 void FuncCador object#(FIRST_NPC_FUNCTION - CADOR)() {
 	if (event == DOUBLECLICK) {
 		CADOR->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
-		var var0001 = Func0908();
+		var var0000 = getPoliteTitle();
+		var var0001 = getAvatarName();
 		var var0002 = "the Avatar";
 		var var0003 = UI_part_of_day();
 		var var0004 = CADOR->get_npc_object();
@@ -44349,8 +44358,8 @@ void FuncCador object#(FIRST_NPC_FUNCTION - CADOR)() {
 void FuncMara object#(FIRST_NPC_FUNCTION - MARA)() {
 	if (event == DOUBLECLICK) {
 		MARA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
-		var var0001 = Func0908();
+		var var0000 = getPoliteTitle();
+		var var0001 = getAvatarName();
 		var var0002 = "the Avatar";
 		var var0003 = MARA->get_npc_object();
 		var var0004 = CADOR->get_npc_object();
@@ -44458,8 +44467,8 @@ void FuncZaksam object#(FIRST_NPC_FUNCTION - ZAKSAM)() {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		ZAKSAM->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var0002 = ZAKSAM->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_ZAKSAM]) {
@@ -44586,7 +44595,7 @@ void FuncEldroth object#(FIRST_NPC_FUNCTION - ELDROTH)() {
 	declare var var0001;
 	if (event == DOUBLECLICK) {
 		ELDROTH->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var0001 = ELDROTH->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_ELDROTH]) {
@@ -44713,8 +44722,8 @@ void FuncEldroth object#(FIRST_NPC_FUNCTION - ELDROTH)() {
 void FuncYongi object#(FIRST_NPC_FUNCTION - YONGI)() {
 	if (event == DOUBLECLICK) {
 		YONGI->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = "the Avatar";
 		var var0003 = Func08F7(DUPRE);
 		var var0004 = false;
@@ -44894,7 +44903,7 @@ void FuncYongi object#(FIRST_NPC_FUNCTION - YONGI)() {
 void FuncBlorn object#(FIRST_NPC_FUNCTION - BLORN)() {
 	if (event == DOUBLECLICK) {
 		BLORN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_BLORN]) {
 			say("The man before you narrows his eyes to slits as he sees you.");
@@ -45000,8 +45009,8 @@ void FuncBlorn object#(FIRST_NPC_FUNCTION - BLORN)() {
 void FuncAuston object#(FIRST_NPC_FUNCTION - AUSTON)() {
 	if (event == DOUBLECLICK) {
 		AUSTON->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = false;
 		var var0003 = false;
 		add(["name", "job", "bye"]);
@@ -45153,8 +45162,8 @@ void FuncAuston object#(FIRST_NPC_FUNCTION - AUSTON)() {
 void FuncLiana object#(FIRST_NPC_FUNCTION - LIANA)() {
 	if (event == DOUBLECLICK) {
 		LIANA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = false;
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_LIANA]) {
@@ -45400,8 +45409,8 @@ void FuncLapLem object#(FIRST_NPC_FUNCTION - LAP_LEM)() {
 void FuncYvella object#(FIRST_NPC_FUNCTION - YVELLA)() {
 	if (event == DOUBLECLICK) {
 		YVELLA->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = false;
 		var var0003 = CADOR->get_npc_object()->is_dead();
 		var var0004 = "the Avatar";
@@ -45597,7 +45606,7 @@ void FuncYvella object#(FIRST_NPC_FUNCTION - YVELLA)() {
 void FuncCatherine object#(FIRST_NPC_FUNCTION - CATHERINE)() {
 	if (event == DOUBLECLICK) {
 		CATHERINE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		var var0001 = Func08F7(FOR_LEM);
 		if (var0001) {
@@ -46008,8 +46017,8 @@ void FuncAnmanivas object#(FIRST_NPC_FUNCTION - ANMANIVAS)() {
 		ANMANIVAS->show_npc_face(DEFAULT_FACE);
 		var var0000 = ANMANIVAS->get_npc_object();
 		var var0001 = FORANAMO->get_npc_object();
-		var var0002 = Func0908();
-		var var0003 = Func0909();
+		var var0002 = getAvatarName();
+		var var0003 = getPoliteTitle();
 		var var0004 = "the Avatar";
 		var var0005 = var0000->get_alignment();
 		if (var0005 == GOOD) {
@@ -46095,8 +46104,8 @@ void FuncForanamo object#(FIRST_NPC_FUNCTION - FORANAMO)() {
 		FORANAMO->show_npc_face(DEFAULT_FACE);
 		var var0000 = FORANAMO->get_npc_object();
 		var var0001 = ANMANIVAS->get_npc_object();
-		var var0002 = Func0908();
-		var var0003 = Func0909();
+		var var0002 = getAvatarName();
+		var var0003 = getPoliteTitle();
 		var var0004 = "the Avatar";
 		var var0005 = var0001->get_alignment();
 		if (var0005 == GOOD) {
@@ -46258,8 +46267,8 @@ void FuncAurvidlem object#(FIRST_NPC_FUNCTION - AURVIDLEM)() {
 void FuncSullivan object#(FIRST_NPC_FUNCTION - SULLIVAN)() {
 	if (event == DOUBLECLICK) {
 		SULLIVAN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
-		var var0001 = Func0908();
+		var var0000 = getPoliteTitle();
+		var var0001 = getAvatarName();
 		var var0002 = Func08F7(ANTON);
 		var var0003 = Func08F7(GROD);
 		var var0004 = false;
@@ -46444,7 +46453,7 @@ void FuncWench object#(FIRST_NPC_FUNCTION - WENCH)() {
 	WENCH->show_npc_face(DEFAULT_FACE);
 	var var0000 = UI_part_of_day();
 	var var0001 = WENCH->get_npc_object()->get_schedule_type();
-	var var0002 = Func0908();
+	var var0002 = getAvatarName();
 	var var0003 = "Avatar";
 	var var0004 = UI_is_pc_female();
 	declare var var0005;
@@ -46796,7 +46805,7 @@ void FuncMartine object#(FIRST_NPC_FUNCTION - MARTINE)() {
 	MARTINE->show_npc_face(DEFAULT_FACE);
 	var var0000 = UI_part_of_day();
 	var var0001 = MARTINE->get_npc_object()->get_schedule_type();
-	var var0002 = Func0908();
+	var var0002 = getAvatarName();
 	var var0003 = "Avatar";
 	var var0004 = UI_is_pc_female();
 	declare var var0005;
@@ -46962,7 +46971,7 @@ void FuncRoberto object#(FIRST_NPC_FUNCTION - ROBERTO)() {
 	ROBERTO->show_npc_face(DEFAULT_FACE);
 	var var0000 = UI_part_of_day();
 	var var0001 = ROBERTO->get_npc_object()->get_schedule_type();
-	var var0002 = Func0908();
+	var var0002 = getAvatarName();
 	var var0003 = "Avatar";
 	var var0004 = UI_is_pc_female();
 	declare var var0005;
@@ -47262,7 +47271,7 @@ void FuncSintag object#(FIRST_NPC_FUNCTION - SINTAG)() {
 void FuncBlacktooth object#(FIRST_NPC_FUNCTION - BLACKTOOTH)() {
 	if (event == DOUBLECLICK) {
 		BLACKTOOTH->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		var var0001 = UI_wearing_fellowship();
 		var var0002 = "Avatar";
 		var var0003 = BLACKTOOTH->get_npc_object();
@@ -47451,7 +47460,7 @@ void FuncBlacktooth object#(FIRST_NPC_FUNCTION - BLACKTOOTH)() {
 void FuncMole object#(FIRST_NPC_FUNCTION - MOLE)() {
 	if (event == DOUBLECLICK) {
 		MOLE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = UI_wearing_fellowship();
 		var var0002 = MOLE->get_npc_object();
 		add(["name", "job", "bye"]);
@@ -47928,8 +47937,8 @@ void FuncGordy object#(FIRST_NPC_FUNCTION - GORDY)() {
 		GORDY->show_npc_face(DEFAULT_FACE);
 		var var0000 = UI_part_of_day();
 		var var0001 = UI_wearing_fellowship();
-		var var0002 = Func0909();
-		var var0003 = Func0908();
+		var var0002 = getPoliteTitle();
+		var var0003 = getAvatarName();
 		var var0004 = "Avatar";
 		var var0005 = "a pseudonym";
 		add(["name", "job", "bye"]);
@@ -48080,7 +48089,7 @@ void FuncMandy object#(FIRST_NPC_FUNCTION - MANDY)() {
 		MANDY->show_npc_face(DEFAULT_FACE);
 		var var0000 = UI_part_of_day();
 		var var0001 = MANDY->get_npc_object()->get_schedule_type();
-		var var0002 = Func0909();
+		var var0002 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (var0001 == WAITER) {
 			add(["food", "drink", "room", "buy"]);
@@ -48368,7 +48377,7 @@ void FuncSmithy object#(FIRST_NPC_FUNCTION - SMITHY)() {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		SMITHY->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var0001 = UI_part_of_day();
 		var0002 = SMITHY->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
@@ -48705,7 +48714,7 @@ void FuncKessler object#(FIRST_NPC_FUNCTION - KESSLER)() {
 		KESSLER->show_npc_face(DEFAULT_FACE);
 		var var0000 = UI_part_of_day();
 		var var0001 = KESSLER->get_npc_object()->get_schedule_type();
-		var var0002 = Func0909();
+		var var0002 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		var var0003 = Func0931(PARTY, 1, SHAPE_VENOM, QUALITY_ANY, FRAME_ANY);
 		if (var0003) {
@@ -48902,8 +48911,8 @@ void FuncKessler object#(FIRST_NPC_FUNCTION - KESSLER)() {
 void FuncPerrin object#(FIRST_NPC_FUNCTION - PERRIN)() {
 	if (event == DOUBLECLICK) {
 		PERRIN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_PERRIN]) {
 			say("The man before you stretches and inhales deeply.");
@@ -48997,7 +49006,7 @@ void FuncOwings object#(FIRST_NPC_FUNCTION - OWINGS)() {
 		abort;
 	}
 	OWINGS->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	var var0001 = Func08F7(MALLOY);
 	var var0002 = Func08F7(IOLO);
 	var var0003 = Func08F7(SHAMINO);
@@ -49215,7 +49224,7 @@ void FuncOwings object#(FIRST_NPC_FUNCTION - OWINGS)() {
 void FuncAnton object#(FIRST_NPC_FUNCTION - ANTON)() {
 	if (event == DOUBLECLICK) {
 		ANTON->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = Func08F7(SULLIVAN);
 		var var0002 = Func08F7(GROD);
 		var var0003 = false;
@@ -49562,7 +49571,7 @@ void FuncPapa object#(FIRST_NPC_FUNCTION - PAPA)() {
 void FuncTaylor object#(FIRST_NPC_FUNCTION - TAYLOR)() {
 	if (event == DOUBLECLICK) {
 		TAYLOR->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = false;
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_TAYLOR]) {
@@ -49739,7 +49748,7 @@ void FuncMalloy object#(FIRST_NPC_FUNCTION - MALLOY)() {
 		abort;
 	}
 	MALLOY->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	var var0001 = Func08F7(OWINGS);
 	var var0002 = Func08F7(IOLO);
 	var var0003 = Func08F7(SHAMINO);
@@ -49943,7 +49952,7 @@ void FuncCairbre object#(FIRST_NPC_FUNCTION - CAIRBRE)() {
 		CAIRBRE->show_npc_face(DEFAULT_FACE);
 		var var0000 = Func08F7(COSMO);
 		var var0001 = Func08F7(KALLIBRUS);
-		var var0002 = Func0909();
+		var var0002 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_CAIRBRE]) {
 			say("The warrior carries himself with confidence.");
@@ -50038,7 +50047,7 @@ void FuncCairbre object#(FIRST_NPC_FUNCTION - CAIRBRE)() {
 void FuncKreg object#(FIRST_NPC_FUNCTION - KREG)() {
 	if (event == DOUBLECLICK) {
 		KREG->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = KREG->get_npc_object();
 		add(["name", "job", "bye"]);
 		var var0002 = var0001->get_alignment();
@@ -50176,7 +50185,7 @@ void FuncKreg object#(FIRST_NPC_FUNCTION - KREG)() {
 void FuncAlagner object#(FIRST_NPC_FUNCTION - ALAGNER)() {
 	if (event == DOUBLECLICK) {
 		ALAGNER->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		var var0001 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (gflags[WISP_SAID_ALAGNER] && (!gflags[CAINE_GAVE_ANSWER])) {
@@ -50385,7 +50394,7 @@ void FuncCaine object#(FIRST_NPC_FUNCTION - CAINE)() {
 		var var0000 = false;
 		var var0001 = false;
 		var var0002 = false;
-		var var0003 = Func0909();
+		var var0003 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_CAINE]) {
 			say("The ghostly man displays a face filled with pain.");
@@ -50659,8 +50668,8 @@ void FuncCaine object#(FIRST_NPC_FUNCTION - CAINE)() {
 void FuncBrion object#(FIRST_NPC_FUNCTION - BRION)() {
 	if (event == DOUBLECLICK) {
 		BRION->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		var var0002 = false;
 		var var0003 = false;
 		add(["name", "job", "bye"]);
@@ -50934,8 +50943,8 @@ void FuncBrion object#(FIRST_NPC_FUNCTION - BRION)() {
 void FuncNelson object#(FIRST_NPC_FUNCTION - NELSON)() {
 	if (event == DOUBLECLICK) {
 		NELSON->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
-		var var0001 = Func0909();
+		var var0000 = getAvatarName();
+		var var0001 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_NELSON]) {
 			say("You see a scholarly-looking man with a friendly expression.");
@@ -51181,7 +51190,7 @@ void FuncNelson object#(FIRST_NPC_FUNCTION - NELSON)() {
 void FuncRankin object#(FIRST_NPC_FUNCTION - RANKIN)() {
 	if (event == DOUBLECLICK) {
 		RANKIN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0908();
+		var var0000 = getAvatarName();
 		var var0001 = false;
 		var var0002 = Func08F7(BALAYNA);
 		var var0003 = UI_part_of_day();
@@ -51730,7 +51739,7 @@ void FuncKallibrus object#(FIRST_NPC_FUNCTION - KALLIBRUS)() {
 		var var0000 = Func08F7(COSMO);
 		var var0001 = Func08F7(CAIRBRE);
 		var var0002 = false;
-		var var0003 = Func0909();
+		var var0003 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_KALLIBRUS]) {
 			say("You see a rather reserved-looking gargoyle.");
@@ -51832,7 +51841,7 @@ void FuncKallibrus object#(FIRST_NPC_FUNCTION - KALLIBRUS)() {
 void FuncCosmo object#(FIRST_NPC_FUNCTION - COSMO)() {
 	if (event == DOUBLECLICK) {
 		COSMO->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func0909();
+		var var0000 = getPoliteTitle();
 		var var0001 = Func08F7(KALLIBRUS);
 		var var0002 = Func08F7(CAIRBRE);
 		add(["name", "job", "bye"]);
@@ -51942,7 +51951,7 @@ void FuncLasher object#(FIRST_NPC_FUNCTION - LASHER)() {
 		abort;
 	}
 	LASHER->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	if (!gflags[MET_LASHER]) {
 		say("You see a creature the size and shape of a horse. From its head "
 			"protrudes a single straight horn. It looks at you with eyes that "
@@ -52926,7 +52935,7 @@ void Func060E object#(0x60E) () {
 		UI_fade_palette(12 * TICK, 1, FADE_TO_BLACK);
 		UI_play_music(MUSIC_STOP, NULL_OBJ);
 		UI_play_music(MUSIC_WILDERNESS, NULL_OBJ);
-		(@UI_UNKNOWN_83)();
+		(@UNKNOWN_INTRINSIC_83)();
 		var var0000 = get_dead_party();
 		for (var0003 in var0000) {
 			var0004 = var0003->resurrect();
@@ -53072,8 +53081,8 @@ void Func0610 object#(0x610) () {
 			return;
 		}
 	}
-	var var0004 = Func0909();
-	var var0005 = Func0908();
+	var var0004 = getPoliteTitle();
+	var var0005 = getAvatarName();
 	var var0006 = Func08F7(FERIDWYN);
 	var var0007 = Func08F7(BRITA);
 	var var0008 = Func08F7(IOLO);
@@ -53347,7 +53356,7 @@ void Func0619 object#(0x619) () {
 }
 
 void Func061A object#(0x61A) () {
-	(@UI_UNKNOWN_70)();
+	(@UNKNOWN_INTRINSIC_70)();
 }
 
 void Func061B object#(0x61B) () {
@@ -53779,7 +53788,7 @@ void Func0624 object#(0x624) () {
 		var var0000 = [-1, -1, -1, 0, 0, 0, 1, 1, 1];
 		var var0001 = [1, 0, -1, 1, 0, -1, 1, 0, -1];
 		AVATAR->halt_scheduled();
-		Func0828(item, var0000, var0001, -1, Func0624, item, BG_PATH_SUCCESS);
+		tryPathRunUsecodeTo(item, var0000, var0001, -1, Func0624, item, BG_PATH_SUCCESS);
 		UI_set_path_failure(Func0624, item, SCRIPTED);
 	}
 	if (event == SCRIPTED) {
@@ -54167,7 +54176,7 @@ void Func062D object#(0x62D) () {
 			var var0006 = [1, 1];
 			var var0007 = [0, 0];
 			var var0008 = -1;
-			Func0828(
+			tryPathRunUsecodeTo(
 					var0004, var0006, var0007, var0008, FuncSpinningWheel, var0004,
 					BG_PATH_SUCCESS);
 		} else {
@@ -54213,7 +54222,7 @@ void Func062E object#(0x62E) () {
 			var var0006 = [0, -1, -2];
 			var var0007 = [1, 1, 1];
 			var var0008 = -1;
-			Func0828(
+			tryPathRunUsecodeTo(
 					var0004, var0006, var0007, var0008, FuncLoom, var0004,
 					BG_PATH_SUCCESS);
 		} else {
@@ -55509,7 +55518,7 @@ void Func0640 object#(0x640) () {
 	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@An Zu@");
 		declare var var0002;
 		if (Func0906() && (var0000.obj != NULL_OBJ)) {
@@ -55575,7 +55584,7 @@ void Func0642 object#(0x642) () {
 	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@An Flam@");
 		if (Func0906()) {
 			var0002 = set_to_attack(var0000, SHAPE_SPELL_DOUSE);
@@ -55714,7 +55723,7 @@ void Func0646 object#(0x646) () {
 	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@In Flam@");
 		if (Func0906()) {
 			var0002 = set_to_attack(var0000, SHAPE_SPELL_IGNITE);
@@ -55812,7 +55821,7 @@ void Func0649 object#(0x649) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		halt_scheduled();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@An Nox@");
 		declare var var0002;
 		if (Func0906()) {
@@ -56085,7 +56094,7 @@ void Func064F object#(0x64F) () {
 void Func0650 object#(0x650) () {
 	if (event == DOUBLECLICK) {
 		struct<Position> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		halt_scheduled();
 		item_say("@An Jux@");
 		declare var var0002;
@@ -56139,7 +56148,7 @@ void Func0651 object#(0x651) () {
 		halt_scheduled();
 		struct<ObjPos> var0002 = UI_click_on_item();
 		var var0003 = var0002->get_item_shape();
-		var var0004 = Func092D(var0002);
+		var var0004 = directionFromAvatar(var0002);
 		item_say("@Ort Ylem@");
 		declare var var0005;
 		if (Func0906() && (var0003 in var0000)) {
@@ -56179,7 +56188,7 @@ void Func0652 object#(0x652) () {
 	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		halt_scheduled();
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@Vas Flam@");
 		declare var var0003;
 		if (Func0906()) {
@@ -56271,7 +56280,7 @@ void Func0655 object#(0x655) () {
 	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@Uus Sanct@");
 		declare var var0002;
 		if (Func0906() && var0000->is_npc()) {
@@ -56312,7 +56321,7 @@ void Func0656 object#(0x656) () {
 		if (var0000.obj == NULL_OBJ) {
 			return;
 		}
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@Ort Por Ylem@");
 		if (Func0906() && (!var0000->is_npc() && var0000.obj != NULL_OBJ)) {
 			var0002 = set_to_attack(var0000, SHAPE_SPELL_TELEKINESIS);
@@ -56397,7 +56406,7 @@ void Func0658 object#(0x658) () {
 	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@Des Sanct@");
 		declare var var0003;
 		if (Func0906() && (var0000.obj != NULL_OBJ)) {
@@ -56426,7 +56435,7 @@ void Func0659 object#(0x659) () {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		halt_scheduled();
 		item_say("@Mani@");
 		if (Func0906() && var0000->is_npc()) {
@@ -56537,7 +56546,7 @@ void Func065B object#(0x65B) () {
 void Func065C object#(0x65C) () {
 	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		halt_scheduled();
 		item_say("@An Por@");
 		declare var var0003;
@@ -56592,7 +56601,7 @@ void Func065D object#(0x65D) () {
 void Func065E object#(0x65E) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@In Nox@");
 		declare var var0003;
 		if (Func0906() && (var0000.obj != NULL_OBJ)) {
@@ -56620,7 +56629,7 @@ void Func065E object#(0x65E) () {
 void Func065F object#(0x65F) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		halt_scheduled();
 		item_say("@In Zu@");
 		declare var var0003;
@@ -56698,7 +56707,7 @@ void Func0661 object#(0x661) () {
 	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		halt_scheduled();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@Ort Grav@");
 		declare var var0002;
 		if (Func0906()) {
@@ -56983,7 +56992,7 @@ void Func0667 object#(0x667) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		var var0001 = var0000->get_item_shape();
-		var var0002 = Func092D(item);
+		var var0002 = directionFromAvatar(item);
 		halt_scheduled();
 		var var0003 = [
 			SHAPE_DOOR_NS_RIGHT, SHAPE_DOOR_EW_BOTTOM, SHAPE_DOOR_NS_LEFT,
@@ -57034,7 +57043,7 @@ void Func0667 object#(0x667) () {
 void Func0668 object#(0x668) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		halt_scheduled();
 		item_say("@An Xen Ex@");
 		declare var var0002;
@@ -57115,7 +57124,7 @@ void Func0669 object#(0x669) () {
 void Func066A object#(0x66A) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		halt_scheduled();
 		var var0002 = [
 			SHAPE_ENERGY_FIELD, SHAPE_FIRE_FIELD, SHAPE_POISON_FIELD,
@@ -57156,7 +57165,7 @@ void Func066B object#(0x66B) () {
 	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		halt_scheduled();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@Vas Flam Hur@");
 		declare var var0002;
 		if (Func0906()) {
@@ -57187,7 +57196,7 @@ void Func066C object#(0x66C) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		var0000->halt_scheduled();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@Vas Mani@");
 		declare var var0002;
 		if (Func0906()) {
@@ -57219,7 +57228,7 @@ void Func066D object#(0x66D) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		halt_scheduled();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@Sanct Lor@");
 		declare var var0002;
 		if (Func0906()) {
@@ -57252,7 +57261,7 @@ void Func066D object#(0x66D) () {
 void Func066E object#(0x66E) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		halt_scheduled();
 		item_say("@In Flam Grav@");
 		declare var var0002;
@@ -57377,7 +57386,7 @@ void Func0671 object#(0x671) () {
 	declare var var0002;
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		halt_scheduled();
 		item_say("@In Quas Xen@");
 		// BUG: this should probably have been 'var0000' instead of NULL_OBJ
@@ -57414,7 +57423,7 @@ void Func0672 object#(0x672) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		halt_scheduled();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@Kal Flam Grav@");
 		if (Func0906()) {
 			var0002 = script item {
@@ -57591,7 +57600,7 @@ void Func0675 object#(0x675) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		halt_scheduled();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@In Nox Grav@");
 		declare var var0002;
 		if (Func0906()) {
@@ -57627,7 +57636,7 @@ void Func0676 object#(0x676) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		halt_scheduled();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@In Zu Grav@");
 		declare var var0002;
 		if (Func0906()) {
@@ -57783,7 +57792,7 @@ void Func0678 object#(0x678) () {
 	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@Rel Ylem@");
 		declare var var0002;
 		if (Func0906() && var0000->get_item_shape() == SHAPE_CHUNKS_OF_LEAD) {
@@ -57822,7 +57831,7 @@ void Func0679 object#(0x679) () {
 		|| ((event == WEAPON) && (get_npc_number() == AVATAR))) {
 		halt_scheduled();
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@Corp Por@");
 		declare var var0002;
 		if (Func0906()) {
@@ -57870,7 +57879,7 @@ void Func067A object#(0x67A) () {
 		var var0000 = false;
 		halt_scheduled();
 		struct<ObjPos> var0001 = UI_click_on_item();
-		var var0002 = Func092D(var0001);
+		var var0002 = directionFromAvatar(var0001);
 		struct<Position> var0003 = [var0001.x, var0001.y, var0001.z];
 		item_say("@Tym Vas Flam@");
 		declare var var0004;
@@ -57976,7 +57985,7 @@ void Func067C object#(0x67C) () {
 	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@In Hur Grav Ylem@");
 		declare var var0002;
 		if (Func0906()) {
@@ -58185,7 +58194,7 @@ void Func0680 object#(0x680) () {
 void Func0681 object#(0x681) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		halt_scheduled();
 		item_say("@Vas Corp Hur@");
 		declare var var0002;
@@ -58320,7 +58329,7 @@ void Func0684 object#(0x684) () {
 		struct<ObjPos> var0000 = UI_click_on_item();
 		var var0001 = var0000->get_item_shape();
 		struct<Position> var0002 = var0000->get_object_position();
-		var var0003 = Func092D(var0000);
+		var var0003 = directionFromAvatar(var0000);
 		var0000->halt_scheduled();
 		halt_scheduled();
 		declare var var0006;
@@ -58432,7 +58441,7 @@ void Func0686 object#(0x686) () {
 	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		halt_scheduled();
 		struct<ObjPos> var0000 = UI_click_on_item();
-		var var0001 = Func092D(var0000);
+		var var0001 = directionFromAvatar(var0000);
 		item_say("@In Jux Por Ylem@");
 		declare var var0003;
 		if (Func0906()) {
@@ -58769,25 +58778,40 @@ void Func0695 object#(0x695) () {
 	}
 }
 
-void Func0696 object#(0x696) () {
-	var var0000 = false;
-	var var0001 = false;
-	var var0002 = false;
-	var var0003 = false;
-	var var0004 = false;
-	var var0005 = false;
-	struct<Position> var0006 = get_object_position();
-	declare var var0007;
+/**
+ * Prepares the transformation of Erethian into various forms.
+ * This has most of the dialog of the transformation sequence.
+ *
+ * The possible transformations include Gargoyle, Dragon, Mouse, and Cow.
+ * - If the global flag `BROKE_TETRA` is set, Erethian will transform
+ *   into a Gargoyle, then into a Dragon, then revert back.
+ * - If the global flag `BROKE_TETRA` is not set, Erethian will attempt to
+ *   transform into a Gargoyle (but will turn into a mouse instead), then
+ *   into a Dragon (but will turn into a cow instead), then revert back.
+ * - If there is not enough space for transformations into Dragon or cow
+ *   (depending on state of `BROKE_TETRA`), the transformation cycle is
+ *   aborted.
+ * @see handleErethianTransformation, revertFailedErethianTransformation
+ */
+void dialogErethianTransformation object#(0x696) () {
+	var isGargoyleTransformation = false;
+	var isDragonTransformation = false;
+	var isMouseTransformation = false;
+	var isCowTransformation = false;
+	var transformationBlocked = false;
+	var isFinalTransformation = false;
+	struct<Position> erethianPos = get_object_position();
+	declare var disposable;
 	set_schedule_type(WAIT);
 	if (gflags[BROKE_TETRA]) {
 		if (!gflags[ERETHIAN_TURNED_GARGOYLE]) {
-			var0007 = set_last_created();
-			if (!UI_is_not_blocked(var0006, SHAPE_DRAGON, FRAME_ANY)) {
-				var0004 = true;
-				var0007 = UI_update_last_created(var0006);
+			disposable = set_last_created();
+			if (!UI_is_not_blocked(erethianPos, SHAPE_DRAGON, FRAME_ANY)) {
+				transformationBlocked = true;
+				disposable = UI_update_last_created(erethianPos);
 			} else {
-				var0007 = UI_update_last_created(var0006);
-				Func087D();
+				disposable = UI_update_last_created(erethianPos);
+				createAvatarStatue();
 				ERETHIAN->show_npc_face(ERETHIAN_MAD);
 				say("Erethian looks irritated by your question, \"'Tis not a "
 					"hindrance for one sensitive enough to feel the ridges the "
@@ -58803,7 +58827,7 @@ void Func0696 object#(0x696) () {
 				say("His hands move in passes you recognize as being magical, "
 					"then he speaks softly the magic words,");
 				say("\"Rel An-Quas Ailem In Garge\".*");
-				var0000 = true;
+				isGargoyleTransformation = true;
 			}
 		} else if (!gflags[ERETHIAN_TURNED_DRAGON]) {
 			ERETHIAN->show_npc_face(ERETHIAN_GARGOYLE);
@@ -58811,7 +58835,7 @@ void Func0696 object#(0x696) () {
 				"Erethian begins speaking softly, then rises to a crescendo "
 				"with the words,");
 			say("\"Rel An-Quas Ailem In BAL-ZEN\"!*");
-			var0001 = true;
+			isDragonTransformation = true;
 		} else {
 			ERETHIAN->show_npc_face(ERETHIAN_DRAGON);
 			say("The dragon looks down its snout menacingly at what you guess "
@@ -58821,18 +58845,18 @@ void Func0696 object#(0x696) () {
 			say("\"Enough of these silly charades, I really am quite busy with "
 				"my studies.\" He intones the words,");
 			say("\"An Ort Rel\"!*");
-			var0005 = true;
+			isFinalTransformation = true;
 		}
 	} else {
 		ERETHIAN->show_npc_face(ERETHIAN_MAD);
 		if (!gflags[ERETHIAN_TURNED_GARGOYLE]) {
-			var0007 = set_last_created();
-			if (!UI_is_not_blocked(var0006, SHAPE_COW, STAND_NORTH)) {
-				var0004 = true;
-				var0007 = UI_update_last_created(var0006);
+			disposable = set_last_created();
+			if (!UI_is_not_blocked(erethianPos, SHAPE_COW, STAND_NORTH)) {
+				transformationBlocked = true;
+				disposable = UI_update_last_created(erethianPos);
 			} else {
-				var0007 = UI_update_last_created(var0006);
-				Func087D();
+				disposable = UI_update_last_created(erethianPos);
+				createAvatarStatue();
 				say("Erethian looks irritated by your question, \"'Tis not a "
 					"hindrance for one\tsensitive enough to feel the ridges "
 					"the ink makes on the page.");
@@ -58847,7 +58871,7 @@ void Func0696 object#(0x696) () {
 				say("His hands move in passes you recognize as being magical, "
 					"then he speaks softly the magic words,");
 				say("\"Rel An-Quas Ailem In Bet-Zen\".*");
-				var0002 = true;
+				isMouseTransformation = true;
 			}
 		} else if (!gflags[ERETHIAN_TURNED_DRAGON]) {
 			say("The elderly mage looks a bit perplexed after his experience "
@@ -58858,27 +58882,27 @@ void Func0696 object#(0x696) () {
 				"to prove my powers...\" he begins speaking softly, then rises "
 				"to a crescendo with the words,");
 			say("\"Rel An-Quas Ailem In MOO\"!*");
-			var0003 = true;
+			isCowTransformation = true;
 		} else {
 			say("The elderly mage looks quite embarrassed, \"Enough of these "
 				"silly charades, I really am quite busy with my studies.\" He "
 				"turns away, his face blushing furiously.*");
 			set_schedule_type(PATROL);
 			AVATAR->get_npc_object()->clear_item_flag(DONT_RENDER);
-			var var0008 = Func0881();
-			var var0009 = script var0008 after 14 ticks {
+			var avatarStatue = findAvatarStatue();
+			var ignore1 = script avatarStatue after 14 ticks {
 				finish;
 				remove;
 			};
-			var var000A = script AVATAR->get_npc_object() {
+			var ignore2 = script AVATAR->get_npc_object() {
 				wait 12;
-				call Func069D;
+				call pathfindToNearestPedestal;
 			};
 		}
 	}
-	declare var var000B;
-	if (var0000) {
-		var000B = script item {
+	declare var ignore1;
+	if (isGargoyleTransformation) {
+		ignore1 = script item {
 			face south;
 			wait 1;
 			actor frame cast_out;
@@ -58891,22 +58915,22 @@ void Func0696 object#(0x696) () {
 			wait 1;
 			actor frame kneeling;
 			wait 3;
-			call Func0697;
+			call handleErethianTransformation;
 		};
 	}
-	if (var0001) {
-		var0000 = find_nearest(SHAPE_GARGOYLE_WARRIOR, 1);
-		var var000C = script var0000 {
+	if (isDragonTransformation) {
+		isGargoyleTransformation = find_nearest(SHAPE_GARGOYLE_WARRIOR, 1);
+		var ignore2 = script isGargoyleTransformation {
 			wait 6;
 			actor frame bowing;
 			wait 3;
 			actor frame kneeling;
 			wait 2;
-			call Func0697;
+			call handleErethianTransformation;
 		};
 	}
-	if (var0002) {
-		var000B = script item {
+	if (isMouseTransformation) {
+		ignore1 = script item {
 			face south;
 			wait 1;
 			actor frame cast_up;
@@ -58917,11 +58941,11 @@ void Func0696 object#(0x696) () {
 			wait 1;
 			actor frame kneeling;
 			wait 3;
-			call Func0697;
+			call handleErethianTransformation;
 		};
 	}
-	if (var0003) {
-		var000B = script item {
+	if (isCowTransformation) {
+		ignore1 = script item {
 			face south;
 			wait 1;
 			actor frame bowing;
@@ -58934,12 +58958,12 @@ void Func0696 object#(0x696) () {
 			wait 1;
 			actor frame cast_up;
 			wait 1;
-			call Func0697;
+			call handleErethianTransformation;
 		};
 	}
-	if (var0005) {
-		var0001 = find_nearest(SHAPE_DRAGON, 1);
-		var var000D = script var0001 {
+	if (isFinalTransformation) {
+		isDragonTransformation = find_nearest(SHAPE_DRAGON, 1);
+		var ignore2 = script isDragonTransformation {
 			wait 3;
 			actor frame raise_2h;
 			wait 2;
@@ -58951,10 +58975,10 @@ void Func0696 object#(0x696) () {
 			wait 2;
 			actor frame strike_2h;
 			wait 1;
-			call Func0697;
+			call handleErethianTransformation;
 		};
 	}
-	if (var0004) {
+	if (transformationBlocked) {
 		ERETHIAN->show_npc_face(ERETHIAN_MAD);
 		if (!gflags[ERETHIAN_IS_ANGRY]) {
 			say("The old mage seems on the verge of saying something, stops "
@@ -58965,36 +58989,43 @@ void Func0696 object#(0x696) () {
 			say("\"Have you nothing better to do than bother an old man?!\" He "
 				"seems quite put out with this line of conversation.*");
 		}
-		var0005->set_schedule_type(PATROL);
+		// BUG: This should have been 'item' instead of isFinalTransformation.
+		isFinalTransformation->set_schedule_type(PATROL);
 		gflags[ERETHIAN_IS_ANGRY] = true;
 	}
 }
 
-void Func0697 object#(0x697) () {
-	struct<Position> var0000 = get_object_position();
-	declare var var0002;
-	declare var var0003;
+/**
+ * This function handles the transformation of Erethian into various forms.
+ * After each transformation is done, the next one is "queued" by running a
+ * script that starts the next dialog fragment.
+ * @see dialogErethianTransformation, revertFailedErethianTransformation
+ */
+void handleErethianTransformation object#(0x697) () {
+	struct<Position> erethianPos = get_object_position();
+	declare var newObject;
+	declare var disposable;
 	if (gflags[BROKE_TETRA]) {
-		declare var var0001;
-		declare var var0006;
+		declare var gargoyleObject;
+		declare var nearestMage;
 		if (!gflags[ERETHIAN_TURNED_GARGOYLE]) {
 			gflags[ERETHIAN_TURNED_GARGOYLE] = true;
 			UI_sprite_effect(
-					ANIMATION_GREEN_BUBBLES, var0000.x - 2, var0000.y - 2, 0, 0,
+					ANIMATION_GREEN_BUBBLES, erethianPos.x - 2, erethianPos.y - 2, 0, 0,
 					0, LOOP_ONCE);
 			UI_sprite_effect(
-					ANIMATION_TELEPORT, var0000.x - 2, var0000.y - 2, 0, 0, 0,
+					ANIMATION_TELEPORT, erethianPos.x - 2, erethianPos.y - 2, 0, 0, 0,
 					LOOP_ONCE);
 			UI_play_sound_effect(SFX_WIZARD_MAGIC);
 			set_item_frame(SWING_1_NORTH);
-			var0001 = UI_create_new_object(SHAPE_GARGOYLE_WARRIOR);
-			var0001->set_item_frame(KNEEL_SOUTH);
-			var0002 = UI_update_last_created(var0000);
-			var0003 = script item {
+			gargoyleObject = UI_create_new_object(SHAPE_GARGOYLE_WARRIOR);
+			gargoyleObject->set_item_frame(KNEEL_SOUTH);
+			newObject = UI_update_last_created(erethianPos);
+			disposable = script item {
 				wait 16;
-				call Func0696;
+				call dialogErethianTransformation;
 			};
-			var var0004 = script var0001 {
+			var ignore = script gargoyleObject {
 				face south;
 				actor frame kneeling;
 				wait 4;
@@ -59006,23 +59037,23 @@ void Func0697 object#(0x697) () {
 		} else if (!gflags[ERETHIAN_TURNED_DRAGON]) {
 			gflags[ERETHIAN_TURNED_DRAGON] = true;
 			UI_sprite_effect(
-					ANIMATION_LIGHTNING, var0000.x, var0000.y, 0, 0, 0,
-					LOOP_ONCE);
+					ANIMATION_LIGHTNING, erethianPos.x, erethianPos.y,
+					0, 0, 0, LOOP_ONCE);
 			UI_sprite_effect(
-					ANIMATION_MEDIUM_BLAST, var0000.x - 2, var0000.y - 2, 0, 0,
-					0, LOOP_ONCE);
+					ANIMATION_MEDIUM_BLAST, erethianPos.x - 2, erethianPos.y - 2,
+					0, 0, 0, LOOP_ONCE);
 			UI_play_sound_effect(SFX_EXPLOSION_LARGE);
-			var0001 = find_nearest(SHAPE_GARGOYLE_WARRIOR, 1);
-			var0001->remove_item();
-			var var0005 = UI_create_new_object(SHAPE_DRAGON);
-			var0005->set_item_frame(USE_SOUTH);
-			var0002 = UI_update_last_created(var0000);
-			var0006 = var0005->find_nearest(SHAPE_MONSTER_MAGE, 1);
-			var0003 = script var0006 {
+			gargoyleObject = find_nearest(SHAPE_GARGOYLE_WARRIOR, 1);
+			gargoyleObject->remove_item();
+			var dragonObject = UI_create_new_object(SHAPE_DRAGON);
+			dragonObject->set_item_frame(USE_SOUTH);
+			newObject = UI_update_last_created(erethianPos);
+			nearestMage = dragonObject->find_nearest(SHAPE_MONSTER_MAGE, 1);
+			disposable = script nearestMage {
 				wait 14;
-				call Func0696;
+				call dialogErethianTransformation;
 			};
-			var var0007 = script var0005 {
+			var ignore = script dragonObject {
 				face south;
 				wait 4;
 				actor frame raise_2h;
@@ -59034,51 +59065,51 @@ void Func0697 object#(0x697) () {
 			};
 		} else {
 			UI_sprite_effect(
-					ANIMATION_LIGHTNING, var0000.x, var0000.y, 0, 0, 0,
-					LOOP_ONCE);
+					ANIMATION_LIGHTNING, erethianPos.x, erethianPos.y,
+					0, 0, 0, LOOP_ONCE);
 			UI_sprite_effect(
-					ANIMATION_TELEPORT, var0000.x, var0000.y, 0, 0, 0,
-					LOOP_ONCE);
+					ANIMATION_TELEPORT, erethianPos.x, erethianPos.y,
+					0, 0, 0, LOOP_ONCE);
 			UI_play_sound_effect(SFX_EXPLOSION_MEDIUM);
-			var0006 = find_nearest(SHAPE_MONSTER_MAGE, 1);
+			nearestMage = find_nearest(SHAPE_MONSTER_MAGE, 1);
 			remove_item();
-			var0006->set_item_frame(KNEEL_SOUTH);
-			var0003 = script var0006 {
+			nearestMage->set_item_frame(KNEEL_SOUTH);
+			disposable = script nearestMage {
 				actor frame kneeling;
 				wait 5;
 				actor frame bowing;
 				wait 4;
 				actor frame standing;
 			};
-			var0006->set_schedule_type(PATROL);
+			nearestMage->set_schedule_type(PATROL);
 			AVATAR->get_npc_object()->clear_item_flag(DONT_RENDER);
-			var var0008 = Func0881();
-			var var0009 = script var0008 after 13 ticks {
+			var avatarStatue = findAvatarStatue();
+			var ignore1 = script avatarStatue after 13 ticks {
 				finish;
 				remove;
 			};
-			var var000A = script AVATAR->get_npc_object() {
+			var ignore2 = script AVATAR->get_npc_object() {
 				wait 11;
-				call Func069D;
+				call pathfindToNearestPedestal;
 			};
 		}
 	} else if (!gflags[ERETHIAN_TURNED_GARGOYLE]) {
 		gflags[ERETHIAN_TURNED_GARGOYLE] = true;
 		UI_sprite_effect(
-				ANIMATION_GREEN_BUBBLES, var0000.x, var0000.y, 0, 0, 0,
-				LOOP_ONCE);
+				ANIMATION_GREEN_BUBBLES, erethianPos.x, erethianPos.y,
+				0, 0, 0, LOOP_ONCE);
 		UI_play_sound_effect(SFX_WIZARD_MAGIC);
 		set_item_frame(SWING_1_NORTH);
-		var var000B = UI_create_new_object(SHAPE_MOUSE);
-		var000B->set_item_frame(STAND_SOUTH);
-		var0002 = UI_update_last_created(var0000);
-		var0003 = script item {
+		var mouseObject = UI_create_new_object(SHAPE_MOUSE);
+		mouseObject->set_item_frame(STAND_SOUTH);
+		newObject = UI_update_last_created(erethianPos);
+		disposable = script item {
 			wait 11;
 			say "@Squeak!@";
 			wait 7;
-			call Func0698;
+			call revertFailedErethianTransformation;
 		};
-		var var000C = script var000B {
+		var ignore = script mouseObject {
 			face south;
 			wait 4;
 			actor frame step_right;
@@ -59098,21 +59129,23 @@ void Func0697 object#(0x697) () {
 	} else if (!gflags[ERETHIAN_TURNED_DRAGON]) {
 		gflags[ERETHIAN_TURNED_DRAGON] = true;
 		UI_sprite_effect(
-				ANIMATION_LIGHTNING, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
+				ANIMATION_LIGHTNING, erethianPos.x, erethianPos.y,
+				0, 0, 0, LOOP_ONCE);
 		UI_sprite_effect(
-				ANIMATION_TELEPORT, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
+				ANIMATION_TELEPORT, erethianPos.x, erethianPos.y,
+				0, 0, 0, LOOP_ONCE);
 		UI_play_sound_effect(SFX_THUNDER);
 		set_item_frame(SWING_1_NORTH);
-		var var000D = UI_create_new_object(SHAPE_COW);
-		var000D->set_item_frame(SWING_2H_1_SOUTH);
-		var0002 = UI_update_last_created(var0000);
-		var0003 = script item {
+		var cowObject = UI_create_new_object(SHAPE_COW);
+		cowObject->set_item_frame(SWING_2H_1_SOUTH);
+		newObject = UI_update_last_created(erethianPos);
+		disposable = script item {
 			wait 11;
 			say "@MOO?!@";
 			wait 7;
-			call Func0698;
+			call revertFailedErethianTransformation;
 		};
-		var var000E = script var000D {
+		var ignore = script cowObject {
 			face south;
 			wait 4;
 			actor frame raise_2h;
@@ -59132,139 +59165,148 @@ void Func0697 object#(0x697) () {
 	}
 }
 
-void Func0698 object#(0x698) () {
-	struct<Position> var0000 = get_object_position();
-	var var0001 = find_nearby(SHAPE_MOUSE, 1, MASK_NPC);
-	var var0002 = find_nearby(SHAPE_COW, 1, MASK_NPC);
-	declare var var0003;
-	if (var0001) {
+/**
+ * Reverts failed Erethian transformations
+ * @see handleErethianTransformation, dialogErethianTransformation
+ */
+void revertFailedErethianTransformation object#(0x698) () {
+	struct<Position> currentPosition = get_object_position();
+	var nearbyMouse = find_nearby(SHAPE_MOUSE, 1, MASK_NPC);
+	var nearbyCow = find_nearby(SHAPE_COW, 1, MASK_NPC);
+	declare var disposable;
+	if (nearbyMouse) {
 		UI_sprite_effect(
-				ANIMATION_GREEN_BUBBLES, var0000.x, var0000.y, 0, 0, 0,
-				LOOP_ONCE);
+				ANIMATION_GREEN_BUBBLES, currentPosition.x, currentPosition.y,
+				0, 0, 0, LOOP_ONCE);
 		UI_play_sound_effect(SFX_WIZARD_MAGIC);
-		var0001->remove_item();
+		nearbyMouse->remove_item();
 		set_item_frame(KNEEL_SOUTH);
-		var0003 = script item {
+		disposable = script item {
 			actor frame kneeling;
 			wait 5;
 			actor frame bowing;
 			wait 4;
 			actor frame standing;
 			wait 3;
-			call Func0696;
+			call dialogErethianTransformation;
 		};
 	}
-	if (var0002) {
+	if (nearbyCow) {
 		UI_sprite_effect(
-				ANIMATION_LIGHTNING, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
+				ANIMATION_LIGHTNING, currentPosition.x, currentPosition.y,
+				0, 0, 0, LOOP_ONCE);
 		UI_sprite_effect(
-				ANIMATION_TELEPORT, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
+				ANIMATION_TELEPORT, currentPosition.x, currentPosition.y,
+				0, 0, 0, LOOP_ONCE);
 		UI_play_sound_effect(SFX_THUNDER);
-		var0002->remove_item();
+		nearbyCow->remove_item();
 		set_item_frame(CAST_1_SOUTH);
-		var0003 = script item {
+		disposable = script item {
 			actor frame cast_up;
 			wait 5;
 			actor frame cast_out;
 			wait 4;
 			actor frame standing;
 			wait 3;
-			call Func0696;
+			call dialogErethianTransformation;
 		};
 	}
 }
 
-void Func0699 object#(0x699) () {
-	struct<FindSpec> var0000 = get_object_position() & (8 & FRAME_EGG_PATH);
-	var var0001 = var0000->find_nearby(SHAPE_EGG, 40, MASK_EGG);
-	struct<FindSpec> var0002 = get_object_position() & (9 & FRAME_EGG_PATH);
-	var var0003 = var0002->find_nearby(SHAPE_EGG, 40, MASK_EGG);
-	if (var0001 && var0003) {
-		struct<Position> var0004 = var0001[1]->get_object_position();
-		struct<Position> var0005 = var0003[1]->get_object_position();
-		var var0006 = Func0881();
-		move_object(var0004);
-		AVATAR->get_npc_object()->move_object(var0005);
-		if (var0006) {
-			var0006->move_object(var0005);
-		}
-		var var0007 = 1;
-		var var0008 = UI_get_party_list();
-		struct<Position> var0009 = var0005;
-		for (var000C in var0008) {
-			if (var0007 == 1) {
-				var0009.x = var0005.x - 2;
-				var0009.y = var0005.y + 2;
-			}
-			if (var0007 == 2) {
-				var0009.x = var0005.x + 2;
-				var0009.y = var0005.y + 2;
-			}
-			if (var0007 == 3) {
-				var0009.x = var0005.x - 4;
-				var0009.y = var0005.y + 4;
-			}
-			if (var0007 == 4) {
-				var0009.x = var0005.x;
-				var0009.y = var0005.y + 4;
-			}
-			if (var0007 == 5) {
-				var0009.x = var0005.x + 4;
-				var0009.y = var0005.y + 4;
-			}
-			if (var0007 == 6) {
-				var0009.x = var0005.x - 2;
-				var0009.y = var0005.y + 6;
-			}
-			if (var0007 == 7) {
-				var0009.x = var0005.x + 2;
-				var0009.y = var0005.y + 6;
-			}
-			if (!(var000C == AVATAR->get_npc_object())) {
-				var000C->move_object(var0009);
-				var var000D = script var000C {
-					face north;
-				};
-				var0007 += 1;
-			}
-		}
-		var var000E = script item {
-			face south;
-			wait 2;
-			call Func069C;
-		};
-		var var000F = script AVATAR->get_npc_object() {
-			face north;
-		};
-		declare var var0010;
-		if (UI_is_pc_female()) {
-			var0010 = script var0006 {
-				frame FRAME_STATUE_FEMALE_AVATAR_NORTH;
-			};
-		} else {
-			var0010 = script var0006 {
-				frame FRAME_STATUE_MALE_AVATAR_NORTH;
-			};
-		}
-	}
+/**
+ * Initiates the teleportation sequence to the black sword forge.
+ */
+void erethianStartTeleportToForge object#(0x699) () {
+    struct<FindSpec> findSpec1 = get_object_position() & (8 & FRAME_EGG_PATH);
+    var nearbyEgg1 = findSpec1->find_nearby(SHAPE_EGG, 40, MASK_EGG);
+    struct<FindSpec> findSpec2 = get_object_position() & (9 & FRAME_EGG_PATH);
+    var nearbyEgg2 = findSpec2->find_nearby(SHAPE_EGG, 40, MASK_EGG);
+    if (nearbyEgg1 && nearbyEgg2) {
+        struct<Position> eggPos1 = nearbyEgg1[1]->get_object_position();
+        struct<Position> eggPos2 = nearbyEgg2[1]->get_object_position();
+        var avatarStatue = findAvatarStatue();
+        move_object(eggPos1);
+        AVATAR->get_npc_object()->move_object(eggPos2);
+        if (avatarStatue) {
+            avatarStatue->move_object(eggPos2);
+        }
+        var partyMemberIndex = 1;
+        var partyList = UI_get_party_list();
+        struct<Position> partyMemberPos = eggPos2;
+        for (partyMember in partyList) {
+            if (partyMemberIndex == 1) {
+                partyMemberPos.x = eggPos2.x - 2;
+                partyMemberPos.y = eggPos2.y + 2;
+            }
+            if (partyMemberIndex == 2) {
+                partyMemberPos.x = eggPos2.x + 2;
+                partyMemberPos.y = eggPos2.y + 2;
+            }
+            if (partyMemberIndex == 3) {
+                partyMemberPos.x = eggPos2.x - 4;
+                partyMemberPos.y = eggPos2.y + 4;
+            }
+            if (partyMemberIndex == 4) {
+                partyMemberPos.x = eggPos2.x;
+                partyMemberPos.y = eggPos2.y + 4;
+            }
+            if (partyMemberIndex == 5) {
+                partyMemberPos.x = eggPos2.x + 4;
+                partyMemberPos.y = eggPos2.y + 4;
+            }
+            if (partyMemberIndex == 6) {
+                partyMemberPos.x = eggPos2.x - 2;
+                partyMemberPos.y = eggPos2.y + 6;
+            }
+            if (partyMemberIndex == 7) {
+                partyMemberPos.x = eggPos2.x + 2;
+                partyMemberPos.y = eggPos2.y + 6;
+            }
+            if (!(partyMember == AVATAR->get_npc_object())) {
+                partyMember->move_object(partyMemberPos);
+                var faceNorthScript = script partyMember {
+                    face north;
+                };
+                partyMemberIndex += 1;
+            }
+        }
+        var finishTeleportScript = script item {
+            face south;
+            wait 2;
+            call erethianFinishTeleportToForge;
+        };
+        var avatarFaceNorthScript = script AVATAR->get_npc_object() {
+            face north;
+        };
+        declare var statueFrameScript;
+        if (UI_is_pc_female()) {
+            statueFrameScript = script avatarStatue {
+                frame FRAME_STATUE_FEMALE_AVATAR_NORTH;
+            };
+        } else {
+            statueFrameScript = script avatarStatue {
+                frame FRAME_STATUE_MALE_AVATAR_NORTH;
+            };
+        }
+    }
 }
 
-void Func069A object#(0x69A) () {
+void erethianPrepareTeleportToForge object#(0x69A) () {
 	set_schedule_type(WAIT);
-	Func087D();
-	struct<Position> var0000 = get_object_position();
+	createAvatarStatue();
+	struct<Position> itemPos = get_object_position();
 	UI_sprite_effect(
-			ANIMATION_GREEN_BUBBLES, var0000.x - 2, var0000.y - 2, 0, 0, 0,
+			ANIMATION_GREEN_BUBBLES, itemPos.x - 2, itemPos.y - 2, 0, 0, 0,
 			LOOP_ONCE);
-	struct<Position> var0001 = AVATAR->get_npc_object()->get_object_position();
+	struct<Position> avatarPos = AVATAR->get_npc_object()->get_object_position();
 	UI_sprite_effect(
-			ANIMATION_TELEPORT, var0001.x - 2, var0001.y - 2, 0, 0, 0,
+			ANIMATION_TELEPORT, avatarPos.x - 2, avatarPos.y - 2, 0, 0, 0,
 			LOOP_ONCE);
 	UI_play_sound_effect(SFX_GENERAL_MAGIC);
-	var var0002 = Func092D(item);
-	var var0003 = (var0002 + HALF_TURN) % FULL_TURN;
-	var var0004 = script item {
-		face var0003;
+	var dirFromAvatar = directionFromAvatar(item);
+	var facingDir = (dirFromAvatar + HALF_TURN) % FULL_TURN;
+	var castingScript = script item {
+		face facingDir;
 		wait 1;
 		actor frame bowing;
 		wait 1;
@@ -59278,27 +59320,30 @@ void Func069A object#(0x69A) () {
 		wait 1;
 		actor frame cast_up;
 		wait 4;
-		call Func069B;
+		call erethianFadeAndStartTeleport;
 	};
 }
 
-void Func069B object#(0x69B) () {
+void erethianFadeAndStartTeleport object#(0x69B) () {
 	UI_fade_palette(12 * TICK, 1, FADE_TO_BLACK);
-	item->Func0699();
+	item->erethianStartTeleportToForge();
 }
 
-void Func069C object#(0x69C) () {
+/**
+ * Finishes the teleportation sequence to the black sword forge.
+ */
+void erethianFinishTeleportToForge object#(0x69C) () {
 	UI_fade_palette(12 * TICK, 1, FADE_FROM_BLACK);
-	struct<Position> var0000 = get_object_position();
+	struct<Position> objPos = get_object_position();
 	UI_sprite_effect(
-			ANIMATION_GREEN_BUBBLES, var0000.x - 2, var0000.y - 2, 0, 0, 0,
+			ANIMATION_GREEN_BUBBLES, objPos.x - 2, objPos.y - 2, 0, 0, 0,
 			LOOP_ONCE);
-	struct<Position> var0001 = AVATAR->get_npc_object()->get_object_position();
+	struct<Position> avatarPos = AVATAR->get_npc_object()->get_object_position();
 	UI_sprite_effect(
-			ANIMATION_TELEPORT, var0001.x - 2, var0001.y - 2, 0, 0, 0,
+			ANIMATION_TELEPORT, avatarPos.x - 2, avatarPos.y - 2, 0, 0, 0,
 			LOOP_ONCE);
 	UI_play_sound_effect(SFX_GENERAL_MAGIC);
-	var var0002 = script item {
+	var ignore1 = script item {
 		face south;
 		actor frame cast_up;
 		wait 3;
@@ -59306,60 +59351,61 @@ void Func069C object#(0x69C) () {
 		wait 2;
 		actor frame standing;
 		wait 8;
-		call Func069E;
+		call erethianStartForgeCutscene;
 	};
-	var var0003 = Func0881();
-	declare var var0004;
+	var avatarStatue = findAvatarStatue();
+	declare var ignore2;
 	if (UI_is_pc_female()) {
-		var0004 = script var0003 {
-			frame 20;
+		ignore2 = script avatarStatue {
+			frame FRAME_STATUE_FEMALE_AVATAR_NORTH;
 		};
 	} else {
-		var0004 = script var0003 {
-			frame 18;
+		ignore2 = script avatarStatue {
+			frame FRAME_STATUE_MALE_AVATAR_NORTH;
 		};
 	}
 }
 
-void Func069D object#(0x69D) () {
+void pathfindToNearestPedestal object#(0x69D) () {
 	if (event == BG_PATH_SUCCESS) {
-		(@UI_UNKNOWN_70)();
+		(@UNKNOWN_INTRINSIC_70)();
 		return;
 	}
-	var var0000 = Func0881();
-	if (var0000) {
-		var0000->remove_item();
+	var avatarStatue = findAvatarStatue();
+	if (avatarStatue) {
+		avatarStatue->remove_item();
 	}
-	var var0001 = false;
-	var var0002 = false;
-	var var0003 = AVATAR->get_npc_object()->find_nearest(SHAPE_PEDESTAL2, 10);
-	if (var0003) {
-		var var0004 = Func092D(var0003);
-		if (var0004 == NORTH || (var0004 == NORTHEAST || var0004 == NORTHWEST)) {
-			var0001 = [0, 0, 1, -1];
-			var0002 = [-1, 1, 0, 0];
+	var deltaX = false;
+	var deltaY = false;
+	var nearestPedestal = AVATAR->get_npc_object()->find_nearest(SHAPE_PEDESTAL2, 10);
+	if (nearestPedestal) {
+		var dir = directionFromAvatar(nearestPedestal);
+		if (dir == NORTH || (dir == NORTHEAST || dir == NORTHWEST)) {
+			deltaX = [0, 0, 1, -1];
+			deltaY = [-1, 1, 0, 0];
 		}
-		if (var0004 == EAST) {
-			var0001 = [1, 0, 0, -1];
-			var0002 = [0, 1, -1, 0];
+		if (dir == EAST) {
+			deltaX = [1, 0, 0, -1];
+			deltaY = [0, 1, -1, 0];
 		}
-		if (var0004 == SOUTHEAST || (var0004 == SOUTH || var0004 == SOUTHWEST)) {
-			var0001 = [0, 0, 1, -1];
-			var0002 = [1, -1, 0, 0];
+		if (dir == SOUTHEAST || (dir == SOUTH || dir == SOUTHWEST)) {
+			deltaX = [0, 0, 1, -1];
+			deltaY = [1, -1, 0, 0];
 		}
-		if (var0004 == WEST) {
-			var0001 = [-1, 0, 0, 1];
-			var0002 = [0, 1, -1, 0];
+		if (dir == WEST) {
+			deltaX = [-1, 0, 0, 1];
+			deltaY = [0, 1, -1, 0];
 		}
 	} else {
-		var0001 = [0, 1, 0, -1];
-		var0002 = [-1, 0, 1, 0];
+		deltaX = [0, 1, 0, -1];
+		deltaY = [-1, 0, 1, 0];
 	}
-	var var0005 = AVATAR->get_npc_object();
-	Func0828(var0005, var0001, var0002, 0, Func069D, var0005, BG_PATH_SUCCESS);
+	var avatarObject = AVATAR->get_npc_object();
+	tryPathRunUsecodeTo(avatarObject, deltaX, deltaY, 0,
+			pathfindToNearestPedestal, avatarObject, BG_PATH_SUCCESS);
 }
 
-void Func069E object#(0x69E) () {
+void erethianStartForgeCutscene object#(0x69E) () {
 	ERETHIAN->show_npc_face(ERETHIAN_MAD);
 	say("A look of grim determination comes to Erethian's lined features. He "
 		"pushes up his sleeves like a blacksmith about to shoe a high strung "
@@ -59388,7 +59434,7 @@ void Func069E object#(0x69E) () {
 		actor frame cast_out;
 		wait 1;
 		actor frame cast_up;
-		call Func069F;
+		call saveItemsNearIsleOfFireForge;
 	};
 	struct<Position> var0001 = get_object_position();
 	UI_sprite_effect(
@@ -59398,99 +59444,104 @@ void Func069E object#(0x69E) () {
 	UI_play_sound_effect(SFX_THUNDER);
 }
 
-void Func069F object#(0x69F) () {
-	var var0000 = find_nearby(SHAPE_EGG, 10, MASK_EGG);
-	for (var0003 in var0000) {
-		var var0004 = var0003->get_item_quality();
-		var var0005 = var0003->get_item_frame();
-		struct<Position> var0006 = var0003->get_object_position();
-		declare var var0007;
-		declare struct<Position> var0008;
-		declare var var000A;
-		if (var0005 == FRAME_EGG_PATH) {
-			if (var0004 == 0) {
-				var0007 = 3;
-				var0008.x = 0x0887;
-				var0008.y = 0x05F5;
-				var0008.z = 0;
-				Func087E(var0008, var0007, var0006, var0003);
-				var var0009 = UI_create_new_object(SHAPE_FIREPIT);
-				var0009->set_item_frame(FRAME_MAGIC_FIREPIT_COLD);
-				var000A = UI_update_last_created(var0006);
+/**
+ * This function searches for eggs within a radius of 10 tiles.
+ * For each egg, it saves the items near specific positions depending on its
+ * quality, then creates objects for the black sword forge.
+ */
+void saveItemsNearIsleOfFireForge object#(0x69F) () {
+	var nearbyEggs = find_nearby(SHAPE_EGG, 10, MASK_EGG);
+	for (egg in nearbyEggs) {
+		var eggQuality = egg->get_item_quality();
+		var eggFrame = egg->get_item_frame();
+		struct<Position> eggPosition = egg->get_object_position();
+		declare var saveRadius;
+		declare struct<Position> savePosition;
+		declare var flag;
+		if (eggFrame == FRAME_EGG_PATH) {
+			if (eggQuality == QUALITY_EGG_FORGE_FIREPIT) {
+				saveRadius = 3;
+				savePosition.x = 0x0887;
+				savePosition.y = 0x05F5;
+				savePosition.z = 0;
+				erethianSaveItemsNearPosition(savePosition, saveRadius, eggPosition, egg);
+				var firepit = UI_create_new_object(SHAPE_FIREPIT);
+				firepit->set_item_frame(FRAME_MAGIC_FIREPIT_COLD);
+				flag = UI_update_last_created(eggPosition);
 			}
-			if (var0004 == 1) {
-				var0007 = 1;
-				var0008.x = 0x088C;
-				var0008.y = 0x05F7;
-				var0008.z = 0;
-				Func087E(var0008, var0007, var0006, var0003);
-				var var000B = UI_create_new_object(SHAPE_BELLOWS);
-				var000B->set_item_frame(FRAME_MAGIC_BELLOWS_OPEN);
-				var000A = UI_update_last_created(var0006);
+			if (eggQuality == QUALITY_EGG_FORGE_BELLOWS) {
+				saveRadius = 1;
+				savePosition.x = 0x088C;
+				savePosition.y = 0x05F7;
+				savePosition.z = 0;
+				erethianSaveItemsNearPosition(savePosition, saveRadius, eggPosition, egg);
+				var bellows = UI_create_new_object(SHAPE_BELLOWS);
+				bellows->set_item_frame(FRAME_MAGIC_BELLOWS_OPEN);
+				flag = UI_update_last_created(eggPosition);
 				UI_sprite_effect(
-						ANIMATION_GREEN_BUBBLES, var0006.x - 4, var0006.y - 1,
+						ANIMATION_GREEN_BUBBLES, eggPosition.x - 4, eggPosition.y - 1,
 						0, 0, 0, LOOP_ONCE);
 			}
-			if (var0004 == 2) {
-				var0007 = 2;
-				var0008.x = 0x088B;
-				var0008.y = 0x05F1;
-				var0008.z = 0;
-				Func087E(var0008, var0007, var0006, var0003);
-				var var000C = UI_create_new_object(SHAPE_ANVIL);
-				var000C->set_item_frame(FRAME_MAGIC_ANVIL);
-				var000A = UI_update_last_created(var0006);
+			if (eggQuality == QUALITY_EGG_FORGE_ANVIL) {
+				saveRadius = 2;
+				savePosition.x = 0x088B;
+				savePosition.y = 0x05F1;
+				savePosition.z = 0;
+				erethianSaveItemsNearPosition(savePosition, saveRadius, eggPosition, egg);
+				var anvil = UI_create_new_object(SHAPE_ANVIL);
+				anvil->set_item_frame(FRAME_MAGIC_ANVIL);
+				flag = UI_update_last_created(eggPosition);
 			}
-			if (var0004 == 4) {
-				var0007 = 3;
-				var0008.x = 0x0891;
-				var0008.y = 0x05F0;
-				var0008.z = 0;
-				Func087E(var0008, var0007, var0006, var0003);
-				var var000D = UI_create_new_object(SHAPE_WATER_TROUGH_NS);
-				var000D->set_item_frame(FRAME_WATER_TROUGH_GOLDEN);
-				var000A = UI_update_last_created(var0006);
+			if (eggQuality == QUALITY_EGG_FORGE_TROUGH) {
+				saveRadius = 3;
+				savePosition.x = 0x0891;
+				savePosition.y = 0x05F0;
+				savePosition.z = 0;
+				erethianSaveItemsNearPosition(savePosition, saveRadius, eggPosition, egg);
+				var waterTrough = UI_create_new_object(SHAPE_WATER_TROUGH_NS);
+				waterTrough->set_item_frame(FRAME_WATER_TROUGH_GOLDEN);
+				flag = UI_update_last_created(eggPosition);
 				UI_sprite_effect(
-						ANIMATION_GREEN_BUBBLES, var0006.x - 5, var0006.y - 1,
+						ANIMATION_GREEN_BUBBLES, eggPosition.x - 5, eggPosition.y - 1,
 						0, 0, 0, LOOP_ONCE);
 			}
-			if (var0004 == 5) {
-				var0007 = 3;
-				var0008.x = 0x0894;
-				var0008.y = 0x05F6;
-				var0008.z = 0;
-				Func087E(var0008, var0007, var0006, var0003);
-				var var000E = UI_create_new_object(SHAPE_WELL);
-				var000E->set_item_frame(FRAME_WELL_GOLDEN);
-				var000A = UI_update_last_created(var0006);
+			if (eggQuality == QUALITY_EGG_FORGE_WELL) {
+				saveRadius = 3;
+				savePosition.x = 0x0894;
+				savePosition.y = 0x05F6;
+				savePosition.z = 0;
+				erethianSaveItemsNearPosition(savePosition, saveRadius, eggPosition, egg);
+				var well = UI_create_new_object(SHAPE_WELL);
+				well->set_item_frame(FRAME_WELL_GOLDEN);
+				flag = UI_update_last_created(eggPosition);
 				UI_sprite_effect(
-						ANIMATION_GREEN_BUBBLES, var0006.x - 2, var0006.y - 2,
+						ANIMATION_GREEN_BUBBLES, eggPosition.x - 2, eggPosition.y - 2,
 						0, 0, 0, LOOP_ONCE);
 			}
-			if (var0004 == 6) {
-				var0007 = 3;
-				var0008.x = 0x0898;
-				var0008.y = 0x05F3;
-				var0008.z = 0;
-				Func087E(var0008, var0007, var0006, var0003);
-				var var000F = UI_create_new_object(SHAPE_WELL_PULLEY);
-				var000F->set_item_frame(FRAME_GOLDEN_BEAM);
-				var000A = UI_update_last_created(var0006);
+			if (eggQuality == QUALITY_EGG_FORGE_PULLEY) {
+				saveRadius = 3;
+				savePosition.x = 0x0898;
+				savePosition.y = 0x05F3;
+				savePosition.z = 0;
+				erethianSaveItemsNearPosition(savePosition, saveRadius, eggPosition, egg);
+				var wellPulley = UI_create_new_object(SHAPE_WELL_PULLEY);
+				wellPulley->set_item_frame(FRAME_GOLDEN_BEAM);
+				flag = UI_update_last_created(eggPosition);
 			}
 		}
 	}
-	var var0010 = script item {
+	var scriptAction = script item {
 		wait 5;
 		actor frame cast_out;
 		wait 4;
 		actor frame standing;
 		wait 5;
-		call Func06A0;
+		call erethianTryCreateHammerAndBucket;
 	};
 	UI_play_sound_effect(SFX_WIZARD_MAGIC);
 }
 
-void Func06A0 object#(0x6A0) () {
+void erethianTryCreateHammerAndBucket object#(0x6A0) () {
 	var var0000 = find_nearby(SHAPE_EGG, 10, MASK_EGG);
 	var var0001 = false;
 	struct<Position> var0002 = false;
@@ -59545,7 +59596,7 @@ void Func06A0 object#(0x6A0) () {
 				wait 3;
 				actor frame standing;
 				wait 3;
-				call Func06A1;
+				call erethianCreateHammerAndBucket;
 			};
 			var0001->remove_item();
 			var0003->remove_item();
@@ -59605,7 +59656,7 @@ void Func06A0 object#(0x6A0) () {
 				wait 2;
 				actor frame standing;
 				wait 2;
-				call Func06A1;
+				call erethianCreateHammerAndBucket;
 			};
 		} else {
 			var000D = script item {
@@ -59620,87 +59671,94 @@ void Func06A0 object#(0x6A0) () {
 				wait 3;
 				actor frame cast_out;
 				wait 4;
-				call Func06A2;
+				call erethianCreateMirrorAndFlowers;
 			};
 		}
 	}
 }
 
-void Func06A1 object#(0x6A1) () {
-	var var0000 = find_nearby(SHAPE_EGG, 10, MASK_EGG);
-	for (var0003 in var0000) {
-		var var0004 = var0003->get_item_quality();
-		var var0005 = var0003->get_item_frame();
-		struct<Position> var0006 = var0003->get_object_position();
-		if (var0005 == FRAME_EGG_PATH) {
-			declare var var0008;
-			if (var0004 == 3) {
-				var var0007 = UI_create_new_object(SHAPE_HAMMER);
-				var0007->set_item_frame(0);
-				var0008 = UI_update_last_created(var0006);
-				UI_sprite_effect(
-						ANIMATION_GREEN_BUBBLES, var0006.x - 1, var0006.y - 2,
-						0, 0, 0, LOOP_ONCE);
-			}
-			if (var0004 == 7) {
-				var var0009 = UI_create_new_object(SHAPE_BUCKET);
-				var0009->set_item_frame(FRAME_BUCKET_EMPTY);
-				var0008 = UI_update_last_created(var0006);
-				UI_sprite_effect(
-						ANIMATION_GREEN_BUBBLES, var0006.x - 1, var0006.y - 2,
-						0, 0, 0, LOOP_ONCE);
-			}
-		}
-	}
-	var var000A = script item {
-		actor frame bowing;
-		wait 3;
-		actor frame kneeling;
-		wait 4;
-		actor frame bowing;
-		wait 3;
-		actor frame standing;
-		wait 2;
-		call Func06F5;
-	};
-	UI_play_sound_effect(SFX_GENERAL_MAGIC);
+/**
+ * In this function, Erethian creates a hammer and bucket, then gives the black
+ * sword blank to the player after a bit of rest.
+ */
+void erethianCreateHammerAndBucket object#(0x6A1) () {
+    var eggs = find_nearby(SHAPE_EGG, 10, MASK_EGG);
+    for (egg in eggs) {
+        var quality = egg->get_item_quality();
+        var frame = egg->get_item_frame();
+        struct<Position> position = egg->get_object_position();
+        if (frame == FRAME_EGG_PATH) {
+            declare var createdObject;
+            if (quality == 3) {
+                var hammer = UI_create_new_object(SHAPE_HAMMER);
+                hammer->set_item_frame(0);
+                createdObject = UI_update_last_created(position);
+                UI_sprite_effect(
+                        ANIMATION_GREEN_BUBBLES, position.x - 1, position.y - 2,
+                        0, 0, 0, LOOP_ONCE);
+            }
+            if (quality == 7) {
+                var bucket = UI_create_new_object(SHAPE_BUCKET);
+                bucket->set_item_frame(FRAME_BUCKET_EMPTY);
+                createdObject = UI_update_last_created(position);
+                UI_sprite_effect(
+                        ANIMATION_GREEN_BUBBLES, position.x - 1, position.y - 2,
+                        0, 0, 0, LOOP_ONCE);
+            }
+        }
+    }
+    var scriptAction = script item {
+        actor frame bowing;
+        wait 3;
+        actor frame kneeling;
+        wait 4;
+        actor frame bowing;
+        wait 3;
+        actor frame standing;
+        wait 2;
+        call erethianGiveBlackSwordBlank;
+    };
+    UI_play_sound_effect(SFX_GENERAL_MAGIC);
 }
 
-void Func06A2 object#(0x6A2) () {
-	var var0000 = find_nearby(SHAPE_EGG, 10, MASK_EGG);
-	for (var0003 in var0000) {
-		var var0004 = var0003->get_item_quality();
-		var var0005 = var0003->get_item_frame();
-		struct<Position> var0006 = var0003->get_object_position();
-		if (var0005 == FRAME_EGG_PATH) {
-			declare var var0009;
-			if (var0004 == 3) {
-				var var0007 = UI_create_new_object(SHAPE_DESK_ITEMS);
-				var0007->set_item_frame(FRAME_DESK_ITEM_MIRROR);
-				struct<Position> var0008 = var0006;
-				var0008.x -= 1;
-				var0009 = UI_update_last_created(var0008);
-				UI_sprite_effect(
-						ANIMATION_GREEN_BUBBLES, var0006.x - 2, var0006.y - 2,
-						0, 0, 0, LOOP_ONCE);
-			}
-			if (var0004 == 7) {
-				var var000A = UI_create_new_object(SHAPE_PLANT);
-				var000A->set_item_frame(FRAME_PLANT_FLOWER_POT);
-				var0009 = UI_update_last_created(var0006);
-				UI_sprite_effect(
-						ANIMATION_GREEN_BUBBLES, var0006.x - 1, var0006.y - 2,
-						0, 0, 0, LOOP_ONCE);
-			}
-		}
-	}
-	var var000B = script item {
-		wait 6;
-		say "@NO!, No. No...@";
-		wait 14;
-		call Func06A0;
-	};
-	UI_play_sound_effect(SFX_GENERAL_MAGIC);
+/**
+ * In this function, Erethian mistakenly creates a hand mirror and flower pot.
+ */
+void erethianCreateMirrorAndFlowers object#(0x6A2) () {
+    var nearbyEggs = find_nearby(SHAPE_EGG, 10, MASK_EGG);
+    for (egg in nearbyEggs) {
+        var eggQuality = egg->get_item_quality();
+        var eggFrame = egg->get_item_frame();
+        struct<Position> eggPosition = egg->get_object_position();
+        if (eggFrame == FRAME_EGG_PATH) {
+            declare var createdObject;
+            if (eggQuality == 3) {
+                var mirror = UI_create_new_object(SHAPE_DESK_ITEMS);
+                mirror->set_item_frame(FRAME_DESK_ITEM_MIRROR);
+                struct<Position> mirrorPosition = eggPosition;
+                mirrorPosition.x -= 1;
+                createdObject = UI_update_last_created(mirrorPosition);
+                UI_sprite_effect(
+                        ANIMATION_GREEN_BUBBLES, eggPosition.x - 2, eggPosition.y - 2,
+                        0, 0, 0, LOOP_ONCE);
+            }
+            if (eggQuality == 7) {
+                var flowerPot = UI_create_new_object(SHAPE_PLANT);
+                flowerPot->set_item_frame(FRAME_PLANT_FLOWER_POT);
+                createdObject = UI_update_last_created(eggPosition);
+                UI_sprite_effect(
+                        ANIMATION_GREEN_BUBBLES, eggPosition.x - 1, eggPosition.y - 2,
+                        0, 0, 0, LOOP_ONCE);
+            }
+        }
+    }
+    var scriptAction = script item {
+        wait 6;
+        say "@NO!, No. No...@";
+        wait 14;
+        call erethianTryCreateHammerAndBucket;
+    };
+    UI_play_sound_effect(SFX_GENERAL_MAGIC);
 }
 
 void Func06A3 object#(0x6A3) () {
@@ -60987,7 +61045,12 @@ void Func06E2 object#(0x6E2) () {
 	}
 }
 
-void Func06F5 object#(0x6F5) () {
+/**
+ * This function handles the interaction with Erethian where he presents the
+ * player with a partially completed black sword. If the player cannot receive
+ * the sword blank, it is placed on the nearest firepit.
+ */
+void erethianGiveBlackSwordBlank object#(0x6F5) () {
 	ERETHIAN->show_npc_face(ERETHIAN_MAD);
 	say("Erethian's face begins to take on an ashen palor, but he looks "
 		"contented with a job well done. \"As I have said, I myself once "
@@ -61001,33 +61064,33 @@ void Func06F5 object#(0x6F5) () {
 		"out of thin air. \"Fear not to touch the hilt when the blade is hot, "
 		"for heat apparently does not travel well across the medium of the "
 		"pure, black substance. I wish thee good luck.\"");
-	var var0000 = UI_create_new_object(SHAPE_SWORD_BLANK);
-	var0000->set_item_frame(FRAME_BLACKSWORD_BLANK_COLD1);
-	var var0001 = AVATAR->get_npc_object()->give_last_created();
-	if (var0001) {
+	var swordBlank = UI_create_new_object(SHAPE_SWORD_BLANK);
+	swordBlank->set_item_frame(FRAME_BLACKSWORD_BLANK_COLD1);
+	var swordGiven = AVATAR->get_npc_object()->give_last_created();
+	if (swordGiven) {
 		say("He hands the sword to you and wearily turns away.*");
 	} else {
 		say("He places the sword upon the firepit and wearily turns away.\"*");
-		var var0002 = find_nearest(SHAPE_FIREPIT, 10);
-		struct<Position> var0003 = var0002->get_object_position();
-		var0003.y -= 1;
-		var0003.z += 2;
-		var var0004 = UI_update_last_created(var0003);
+		var nearestFirepit = find_nearest(SHAPE_FIREPIT, 10);
+		struct<Position> firepitPosition = nearestFirepit->get_object_position();
+		firepitPosition.y -= 1;
+		firepitPosition.z += 2;
+		var updatedSwordPosition = UI_update_last_created(firepitPosition);
 	}
 	ERETHIAN->hide();
 	set_schedule_type(PATROL);
 	AVATAR->get_npc_object()->clear_item_flag(DONT_RENDER);
-	var var0005 = script item {
+	var waitScript = script item {
 		wait 13;
 	};
-	var var0006 = Func0881();
-	var var0007 = script var0006 after 13 ticks {
+	var avatarStatue = findAvatarStatue();
+	var removeStatueScript = script avatarStatue after 13 ticks {
 		finish;
 		remove;
 	};
-	var var0008 = script AVATAR->get_npc_object() {
+	var pathfindScript = script AVATAR->get_npc_object() {
 		wait 11;
-		call Func069D;
+		call pathfindToNearestPedestal;
 	};
 	gflags[HAVE_BLANK_BLACKSWORD] = true;
 }
@@ -61613,7 +61676,7 @@ void Func06F6 object#(0x6F6) () {
 						if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
 							say("\"Yes! I have long sought the end of Lord "
 								"British, my traitorous master.\"");
-							var var0019 = Func0908();
+							var var0019 = getAvatarName();
 							LORD_BRITISH->say(
 									"\"", var0019,
 									", for what reason art thou brandishing "
@@ -61813,7 +61876,7 @@ void Func06F6 object#(0x6F6) () {
 		declare var var001C;
 		declare var var001D;
 		if (var0014) {
-			var001B = Func092D(var0011);
+			var001B = directionFromAvatar(var0011);
 			var0010 = script AVATAR->get_npc_object() {
 				face var001B;
 				actor frame ready;
@@ -61843,7 +61906,7 @@ void Func06F6 object#(0x6F6) () {
 			}
 		}
 		if (var0015) {
-			var001B = Func092D(var0011);
+			var001B = directionFromAvatar(var0011);
 			var0010 = script AVATAR->get_npc_object() {
 				face var001B;
 				actor frame ready;
@@ -62337,18 +62400,18 @@ void Func06F8 object#(0x6F8) () {
 					}
 				}
 				if (var000D == 2) {
-					Func087D();
+					createAvatarStatue();
 					var0013 = AVATAR->get_npc_object()->get_object_position();
 					if (var0013.y > var0005.y) {
 						if (UI_is_pc_female()) {
-							Func0881()->set_item_frame(FRAME_STATUE_FEMALE_AVATAR_NORTH);
+							findAvatarStatue()->set_item_frame(FRAME_STATUE_FEMALE_AVATAR_NORTH);
 						} else {
-							Func0881()->set_item_frame(FRAME_STATUE_MALE_AVATAR_NORTH);
+							findAvatarStatue()->set_item_frame(FRAME_STATUE_MALE_AVATAR_NORTH);
 						}
 					} else if (UI_is_pc_female()) {
-						Func0881()->set_item_frame(FRAME_STATUE_FEMALE_AVATAR_SOUTH);
+						findAvatarStatue()->set_item_frame(FRAME_STATUE_FEMALE_AVATAR_SOUTH);
 					} else {
-						Func0881()->set_item_frame(FRAME_STATUE_MALE_AVATAR_SOUTH);
+						findAvatarStatue()->set_item_frame(FRAME_STATUE_MALE_AVATAR_SOUTH);
 					}
 					var var0014 = UI_create_new_object(SHAPE_AMULET);
 					var0014->set_item_frame(FRAME_AMULET_TALISMAN_OF_INFINITY);
@@ -62579,14 +62642,14 @@ void Func06F8 object#(0x6F8) () {
 			}
 		}
 		AVATAR->get_npc_object()->clear_item_flag(DONT_RENDER);
-		var var002E = Func0881();
+		var var002E = findAvatarStatue();
 		var var002F = script var002E after 14 ticks {
 			finish;
 			remove;
 		};
 		var0016 = script AVATAR->get_npc_object() {
 			wait 12;
-			call Func069D;
+			call pathfindToNearestPedestal;
 		};
 		var var0030 = find_nearest(SHAPE_LENS, 10);
 		if (var0030) {
@@ -63010,7 +63073,7 @@ void Func06FC object#(0x6FC) () {
 		var var0005 = var0004->set_item_quality(
 				QUALITY_SCROLL_BACKSWORD_KILL_TARGET);
 		var0005 = UI_update_last_created(var0002);
-		var var0006 = Func092D(var0004);
+		var var0006 = directionFromAvatar(var0004);
 		var var0007 = script AVATAR->get_npc_object() {
 			face var0006;
 		};
@@ -64062,7 +64125,7 @@ void Func0714 object#(0x714) () {
 			"@In Ylem...@", "@In Grav...@", "@In Mani...@", "@Kal Por...@",
 			"@Vas Flam Uus...@"
 		]);
-		var0010 = Func092D(var0007);
+		var0010 = directionFromAvatar(var0007);
 		var var0012 = script AVATAR {
 			face var0010;
 			wait 1;
@@ -65131,64 +65194,95 @@ var Func0827 0x827 (var var0000, var var0001) {
 	return var0000->find_direction(var0001);
 }
 
-void Func0828 0x828 (
-		var var0000, var var0001, var var0002, var var0003, var var0004,
-		var var0005, var var0006) {
-	if (var0000->get_container()) {
+/**
+ * Makes Avatar try to pathfind to the target object.
+ *
+ * @param targetObj The object to pathfind to.
+ * @param maxDeltaX The maximum delta range for the X coordinate.
+ * @param maxDeltaY The maximum delta range for the Y coordinate.
+ * @param maxDeltaZ The maximum delta range for the Z coordinate.
+ * @param function The usecode function to call when reaching the target.
+ * @param obj The object to be passed to the usecode function.
+ * @param eventId The event ID to be passed to the usecode function.
+ *
+ * The function fails if the target object is within a container.
+ * Otherwise, it halts any scheduled actions for the Avatar and tries to find a
+ * position near the target object to pathfind to.
+ *
+ * If maxDeltaX is negative and its array size is 1, it iterates through the Z,
+ * X, and Y delta ranges to find a valid path to the target location.
+ *
+ * If maxDeltaX is not negative or its array size is not 1, it iterates through
+ * the delta ranges using a different approach. It assumes that all three delta
+ * ranges are arrays of the same size and goes through them in lock-step.
+ * For each pair of delta-x and delta-y values, it tries placing the target
+ * spot at different heights based on the current value of delta-z:
+ * 	- If the first (or only) value of maxDeltaZ is < -1, then delta-z goes
+ *    through the range [maxDeltaZ[1], ..., 0] in decreasing order.
+ *  - If it is exactly -1, then the delta-z is set to 0.
+ *  - Otherwise, the delta-z is used as a single value.
+ * Due to the way usecode arrays work, maxDeltaZ does not need to be an array,
+ * or it can be shorter than the other two. Zeroes are filled in as needed.
+ */
+void tryPathRunUsecodeTo 0x828 (
+		var targetObj, var maxDeltaX, var maxDeltaY, var maxDeltaZ, var function,
+		var obj, var eventId) {
+	if (targetObj->get_container()) {
 		UI_flash_mouse(CURSOR_HAND);
 		abort;
 	}
 	AVATAR->halt_scheduled();
-	struct<Position> var0007 = var0000->get_object_position();
-	declare var var0008;
-	declare struct<Position> var0009;
-	declare var var000A;
-	declare var var000B;
-	if ((var0001 < 0) && (UI_get_array_size(var0001) == 1)) {
-		var0008 = var0003;
-		while (var0008 <= var0007.z) {
-			var0009.z = var0007.z + var0008;
-			var000A = -1 * var0001;
-			while (var000A >= var0001) {
-				var0009.x = var0007.x + var000A;
-				var000B = -1 * var0002;
-				while (var000B >= var0002) {
-					var0009.y = var0007.y + var000B;
+	struct<Position> targetPos = targetObj->get_object_position();
+	declare var deltaZ;
+	declare struct<Position> targetLoc;
+	declare var deltaX;
+	declare var deltaY;
+	if (maxDeltaX < 0 && UI_get_array_size(maxDeltaX) == 1) {
+		deltaZ = maxDeltaZ;
+		while (deltaZ <= targetPos.z) {
+			targetLoc.z = targetPos.z + deltaZ;
+			deltaX = -1 * maxDeltaX;
+			while (deltaX >= maxDeltaX) {
+				targetLoc.x = targetPos.x + deltaX;
+				deltaY = -1 * maxDeltaY;
+				while (deltaY >= maxDeltaY) {
+					targetLoc.y = targetPos.y + deltaY;
 					if (UI_path_run_usecode(
-								var0009, var0004, var0005, var0006)) {
+								targetLoc, function, obj, eventId)) {
 						return;
 					}
-					var000B -= 1;
+					deltaY -= 1;
 				}
-				var000A -= 1;
+				deltaX -= 1;
 			}
-			var0008 += 1;
+			deltaZ += 1;
 		}
 	} else {
-		var var000C = 0;
-		for (var000A in var0001) {
-			var000C += 1;
-			var000B = var0002[var000C];
-			var0008 = var0003[var000C];
-			var0009.x = var0007.x + var000A;
-			var0009.y = var0007.y + var000B;
-			if (var0003 < -1) {
-				var0008 = 0;
-				while (var0008 >= var0003) {
-					var0009.z = var0007.z + var0008;
+		// NOTE: Could just define index in for loop header...
+		var index = 0;
+		for (deltaX in maxDeltaX) {
+			index += 1;
+			deltaY = maxDeltaY[index];
+			deltaZ = maxDeltaZ[index];
+			targetLoc.x = targetPos.x + deltaX;
+			targetLoc.y = targetPos.y + deltaY;
+			if (maxDeltaZ < -1) {
+				deltaZ = 0;
+				while (deltaZ >= maxDeltaZ) {
+					targetLoc.z = targetPos.z + deltaZ;
 					if (UI_path_run_usecode(
-								var0009, var0004, var0005, var0006)) {
+								targetLoc, function, obj, eventId)) {
 						return;
 					}
-					var0008 -= 1;
+					deltaZ -= 1;
 				}
 			} else {
-				if (var0003 == -1) {
-					var0009.z = var0007.z;
+				if (maxDeltaZ == -1) {
+					targetLoc.z = targetPos.z;
 				} else {
-					var0009.z = var0007.z + var0008;
+					targetLoc.z = targetPos.z + deltaZ;
 				}
-				if (UI_path_run_usecode(var0009, var0004, var0005, var0006)) {
+				if (UI_path_run_usecode(targetLoc, function, obj, eventId)) {
 					return;
 				}
 			}
@@ -65206,7 +65300,6 @@ void Func0828 0x828 (
  * @param gangplank The gangplank object to be handled.
  * @returns Returns true if the gangplank is not blocked and was updated.
  */
-
 var handleGangplank 0x829 (var gangplank) {
 	var xOffsets = [-3, 0, 1, 0];
 	var yOffsets = [0, -3, 0, 1];
@@ -65255,7 +65348,6 @@ var handleGangplank 0x829 (var gangplank) {
  * @param size The size of the arrays.
  * @returns The modified base array with offsets added.
  */
-
 var addOffsetArray 0x82A (var base, var offset, var size) {
 	var index = 0;
 	do {
@@ -65275,7 +65367,6 @@ var addOffsetArray 0x82A (var base, var offset, var size) {
  * @param size The size of the array.
  * @returns The inverted array.
  */
-
 var invertArray 0x82B (var base, var size) {
 	var index = 0;
 	do {
@@ -65292,12 +65383,11 @@ var invertArray 0x82B (var base, var size) {
  * @param objPos The position of the object.
  * @param delta The delta value to determine the range of nearby objects.
  * @param shapeList A list of shapes to exclude from the blockage check.
- * @return true if the object is blocked by any nearby objects, false otherwise.
+ * @returns true if the object is blocked by any nearby objects, false otherwise.
  *
  * @note There is a known bug where the code incorrectly uses `obj` instead of
  * `foundObj` when checking the item flag for solidity.
  */
-
 var isObjBlocked 0x82C (
 		var obj, struct<Position> objPos, var delta, var shapeList) {
 	var nearbyObjects = obj->find_nearby(
@@ -65322,9 +65412,8 @@ var isObjBlocked 0x82C (
  * @param pos The current position of the gangplank.
  * @param offset The offset to be applied to the position.
  * @param shapeNum The shape identifier of the gangplank.
- * @return The adjusted position of the gangplank.
+ * @returns The adjusted position of the gangplank.
  */
-
 struct<Position> adjustGangplankPosition 0x82D (
 		struct<Position> pos, struct<Position> offset, var shapeNum) {
 	if (shapeNum == SHAPE_GANGPLANK_RAISED) {
@@ -66034,7 +66123,7 @@ void Func083E 0x83E (var var0000, var var0001) {
 		if (var0000->in_usecode()) {
 			return;
 		}
-		Func0828(var0000, -2, -2, -1, Func0631, var0000, BG_PATH_SUCCESS);
+		tryPathRunUsecodeTo(var0000, -2, -2, -1, Func0631, var0000, BG_PATH_SUCCESS);
 	}
 	if (var0001 == SCRIPTED) {
 		var var0002 = get_item_quality();
@@ -66205,7 +66294,7 @@ void Func0841 0x841 () {
 
 void Func0842 0x842 () {
 	UI_push_answers();
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	var var0001 = UI_is_pc_female();
 	var var0002 = true;
 	var var0003 = [
@@ -66597,7 +66686,7 @@ void Func084D 0x84D () {
 
 void Func084E 0x84E () {
 	BATLIN->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0908();
+	var var0000 = getAvatarName();
 	say("\"These questions are all hypothetical. Do not let them confuse or "
 		"upset thee.~~\"Question One: Thou art feeling depressed right now. Is "
 		"it more likely because -~A: Thou hast disappointed a friend, or~B: A "
@@ -66761,8 +66850,8 @@ void Func084E 0x84E () {
 
 void Func084F 0x84F () {
 	BATLIN->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0908();
-	var var0001 = Func0909();
+	var var0000 = getAvatarName();
+	var var0001 = getPoliteTitle();
 	say("The ceremony begins as Batlin stands before the gathered members of "
 		"The Fellowship in Britain. He begins his sermon. \"My friends, I "
 		"originally created The Fellowship to help ready Britannia and its "
@@ -66957,8 +67046,8 @@ void Func084F 0x84F () {
 
 void Func0850 0x850 () {
 	BATLIN->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func0908();
-	var var0001 = Func0909();
+	var var0000 = getAvatarName();
+	var var0001 = getPoliteTitle();
 	say("The ceremony begins as Batlin stands before the gathered Fellowship "
 		"members. The hall fills with thunderous cheers. They look at him with "
 		"a mixture of awe and sheer adoration. Batlin stands and basks in the "
@@ -67310,7 +67399,7 @@ void Func0853 0x853 () {
 }
 
 void Func0854 0x854 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	declare var var0001;
 	forever {
 		say("\"How many portions wouldst thou wish to sell?\"");
@@ -67340,7 +67429,7 @@ void Func0854 0x854 () {
 }
 
 void Func0855 0x855 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = ["nothing", "jerky", "mead", "fish", "ale", "wine"];
@@ -67761,7 +67850,7 @@ void Func085C 0x85C () {
 }
 
 void Func085D 0x85D () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 =
@@ -67832,7 +67921,7 @@ void Func085D 0x85D () {
 }
 
 void Func085E 0x85E () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = ["nothing", "wine", "ale"];
@@ -67876,8 +67965,8 @@ void Func085E 0x85E () {
 }
 
 void Func085F 0x85F (var var0000, var var0001) {
-	var var0002 = Func0908();
-	var var0003 = Func0909();
+	var var0002 = getAvatarName();
+	var var0003 = getPoliteTitle();
 	var var0004 = "the Avatar";
 	declare var var0005;
 	if (gflags[TOLD_CHAD_NAME]) {
@@ -67948,7 +68037,7 @@ void Func085F 0x85F (var var0000, var var0001) {
 }
 
 void Func0860 0x860 (var var0000, var var0001, var var0002) {
-	var var0003 = Func0909();
+	var var0003 = getPoliteTitle();
 	say("\"I am able to heal, cure poison, and resurrect. Art thou in need of "
 		"one of these services?\"");
 	UI_push_answers();
@@ -68956,7 +69045,7 @@ void Func0870 0x870 (var var0000, var var0001, var var0002) {
 }
 
 void Func0871 0x871 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = [
@@ -69212,7 +69301,7 @@ void Func0874 0x874 () {
 void Func0875 0x875 (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = Func090F(var0002);
-	var var0004 = Func0908();
+	var var0004 = getAvatarName();
 	if (var0003 == var0004) {
 		var0003 = "you";
 	}
@@ -69295,7 +69384,7 @@ void Func0875 0x875 (var var0000, var var0001) {
 }
 
 void Func0876 0x876 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = [
@@ -69429,7 +69518,7 @@ void Func0878 0x878 (var var0000, var var0001) {
 				var0001, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 		say("You pay ", var0001, " gold, and the training session begins.");
 		var var0007 = Func090F(var0002);
-		var var0008 = Func0908();
+		var var0008 = getAvatarName();
 		if (var0007 == var0008) {
 			var0007 = "you";
 		}
@@ -69715,41 +69804,63 @@ void Func087C 0x87C () {
 	}
 }
 
-void Func087D 0x87D () {
+/**
+ * This function creates a statue based on the Avatar's gender and facing.
+ * It hides the Avatar's NPC object and it places the created statue to
+ * match the Avatar's current position.
+ *
+ * In SI/Exult this could simply be the SI_DONT_MOVE flag instead.
+ */
+void createAvatarStatue 0x87D () {
 	AVATAR->get_npc_object()->set_item_flag(DONT_RENDER);
-	var var0000 = UI_create_new_object(SHAPE_STATUE);
+	var statue = UI_create_new_object(SHAPE_STATUE);
 	if (!UI_is_pc_female()) {
 		if (AVATAR->get_npc_object()->get_item_frame() < STAND_SOUTH) {
-			var0000->set_item_frame(FRAME_STATUE_MALE_AVATAR_NORTH);
+			statue->set_item_frame(FRAME_STATUE_MALE_AVATAR_NORTH);
 		} else {
-			var0000->set_item_frame(FRAME_STATUE_MALE_AVATAR_SOUTH);
+			statue->set_item_frame(FRAME_STATUE_MALE_AVATAR_SOUTH);
 		}
 	} else if (AVATAR->get_npc_object()->get_item_frame() < STAND_SOUTH) {
-		var0000->set_item_frame(FRAME_STATUE_FEMALE_AVATAR_NORTH);
+		statue->set_item_frame(FRAME_STATUE_FEMALE_AVATAR_NORTH);
 	} else {
-		var0000->set_item_frame(FRAME_STATUE_FEMALE_AVATAR_SOUTH);
+		statue->set_item_frame(FRAME_STATUE_FEMALE_AVATAR_SOUTH);
 	}
-	struct<Position> var0001 = AVATAR->get_npc_object()->get_object_position();
-	var var0002 = UI_update_last_created(var0001);
+	struct<Position> avatarPos = AVATAR->get_npc_object()->get_object_position();
+	var unused = UI_update_last_created(avatarPos);
 }
 
-void Func087E 0x87E (
-		struct<Position> var0000, var var0001, struct<Position> var0002,
-		var var0003) {
-	var var0004 = var0003->find_nearby(ANY_SHAPE, var0001, MASK_NONE);
-	for (var0007 in var0004) {
-		var var0008 = var0007->get_item_shape();
-		struct<Position> var0009 = var0007->get_object_position();
-		if (var0009.x <= var0002.x) {
-			if (var0009.x >= var0000.x) {
-				if (var0009.y <= var0002.y) {
-					if (var0009.y >= var0000.y) {
-						if (var0009.z < 5) {
-							if (!(var0008 == SHAPE_FLOOR_BD)) {
-								if (!var0007->is_npc()) {
-									Func087F(var0007);
+/**
+ * This function searches for objects within a specified radius of the given
+ * object. For each such object:
+ * - If the object is inside the rectangle defined by topLeft and bottomRight;
+ * - and the object's z-coordinate is less than 5;
+ * - and its shape is not SHAPE_FLOOR_BD;
+ * - Then:
+ *    - If the object is not an NPC, it is stored in a chest.
+ *    - Otherwise, it is moved end position if there is an available location.
+ *
+ * @param topLeft The top-left corner of the rectangle.
+ * @param searchRadius The radius within which to search for nearby objects.
+ * @param bottomRight The bottom-left corner of the rectangle
+ * @param targetObj The object around which to find nearby objects.
+ */
+void erethianSaveItemsNearPosition 0x87E (
+		struct<Position> topLeft, var searchRadius, struct<Position> bottomRight,
+		var targetObj) {
+	var nearbyObjects = targetObj->find_nearby(ANY_SHAPE, searchRadius, MASK_NONE);
+	for (obj in nearbyObjects) {
+		var objShape = obj->get_item_shape();
+		struct<Position> objPos = obj->get_object_position();
+		if (objPos.x <= bottomRight.x) {
+			if (objPos.x >= topLeft.x) {
+				if (objPos.y <= bottomRight.y) {
+					if (objPos.y >= topLeft.y) {
+						if (objPos.z < 5) {
+							if (!(objShape == SHAPE_FLOOR_BD)) {
+								if (!obj->is_npc()) {
+									erethianStorePartyItemsInChest(obj);
 								} else {
-									Func0880(var0007, var0002);
+									tryToMoveObjectToPosition(obj, bottomRight);
 								}
 							}
 						}
@@ -69760,128 +69871,167 @@ void Func087E 0x87E (
 	}
 }
 
-void Func087F 0x87F (var var0000) {
-	var var0001 = find_nearby(SHAPE_EGG, 15, MASK_EGG);
-	for (var0004 in var0001) {
-		var var0005 = var0004->get_item_quality();
-		var var0006 = var0004->get_item_frame();
-		struct<Position> var0007 = var0004->get_object_position();
-		if (var0005 == 10 && var0006 == FRAME_EGG_PATH) {
-			var var0008 = var0004->find_nearby(ANY_SHAPE, 1, MASK_NONE);
-			var var0009 = NULL_OBJ;
-			declare var var000D;
-			declare struct<Position> var000E;
-			declare var var000F;
-			declare var var0013;
-			declare var var0014;
-			declare var var0015;
-			if (var0008) {
-				declare var var000C;
-				for (var000C in var0008) {
-					var000D = var000C->get_item_shape();
-					if (var000D == SHAPE_CHEST) {
-						var000E = var000C->get_object_position();
-						if ((var000E.x == var0007.x)
-							&& (var000E.y == var0007.y)) {
-							var0009 = var000C;
-							var000F = var0009->set_item_quality(QUALITY_ERSTAMS_CHEST);
+/**
+ * This function performs the following operations:
+ * 1. Finds nearby eggs within a specified radius of `item`.
+ * 2. For teleport eggs with quality 10, it searches for nearby objects.
+ * 3. If a chest is found near the egg, it updates the chest's quality.
+ * 4. If no chest is found, it creates a new chest and updates its position.
+ * 5. Nearby objects are dumped into the chest, dousing light sources if needed.
+ * 7. Finally, dumps the input object into the chest, dousing it if needed.
+ *
+ * @param obj The object to be processed and potentially stored in a chest.
+ */
+void erethianStorePartyItemsInChest 0x87F (var obj) {
+	var nearbyEggs = find_nearby(SHAPE_EGG, 15, MASK_EGG);
+	for (egg in nearbyEggs) {
+		var eggQuality = egg->get_item_quality();
+		var eggFrame = egg->get_item_frame();
+		struct<Position> eggPosition = egg->get_object_position();
+		if (eggQuality == 10 && eggFrame == FRAME_EGG_PATH) {
+			var nearbyObjects = egg->find_nearby(ANY_SHAPE, 1, MASK_NONE);
+			var chest = NULL_OBJ;
+			declare var nearbyShape;
+			declare var ignore;
+			declare struct<Position> objPos;
+			declare var lightQuality;
+			declare var lightFrame;
+			declare var objShape;
+			if (nearbyObjects) {
+				declare var nearby;
+				// Find a chest near the egg.
+				for (nearby in nearbyObjects) {
+					nearbyShape = nearby->get_item_shape();
+					if (nearbyShape == SHAPE_CHEST) {
+						objPos = nearby->get_object_position();
+						if (objPos.x == eggPosition.x
+								&& objPos.y == eggPosition.y) {
+							chest = nearby;
+							ignore = chest->set_item_quality(QUALITY_ERSTAMS_CHEST);
 						}
 					}
 				}
-				if (!var0009) {
-					var0009 = UI_create_new_object(SHAPE_CHEST);
-					var000F = var0009->set_item_quality(QUALITY_ERSTAMS_CHEST);
-					var0009->set_item_frame(0);
-					var000F = UI_update_last_created(var0007);
+				// If no chest was found, create one.
+				if (!chest) {
+					chest = UI_create_new_object(SHAPE_CHEST);
+					ignore = chest->set_item_quality(QUALITY_ERSTAMS_CHEST);
+					chest->set_item_frame(0);
+					ignore = UI_update_last_created(eggPosition);
 				}
-				for (var000C in var0008) {
-					var000D = var000C->get_item_shape();
-					struct<Position> var0012 = var000C->get_object_position();
-					if (var0012.z < 5) {
-						if (!(var000C == var0009)) {
-							if (var000D == SHAPE_LIT_LIGHT_SOURCE) {
-								var0013 = var000C->get_item_quality();
-								var0014 = var000C->get_item_frame();
-								var000C->remove_item();
-								var000C = UI_create_new_object(SHAPE_LIGHT_SOURCE);
-								var000F = var000C->set_item_quality(var0013);
-								var000C->set_item_frame(var0014);
+				// Dump nearby objects into the chest.
+				for (nearby in nearbyObjects) {
+					nearbyShape = nearby->get_item_shape();
+					struct<Position> objPosition = nearby->get_object_position();
+					if (objPosition.z < 5) {
+						if (!(nearby == chest)) {
+							if (nearbyShape == SHAPE_LIT_LIGHT_SOURCE) {
+								// Douse lit light sources for storage.
+								lightQuality = nearby->get_item_quality();
+								lightFrame = nearby->get_item_frame();
+								nearby->remove_item();
+								nearby = UI_create_new_object(SHAPE_LIGHT_SOURCE);
+								ignore = nearby->set_item_quality(lightQuality);
+								nearby->set_item_frame(lightFrame);
 							}
-							var000F = var000C->set_last_created();
-							var000F = var0009->give_last_created();
+							ignore = nearby->set_last_created();
+							ignore = chest->give_last_created();
 						}
 					}
 				}
 			} else {
-				var0009 = UI_create_new_object(SHAPE_CHEST);
-				var000F = var0009->set_item_quality(QUALITY_ERSTAMS_CHEST);
-				var0009->set_item_frame(0);
-				var000F = UI_update_last_created(var0007);
+				// No nearby objects, so create the chest anyway.
+				chest = UI_create_new_object(SHAPE_CHEST);
+				ignore = chest->set_item_quality(QUALITY_ERSTAMS_CHEST);
+				chest->set_item_frame(0);
+				ignore = UI_update_last_created(eggPosition);
 			}
-			var000E = var0009->get_object_position();
+			// Dump the input object into the chest.
+			objPos = chest->get_object_position();
 			UI_sprite_effect(
-					ANIMATION_GREEN_BUBBLES, var000E.x - 1, var000E.y - 1, 0, 0,
-					0, LOOP_ONCE);
-			var0015 = var0000->get_item_shape();
-			if (var0015 == SHAPE_LIT_LIGHT_SOURCE) {
-				var0013 = var0000->get_item_quality();
-				var0014 = var0000->get_item_frame();
-				var0000->remove_item();
-				var0000 = UI_create_new_object(SHAPE_LIGHT_SOURCE);
-				var000F = var0000->set_item_quality(var0013);
-				var0000->set_item_frame(var0014);
+					ANIMATION_GREEN_BUBBLES, objPos.x - 1, objPos.y - 1,
+					0, 0, 0, LOOP_ONCE);
+			objShape = obj->get_item_shape();
+			if (objShape == SHAPE_LIT_LIGHT_SOURCE) {
+				// Douse lit light sources for storage.
+				lightQuality = obj->get_item_quality();
+				lightFrame = obj->get_item_frame();
+				obj->remove_item();
+				obj = UI_create_new_object(SHAPE_LIGHT_SOURCE);
+				ignore = obj->set_item_quality(lightQuality);
+				obj->set_item_frame(lightFrame);
 			}
-			var000F = var0000->set_last_created();
-			var000F = var0009->give_last_created();
+			ignore = obj->set_last_created();
+			ignore = chest->give_last_created();
 		}
 	}
 }
 
-void Func0880 0x880 (var var0000, struct<Position> var0001) {
-	var var0002 = var0000->get_item_shape();
-	var var0003 = var0000->get_item_frame();
-	struct<Position> var0004 = var0001;
-	var0004.x = var0001.x + 1;
-	var0004.y = var0001.y + 1;
-	if (!UI_is_not_blocked(var0004, var0002, var0003)) {
-		var0004.x = var0001.x + 1;
-		var0004.y = var0001.y;
-		if (!UI_is_not_blocked(var0004, var0002, var0003)) {
-			var0004.x = var0001.x;
-			var0004.y = var0001.y + 1;
-			if (!UI_is_not_blocked(var0004, var0002, var0003)) {
-				var0004.x = var0001.x + 1;
-				var0004.y = var0001.y - 1;
-				if (!UI_is_not_blocked(var0004, var0002, var0003)) {
-					var0004.x = var0001.x - 1;
-					var0004.y = var0001.y + 1;
-					if (!UI_is_not_blocked(var0004, var0002, var0003)) {
-						var0004.x = var0001.x + 1;
-						var0004.y = var0001.y - 2;
-						if (!UI_is_not_blocked(var0004, var0002, var0003)) {
-							var0004.x = var0001.x - 2;
-							var0004.y = var0001.y + 1;
-							if (!UI_is_not_blocked(var0004, var0002, var0003)) {
-								var0004.x = var0001.x + 1;
-								var0004.y = var0001.y - 3;
-								if (!UI_is_not_blocked(
-											var0004, var0002, var0003)) {
-									var0004.x = var0001.x - 3;
-									var0004.y = var0001.y + 1;
-									if (!UI_is_not_blocked(
-												var0004, var0002, var0003)) {
-										var0004.x = var0001.x + 1;
-										var0004.y = var0001.y - 4;
-										if (!UI_is_not_blocked(
-													var0004, var0002,
-													var0003)) {
-											var0004.x = var0001.x - 4;
-											var0004.y = var0001.y + 1;
-											if (!UI_is_not_blocked(
-														var0004, var0002,
-														var0003)) {
-												var0004.x = var0001.x + 1;
-												var0004.y = var0001.y + 1;
+/**
+ * Moves an object to a new position based on the target position.
+ * The function attempts to find a valid position around the target position
+ * where the object can be placed without being blocked.
+ *
+ * @param obj The object to be moved.
+ * @param targetPos The target position to move the object to.
+ *
+ * Positions searched, in order:
+ *       -4   -3   -2   -1    0   +1
+ *     ┌────┬────┬────┬────┬────┬────┐
+ *  -4 │    │    │    │    │    │ 10 │
+ *     ├────┼────┼────┼────┼────┼────┤
+ *  -3 │    │    │    │    │    │  8 │
+ *     ├────┼────┼────┼────┼────┼────┤
+ *  -2 │    │    │    │    │    │  6 │
+ *     ├────┼────┼────┼────┼────┼────┤
+ *  -1 │    │    │    │    │    │  4 │
+ *     ├────┼────┼────┼────┼────┼────┤
+ *   0 │    │    │    │    │    │  2 │
+ *     ├────┼────┼────┼────┼────┼────┤
+ *  +1 │ 11 │  9 │  7 │  5 │  3 │  1 │
+ *     └────┴────┴────┴────┴────┴────┘
+ *
+ * If none of these positions are valid, the object is moved to
+ *    (targetPos.x + 1, targetPos.y + 1)
+ */
+void tryToMoveObjectToPosition 0x880 (var obj, struct<Position> targetPos) {
+	var shapeId = obj->get_item_shape();
+	var frameId = obj->get_item_frame();
+	struct<Position> newPos = targetPos;
+	newPos.x = targetPos.x + 1;
+	newPos.y = targetPos.y + 1;
+	if (!UI_is_not_blocked(newPos, shapeId, frameId)) {
+		newPos.x = targetPos.x + 1;
+		newPos.y = targetPos.y;
+		if (!UI_is_not_blocked(newPos, shapeId, frameId)) {
+			newPos.x = targetPos.x;
+			newPos.y = targetPos.y + 1;
+			if (!UI_is_not_blocked(newPos, shapeId, frameId)) {
+				newPos.x = targetPos.x + 1;
+				newPos.y = targetPos.y - 1;
+				if (!UI_is_not_blocked(newPos, shapeId, frameId)) {
+					newPos.x = targetPos.x - 1;
+					newPos.y = targetPos.y + 1;
+					if (!UI_is_not_blocked(newPos, shapeId, frameId)) {
+						newPos.x = targetPos.x + 1;
+						newPos.y = targetPos.y - 2;
+						if (!UI_is_not_blocked(newPos, shapeId, frameId)) {
+							newPos.x = targetPos.x - 2;
+							newPos.y = targetPos.y + 1;
+							if (!UI_is_not_blocked(newPos, shapeId, frameId)) {
+								newPos.x = targetPos.x + 1;
+								newPos.y = targetPos.y - 3;
+								if (!UI_is_not_blocked(newPos, shapeId, frameId)) {
+									newPos.x = targetPos.x - 3;
+									newPos.y = targetPos.y + 1;
+									if (!UI_is_not_blocked(newPos, shapeId, frameId)) {
+										newPos.x = targetPos.x + 1;
+										newPos.y = targetPos.y - 4;
+										if (!UI_is_not_blocked(newPos, shapeId, frameId)) {
+											newPos.x = targetPos.x - 4;
+											newPos.y = targetPos.y + 1;
+											if (!UI_is_not_blocked(newPos, shapeId, frameId)) {
+												newPos.x = targetPos.x + 1;
+												newPos.y = targetPos.y + 1;
 											}
 										}
 									}
@@ -69893,10 +70043,10 @@ void Func0880 0x880 (var var0000, struct<Position> var0001) {
 			}
 		}
 	}
-	var0000->move_object(var0004);
+	obj->move_object(newPos);
 }
 
-var Func0881 0x881 () {
+var findAvatarStatue 0x881 () {
 	var var0000
 			= AVATAR->get_npc_object()->find_nearby(SHAPE_STATUE, 0, MASK_NONE);
 	for (var0003 in var0000) {
@@ -69944,7 +70094,7 @@ void Func0883 0x883 () {
 }
 
 void Func0884 0x884 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_clear_answers();
 	declare var var0001;
 	if (!gflags[QUESTION_ONE]) {
@@ -70504,7 +70654,7 @@ void Func0889 0x889 () {
 }
 
 void Func088A 0x88A () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	say("After learning that none of the townsfolk are willing to sacrifice "
 		"themselves for a greater good, an odd light comes into Forsythe's "
 		"eyes. His chin firms and his shoulders square.~~\"Well, then. It has "
@@ -71813,7 +71963,7 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 void Func089F 0x89F (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = Func090F(var0002);
-	var var0004 = Func0908();
+	var var0004 = getAvatarName();
 	if (var0003 == var0004) {
 		var0003 = "you";
 	}
@@ -71873,7 +72023,7 @@ void Func089F 0x89F (var var0000, var var0001) {
 }
 
 void Func08A0 0x8A0 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = [
@@ -71950,7 +72100,7 @@ void Func08A0 0x8A0 () {
 }
 
 void Func08A1 0x8A1 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = [
@@ -72079,7 +72229,7 @@ void Func08A2 0x8A2 (var var0000, var var0001) {
 }
 
 void Func08A3 0x8A3 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = ["nothing", "arrows", "bolts"];
@@ -72124,7 +72274,7 @@ void Func08A3 0x8A3 () {
 }
 
 void Func08A4 0x8A4 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 =
@@ -72196,7 +72346,7 @@ void Func08A5 0x8A5 () {
 
 void Func08A6 0x8A6 (var var0000, var var0001) {
 	var var0002 = Func0920();
-	var var0003 = Func0908();
+	var var0003 = getAvatarName();
 	if (var0002 != INVALID_NPC) {
 		var var0004 = Func090F(var0002);
 		declare var var0005;
@@ -72630,8 +72780,8 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002) {
 
 void Func08AD 0x8AD () {
 	HORANCE->show_npc_face(HORANCE_GOOD);
-	var var0000 = Func0909();
-	var var0001 = Func0908();
+	var var0000 = getPoliteTitle();
+	var var0001 = getAvatarName();
 	if (!gflags[DONE_HORANCE]) {
 		gflags[DONE_HORANCE] = true;
 		say("\"I thank thee, ", var0000,
@@ -72780,7 +72930,7 @@ void Func08B0 0x8B0 () {
 
 void Func08B1 0x8B1 () {
 	HORANCE->show_npc_face(HORANCE_GOOD);
-	var var0000 = Func0908();
+	var var0000 = getAvatarName();
 	say("\"Once again, Avatar, thou hast proven that thou art ever the "
 		"defender of Britannia and the innocent. I cannot adequately express "
 		"my gratitude; however, please take this small token of my thanks. I "
@@ -72814,7 +72964,7 @@ void Func08B1 0x8B1 () {
 
 void Func08B2 0x8B2 () {
 	HORANCE->show_npc_face(HORANCE_GOOD);
-	var var0000 = Func0908();
+	var var0000 = getAvatarName();
 	say("Horance looks at you curiously, \"Thy task is done here in Skara "
 		"Brae. Thou hast my respect and lifelong gratitude.\"");
 	if (gflags[ALAGNER_QUEST]) {
@@ -72920,7 +73070,7 @@ void Func08B4 0x8B4 (var var0000, var var0001, var var0002) {
 				}
 			}
 			if (var0005 == "resurrect") {
-				var var0009 = Func0908();
+				var var0009 = getAvatarName();
 				var var000A = UI_get_avatar_ref();
 				var000B = var000A->find_nearest(SHAPE_BODY1, 25);
 				if (var000B == NULL_OBJ) {
@@ -73065,7 +73215,7 @@ void Func08B6 0x8B6 (var var0000, var var0001) {
 }
 
 void Func08B7 0x8B7 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = [
@@ -73176,7 +73326,7 @@ void Func08B8 0x8B8 () {
 }
 
 void Func08B9 0x8B9 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = [
@@ -73927,7 +74077,7 @@ void Func08C0 0x8C0 () {
 }
 
 void Func08C1 0x8C1 () {
-	var var0000 = Func0908();
+	var var0000 = getAvatarName();
 	say("\"Sweet Rowena, I am so happy to see thee out of that horrid tower.\" "
 		"Mordra's eyes begin to fill with tears of joy.*");
 	ROWENA->show_npc_face(ROWENA_HAPPY);
@@ -73944,8 +74094,8 @@ void Func08C1 0x8C1 () {
 }
 
 void Func08C2 0x8C2 () {
-	var var0000 = Func0909();
-	var var0001 = Func0908();
+	var var0000 = getPoliteTitle();
+	var var0001 = getAvatarName();
 	say("\"Well, hello, Mayor Forsythe. Thou has finally decided to assist in "
 		"the salvation of our town.\" She gives him a pointed look.*");
 	FORSYTHE->say("\"Look here, I wasn't the one who gave that fool recipe to "
@@ -74582,7 +74732,7 @@ void Func08CA 0x8CA (var var0000, var var0001) {
 }
 
 void Func08CB 0x8CB () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 =
@@ -74645,7 +74795,7 @@ void Func08CB 0x8CB () {
 }
 
 void Func08CC 0x8CC () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = ["nothing", "wine", "ale"];
@@ -74759,7 +74909,7 @@ void Func08CE 0x8CE () {
 	var var0001 = Func08F7(SARPLING);
 	var var0002 = Func08F7(QUAEVEN);
 	var var0003 = Func08F7(SPARK);
-	var var0004 = Func0908();
+	var var0004 = getAvatarName();
 	say("The winged gargoyle begins his sermon.");
 	if (var0000) {
 		say("You see the gargoyle clerk taking notes in the corner.");
@@ -74858,7 +75008,7 @@ void Func08D0 0x8D0 (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = Func090F(var0002);
 	var var0004 = "feels";
-	var var0005 = Func0908();
+	var var0005 = getAvatarName();
 	declare var var0006;
 	if (var0003 == var0005) {
 		var0003 = "you";
@@ -74983,7 +75133,7 @@ void Func08D1 0x8D1 () {
 }
 
 void Func08D2 0x8D2 (var var0000, var var0001, var var0002) {
-	var var0003 = Func0909();
+	var var0003 = getPoliteTitle();
 	say("\"Dost thou want mine aid?\"");
 	UI_push_answers();
 	var var0004 = askYesNo();
@@ -75061,7 +75211,7 @@ void Func08D2 0x8D2 (var var0000, var var0001, var var0002) {
 }
 
 void Func08D3 0x8D3 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = [
@@ -75114,7 +75264,7 @@ void Func08D3 0x8D3 () {
 }
 
 void Func08D4 0x8D4 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = [
@@ -75226,7 +75376,7 @@ void Func08D5 0x8D5 () {
 }
 
 void Func08D6 0x8D6 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	var var0001 = Func08F7(TRENT);
 	if (!var0001) {
 		say("\"Where, oh where has my dear husband gone. I cannot stand to be "
@@ -75260,7 +75410,7 @@ void Func08D6 0x8D6 () {
 }
 
 void Func08D7 0x8D7 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	var var0001 = UI_get_party_list();
 	var var0002 = ROWENA->get_npc_object();
 	if (var0002 in var0001) {
@@ -75329,7 +75479,7 @@ void Func08D7 0x8D7 () {
 
 void Func08D8 0x8D8 () {
 	var var0000 = UI_is_pc_female();
-	var var0001 = Func0909();
+	var var0001 = getPoliteTitle();
 	if (!gflags[SEANCE_ROWENA]) {
 		ROWENA->say("The beautiful ghost looks through you with a slack look. "
 					"Nothing\tyou do seems to attract her attention.*");
@@ -75405,7 +75555,7 @@ void Func08D9 0x8D9 () {
 }
 
 void Func08DA 0x8DA () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	say("The lovely ghost holds up her hand as you begin to speak, \"Please, ",
 		var0000,
 		", forgive me, I am not feeling very well right now. Come back later "
@@ -75667,7 +75817,7 @@ void Func08DD 0x8DD () {
 }
 
 void Func08DE 0x8DE () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = [
@@ -76277,7 +76427,7 @@ void Func08EE 0x8EE () {
 
 void Func08EF 0x8EF () {
 	var var0000 = TRENT->find_nearest(SHAPE_SOUL_CAGE, ON_SCREEN);
-	var var0001 = Func0909();
+	var var0001 = getPoliteTitle();
 	if (!gflags[CAME_FROM_DEFAULT]) {
 		if (gflags[CAGE_MADE]) {
 			say("Trent paces around the burned-out remains of his shop. When "
@@ -76376,7 +76526,7 @@ void Func08EF 0x8EF () {
 }
 
 void Func08F0 0x8F0 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	var var0001 = Func08F7(ROWENA);
 	if (var0001) {
 		say("The couple haven't released their embrace since they were first "
@@ -76853,7 +77003,6 @@ void Func08FD 0x8FD (var var0000) {
  *
  * @param lines The lines of dialogue that the NPC will say.
  */
-
 void partyUtters 0x8FE (var lines) {
 	var npc = getNearbyPartyMember();
 	makeNpcSay(npc, lines);
@@ -76865,7 +77014,6 @@ void partyUtters 0x8FE (var lines) {
  *
  * @param lines The lines of dialogue that the NPC will say.
  */
-
 void partySpeak 0x8FF (var lines) {
 	var npc = getNearbyPartyMember();
 	handleNpcSpeech(npc, lines);
@@ -76875,10 +77023,9 @@ void partySpeak 0x8FF (var lines) {
  * This function performs a die roll between 1 and 10. If the result is less than 4,
  * it returns a nearby party NPC. Otherwise, it returns a random nearby party member.
  *
- * @return A nearby party NPC if the die roll is less than 4.
- * @return A random nearby party member if the die roll is 4 or greater.
+ * @returns A nearby party NPC if the die roll is less than 4.
+ * @returns A random nearby party member if the die roll is 4 or greater.
  */
-
 var getNearbyPartyMember 0x900 () {
 	if (UI_die_roll(1, 10) < 4) {
 		return findNearbyPartyNPC();
@@ -76894,9 +77041,8 @@ var getNearbyPartyMember 0x900 () {
  * NPC is nearby, it returns that NPC. If no NPCs are nearby or the party list
  * is empty, it returns the avatar.
  *
- * @return A random nearby party member, or the avatar if none are around.
+ * @returns A random nearby party member, or the avatar if none are around.
  */
-
 var getNearbyRandomPartyMember 0x901 () {
 	var partyList = UI_get_party_list();
 	partyList = filterArray(AVATAR->get_npc_object(), partyList);
@@ -76914,10 +77060,9 @@ var getNearbyRandomPartyMember 0x901 () {
  * This function iterates through a list of NPCs and checks if any of them are
  * are in the current party list and nearby.
  *
- * @return The first NPC from the list who is in the party and nearby.
- * @return If no such NPC is found, returns the avatar.
+ * @returns The first NPC from the list who is in the party and nearby.
+ * @returns If no such NPC is found, returns the avatar.
  */
-
 var findNearbyPartyNPC 0x902 () {
 	var companions = [
 		IOLO, SHAMINO, DUPRE, JAANA, SENTRI, JULIA, KATRINA, SPARK, TSERAMED
@@ -76945,7 +77090,6 @@ var findNearbyPartyNPC 0x902 () {
  * @param npc The NPC that will speak.
  * @param messages The list of messages to display.
  */
-
 void handleNpcSpeech 0x903 (var npc, var messages) {
 	if (npc->npc_nearby()) {
 		declare var facenum;
@@ -76975,7 +77119,6 @@ void handleNpcSpeech 0x903 (var npc, var messages) {
  * @param npc An object that has a method `npc_nearby()`.
  * @param lines A list of items to be processed.
  */
-
 void makeNpcSay 0x904 (var npc, var lines) {
 	if (npc->npc_nearby()) {
 		if (get_item_flag(CONFUSED)) {
@@ -77011,11 +77154,21 @@ var Func0907 0x907 (var var0000) {
 	return var0000->get_npc_object()->give_last_created();
 }
 
-var Func0908 0x908 () {
+/**
+ * Retrieves the Avatar's name.
+ * @returns The Avatar's name.
+ */
+var getAvatarName 0x908 () {
 	return UI_get_avatar_ref()->get_npc_name();
 }
 
-var Func0909 0x909 () {
+/**
+ * Determines the appropriate title based on the gender of the player character.
+ *
+ * @returns "milord" if the player character is male.
+ * @returns "milady" if the player character is female.
+ */
+var getPoliteTitle 0x909 () {
 	if (UI_is_pc_female() == 0) {
 		return "milord";
 	}
@@ -77025,9 +77178,8 @@ var Func0909 0x909 () {
 /**
  * Prompts the user with a yes/no question and returns their response.
  *
- * @return The user's response: `true` for "Yes" and `false` for "No`.
+ * @returns The user's response: `true` for "Yes" and `false` for "No`.
  */
-
 var askYesNo 0x90A () {
 	UI_push_answers();
 	converse(["Yes", "No"]) {
@@ -77048,9 +77200,8 @@ var askYesNo 0x90A () {
  *
  * @param options The options to present for the player.
  *
- * @return The text option chosen.
+ * @returns The text option chosen.
  */
-
 var askForResponse 0x90B (var options) {
 	UI_push_answers();
 	add(options);
@@ -77066,9 +77217,8 @@ var askForResponse 0x90B (var options) {
  *
  * @param options The options to present for the player.
  *
- * @return The index (1-n) of the option chosen.
+ * @returns The index (1-n) of the option chosen.
  */
-
 var chooseFromMenu2 0x90C (var options) {
 	UI_push_answers();
 	add(options);
@@ -77275,9 +77425,8 @@ void Func091A 0x91A () {
  * @param isPlural A flag indicating if the item is singular (0) or plural (1).
  * @param price The price of the item in gold.
  * @param suffix Any additional suffix to append to the price (e.g., " each").
- * @return A description of the item being sold with the proposed price.
+ * @returns A description of the item being sold with the proposed price.
  */
-
 var humanProposeSellPrice 0x91B (
 		var article, var itemName, var isPlural, var price, var suffix) {
 	var description = article + itemName + " ";
@@ -77298,9 +77447,8 @@ var humanProposeSellPrice 0x91B (
  * @param isPlural A flag indicating if the item is singular (0) or plural (1).
  * @param price The price of the item in gold.
  * @param suffix Any additional suffix to append to the price (e.g., " each").
- * @return A description of the item being sold with the proposed price.
+ * @returns A description of the item being sold with the proposed price.
  */
-
 var gargoyleProposeSellPrice 0x91C (
 		var article, var itemName, var isPlural, var price, var suffix) {
 	var description = "To sell " + article + itemName + " for " + price + " gold"
@@ -77516,7 +77664,7 @@ void Func0927 0x927 (var var0000) {
 			var var0006 = "mmmm... I bet that would sure wet a body's whistle.";
 		}
 		if (var0003 == 2) {
-			var var0007 = Func0908();
+			var var0007 = getAvatarName();
 			var0005 = "Why dost thou not wait until dinner to drink that "
 					  + var0004 + ", " + var0007 + ".";
 		}
@@ -77553,7 +77701,7 @@ void Func0928 0x928 (var var0000) {
 		}
 		if (var0009 == 2) {
 			var var000A = var0002[var0001];
-			var var000B = Func0908();
+			var var000B = getAvatarName();
 			var0008 = "Why dost thou not wait until dinner to drink that "
 					  + var000A + ", " + var000B + ".";
 			partySpeak(var0008);
@@ -77565,7 +77713,7 @@ void Func0928 0x928 (var var0000) {
 }
 
 void Func0929 0x929 () {
-	var var0000 = Func0908();
+	var var0000 = getAvatarName();
 	var var0001 = UI_die_roll(1, 3);
 	if (var0001 == 1) {
 		partySpeak([
@@ -77602,8 +77750,15 @@ void Func092C 0x92C (var var0000) {
 	UI_play_sound_effect(SFX_SUCCESS_BUZZ);
 }
 
-var Func092D 0x92D (var var0000) {
-	return AVATAR->direction_from(var0000);
+/**
+ * Calculates the direction from the avatar to the given object or position.
+ *
+ * @param target The target object or position.
+ *
+ * @returns The direction from the avatar to the target.
+ */
+var directionFromAvatar 0x92D (var target) {
+	return AVATAR->direction_from(target);
 }
 
 void Func092E 0x92E (var var0000) {
@@ -77802,7 +77957,6 @@ var absoluteValueOf 0x932 (var value) {
  * @param line The message to be spoken by the NPC.
  * @param delay The number of ticks to wait before the NPC speaks.
  */
-
 void delayedBark 0x933 (var npc, var line, var delay) {
 	if (canTalk(npc)) {
 		var var0003 = script npc->get_npc_object() after delay ticks {
@@ -77853,9 +78007,8 @@ void Func0936 0x936 (var var0000, var var0001) {
  * - The NPC is indeed an NPC.
  *
  * @param npc The NPC object to check.
- * @return True if the NPC can talk, false otherwise.
+ * @returns True if the NPC can talk, false otherwise.
  */
-
 var canTalk 0x937 (var npc) {
 	if ((npc->get_npc_prop(INTELLIGENCE) >= 10)
 		&& ((!npc->get_item_flag(ASLEEP))
@@ -77875,9 +78028,8 @@ var canTalk 0x937 (var npc) {
  * is asleep, paralyzed, dead, or has health less than or equal to zero.
  *
  * @param npc The ID of the NPC to check.
- * @return true if the NPC is incapacitated, otherwise false.
+ * @returns true if the NPC is incapacitated, otherwise false.
  */
-
 var isNpcIncapacitated 0x938 (var npc) {
 	npc = getNpcById(npc);
 	if (npc->get_item_flag(ASLEEP)
@@ -77893,9 +78045,8 @@ var isNpcIncapacitated 0x938 (var npc) {
  * Retrieves an NPC object by its ID.
  *
  * @param npcId - The ID of the NPC to retrieve.
- * @return The NPC object for the given ID or the ID itself if it is invalid.
+ * @returns The NPC object for the given ID or the ID itself if it is invalid.
  */
-
 var getNpcById 0x939 (var npcId) {
 	declare var npc;
 	if ((npcId < INVALID_NPC) && (npcId >= AVATAR)) {
@@ -77923,7 +78074,6 @@ var getNpcById 0x939 (var npcId) {
  *   time. If the quality is less than the sleep time multiplied by 30, the
  *   torch or light source is extinguished and its shape is changed accordingly.
  */
-
 void handleSleepEffects 0x93A (var sleepTime, var bed) {
 	var partyList = UI_get_party_list2();
 	declare var result;
@@ -77977,7 +78127,6 @@ void handleSleepEffects 0x93A (var sleepTime, var bed) {
  * maximum value.
  * Finally, the NPC's property is updated with the new value.
  */
-
 void restorePropertyAfterSleep 0x93B (var npc, var prop, var maxProp, var sleepTime) {
 	var currentProp = npc->get_npc_prop(prop);
 	var newProp = currentProp + (2 * sleepTime);
@@ -77992,9 +78141,8 @@ void restorePropertyAfterSleep 0x93B (var npc, var prop, var maxProp, var sleepT
  *
  * @param targetValue The value to be filtered out from the array.
  * @param inputArray The array from which the target value will be filtered out.
- * @return A new array with all elements except the target value.
+ * @returns A new array with all elements except the target value.
  */
-
 var filterArray 0x93C (var targetValue, var inputArray) {
 	var resultArray = [];
 	for (element in inputArray) {
@@ -78011,9 +78159,8 @@ var filterArray 0x93C (var targetValue, var inputArray) {
  *
  * @param valueArray The array of values to be sorted.
  * @param keyArray The array of keys used to determine the order of `valueArray`.
- * @return The sorted `valueArray`.
+ * @returns The sorted `valueArray`.
  */
-
 var sortArraysBySecondArray 0x93D (var valueArray, var keyArray) {
 	var size = UI_get_array_size(valueArray);
 	if (size > 1) {
@@ -78866,7 +79013,7 @@ void Func0950 0x950 (var var0000, var var0001) {
 }
 
 void Func0951 0x951 () {
-	var var0000 = Func0909();
+	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = [
