@@ -6,8 +6,8 @@ const int MAX_QUANTITY = 100;
 const int MAX_CHARGES = 100;
 
 enum intrinsics {
-	UI_UNKNOWN_70 = 0x70,
-	UI_UNKNOWN_83 = 0x83,
+	UNKNOWN_INTRINSIC_70 = 0x70,
+	UNKNOWN_INTRINSIC_83 = 0x83,
 };
 
 enum sprite_repeats {
