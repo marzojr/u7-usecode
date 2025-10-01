@@ -916,28 +916,33 @@ void FuncPocketwatch shape#(SHAPE_POCKETWATCH) () {
 
 void FuncClothMap shape#(SHAPE_CLOTH_MAP) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = UI_display_map();
+		var ignore = UI_display_map();
 	}
 }
 
+/**
+ * Handles double-click events on a chicken coop.
+ * If the coop hasn't laid eggs in the current 3-hour period,
+ * it has a 75% chance to spawn an egg.
+ */
 void FuncChickenCoop shape#(SHAPE_CHICKEN_COOP) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = get_item_quality();
-		if (var0000 == UI_part_of_day()) {
+		var lastEggSpawnTime = get_item_quality();
+		if (lastEggSpawnTime == UI_part_of_day()) {
 			return;
 		}
-		var var0001 = set_item_quality(UI_part_of_day());
+		var ignored = set_item_quality(UI_part_of_day());
 		if (UI_die_roll(1, 4) > 1) {
-			var var0002 = UI_create_new_object(SHAPE_FOOD);
-			if (var0002) {
-				var0002->set_item_flag(TEMPORARY);
-				var0002->clear_item_flag(OKAY_TO_TAKE);
-				var0002->set_item_frame(FRAME_EGG);
-				struct<Position> var0003 = get_object_position();
-				var var0004 = var0003.x - UI_die_roll(0, 1);
-				var var0005 = var0003.y - UI_die_roll(0, 1);
-				var var0006 = var0003.z + 1;
-				var0001 = UI_update_last_created([var0004, var0005, var0006]);
+			var newEgg = UI_create_new_object(SHAPE_FOOD);
+			if (newEgg) {
+				newEgg->set_item_flag(TEMPORARY);
+				newEgg->clear_item_flag(OKAY_TO_TAKE);
+				newEgg->set_item_frame(FRAME_EGG);
+				struct<Position> coopPosition = get_object_position();
+				var deltaX = coopPosition.x - UI_die_roll(0, 1);
+				var deltaY = coopPosition.y - UI_die_roll(0, 1);
+				var deltaZ = coopPosition.z + 1;
+				ignored = UI_update_last_created([deltaX, deltaY, deltaZ]);
 			}
 		}
 	}
@@ -947,32 +952,32 @@ void FuncAbbeyDoorClosedRight shape#(SHAPE_ABBEY_DOOR_CLOSED_RIGHT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = Func081B(item);
-	if (var0000 == FRAME_DOOR_OPENED) {
-		if (Func081D(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_CLOSED,
+	var state = getDoorState(item);
+	if (state == FRAME_DOOR_OPENED) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_CLOSED,
 				0, 0, 7)) {
-			Func081E(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_OPENED, X,
+			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_OPENED, X,
 					SHAPE_ABBEY_DOOR_OPEN_LEFT, FRAME_DOOR_CLOSED, 0, 3, 5);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_CLOSED) {
-		if (Func081D(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_OPENED,
+	if (state == FRAME_DOOR_CLOSED) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_OPENED,
 				0, 0, 7)) {
-			Func081E(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_CLOSED, Y,
+			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_CLOSED, Y,
 					SHAPE_ABBEY_DOOR_OPEN_LEFT, FRAME_DOOR_OPENED, -3, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_LOCKED) {
-		Func0819(item);
+	if (state == FRAME_DOOR_LOCKED) {
+		doorUtterLocked(item);
 	}
-	if (var0000 == FRAME_DOOR_MAGIC_LOCK) {
-		Func081A(item);
+	if (state == FRAME_DOOR_MAGIC_LOCK) {
+		doorUtterMagicallyLocked(item);
 	}
 }
 
@@ -980,32 +985,32 @@ void FuncAbbeyDoorClosedLeft shape#(SHAPE_ABBEY_DOOR_CLOSED_LEFT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = Func081B(item);
-	if (var0000 == FRAME_DOOR_OPENED) {
-		if (Func081D(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_CLOSED,
+	var state = getDoorState(item);
+	if (state == FRAME_DOOR_OPENED) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_CLOSED,
 				0, 3, 5)) {
-			Func081E(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_OPENED, X,
+			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_OPENED, X,
 					SHAPE_ABBEY_DOOR_OPEN_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_CLOSED) {
-		if (Func081D(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_OPENED,
+	if (state == FRAME_DOOR_CLOSED) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_OPENED,
 				-3, 0, 7)) {
-			Func081E(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_CLOSED, Y,
+			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_CLOSED, Y,
 					SHAPE_ABBEY_DOOR_OPEN_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_LOCKED) {
-		Func0819(item);
+	if (state == FRAME_DOOR_LOCKED) {
+		doorUtterLocked(item);
 	}
-	if (var0000 == FRAME_DOOR_MAGIC_LOCK) {
-		Func081A(item);
+	if (state == FRAME_DOOR_MAGIC_LOCK) {
+		doorUtterMagicallyLocked(item);
 	}
 }
 
@@ -1013,32 +1018,32 @@ void FuncAbbeyDoorOpenLeft shape#(SHAPE_ABBEY_DOOR_OPEN_LEFT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = Func081B(item);
-	if (var0000 == FRAME_DOOR_OPENED) {
-		if (Func081D(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_CLOSED,
+	var state = getDoorState(item);
+	if (state == FRAME_DOOR_OPENED) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_CLOSED,
 				3, 0, 1)) {
-			Func081E(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_OPENED, Y,
+			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_OPENED, Y,
 					SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_CLOSED) {
-		if (Func081D(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_OPENED,
+	if (state == FRAME_DOOR_CLOSED) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_OPENED,
 				0, -3, 7)) {
-			Func081E(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_CLOSED, X,
+			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_CLOSED, X,
 					SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_LOCKED) {
-		Func0819(item);
+	if (state == FRAME_DOOR_LOCKED) {
+		doorUtterLocked(item);
 	}
-	if (var0000 == FRAME_DOOR_MAGIC_LOCK) {
-		Func081A(item);
+	if (state == FRAME_DOOR_MAGIC_LOCK) {
+		doorUtterMagicallyLocked(item);
 	}
 }
 
@@ -1188,30 +1193,30 @@ void FuncDoorNsRight shape#(SHAPE_DOOR_NS_RIGHT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = Func081B(item);
+	var var0000 = getDoorState(item);
 	if (var0000 == FRAME_DOOR_OPENED) {
-		if (Func081D(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 7)) {
-			Func081E(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_OPENED, X,
+		if (handleDoorInteraction(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 7)) {
+			handleDoubleDoorInteraction(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_OPENED, X,
 					SHAPE_DOOR_EW_TOP, FRAME_DOOR_CLOSED, 0, 3, 5);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
 	if (var0000 == FRAME_DOOR_CLOSED) {
-		if (Func081D(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_OPENED, 0, 0, 7)) {
-			Func081E(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_CLOSED, Y,
+		if (handleDoorInteraction(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_OPENED, 0, 0, 7)) {
+			handleDoubleDoorInteraction(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_CLOSED, Y,
 					SHAPE_DOOR_EW_TOP, FRAME_DOOR_OPENED, -3, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
 	if (var0000 == FRAME_DOOR_LOCKED) {
-		Func0819(item);
+		doorUtterLocked(item);
 	}
 	if (var0000 == FRAME_DOOR_MAGIC_LOCK) {
-		Func081A(item);
+		doorUtterMagicallyLocked(item);
 	}
 }
 
@@ -1695,30 +1700,30 @@ void FuncDoorEwBottom shape#(SHAPE_DOOR_EW_BOTTOM) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = Func081B(item);
+	var var0000 = getDoorState(item);
 	if (var0000 == FRAME_DOOR_OPENED) {
-		if (Func081D(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7)) {
-			Func081E(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_OPENED, Y,
+		if (handleDoorInteraction(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7)) {
+			handleDoubleDoorInteraction(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_OPENED, Y,
 					SHAPE_DOOR_NS_LEFT, FRAME_DOOR_CLOSED, 3, 0, 1);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
 	if (var0000 == FRAME_DOOR_CLOSED) {
-		if (Func081D(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7)) {
-			Func081E(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_CLOSED, X,
+		if (handleDoorInteraction(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7)) {
+			handleDoubleDoorInteraction(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_CLOSED, X,
 					SHAPE_DOOR_NS_LEFT, FRAME_DOOR_OPENED, 0, -3, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
 	if (var0000 == FRAME_DOOR_LOCKED) {
-		Func0819(item);
+		doorUtterLocked(item);
 	}
 	if (var0000 == FRAME_DOOR_MAGIC_LOCK) {
-		Func081A(item);
+		doorUtterMagicallyLocked(item);
 	}
 }
 
@@ -2035,32 +2040,32 @@ void FuncAbbeyDoorOpenRight shape#(SHAPE_ABBEY_DOOR_OPEN_RIGHT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = Func081B(item);
-	if (var0000 == FRAME_DOOR_OPENED) {
-		if (Func081D(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_CLOSED,
+	var state = getDoorState(item);
+	if (state == FRAME_DOOR_OPENED) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_CLOSED,
 				0, 0, 7)) {
-			Func081E(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_OPENED, Y,
+			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_OPENED, Y,
 					SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_CLOSED, 3, 0, 1);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_CLOSED) {
-		if (Func081D(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_OPENED,
+	if (state == FRAME_DOOR_CLOSED) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_OPENED,
 				0, 0, 7)) {
-			Func081E(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_CLOSED, X,
+			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_CLOSED, X,
 					SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_OPENED, 0, -3, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_LOCKED) {
-		Func0819(item);
+	if (state == FRAME_DOOR_LOCKED) {
+		doorUtterLocked(item);
 	}
-	if (var0000 == FRAME_DOOR_MAGIC_LOCK) {
-		Func081A(item);
+	if (state == FRAME_DOOR_MAGIC_LOCK) {
+		doorUtterMagicallyLocked(item);
 	}
 }
 
@@ -2450,30 +2455,30 @@ void FuncDoorNsLeft shape#(SHAPE_DOOR_NS_LEFT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = Func081B(item);
+	var var0000 = getDoorState(item);
 	if (var0000 == FRAME_DOOR_OPENED) {
-		if (Func081D(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_CLOSED, 0, 3, 5)) {
-			Func081E(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_OPENED, X,
+		if (handleDoorInteraction(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_CLOSED, 0, 3, 5)) {
+			handleDoubleDoorInteraction(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_OPENED, X,
 					SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
 	if (var0000 == FRAME_DOOR_CLOSED) {
-		if (Func081D(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_OPENED, -3, 0, 7)) {
-			Func081E(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_CLOSED, Y,
+		if (handleDoorInteraction(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_OPENED, -3, 0, 7)) {
+			handleDoubleDoorInteraction(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_CLOSED, Y,
 					SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_OPENED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
 	if (var0000 == FRAME_DOOR_LOCKED) {
-		Func0819(item);
+		doorUtterLocked(item);
 	}
 	if (var0000 == FRAME_DOOR_MAGIC_LOCK) {
-		Func081A(item);
+		doorUtterMagicallyLocked(item);
 	}
 }
 
@@ -2481,30 +2486,30 @@ void FuncDoorEwTop shape#(SHAPE_DOOR_EW_TOP) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = Func081B(item);
+	var var0000 = getDoorState(item);
 	if (var0000 == FRAME_DOOR_OPENED) {
-		if (Func081D(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_CLOSED, 3, 0, 1)) {
-			Func081E(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_OPENED, Y,
+		if (handleDoorInteraction(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_CLOSED, 3, 0, 1)) {
+			handleDoubleDoorInteraction(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_OPENED, Y,
 					SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
 	if (var0000 == FRAME_DOOR_CLOSED) {
-		if (Func081D(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_OPENED, 0, -3, 7)) {
-			Func081E(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_CLOSED, X,
+		if (handleDoorInteraction(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_OPENED, 0, -3, 7)) {
+			handleDoubleDoorInteraction(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_CLOSED, X,
 					SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 		}
 	}
 	if (var0000 == FRAME_DOOR_LOCKED) {
-		Func0819(item);
+		doorUtterLocked(item);
 	}
 	if (var0000 == FRAME_DOOR_MAGIC_LOCK) {
-		Func081A(item);
+		doorUtterMagicallyLocked(item);
 	}
 }
 
@@ -3536,9 +3541,9 @@ void FuncLockpick shape#(SHAPE_LOCKPICK) () {
 		for (var0009 in var0006) {
 			if (var0001 == var0009) {
 				if (var0002 == QUALITY_DOOR_PICKABLE) {
-					if (Func081B(var0000) == FRAME_DOOR_LOCKED) {
+					if (getDoorState(var0000) == FRAME_DOOR_LOCKED) {
 						if (var0003) {
-							Func081C(var0000, FRAME_DOOR_CLOSED);
+							changeDoorState(var0000, FRAME_DOOR_CLOSED);
 							var0000->item_say("Unlocked");
 						} else {
 							var0000->item_say("Pick broke");
@@ -8600,7 +8605,7 @@ void FuncWallBottom shape#(SHAPE_WALL_BOTTOM) () {
 		return;
 	}
 	if (get_item_quality() == QUALITY_DOOR_PICKABLE) {
-		var var0000 = Func081F(item);
+		var var0000 = handleSecretDoorInteraction(item);
 	}
 }
 
@@ -8662,7 +8667,7 @@ void FuncWallNsRight shape#(SHAPE_WALL_NS_RIGHT) () {
 		return;
 	}
 	if (get_item_quality() == QUALITY_DOOR_PICKABLE) {
-		var var0000 = Func0820(item);
+		var var0000 = handleSecretDoorNsInteraction(item);
 	}
 }
 
@@ -53932,8 +53937,8 @@ void Func0625 object#(0x625) () {
 		UI_play_music(MUSIC_STOP, item);
 		PARTY->move_object(var0018);
 		var var0019 = AVATAR->find_nearby(SHAPE_WALL_BOTTOM, 10, MASK_NONE);
-		if (var0019 && (Func081B(var0019) == 1)) {
-			var0013 = Func081F(var0019);
+		if (var0019 && (getDoorState(var0019) == FRAME_DOOR_OPENED)) {
+			var0013 = handleSecretDoorInteraction(var0019);
 		}
 		Func084A();
 		var0013 = script AVATAR {
@@ -60349,7 +60354,7 @@ void Func06B5 object#(0x6B5) () {
 				// Need to make UCC optimize this.
 				goto labelFunc06B5_00BE;
 			}
-			if (Func081B(var0004) != FRAME_DOOR_LOCKED) {
+			if (getDoorState(var0004) != FRAME_DOOR_LOCKED) {
 				break;
 			}
 			var0005 += 1;
@@ -64779,7 +64784,7 @@ var Func0814 id#(0x814) () {
 }
 
 void Func0815 id#(0x815) (var var0000) {
-	var var0001 = Func081B(var0000);
+	var var0001 = getDoorState(var0000);
 	var var0002 = get_item_quality();
 	var var0003 = -1;
 	if (var0001 == FRAME_DOOR_CLOSED) {
@@ -64814,7 +64819,7 @@ void Func0815 id#(0x815) (var var0000) {
 		}
 	}
 	if (var0003 != -1) {
-		Func081C(var0000, var0003);
+		changeDoorState(var0000, var0003);
 	}
 }
 
@@ -64861,9 +64866,9 @@ void Func0816 id#(0x816) (var var0000) {
 		for (var0013 in var0010) {
 			if (var0002 == var0013->get_item_quality()) {
 				if (var0013->get_item_shape() == SHAPE_WALL_NS_RIGHT) {
-					var0001 = Func0820(var0013);
+					var0001 = handleSecretDoorNsInteraction(var0013);
 				} else {
-					var0001 = Func081F(var0013);
+					var0001 = handleSecretDoorInteraction(var0013);
 				}
 			}
 		}
@@ -64923,7 +64928,7 @@ void Func0816 id#(0x816) (var var0000) {
 			var var0018 = var0013->get_item_quality();
 			if ((var0018 == 230 || (var0018 == 220 || var0018 == 210))
 					&& !(var0018 == var0015)) {
-				var0001 = Func081F(var0013);
+				var0001 = handleSecretDoorInteraction(var0013);
 			}
 		}
 		struct<Position> var0019 = var0000->get_object_position();
@@ -64931,7 +64936,7 @@ void Func0816 id#(0x816) (var var0000) {
 		var var001A = var0019->find_nearby(SHAPE_WINCH_NS, 60, MASK_NONE);
 		for (var0013 in var0010) {
 			if (var0013->get_item_quality() == var0015) {
-				var0001 = Func0820(var0013);
+				var0001 = handleSecretDoorNsInteraction(var0013);
 			}
 		}
 		for (var001F in var001A) {
@@ -64994,97 +64999,155 @@ void Func0817 id#(0x817) (var var0000) {
 	}
 }
 
-void Func0818 id#(0x818) () {
+/**
+ * Makes a party member state that the door is blocked.
+ */
+void partyUttersDoorIsBlocked id#(0x818) () {
 	partySpeak("@The door appears blocked.@");
 }
 
-void Func0819 id#(0x819) (var var0000) {
-	var0000->item_say("Locked");
+void doorUtterLocked id#(0x819) (var door) {
+	door->item_say("Locked");
 }
 
-void Func081A id#(0x81A) (var var0000) {
-	var0000->item_say("Magically Locked");
+void doorUtterMagicallyLocked id#(0x81A) (var door) {
+	door->item_say("Magically Locked");
 }
 
-var Func081B id#(0x81B) (var var0000) {
-	return var0000->get_item_frame() % 4;
+/**
+ * Gets the state of a door based on its item frame.
+ *
+ * @param door the door object to query
+ * @returns the door state (0-3) (see @enum Door_Frame_Constants)
+ */
+var getDoorState id#(0x81B) (var door) {
+	return door->get_item_frame() % 4;
 }
 
-void Func081C id#(0x81C) (var var0000, var var0001) {
-	var var0002 = var0000->get_item_frame();
-	var var0003 = var0002 % 4;
-	var0000->set_item_frame((var0002 - var0003) + var0001);
+/**
+ * Changes the given door's state to the specified value.
+ *
+ * @param door the door object
+ * @param newState the door state (0-3) (see @enum Door_Frame_Constants)
+ */
+void changeDoorState id#(0x81C) (var door, var newState) {
+	var frameNum = door->get_item_frame();
+	var oldState = frameNum % 4;
+	door->set_item_frame((frameNum - oldState) + newState);
 }
 
-var Func081D id#(0x81D) (
-		var var0000, var var0001, var var0002, var var0003, var var0004,
-		var var0005) {
-	Func081C(var0000, var0002);
-	var0000->set_item_shape(var0001);
-	struct<Position> var0006 = var0000->get_object_position();
-	var0006.x += var0003;
-	var0006.y += var0004;
-	if (var0000->set_last_created()) {
-		var var0007 = UI_update_last_created(var0006);
+/**
+ * Opens or closes a door.
+ *
+ * @param door the door object
+ * @param newShape the shape corresponding to the new state (open/closed)
+ * @param newState the door state (0-3) (see @enum Door_Frame_Constants)
+ * @param deltaX How much to offset the door in the X direction
+ * @param deltaY How much to offset the door in the Y direction
+ * @param unused An unused parameter, likely a holdover
+ * @returns true
+ *
+ * SPECULATION: @param unused was likely a delta-Z.
+ */
+var handleDoorInteraction id#(0x81D) (
+		var door, var newShape, var newState, var deltaX, var deltaY,
+		var unused) {
+	changeDoorState(door, newState);
+	door->set_item_shape(newShape);
+	struct<Position> doorPosition = door->get_object_position();
+	doorPosition.x += deltaX;
+	doorPosition.y += deltaY;
+	if (door->set_last_created()) {
+		var ignore = UI_update_last_created(doorPosition);
 	}
 	return true;
 }
 
-void Func081E id#(0x81E) (
-		var var0000, var var0001, var var0002, var var0003, var var0004,
-		var var0005, var var0006, var var0007, var var0008) {
-	struct<Position> var0009 = var0000->get_object_position();
-	var var000A = var0009[var0003];
-	var var000B = var0000->find_nearby(var0001, 7, MASK_NONE);
-	var var000C = false;
-	declare var var000F;
-	for (var000F in var000B) {
-		if ((Func081B(var000F) == var0002) && (var0009[var0003] == var000A)) {
-			var000C = true;
+/**
+ * Used for double-doors. Looks for the other door in the pair
+ * and interacts with it.
+ *
+ * @param sourceObj The door that was opened/closed/locked/unlocked.
+ * @param doorShape The shape of the door to look for.
+ * @param oldState What the door state was before interaction.
+ *        (0-3) (see @enum Door_Frame_Constants)
+ * @param axis The axis (X, Y, Z) which should be equal in the
+ *        door's pair. See @enum Position and @struct Position.
+ * @param newShape What the pair's shape should be changed to.
+ * @param newState What the pair's state should be changed to.
+ * @param deltaX How much to offset the pair in the X direction
+ * @param deltaY How much to offset the pair in the Y direction
+ * @param unused An unused parameter, likely a holdover
+ *
+ * SPECULATION: @param unused was likely a delta-Z.
+ */
+void handleDoubleDoorInteraction id#(0x81E) (
+		var sourceObj, var doorShape, var oldState, var axis, var newShape,
+		var newState, var deltaX, var deltaY, var unused) {
+	struct<Position> objPosition = sourceObj->get_object_position();
+	var coord = objPosition[axis];
+	var nearDoors = sourceObj->find_nearby(doorShape, 7, MASK_NONE);
+	var foundDoor = false;
+	declare var door;
+	for (door in nearDoors) {
+		if ((getDoorState(door) == oldState) && (objPosition[axis] == coord)) {
+			foundDoor = true;
 			break;
 		}
 	}
-	if (var000C) {
-		var000C = Func081D(var000F, var0004, var0005, var0006, var0007, var0008);
+	if (foundDoor) {
+		foundDoor = handleDoorInteraction(door, newShape, newState, deltaX, deltaY, unused);
 	}
 }
 
-var Func081F id#(0x81F) (var var0000) {
-	var var0001 = Func081B(var0000);
-	if (var0001 == FRAME_DOOR_OPENED) {
-		if (Func081D(var0000, SHAPE_WALL_NS_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7)) {
+/**
+ * Opens or closes secret doors (SHAPE_WALL_BOTTOM).
+ *
+ * @param door The secret door to open/close.
+ * @returns true if the door was opened, false otherwise.
+ */
+var handleSecretDoorInteraction id#(0x81F) (var door) {
+	var state = getDoorState(door);
+	if (state == FRAME_DOOR_OPENED) {
+		if (handleDoorInteraction(door, SHAPE_WALL_NS_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7)) {
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 			return false;
 		}
 	}
-	if (var0001 == FRAME_DOOR_CLOSED) {
-		if (Func081D(var0000, SHAPE_WALL_NS_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7)) {
+	if (state == FRAME_DOOR_CLOSED) {
+		if (handleDoorInteraction(door, SHAPE_WALL_NS_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7)) {
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 			return false;
 		}
 	}
 	return true;
 }
 
-var Func0820 id#(0x820) (var var0000) {
-	var var0001 = Func081B(var0000);
-	if (var0001 == FRAME_DOOR_OPENED) {
-		if (Func081D(var0000, SHAPE_WALL_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 7)) {
+/**
+ * Opens or closes secret doors (SHAPE_WALL_NS_RIGHT).
+ *
+ * @param door The secret door to open/close.
+ * @returns true if the door was opened, false otherwise.
+ */
+var handleSecretDoorNsInteraction id#(0x820) (var door) {
+	var state = getDoorState(door);
+	if (state == FRAME_DOOR_OPENED) {
+		if (handleDoorInteraction(door, SHAPE_WALL_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 7)) {
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 			return false;
 		}
 	}
-	if (var0001 == FRAME_DOOR_CLOSED) {
-		if (Func081D(var0000, SHAPE_WALL_BOTTOM, FRAME_DOOR_OPENED, 0, 0, 7)) {
+	if (state == FRAME_DOOR_CLOSED) {
+		if (handleDoorInteraction(door, SHAPE_WALL_BOTTOM, FRAME_DOOR_OPENED, 0, 0, 7)) {
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
-			Func0818();
+			partyUttersDoorIsBlocked();
 			return false;
 		}
 	}
