@@ -154,8 +154,8 @@ extern var isObjBlocked id#(0x82C) (var obj, struct<Position> objPos, var delta,
 extern struct<Position> adjustGangplankPosition id#(0x82D) (struct<Position> pos, struct<Position> offset, var shapeNum);
 extern var Func082E id#(0x82E) (var var0000);
 extern void Func082F id#(0x82F) ();
-extern void Func0830 id#(0x830) (var var0000, var var0001);
-extern void Func0831 id#(0x831) (var var0000);
+extern void sailsFurlUnfurl id#(0x830) (var var0000, var var0001);
+extern void shipStartSailing id#(0x831) (var var0000);
 extern void Func0832 id#(0x832) (var var0000, var var0001);
 extern void Func0833 id#(0x833) (var var0000, var var0001);
 extern var Func0834 id#(0x834) ();

@@ -1055,15 +1055,15 @@ void FuncSails shape#(SHAPE_SAILS) () {
 		UI_close_gumps();
 	}
 	if (get_barge()) {
-		var var0000 = find_nearby(SHAPE_MAST , 5, MASK_NONE);
-		var var0001 = find_nearby(SHAPE_SAILS, 5, MASK_NONE);
-		if (!(item in var0001)) {
-			var0001 &= item;
+		var masts = find_nearby(SHAPE_MAST , 5, MASK_NONE);
+		var sails = find_nearby(SHAPE_SAILS, 5, MASK_NONE);
+		if (!(item in sails)) {
+			sails &= item;
 		}
 		if (!AVATAR->get_item_flag(ON_MOVING_BARGE)) {
-			var var0002 = get_item_quality();
-			var var0003 = PARTY->count_objects(SHAPE_SCROLL, var0002, FRAME_ANY);
-			if (!var0003) {
+			var objQual = get_item_quality();
+			var numDeeds = PARTY->count_objects(SHAPE_SCROLL, objQual, FRAME_ANY);
+			if (!numDeeds) {
 				if (UI_get_array_size(UI_get_party_list()) == 1) {
 					partySpeak("@The deed for this vessel must first be "
 							 "purchased.@");
@@ -1074,14 +1074,14 @@ void FuncSails shape#(SHAPE_SAILS) () {
 				return;
 			}
 			if (allPartyMembersSeated()) {
-				Func0831(item);
+				shipStartSailing(item);
 			} else {
-				var var0004 = assignSeatsOnBarge(var0000[1]);
+				var ignore = assignSeatsOnBarge(masts[1]);
 				set_item_flag(ACTIVE_SAILOR);
 			}
 		} else {
 			clear_item_flag(ACTIVE_SAILOR);
-			Func0830(var0001, 0);
+			sailsFurlUnfurl(sails, 0);
 			clear_item_flag(ON_MOVING_BARGE);
 			clear_item_flag(ACTIVE_BARGE);
 			UI_play_music(MUSIC_STOP, NULL_OBJ);
@@ -1089,21 +1089,24 @@ void FuncSails shape#(SHAPE_SAILS) () {
 	}
 }
 
+/**
+ * Displays current time when double-clicking the grandfather clock.
+ */
 void FuncGrandfatherClockEw shape#(SHAPE_GRANDFATHER_CLOCK_EW) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = UI_game_hour();
-		if (var0000 > 12) {
-			var0000 -= 12;
+		var currentHour = UI_game_hour();
+		if (currentHour > 12) {
+			currentHour -= 12;
 		}
-		if (var0000 == 0) {
-			var0000 = 12;
+		if (currentHour == 0) {
+			currentHour = 12;
 		}
-		var var0001 = UI_game_minute();
-		if (var0001 < 10) {
-			var0001 = "0" + var0001;
+		var currentMinutes = UI_game_minute();
+		if (currentMinutes < 10) {
+			currentMinutes = "0" + currentMinutes;
 		}
-		var var0002 = " " + var0000 + ":" + var0001;
-		item_say(var0002);
+		var timeStr = " " + currentHour + ":" + currentMinutes;
+		item_say(timeStr);
 	}
 }
 
@@ -54456,7 +54459,7 @@ void Func0634 object#(0x634) () {
 			} else {
 				var var0003 = AVATAR->get_item_flag(ACTIVE_SAILOR);
 				if (var0003) {
-					Func0831(var0003);
+					shipStartSailing(var0003);
 				}
 			}
 		}
@@ -65730,46 +65733,56 @@ void Func082F id#(0x82F) () {
 	}
 }
 
-void Func0830 id#(0x830) (var var0000, var var0001) {
-	declare var var0002;
-	declare var var0003;
-	declare var var0004;
-	declare var var0005;
-	if (var0001 == 1) {
-		var0002 = -4;
-		var0003 = SFX_SAIL_UNFURL;
-		var0004 = var0000[1]->find_nearby(SHAPE_MAST, 25, MASK_NONE);
-		var0005 = script var0004 {
+/**
+ * Furls or unfurls the sails for the ship.
+ *
+ * @param sails A list of sails to furl/unfurl.
+ * @param startSailing 1 to unfurl, 0 to furl.
+ */
+void sailsFurlUnfurl id#(0x830) (var sails, var startSailing) {
+	declare var frameDelta;
+	declare var sfxToPlay;
+	if (startSailing == 1) {
+		frameDelta = -4;
+		sfxToPlay = SFX_SAIL_UNFURL;
+		var masts = sails[1]->find_nearby(SHAPE_MAST, 25, MASK_NONE);
+		var ignore = script masts {
 			music MUSIC_SEA_SHANTY, PLAY_ONCE;
 		};
 	}
-	if (var0001 == 0) {
-		var0002 = 4;
-		var0003 = SFX_SAIL_FURL;
+	if (startSailing == 0) {
+		frameDelta = 4;
+		sfxToPlay = SFX_SAIL_FURL;
 	}
-	for (var0008 in var0000) {
-		var var0009 = var0008->get_item_frame_rot();
-		var0008->set_item_frame_rot(var0009 + var0002);
+	for (sail in sails) {
+		var frameNum = sail->get_item_frame_rot();
+		sail->set_item_frame_rot(frameNum + frameDelta);
 	}
-	UI_play_sound_effect(var0003);
+	UI_play_sound_effect(sfxToPlay);
 }
 
-void Func0831 id#(0x831) (var var0000) {
-	struct<FindSpec> var0001 = var0000->get_object_position();
-	var0001 &= var0000->get_item_quality();
-	var0001 &= FRAME_ANY;
-	var var0002 = var0001->find_nearby(SHAPE_GANGPLANK_LOWERED, 12, MASK_NONE);
-	for (var0005 in var0002) {
-		if (!handleGangplank(var0005)) {
+/**
+ * Checks if the ship's gangplank is lowered. If it is,
+ * unfurls the sails and starts sailing.
+ *
+ * @param sails An object in the ship (e.e., sails)
+ */
+void shipStartSailing id#(0x831) (var sourceObj) {
+	struct<FindSpec> findSpec = sourceObj->get_object_position();
+	findSpec &= sourceObj->get_item_quality();
+	findSpec &= FRAME_ANY;
+	var gangplanks = findSpec->find_nearby(SHAPE_GANGPLANK_LOWERED, 12, MASK_NONE);
+	for (gangplank in gangplanks) {
+		if (!handleGangplank(gangplank)) {
 			partySpeak("@One of the gangplanks seems to be blocked. It must be "
 					 "lowered to sail.@");
 			return;
 		}
 	}
-	var var0006 = var0001->find_nearby(SHAPE_SAILS, 18, MASK_NONE);
-	Func0830(var0006, 1);
+	var sails = findSpec->find_nearby(SHAPE_SAILS, 18, MASK_NONE);
+	sailsFurlUnfurl(sails, 1);
 	AVATAR->clear_item_flag(ACTIVE_SAILOR);
-	var0000->set_item_flag(ON_MOVING_BARGE);
+	sourceObj->set_item_flag(ON_MOVING_BARGE);
 	AVATAR->get_barge()->set_item_flag(ACTIVE_BARGE);
 }
 
