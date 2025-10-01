@@ -7,7 +7,7 @@ SS_SOURCES=$(wildcard ss/include/*.uc)
 PASS=\e[1m\e[32m[✔️  PASS]\e[0m
 FAIL=\e[1m\e[31m[❌  FAIL]\e[0m
 
-all: usecode.fov2.ucxt usecode.ss2.ucxt usecode.fov3.ucxt usecode.ss3.ucxt check_ref
+all: usecode.fov3.ucxt usecode.ss3.ucxt check_ref
 
 usecode.fov.ref.ucxt : usecode.fov2.ucxt
 	cp $< $@
@@ -36,9 +36,12 @@ check_ref: usecode.fov2.ucxt usecode.ss2.ucxt
 	fi
 
 usecode.fov2 : fov/usecode.fov.uc $(FOV_SOURCES) $(UCC)
+	rm -f usecode.fov2.ucxt usecode.fov3.ucxt
 	$(UCC) -b -I fov -o $@ $< |& (grep -vE "Warning: (Interpreting integer|You \*really\*)" || true)
 
 usecode.ss2 : ss/usecode.ss.uc $(SS_SOURCES) $(UCC)
+	rm -f usecode.ss2.ucxt usecode.ss3.ucxt
+	rm -f
 	$(UCC) -b -I ss -o $@ $< |& (grep -vE "Warning: (Interpreting integer|You \*really\*)" || true)
 
 usecode.fov2.ucxt : usecode.fov2 $(UCXT)

@@ -891,21 +891,21 @@ void FuncFerryman shape#(SHAPE_FERRYMAN) () {
  */
 void FuncPocketwatch shape#(SHAPE_POCKETWATCH) () {
 	if (event == DOUBLECLICK) {
-		var hours = UI_game_hour();
+		var currHour = UI_game_hour();
 		var amOrPm = "am";
-		if (hours > 12) {
-			hours -= 12;
+		if (currHour > 12) {
+			currHour -= 12;
 			amOrPm = "pm";
 		}
-		if (hours == 0) {
-			hours = 12;
+		if (currHour == 0) {
+			currHour = 12;
 			amOrPm = "am";
 		}
-		var minutes = UI_game_minute();
-		if (minutes <= 9) {
-			minutes = "0" + minutes;
+		var currMinutes = UI_game_minute();
+		if (currMinutes <= 9) {
+			currMinutes = "0" + currMinutes;
 		}
-		var timeStr = " " + hours + ":" + minutes + amOrPm;
+		var timeStr = " " + currHour + ":" + currMinutes + amOrPm;
 		if (UI_in_gump_mode()) {
 			item_say(timeStr);
 		} else {
@@ -53363,7 +53363,7 @@ void Func0619 object#(0x619) () {
 }
 
 void Func061A object#(0x61A) () {
-	UI_UNKNOWN__70();
+	UI_UNKNOWN_70();
 }
 
 void Func061B object#(0x61B) () {
