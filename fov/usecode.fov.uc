@@ -64250,7 +64250,7 @@ void Func0717 object#(0x717) () {
 	Func0838(item);
 }
 
-void Func0800 0x800 (var var0000) {
+void Func0800 id#(0x800) (var var0000) {
 	UI_close_gumps();
 	gflags[INSIDE_PUT_THE_AVATAR_TO_BED] = false;
 	var var0001 = getNearbyPartyMember();
@@ -64295,7 +64295,7 @@ void Func0800 0x800 (var var0000) {
 	}
 }
 
-var Func0801 0x801 (var var0000) {
+var Func0801 id#(0x801) (var var0000) {
 	var var0001 = var0000->get_item_frame();
 	var var0002 = var0000->get_item_shape();
 	if (var0001 == FRAME_BED_ROLL && var0002 == SHAPE_BED) {
@@ -64304,7 +64304,7 @@ var Func0801 0x801 (var var0000) {
 	return false;
 }
 
-var Func0802 0x802 (var var0000, var var0001) {
+var Func0802 id#(0x802) (var var0000, var var0001) {
 	var var0002 = [];
 	for (var0005 in var0001) {
 		if (!(var0005 == var0000)) {
@@ -64314,7 +64314,7 @@ var Func0802 0x802 (var var0000, var var0001) {
 	return var0002;
 }
 
-void Func0803 0x803 (var var0000) {
+void Func0803 id#(0x803) (var var0000) {
 	var var0001 = var0000->find_nearby(SHAPE_ETHEREAL_MONSTER, 40, MASK_NONE);
 	if (var0001->get_item_flag(ASLEEP)) {
 		var0001 = NULL_OBJ;
@@ -64338,7 +64338,7 @@ void Func0803 0x803 (var var0000) {
 	}
 }
 
-void Func0804 0x804 (var var0000, var var0001, var var0002) {
+void Func0804 id#(0x804) (var var0000, var var0001, var var0002) {
 	var var0003 = AVATAR->find_nearby(var0000, 30, MASK_EGG);
 	var var0004 = NULL_OBJ;
 	for (var0007 in var0003) {
@@ -64354,7 +64354,7 @@ void Func0804 0x804 (var var0000, var var0001, var var0002) {
 	}
 }
 
-void Func0805 0x805 (var var0000) {
+void Func0805 id#(0x805) (var var0000) {
 	if (!gflags[BROKE_SPHERE]) {
 		var0000->set_item_shape(SHAPE_PRISM);
 		struct<Position> var0001 = [0x0217, 0x0460, 0];
@@ -64375,7 +64375,7 @@ void Func0805 0x805 (var var0000) {
 	}
 }
 
-void Func0806 0x806 (var var0000, var var0001) {
+void Func0806 id#(0x806) (var var0000, var var0001) {
 	struct<Position> var0002 = var0001->get_object_position();
 	var var0003 = var0002->find_nearby(var0000, 20, MASK_ALL_UNSEEN);
 	var0003 &= var0002->find_nearby(var0000 + 1, 20, MASK_ALL_UNSEEN);
@@ -64392,7 +64392,7 @@ void Func0806 0x806 (var var0000, var var0001) {
 	UI_earthquake(7 * TICK);
 }
 
-void Func0807 0x807 (var var0000) {
+void Func0807 id#(0x807) (var var0000) {
 	if (!gflags[BROKE_CUBE]) {
 		var0000->set_item_shape(SHAPE_PRISM);
 		struct<Position> var0001 = [0x06E7, 0x0AE0, 0];
@@ -64408,7 +64408,7 @@ void Func0807 0x807 (var var0000) {
 	}
 }
 
-void Func0808 0x808 () {
+void Func0808 id#(0x808) () {
 	var var0000 = filterArray(AVATAR->get_npc_object(), UI_get_party_list());
 	var var0001 = AVATAR->get_npc_object()->get_schedule_type();
 	for (var0004 in var0000) {
@@ -64417,7 +64417,7 @@ void Func0808 0x808 () {
 	}
 }
 
-void Func0809 0x809 (var var0000) {
+void Func0809 id#(0x809) (var var0000) {
 	var var0001 = var0000->get_barge();
 	if (var0001) {
 		if (var0000->get_item_flag(ON_MOVING_BARGE)) {
@@ -64449,7 +64449,7 @@ void Func0809 0x809 (var var0000) {
 	}
 }
 
-void Func080A 0x80A (var var0000, var var0001) {
+void Func080A id#(0x80A) (var var0000, var var0001) {
 	var var0002 = [];
 	var var0003 = AVATAR->find_nearby(var0001, 15, MASK_NONE);
 	declare var var0007;
@@ -64486,7 +64486,7 @@ void Func080A 0x80A (var var0000, var var0001) {
 	}
 }
 
-var Func080B 0x80B (var var0000) {
+var Func080B id#(0x80B) (var var0000) {
 	if (var0000 < 5) {
 		var0000 += 2;
 		return var0000;
@@ -64506,7 +64506,7 @@ var Func080B 0x80B (var var0000) {
 	return 0;
 }
 
-var Func080C 0x80C (var var0000) {
+var Func080C id#(0x80C) (var var0000) {
 	var var0001 = find_nearby(SHAPE_ANY, 2, MASK_NONE);
 	var var0002 = [SHAPE_FLYING_CARPET];
 	var var0003 = [
@@ -64525,7 +64525,7 @@ var Func080C 0x80C (var var0000) {
 	return SHAPE_MAST;
 }
 
-var Func080D 0x80D () {
+var Func080D id#(0x80D) () {
 	var var0000 = UI_get_party_list();
 	for (var0003 in var0000) {
 		var var0004 = var0003->get_item_frame();
@@ -64536,7 +64536,7 @@ var Func080D 0x80D () {
 	return true;
 }
 
-var Func080E 0x80E (var var0000) {
+var Func080E id#(0x80E) (var var0000) {
 	declare var var0003;
 	for (var0003 in var0000) {
 		if (var0003->get_item_shape() == SHAPE_DRAWBRIDGE) {
@@ -64598,7 +64598,7 @@ var Func080E 0x80E (var var0000) {
 	return true;
 }
 
-void Func080F 0x80F () {
+void Func080F id#(0x80F) () {
 	if (event == EGG) {
 		var var0000 = find_nearby(SHAPE_VICTIM, 15, MASK_NONE);
 		var var0001 = find_nearby(SHAPE_LIT_LIGHT_SOURCE, 15, MASK_NONE);
@@ -64616,7 +64616,7 @@ void Func080F 0x80F () {
 	}
 }
 
-void Func0810 0x810 (var var0000, var var0001) {
+void Func0810 id#(0x810) (var var0000, var var0001) {
 	declare var var0002;
 	if (var0000 == 0) {
 		var0000 = SHAPE_FLOOR_NS;
@@ -64651,7 +64651,7 @@ void Func0810 0x810 (var var0000, var var0001) {
 	}
 }
 
-void Func0811 0x811 () {
+void Func0811 id#(0x811) () {
 	var var0000 = filterArray(AVATAR->get_npc_object(), UI_get_party_list());
 	for (var0003 in var0000) {
 		gflags[INSIDE_GENERATOR] = true;
@@ -64659,7 +64659,7 @@ void Func0811 0x811 () {
 	}
 }
 
-void Func0812 0x812 (var var0000) {
+void Func0812 id#(0x812) (var var0000) {
 	var var0001 = AVATAR->get_barge();
 	if (UI_on_barge()) {
 		struct<Position> var0002 = var0000->get_object_position();
@@ -64676,7 +64676,7 @@ void Func0812 0x812 (var var0000) {
 	}
 }
 
-void Func0813 0x813 (var var0000, var var0001, var var0002) {
+void Func0813 id#(0x813) (var var0000, var var0001, var var0002) {
 	struct<ObjPos> var0003 = UI_click_on_item();
 	var var0004 = UI_get_party_list();
 	if ((var0003 in var0004)
@@ -64741,7 +64741,7 @@ void Func0813 0x813 (var var0000, var var0001, var var0002) {
 	}
 }
 
-var Func0814 0x814 () {
+var Func0814 id#(0x814) () {
 	var var0000 = [];
 	var var0001 = AVATAR->find_nearby(SHAPE_BODY2, 40, MASK_NONE);
 	for (var0004 in var0001) {
@@ -64758,7 +64758,7 @@ var Func0814 0x814 () {
 	return var0000;
 }
 
-void Func0815 0x815 (var var0000) {
+void Func0815 id#(0x815) (var var0000) {
 	var var0001 = Func081B(var0000);
 	var var0002 = get_item_quality();
 	var var0003 = -1;
@@ -64798,7 +64798,7 @@ void Func0815 0x815 (var var0000) {
 	}
 }
 
-void Func0816 0x816 (var var0000) {
+void Func0816 id#(0x816) (var var0000) {
 	var var0001 = false;
 	var var0002 = var0000->get_item_quality();
 	declare struct<Position> var0008;
@@ -64945,7 +64945,7 @@ void Func0816 0x816 (var var0000) {
 	}
 }
 
-void Func0817 0x817 (var var0000) {
+void Func0817 id#(0x817) (var var0000) {
 	gflags[LEFT_DOOR_ACTIVE] = var0000[1];
 	gflags[CENTER_DOOR_ACTIVE] = var0000[2];
 	gflags[RIGHT_DOOR_ACTIVE] = var0000[3];
@@ -64974,29 +64974,29 @@ void Func0817 0x817 (var var0000) {
 	}
 }
 
-void Func0818 0x818 () {
+void Func0818 id#(0x818) () {
 	partySpeak("@The door appears blocked.@");
 }
 
-void Func0819 0x819 (var var0000) {
+void Func0819 id#(0x819) (var var0000) {
 	var0000->item_say("Locked");
 }
 
-void Func081A 0x81A (var var0000) {
+void Func081A id#(0x81A) (var var0000) {
 	var0000->item_say("Magically Locked");
 }
 
-var Func081B 0x81B (var var0000) {
+var Func081B id#(0x81B) (var var0000) {
 	return var0000->get_item_frame() % 4;
 }
 
-void Func081C 0x81C (var var0000, var var0001) {
+void Func081C id#(0x81C) (var var0000, var var0001) {
 	var var0002 = var0000->get_item_frame();
 	var var0003 = var0002 % 4;
 	var0000->set_item_frame((var0002 - var0003) + var0001);
 }
 
-var Func081D 0x81D (
+var Func081D id#(0x81D) (
 		var var0000, var var0001, var var0002, var var0003, var var0004,
 		var var0005) {
 	Func081C(var0000, var0002);
@@ -65010,7 +65010,7 @@ var Func081D 0x81D (
 	return true;
 }
 
-void Func081E 0x81E (
+void Func081E id#(0x81E) (
 		var var0000, var var0001, var var0002, var var0003, var var0004,
 		var var0005, var var0006, var var0007, var var0008) {
 	struct<Position> var0009 = var0000->get_object_position();
@@ -65029,7 +65029,7 @@ void Func081E 0x81E (
 	}
 }
 
-var Func081F 0x81F (var var0000) {
+var Func081F id#(0x81F) (var var0000) {
 	var var0001 = Func081B(var0000);
 	if (var0001 == FRAME_DOOR_OPENED) {
 		if (Func081D(var0000, SHAPE_WALL_NS_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7)) {
@@ -65050,7 +65050,7 @@ var Func081F 0x81F (var var0000) {
 	return true;
 }
 
-var Func0820 0x820 (var var0000) {
+var Func0820 id#(0x820) (var var0000) {
 	var var0001 = Func081B(var0000);
 	if (var0001 == FRAME_DOOR_OPENED) {
 		if (Func081D(var0000, SHAPE_WALL_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 7)) {
@@ -65071,7 +65071,7 @@ var Func0820 0x820 (var var0000) {
 	return true;
 }
 
-void Func0821 0x821 (var var0000) {
+void Func0821 id#(0x821) (var var0000) {
 	var var0001 = script var0000 {
 		finish;
 		frame 4;
@@ -65082,7 +65082,7 @@ void Func0821 0x821 (var var0000) {
 	};
 }
 
-struct<Position> Func0822 0x822 (struct<ObjPos> var0000) {
+struct<Position> Func0822 id#(0x822) (struct<ObjPos> var0000) {
 	declare struct<Position> var0001;
 	var0001.x = var0000.x;
 	var0001.y = var0000.y;
@@ -65090,7 +65090,7 @@ struct<Position> Func0822 0x822 (struct<ObjPos> var0000) {
 	return var0001;
 }
 
-struct<Position> Func0823 0x823 (var var0000) {
+struct<Position> Func0823 id#(0x823) (var var0000) {
 	var var0001 = [
 		0x04CF, 0x0105, 0x0207, 0x073F, 0x03FF, 0x087F, 0x0237, 0x0B67, 0x0B3F
 	];
@@ -65111,7 +65111,7 @@ struct<Position> Func0823 0x823 (var var0000) {
 	return var0005;
 }
 
-void Func0824 0x824 (var var0000) {
+void Func0824 id#(0x824) (var var0000) {
 	if ((UI_die_roll(1, 3) == 1)
 		&& (!(var0000->get_item_quality() == 8))) {
 		AVATAR->reduce_health(3, ETHEREAL_DAMAGE);
@@ -65139,7 +65139,7 @@ void Func0824 0x824 (var var0000) {
 	}
 }
 
-struct<Position> Func0825 0x825 (
+struct<Position> Func0825 id#(0x825) (
 		struct<Position> var0000, struct<Position> var0001, var var0002) {
 	declare var var0003;
 	declare var var0004;
@@ -65182,7 +65182,7 @@ struct<Position> Func0825 0x825 (
 	return var0000;
 }
 
-var Func0826 0x826 (var var0000) {
+var Func0826 id#(0x826) (var var0000) {
 	var var0001 = [SHAPE_RED_MOONGATE_NS, SHAPE_RED_MOONGATE_EW];
 	if (var0000->get_item_shape() in var0001) {
 		return true;
@@ -65190,7 +65190,7 @@ var Func0826 0x826 (var var0000) {
 	return false;
 }
 
-var Func0827 0x827 (var var0000, var var0001) {
+var Func0827 id#(0x827) (var var0000, var var0001) {
 	return var0000->find_direction(var0001);
 }
 
@@ -65224,7 +65224,7 @@ var Func0827 0x827 (var var0000, var var0001) {
  * Due to the way usecode arrays work, maxDeltaZ does not need to be an array,
  * or it can be shorter than the other two. Zeroes are filled in as needed.
  */
-void tryPathRunUsecodeTo 0x828 (
+void tryPathRunUsecodeTo id#(0x828) (
 		var targetObj, var maxDeltaX, var maxDeltaY, var maxDeltaZ, var function,
 		var obj, var eventId) {
 	if (targetObj->get_container()) {
@@ -65300,7 +65300,7 @@ void tryPathRunUsecodeTo 0x828 (
  * @param gangplank The gangplank object to be handled.
  * @returns Returns true if the gangplank is not blocked and was updated.
  */
-var handleGangplank 0x829 (var gangplank) {
+var handleGangplank id#(0x829) (var gangplank) {
 	var xOffsets = [-3, 0, 1, 0];
 	var yOffsets = [0, -3, 0, 1];
 	var shapeStates = [
@@ -65348,7 +65348,7 @@ var handleGangplank 0x829 (var gangplank) {
  * @param size The size of the arrays.
  * @returns The modified base array with offsets added.
  */
-var addOffsetArray 0x82A (var base, var offset, var size) {
+var addOffsetArray id#(0x82A) (var base, var offset, var size) {
 	var index = 0;
 	do {
 		index += 1;
@@ -65367,7 +65367,7 @@ var addOffsetArray 0x82A (var base, var offset, var size) {
  * @param size The size of the array.
  * @returns The inverted array.
  */
-var invertArray 0x82B (var base, var size) {
+var invertArray id#(0x82B) (var base, var size) {
 	var index = 0;
 	do {
 		index += 1;
@@ -65388,7 +65388,7 @@ var invertArray 0x82B (var base, var size) {
  * @note There is a known bug where the code incorrectly uses `obj` instead of
  * `foundObj` when checking the item flag for solidity.
  */
-var isObjBlocked 0x82C (
+var isObjBlocked id#(0x82C) (
 		var obj, struct<Position> objPos, var delta, var shapeList) {
 	var nearbyObjects = obj->find_nearby(
 			SHAPE_ANY, absoluteValueOf(delta), MASK_INVISIBLE);
@@ -65414,7 +65414,7 @@ var isObjBlocked 0x82C (
  * @param shapeNum The shape identifier of the gangplank.
  * @returns The adjusted position of the gangplank.
  */
-struct<Position> adjustGangplankPosition 0x82D (
+struct<Position> adjustGangplankPosition id#(0x82D) (
 		struct<Position> pos, struct<Position> offset, var shapeNum) {
 	if (shapeNum == SHAPE_GANGPLANK_RAISED) {
 		offset = invertArray(offset, Z);
@@ -65426,7 +65426,7 @@ struct<Position> adjustGangplankPosition 0x82D (
 	return pos;
 }
 
-var Func082E 0x82E (var var0000) {
+var Func082E id#(0x82E) (var var0000) {
 	UI_close_gumps();
 	var var0001 = find_nearby(SHAPE_BEAM_OF_LIGHT, 20, MASK_NONE);
 	if (var0001) {
@@ -65468,7 +65468,7 @@ var Func082E 0x82E (var var0000) {
 	return 0;
 }
 
-void Func082F 0x82F () {
+void Func082F id#(0x82F) () {
 	var var0000 = UI_find_nearby_avatar(SHAPE_RAT_RACE_GAME);
 	var var0001 = UI_find_nearby_avatar(SHAPE_RAT_RACE_GAME_RAT);
 	if (UI_get_array_size(var0001) == 4) {
@@ -65647,7 +65647,7 @@ void Func082F 0x82F () {
 	}
 }
 
-void Func0830 0x830 (var var0000, var var0001) {
+void Func0830 id#(0x830) (var var0000, var var0001) {
 	declare var var0002;
 	declare var var0003;
 	declare var var0004;
@@ -65671,7 +65671,7 @@ void Func0830 0x830 (var var0000, var var0001) {
 	UI_play_sound_effect(var0003);
 }
 
-void Func0831 0x831 (var var0000) {
+void Func0831 id#(0x831) (var var0000) {
 	struct<FindSpec> var0001 = var0000->get_object_position();
 	var0001 &= var0000->get_item_quality();
 	var0001 &= FRAME_ANY;
@@ -65690,7 +65690,7 @@ void Func0831 0x831 (var var0000) {
 	AVATAR->get_barge()->set_item_flag(ACTIVE_BARGE);
 }
 
-void Func0832 0x832 (var var0000, var var0001) {
+void Func0832 id#(0x832) (var var0000, var var0001) {
 	var var0002 = script var0000 {
 		frame 4;
 		repeat 3 {
@@ -65702,7 +65702,7 @@ void Func0832 0x832 (var var0000, var var0001) {
 	};
 }
 
-void Func0833 0x833 (var var0000, var var0001) {
+void Func0833 id#(0x833) (var var0000, var var0001) {
 	var var0002 = script var0000 {
 		call var0001;
 		repeat 3 {
@@ -65713,7 +65713,7 @@ void Func0833 0x833 (var var0000, var var0001) {
 	};
 }
 
-var Func0834 0x834 () {
+var Func0834 id#(0x834) () {
 	if (gflags[LEFT_TRINSIC] == false) {
 		gflags[LEFT_TRINSIC] = true;
 	}
@@ -65803,12 +65803,12 @@ var Func0834 0x834 () {
 	return true;
 }
 
-void Func0835 0x835 (var var0000, var var0001, var var0002) {
+void Func0835 id#(0x835) (var var0000, var var0001, var var0002) {
 	var var0003 = var0000->get_npc_prop(var0001);
 	var var0004 = var0000->set_npc_prop(var0001, var0002 - var0003);
 }
 
-void Func0836 0x836 (var var0000, var var0001) {
+void Func0836 id#(0x836) (var var0000, var var0001) {
 	var var0002 = var0000->get_item_quality();
 	var var0003 = [];
 	if (var0001 == FLAG_FIND_METAL_WALLS || var0001 == SHAPE_ANY) {
@@ -65841,7 +65841,7 @@ void Func0836 0x836 (var var0000, var var0001) {
 	}
 }
 
-var Func0837 0x837 (
+var Func0837 id#(0x837) (
 		var var0000, var var0001, var var0002, var var0003, var var0004) {
 	struct<Position> var0005 = var0001->get_object_position();
 	var0005.x += var0002;
@@ -65868,7 +65868,7 @@ var Func0837 0x837 (
 	return 0;
 }
 
-void Func0838 0x838 (var var0000) {
+void Func0838 id#(0x838) (var var0000) {
 	var var0001 = get_item_frame();
 	declare var var0002;
 	if (var0001 == FRAME_BLACKSWORD_BLANK_LUKEWARM1) {
@@ -65933,7 +65933,7 @@ void Func0838 0x838 (var var0000) {
 	}
 }
 
-void Func0839 0x839 (var var0000, var var0001, var var0002) {
+void Func0839 id#(0x839) (var var0000, var var0001, var var0002) {
 	if (var0002 == DOUBLECLICK || var0002 == SCRIPTED) {
 		var0000->set_item_shape(var0001);
 		var0000->halt_scheduled();
@@ -65954,14 +65954,14 @@ void Func0839 0x839 (var var0000, var var0001, var var0002) {
 	}
 }
 
-struct<PosObj> Func083A 0x83A () {
+struct<PosObj> Func083A id#(0x83A) () {
 	var var0000 = UI_find_nearby_avatar(SHAPE_TRIPLES_GAME_TABLE);
 	struct<PosObj> var0001 = var0000[1]->get_object_position();
 	var0001 &= var0000[1];
 	return var0001;
 }
 
-var Func083B 0x83B () {
+var Func083B id#(0x83B) () {
 	var var0000 = 0;
 	var var0001 = 0;
 	var var0002 = 0;
@@ -65992,7 +65992,7 @@ var Func083B 0x83B () {
 	return [var000A, var000B];
 }
 
-var Func083C 0x83C (struct<PosObj> var0000) {
+var Func083C id#(0x83C) (struct<PosObj> var0000) {
 	var var0001 = [];
 	var var0002 = var0000.obj->find_nearby(SHAPE_GOLD_COIN, 10, MASK_NONE);
 	for (var0005 in var0002) {
@@ -66005,7 +66005,7 @@ var Func083C 0x83C (struct<PosObj> var0000) {
 	return var0001;
 }
 
-void Func083D 0x83D () {
+void Func083D id#(0x83D) () {
 	if (SMITHY->get_schedule_type() == HOUND) {
 		SMITHY->set_schedule_type(STANDTHERE);
 	}
@@ -66118,7 +66118,7 @@ void Func083D 0x83D () {
 	delayedBark(SMITHY, var0008, 0);
 }
 
-void Func083E 0x83E (var var0000, var var0001) {
+void Func083E id#(0x83E) (var var0000, var var0001) {
 	if (var0001 == DOUBLECLICK) {
 		if (var0000->in_usecode()) {
 			return;
@@ -66151,7 +66151,7 @@ void Func083E 0x83E (var var0000, var var0001) {
 	}
 }
 
-void Func083F 0x83F (var var0000, var var0001) {
+void Func083F id#(0x83F) (var var0000, var var0001) {
 	var var0002 = UI_find_nearby_avatar(SHAPE_PORTCULLIS_EW)
 			& UI_find_nearby_avatar(SHAPE_PORTCULLIS_NS);
 	var var0003 = false;
@@ -66180,7 +66180,7 @@ void Func083F 0x83F (var var0000, var var0001) {
 	}
 }
 
-void Func0840 0x840 () {
+void Func0840 id#(0x840) () {
 	UI_push_answers();
 	var var0000 = askForResponse([
 		"Be Good", "No Answers", "Strive for Unity", "Have Faith",
@@ -66234,7 +66234,7 @@ void Func0840 0x840 () {
 	UI_pop_answers();
 }
 
-void Func0841 0x841 () {
+void Func0841 id#(0x841) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "mutton rations", "cake", "ham", "wine", "ale"];
@@ -66292,7 +66292,7 @@ void Func0841 0x841 () {
 	UI_pop_answers();
 }
 
-void Func0842 0x842 () {
+void Func0842 id#(0x842) () {
 	UI_push_answers();
 	var var0000 = getPoliteTitle();
 	var var0001 = UI_is_pc_female();
@@ -66369,7 +66369,7 @@ void Func0842 0x842 () {
 	UI_pop_answers();
 }
 
-void Func0843 0x843 () {
+void Func0843 id#(0x843) () {
 	ARCADION->hide();
 	var var0000 = script item {
 		frame 8;
@@ -66383,7 +66383,7 @@ void Func0843 0x843 () {
 	abort;
 }
 
-var Func0844 0x844 (var var0000) {
+var Func0844 id#(0x844) (var var0000) {
 	for (var0003 in var0000) {
 		var var0004 = var0003->get_item_frame();
 		if (var0004 == FRAME_GEM_DRACOTHRAXUS) {
@@ -66393,7 +66393,7 @@ var Func0844 0x844 (var var0000) {
 	return NULL_OBJ;
 }
 
-void Func0845 0x845 (var var0000) {
+void Func0845 id#(0x845) (var var0000) {
 	var var0001 = AVATAR->get_npc_object()->get_npc_prop(MANA);
 	var var0002 = AVATAR->get_npc_object()->get_npc_prop(MAX_MANA);
 	declare var var0003;
@@ -66418,7 +66418,7 @@ void Func0845 0x845 (var var0000) {
 	}
 }
 
-var Func0846 0x846 () {
+var Func0846 id#(0x846) () {
 	if (!AVATAR->get_npc_object()->is_readied(
 			BG_WEAPON_HAND, SHAPE_SWORD_BLANK, FRAME_BLACKSWORD_BLANK_COLD3)) {
 		if (!AVATAR->get_npc_object()->is_readied(
@@ -66436,7 +66436,7 @@ var Func0846 0x846 () {
 	return 1;
 }
 
-var Func0847 0x847 (var var0000) {
+var Func0847 id#(0x847) (var var0000) {
 	if (var0000 == SHAPE_BODY1) {
 		return 1;
 	}
@@ -66458,7 +66458,7 @@ var Func0847 0x847 (var var0000) {
 	return 0;
 }
 
-var Func0848 0x848 (var var0000) {
+var Func0848 id#(0x848) (var var0000) {
 	if (var0000 == SHAPE_DRAGON) {
 		return 1;
 	}
@@ -66516,7 +66516,7 @@ var Func0848 0x848 (var var0000) {
 	return 0;
 }
 
-var Func0849 0x849 (var var0000) {
+var Func0849 id#(0x849) (var var0000) {
 	if (var0000 == SHAPE_LICHE_HORANCE) {
 		return 1;
 	}
@@ -66538,7 +66538,7 @@ var Func0849 0x849 (var var0000) {
 	return 0;
 }
 
-void Func084A 0x84A () {
+void Func084A id#(0x84A) () {
 	var var0000 = 1;
 	var var0001 =
 			[0x0193, 0x0193, 0x0193, 0x0193, 0x019B, 0x019B, 0x019B, 0x019B];
@@ -66562,7 +66562,7 @@ void Func084A 0x84A () {
 	}
 }
 
-var Func084B 0x84B (var var0000) {
+var Func084B id#(0x84B) (var var0000) {
 	var var0001 = UI_input_numeric_value(0, var0000, 1, var0000 / 2);
 	if (var0001 >= 50 && var0001 >= (var0000 / 2)) {
 		var var0002 = UI_remove_party_items(
@@ -66572,7 +66572,7 @@ var Func084B 0x84B (var var0000) {
 	return false;
 }
 
-void Func084C 0x84C () {
+void Func084C id#(0x84C) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -66639,7 +66639,7 @@ void Func084C 0x84C () {
 	UI_pop_answers();
 }
 
-void Func084D 0x84D () {
+void Func084D id#(0x84D) () {
 	var var0000 = UI_part_of_day();
 	if (gflags[TEST_GIVEN] && gflags[CHEST_QUEST_DONE]) {
 		say("\"Well, thou didst certainly attempt to complete the quest. I "
@@ -66684,7 +66684,7 @@ void Func084D 0x84D () {
 	}
 }
 
-void Func084E 0x84E () {
+void Func084E id#(0x84E) () {
 	BATLIN->show_npc_face(DEFAULT_FACE);
 	var var0000 = getAvatarName();
 	say("\"These questions are all hypothetical. Do not let them confuse or "
@@ -66848,7 +66848,7 @@ void Func084E 0x84E () {
 	Func0851();
 }
 
-void Func084F 0x84F () {
+void Func084F id#(0x84F) () {
 	BATLIN->show_npc_face(DEFAULT_FACE);
 	var var0000 = getAvatarName();
 	var var0001 = getPoliteTitle();
@@ -67044,7 +67044,7 @@ void Func084F 0x84F () {
 	abort;
 }
 
-void Func0850 0x850 () {
+void Func0850 id#(0x850) () {
 	BATLIN->show_npc_face(DEFAULT_FACE);
 	var var0000 = getAvatarName();
 	var var0001 = getPoliteTitle();
@@ -67189,7 +67189,7 @@ void Func0850 0x850 () {
 	abort;
 }
 
-void Func0851 0x851 () {
+void Func0851 id#(0x851) () {
 	if (!gflags[REFUSED_PACKAGE]) {
 		say("\"I need thee to deliver this sealed package unopened to Elynor, "
 			"the leader of our Fellowship branch in Minoc. Elynor will reward "
@@ -67226,7 +67226,7 @@ void Func0851 0x851 () {
 	abort;
 }
 
-void Func0852 0x852 () {
+void Func0852 id#(0x852) () {
 	var var0000 = [0, 0];
 	var var0001 = [1, 2];
 	var var0002 = false;
@@ -67325,7 +67325,7 @@ void Func0852 0x852 () {
 	}
 }
 
-void Func0853 0x853 () {
+void Func0853 id#(0x853) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -67398,7 +67398,7 @@ void Func0853 0x853 () {
 	UI_pop_answers();
 }
 
-void Func0854 0x854 () {
+void Func0854 id#(0x854) () {
 	var var0000 = getPoliteTitle();
 	declare var var0001;
 	forever {
@@ -67428,7 +67428,7 @@ void Func0854 0x854 () {
 	}
 }
 
-void Func0855 0x855 () {
+void Func0855 id#(0x855) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -67492,7 +67492,7 @@ void Func0855 0x855 () {
 	UI_pop_answers();
 }
 
-void Func0856 0x856 (var var0000, var var0001) {
+void Func0856 id#(0x856) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
 	if (var0002 == AVATAR) {
@@ -67561,7 +67561,7 @@ void Func0856 0x856 (var var0000, var var0001) {
 	}
 }
 
-void Func0857 0x857 () {
+void Func0857 id#(0x857) () {
 	UI_push_answers();
 	var var0000 = 1;
 	var var0001 = 1;
@@ -67601,7 +67601,7 @@ void Func0857 0x857 () {
 	UI_pop_answers();
 }
 
-void Func0858 0x858 () {
+void Func0858 id#(0x858) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -67658,7 +67658,7 @@ void Func0858 0x858 () {
 	UI_pop_answers();
 }
 
-void Func0859 0x859 () {
+void Func0859 id#(0x859) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -67707,7 +67707,7 @@ void Func0859 0x859 () {
 	UI_pop_answers();
 }
 
-void Func085A 0x85A () {
+void Func085A id#(0x85A) () {
 	UI_push_answers();
 	var var0000 = true;
 	declare var var0001;
@@ -67777,7 +67777,7 @@ void Func085A 0x85A () {
 	UI_pop_answers();
 }
 
-void Func085B 0x85B () {
+void Func085B id#(0x85B) () {
 	var var0000 = CAIRBRE->get_npc_object();
 	var var0001 = var0000->get_schedule_type();
 	var var0002 = "";
@@ -67799,7 +67799,7 @@ void Func085B 0x85B () {
 	var0000->item_say(var0002);
 }
 
-void Func085C 0x85C () {
+void Func085C id#(0x85C) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "heavy cloak", "tunic", "pants", "dress", "hood"];
@@ -67849,7 +67849,7 @@ void Func085C 0x85C () {
 	UI_pop_answers();
 }
 
-void Func085D 0x85D () {
+void Func085D id#(0x85D) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -67920,7 +67920,7 @@ void Func085D 0x85D () {
 	UI_pop_answers();
 }
 
-void Func085E 0x85E () {
+void Func085E id#(0x85E) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -67964,7 +67964,7 @@ void Func085E 0x85E () {
 	UI_pop_answers();
 }
 
-void Func085F 0x85F (var var0000, var var0001) {
+void Func085F id#(0x85F) (var var0000, var var0001) {
 	var var0002 = getAvatarName();
 	var var0003 = getPoliteTitle();
 	var var0004 = "the Avatar";
@@ -68036,7 +68036,7 @@ void Func085F 0x85F (var var0000, var var0001) {
 	}
 }
 
-void Func0860 0x860 (var var0000, var var0001, var var0002) {
+void Func0860 id#(0x860) (var var0000, var var0001, var var0002) {
 	var var0003 = getPoliteTitle();
 	say("\"I am able to heal, cure poison, and resurrect. Art thou in need of "
 		"one of these services?\"");
@@ -68118,13 +68118,13 @@ void Func0860 0x860 (var var0000, var var0001, var var0002) {
 	UI_pop_answers();
 }
 
-void Func0861 0x861 () {
+void Func0861 id#(0x861) () {
 	say("\"Thou didst just break the rule of The Game! Thou had best learn "
 		"it!\"*");
 	abort;
 }
 
-void Func0862 0x862 () {
+void Func0862 id#(0x862) () {
 	var var0000 = Func08F7(IOLO);
 	var var0001 = false;
 	var var0002 = false;
@@ -68233,7 +68233,7 @@ void Func0862 0x862 () {
 	}
 }
 
-void Func0863 0x863 () {
+void Func0863 id#(0x863) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -68289,7 +68289,7 @@ void Func0863 0x863 () {
 	UI_pop_answers();
 }
 
-void Func0864 0x864 () {
+void Func0864 id#(0x864) () {
 	var var0000 = COSMO->get_npc_object();
 	var var0001 = var0000->get_schedule_type();
 	var var0002 = "";
@@ -68311,7 +68311,7 @@ void Func0864 0x864 () {
 	var0000->item_say(var0002);
 }
 
-var Func0865 0x865 () {
+var Func0865 id#(0x865) () {
 	var var0000
 			= "soup"
 			  & ("*"
@@ -68350,7 +68350,7 @@ var Func0865 0x865 () {
 	return [var0002, var0003];
 }
 
-var Func0866 0x866 () {
+var Func0866 id#(0x866) () {
 	var var0000
 			= "batting cage"
 			  & ("*"
@@ -68398,7 +68398,7 @@ var Func0866 0x866 () {
 	return [var0002, var0003];
 }
 
-var Func0867 0x867 () {
+var Func0867 id#(0x867) () {
 	var var0000 = "constipated"
 				  & ("fractal"
 					 & ("dysfuctional"
@@ -68442,7 +68442,7 @@ var Func0867 0x867 () {
 	return [var0002, var0003];
 }
 
-var Func0868 0x868 () {
+var Func0868 id#(0x868) () {
 	var var0000 = "lactate"
 				  & ("lactated"
 					 & ("lactating"
@@ -68506,7 +68506,7 @@ var Func0868 0x868 () {
 	return [var0002, var0003, var0004];
 }
 
-var Func0869 0x869 () {
+var Func0869 id#(0x869) () {
 	var var0000
 			= "collate"
 			  & ("collated"
@@ -68562,7 +68562,7 @@ var Func0869 0x869 () {
 	return [var0002, var0003, var0004];
 }
 
-var Func086A 0x86A () {
+var Func086A id#(0x86A) () {
 	var var0000
 			= "between the sheets"
 			  & ("with a melon"
@@ -68575,7 +68575,7 @@ var Func086A 0x86A () {
 	return var0002;
 }
 
-var Func086B 0x86B () {
+var Func086B id#(0x86B) () {
 	var var0000 = "without my knowledge"
 				  & ("without the proper documentation"
 					 & ("though the ages" & "against all odds"));
@@ -68587,7 +68587,7 @@ var Func086B 0x86B () {
 	return var0002;
 }
 
-var Func086C 0x86C () {
+var Func086C id#(0x86C) () {
 	var var0000
 			= "armadillo"
 			  & ("*"
@@ -68629,7 +68629,7 @@ var Func086C 0x86C () {
 	return [var0002, var0003];
 }
 
-var Func086D 0x86D () {
+var Func086D id#(0x86D) () {
 	var var0000
 			= "dicot"
 			  & ("*"
@@ -68679,7 +68679,7 @@ var Func086D 0x86D () {
 	return [var0002, var0003];
 }
 
-var Func086E 0x86E () {
+var Func086E id#(0x86E) () {
 	var var0000
 			= "studmuffin"
 			  & ("creampuff"
@@ -68704,7 +68704,7 @@ var Func086E 0x86E () {
 	return var0002;
 }
 
-var Func086F 0x86F () {
+var Func086F id#(0x86F) () {
 	declare var var0000;
 	if (UI_die_roll(0, 3)) {
 		if (UI_die_roll(0, 1)) {
@@ -68970,7 +68970,7 @@ var Func086F 0x86F () {
 	return (var0012 + var000F);
 }
 
-void Func0870 0x870 (var var0000, var var0001, var var0002) {
+void Func0870 id#(0x870) (var var0000, var var0001, var var0002) {
 	say("\"I am qualified to heal, cure poison, and resurrect. Art thou "
 		"interested in one of these services?\"");
 	UI_push_answers();
@@ -69044,7 +69044,7 @@ void Func0870 0x870 (var var0000, var var0001, var var0002) {
 	UI_pop_answers();
 }
 
-void Func0871 0x871 () {
+void Func0871 id#(0x871) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -69122,7 +69122,7 @@ void Func0871 0x871 () {
 	UI_pop_answers();
 }
 
-void Func0872 0x872 () {
+void Func0872 id#(0x872) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -69186,7 +69186,7 @@ void Func0872 0x872 () {
 	UI_pop_answers();
 }
 
-void Func0873 0x873 () {
+void Func0873 id#(0x873) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -69237,7 +69237,7 @@ void Func0873 0x873 () {
 	UI_pop_answers();
 }
 
-void Func0874 0x874 () {
+void Func0874 id#(0x874) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -69298,7 +69298,7 @@ void Func0874 0x874 () {
 	UI_pop_answers();
 }
 
-void Func0875 0x875 (var var0000, var var0001) {
+void Func0875 id#(0x875) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = Func090F(var0002);
 	var var0004 = getAvatarName();
@@ -69383,7 +69383,7 @@ void Func0875 0x875 (var var0000, var var0001) {
 	}
 }
 
-void Func0876 0x876 () {
+void Func0876 id#(0x876) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -69451,7 +69451,7 @@ void Func0876 0x876 () {
 	UI_pop_answers();
 }
 
-void Func0877 0x877 () {
+void Func0877 id#(0x877) () {
 	say("\"I shall tell thee the story of the only unhappy person in Cove -- "
 		"Nastassia. She is the only person in town without a lover. Not that "
 		"she does not have suitors -- she is quite beautiful! All she thinks "
@@ -69486,7 +69486,7 @@ void Func0877 0x877 () {
 	gflags[DE_MARIA_TOLD_STORY] = true;
 }
 
-void Func0878 0x878 (var var0000, var var0001) {
+void Func0878 id#(0x878) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	if (var0002 != INVALID_NPC) {
 		var var0003 = 2;
@@ -69537,7 +69537,7 @@ void Func0878 0x878 (var var0000, var var0001) {
 	}
 }
 
-void Func0879 0x879 (var var0000, var var0001, var var0002) {
+void Func0879 id#(0x879) (var var0000, var var0001, var var0002) {
 	say("\"Art thou in need of healing, curing, or resurrection?\"");
 	UI_push_answers();
 	var var0003 = askYesNo();
@@ -69610,7 +69610,7 @@ void Func0879 0x879 (var var0000, var var0001, var var0002) {
 	UI_pop_answers();
 }
 
-void Func087A 0x87A () {
+void Func087A id#(0x87A) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -69674,7 +69674,7 @@ void Func087A 0x87A () {
 	UI_pop_answers();
 }
 
-void Func087B 0x87B () {
+void Func087B id#(0x87B) () {
 	say("With Elynor standing before the gathered members of The Fellowship, "
 		"the ceremony begins. \"My brothers in The Fellowship, I greet you on "
 		"this occasion and thank you for your attendance. The events which "
@@ -69770,7 +69770,7 @@ void Func087B 0x87B () {
 	abort;
 }
 
-void Func087C 0x87C () {
+void Func087C id#(0x87C) () {
 	RANDOM_EMP->show_npc_face(DEFAULT_FACE);
 	if (!gflags[GAVE_HONEY]) {
 		say("The ape-like creature slowly and cautiously walks up to you. He, "
@@ -69811,7 +69811,7 @@ void Func087C 0x87C () {
  *
  * In SI/Exult this could simply be the SI_DONT_MOVE flag instead.
  */
-void createAvatarStatue 0x87D () {
+void createAvatarStatue id#(0x87D) () {
 	AVATAR->get_npc_object()->set_item_flag(DONT_RENDER);
 	var statue = UI_create_new_object(SHAPE_STATUE);
 	if (!UI_is_pc_female()) {
@@ -69844,7 +69844,7 @@ void createAvatarStatue 0x87D () {
  * @param bottomRight The bottom-left corner of the rectangle
  * @param targetObj The object around which to find nearby objects.
  */
-void erethianSaveItemsNearPosition 0x87E (
+void erethianSaveItemsNearPosition id#(0x87E) (
 		struct<Position> topLeft, var searchRadius, struct<Position> bottomRight,
 		var targetObj) {
 	var nearbyObjects = targetObj->find_nearby(ANY_SHAPE, searchRadius, MASK_NONE);
@@ -69882,7 +69882,7 @@ void erethianSaveItemsNearPosition 0x87E (
  *
  * @param obj The object to be processed and potentially stored in a chest.
  */
-void erethianStorePartyItemsInChest 0x87F (var obj) {
+void erethianStorePartyItemsInChest id#(0x87F) (var obj) {
 	var nearbyEggs = find_nearby(SHAPE_EGG, 15, MASK_EGG);
 	for (egg in nearbyEggs) {
 		var eggQuality = egg->get_item_quality();
@@ -69993,7 +69993,7 @@ void erethianStorePartyItemsInChest 0x87F (var obj) {
  * If none of these positions are valid, the object is moved to
  *    (targetPos.x + 1, targetPos.y + 1)
  */
-void tryToMoveObjectToPosition 0x880 (var obj, struct<Position> targetPos) {
+void tryToMoveObjectToPosition id#(0x880) (var obj, struct<Position> targetPos) {
 	var shapeId = obj->get_item_shape();
 	var frameId = obj->get_item_frame();
 	struct<Position> newPos = targetPos;
@@ -70046,7 +70046,7 @@ void tryToMoveObjectToPosition 0x880 (var obj, struct<Position> targetPos) {
 	obj->move_object(newPos);
 }
 
-var findAvatarStatue 0x881 () {
+var findAvatarStatue id#(0x881) () {
 	var var0000
 			= AVATAR->get_npc_object()->find_nearby(SHAPE_STATUE, 0, MASK_NONE);
 	for (var0003 in var0000) {
@@ -70058,7 +70058,7 @@ var findAvatarStatue 0x881 () {
 	return NULL_OBJ;
 }
 
-void Func0882 0x882 (var var0000) {
+void Func0882 id#(0x882) (var var0000) {
 	if (var0000->get_barge()) {
 		var var0001 = var0000->find_nearby(SHAPE_BARGE, 10, MASK_EGG);
 		if (var0001) {
@@ -70077,7 +70077,7 @@ void Func0882 0x882 (var var0000) {
 	}
 }
 
-void Func0883 0x883 () {
+void Func0883 id#(0x883) () {
 	FINNIGAN->show_npc_face(DEFAULT_FACE);
 	var var0000 = Func08F7(PETRE);
 	if (var0000) {
@@ -70093,7 +70093,7 @@ void Func0883 0x883 () {
 	Func0885();
 }
 
-void Func0884 0x884 () {
+void Func0884 id#(0x884) () {
 	var var0000 = getPoliteTitle();
 	UI_clear_answers();
 	declare var var0001;
@@ -70264,7 +70264,7 @@ void Func0884 0x884 () {
 	}
 }
 
-void Func0885 0x885 () {
+void Func0885 id#(0x885) () {
 	if (askYesNo()) {
 		say("\"What didst thou find?\"");
 		UI_clear_answers();
@@ -70305,7 +70305,7 @@ void Func0885 0x885 () {
 	}
 }
 
-var Func0886 0x886 () {
+var Func0886 id#(0x886) () {
 	var var0000 = [0, 0, 0];
 	var var0001 = [1, 2, 3];
 	var var0002 = false;
@@ -70424,7 +70424,7 @@ var Func0886 0x886 () {
 	return true;
 }
 
-struct<Position> Func0887 0x887 (
+struct<Position> Func0887 id#(0x887) (
 		struct<Position> var0000, struct<Position> var0001, var var0002) {
 	var var0003 = false;
 	var var0004 = false;
@@ -70535,7 +70535,7 @@ struct<Position> Func0887 0x887 (
 	return var0000;
 }
 
-void Func0888 0x888 (var var0000) {
+void Func0888 id#(0x888) (var var0000) {
 	var var0001 = false;
 	var var0002 = false;
 	var var0003 = false;
@@ -70589,7 +70589,7 @@ void Func0888 0x888 (var var0000) {
 	}
 }
 
-void Func0889 0x889 () {
+void Func0889 id#(0x889) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -70653,7 +70653,7 @@ void Func0889 0x889 () {
 	UI_pop_answers();
 }
 
-void Func088A 0x88A () {
+void Func088A id#(0x88A) () {
 	var var0000 = getPoliteTitle();
 	say("After learning that none of the townsfolk are willing to sacrifice "
 		"themselves for a greater good, an odd light comes into Forsythe's "
@@ -70682,7 +70682,7 @@ void Func088A 0x88A () {
 	abort;
 }
 
-void Func088B 0x88B () {
+void Func088B id#(0x88B) () {
 	var var0000 = AVATAR->find_nearby(SHAPE_WELL_OF_SOULS, 10, MASK_NONE);
 	var var0001 = 15 * TICK;
 	var var0002 = -3;
@@ -70705,7 +70705,7 @@ void Func088B 0x88B () {
 	abort;
 }
 
-void Func088C 0x88C () {
+void Func088C id#(0x88C) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -70764,7 +70764,7 @@ void Func088C 0x88C () {
 	UI_pop_answers();
 }
 
-void Func088D 0x88D () {
+void Func088D id#(0x88D) () {
 	var var0000 = Func08F7(IOLO);
 	if (var0000) {
 		IOLO->say("\"Feeling all right, man?\"*");
@@ -70778,7 +70778,7 @@ void Func088D 0x88D () {
 	}
 }
 
-void Func088E 0x88E () {
+void Func088E id#(0x88E) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -70833,7 +70833,7 @@ void Func088E 0x88E () {
 	UI_pop_answers();
 }
 
-void Func088F 0x88F () {
+void Func088F id#(0x88F) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "wine", "ale"];
@@ -70877,7 +70877,7 @@ void Func088F 0x88F () {
 	UI_pop_answers();
 }
 
-void Func0890 0x890 () {
+void Func0890 id#(0x890) () {
 	ADJHAR->show_npc_face(DEFAULT_FACE);
 	if (!gflags[TALKED_ABOUT_BOLLUX]) {
 		add(["Don't know", "sacrificed", "bye"]);
@@ -71044,7 +71044,7 @@ void Func0890 0x890 () {
 	}
 }
 
-void Func0891 0x891 () {
+void Func0891 id#(0x891) () {
 	gflags[ADJHAR_READ_BOOK] = true;
 	say("\"'Tis as I suspected. Bollux thought he must sacrifice his own heart "
 		"to return my life.\"~If you were to believe it possible, you would "
@@ -71069,7 +71069,7 @@ void Func0891 0x891 () {
 	gflags[CAN_HARVEST_NEW_HEART] = true;
 }
 
-void Func0892 0x892 () {
+void Func0892 id#(0x892) () {
 	ADJHAR->say(
 			"Adjhar appears to have resumed the stance of a more traditional "
 			"golem guardian -- staunch and unmoving. However, it is impossible "
@@ -71137,7 +71137,7 @@ labelFunc0892_00CA:
 	}
 }
 
-void Func0893 0x893 () {
+void Func0893 id#(0x893) () {
 	ADJHAR->say(
 			"Adjhar appears to have resumed the stance of a more traditional "
 			"golem guardian -- staunch and distant. However, it is impossible "
@@ -71160,7 +71160,7 @@ void Func0893 0x893 () {
 	}
 }
 
-void Func0894 0x894 (var var0000) {
+void Func0894 id#(0x894) (var var0000) {
 	if (gflags[ADJHAR_IS_ALIVE]) {
 		var0000->set_schedule_type(LOITER);
 	}
@@ -71339,7 +71339,7 @@ void Func0894 0x894 (var var0000) {
 	}
 }
 
-void Func0895 0x895 () {
+void Func0895 id#(0x895) () {
 	BOLLUX->say("Bollux stares ahead, almost vacantly. Despite his features "
 				"and lack of motion, it is apparent by his expression that "
 				"some of Castambre's magic still resides within.");
@@ -71376,7 +71376,7 @@ void Func0895 0x895 () {
 	}
 }
 
-void Func0896 0x896 () {
+void Func0896 id#(0x896) () {
 	BOLLUX->say("The golem seems to have regained his staid composure. "
 				"However, life is still evident within his gem-like eyes.");
 	converse(["name", "job", "bye"]) {
@@ -71401,7 +71401,7 @@ void Func0896 0x896 () {
 	}
 }
 
-void Func0897 0x897 () {
+void Func0897 id#(0x897) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -71451,7 +71451,7 @@ void Func0897 0x897 () {
 	UI_pop_answers();
 }
 
-void Func0898 0x898 () {
+void Func0898 id#(0x898) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -71510,7 +71510,7 @@ void Func0898 0x898 () {
 	UI_pop_answers();
 }
 
-void Func0899 0x899 () {
+void Func0899 id#(0x899) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -71572,7 +71572,7 @@ void Func0899 0x899 () {
 	UI_pop_answers();
 }
 
-void Func089A 0x89A (var var0000, var var0001) {
+void Func089A id#(0x89A) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
 	if (var0002 != INVALID_NPC) {
@@ -71623,7 +71623,7 @@ void Func089A 0x89A (var var0000, var var0001) {
 	}
 }
 
-void Func089B 0x89B (var var0000, var var0001) {
+void Func089B id#(0x89B) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
 	declare var var0004;
@@ -71685,7 +71685,7 @@ void Func089B 0x89B (var var0000, var var0001) {
 	}
 }
 
-void Func089C 0x89C () {
+void Func089C id#(0x89C) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "throwing axe", "two-handed axe", "boomerang"];
@@ -71730,7 +71730,7 @@ void Func089C 0x89C () {
 	UI_pop_answers();
 }
 
-void Func089D 0x89D (var var0000, var var0001, var var0002) {
+void Func089D id#(0x89D) (var var0000, var var0001, var var0002) {
 	say("\"To be able to heal, cure poison, and resurrect. To be interested in "
 		"one of these services?\"");
 	UI_push_answers();
@@ -71836,7 +71836,7 @@ void Func089D 0x89D (var var0000, var var0001, var var0002) {
 	UI_pop_answers();
 }
 
-void Func089E 0x89E (var var0000, var var0001, var var0002) {
+void Func089E id#(0x89E) (var var0000, var var0001, var var0002) {
 	var var0003 = JAANA->get_npc_object();
 	var var0004 = UI_get_party_list();
 	say("\"I am able to heal, cure poison, and resurrect. Art thou interested "
@@ -71960,7 +71960,7 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 	UI_pop_answers();
 }
 
-void Func089F 0x89F (var var0000, var var0001) {
+void Func089F id#(0x89F) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = Func090F(var0002);
 	var var0004 = getAvatarName();
@@ -72022,7 +72022,7 @@ void Func089F 0x89F (var var0000, var var0001) {
 	say("\"I look forward to thy return.\"");
 }
 
-void Func08A0 0x8A0 () {
+void Func08A0 id#(0x8A0) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -72099,7 +72099,7 @@ void Func08A0 0x8A0 () {
 	UI_pop_answers();
 }
 
-void Func08A1 0x8A1 () {
+void Func08A1 id#(0x8A1) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -72168,7 +72168,7 @@ void Func08A1 0x8A1 () {
 	UI_pop_answers();
 }
 
-void Func08A2 0x8A2 (var var0000, var var0001) {
+void Func08A2 id#(0x8A2) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
 	if (var0002 != INVALID_NPC) {
@@ -72228,7 +72228,7 @@ void Func08A2 0x8A2 (var var0000, var var0001) {
 	}
 }
 
-void Func08A3 0x8A3 () {
+void Func08A3 id#(0x8A3) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -72273,7 +72273,7 @@ void Func08A3 0x8A3 () {
 	UI_pop_answers();
 }
 
-void Func08A4 0x8A4 () {
+void Func08A4 id#(0x8A4) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -72322,7 +72322,7 @@ void Func08A4 0x8A4 () {
 	UI_pop_answers();
 }
 
-void Func08A5 0x8A5 () {
+void Func08A5 id#(0x8A5) () {
 	var var0000 = KALLIBRUS->get_npc_object();
 	var var0001 = var0000->get_schedule_type();
 	var var0002 = "";
@@ -72344,7 +72344,7 @@ void Func08A5 0x8A5 () {
 	var0000->item_say(var0002);
 }
 
-void Func08A6 0x8A6 (var var0000, var var0001) {
+void Func08A6 id#(0x8A6) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = getAvatarName();
 	if (var0002 != INVALID_NPC) {
@@ -72416,7 +72416,7 @@ void Func08A6 0x8A6 (var var0000, var var0001) {
 	}
 }
 
-void Func08A7 0x8A7 () {
+void Func08A7 id#(0x8A7) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -72474,7 +72474,7 @@ void Func08A7 0x8A7 () {
 	UI_pop_answers();
 }
 
-void Func08A8 0x8A8 () {
+void Func08A8 id#(0x8A8) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -72525,7 +72525,7 @@ void Func08A8 0x8A8 () {
 	UI_pop_answers();
 }
 
-void Func08A9 0x8A9 () {
+void Func08A9 id#(0x8A9) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -72582,7 +72582,7 @@ void Func08A9 0x8A9 () {
 	UI_pop_answers();
 }
 
-void Func08AA 0x8AA () {
+void Func08AA id#(0x8AA) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "crested helm", "scale armour", "gorget"];
@@ -72628,7 +72628,7 @@ void Func08AA 0x8AA () {
 	UI_pop_answers();
 }
 
-void Func08AB 0x8AB () {
+void Func08AB id#(0x8AB) () {
 	var var0000 = Func08F7(JOHNSON);
 	var var0001 = Func08F7(ELLEN);
 	var var0002 = Func08F7(DELL);
@@ -72705,7 +72705,7 @@ void Func08AB 0x8AB () {
 	abort;
 }
 
-void Func08AC 0x8AC (var var0000, var var0001, var var0002) {
+void Func08AC id#(0x8AC) (var var0000, var var0001, var var0002) {
 	say("\"I am qualified to heal, cure poison, and resurrect. Art thou "
 		"interested in one of these services?\"");
 	UI_push_answers();
@@ -72778,7 +72778,7 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002) {
 	UI_pop_answers();
 }
 
-void Func08AD 0x8AD () {
+void Func08AD id#(0x8AD) () {
 	HORANCE->show_npc_face(HORANCE_GOOD);
 	var var0000 = getPoliteTitle();
 	var var0001 = getAvatarName();
@@ -72856,7 +72856,7 @@ void Func08AD 0x8AD () {
 	abort;
 }
 
-void Func08AE 0x8AE (var var0000) {
+void Func08AE id#(0x8AE) (var var0000) {
 	var var0001 = askYesNo();
 	if (!var0001) {
 		say("\"", var0000,
@@ -72875,7 +72875,7 @@ void Func08AE 0x8AE (var var0000) {
 	gflags[WELL_REFUSED] = false;
 }
 
-void Func08AF 0x8AF () {
+void Func08AF id#(0x8AF) () {
 	HORANCE->show_npc_face(HORANCE_GOOD);
 	var var0000 = UI_get_party_list();
 	if (!(FORSYTHE->get_npc_object() in var0000)) {
@@ -72917,7 +72917,7 @@ void Func08AF 0x8AF () {
 	}
 }
 
-void Func08B0 0x8B0 () {
+void Func08B0 id#(0x8B0) () {
 	if (!gflags[MET_LICHE]) {
 		say("Before you is the vile form of a liche. It remains motionless and "
 			"its eyes stare straight ahead.*");
@@ -72928,7 +72928,7 @@ void Func08B0 0x8B0 () {
 	abort;
 }
 
-void Func08B1 0x8B1 () {
+void Func08B1 id#(0x8B1) () {
 	HORANCE->show_npc_face(HORANCE_GOOD);
 	var var0000 = getAvatarName();
 	say("\"Once again, Avatar, thou hast proven that thou art ever the "
@@ -72962,7 +72962,7 @@ void Func08B1 0x8B1 () {
 	abort;
 }
 
-void Func08B2 0x8B2 () {
+void Func08B2 id#(0x8B2) () {
 	HORANCE->show_npc_face(HORANCE_GOOD);
 	var var0000 = getAvatarName();
 	say("Horance looks at you curiously, \"Thy task is done here in Skara "
@@ -73001,7 +73001,7 @@ void Func08B2 0x8B2 () {
 	}
 }
 
-var Func08B3 0x8B3 (var var0000) {
+var Func08B3 id#(0x8B3) (var var0000) {
 	var var0001 = 1;
 	var var0002 = 0;
 	var var0003 = false;
@@ -73036,7 +73036,7 @@ var Func08B3 0x8B3 (var var0000) {
 	return false;
 }
 
-void Func08B4 0x8B4 (var var0000, var var0001, var var0002) {
+void Func08B4 id#(0x8B4) (var var0000, var var0001, var var0002) {
 	say("\"I can still heal, cure poison, and sometimes resurrect. Art thou in "
 		"need of one of these?\"");
 	UI_push_answers();
@@ -73108,7 +73108,7 @@ void Func08B4 0x8B4 (var var0000, var var0001, var var0002) {
 	UI_pop_answers();
 }
 
-void Func08B5 0x8B5 () {
+void Func08B5 id#(0x8B5) () {
 	say("\"If thou wishest to seek out this isle, thou mayest use my ship. It "
 		"now sits upon the southern shore of Vesper and is called the Golden "
 		"Ankh. Please, feel free to use it for as long as thou hast need of "
@@ -73150,7 +73150,7 @@ void Func08B5 0x8B5 () {
 	gflags[TALKED_ABOUT_RUMBLE] = true;
 }
 
-void Func08B6 0x8B6 (var var0000, var var0001) {
+void Func08B6 id#(0x8B6) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	if (var0002 != INVALID_NPC) {
 		var var0003 = 1;
@@ -73214,7 +73214,7 @@ void Func08B6 0x8B6 (var var0000, var var0001) {
 	}
 }
 
-void Func08B7 0x8B7 () {
+void Func08B7 id#(0x8B7) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -73291,7 +73291,7 @@ void Func08B7 0x8B7 () {
 	UI_pop_answers();
 }
 
-void Func08B8 0x8B8 () {
+void Func08B8 id#(0x8B8) () {
 	UI_push_answers();
 	var var0000 = 1;
 	var var0001 = 1;
@@ -73325,7 +73325,7 @@ void Func08B8 0x8B8 () {
 	UI_pop_answers();
 }
 
-void Func08B9 0x8B9 () {
+void Func08B9 id#(0x8B9) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -73394,7 +73394,7 @@ void Func08B9 0x8B9 () {
 	UI_pop_answers();
 }
 
-void Func08BA 0x8BA () {
+void Func08BA id#(0x8BA) () {
 	var var0000 = UI_is_pc_female();
 	say("\"The fortune vill cost thee 20 gold. All right?\"");
 	var var0001 = askYesNo();
@@ -73463,7 +73463,7 @@ void Func08BA 0x8BA () {
 	gflags[FORTUNE_TOLD] = true;
 }
 
-void Func08BB 0x8BB (var var0000) {
+void Func08BB id#(0x8BB) (var var0000) {
 	UI_push_answers();
 	var var0001 = true;
 	var var0002 = [20, 40, 60, 80, 100, 130, 150, 180];
@@ -73571,7 +73571,7 @@ void Func08BB 0x8BB (var var0000) {
 	UI_pop_answers();
 }
 
-void Func08BC 0x8BC (var var0000) {
+void Func08BC id#(0x8BC) (var var0000) {
 	UI_push_answers();
 	var var0001 = true;
 	declare var var0002;
@@ -73653,7 +73653,7 @@ void Func08BC 0x8BC (var var0000) {
 	UI_pop_answers();
 }
 
-void Func08BD 0x8BD (var var0000, var var0001) {
+void Func08BD id#(0x8BD) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
 	breakable {
@@ -73715,7 +73715,7 @@ void Func08BD 0x8BD (var var0000, var var0001) {
 	}
 }
 
-void Func08BE 0x8BE (var var0000, var var0001) {
+void Func08BE id#(0x8BE) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	breakable {
 		if (var0002 != INVALID_NPC) {
@@ -73778,7 +73778,7 @@ void Func08BE 0x8BE (var var0000, var var0001) {
 	}
 }
 
-void Func08BF 0x8BF (var var0000) {
+void Func08BF id#(0x8BF) (var var0000) {
 	var var0001 = Func0910(var0000, STRENGTH);
 	var var0002 = Func0910(var0000, HEALTH);
 	if (var0001 > var0002) {
@@ -73787,7 +73787,7 @@ void Func08BF 0x8BF (var var0000) {
 	}
 }
 
-void Func08C0 0x8C0 () {
+void Func08C0 id#(0x8C0) () {
 	var var0000 = false;
 	var var0001 = false;
 	var var0002 = false;
@@ -74076,7 +74076,7 @@ void Func08C0 0x8C0 () {
 	}
 }
 
-void Func08C1 0x8C1 () {
+void Func08C1 id#(0x8C1) () {
 	var var0000 = getAvatarName();
 	say("\"Sweet Rowena, I am so happy to see thee out of that horrid tower.\" "
 		"Mordra's eyes begin to fill with tears of joy.*");
@@ -74093,7 +74093,7 @@ void Func08C1 0x8C1 () {
 	abort;
 }
 
-void Func08C2 0x8C2 () {
+void Func08C2 id#(0x8C2) () {
 	var var0000 = getPoliteTitle();
 	var var0001 = getAvatarName();
 	say("\"Well, hello, Mayor Forsythe. Thou has finally decided to assist in "
@@ -74136,7 +74136,7 @@ void Func08C2 0x8C2 () {
 	abort;
 }
 
-void Func08C3 0x8C3 () {
+void Func08C3 id#(0x8C3) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [25, 45, 65, 85, 115, 135, 155, 185];
@@ -74244,7 +74244,7 @@ void Func08C3 0x8C3 () {
 	UI_pop_answers();
 }
 
-void Func08C4 0x8C4 () {
+void Func08C4 id#(0x8C4) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -74298,7 +74298,7 @@ void Func08C4 0x8C4 () {
 	UI_pop_answers();
 }
 
-void Func08C5 0x8C5 () {
+void Func08C5 id#(0x8C5) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 =
@@ -74411,7 +74411,7 @@ void Func08C5 0x8C5 () {
 	UI_pop_answers();
 }
 
-void Func08C6 0x8C6 () {
+void Func08C6 id#(0x8C6) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -74465,7 +74465,7 @@ void Func08C6 0x8C6 () {
 	UI_pop_answers();
 }
 
-void Func08C7 0x8C7 () {
+void Func08C7 id#(0x8C7) () {
 	PAUL->show_npc_face(DEFAULT_FACE);
 	var var0000 = Func08F7(IOLO);
 	var var0001 = Func08F7(SPARK);
@@ -74565,7 +74565,7 @@ void Func08C7 0x8C7 () {
 	abort;
 }
 
-void Func08C8 0x8C8 (var var0000, var var0001) {
+void Func08C8 id#(0x8C8) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
 	breakable {
@@ -74633,7 +74633,7 @@ void Func08C8 0x8C8 (var var0000, var var0001) {
 	}
 }
 
-var Func08C9 0x8C9 () {
+var Func08C9 id#(0x8C9) () {
 	var var0000 = find_nearby(SHAPE_PEDESTAL2, 40, MASK_NONE);
 	var var0001 = find_nearby(SHAPE_BLACKROCK, 40, MASK_NONE);
 	var var0002 = 0;
@@ -74661,7 +74661,7 @@ var Func08C9 0x8C9 () {
 	return false;
 }
 
-void Func08CA 0x8CA (var var0000, var var0001) {
+void Func08CA id#(0x8CA) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	breakable {
 		if (var0002 != INVALID_NPC) {
@@ -74731,7 +74731,7 @@ void Func08CA 0x8CA (var var0000, var var0001) {
 	}
 }
 
-void Func08CB 0x8CB () {
+void Func08CB id#(0x8CB) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -74794,7 +74794,7 @@ void Func08CB 0x8CB () {
 	UI_pop_answers();
 }
 
-void Func08CC 0x8CC () {
+void Func08CC id#(0x8CC) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -74838,7 +74838,7 @@ void Func08CC 0x8CC () {
 	UI_pop_answers();
 }
 
-void Func08CD 0x8CD () {
+void Func08CD id#(0x8CD) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -74904,7 +74904,7 @@ void Func08CD 0x8CD () {
 	UI_pop_answers();
 }
 
-void Func08CE 0x8CE () {
+void Func08CE id#(0x8CE) () {
 	var var0000 = Func08F7(RUNEB);
 	var var0001 = Func08F7(SARPLING);
 	var var0002 = Func08F7(QUAEVEN);
@@ -74952,7 +74952,7 @@ void Func08CE 0x8CE () {
 	}
 }
 
-void Func08CF 0x8CF () {
+void Func08CF id#(0x8CF) () {
 	var var0000 = Func08F7(BALAYNA);
 	var var0001 = Func08F7(TOLEMAC);
 	var var0002 = Func08F7(IOLO);
@@ -75004,7 +75004,7 @@ void Func08CF 0x8CF () {
 	}
 }
 
-void Func08D0 0x8D0 (var var0000, var var0001) {
+void Func08D0 id#(0x8D0) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = Func090F(var0002);
 	var var0004 = "feels";
@@ -75075,7 +75075,7 @@ void Func08D0 0x8D0 (var var0000, var var0001) {
 	}
 }
 
-void Func08D1 0x8D1 () {
+void Func08D1 id#(0x8D1) () {
 	UI_clear_answers();
 	var var0000 = UI_is_pc_female();
 	RAYMUNDO->say(
@@ -75132,7 +75132,7 @@ void Func08D1 0x8D1 () {
 	}
 }
 
-void Func08D2 0x8D2 (var var0000, var var0001, var var0002) {
+void Func08D2 id#(0x8D2) (var var0000, var var0001, var var0002) {
 	var var0003 = getPoliteTitle();
 	say("\"Dost thou want mine aid?\"");
 	UI_push_answers();
@@ -75210,7 +75210,7 @@ void Func08D2 0x8D2 (var var0000, var var0001, var var0002) {
 	UI_pop_answers();
 }
 
-void Func08D3 0x8D3 () {
+void Func08D3 id#(0x8D3) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -75263,7 +75263,7 @@ void Func08D3 0x8D3 () {
 	UI_pop_answers();
 }
 
-void Func08D4 0x8D4 () {
+void Func08D4 id#(0x8D4) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -75316,7 +75316,7 @@ void Func08D4 0x8D4 () {
 	UI_pop_answers();
 }
 
-void Func08D5 0x8D5 () {
+void Func08D5 id#(0x8D5) () {
 	declare var var0000;
 	if (gflags[NEAR_SHELTER]) {
 		var0000 = "It is most fortunate that thou fell so near our shelter. "
@@ -75375,7 +75375,7 @@ void Func08D5 0x8D5 () {
 	}
 }
 
-void Func08D6 0x8D6 () {
+void Func08D6 id#(0x8D6) () {
 	var var0000 = getPoliteTitle();
 	var var0001 = Func08F7(TRENT);
 	if (!var0001) {
@@ -75409,7 +75409,7 @@ void Func08D6 0x8D6 () {
 	}
 }
 
-void Func08D7 0x8D7 () {
+void Func08D7 id#(0x8D7) () {
 	var var0000 = getPoliteTitle();
 	var var0001 = UI_get_party_list();
 	var var0002 = ROWENA->get_npc_object();
@@ -75477,7 +75477,7 @@ void Func08D7 0x8D7 () {
 	}
 }
 
-void Func08D8 0x8D8 () {
+void Func08D8 id#(0x8D8) () {
 	var var0000 = UI_is_pc_female();
 	var var0001 = getPoliteTitle();
 	if (!gflags[SEANCE_ROWENA]) {
@@ -75543,7 +75543,7 @@ void Func08D8 0x8D8 () {
 	abort;
 }
 
-void Func08D9 0x8D9 () {
+void Func08D9 id#(0x8D9) () {
 	if (!gflags[MET_ROWENA]) {
 		say("The beautiful ghost appears to be incapable of responding to you "
 			"at the current time, or in fact anyone else for that matter.*");
@@ -75554,7 +75554,7 @@ void Func08D9 0x8D9 () {
 	abort;
 }
 
-void Func08DA 0x8DA () {
+void Func08DA id#(0x8DA) () {
 	var var0000 = getPoliteTitle();
 	say("The lovely ghost holds up her hand as you begin to speak, \"Please, ",
 		var0000,
@@ -75563,7 +75563,7 @@ void Func08DA 0x8DA () {
 	abort;
 }
 
-void Func08DB 0x8DB () {
+void Func08DB id#(0x8DB) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [25, 45, 65, 85, 115, 135, 155, 185];
@@ -75666,7 +75666,7 @@ void Func08DB 0x8DB () {
 	UI_pop_answers();
 }
 
-void Func08DC 0x8DC () {
+void Func08DC id#(0x8DC) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -75720,7 +75720,7 @@ void Func08DC 0x8DC () {
 	UI_pop_answers();
 }
 
-void Func08DD 0x8DD () {
+void Func08DD id#(0x8DD) () {
 	halt_scheduled();
 	var var0000 = find_nearby(SHAPE_ANY, 40, MASK_NPC2);
 	var var0001 = 6;
@@ -75816,7 +75816,7 @@ void Func08DD 0x8DD () {
 	UI_earthquake(var0001 * (3 * TICK));
 }
 
-void Func08DE 0x8DE () {
+void Func08DE id#(0x8DE) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -75889,7 +75889,7 @@ void Func08DE 0x8DE () {
 	UI_pop_answers();
 }
 
-void Func08DF 0x8DF () {
+void Func08DF id#(0x8DF) () {
 	SALAMON->say("The ape-like creature slowly and cautiously walks up to you. "
 				 "He, or she, sniffs for a moment, and then points to the "
 				 "honey you are carrying.");
@@ -75915,7 +75915,7 @@ void Func08DF 0x8DF () {
 	}
 }
 
-void Func08E0 0x8E0 () {
+void Func08E0 id#(0x8E0) () {
 	SARALEK->say("The ape-like creature slowly and cautiously walks up to you. "
 				 "He, or she, sniffs for a moment, and then points to the "
 				 "honey you are carrying.");
@@ -75941,7 +75941,7 @@ void Func08E0 0x8E0 () {
 	}
 }
 
-void Func08E1 0x8E1 () {
+void Func08E1 id#(0x8E1) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -75996,7 +75996,7 @@ void Func08E1 0x8E1 () {
 	UI_pop_answers();
 }
 
-void Func08E2 0x8E2 () {
+void Func08E2 id#(0x8E2) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 =
@@ -76045,7 +76045,7 @@ void Func08E2 0x8E2 () {
 	UI_pop_answers();
 }
 
-void Func08E3 0x8E3 () {
+void Func08E3 id#(0x8E3) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "gem", "gold ring", "wedding ring", "ankh"];
@@ -76091,11 +76091,11 @@ void Func08E3 0x8E3 () {
 	UI_pop_answers();
 }
 
-void Func08E4 0x8E4 () {
+void Func08E4 id#(0x8E4) () {
 	var var0000 = 1;
 }
 
-void Func08E5 0x8E5 (var var0000, var var0001) {
+void Func08E5 id#(0x8E5) (var var0000, var var0001) {
 	var var0002 = Func0921(SENTRI->get_npc_object());
 	declare var var0003;
 	if ((var0002 == JULIA) || ((var0002 == JAANA) || (var0002 == KATRINA))) {
@@ -76183,7 +76183,7 @@ void Func08E5 0x8E5 (var var0000, var var0001) {
 	}
 }
 
-void Func08E6 0x8E6 (var var0000) {
+void Func08E6 id#(0x8E6) (var var0000) {
 	forever {
 		var var0001
 				= var0000->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
@@ -76197,7 +76197,7 @@ void Func08E6 0x8E6 (var var0000) {
 	var0000->remove_item();
 }
 
-var Func08E7 0x8E7 () {
+var Func08E7 id#(0x8E7) () {
 	struct<Position> var0000 = AVATAR->get_npc_object()->get_object_position();
 	struct<Position> var0001 = [1936, 1392];
 	struct<Position> var0002 = [2495, 1743];
@@ -76213,7 +76213,7 @@ var Func08E7 0x8E7 () {
 	return 0;
 }
 
-var Func08E8 0x8E8 (var var0000) {
+var Func08E8 id#(0x8E8) (var var0000) {
 	var var0001 = UI_get_party_list();
 	for (var0004 in var0001) {
 		var var0005 = var0004->get_cont_items(
@@ -76225,7 +76225,7 @@ var Func08E8 0x8E8 (var var0000) {
 	return 0;
 }
 
-var Func08E9 0x8E9 (var var0000) {
+var Func08E9 id#(0x8E9) (var var0000) {
 	var var0001 = var0000->get_item_shape();
 	var var0002 = var0000->get_item_frame();
 	if (AVATAR->is_readied(BG_WEAPON_HAND, var0001, var0002)) {
@@ -76240,7 +76240,7 @@ var Func08E9 0x8E9 (var var0000) {
 	return 0;
 }
 
-var Func08EA 0x8EA (var var0000) {
+var Func08EA id#(0x8EA) (var var0000) {
 	var var0001 = var0000->get_item_shape();
 	var var0002 = var0000->get_item_frame();
 	if (AVATAR->is_readied(BG_BACKPACK, var0001, var0002)) {
@@ -76249,7 +76249,7 @@ var Func08EA 0x8EA (var var0000) {
 	return 0;
 }
 
-void Func08EB 0x8EB (var var0000, var var0001, var var0002) {
+void Func08EB id#(0x8EB) (var var0000, var var0001, var var0002) {
 	var var0003 = 4;
 	var var0004 = 0;
 	struct<Position> var0005 = get_object_position();
@@ -76350,7 +76350,7 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002) {
 	}
 }
 
-void Func08EC 0x8EC () {
+void Func08EC id#(0x8EC) () {
 	var var0000 = Func08F7(SPARK);
 	var var0001 = Func08F7(IOLO);
 	var var0002 = Func08F7(SHAMINO);
@@ -76372,7 +76372,7 @@ void Func08EC 0x8EC () {
 	UI_pop_answers();
 }
 
-void Func08ED 0x8ED () {
+void Func08ED id#(0x8ED) () {
 	TAVENOR->say("The ape-like creature slowly and cautiously walks up to you. "
 				 "He, or she, sniffs for a moment, and then points to the "
 				 "honey you are carrying.");
@@ -76399,7 +76399,7 @@ void Func08ED 0x8ED () {
 	}
 }
 
-void Func08EE 0x8EE () {
+void Func08EE id#(0x8EE) () {
 	TRELLEK->say("The ape-like creature slowly and cautiously walks up to you. "
 				 "He, or she, sniffs for a moment, and then points to the "
 				 "honey you are carrying.");
@@ -76425,7 +76425,7 @@ void Func08EE 0x8EE () {
 	}
 }
 
-void Func08EF 0x8EF () {
+void Func08EF id#(0x8EF) () {
 	var var0000 = TRENT->find_nearest(SHAPE_SOUL_CAGE, ON_SCREEN);
 	var var0001 = getPoliteTitle();
 	if (!gflags[CAME_FROM_DEFAULT]) {
@@ -76525,7 +76525,7 @@ void Func08EF 0x8EF () {
 	}
 }
 
-void Func08F0 0x8F0 () {
+void Func08F0 id#(0x8F0) () {
 	var var0000 = getPoliteTitle();
 	var var0001 = Func08F7(ROWENA);
 	if (var0001) {
@@ -76562,7 +76562,7 @@ void Func08F0 0x8F0 () {
 	}
 }
 
-var Func08F1 0x8F1 (var var0000) {
+var Func08F1 id#(0x8F1) (var var0000) {
 	var var0001 = [
 		"viper", "deceiver", "wretch", "scoundrel", "snake", "toad", "coward"
 	];
@@ -76573,7 +76573,7 @@ var Func08F1 0x8F1 (var var0000) {
 	return var0002;
 }
 
-void Func08F2 0x8F2 (var var0000, var var0001) {
+void Func08F2 id#(0x8F2) (var var0000, var var0001) {
 	UI_push_answers();
 	var var0002 = false;
 	var var0003 = true;
@@ -76654,7 +76654,7 @@ void Func08F2 0x8F2 (var var0000, var var0001) {
 	abort;
 }
 
-void Func08F3 0x8F3 (var var0000) {
+void Func08F3 id#(0x8F3) (var var0000) {
 	UI_push_answers();
 	var var0001 = false;
 	var var0002 = false;
@@ -76761,7 +76761,7 @@ labelFunc08F3_0157:
 	UI_pop_answers();
 }
 
-void Func08F4 0x8F4 (var var0000, var var0001) {
+void Func08F4 id#(0x8F4) (var var0000, var var0001) {
 	var var0002 = "thee";
 	if (var0001 > 2) {
 		var0002 = "the party";
@@ -76785,7 +76785,7 @@ void Func08F4 0x8F4 (var var0000, var var0001) {
 	add(["bees", "leave"]);
 }
 
-var Func08F5 0x8F5 (var var0000, var var0001) {
+var Func08F5 id#(0x8F5) (var var0000, var var0001) {
 	UI_push_answers();
 	var var0002 = "nobody";
 	var var0003 = [];
@@ -76881,7 +76881,7 @@ var Func08F5 0x8F5 (var var0000, var var0001) {
 	return var0001;
 }
 
-var Func08F6 0x8F6 (var var0000) {
+var Func08F6 id#(0x8F6) (var var0000) {
 	var var0001 = var0000->get_npc_object();
 	var var0002 = var0001->get_npc_prop(EXPERIENCE) / 100;
 	var var0003 = 1;
@@ -76892,7 +76892,7 @@ var Func08F6 0x8F6 (var var0000) {
 	return var0003;
 }
 
-var Func08F7 0x8F7 (var var0000) {
+var Func08F7 id#(0x8F7) (var var0000) {
 	var var0001 = var0000->get_npc_object();
 	var var0002 = var0001->npc_nearby();
 	if (var0001->get_item_flag(INVISIBLE)) {
@@ -76901,7 +76901,7 @@ var Func08F7 0x8F7 (var var0000) {
 	return var0002;
 }
 
-var Func08F8 0x8F8 (
+var Func08F8 id#(0x8F8) (
 		var var0000, var var0001, var var0002, var var0003, var var0004,
 		var var0005, var var0006) {
 	var var0007 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -76957,7 +76957,7 @@ var Func08F8 0x8F8 (
 	return var000A;
 }
 
-var Func08F9 0x8F9 (
+var Func08F9 id#(0x8F9) (
 		struct<Position> var0000, struct<Position> var0001,
 		struct<Position> var0002) {
 	var var0003 = [X, Y, Z];
@@ -76970,7 +76970,7 @@ var Func08F9 0x8F9 (
 	return true;
 }
 
-void Func08FA 0x8FA (var var0000) {
+void Func08FA id#(0x8FA) (var var0000) {
 	if ((!var0000->get_item_flag(OKAY_TO_TAKE))
 		&& (!var0000->get_item_flag(IN_DUNGEON))) {
 		UI_call_guards();
@@ -76978,11 +76978,11 @@ void Func08FA 0x8FA (var var0000) {
 	}
 }
 
-var Func08FB 0x8FB () {
+var Func08FB id#(0x8FB) () {
 	return UI_get_party_list()->get_npc_name();
 }
 
-var Func08FC 0x8FC (var var0000, var var0001) {
+var Func08FC id#(0x8FC) (var var0000, var var0001) {
 	var var0002 = var0000->get_distance(var0001);
 	if (var0002 < 20) {
 		return true;
@@ -76990,7 +76990,7 @@ var Func08FC 0x8FC (var var0000, var var0001) {
 	return 0;
 }
 
-void Func08FD 0x8FD (var var0000) {
+void Func08FD id#(0x8FD) (var var0000) {
 	UI_play_sound_effect(SFX_FAIL_BUZZ);
 	if (var0000 > CURSOR_FIRST_INVALID) {
 		var0000 = CURSOR_X;
@@ -77003,7 +77003,7 @@ void Func08FD 0x8FD (var var0000) {
  *
  * @param lines The lines of dialogue that the NPC will say.
  */
-void partyUtters 0x8FE (var lines) {
+void partyUtters id#(0x8FE) (var lines) {
 	var npc = getNearbyPartyMember();
 	makeNpcSay(npc, lines);
 }
@@ -77014,7 +77014,7 @@ void partyUtters 0x8FE (var lines) {
  *
  * @param lines The lines of dialogue that the NPC will say.
  */
-void partySpeak 0x8FF (var lines) {
+void partySpeak id#(0x8FF) (var lines) {
 	var npc = getNearbyPartyMember();
 	handleNpcSpeech(npc, lines);
 }
@@ -77026,7 +77026,7 @@ void partySpeak 0x8FF (var lines) {
  * @returns A nearby party NPC if the die roll is less than 4.
  * @returns A random nearby party member if the die roll is 4 or greater.
  */
-var getNearbyPartyMember 0x900 () {
+var getNearbyPartyMember id#(0x900) () {
 	if (UI_die_roll(1, 10) < 4) {
 		return findNearbyPartyNPC();
 	}
@@ -77043,7 +77043,7 @@ var getNearbyPartyMember 0x900 () {
  *
  * @returns A random nearby party member, or the avatar if none are around.
  */
-var getNearbyRandomPartyMember 0x901 () {
+var getNearbyRandomPartyMember id#(0x901) () {
 	var partyList = UI_get_party_list();
 	partyList = filterArray(AVATAR->get_npc_object(), partyList);
 	var partySize = UI_get_array_size(partyList);
@@ -77063,7 +77063,7 @@ var getNearbyRandomPartyMember 0x901 () {
  * @returns The first NPC from the list who is in the party and nearby.
  * @returns If no such NPC is found, returns the avatar.
  */
-var findNearbyPartyNPC 0x902 () {
+var findNearbyPartyNPC id#(0x902) () {
 	var companions = [
 		IOLO, SHAMINO, DUPRE, JAANA, SENTRI, JULIA, KATRINA, SPARK, TSERAMED
 	];
@@ -77090,7 +77090,7 @@ var findNearbyPartyNPC 0x902 () {
  * @param npc The NPC that will speak.
  * @param messages The list of messages to display.
  */
-void handleNpcSpeech 0x903 (var npc, var messages) {
+void handleNpcSpeech id#(0x903) (var npc, var messages) {
 	if (npc->npc_nearby()) {
 		declare var facenum;
 		if (npc == AVATAR) {
@@ -77119,7 +77119,7 @@ void handleNpcSpeech 0x903 (var npc, var messages) {
  * @param npc An object that has a method `npc_nearby()`.
  * @param lines A list of items to be processed.
  */
-void makeNpcSay 0x904 (var npc, var lines) {
+void makeNpcSay id#(0x904) (var npc, var lines) {
 	if (npc->npc_nearby()) {
 		if (get_item_flag(CONFUSED)) {
 			item_say("@Oink@");
@@ -77133,7 +77133,7 @@ void makeNpcSay 0x904 (var npc, var lines) {
 	}
 }
 
-void Func0905 0x905 (var var0000) {
+void Func0905 id#(0x905) (var var0000) {
 	var0000->halt_scheduled();
 	set_light(true);
 	UI_set_time_palette();
@@ -77143,14 +77143,14 @@ void Func0905 0x905 (var var0000) {
 	};
 }
 
-var Func0906 0x906 () {
+var Func0906 id#(0x906) () {
 	if (UI_get_weather() == SPARKLE) {
 		return false;
 	}
 	return true;
 }
 
-var Func0907 0x907 (var var0000) {
+var Func0907 id#(0x907) (var var0000) {
 	return var0000->get_npc_object()->give_last_created();
 }
 
@@ -77158,7 +77158,7 @@ var Func0907 0x907 (var var0000) {
  * Retrieves the Avatar's name.
  * @returns The Avatar's name.
  */
-var getAvatarName 0x908 () {
+var getAvatarName id#(0x908) () {
 	return UI_get_avatar_ref()->get_npc_name();
 }
 
@@ -77168,7 +77168,7 @@ var getAvatarName 0x908 () {
  * @returns "milord" if the player character is male.
  * @returns "milady" if the player character is female.
  */
-var getPoliteTitle 0x909 () {
+var getPoliteTitle id#(0x909) () {
 	if (UI_is_pc_female() == 0) {
 		return "milord";
 	}
@@ -77180,7 +77180,7 @@ var getPoliteTitle 0x909 () {
  *
  * @returns The user's response: `true` for "Yes" and `false` for "No`.
  */
-var askYesNo 0x90A () {
+var askYesNo id#(0x90A) () {
 	UI_push_answers();
 	converse(["Yes", "No"]) {
 	case "Yes":
@@ -77202,7 +77202,7 @@ var askYesNo 0x90A () {
  *
  * @returns The text option chosen.
  */
-var askForResponse 0x90B (var options) {
+var askForResponse id#(0x90B) (var options) {
 	UI_push_answers();
 	add(options);
 	var reply = UI_select_from_menu();
@@ -77219,7 +77219,7 @@ var askForResponse 0x90B (var options) {
  *
  * @returns The index (1-n) of the option chosen.
  */
-var chooseFromMenu2 0x90C (var options) {
+var chooseFromMenu2 id#(0x90C) (var options) {
 	UI_push_answers();
 	add(options);
 	var reply = UI_select_from_menu2();
@@ -77227,7 +77227,7 @@ var chooseFromMenu2 0x90C (var options) {
 	return reply;
 }
 
-var Func090D 0x90D () {
+var Func090D id#(0x90D) () {
 	var var0000 = Func08FB();
 	var var0001 = UI_get_party_list();
 	var var0002 = [INVALID_NPC, var0001];
@@ -77239,7 +77239,7 @@ var Func090D 0x90D () {
 	return var0004->get_npc_number();
 }
 
-var Func090E 0x90E () {
+var Func090E id#(0x90E) () {
 	var var0000 = UI_get_party_list2()->get_npc_name();
 	var var0001 = UI_get_party_list2();
 	var var0002 = [INVALID_NPC, var0001];
@@ -77251,26 +77251,26 @@ var Func090E 0x90E () {
 	return var0004->get_npc_number();
 }
 
-var Func090F 0x90F (var var0000) {
+var Func090F id#(0x90F) (var var0000) {
 	return var0000->get_npc_object()->get_npc_name();
 }
 
-var Func0910 0x910 (var var0000, var var0001) {
+var Func0910 id#(0x910) (var var0000, var var0001) {
 	return var0000->get_npc_object()->get_npc_prop(var0001);
 }
 
-void Func0911 0x911 (var var0000) {
+void Func0911 id#(0x911) (var var0000) {
 	var var0001 = UI_get_party_list();
 	for (var0004 in var0001) {
 		var var0005 = var0004->set_npc_prop(EXPERIENCE, var0000);
 	}
 }
 
-void Func0912 0x912 (var var0000, var var0001, var var0002) {
+void Func0912 id#(0x912) (var var0000, var var0001, var var0002) {
 	var var0003 = var0000->get_npc_object()->set_npc_prop(var0001, var0002);
 }
 
-var Func0913 0x913 (var var0000, var var0001) {
+var Func0913 id#(0x913) (var var0000, var var0001) {
 	var var0002 = 0;
 	for (var0005 in var0001) {
 		var0002 += 1;
@@ -77281,7 +77281,7 @@ var Func0913 0x913 (var var0000, var var0001) {
 	return 0;
 }
 
-void Func0914 0x914 (var var0000, var var0001) {
+void Func0914 id#(0x914) (var var0000, var var0001) {
 	var var0002 = 0;
 	while (var0002 < var0001) {
 		Func0912(var0000, STRENGTH, 1);
@@ -77291,7 +77291,7 @@ void Func0914 0x914 (var var0000, var var0001) {
 	}
 }
 
-void Func0915 0x915 (var var0000, var var0001) {
+void Func0915 id#(0x915) (var var0000, var var0001) {
 	var var0002 = 0;
 	while (var0002 < var0001) {
 		var var0003 = Func0910(var0000, DEXTERITY);
@@ -77305,7 +77305,7 @@ void Func0915 0x915 (var var0000, var var0001) {
 	}
 }
 
-void Func0916 0x916 (var var0000, var var0001) {
+void Func0916 id#(0x916) (var var0000, var var0001) {
 	var var0002 = 0;
 	while (var0002 < var0001) {
 		var var0003 = Func0910(var0000, INTELLIGENCE);
@@ -77315,7 +77315,7 @@ void Func0916 0x916 (var var0000, var var0001) {
 	}
 }
 
-void Func0917 0x917 (var var0000, var var0001) {
+void Func0917 id#(0x917) (var var0000, var var0001) {
 	var var0002 = 0;
 	while (var0002 < var0001) {
 		var var0003 = Func0910(var0000, DEXTERITY);
@@ -77333,7 +77333,7 @@ void Func0917 0x917 (var var0000, var var0001) {
 	}
 }
 
-void Func0918 0x918 (var var0000, var var0001) {
+void Func0918 id#(0x918) (var var0000, var var0001) {
 	var var0002 = 0;
 	while (var0002 < var0001) {
 		var var0003 = Func0910(var0000, INTELLIGENCE);
@@ -77351,7 +77351,7 @@ void Func0918 0x918 (var var0000, var var0001) {
 	}
 }
 
-void Func0919 0x919 () {
+void Func0919 id#(0x919) () {
 	var var0000 = UI_wearing_fellowship();
 	var var0001 = UI_die_roll(1, 4);
 	if (var0001 == 1) {
@@ -77387,7 +77387,7 @@ void Func0919 0x919 () {
 	add("philosophy");
 }
 
-void Func091A 0x91A () {
+void Func091A id#(0x91A) () {
 	say("\"The Fellowship advances the philosophy of 'sanguine cognition', a "
 		"way to apply a confident order of thought to one's life, through what "
 		"is called the Triad of Inner Strength. The Triad is simply three "
@@ -77427,7 +77427,7 @@ void Func091A 0x91A () {
  * @param suffix Any additional suffix to append to the price (e.g., " each").
  * @returns A description of the item being sold with the proposed price.
  */
-var humanProposeSellPrice 0x91B (
+var humanProposeSellPrice id#(0x91B) (
 		var article, var itemName, var isPlural, var price, var suffix) {
 	var description = article + itemName + " ";
 	if (isPlural == 1) {
@@ -77449,14 +77449,14 @@ var humanProposeSellPrice 0x91B (
  * @param suffix Any additional suffix to append to the price (e.g., " each").
  * @returns A description of the item being sold with the proposed price.
  */
-var gargoyleProposeSellPrice 0x91C (
+var gargoyleProposeSellPrice id#(0x91C) (
 		var article, var itemName, var isPlural, var price, var suffix) {
 	var description = "To sell " + article + itemName + " for " + price + " gold"
 				  + suffix + ".";
 	return description;
 }
 
-void Func091D 0x91D (var var0000, var var0001) {
+void Func091D id#(0x91D) (var var0000, var var0001) {
 	var var0002 = Func0910(var0000, STRENGTH);
 	var var0003 = Func0910(var0000, HEALTH);
 	var var0004 = var0000->get_npc_name();
@@ -77473,7 +77473,7 @@ void Func091D 0x91D (var var0000, var var0001) {
 	}
 }
 
-void Func091E 0x91E (var var0000, var var0001) {
+void Func091E id#(0x91E) (var var0000, var var0001) {
 	var var0002 = var0000->get_npc_object();
 	if (var0002->get_item_flag(POISONED)) {
 		var0002->clear_item_flag(POISONED);
@@ -77485,7 +77485,7 @@ void Func091E 0x91E (var var0000, var var0001) {
 	}
 }
 
-void Func091F 0x91F (var var0000, var var0001) {
+void Func091F id#(0x91F) (var var0000, var var0001) {
 	var var0002 = var0000->resurrect();
 	if (var0002) {
 		say("\"Breath doth return to the body. Thy comrade is alive!\"");
@@ -77497,13 +77497,13 @@ void Func091F 0x91F (var var0000, var var0001) {
 	}
 }
 
-var Func0920 0x920 () {
+var Func0920 id#(0x920) () {
 	say("\"Which of you wishes to train?\"");
 	var var0000 = Func090D();
 	return var0000;
 }
 
-var Func0921 0x921 (var var0000) {
+var Func0921 id#(0x921) (var var0000) {
 	say("\"One of you wishes to train?\"");
 	var var0001 = askYesNo();
 	declare var var000C;
@@ -77536,7 +77536,7 @@ var Func0921 0x921 (var var0000) {
 	return var000C;
 }
 
-var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003) {
+var Func0922 id#(0x922) (var var0000, var var0001, var var0002, var var0003) {
 	var var0004 = false;
 	var var0005 = Func0910(var0002, TRAINING);
 	var var0006 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
@@ -77558,7 +77558,7 @@ var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003) {
 	return TRAIN_CAN_TRAIN;
 }
 
-var Func0923 0x923 (var var0000, var var0001) {
+var Func0923 id#(0x923) (var var0000, var var0001) {
 	var var0002 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 	declare var var0003;
 	say("\"Agreeable?\"");
@@ -77583,7 +77583,7 @@ var Func0923 0x923 (var var0000, var var0001) {
 	return var0003;
 }
 
-var Func0924 0x924 (var var0000, var var0001) {
+var Func0924 id#(0x924) (var var0000, var var0001) {
 	var var0002 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
 	declare var var0003;
 	say("\"To be agreeable?\"");
@@ -77608,7 +77608,7 @@ var Func0924 0x924 (var var0000, var var0001) {
 	return var0003;
 }
 
-void Func0925 0x925 (var var0000) {
+void Func0925 id#(0x925) (var var0000) {
 	var var0001 = var0000->get_item_quantity(AVATAR);
 	if (var0001 <= 1) {
 		var0000->remove_item();
@@ -77618,7 +77618,7 @@ void Func0925 0x925 (var var0000) {
 	}
 }
 
-void Func0926 0x926 (var var0000) {
+void Func0926 id#(0x926) (var var0000) {
 	struct<Position> var0001 = false;
 	var var0002 = var0000->get_item_shape();
 	var var0003 = var0000->get_item_frame();
@@ -77642,7 +77642,7 @@ void Func0926 0x926 (var var0000) {
 	}
 }
 
-void Func0927 0x927 (var var0000) {
+void Func0927 id#(0x927) (var var0000) {
 	Func08FA(var0000);
 	var var0001 = var0000->get_item_frame();
 	if (var0001 == 0) {
@@ -77672,7 +77672,7 @@ void Func0927 0x927 (var var0000) {
 	}
 }
 
-void Func0928 0x928 (var var0000) {
+void Func0928 id#(0x928) (var var0000) {
 	Func08FA(var0000);
 	var var0001 = var0000->get_item_frame() % 2;
 	if (var0001 == 0) {
@@ -77712,7 +77712,7 @@ void Func0928 0x928 (var var0000) {
 	}
 }
 
-void Func0929 0x929 () {
+void Func0929 id#(0x929) () {
 	var var0000 = getAvatarName();
 	var var0001 = UI_die_roll(1, 3);
 	if (var0001 == 1) {
@@ -77725,7 +77725,7 @@ void Func0929 0x929 () {
 	}
 }
 
-void Func092A 0x92A (var var0000, var var0001) {
+void Func092A id#(0x92A) (var var0000, var var0001) {
 	if (var0000->is_npc()) {
 		var var0002 = var0000->get_npc_prop(STRENGTH);
 		var var0003 = var0000->get_npc_prop(HEALTH);
@@ -77738,7 +77738,7 @@ void Func092A 0x92A (var var0000, var var0001) {
 	}
 }
 
-var Func092B 0x92B (var var0000) {
+var Func092B id#(0x92B) (var var0000) {
 	var var0001 = 0;
 	for (var0004 in var0000) {
 		var0001 += 1;
@@ -77746,7 +77746,7 @@ var Func092B 0x92B (var var0000) {
 	return var0001;
 }
 
-void Func092C 0x92C (var var0000) {
+void Func092C id#(0x92C) (var var0000) {
 	UI_play_sound_effect(SFX_SUCCESS_BUZZ);
 }
 
@@ -77757,11 +77757,11 @@ void Func092C 0x92C (var var0000) {
  *
  * @returns The direction from the avatar to the target.
  */
-var directionFromAvatar 0x92D (var target) {
+var directionFromAvatar id#(0x92D) (var target) {
 	return AVATAR->direction_from(target);
 }
 
-void Func092E 0x92E (var var0000) {
+void Func092E id#(0x92E) (var var0000) {
 	var var0001 = var0000->get_npc_object();
 	if (!canTalk(var0001)) {
 		return;
@@ -77859,7 +77859,7 @@ void Func092E 0x92E (var var0000) {
 	var0001->item_say(var0003);
 }
 
-void Func092F 0x92F (var var0000) {
+void Func092F id#(0x92F) (var var0000) {
 	var var0001 = var0000->get_npc_object();
 	if (!canTalk(var0001)) {
 		return;
@@ -77929,12 +77929,12 @@ void Func092F 0x92F (var var0000) {
 	var0001->item_say(var0003);
 }
 
-var Func0930 0x930 (var var0000, var var0001) {
+var Func0930 id#(0x930) (var var0000, var var0001) {
 	var var0002 = var0000->run_script(var0001, ZERO_DELAY);
 	return var0002;
 }
 
-var Func0931 0x931 (
+var Func0931 id#(0x931) (
 		var var0000, var var0001, var var0002, var var0003, var var0004) {
 	var var0005 = var0000->count_objects(var0002, var0003, var0004);
 	if (var0005 >= var0001) {
@@ -77943,7 +77943,7 @@ var Func0931 0x931 (
 	return false;
 }
 
-var absoluteValueOf 0x932 (var value) {
+var absoluteValueOf id#(0x932) (var value) {
 	if (value < 0) {
 		value *= -1;
 	}
@@ -77957,7 +77957,7 @@ var absoluteValueOf 0x932 (var value) {
  * @param line The message to be spoken by the NPC.
  * @param delay The number of ticks to wait before the NPC speaks.
  */
-void delayedBark 0x933 (var npc, var line, var delay) {
+void delayedBark id#(0x933) (var npc, var line, var delay) {
 	if (canTalk(npc)) {
 		var var0003 = script npc->get_npc_object() after delay ticks {
 			nohalt;
@@ -77966,7 +77966,7 @@ void delayedBark 0x933 (var npc, var line, var delay) {
 	}
 }
 
-var Func0934 0x934 (var var0000) {
+var Func0934 id#(0x934) (var var0000) {
 	var var0001 = find_nearby(SHAPE_ANY, var0000, MASK_NPC2);
 	var var0002 = UI_get_party_list();
 	var var0003 = [];
@@ -77981,7 +77981,7 @@ var Func0934 0x934 (var var0000) {
 	return var0002;
 }
 
-var Func0935 0x935 (var var0000, var var0001) {
+var Func0935 id#(0x935) (var var0000, var var0001) {
 	var var0002 = var0000[1];
 	for (var0005 in var0000) {
 		if (var0001->get_distance(var0005) < var0001->get_distance(var0002)) {
@@ -77991,7 +77991,7 @@ var Func0935 0x935 (var var0000, var var0001) {
 	return var0002;
 }
 
-void Func0936 0x936 (var var0000, var var0001) {
+void Func0936 id#(0x936) (var var0000, var var0001) {
 	var0000->reduce_health(var0001, NORMAL_DAMAGE);
 }
 
@@ -78009,7 +78009,7 @@ void Func0936 0x936 (var var0000, var var0001) {
  * @param npc The NPC object to check.
  * @returns True if the NPC can talk, false otherwise.
  */
-var canTalk 0x937 (var npc) {
+var canTalk id#(0x937) (var npc) {
 	if ((npc->get_npc_prop(INTELLIGENCE) >= 10)
 		&& ((!npc->get_item_flag(ASLEEP))
 			&& ((!npc->get_item_flag(PARALYZED))
@@ -78030,7 +78030,7 @@ var canTalk 0x937 (var npc) {
  * @param npc The ID of the NPC to check.
  * @returns true if the NPC is incapacitated, otherwise false.
  */
-var isNpcIncapacitated 0x938 (var npc) {
+var isNpcIncapacitated id#(0x938) (var npc) {
 	npc = getNpcById(npc);
 	if (npc->get_item_flag(ASLEEP)
 		|| (npc->get_item_flag(PARALYZED)
@@ -78047,7 +78047,7 @@ var isNpcIncapacitated 0x938 (var npc) {
  * @param npcId - The ID of the NPC to retrieve.
  * @returns The NPC object for the given ID or the ID itself if it is invalid.
  */
-var getNpcById 0x939 (var npcId) {
+var getNpcById id#(0x939) (var npcId) {
 	declare var npc;
 	if ((npcId < INVALID_NPC) && (npcId >= AVATAR)) {
 		npc = npcId->get_npc_object();
@@ -78074,7 +78074,7 @@ var getNpcById 0x939 (var npcId) {
  *   time. If the quality is less than the sleep time multiplied by 30, the
  *   torch or light source is extinguished and its shape is changed accordingly.
  */
-void handleSleepEffects 0x93A (var sleepTime, var bed) {
+void handleSleepEffects id#(0x93A) (var sleepTime, var bed) {
 	var partyList = UI_get_party_list2();
 	declare var result;
 	for (partyMember in partyList) {
@@ -78127,7 +78127,7 @@ void handleSleepEffects 0x93A (var sleepTime, var bed) {
  * maximum value.
  * Finally, the NPC's property is updated with the new value.
  */
-void restorePropertyAfterSleep 0x93B (var npc, var prop, var maxProp, var sleepTime) {
+void restorePropertyAfterSleep id#(0x93B) (var npc, var prop, var maxProp, var sleepTime) {
 	var currentProp = npc->get_npc_prop(prop);
 	var newProp = currentProp + (2 * sleepTime);
 	if (newProp > npc->get_npc_prop(maxProp)) {
@@ -78143,7 +78143,7 @@ void restorePropertyAfterSleep 0x93B (var npc, var prop, var maxProp, var sleepT
  * @param inputArray The array from which the target value will be filtered out.
  * @returns A new array with all elements except the target value.
  */
-var filterArray 0x93C (var targetValue, var inputArray) {
+var filterArray id#(0x93C) (var targetValue, var inputArray) {
 	var resultArray = [];
 	for (element in inputArray) {
 		if (!(element == targetValue)) {
@@ -78161,7 +78161,7 @@ var filterArray 0x93C (var targetValue, var inputArray) {
  * @param keyArray The array of keys used to determine the order of `valueArray`.
  * @returns The sorted `valueArray`.
  */
-var sortArraysBySecondArray 0x93D (var valueArray, var keyArray) {
+var sortArraysBySecondArray id#(0x93D) (var valueArray, var keyArray) {
 	var size = UI_get_array_size(valueArray);
 	if (size > 1) {
 		var swapped = true;
@@ -78185,13 +78185,13 @@ var sortArraysBySecondArray 0x93D (var valueArray, var keyArray) {
 	return valueArray;
 }
 
-var Func093E 0x93E () {
+var Func093E id#(0x93E) () {
 	struct<Position> var0000 = [0x0390, 0x0810, 0];
 	struct<Position> var0001 = [0x0450, 0x0930, 15];
 	return Func08F9(AVATAR->get_object_position(), var0000, var0001);
 }
 
-void Func093F 0x93F (var var0000, var var0001) {
+void Func093F id#(0x93F) (var var0000, var var0001) {
 	var var0002 = UI_get_party_list();
 	if ((getNpcById(var0000) in var0002) && gflags[INSIDE_GENERATOR]) {
 		return;
@@ -78199,7 +78199,7 @@ void Func093F 0x93F (var var0000, var var0001) {
 	var0000->set_schedule_type(var0001);
 }
 
-void Func0940 0x940 (var var0000) {
+void Func0940 id#(0x940) (var var0000) {
 	if (!UI_start_speech(var0000)) {
 		NULL_OBJ->Func0614();
 	} else {
@@ -78207,7 +78207,7 @@ void Func0940 0x940 (var var0000) {
 	}
 }
 
-void Func0941 0x941 (var var0000) {
+void Func0941 id#(0x941) (var var0000) {
 	if (!UI_start_blocking_speech(var0000)) {
 		NULL_OBJ->Func0614();
 	} else {
@@ -78215,7 +78215,7 @@ void Func0941 0x941 (var var0000) {
 	}
 }
 
-void Func0942 0x942 (var var0000, var var0001) {
+void Func0942 id#(0x942) (var var0000, var var0001) {
 	var var0002 = var0000->get_item_frame();
 	if (!var0000->get_item_quality()) {
 		var var0003 = var0000->set_item_quality(UI_die_roll(30, 60));
@@ -78240,13 +78240,13 @@ void Func0942 0x942 (var var0000, var var0001) {
 	UI_set_time_palette();
 }
 
-void Func0943 0x943 (var var0000) {
+void Func0943 id#(0x943) (var var0000) {
 	struct<Position> var0001 = var0000->get_object_position();
 	UI_sprite_effect(
 			ANIMATION_MUSIC, var0001.x, var0001.y, -2, -2, 0, LOOP_ONCE);
 }
 
-var Func0944 0x944 (var var0000) {
+var Func0944 id#(0x944) (var var0000) {
 	var var0001 = get_container();
 	while (!(var0001 == AVATAR->get_npc_object())) {
 		var0001 = var0001->get_container();
@@ -78257,7 +78257,7 @@ var Func0944 0x944 (var var0000) {
 	return var0001;
 }
 
-var Func0945 0x945 (var var0000) {
+var Func0945 id#(0x945) (var var0000) {
 	var var0001 = get_container();
 	declare var var0002;
 	while (var0001) {
@@ -78267,7 +78267,7 @@ var Func0945 0x945 (var var0000) {
 	return var0002;
 }
 
-void Func0946 0x946 () {
+void Func0946 id#(0x946) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "bread", "cake", "rolls", "pastry"];
@@ -78313,7 +78313,7 @@ void Func0946 0x946 () {
 	UI_pop_answers();
 }
 
-void Func0947 0x947 () {
+void Func0947 id#(0x947) () {
 	UI_push_answers();
 	say("\"Excellent! Dost thou have some loaves for me?\"");
 	var var0000 = askYesNo();
@@ -78367,7 +78367,7 @@ void Func0947 0x947 () {
 	UI_pop_answers();
 }
 
-void Func0948 0x948 () {
+void Func0948 id#(0x948) () {
 	UI_push_answers();
 	var var0000 = 4;
 	var var0001 = 1;
@@ -78413,7 +78413,7 @@ void Func0948 0x948 () {
 	UI_pop_answers();
 }
 
-void Func0949 0x949 () {
+void Func0949 id#(0x949) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -78484,7 +78484,7 @@ void Func0949 0x949 () {
 	UI_pop_answers();
 }
 
-void Func094A 0x94A () {
+void Func094A id#(0x94A) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -78559,7 +78559,7 @@ void Func094A 0x94A () {
 	UI_pop_answers();
 }
 
-var Func094B 0x94B (var var0000, var var0001) {
+var Func094B id#(0x94B) (var var0000, var var0001) {
 	var var0002 = 0;
 	var var0003 = var0000;
 	var var0004 = var0000;
@@ -78664,7 +78664,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 	return 0;
 }
 
-void Func094C 0x94C () {
+void Func094C id#(0x94C) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [30, 50, 70, 90, 120, 140];
@@ -78758,7 +78758,7 @@ void Func094C 0x94C () {
 	UI_pop_answers();
 }
 
-void Func094D 0x94D () {
+void Func094D id#(0x94D) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "mutton rations", "bread", "flounder"];
@@ -78805,7 +78805,7 @@ void Func094D 0x94D () {
 	UI_pop_answers();
 }
 
-void Func094E 0x94E () {
+void Func094E id#(0x94E) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = ["nothing", "mead", "wine", "ale"];
@@ -78853,7 +78853,7 @@ void Func094E 0x94E () {
 	UI_pop_answers();
 }
 
-void Func094F 0x94F (var var0000, var var0001) {
+void Func094F id#(0x94F) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
 	breakable {
@@ -78919,7 +78919,7 @@ void Func094F 0x94F (var var0000, var var0001) {
 	}
 }
 
-void Func0950 0x950 (var var0000, var var0001) {
+void Func0950 id#(0x950) (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
 	var var0004 = UI_is_pc_female();
@@ -79012,7 +79012,7 @@ void Func0950 0x950 (var var0000, var var0001) {
 	}
 }
 
-void Func0951 0x951 () {
+void Func0951 id#(0x951) () {
 	var var0000 = getPoliteTitle();
 	UI_push_answers();
 	var var0001 = true;
@@ -79089,7 +79089,7 @@ void Func0951 0x951 () {
 	UI_pop_answers();
 }
 
-void Func0952 0x952 () {
+void Func0952 id#(0x952) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
@@ -79138,7 +79138,7 @@ void Func0952 0x952 () {
 	UI_pop_answers();
 }
 
-void Func0953 0x953 () {
+void Func0953 id#(0x953) () {
 	UI_push_answers();
 	var var0000 = true;
 	var var0001 = [
