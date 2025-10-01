@@ -5,11 +5,6 @@ const int FIRST_NPC_FUNCTION = 0x400;
 const int MAX_QUANTITY = 100;
 const int MAX_CHARGES = 100;
 
-enum intrinsics {
-	UNKNOWN_INTRINSIC_70 = 0x70,
-	UNKNOWN_INTRINSIC_83 = 0x83,
-};
-
 enum sprite_repeats {
 	LOOP_ONCE = -1,
 	LOOP_ONCE2 = -3	// Not sure about this

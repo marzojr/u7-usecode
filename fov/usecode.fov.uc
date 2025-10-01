@@ -52939,7 +52939,7 @@ void Func060E object#(0x60E) () {
 		UI_fade_palette(12 * TICK, 1, FADE_TO_BLACK);
 		UI_play_music(MUSIC_STOP, NULL_OBJ);
 		UI_play_music(MUSIC_WILDERNESS, NULL_OBJ);
-		(@UNKNOWN_INTRINSIC_83)();
+		UI_UNKNOWN_83();
 		var var0000 = get_dead_party();
 		for (var0003 in var0000) {
 			var0004 = var0003->resurrect();
@@ -53360,7 +53360,7 @@ void Func0619 object#(0x619) () {
 }
 
 void Func061A object#(0x61A) () {
-	(@UNKNOWN_INTRINSIC_70)();
+	UI_UNKNOWN__70();
 }
 
 void Func061B object#(0x61B) () {
@@ -59382,7 +59382,7 @@ void erethianFinishTeleportToForge object#(0x69C) () {
 
 void pathfindToNearestPedestal object#(0x69D) () {
 	if (event == BG_PATH_SUCCESS) {
-		(@UNKNOWN_INTRINSIC_70)();
+		UI_UNKNOWN_70();
 		return;
 	}
 	var avatarStatue = findAvatarStatue();
