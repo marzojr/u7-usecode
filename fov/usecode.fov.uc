@@ -28,7 +28,6 @@ void FuncGangplank shape#(SHAPE_GANGPLANK_LOWERED) () {
  * "Erethian", in this case, means any monster mage
  * carrying a scroll with a specific quality and frame.
  */
-
 void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 	declare var queuedScript;
 	if (event == PROXIMITY) {
@@ -718,12 +717,17 @@ void FuncMonsterMage shape#(SHAPE_MONSTER_MAGE) () {
 	}
 }
 
+/**
+ * Handles the Ferryman's dialog and overall behavior.
+ * "the Ferryman", in this case, an object that does not move,
+ * instead of a real NPC.
+ */
 void FuncFerryman shape#(SHAPE_FERRYMAN) () {
 	if (event == DOUBLECLICK) {
 		FERRYMAN->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func08F7(SPARK);
-		var var0001 = Func08F7(SHAMINO);
-		var var0002 = getAvatarName();
+		var isSparkNearby = isNpcNearbyAndVisible(SPARK);
+		var isShaminoNearby = isNpcNearbyAndVisible(SHAMINO);
+		var avatarName = getAvatarName();
 		if (!gflags[SEANCE_FERRYMAN]) {
 			say("The hooded figure in the boat ignores you completely.*");
 			abort;
@@ -782,9 +786,9 @@ void FuncFerryman shape#(SHAPE_FERRYMAN) () {
 			if (!gflags[ISLAND_DOCK]) {
 				say("He turns all the way around and points across the water "
 					"to the west. \"There... \"");
-				if (var0001 && var0000) {
+				if (isShaminoNearby && isSparkNearby) {
 					SHAMINO->say(
-							"\"Er... ", var0002,
+							"\"Er... ", avatarName,
 							", art thou sure we need to go over there?\"*");
 					SHAMINO->hide();
 					SPARK->say("\"What's the matter, Shamino? Art thou "
@@ -793,8 +797,8 @@ void FuncFerryman shape#(SHAPE_FERRYMAN) () {
 					SHAMINO->say("\"Of course not! I just... well, I... oh, "
 								 "never mind! Let's go!\"*");
 					SHAMINO->hide();
-					var var0003 = Func08F7(IOLO);
-					if (var0003) {
+					var isIoloNearby = isNpcNearbyAndVisible(IOLO);
+					if (isIoloNearby) {
 						IOLO->say(
 								"Iolo's eyes narrow as he adopts a patronizing "
 								"look on his face.~~\"And I suppose thou art "
@@ -814,18 +818,18 @@ void FuncFerryman shape#(SHAPE_FERRYMAN) () {
 			remove("Skara Brae");
 			fallthrough;
 		case "pay", "return":
-			declare var var0004;
+			declare var playerChoice;
 			if (!gflags[ISLAND_DOCK]) {
 				say("\"Wilt thou pay my price... for passage to Skara Brae?\"");
-				var0004 = askYesNo();
-				if (var0004) {
-					var var0005 = UI_remove_party_items(
+				playerChoice = askYesNo();
+				if (playerChoice) {
+					var coinsRemoved = UI_remove_party_items(
 							2, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
-					if (var0005) {
+					if (coinsRemoved) {
 						say("You place the coins in the shade's palm and his "
 							"bony fingers close over them. \"Step aboard... if "
 							"thou wouldst go... to the Isle of the Dead.\"");
-						Func0882(item);
+						ferrymanHandleBarge(item);
 					} else {
 						say("\"I'll not cross... without proper payment.\"");
 					}
@@ -834,12 +838,12 @@ void FuncFerryman shape#(SHAPE_FERRYMAN) () {
 				}
 			} else {
 				say("\"Dost thou wish... to return to the mainland?\"");
-				var0004 = askYesNo();
-				if (var0004) {
-					var var0006 = ROWENA->get_npc_object();
-					var var0007 = UI_get_party_list();
-					var var0008 = FORSYTHE->get_npc_object();
-					if ((var0006 in var0007) || (var0008 in var0007)) {
+				playerChoice = askYesNo();
+				if (playerChoice) {
+					var rowenaNpc = ROWENA->get_npc_object();
+					var partyList = UI_get_party_list();
+					var forsytheNpc = FORSYTHE->get_npc_object();
+					if ((rowenaNpc in partyList) || (forsytheNpc in partyList)) {
 						say("\"I may not carry spirits to the mainland.\" He "
 							"holds his pole in front of himself, blocking your "
 							"way onto the boat.");
@@ -847,7 +851,7 @@ void FuncFerryman shape#(SHAPE_FERRYMAN) () {
 						say("The Ferryman seems to smile beneath his hood as "
 							"he motions for you to once more board his "
 							"spectral boat.");
-						Func0882(item);
+						ferrymanHandleBarge(item);
 					}
 				} else {
 					say("You think you see pale flames flicker in the depths "
@@ -1061,10 +1065,10 @@ void FuncSails shape#(SHAPE_SAILS) () {
 				}
 				return;
 			}
-			if (Func080D()) {
+			if (allPartyMembersSeated()) {
 				Func0831(item);
 			} else {
-				var var0004 = Func08B3(var0000[1]);
+				var var0004 = assignSeatsOnBarge(var0000[1]);
 				set_item_flag(ACTIVE_SAILOR);
 			}
 		} else {
@@ -1263,7 +1267,7 @@ void FuncSeat shape#(SHAPE_SEAT) () {
 						item->FuncFlyingCarpet();
 					}
 				} else {
-					var0001 = Func08B3(item);
+					var0001 = assignSeatsOnBarge(item);
 				}
 			}
 		} else {
@@ -4813,7 +4817,7 @@ void FuncGoldCoin shape#(SHAPE_GOLD_COIN) () {
 		if (!(canTalk(AVATAR) || (!canTalk(IOLO)))) {
 			return;
 		}
-		if (Func08F7(IOLO)) {
+		if (isNpcNearbyAndVisible(IOLO)) {
 			delayedBark(AVATAR, "@Call it.@", 0);
 			var var0000 = UI_die_roll(1, 2);
 			if (var0000 == 1) {
@@ -6649,7 +6653,7 @@ void FuncMusicBox shape#(SHAPE_MUSIC_BOX) () {
 		if (var0000 == FRAME_MUSIC_BOX_CLOSED) {
 			set_item_frame(FRAME_MUSIC_BOX_OPEN);
 			UI_play_music(MUSIC_MUSIC_BOX, item);
-			if (Func08F7(ROWENA)) {
+			if (isNpcNearbyAndVisible(ROWENA)) {
 				gflags[MUSIC_BOX] = true;
 				ROWENA->get_npc_object()->FuncRowena();
 			}
@@ -8623,9 +8627,9 @@ void FuncFlyingCarpet shape#(SHAPE_FLYING_CARPET) () {
 	var var0000 = get_barge();
 	if ((event == DOUBLECLICK) && (!(var0000 == NULL_OBJ))) {
 		if (!get_item_flag(ON_MOVING_BARGE)) {
-			if (Func080D()) {
+			if (allPartyMembersSeated()) {
 				Func0812(var0000);
-			} else if (Func08B3(item)) {
+			} else if (assignSeatsOnBarge(item)) {
 				UI_close_gumps();
 			}
 		} else if (var0000->get_item_flag(OKAY_TO_LAND)) {
@@ -9041,7 +9045,7 @@ void FuncHorn shape#(SHAPE_HORN) () {
 							= AVATAR->find_nearby(SHAPE_FERRYMAN, 100, MASK_NONE);
 					if (var0005) {
 						var0005->set_camera();
-						var0005->get_barge()->Func061C();
+						var0005->get_barge()->ferrymanMoveBarge();
 					}
 				}
 			}
@@ -9658,8 +9662,8 @@ void FuncIolo object#(FIRST_NPC_FUNCTION - IOLO)() {
 		var0002 = IOLO->get_npc_object();
 		var0003 = getPoliteTitle();
 		IOLO->show_npc_face(DEFAULT_FACE);
-		var var0008 = Func08F7(PETRE);
-		var var0009 = Func08F7(SHAMINO);
+		var var0008 = isNpcNearbyAndVisible(PETRE);
+		var var0009 = isNpcNearbyAndVisible(SHAMINO);
 		var var000A = false;
 		var var000B = false;
 		add(["name", "job", "bye"]);
@@ -9780,7 +9784,7 @@ void FuncIolo object#(FIRST_NPC_FUNCTION - IOLO)() {
 			add(["Shamino", "Dupre"]);
 			fallthrough;
 		case "Dupre":
-			var var000C = Func08F7(DUPRE);
+			var var000C = isNpcNearbyAndVisible(DUPRE);
 			if (var000C) {
 				say("\"Why, he is right there, ", var0003, ".\"*");
 				DUPRE->say("\"I am right here, ", var0003, ".\"*");
@@ -9978,7 +9982,7 @@ void FuncSpark object#(FIRST_NPC_FUNCTION - SPARK)() {
 				var0008 = var0001;
 				gflags[TOLD_SPARK_AVATAR] = true;
 			}
-			var000B = Func08F7(IOLO);
+			var000B = isNpcNearbyAndVisible(IOLO);
 			if (var000B) {
 				IOLO->say("\"Boy, this is the Avatar! ");
 				if (!var0003) {
@@ -10131,7 +10135,7 @@ void FuncSpark object#(FIRST_NPC_FUNCTION - SPARK)() {
 						"slingshot! I can strike sewer rats with almost every "
 						"shot! And I am small -- I do not eat much! Please "
 						"take me! Please ask me to join thee!\"*");
-					var000B = Func08F7(IOLO);
+					var000B = isNpcNearbyAndVisible(IOLO);
 					if (var000B) {
 						IOLO->say(
 								"Iolo whispers to you. \"I do not know about "
@@ -10415,7 +10419,7 @@ void FuncShamino object#(FIRST_NPC_FUNCTION - SHAMINO)() {
 				"British rarely finds work for me. I certainly have no "
 				"time\tfor wenching or drinking -- I have grown up a bit.\"*");
 			remove("diversions");
-			var0005 = Func08F7(IOLO);
+			var0005 = isNpcNearbyAndVisible(IOLO);
 			if (var0005) {
 				IOLO->say("\"Ahem, I have heard something about an actress, "
 						  "no?\"*");
@@ -10441,7 +10445,7 @@ void FuncShamino object#(FIRST_NPC_FUNCTION - SHAMINO)() {
 			add(["Iolo", "Dupre"]);
 			fallthrough;
 		case "Iolo":
-			var0005 = Func08F7(IOLO);
+			var0005 = isNpcNearbyAndVisible(IOLO);
 			if (var0005) {
 				say("\"Dost thou mean that miserable excuse for an archer?\"*");
 				IOLO->say("\"Watch what thou dost say, scoundrel!\"*");
@@ -10454,7 +10458,7 @@ void FuncShamino object#(FIRST_NPC_FUNCTION - SHAMINO)() {
 			remove("Iolo");
 			fallthrough;
 		case "Dupre":
-			var var0006 = Func08F7(DUPRE);
+			var var0006 = isNpcNearbyAndVisible(DUPRE);
 			if (var0006) {
 				say("\"Dost thou mean that incorrigible wencher and "
 					"drunkard?\"*");
@@ -10584,9 +10588,9 @@ void FuncDupre object#(FIRST_NPC_FUNCTION - DUPRE)() {
 		var var0001 = UI_get_party_list();
 		var var0002 = DUPRE->get_npc_object();
 		var var0003 = getAvatarName();
-		var var0004 = Func08F7(IOLO);
-		var var0005 = Func08F7(SHAMINO);
-		var var0006 = Func08F7(SPARK);
+		var var0004 = isNpcNearbyAndVisible(IOLO);
+		var var0005 = isNpcNearbyAndVisible(SHAMINO);
+		var var0006 = isNpcNearbyAndVisible(SPARK);
 		var var0007 = IOLO->get_npc_object()->is_dead();
 		var var0008 = SHAMINO->get_npc_object()->is_dead();
 		var var0009 = SPARK->get_npc_object()->is_dead();
@@ -10985,7 +10989,7 @@ void FuncJaana object#(FIRST_NPC_FUNCTION - JAANA)() {
 			say("Jaana blushes. \"Yes, I have been seeing our Town Mayor for "
 				"some time now.\"");
 			remove("Lord Heather");
-			var var000A = Func08F7(LORD_HEATHER);
+			var var000A = isNpcNearbyAndVisible(LORD_HEATHER);
 			if (var000A) {
 				LORD_HEATHER->say("\"I see that thou art leaving Cove for a "
 								  "while, my dear?\"*");
@@ -11002,7 +11006,7 @@ void FuncJaana object#(FIRST_NPC_FUNCTION - JAANA)() {
 			}
 			fallthrough;
 		case "Iolo":
-			var var000B = Func08F7(IOLO);
+			var var000B = isNpcNearbyAndVisible(IOLO);
 			if (!var000B) {
 				say("\"Where is he? 'Twould be good to see him!\"");
 			} else {
@@ -11017,7 +11021,7 @@ void FuncJaana object#(FIRST_NPC_FUNCTION - JAANA)() {
 			remove("Iolo");
 			fallthrough;
 		case "Shamino":
-			var var000C = Func08F7(SHAMINO);
+			var var000C = isNpcNearbyAndVisible(SHAMINO);
 			if (!var000C) {
 				say("\"Oh, I would love to see him. I wonder where he might "
 					"be.\"");
@@ -11032,7 +11036,7 @@ void FuncJaana object#(FIRST_NPC_FUNCTION - JAANA)() {
 			remove("Shamino");
 			fallthrough;
 		case "Dupre":
-			var var000D = Func08F7(DUPRE);
+			var var000D = isNpcNearbyAndVisible(DUPRE);
 			if (!var000D) {
 				say("\"I miss having a drink or two with that rogue! Let's go "
 					"find that knight!\"");
@@ -11453,7 +11457,7 @@ void FuncSentri object#(FIRST_NPC_FUNCTION - SENTRI)() {
 			}
 			fallthrough;
 		case "Iolo":
-			var var000B = Func08F7(IOLO);
+			var var000B = isNpcNearbyAndVisible(IOLO);
 			if (var000B) {
 				say("\"How art thou, friend? Thou dost look like thou couldst "
 					"use a little training thyself!\"*");
@@ -11468,7 +11472,7 @@ void FuncSentri object#(FIRST_NPC_FUNCTION - SENTRI)() {
 			remove("Iolo");
 			fallthrough;
 		case "Shamino":
-			var var000C = Func08F7(SHAMINO);
+			var var000C = isNpcNearbyAndVisible(SHAMINO);
 			if (var000C) {
 				say("\"Say, Shamino, art thou still spending thy time dressing "
 					"in women's clothes?\"*");
@@ -11487,7 +11491,7 @@ void FuncSentri object#(FIRST_NPC_FUNCTION - SENTRI)() {
 			remove("Shamino");
 			fallthrough;
 		case "Dupre":
-			var var000D = Func08F7(DUPRE);
+			var var000D = isNpcNearbyAndVisible(DUPRE);
 			if (var000D) {
 				say("\"Ah, my good friend Dupre! Hast thou some good ale on "
 					"thee?\"*");
@@ -11543,7 +11547,7 @@ void FuncJulia object#(FIRST_NPC_FUNCTION - JULIA)() {
 		var var0001 = UI_get_party_list();
 		var var0002 = JULIA->get_npc_object();
 		var var0003 = getAvatarName();
-		var var0004 = Func08F7(SPARK);
+		var var0004 = isNpcNearbyAndVisible(SPARK);
 		add(["name", "job", "bye"]);
 		if (gflags[KARL_TOLD_ABOUT_PLANS]) {
 			add("plans");
@@ -11715,7 +11719,7 @@ void FuncJulia object#(FIRST_NPC_FUNCTION - JULIA)() {
 			remove("plans");
 			fallthrough;
 		case "Iolo":
-			var var000B = Func08F7(IOLO);
+			var var000B = isNpcNearbyAndVisible(IOLO);
 			if (!var000B) {
 				say("\"Perhaps we should go find Iolo and have him join us as "
 					"well.\"");
@@ -11728,7 +11732,7 @@ void FuncJulia object#(FIRST_NPC_FUNCTION - JULIA)() {
 			remove("Iolo");
 			fallthrough;
 		case "Shamino":
-			var var000C = Func08F7(SHAMINO);
+			var var000C = isNpcNearbyAndVisible(SHAMINO);
 			if (!var000C) {
 				say("\"Perhaps we should go find Shamino and have him join us "
 					"as well.\"");
@@ -11742,7 +11746,7 @@ void FuncJulia object#(FIRST_NPC_FUNCTION - JULIA)() {
 			remove("Shamino");
 			fallthrough;
 		case "Dupre":
-			var var000D = Func08F7(DUPRE);
+			var var000D = isNpcNearbyAndVisible(DUPRE);
 			if (!var000D) {
 				say("\"Perhaps we should go find Sir Dupre and have him join "
 					"us as well.\"");
@@ -11789,9 +11793,9 @@ void FuncKatrina object#(FIRST_NPC_FUNCTION - KATRINA)() {
 		var var0001 = UI_get_party_list();
 		var var0002 = KATRINA->get_npc_object();
 		var var0003 = getAvatarName();
-		var var0004 = Func08F7(SHAMINO);
-		var var0005 = Func08F7(IOLO);
-		var var0006 = Func08F7(DUPRE);
+		var var0004 = isNpcNearbyAndVisible(SHAMINO);
+		var var0005 = isNpcNearbyAndVisible(IOLO);
+		var var0006 = isNpcNearbyAndVisible(DUPRE);
 		add(["name", "job", "bye"]);
 		if (var0002 in var0001) {
 			add("leave");
@@ -12048,7 +12052,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED)() {
 		var var001A = var0004->find_nearby(SHAPE_BEE, 20, MASK_NONE);
 		var var001B = false;
 		// BUG: These were likely meant to be without the minus signs.
-		if (Func08F7(-BUDO) || Func08F7(-LUCKY)) {
+		if (isNpcNearbyAndVisible(-BUDO) || isNpcNearbyAndVisible(-LUCKY)) {
 			var001B = true;
 		}
 		var var001C = "valiant warrior";
@@ -12764,7 +12768,7 @@ void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN)() {
 		FINNIGAN->show_npc_face(DEFAULT_FACE);
 		var var0000 = getPoliteTitle();
 		var var0001 = getAvatarName();
-		var var0002 = Func08F7(SPARK);
+		var var0002 = isNpcNearbyAndVisible(SPARK);
 		var var0003 = UI_is_pc_female();
 		breakable {
 			declare var var0005;
@@ -12826,7 +12830,7 @@ void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN)() {
 					say("\"Then leave our people to work it out for "
 						"themselves.\"*");
 					FINNIGAN->hide();
-					var0006 = Func08F7(IOLO);
+					var0006 = isNpcNearbyAndVisible(IOLO);
 					if (var0006) {
 						IOLO->say("\"Avatar! I am ashamed of thee! Thou "
 								  "shouldst reconsider!\"*");
@@ -12839,7 +12843,7 @@ void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN)() {
 				FINNIGAN->get_npc_object()->set_schedule_type(LOITER);
 				say("You see a middle-aged nobleman.");
 				gflags[MET_FINNIGAN] = true;
-				var0006 = Func08F7(IOLO);
+				var0006 = isNpcNearbyAndVisible(IOLO);
 				if (var0006) {
 					say("\"Iolo! Who is this stranger?\"*");
 					IOLO->say(
@@ -12874,7 +12878,7 @@ void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN)() {
 					"name of the killer. Dost thou accept?\"");
 				var0005 = askYesNo();
 				if (var0005) {
-					var var0007 = Func08F7(PETRE);
+					var var0007 = isNpcNearbyAndVisible(PETRE);
 					if (var0007) {
 						say("\"Petre here knows something about all of "
 							"this.\"*");
@@ -13365,7 +13369,7 @@ void FuncEiko object#(FIRST_NPC_FUNCTION - EIKO)() {
 	}
 	EIKO->show_npc_face(DEFAULT_FACE);
 	var var0000 = getPoliteTitle();
-	var var0001 = Func08F7(AMANDA);
+	var var0001 = isNpcNearbyAndVisible(AMANDA);
 	if (!gflags[MET_EIKO]) {
 		say("You see a stunningly attractive oriental woman. She is armed to "
 			"the teeth.");
@@ -13780,7 +13784,7 @@ void FuncDell object#(FIRST_NPC_FUNCTION - DELL)() {
 				"said in the street, so do not ask me. If thou art not going "
 				"to buy anything, then thou art wasting my time. Go away.\"");
 			remove("murder");
-			var var0007 = Func08F7(IOLO);
+			var var0007 = isNpcNearbyAndVisible(IOLO);
 			if (var0007) {
 				IOLO->say(
 						"Iolo whispers to you, \"Pleasant chap, is he not?\"");
@@ -14196,7 +14200,7 @@ void FuncGargan object#(FIRST_NPC_FUNCTION - GARGAN)() {
 			say("\"I heard about that. Terrible thing to happen. Can't say I "
 				"saw or heard anything, though.\"~Gargan coughs, clears his "
 				"throat loudly, then spits.");
-			var0008 = Func08F7(SPARK);
+			var0008 = isNpcNearbyAndVisible(SPARK);
 			if (var0008) {
 				SPARK->say("\"Ooooh, yuck!\"");
 				SPARK->hide();
@@ -14228,7 +14232,7 @@ void FuncGargan object#(FIRST_NPC_FUNCTION - GARGAN)() {
 				"There was a wingless gargoyle with him. They were walking "
 				"east.\"");
 			say("Gargan sneezes, then coughs a couple of times.");
-			var0008 = Func08F7(SPARK);
+			var0008 = isNpcNearbyAndVisible(SPARK);
 			if (var0008) {
 				SPARK->say("\"I told thee! It was him!\"");
 				SPARK->hide();
@@ -14385,9 +14389,9 @@ void FuncLordBritish object#(FIRST_NPC_FUNCTION - LORD_BRITISH)() {
 				add("rumble");
 			}
 			var var0002 = UI_get_party_list();
-			var var0003 = Func08F7(IOLO);
-			var var0004 = Func08F7(DUPRE);
-			var var0005 = Func08F7(SHAMINO);
+			var var0003 = isNpcNearbyAndVisible(IOLO);
+			var var0004 = isNpcNearbyAndVisible(DUPRE);
+			var var0005 = isNpcNearbyAndVisible(SHAMINO);
 			LORD_BRITISH->show_npc_face(DEFAULT_FACE);
 			var var0006 = false;
 			var var0007 = false;
@@ -14981,7 +14985,7 @@ void FuncNystul object#(FIRST_NPC_FUNCTION - NYSTUL)() {
 			say("\"Sometimes the magic works, sometimes it doth not.\" He "
 				"waves his hand, and drops his wand. \"Oops!\" he cries, as he "
 				"bends to pick it up.");
-			var var0000 = Func08F7(SPARK);
+			var var0000 = isNpcNearbyAndVisible(SPARK);
 			if (var0000) {
 				SPARK->say(
 						"\"Art thou sure this man is not really the jester?\"");
@@ -16035,7 +16039,7 @@ void FuncStuart object#(FIRST_NPC_FUNCTION - STUART)() {
 			say("Stuart's feathers are obviously ruffled. \"Yes. I have been "
 				"cast as second banana yet again! I am much more suited to "
 				"play the Avatar, but did Raymundo cast me? Noooo!\"");
-			var var0000 = Func08F7(IOLO);
+			var var0000 = isNpcNearbyAndVisible(IOLO);
 			if (var0000) {
 				IOLO->say("\"But thou art nothing like me!\"*");
 				STUART->say("\"And who art thou, pray tell?\"*");
@@ -16106,7 +16110,7 @@ void FuncAmber object#(FIRST_NPC_FUNCTION - AMBER)() {
 		AMBER->show_npc_face(DEFAULT_FACE);
 		var var0000 = UI_part_of_day();
 		add(["name", "job", "bye"]);
-		var var0001 = Func08F7(SHAMINO);
+		var var0001 = isNpcNearbyAndVisible(SHAMINO);
 		if (gflags[SHAMINO_SAID_AMBER] || var0001) {
 			add("Shamino");
 		}
@@ -16168,7 +16172,7 @@ void FuncAmber object#(FIRST_NPC_FUNCTION - AMBER)() {
 			remove("queen");
 			fallthrough;
 		case "Shamino":
-			var0001 = Func08F7(SHAMINO);
+			var0001 = isNpcNearbyAndVisible(SHAMINO);
 			if (var0001) {
 				say("\"Poo Poo Head!\" she cries. She then rushes to him and "
 					"kisses him full on the mouth. Shamino turns red and "
@@ -16221,7 +16225,7 @@ void FuncKristy object#(FIRST_NPC_FUNCTION - KRISTY)() {
 	declare var var0001;
 	if (event == DOUBLECLICK) {
 		KRISTY->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func08F7(NANNA);
+		var var0000 = isNpcNearbyAndVisible(NANNA);
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_KRISTY]) {
 			say("This is a cute toddler holding a baby doll.");
@@ -16317,7 +16321,7 @@ void FuncMax object#(FIRST_NPC_FUNCTION - MAX)() {
 		converse(0) {
 		case "name":
 			say("\"Makth.\"");
-			var var0000 = Func08F7(NANNA);
+			var var0000 = isNpcNearbyAndVisible(NANNA);
 			if (var0000) {
 				NANNA->say("\"He says his name is Max.\"");
 				NANNA->hide();
@@ -16389,7 +16393,7 @@ void FuncNicholas object#(FIRST_NPC_FUNCTION - NICHOLAS)() {
 	declare var var0001;
 	if (event == DOUBLECLICK) {
 		NICHOLAS->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func08F7(NANNA);
+		var var0000 = isNpcNearbyAndVisible(NANNA);
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_NICHOLAS]) {
 			say("You see a child that has recently grown into toddlerhood.");
@@ -16524,14 +16528,14 @@ void FuncNanna object#(FIRST_NPC_FUNCTION - NANNA)() {
 				"that they may attend to their daily duties.\"");
 			remove("Royal Nursery");
 			add("luxury");
-			var var0004 = Func08F7(SPARK);
+			var var0004 = isNpcNearbyAndVisible(SPARK);
 			if (var0001 == TEND_SHOP) {
 				if (var0004) {
 					SPARK->say(
 							"\"Whew! Dost thou smell what I smell, Avatar?\"*");
 					SPARK->hide();
 				}
-				var var0005 = Func08F7(IOLO);
+				var var0005 = isNpcNearbyAndVisible(IOLO);
 				if (var0005) {
 					IOLO->say("\"I believe that is the smell of diapers, boy. "
 							  "When thou art a father one day, thou wilt come "
@@ -16675,12 +16679,12 @@ void FuncCsil object#(FIRST_NPC_FUNCTION - CSIL)() {
 			say("\"My practice grew swiftly. I am a modest man, but I do not "
 				"mind saying that I was a popular healer.\"");
 			remove("practice");
-			var var0001 = Func08F7(SHAMINO);
+			var var0001 = isNpcNearbyAndVisible(SHAMINO);
 			if (var0001) {
 				SHAMINO->say("\"He is probably the best healer in all "
 							 "Britannia. Why, he cured a, er, particular "
 							 "problem I had in no time at all.\"*");
-				var var0002 = Func08F7(IOLO);
+				var var0002 = isNpcNearbyAndVisible(IOLO);
 				if (var0002) {
 					SHAMINO->hide();
 					IOLO->say("\"Oh? What problem was that?\"*");
@@ -16882,7 +16886,7 @@ void FuncLucy object#(FIRST_NPC_FUNCTION - LUCY)() {
 					say("Everyone in the Blue Boar laughs.");
 					say("\"And I'd bet thou dost need a drink, right?\"");
 					gflags[TOLD_LUCY_AVATAR] = true;
-					var0007 = Func08F7(DUPRE);
+					var0007 = isNpcNearbyAndVisible(DUPRE);
 					if (var0007) {
 						DUPRE->say("\"Damn! How did she know?\"");
 						DUPRE->hide();
@@ -16912,7 +16916,7 @@ void FuncLucy object#(FIRST_NPC_FUNCTION - LUCY)() {
 				say("\"If thou dost want anything to eat or drink, just say "
 					"so!\"");
 				add("Blue Boar");
-				var0007 = Func08F7(DUPRE);
+				var0007 = isNpcNearbyAndVisible(DUPRE);
 				if (var0007) {
 					say("She addresses Dupre. \"How about thou, handsome? Want "
 						"something to eat?\" She bats her eyelashes.*");
@@ -17171,7 +17175,7 @@ void FuncNeno object#(FIRST_NPC_FUNCTION - NENO)() {
 		NENO->show_npc_face(DEFAULT_FACE);
 		var var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
-			var var0001 = Func08F7(COOP);
+			var var0001 = isNpcNearbyAndVisible(COOP);
 			if (var0001) {
 				say("Neno is busy performing with The Avatars and cannot speak "
 					"at the moment.*");
@@ -17247,7 +17251,7 @@ void FuncJudith object#(FIRST_NPC_FUNCTION - JUDITH)() {
 		JUDITH->show_npc_face(DEFAULT_FACE);
 		var var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
-			var var0001 = Func08F7(COOP);
+			var var0001 = isNpcNearbyAndVisible(COOP);
 			if (var0001) {
 				say("Judith is busy performing with The Avatars and cannot "
 					"speak at the moment.*");
@@ -17374,7 +17378,7 @@ void FuncCandice object#(FIRST_NPC_FUNCTION - CANDICE)() {
 				"Word has spread that thou wert in Britain!\"");
 			gflags[MET_CANDICE] = true;
 		} else if (var0002 == MIDNIGHT) {
-			var var0004 = Func08F7(PATTERSON);
+			var var0004 = isNpcNearbyAndVisible(PATTERSON);
 			if (var0004) {
 				say("Candice looks guilty about something. She gives you a "
 					"little wave, but says nothing. She looks at Patterson, "
@@ -17433,7 +17437,7 @@ void FuncCandice object#(FIRST_NPC_FUNCTION - CANDICE)() {
 				"places around Britannia. I believe if one casts a 'Mark' "
 				"spell on one, thou canst re-assign the teleportation "
 				"location! But I suppose none of that works anymore.\"");
-			var var0005 = Func08F7(IOLO);
+			var var0005 = isNpcNearbyAndVisible(IOLO);
 			if (var0005) {
 				IOLO->say("Iolo whispers to you, \"Er, Avatar, thou dost know "
 						  "that I do not condone stealing. But, er, I do "
@@ -17742,8 +17746,8 @@ void FuncPatterson object#(FIRST_NPC_FUNCTION - PATTERSON)() {
 		} else if (
 				(var0000 == MIDNIGHT)
 				|| ((var0000 == EARLY) || (var0000 == DAWN))) {
-			var var0002 = Func08F7(CANDICE);
-			var0003 = Func08F7(IOLO);
+			var var0002 = isNpcNearbyAndVisible(CANDICE);
+			var0003 = isNpcNearbyAndVisible(IOLO);
 			if (var0002) {
 				say("\"Avatar! Er, uhm, how art thee? Oh, dost thou know "
 					"Candice, the curator at the Royal Museum? She is a "
@@ -17870,7 +17874,7 @@ void FuncPatterson object#(FIRST_NPC_FUNCTION - PATTERSON)() {
 		case "Judith suspicious":
 			say("\"Why, I do not know what she is talking about! I work late, "
 				"that is all!\"");
-			var0003 = Func08F7(IOLO);
+			var0003 = isNpcNearbyAndVisible(IOLO);
 			if (var0003) {
 				IOLO->say("Iolo whispers to you, \"This man seems very "
 						  "defensive, dost thou not think? I say we should "
@@ -17938,7 +17942,7 @@ void FuncCarrocio object#(FIRST_NPC_FUNCTION - CARROCIO)() {
 		var0001 = UI_part_of_day();
 		var0002 = CARROCIO->get_npc_object()->get_schedule_type();
 		var var0003 = UI_is_pc_female();
-		var var0004 = Func08F7(SPARK);
+		var var0004 = isNpcNearbyAndVisible(SPARK);
 		add(["name", "job", "bye"]);
 		if (gflags[NELL_SAID_CHILD]) {
 			add("Nell with child");
@@ -18586,7 +18590,7 @@ void FuncJeanette object#(FIRST_NPC_FUNCTION - JEANETTE)() {
 				say("\"If there is anything thou wouldst like, please say so! "
 					"And, er, I shall give thee a discount if thou dost buy "
 					"from me!\"");
-				var var0002 = Func08F7(DUPRE);
+				var var0002 = isNpcNearbyAndVisible(DUPRE);
 				if (var0002) {
 					say("\"Why, Sir Dupre! How good to see thee again!\"*");
 					DUPRE->say("\"Hello milady! I thought I might re-sample "
@@ -18637,7 +18641,7 @@ void FuncJeanette object#(FIRST_NPC_FUNCTION - JEANETTE)() {
 			say("\"'Tis Willy the Baker! But he does not know it yet!\" she "
 				"giggles.");
 			gflags[JEANETTE_LOVES_WILLY] = true;
-			var var0003 = Func08F7(LUCY);
+			var var0003 = isNpcNearbyAndVisible(LUCY);
 			if (var0003) {
 				LUCY->say("\"A moment, Jeanette! Thou hast it all wrong! "
 						  "Charles is a -servant-! Thou art an ignoramus! "
@@ -18675,7 +18679,7 @@ void FuncAmanda object#(FIRST_NPC_FUNCTION - AMANDA)() {
 	}
 	AMANDA->show_npc_face(DEFAULT_FACE);
 	var var0000 = getPoliteTitle();
-	var var0001 = Func08F7(EIKO);
+	var var0001 = isNpcNearbyAndVisible(EIKO);
 	if (!gflags[MET_AMANDA]) {
 		say("You see an attractive woman dressed in armour and carrying a "
 			"small arsenal of weapons with her.");
@@ -19132,7 +19136,7 @@ void FuncWilly object#(FIRST_NPC_FUNCTION - WILLY)() {
 		var var0001 = getAvatarName();
 		var0002 = WILLY->get_npc_object()->get_schedule_type();
 		var0003 = UI_part_of_day();
-		var var0004 = Func08F7(SPARK);
+		var var0004 = isNpcNearbyAndVisible(SPARK);
 		add(["name", "job", "bye"]);
 		if (gflags[JEANETTE_LOVES_WILLY]) {
 			add("Jeanette");
@@ -19178,7 +19182,7 @@ void FuncWilly object#(FIRST_NPC_FUNCTION - WILLY)() {
 					if (var0008) {
 						say("\"Ha! Thou dost see, then? Everyone agrees! That "
 							"should be proof enough!\"");
-						var0004 = Func08F7(SPARK);
+						var0004 = isNpcNearbyAndVisible(SPARK);
 						if (var0004) {
 							SPARK->say("\"I want some!\"*");
 							WILLY->say("\"Here thou art, laddie.\" Willy hands "
@@ -19564,8 +19568,8 @@ void FuncCoop object#(FIRST_NPC_FUNCTION - COOP)() {
 		var0003 = COOP->get_npc_object()->get_schedule_type();
 		declare var var0006;
 		if (var0002 == NIGHT) {
-			var var0004 = Func08F7(NENO);
-			var var0005 = Func08F7(JUDITH);
+			var var0004 = isNpcNearbyAndVisible(NENO);
+			var var0005 = isNpcNearbyAndVisible(JUDITH);
 			if (var0004 && var0005) {
 				say("Coop is onstage with The Avatars. He sees you and says, "
 					"\"Uhm, there is someone special listening tonight, and "
@@ -19587,7 +19591,7 @@ void FuncCoop object#(FIRST_NPC_FUNCTION - COOP)() {
 				say("\"We are the Av-atars! ~We are the Av-atars! ~We are the "
 					"Aaaa-Vaaa-Taaars!\"");
 				say("The applause is tumultuous.*");
-				var0006 = Func08F7(IOLO);
+				var0006 = isNpcNearbyAndVisible(IOLO);
 				if (var0006) {
 					IOLO->say(
 							"\"Hmmm. They must have seen thee coming, ",
@@ -19604,7 +19608,7 @@ void FuncCoop object#(FIRST_NPC_FUNCTION - COOP)() {
 			}
 		}
 		add(["name", "job", "bye"]);
-		var0006 = Func08F7(IOLO);
+		var0006 = isNpcNearbyAndVisible(IOLO);
 		if (var0006) {
 			add("Iolo");
 		}
@@ -19653,7 +19657,7 @@ void FuncCoop object#(FIRST_NPC_FUNCTION - COOP)() {
 			say("\"I sell many goods but I also plan to perpetuate the good "
 				"name of Iolo by becoming a master archer! Iolo has taught me "
 				"well!\"*");
-			var0006 = Func08F7(IOLO);
+			var0006 = isNpcNearbyAndVisible(IOLO);
 			if (var0006) {
 				IOLO->say("\"Yes, the lad is good! He was good before I taught "
 						  "him the first lesson.\"*");
@@ -22070,7 +22074,7 @@ void FuncMiranda object#(FIRST_NPC_FUNCTION - MIRANDA)() {
 					|| ((var0001 == NOON) || (var0001 == AFTERNOON)))) {
 				say("\"He is probably in the Royal Nursery.");
 			} else {
-				var var0002 = Func08F7(MAX);
+				var var0002 = isNpcNearbyAndVisible(MAX);
 				if (var0002) {
 					say("\"He's right here! Say hello to the Avatar, Max.\"*");
 					MAX->say("\"Hi. I'm a funny boy!\"*");
@@ -23030,13 +23034,13 @@ void FuncLordHeather object#(FIRST_NPC_FUNCTION - LORD_HEATHER)() {
 				"Zinaida, who runs the Emerald. She has an interest in De "
 				"Maria, our local bard. And vice versa. Rayburt, our trainer, "
 				"is courting Pamela, the innkeeper.\"");
-			var var0001 = Func08F7(IOLO);
+			var var0001 = isNpcNearbyAndVisible(IOLO);
 			if (var0001) {
 				IOLO->say("\"Sounds like bad theatre to me!\"");
 				IOLO->hide();
 				LORD_HEATHER->show_npc_face(DEFAULT_FACE);
 			}
-			var var0002 = Func08F7(SPARK);
+			var var0002 = isNpcNearbyAndVisible(SPARK);
 			if (var0002) {
 				SPARK->say("\"Any wenches mine own age around here?\"*");
 				SPARK->hide();
@@ -23044,7 +23048,7 @@ void FuncLordHeather object#(FIRST_NPC_FUNCTION - LORD_HEATHER)() {
 			}
 			gflags[LORD_HEATHER_SAID_LOVERS] = true;
 			remove("everyone");
-			var var0003 = Func08F7(JAANA);
+			var var0003 = isNpcNearbyAndVisible(JAANA);
 			if (var0003) {
 				say("\"I see that thou art leaving Cove for a while, my "
 					"dear?\"*");
@@ -23369,7 +23373,7 @@ void FuncDeMaria object#(FIRST_NPC_FUNCTION - DE_MARIA)() {
 			say("\"My love! My flower! Mine angel! The provider of the "
 				"sweetest nectar my mouth has ever known! She is the light of "
 				"my day! The notes of my songs! The flesh of my...\"~~");
-			var var0002 = Func08F7(ZINAIDA);
+			var var0002 = isNpcNearbyAndVisible(ZINAIDA);
 			if (var0002) {
 				ZINAIDA->say("\"Enough, my love. I think the Avatar dost know "
 							 "thy meaning!\"*");
@@ -23408,7 +23412,7 @@ void FuncElynor object#(FIRST_NPC_FUNCTION - ELYNOR)() {
 		if (gflags[EA_GONE_TO_MINOC]) {
 			add("Elizabeth and Abraham");
 		}
-		var var0005 = Func08F7(GREGOR);
+		var var0005 = isNpcNearbyAndVisible(GREGOR);
 		if (var0005) {
 			if (var0004 == MAJOR_SIT) {
 				add("Gregor");
@@ -23781,7 +23785,7 @@ void FuncGregor object#(FIRST_NPC_FUNCTION - GREGOR)() {
 		}
 		var var0003 = getPoliteTitle();
 		add(["name", "job", "bye"]);
-		var var0004 = Func08F7(ELYNOR);
+		var var0004 = isNpcNearbyAndVisible(ELYNOR);
 		if (var0004) {
 			if (var0000 == MIDNIGHT) {
 				if (var0001 == MAJOR_SIT) {
@@ -24808,7 +24812,7 @@ void FuncKarl object#(FIRST_NPC_FUNCTION - KARL)() {
 			"himself, could understand them. Maybe Julia, the tinker, would be "
 			"able to shed some light on them. But she would never listen to an "
 			"old mountain man like me.\"");
-		var var0003 = Func08F7(JULIA);
+		var var0003 = isNpcNearbyAndVisible(JULIA);
 		if (var0003) {
 			JULIA->say("\"Yes I would, Karl! Thou dost have too low opinion of "
 					   "thyself! Raise thy spirits, please!\"");
@@ -25506,7 +25510,7 @@ void FuncRutherford object#(FIRST_NPC_FUNCTION - RUTHERFORD)() {
 				if (var0002 == WAITER) {
 					say("He coughs into the rag he had just been using to "
 						"polish the bar.");
-					var var0003 = Func08F7(DUPRE);
+					var var0003 = isNpcNearbyAndVisible(DUPRE);
 					if (var0003) {
 						say("\"Hello again, Sir Dupre! Didst thou enjoy mine "
 							"establishment so much that thou hast "
@@ -25840,7 +25844,7 @@ void FuncKarenna object#(FIRST_NPC_FUNCTION - KARENNA)() {
 				"skilled as myself, obviously. But I do think he is cute, "
 				"though I bid thee, do not tell him that I spoke of this. It "
 				"will only encourage him.\"");
-			var0003 = Func08F7(JAKHER);
+			var0003 = isNpcNearbyAndVisible(JAKHER);
 			if (var0003) {
 				JAKHER->say("\"Art thou speaking about me? Mine ears are "
 							"burning!\"*");
@@ -25897,7 +25901,7 @@ void FuncKarenna object#(FIRST_NPC_FUNCTION - KARENNA)() {
 			say("\"Jakher told thee he doth find me attractive? He denies it, "
 				"of course, but I have known for years that he doth have "
 				"feelings for me.\"");
-			var0003 = Func08F7(JAKHER);
+			var0003 = isNpcNearbyAndVisible(JAKHER);
 			if (var0003) {
 				JAKHER->say("\"What? What didst thou say?\"*");
 				KARENNA->say("\"Nothing, Jakher. Go away.\" She giggles "
@@ -26026,7 +26030,7 @@ void FuncJakher object#(FIRST_NPC_FUNCTION - JAKHER)() {
 				"mention to her that I said that. It would just encourage her. "
 				"It is uncomfortable enough sharing the same roof with her as "
 				"it is.\"");
-			var0003 = Func08F7(KARENNA);
+			var0003 = isNpcNearbyAndVisible(KARENNA);
 			if (var0003) {
 				KARENNA->say("\"What art thou whispering about over there?\"*");
 				JAKHER->say(
@@ -26042,7 +26046,7 @@ void FuncJakher object#(FIRST_NPC_FUNCTION - JAKHER)() {
 			say("\"She is the sort of person who labors under the belief that "
 				"all problems can be solved in one of three ways. Hit them "
 				"harder. Hit them faster. Or, hit them some more.\"");
-			var0003 = Func08F7(KARENNA);
+			var0003 = isNpcNearbyAndVisible(KARENNA);
 			if (var0003) {
 				KARENNA->say("\"Art thou talking about me? I feel mine ears "
 							 "burning!\"*");
@@ -26099,7 +26103,7 @@ void FuncJergi object#(FIRST_NPC_FUNCTION - JERGI)() {
 	JERGI->show_npc_face(DEFAULT_FACE);
 	var var0000 = getPoliteTitle();
 	add(["name", "job", "bye"]);
-	var var0001 = Func08F7(MARGARETA);
+	var var0001 = isNpcNearbyAndVisible(MARGARETA);
 	if (var0001) {
 		add("Margareta");
 	}
@@ -26553,7 +26557,7 @@ void FuncTavenor object#(FIRST_NPC_FUNCTION - TAVENOR)() {
 				abort;
 			}
 			say("\"The truth is known to me, but, belief is hard for me.\"");
-			var var0003 = Func08F7(TRELLEK);
+			var var0003 = isNpcNearbyAndVisible(TRELLEK);
 			if (var0003) {
 				say("*");
 				TRELLEK->say("\"The truth is spoken by the human,\" Trellek "
@@ -27193,8 +27197,8 @@ void FuncBradman object#(FIRST_NPC_FUNCTION - BRADMAN)() {
 			say("\"I love the forest. It is very beautiful. Also,\" he raises "
 				"his bow, \"I moved out here to be near the two great archers, "
 				"Iolo and Tseramed.\"*");
-			var var0001 = Func08F7(IOLO);
-			var var0002 = Func08F7(TSERAMED);
+			var var0001 = isNpcNearbyAndVisible(IOLO);
+			var var0002 = isNpcNearbyAndVisible(TSERAMED);
 			if (var0001) {
 				IOLO->say("Iolo blushes. \"I am honored, my friend. I was not "
 						  "aware I had an admirer in this part of the land.\" "
@@ -28402,7 +28406,7 @@ void FuncSmith object#(FIRST_NPC_FUNCTION - SMITH)() {
 	if (event == DOUBLECLICK) {
 		SMITH->show_npc_face(DEFAULT_FACE);
 		var var0000 = getAvatarName();
-		var var0001 = Func08F7(IOLO);
+		var var0001 = isNpcNearbyAndVisible(IOLO);
 		var var0002 = false;
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_SMITH]) {
@@ -28790,7 +28794,7 @@ void FuncPenni object#(FIRST_NPC_FUNCTION - PENNI)() {
 			say("\"Yes,\" she nods her head, grinning, \"I know Bradman. We go "
 				"hunting together. Of course, he rarely catches anything with "
 				"that toothpick shooter of his.\"");
-			var var0005 = Func08F7(IOLO);
+			var var0005 = isNpcNearbyAndVisible(IOLO);
 			if (var0005) {
 				IOLO->say("\"I resent that, my friend. Bows and crossbows can "
 						  "be wielded with deadly effect.\"");
@@ -28935,7 +28939,7 @@ void FuncBen object#(FIRST_NPC_FUNCTION - BEN)() {
 			var var0003 = Func0931(PARTY, 1, SHAPE_SCROLL, QUALITY_SCROLL_SILVERLEAF_CONTRACT, FRAME_ANY);
 			if (var0003) {
 				say("He takes the contract from you and signs it.");
-				var var0004 = Func08F7(TRELLEK);
+				var var0004 = isNpcNearbyAndVisible(TRELLEK);
 				if (var0004) {
 					say("He turns to Trellek. \"Please apologize to thy "
 						"kindred for me. I never meant to destroy thine 'omes. "
@@ -29855,7 +29859,7 @@ void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA)() {
 		var var0002 = UI_part_of_day();
 		var var0003 = OPHELIA->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
-		var var0004 = Func08F7(DAPHNE);
+		var var0004 = isNpcNearbyAndVisible(DAPHNE);
 		if (!gflags[MET_OPHELIA]) {
 			say("A pretty woman gives you a friendly grin and then coyly turns "
 				"her eyes away from you.");
@@ -29907,7 +29911,7 @@ void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA)() {
 		case "Daphne":
 			say("\"Honestly, I cannot imagine why thou wouldst be interested "
 				"in her.\" She lets out a throaty laugh.*");
-			var0004 = Func08F7(DAPHNE);
+			var0004 = isNpcNearbyAndVisible(DAPHNE);
 			if (var0004) {
 				DAPHNE->say("\"I heard that, Ophelia. Thou art a spiteful "
 							"wench!\"*");
@@ -30164,7 +30168,7 @@ void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE)() {
 		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		var var0002 = DAPHNE->get_npc_object()->get_schedule_type();
-		var var0003 = Func08F7(OPHELIA);
+		var var0003 = isNpcNearbyAndVisible(OPHELIA);
 		var var0004 = false;
 		var var0005 = SPRELLIC->get_npc_object()->is_dead();
 		var var0006 = VOKES->get_npc_object()->is_dead();
@@ -30181,7 +30185,7 @@ void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE)() {
 			say("You see a disgruntled, obviously overworked barmaid. She "
 				"gives you a perfunctory grunt of a hello.");
 			gflags[MET_DAPHNE] = true;
-			var var0009 = Func08F7(DUPRE);
+			var var0009 = isNpcNearbyAndVisible(DUPRE);
 			if (var0009) {
 				say("\"Art thou still here?\" she asks Dupre.");
 				DUPRE->say("\"I have not finished making mine assessment of "
@@ -30672,8 +30676,8 @@ void FuncVokes object#(FIRST_NPC_FUNCTION - VOKES)() {
 		var var0002 = VOKES->get_npc_object();
 		var var0003 = TIMMONS->get_npc_object();
 		var var0004 = SYRIA->get_npc_object();
-		var var0005 = Func08F7(SYRIA);
-		var var0006 = Func08F7(TIMMONS);
+		var var0005 = isNpcNearbyAndVisible(SYRIA);
+		var var0006 = isNpcNearbyAndVisible(TIMMONS);
 		if (!gflags[MET_VOKES]) {
 			say("You see a fighting man. His voice booms like thunder as he "
 				"greets you. \"Hail to thee, ",
@@ -30823,7 +30827,7 @@ void FuncSyria object#(FIRST_NPC_FUNCTION - SYRIA)() {
 		var var0002 = SYRIA->get_npc_object();
 		var var0003 = VOKES->get_npc_object();
 		var var0004 = TIMMONS->get_npc_object();
-		var var0005 = Func08F7(VOKES);
+		var var0005 = isNpcNearbyAndVisible(VOKES);
 		add(["name", "job", "bye"]);
 		if (gflags[FALSE_FLAG_GIVEN]) {
 			if (!(var0001 == NOON)) {
@@ -31154,7 +31158,7 @@ void FuncIriale object#(FIRST_NPC_FUNCTION - IRIALE)() {
 		say("\"Thou dost know it. Attendees of the Retreat must stay out of "
 			"this cave.\"");
 		remove("rule");
-		var var0002 = Func08F7(IOLO);
+		var var0002 = isNpcNearbyAndVisible(IOLO);
 		if (var0002) {
 			IOLO->say(
 					"\"Come, ", var0000,
@@ -31427,7 +31431,7 @@ void FuncBoris object#(FIRST_NPC_FUNCTION - BORIS)() {
 			say("You see a leering, ill-postured man who chortles to himself.");
 			gflags[MET_BORIS] = true;
 			if (var0002 == WAITER) {
-				var var0003 = Func08F7(DUPRE);
+				var var0003 = isNpcNearbyAndVisible(DUPRE);
 				if (var0003) {
 					say("\"Well if it isn't Dupre! -Sir- Dupre now, is it?\"");
 					DUPRE->say("\"That it is, Boris.\"");
@@ -31589,7 +31593,7 @@ void FuncBoris object#(FIRST_NPC_FUNCTION - BORIS)() {
 			say("\"Katrina has come to the aid of the people of this town on "
 				"more than one occasion. She gets an interesting smile on her "
 				"face whenever thy name is mentioned.\"");
-			var var000F = Func08F7(KATRINA);
+			var var000F = isNpcNearbyAndVisible(KATRINA);
 			if (var000F) {
 				KATRINA->say("\"That is because the Avatar is one my dearest "
 							 "friends.\"");
@@ -31930,7 +31934,7 @@ void FuncHenry object#(FIRST_NPC_FUNCTION - HENRY)() {
 		case "Katrina":
 			say("\"Katrina is a shepherd here on New Magincia. She has been a "
 				"friend of mine since I was a boy.\"");
-			var var0001 = Func08F7(KATRINA);
+			var var0001 = isNpcNearbyAndVisible(KATRINA);
 			if (var0001) {
 				KATRINA->say("\"We have had some good memories, have we not, "
 							 "Henry?\"");
@@ -31978,7 +31982,7 @@ void FuncHenry object#(FIRST_NPC_FUNCTION - HENRY)() {
 					"Constance and keep my promise to her! I cannot thank thee "
 					"enough, Avatar!\"");
 				gflags[LOCKET_RETURNED] = true;
-				var var0004 = Func08F7(KATRINA);
+				var var0004 = isNpcNearbyAndVisible(KATRINA);
 				if (var0004) {
 					KATRINA->say("\"I am glad that this situation has "
 								 "concluded in thy favor, dear Henry.\"");
@@ -32007,11 +32011,11 @@ void FuncConstance object#(FIRST_NPC_FUNCTION - CONSTANCE)() {
 	if (event == DOUBLECLICK) {
 		CONSTANCE->show_npc_face(DEFAULT_FACE);
 		var var0000 = getPoliteTitle();
-		var var0001 = Func08F7(SHAMINO);
-		var var0002 = Func08F7(IOLO);
-		var var0003 = Func08F7(DUPRE);
-		var var0004 = Func08F7(SPARK);
-		var var0005 = Func08F7(HENRY);
+		var var0001 = isNpcNearbyAndVisible(SHAMINO);
+		var var0002 = isNpcNearbyAndVisible(IOLO);
+		var var0003 = isNpcNearbyAndVisible(DUPRE);
+		var var0004 = isNpcNearbyAndVisible(SPARK);
+		var var0005 = isNpcNearbyAndVisible(HENRY);
 		add(["name", "job", "bye"]);
 		if (gflags[THREE_STRANGERS]) {
 			add("strangers");
@@ -32455,8 +32459,8 @@ void FuncBattles object#(FIRST_NPC_FUNCTION - BATTLES)() {
 		BATTLES->show_npc_face(DEFAULT_FACE);
 		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
-		var var0002 = Func08F7(ROBIN);
-		var var0003 = Func08F7(LEAVELL);
+		var var0002 = isNpcNearbyAndVisible(ROBIN);
+		var var0003 = isNpcNearbyAndVisible(LEAVELL);
 		add(["name", "job", "bye"]);
 		if (gflags[HENRY_ASKED_FIND_LOCKET]) {
 			add("locket");
@@ -32591,8 +32595,8 @@ void FuncLeavell object#(FIRST_NPC_FUNCTION - LEAVELL)() {
 		LEAVELL->show_npc_face(DEFAULT_FACE);
 		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
-		var var0002 = Func08F7(ROBIN);
-		var var0003 = Func08F7(BATTLES);
+		var var0002 = isNpcNearbyAndVisible(ROBIN);
+		var var0003 = isNpcNearbyAndVisible(BATTLES);
 		add(["name", "job", "bye"]);
 		if (gflags[HENRY_ASKED_FIND_LOCKET]) {
 			add("locket");
@@ -33028,9 +33032,9 @@ void FuncGorn object#(FIRST_NPC_FUNCTION - GORN)() {
 	GORN->show_npc_face(DEFAULT_FACE);
 	var var0000 = getAvatarName();
 	var var0001 = getPoliteTitle();
-	var var0002 = Func08F7(IOLO);
-	var var0003 = Func08F7(SHAMINO);
-	var var0004 = Func08F7(DUPRE);
+	var var0002 = isNpcNearbyAndVisible(IOLO);
+	var var0003 = isNpcNearbyAndVisible(SHAMINO);
+	var var0004 = isNpcNearbyAndVisible(DUPRE);
 	var var0005 = UI_wearing_fellowship();
 	if (gflags[MET_IRIALE]) {
 		add("Iriale");
@@ -33282,7 +33286,7 @@ void FuncMarkham object#(FIRST_NPC_FUNCTION - MARKHAM)() {
 				}
 			}
 		}
-		var var0005 = Func08F7(ROWENA);
+		var var0005 = isNpcNearbyAndVisible(ROWENA);
 		if (var0005) {
 			say("\"Oh, hello there, lady Rowena. 'Tis good to see ye again. It "
 				"brings a ray o' sunshine into this old man's heart ta see yer "
@@ -33294,7 +33298,7 @@ void FuncMarkham object#(FIRST_NPC_FUNCTION - MARKHAM)() {
 			ROWENA->hide();
 			MARKHAM->show_npc_face(DEFAULT_FACE);
 		}
-		var var0006 = Func08F7(FORSYTHE);
+		var var0006 = isNpcNearbyAndVisible(FORSYTHE);
 		if (var0006) {
 			say("\"Oh, uh, hello there Mayor. I thought ye were sequestered in "
 				"the Town Hall. Well, uh, it's good ta see ya again.\"*");
@@ -33320,7 +33324,7 @@ void FuncMarkham object#(FIRST_NPC_FUNCTION - MARKHAM)() {
 			say("The heavy-set zombie wipes his mouth off on the back of his "
 				"hand. \"I be Markham. Markham o' the Keg.\" He pats the large "
 				"keg of wine he carries.");
-			var var0007 = Func08F7(PAULETTE);
+			var var0007 = isNpcNearbyAndVisible(PAULETTE);
 			if (var0007 && gflags[SEANCE_PAULETTE]) {
 				if (var0002) {
 					QUENTON->hide();
@@ -33357,7 +33361,7 @@ void FuncMarkham object#(FIRST_NPC_FUNCTION - MARKHAM)() {
 				"Horance.\" Tiny blue flames appear in the pupils of his "
 				"glazed eyes, then go out as he regains his composure.");
 			add(["Caine", "Horance"]);
-			var var0008 = Func08F7(QUENTON);
+			var var0008 = isNpcNearbyAndVisible(QUENTON);
 			if (var0008 && gflags[SEANCE_QUENTON]) {
 				QUENTON->say("\"Please, Markham. Have a little pity for Caine. "
 							 "He was trying to create something to save the "
@@ -33472,7 +33476,7 @@ void FuncHorance object#(FIRST_NPC_FUNCTION - HORANCE)() {
 		}
 		var var0000 = getAvatarName();
 		var var0001 = getPoliteTitle();
-		var var0002 = Func08F7(ROWENA);
+		var var0002 = isNpcNearbyAndVisible(ROWENA);
 		var var0003 = false;
 		if (gflags[WELL_DESTROYED]) {
 			if (!gflags[GAVE_STAFF]) {
@@ -33511,8 +33515,8 @@ void FuncHorance object#(FIRST_NPC_FUNCTION - HORANCE)() {
 				".\" A sardonic expression comes to his undead features. \"How "
 				"may I help thee?\" You get the distinct impression that help "
 				"is the last thing you'll get from the Liche.");
-			var var0006 = Func08F7(SHAMINO);
-			var0007 = Func08F7(IOLO);
+			var var0006 = isNpcNearbyAndVisible(SHAMINO);
+			var0007 = isNpcNearbyAndVisible(IOLO);
 			if (var0006) {
 				SHAMINO->say(
 						"Shamino steps near you and speaks in a whispered "
@@ -33528,7 +33532,7 @@ void FuncHorance object#(FIRST_NPC_FUNCTION - HORANCE)() {
 				IOLO->hide();
 				HORANCE->show_npc_face(DEFAULT_FACE);
 			}
-			var var0008 = Func08F7(SPARK);
+			var var0008 = isNpcNearbyAndVisible(SPARK);
 			if (var0008) {
 				SPARK->say(
 						"\"Uh, ", var0001,
@@ -33657,8 +33661,8 @@ void FuncHorance object#(FIRST_NPC_FUNCTION - HORANCE)() {
 		case "bye":
 			say("\"It is truly sad to see thee go.\" He says with a sardonic "
 				"smile.*");
-			var var0009 = Func08F7(DUPRE);
-			var0007 = Func08F7(IOLO);
+			var var0009 = isNpcNearbyAndVisible(DUPRE);
+			var0007 = isNpcNearbyAndVisible(IOLO);
 			if (var0009) {
 				DUPRE->say("\"Yeah, right.\"*");
 				DUPRE->hide();
@@ -34282,7 +34286,7 @@ void FuncPaulette object#(FIRST_NPC_FUNCTION - PAULETTE)() {
 				"but not before you see the tears in her eyes.*");
 			abort;
 		}
-		var var0006 = Func08F7(ROWENA);
+		var var0006 = isNpcNearbyAndVisible(ROWENA);
 		if (var0006) {
 			if (!gflags[ROWENA_FINE]) {
 				say("Paulette perks up as she sees Rowena.~~\"Hello, milady. "
@@ -34294,7 +34298,7 @@ void FuncPaulette object#(FIRST_NPC_FUNCTION - PAULETTE)() {
 				gflags[ROWENA_FINE] = true;
 			}
 		}
-		var var0007 = Func08F7(FORSYTHE);
+		var var0007 = isNpcNearbyAndVisible(FORSYTHE);
 		if (var0007) {
 			if (!gflags[FORSYTHE_FINE]) {
 				say("\"Hello, Mayor. It has been quite a while since we've "
@@ -34374,7 +34378,7 @@ void FuncPaulette object#(FIRST_NPC_FUNCTION - PAULETTE)() {
 				say("\"I am sorry, ", var0000,
 					",\" she giggles, \"but all we serve here are... "
 					"spirits!\"*");
-				var var0009 = Func08F7(MARKHAM);
+				var var0009 = isNpcNearbyAndVisible(MARKHAM);
 				if (var0009 && gflags[SEANCE_MARKHAM]) {
 					MARKHAM->say("\"That's a good one, wench,\" laughs the "
 								 "portly ghost.*");
@@ -34479,7 +34483,7 @@ void FuncQuenton object#(FIRST_NPC_FUNCTION - QUENTON)() {
 		}
 		var var0000 = false;
 		var var0001 = getPoliteTitle();
-		var var0002 = Func08F7(MARKHAM);
+		var var0002 = isNpcNearbyAndVisible(MARKHAM);
 		declare var var0003;
 		if (gflags[MET_MARKHAM]) {
 			var0003 = "Markham";
@@ -34749,7 +34753,7 @@ void FuncQuenton object#(FIRST_NPC_FUNCTION - QUENTON)() {
 			break;
 		}
 		say("\"Goodbye, ", var0001, ".\"*");
-		if (Func08F7(MARKHAM)) {
+		if (isNpcNearbyAndVisible(MARKHAM)) {
 			say("He turns back to his conversation with ", var0003, ".*");
 		}
 	}
@@ -35501,10 +35505,10 @@ void FuncKissme object#(FIRST_NPC_FUNCTION - KISSME)() {
 	declare var var0005;
 	if (event == DOUBLECLICK) {
 		KISSME->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func08F7(IOLO);
-		var var0001 = Func08F7(SPARK);
-		var var0002 = Func08F7(DUPRE);
-		var var0003 = Func08F7(SHAMINO);
+		var var0000 = isNpcNearbyAndVisible(IOLO);
+		var var0001 = isNpcNearbyAndVisible(SPARK);
+		var var0002 = isNpcNearbyAndVisible(DUPRE);
+		var var0003 = isNpcNearbyAndVisible(SHAMINO);
 		var var0004 = getPoliteTitle();
 		var0005 = KISSME->get_npc_object()->get_schedule_type();
 		var var0006 = UI_is_pc_female();
@@ -35936,7 +35940,7 @@ void FuncMariah object#(FIRST_NPC_FUNCTION - MARIAH)() {
 		if (gflags[BROKE_TETRA]) {
 			converse(0) {
 			case "name":
-				var0002 = Func08F7(IOLO);
+				var0002 = isNpcNearbyAndVisible(IOLO);
 				if (var0002) {
 					IOLO->say("\"Surely thou dost recognize thine old "
 							  "companion, Mariah?\"*");
@@ -35982,7 +35986,7 @@ void FuncMariah object#(FIRST_NPC_FUNCTION - MARIAH)() {
 		} else {
 			converse(0) {
 			case "name":
-				var0002 = Func08F7(IOLO);
+				var0002 = isNpcNearbyAndVisible(IOLO);
 				if (var0002) {
 					IOLO->say("\"Surely thou dost recognize thine old "
 							  "companion, Mariah?\"*");
@@ -36089,10 +36093,10 @@ void FuncGrod object#(FIRST_NPC_FUNCTION - GROD)() {
 	if (event == DOUBLECLICK) {
 		GROD->show_npc_face(DEFAULT_FACE);
 		add(["name", "job", "Fellowship", "bye"]);
-		var var0000 = Func08F7(IOLO);
-		var var0001 = Func08F7(SPARK);
-		var var0002 = Func08F7(ANTON);
-		var var0003 = Func08F7(SULLIVAN);
+		var var0000 = isNpcNearbyAndVisible(IOLO);
+		var var0001 = isNpcNearbyAndVisible(SPARK);
+		var var0002 = isNpcNearbyAndVisible(ANTON);
+		var var0003 = isNpcNearbyAndVisible(SULLIVAN);
 		var var0004 = getPoliteTitle();
 		var var0005 = getAvatarName();
 		GROD->get_npc_object()->set_alignment(EVIL);
@@ -36879,7 +36883,7 @@ void FuncEffrem object#(FIRST_NPC_FUNCTION - EFFREM)() {
 		var var0002 = "the Avatar";
 		var var0003 = UI_is_pc_female();
 		var var0004 = false;
-		var var0005 = Func08F7(JILLIAN);
+		var var0005 = isNpcNearbyAndVisible(JILLIAN);
 		declare var var0006;
 		declare var var0007;
 		if (var0003) {
@@ -37050,14 +37054,14 @@ void FuncChad object#(FIRST_NPC_FUNCTION - CHAD)() {
 					"realized that thou wert the Avatar. Why, it must have "
 					"been, oh, at least, two weeks since thy last visit!\" He "
 					"winks.*");
-				var var0005 = Func08F7(SHAMINO);
+				var var0005 = isNpcNearbyAndVisible(SHAMINO);
 				if (var0005) {
 					SHAMINO->say("\"Thou art a fool! Cannot thy feeble eyes "
 								 "see this is the Avatar?\"*");
 					SHAMINO->hide();
 					CHAD->say("\"Yes, yes! I can see that,\" he laughs. \"Then "
 							  "I must be Iolo!\"*");
-					var var0006 = Func08F7(IOLO);
+					var var0006 = isNpcNearbyAndVisible(IOLO);
 					SHAMINO->show_npc_face(DEFAULT_FACE);
 					if (var0006) {
 						say("\"No, rogue! He is Iolo!\" He nods to Iolo. "
@@ -37257,7 +37261,7 @@ void FuncPhearcy object#(FIRST_NPC_FUNCTION - PHEARCY)() {
 		PHEARCY->show_npc_face(DEFAULT_FACE);
 		var var0000 = getAvatarName();
 		var var0001 = getPoliteTitle();
-		var var0002 = Func08F7(DUPRE);
+		var var0002 = isNpcNearbyAndVisible(DUPRE);
 		var var0003 = UI_part_of_day();
 		var var0004 = false;
 		if (var0003 == NIGHT) {
@@ -37698,7 +37702,7 @@ void FuncFrank object#(FIRST_NPC_FUNCTION - FRANK)() {
 		case "friends":
 			say("\"Speaking of thy friends, I have heard that thy companion, "
 				"Dupre, is a drunken sot.\"");
-			var0003 = Func08F7(DUPRE);
+			var0003 = isNpcNearbyAndVisible(DUPRE);
 			if (var0003) {
 				DUPRE->say("\"Hey, I don't think --\"*");
 				DUPRE->hide();
@@ -37715,7 +37719,7 @@ void FuncFrank object#(FIRST_NPC_FUNCTION - FRANK)() {
 			say("\"I am glad thou didst ask, ", var0001,
 				". Thy friend, Iolo, charges far too much for his bows. "
 				"Perhaps thou couldst have a chat with him.\"");
-			var var0004 = Func08F7(IOLO);
+			var var0004 = isNpcNearbyAndVisible(IOLO);
 			if (var0004) {
 				IOLO->say("\"Too much? What dost thou mean, too --\"*");
 				IOLO->hide();
@@ -37733,7 +37737,7 @@ void FuncFrank object#(FIRST_NPC_FUNCTION - FRANK)() {
 			say("\"That is the reason for thine offensive mouth odor. I have "
 				"not seen anything that yellow since the time thy fellow "
 				"Shamino ran away from a battle in fear.\"");
-			var var0005 = Func08F7(SHAMINO);
+			var var0005 = isNpcNearbyAndVisible(SHAMINO);
 			if (var0005) {
 				SHAMINO->say("\"Thou must be mad!\" Shamino turns to you. "
 							 "\"This rogue needs to be taught a lesson.\"*");
@@ -38000,7 +38004,7 @@ void FuncFeridwyn object#(FIRST_NPC_FUNCTION - FERIDWYN)() {
 			say("\"Garritt, my son, told me that Tobias was in possession of "
 				"some silver snake venom. I went to investigate and found "
 				"Tobias with it!\"*");
-			var var0004 = Func08F7(MERRICK);
+			var var0004 = isNpcNearbyAndVisible(MERRICK);
 			if (var0004) {
 				MERRICK->say("\"That is correct! I am a witness that what "
 							 "Feridwyn has said is the truth!\"*");
@@ -38086,7 +38090,7 @@ void FuncFeridwyn object#(FIRST_NPC_FUNCTION - FERIDWYN)() {
 		case "Brita":
 			if (!gflags[MET_BRITA]) {
 				say("\"A wonderful woman. Thou shouldst meet her.\"");
-				var var0007 = Func08F7(BRITA);
+				var var0007 = isNpcNearbyAndVisible(BRITA);
 				if (var0007) {
 					BRITA->say("\"Mine husband is such a flatterer. The truth "
 							   "is that our work for The Fellowship has "
@@ -38322,7 +38326,7 @@ void FuncBrita object#(FIRST_NPC_FUNCTION - BRITA)() {
 			} else {
 				say("\"Mine husband is the most honorable man I have ever met "
 					"in my life.\"");
-				var var0002 = Func08F7(FERIDWYN);
+				var var0002 = isNpcNearbyAndVisible(FERIDWYN);
 				if (var0002) {
 					FERIDWYN->say("\"Do not put stock in the proud boasts of "
 								  "wives, good Avatar. I am a simple man who "
@@ -39566,7 +39570,7 @@ void FuncKomor object#(FIRST_NPC_FUNCTION - KOMOR)() {
 	if (event == DOUBLECLICK) {
 		KOMOR->show_npc_face(DEFAULT_FACE);
 		var var0000 = getPoliteTitle();
-		var var0001 = Func08F7(FENN);
+		var var0001 = isNpcNearbyAndVisible(FENN);
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_KOMOR]) {
 			say("You see a beggar leaning on a crutch. His eyes shine like "
@@ -39585,7 +39589,7 @@ void FuncKomor object#(FIRST_NPC_FUNCTION - KOMOR)() {
 				".\" He cannot keep a straight face and almost falls off his "
 				"crutches.*");
 			add("beggar");
-			var0001 = Func08F7(FENN);
+			var0001 = isNpcNearbyAndVisible(FENN);
 			if (var0001) {
 				FENN->say(
 						"\"Ha! Ha! Ha! Ha! Ha! Ha! 'Tis a ripe one, Komor!\"*");
@@ -39605,7 +39609,7 @@ void FuncKomor object#(FIRST_NPC_FUNCTION - KOMOR)() {
 				"share in each other's vast expanses of wealth.\"*");
 			remove("Fenn");
 			add(["chums", "wealth"]);
-			var0001 = Func08F7(FENN);
+			var0001 = isNpcNearbyAndVisible(FENN);
 			if (var0001) {
 				FENN->say("\"Ha! Ha! Ha! Ha! With thy wit thou shouldst be on "
 						  "stage!\"*");
@@ -39616,7 +39620,7 @@ void FuncKomor object#(FIRST_NPC_FUNCTION - KOMOR)() {
 		case "chums":
 			say("\"Fenn and me have been friends since we were little tiny "
 				"babes.\"");
-			var0001 = Func08F7(FENN);
+			var0001 = isNpcNearbyAndVisible(FENN);
 			if (var0001) {
 				say("\"I would bet thee that thou didst not think we would end "
 					"up like this. Eh, Fenn?\"*");
@@ -39776,7 +39780,7 @@ void FuncFenn object#(FIRST_NPC_FUNCTION - FENN)() {
 			fallthrough;
 		case "Komor":
 			say("\"He is my best friend and the bravest man I know.\"");
-			var0001 = Func08F7(KOMOR);
+			var0001 = isNpcNearbyAndVisible(KOMOR);
 			if (var0001) {
 				say("*");
 				KOMOR->say("\"Oh, please! Thou art making mine eyes leak!\"*");
@@ -39856,7 +39860,7 @@ void FuncFenn object#(FIRST_NPC_FUNCTION - FENN)() {
 		case "Garritt":
 			say("\"He is the son of Feridwyn and Brita, who run the shelter. "
 				"Garritt crosses the road to avoid us.\"");
-			var0001 = Func08F7(KOMOR);
+			var0001 = isNpcNearbyAndVisible(KOMOR);
 			if (var0001) {
 				say("*");
 				KOMOR->say("\"We would not want the likes of him walking down "
@@ -41866,13 +41870,13 @@ void FuncForbrak object#(FIRST_NPC_FUNCTION - FORBRAK)() {
 		FORBRAK->show_npc_face(DEFAULT_FACE);
 		var var0000 = false;
 		var var0001 = false;
-		var var0002 = Func08F7(DUPRE);
+		var var0002 = isNpcNearbyAndVisible(DUPRE);
 		add(["name", "job", "bye"]);
 		if (var0002) {
 			say("\"To greet you, human,\" the gargoyle says to Dupre. \"To ask "
 				"how well the study is progressing?\"");
 			DUPRE->say("\"Why 'tis progressing nicely, friend Forbrak.\"");
-			var var0003 = Func08F7(SHAMINO);
+			var var0003 = isNpcNearbyAndVisible(SHAMINO);
 			if (var0003 && (!gflags[MET_FORBRAK])) {
 				FORBRAK->hide();
 				SHAMINO->say("\"-What- study?\"");
@@ -42278,7 +42282,7 @@ void FuncMartingo object#(FIRST_NPC_FUNCTION - MARTINGO)() {
 				"-- this person really is a fool!\" ~~Martingo turns back to "
 				"you. \"As I said, I am the Sultan here. I am the master of "
 				"all of these subjects.\" He gestures\taround the room.");
-			var var0005 = Func08F7(IOLO);
+			var var0005 = isNpcNearbyAndVisible(IOLO);
 			if (var0005) {
 				IOLO->say("Iolo whispers to you. \"This fellow is quite daft. "
 						  "Be careful.\"");
@@ -42801,7 +42805,7 @@ void FuncJohnPaul object#(FIRST_NPC_FUNCTION - JOHN_PAUL)() {
 		JOHN_PAUL->show_npc_face(DEFAULT_FACE);
 		var var0000 = getAvatarName();
 		var var0001 = getPoliteTitle();
-		var var0002 = Func08F7(HORFFE);
+		var var0002 = isNpcNearbyAndVisible(HORFFE);
 		var var0003 = false;
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_JOHN_PAUL]) {
@@ -43259,7 +43263,7 @@ void FuncHorffe object#(FIRST_NPC_FUNCTION - HORFFE)() {
 			}
 			say("You see a gargoyle with a very stern expression on his face",
 				var0001, "");
-			var var0002 = Func08F7(JOHN_PAUL);
+			var var0002 = isNpcNearbyAndVisible(JOHN_PAUL);
 			gflags[MET_HORFFE] = true;
 		} else {
 			say("\"To ask how to be of assistance.\" His eyes narrow.");
@@ -43356,8 +43360,8 @@ void FuncJordan object#(FIRST_NPC_FUNCTION - JORDAN)() {
 		var var0000 = getPoliteTitle();
 		var var0001 = getAvatarName();
 		var var0002 = "Avatar";
-		var var0003 = Func08F7(IOLO);
-		var var0004 = Func08F7(SHAMINO);
+		var var0003 = isNpcNearbyAndVisible(IOLO);
+		var var0004 = isNpcNearbyAndVisible(SHAMINO);
 		add(["name", "job", "bye"]);
 		declare var var0005;
 		if (gflags[TOLD_JORDAN_NAME]) {
@@ -43501,7 +43505,7 @@ void FuncDenton object#(FIRST_NPC_FUNCTION - DENTON)() {
 		DENTON->show_npc_face(DEFAULT_FACE);
 		var var0000 = getAvatarName();
 		var var0001 = getPoliteTitle();
-		var var0002 = Func08F7(DUPRE);
+		var var0002 = isNpcNearbyAndVisible(DUPRE);
 		add(["name", "job", "bye"]);
 		if (gflags[STARTED_HOLD_INVESTIGATION]
 			&& (!gflags[FINISHED_HOLD_INVESTIGATION])) {
@@ -43646,8 +43650,8 @@ void FuncDenton object#(FIRST_NPC_FUNCTION - DENTON)() {
 			var var0003 = askYesNo();
 			if (var0003) {
 				say("\"Why did the chicken cross the road?\"");
-				var var0004 = Func08F7(IOLO);
-				var0005 = Func08F7(SPARK);
+				var var0004 = isNpcNearbyAndVisible(IOLO);
+				var0005 = isNpcNearbyAndVisible(SPARK);
 				if (var0005) {
 					SPARK->say("\"To get to the other side! Oh, that joke is "
 							   "new,\" he says sarcastically.\"*");
@@ -43702,7 +43706,7 @@ void FuncDenton object#(FIRST_NPC_FUNCTION - DENTON)() {
 				"`strive for unity,' `trust thy brother,' and `worthiness "
 				"precedes reward.'I will now explain the meaning of each "
 				"principple.\"");
-			var0005 = Func08F7(SPARK);
+			var0005 = isNpcNearbyAndVisible(SPARK);
 			if (var0005) {
 				SPARK->say("\"This Denton fellow is really long-winded.\"*");
 				SPARK->hide();
@@ -43952,7 +43956,7 @@ void FuncTory object#(FIRST_NPC_FUNCTION - TORY)() {
 				"change, remarkably like that in Sir Richter. He would be an "
 				"interesting one to speak with. Thou mayest find him at Iolo's "
 				"South.\"*");
-			var var0008 = Func08F7(IOLO);
+			var var0008 = isNpcNearbyAndVisible(IOLO);
 			if (var0008) {
 				IOLO->say(
 						"Iolo smiles proudly.~~\"My shop has, er, grown a bit "
@@ -44725,7 +44729,7 @@ void FuncYongi object#(FIRST_NPC_FUNCTION - YONGI)() {
 		var var0000 = getAvatarName();
 		var var0001 = getPoliteTitle();
 		var var0002 = "the Avatar";
-		var var0003 = Func08F7(DUPRE);
+		var var0003 = isNpcNearbyAndVisible(DUPRE);
 		var var0004 = false;
 		var var0005 = false;
 		var var0006 = false;
@@ -45608,7 +45612,7 @@ void FuncCatherine object#(FIRST_NPC_FUNCTION - CATHERINE)() {
 		CATHERINE->show_npc_face(DEFAULT_FACE);
 		var var0000 = getPoliteTitle();
 		add(["name", "job", "bye"]);
-		var var0001 = Func08F7(FOR_LEM);
+		var var0001 = isNpcNearbyAndVisible(FOR_LEM);
 		if (var0001) {
 			add("gargoyle");
 		}
@@ -45680,7 +45684,7 @@ void FuncForLem object#(FIRST_NPC_FUNCTION - FOR_LEM)() {
 	if (event == DOUBLECLICK) {
 		FOR_LEM->show_npc_face(DEFAULT_FACE);
 		add(["name", "job", "bye"]);
-		var var0000 = Func08F7(CATHERINE);
+		var var0000 = isNpcNearbyAndVisible(CATHERINE);
 		if (var0000) {
 			add("girl");
 		}
@@ -46058,7 +46062,7 @@ void FuncAnmanivas object#(FIRST_NPC_FUNCTION - ANMANIVAS)() {
 					}
 					say("\"^", var000D, "!\"", var000E,
 						" \"To be the cause for our unhappiness.\"");
-					var var000F = Func08F7(FORANAMO);
+					var var000F = isNpcNearbyAndVisible(FORANAMO);
 					if (var000F) {
 						FORANAMO->say(
 								"The gargoyle by his side also rises.~~\"To be "
@@ -46139,7 +46143,7 @@ void FuncForanamo object#(FIRST_NPC_FUNCTION - FORANAMO)() {
 					}
 					say("The gargoyle growls as he turns to look at you. He "
 						"stands, ");
-					var var000E = Func08F7(ANMANIVAS);
+					var var000E = isNpcNearbyAndVisible(ANMANIVAS);
 					if (var000E) {
 						say("setting a hand on the shoulder of the gargoyle "
 							"next to him.*");
@@ -46269,8 +46273,8 @@ void FuncSullivan object#(FIRST_NPC_FUNCTION - SULLIVAN)() {
 		SULLIVAN->show_npc_face(DEFAULT_FACE);
 		var var0000 = getPoliteTitle();
 		var var0001 = getAvatarName();
-		var var0002 = Func08F7(ANTON);
-		var var0003 = Func08F7(GROD);
+		var var0002 = isNpcNearbyAndVisible(ANTON);
+		var var0003 = isNpcNearbyAndVisible(GROD);
 		var var0004 = false;
 		add(["name", "job", "Fellowship", "bye"]);
 		if (gflags[SULLIVAN_FREE]) {
@@ -46676,7 +46680,7 @@ void FuncGlenno object#(FIRST_NPC_FUNCTION - GLENNO)() {
 				}
 				say("\"Please! Make thyself at home. If thou dost want a "
 					"drink, let me know.\"");
-				var var0005 = Func08F7(SPARK);
+				var var0005 = isNpcNearbyAndVisible(SPARK);
 				if (var0005) {
 					say("\"Uhm, wait a minute. How old art thou, boy?\"*");
 					SPARK->say("\"Uhm, eighteen.\"*");
@@ -46690,7 +46694,7 @@ void FuncGlenno object#(FIRST_NPC_FUNCTION - GLENNO)() {
 								"don't cause any trouble.\"*");
 					SPARK->say("\"All right! Wenches!\"*");
 					SPARK->hide();
-					var var0006 = Func08F7(IOLO);
+					var var0006 = isNpcNearbyAndVisible(IOLO);
 					if (var0006) {
 						IOLO->say("Iolo whispers to you, \"Methinks young "
 								  "Spark hath learned a lot whilst adventuring "
@@ -47381,11 +47385,11 @@ void FuncBlacktooth object#(FIRST_NPC_FUNCTION - BLACKTOOTH)() {
 				"moment of weakness, the tough pirate says in a small voice, "
 				"\"I miss him, too. We were best mates.\" You could swear "
 				"there are tears in his eyes.*");
-			var var0007 = Func08F7(SPARK);
+			var var0007 = isNpcNearbyAndVisible(SPARK);
 			if (var0007) {
 				SPARK->say("Spark whispers, \"Oh, come on, be a man!\"*");
 				SPARK->hide();
-				var var0008 = Func08F7(DUPRE);
+				var var0008 = isNpcNearbyAndVisible(DUPRE);
 				if (var0008) {
 					DUPRE->say("Dupre turns away to suppress a smirk.*");
 					DUPRE->hide();
@@ -47495,7 +47499,7 @@ void FuncMole object#(FIRST_NPC_FUNCTION - MOLE)() {
 			if (askYesNo()) {
 				say("\"All right. I was born in a cave. So my mother named me "
 					"Mole.\"*");
-				var var0003 = Func08F7(IOLO);
+				var var0003 = isNpcNearbyAndVisible(IOLO);
 				if (var0003) {
 					IOLO->say("\"I thought thou said it was a long story.\"*");
 					IOLO->hide();
@@ -47740,11 +47744,11 @@ void FuncBudo object#(FIRST_NPC_FUNCTION - BUDO)() {
 			if (var0001 == TEND_SHOP) {
 				say("\"Hello, hello my friend! Thou dost look like thou "
 					"needest to spend money!\"*");
-				var var0003 = Func08F7(SHAMINO);
+				var var0003 = isNpcNearbyAndVisible(SHAMINO);
 				if (var0003) {
 					SHAMINO->say("\"This place looks quite well-off.\"*");
 					SHAMINO->hide();
-					var var0004 = Func08F7(IOLO);
+					var var0004 = isNpcNearbyAndVisible(IOLO);
 					if (var0004) {
 						IOLO->say("\"The entire island is very opulent. It is "
 								  "not the same island we once knew.\"*");
@@ -48113,7 +48117,7 @@ void FuncMandy object#(FIRST_NPC_FUNCTION - MANDY)() {
 			if (var0001 == WAITER) {
 				say("\"If thou dost want food or drink, or perhaps a room, "
 					"please say so.\"");
-				var var0003 = Func08F7(DUPRE);
+				var var0003 = isNpcNearbyAndVisible(DUPRE);
 				if (var0003) {
 					say("Mandy looks at Dupre and says, \"Don't I know "
 						"thee?\"*");
@@ -48128,7 +48132,7 @@ void FuncMandy object#(FIRST_NPC_FUNCTION - MANDY)() {
 					DUPRE->say("\"I thank thee, milady.\"*");
 					DUPRE->hide();
 					MANDY->show_npc_face(DEFAULT_FACE);
-					var var0004 = Func08F7(IOLO);
+					var var0004 = isNpcNearbyAndVisible(IOLO);
 					if (var0004) {
 						IOLO->say("\"Thou art a swine, Dupre.\"*");
 						IOLO->hide();
@@ -48512,8 +48516,8 @@ void FuncPaul object#(FIRST_NPC_FUNCTION - PAUL)() {
 			} else {
 				say("\"Wouldst thou like to see our Passion Play?\"");
 				if (askYesNo()) {
-					var var0001 = Func08F7(MERYL);
-					var var0002 = Func08F7(DUSTIN);
+					var var0001 = isNpcNearbyAndVisible(MERYL);
+					var var0002 = isNpcNearbyAndVisible(DUSTIN);
 					if (var0001 && var0002) {
 						var var0003 = UI_get_party_list();
 						var var0004 = 0;
@@ -49007,10 +49011,10 @@ void FuncOwings object#(FIRST_NPC_FUNCTION - OWINGS)() {
 	}
 	OWINGS->show_npc_face(DEFAULT_FACE);
 	var var0000 = getPoliteTitle();
-	var var0001 = Func08F7(MALLOY);
-	var var0002 = Func08F7(IOLO);
-	var var0003 = Func08F7(SHAMINO);
-	var var0004 = Func08F7(DUPRE);
+	var var0001 = isNpcNearbyAndVisible(MALLOY);
+	var var0002 = isNpcNearbyAndVisible(IOLO);
+	var var0003 = isNpcNearbyAndVisible(SHAMINO);
+	var var0004 = isNpcNearbyAndVisible(DUPRE);
 	if (!gflags[MET_OWINGS]) {
 		say("Before you is a skinny man with a silly smile on his face. He is "
 			"holding a lantern in one hand and a dirty spoon in the other.");
@@ -49225,8 +49229,8 @@ void FuncAnton object#(FIRST_NPC_FUNCTION - ANTON)() {
 	if (event == DOUBLECLICK) {
 		ANTON->show_npc_face(DEFAULT_FACE);
 		var var0000 = getPoliteTitle();
-		var var0001 = Func08F7(SULLIVAN);
-		var var0002 = Func08F7(GROD);
+		var var0001 = isNpcNearbyAndVisible(SULLIVAN);
+		var var0002 = isNpcNearbyAndVisible(GROD);
 		var var0003 = false;
 		var var0004 = false;
 		add(["name", "job", "bye"]);
@@ -49399,8 +49403,8 @@ void FuncPapa object#(FIRST_NPC_FUNCTION - PAPA)() {
 		abort;
 	}
 	var var0000 = false;
-	var var0001 = Func08F7(TSERAMED);
-	var var0002 = Func08F7(IOLO);
+	var var0001 = isNpcNearbyAndVisible(TSERAMED);
+	var var0002 = isNpcNearbyAndVisible(IOLO);
 	if (gflags[JIG_IS_UP]) {
 		var0000 = true;
 	}
@@ -49461,7 +49465,7 @@ void FuncPapa object#(FIRST_NPC_FUNCTION - PAPA)() {
 				"We no hurt them. We take honey when they sleep. We eat the "
 				"mice in cave. Cook them up on campfire. Very good!\"*");
 		}
-		var0002 = Func08F7(IOLO);
+		var0002 = isNpcNearbyAndVisible(IOLO);
 		if (var0002) {
 			IOLO->say("\"I may puke.\"*");
 			IOLO->hide();
@@ -49749,10 +49753,10 @@ void FuncMalloy object#(FIRST_NPC_FUNCTION - MALLOY)() {
 	}
 	MALLOY->show_npc_face(DEFAULT_FACE);
 	var var0000 = getPoliteTitle();
-	var var0001 = Func08F7(OWINGS);
-	var var0002 = Func08F7(IOLO);
-	var var0003 = Func08F7(SHAMINO);
-	var var0004 = Func08F7(DUPRE);
+	var var0001 = isNpcNearbyAndVisible(OWINGS);
+	var var0002 = isNpcNearbyAndVisible(IOLO);
+	var var0003 = isNpcNearbyAndVisible(SHAMINO);
+	var var0004 = isNpcNearbyAndVisible(DUPRE);
 	if (!gflags[MET_MALLOY]) {
 		say("You see before you a short, roly-poly man with a pompous smirk on "
 			"his face. He is holding a lantern in one hand and a dirty spoon "
@@ -49950,8 +49954,8 @@ void FuncMalloy object#(FIRST_NPC_FUNCTION - MALLOY)() {
 void FuncCairbre object#(FIRST_NPC_FUNCTION - CAIRBRE)() {
 	if (event == DOUBLECLICK) {
 		CAIRBRE->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func08F7(COSMO);
-		var var0001 = Func08F7(KALLIBRUS);
+		var var0000 = isNpcNearbyAndVisible(COSMO);
+		var var0001 = isNpcNearbyAndVisible(KALLIBRUS);
 		var var0002 = getPoliteTitle();
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_CAIRBRE]) {
@@ -51192,7 +51196,7 @@ void FuncRankin object#(FIRST_NPC_FUNCTION - RANKIN)() {
 		RANKIN->show_npc_face(DEFAULT_FACE);
 		var var0000 = getAvatarName();
 		var var0001 = false;
-		var var0002 = Func08F7(BALAYNA);
+		var var0002 = isNpcNearbyAndVisible(BALAYNA);
 		var var0003 = UI_part_of_day();
 		var var0004 = Func0931(PARTY, 1, SHAPE_PRISM, QUALITY_ANY, FRAME_PRISM_CUBE);
 		if (var0003 == NIGHT) {
@@ -51736,8 +51740,8 @@ void FuncDanag object#(FIRST_NPC_FUNCTION - DANAG)() {
 void FuncKallibrus object#(FIRST_NPC_FUNCTION - KALLIBRUS)() {
 	if (event == DOUBLECLICK) {
 		KALLIBRUS->show_npc_face(DEFAULT_FACE);
-		var var0000 = Func08F7(COSMO);
-		var var0001 = Func08F7(CAIRBRE);
+		var var0000 = isNpcNearbyAndVisible(COSMO);
+		var var0001 = isNpcNearbyAndVisible(CAIRBRE);
 		var var0002 = false;
 		var var0003 = getPoliteTitle();
 		add(["name", "job", "bye"]);
@@ -51842,8 +51846,8 @@ void FuncCosmo object#(FIRST_NPC_FUNCTION - COSMO)() {
 	if (event == DOUBLECLICK) {
 		COSMO->show_npc_face(DEFAULT_FACE);
 		var var0000 = getPoliteTitle();
-		var var0001 = Func08F7(KALLIBRUS);
-		var var0002 = Func08F7(CAIRBRE);
+		var var0001 = isNpcNearbyAndVisible(KALLIBRUS);
+		var var0002 = isNpcNearbyAndVisible(CAIRBRE);
 		add(["name", "job", "bye"]);
 		if (!gflags[MET_COSMO]) {
 			say("The wide-eyed expression of this youth seems indicative of "
@@ -52080,9 +52084,9 @@ void FuncLasher object#(FIRST_NPC_FUNCTION - LASHER)() {
 					"it for me?\" Lasher stretches out toward you. \"Thank "
 					"thee so much.\"");
 				var var0003 = UI_is_pc_female();
-				var var0004 = Func08F7(IOLO);
-				var var0005 = Func08F7(SHAMINO);
-				var var0006 = Func08F7(DUPRE);
+				var var0004 = isNpcNearbyAndVisible(IOLO);
+				var var0005 = isNpcNearbyAndVisible(SHAMINO);
+				var var0006 = isNpcNearbyAndVisible(DUPRE);
 				if (!var0003) {
 					if (var0004) {
 						IOLO->say("\"There's no shame in it, milord,\" says "
@@ -52233,10 +52237,10 @@ void FuncMama object#(FIRST_NPC_FUNCTION - MAMA)() {
 		abort;
 	}
 	MAMA->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func08F7(PAPA);
-	var var0001 = Func08F7(SPARK);
-	var var0002 = Func08F7(IOLO);
-	var var0003 = Func08F7(DUPRE);
+	var var0000 = isNpcNearbyAndVisible(PAPA);
+	var var0001 = isNpcNearbyAndVisible(SPARK);
+	var var0002 = isNpcNearbyAndVisible(IOLO);
+	var var0003 = isNpcNearbyAndVisible(DUPRE);
 	var var0004 = false;
 	add(["name", "job", "bye"]);
 	if (!gflags[MET_MAMA]) {
@@ -53083,17 +53087,17 @@ void Func0610 object#(0x610) () {
 	}
 	var var0004 = getPoliteTitle();
 	var var0005 = getAvatarName();
-	var var0006 = Func08F7(FERIDWYN);
-	var var0007 = Func08F7(BRITA);
-	var var0008 = Func08F7(IOLO);
+	var var0006 = isNpcNearbyAndVisible(FERIDWYN);
+	var var0007 = isNpcNearbyAndVisible(BRITA);
+	var var0008 = isNpcNearbyAndVisible(IOLO);
 	if (IOLO->get_item_flag(ASLEEP)) {
 		var0008 = 0;
 	}
-	var var0009 = Func08F7(SHAMINO);
+	var var0009 = isNpcNearbyAndVisible(SHAMINO);
 	if (SHAMINO->get_item_flag(ASLEEP)) {
 		var0009 = 0;
 	}
-	var var000A = Func08F7(DUPRE);
+	var var000A = isNpcNearbyAndVisible(DUPRE);
 	if (DUPRE->get_item_flag(ASLEEP)) {
 		var000A = 0;
 	}
@@ -53372,32 +53376,39 @@ void Func061B object#(0x61B) () {
 	}
 }
 
-void Func061C object#(0x61C) () {
+/**
+ * Marks the barge active moves the Ferryman's barge.
+ * Can move either towards or away from Skara Brae depending
+ * on whether the barge is docked on mainland or Skara Brae.
+ * This is controlled by gflags[ISLAND_DOCK], which is true
+ * if the Ferryman's barge is docked on Skara Brae.
+ */
+void ferrymanMoveBarge object#(0x61C) () {
 	set_item_flag(ACTIVE_BARGE);
 	if (!in_usecode()) {
-		declare var var0000;
+		declare var move_script;
 		if (gflags[ISLAND_DOCK]) {
-			var0000 = new script {
+			move_script = new script {
 				finish;
 				repeat 11 {
 					step east;
 					nop;
 				};
-				call Func0637;
+				call clearBargeAndResetCamera;
 			};
 			gflags[ISLAND_DOCK] = false;
 		} else {
-			var0000 = new script {
+			move_script = new script {
 				finish;
 				repeat 11 {
 					step west;
 					nop;
 				};
-				call Func0637;
+				call clearBargeAndResetCamera;
 			};
 			gflags[ISLAND_DOCK] = true;
 		}
-		var var0001 = item->run_script(var0000);
+		var script_handle = item->run_script(move_script);
 	}
 }
 
@@ -53685,13 +53696,13 @@ void Func0621 object#(0x621) () {
 		declare var var0004;
 		if (var0003 == 0) {
 			var0000 = "@" + var0000 + "@";
-			var0004 = Func08F7(var0002);
+			var0004 = isNpcNearbyAndVisible(var0002);
 			if (var0004) {
 				var0002->item_say(var0000);
 			}
 		}
 		if (var0003 == 1) {
-			var0004 = Func08F7(var0002);
+			var0004 = isNpcNearbyAndVisible(var0002);
 			if (var0004) {
 				var0002->say(var0000, "");
 				var0002->hide();
@@ -54265,7 +54276,7 @@ void Func0631 object#(0x631) () {
 		}
 		declare var var0007;
 		if (gflags[GOT_TRINSIC_PASSWORD]) {
-			if (Func08F7(JOHNSON) && (!gflags[LEFT_TRINSIC])) {
+			if (isNpcNearbyAndVisible(JOHNSON) && (!gflags[LEFT_TRINSIC])) {
 				if (canTalk(JOHNSON) && canTalk(AVATAR)) {
 					var0006 = script JOHNSON->get_npc_object() after 1 ticks {
 						nohalt;
@@ -54286,7 +54297,7 @@ void Func0631 object#(0x631) () {
 				};
 				return;
 			}
-			if (Func08F7(RAYMUNDO) && (!gflags[LEFT_TRINSIC])) {
+			if (isNpcNearbyAndVisible(RAYMUNDO) && (!gflags[LEFT_TRINSIC])) {
 				if (canTalk(RAYMUNDO) && canTalk(AVATAR)) {
 					var0006 = script RAYMUNDO->get_npc_object() after 1 ticks {
 						nohalt;
@@ -54333,14 +54344,14 @@ void Func0631 object#(0x631) () {
 			Func083F(item, true);
 		} else {
 			if (canTalk(JOHNSON)) {
-				if (Func08F7(JOHNSON) && (!gflags[LEFT_TRINSIC])) {
+				if (isNpcNearbyAndVisible(JOHNSON) && (!gflags[LEFT_TRINSIC])) {
 					var0006 = script JOHNSON->get_npc_object() after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
 					};
 				}
 			}
-			if (Func08F7(RAYMUNDO) && (!gflags[LEFT_TRINSIC])) {
+			if (isNpcNearbyAndVisible(RAYMUNDO) && (!gflags[LEFT_TRINSIC])) {
 				if (canTalk(RAYMUNDO)) {
 					var0006 = script JOHNSON->get_npc_object() after 1 ticks {
 						nohalt;
@@ -54430,7 +54441,7 @@ void Func0634 object#(0x634) () {
 			if (var0002) {
 				if (var0002->get_barge() == var0000) {
 					if (AVATAR->get_item_flag(ACTIVE_SAILOR) == var0002) {
-						var0000->Func061C();
+						var0000->ferrymanMoveBarge();
 						AVATAR->clear_item_flag(ACTIVE_SAILOR);
 					}
 				}
@@ -54493,7 +54504,10 @@ void Func0636 object#(0x636) () {
 	}
 }
 
-void Func0637 object#(0x637) () {
+/**
+ * Clears the active barge flag and resets the camera to the avatar.
+ */
+void clearBargeAndResetCamera object#(0x637) () {
 	clear_item_flag(ACTIVE_BARGE);
 	AVATAR->set_camera();
 }
@@ -64430,12 +64444,12 @@ void Func0809 id#(0x809) (var var0000) {
 				var var0003 = PARTY->count_objects(
 						SHAPE_SCROLL, var0002->get_item_quality(), FRAME_ANY);
 				if (var0003) {
-					if (Func080D()) {
+					if (allPartyMembersSeated()) {
 						var0000->set_item_flag(ON_MOVING_BARGE);
 						var0001->set_item_flag(ACTIVE_BARGE);
 						makeNpcSay(AVATAR, "@Giddy-up!@");
 					} else {
-						var var0004 = Func08B3(var0000);
+						var var0004 = assignSeatsOnBarge(var0000);
 					}
 				} else if (UI_get_array_size(UI_get_party_list()) == 1) {
 					partySpeak("@The title for this cart must first be "
@@ -64525,11 +64539,14 @@ var Func080C id#(0x80C) (var var0000) {
 	return SHAPE_MAST;
 }
 
-var Func080D id#(0x80D) () {
-	var var0000 = UI_get_party_list();
-	for (var0003 in var0000) {
-		var var0004 = var0003->get_item_frame();
-		if (!(var0004 == SIT_NORTH) && !(var0004 == SIT_SOUTH)) {
+/**
+ * @returns true if every party member is seated.
+ */
+var allPartyMembersSeated id#(0x80D) () {
+	var party_list = UI_get_party_list();
+	for (member in party_list) {
+		var frameNum = member->get_item_frame();
+		if (!(frameNum == SIT_NORTH) && !(frameNum == SIT_SOUTH)) {
 			return false;
 		}
 	}
@@ -66864,7 +66881,7 @@ void Func084F id#(0x84F) () {
 		"who were at first distrustful of us will come to see the truth of "
 		"what we stand for. Then we may bring about a day when all of "
 		"Britannia is worthy of the ample rewards it shall receive.\"");
-	var var0002 = Func08F7(IOLO);
+	var var0002 = isNpcNearbyAndVisible(IOLO);
 	if (var0002) {
 		IOLO->say(
 				"Iolo whispers to you. \"Art thou quite certain, ", var0000,
@@ -66883,65 +66900,65 @@ void Func084F id#(0x84F) () {
 	BATLIN->say("\"Now is the time when our members give their testimonials of "
 				"how they have been applying the Triad of Inner Strength to "
 				"their lives. Who shall be the first?\"");
-	var var0004 = Func08F7(GAYE);
+	var var0004 = isNpcNearbyAndVisible(GAYE);
 	if (var0004) {
 		GAYE->say("\"The Fellowship has taught me to live with the "
 				  "shortcomings of others,\" says Gaye.");
 		GAYE->hide();
 	}
-	var var0005 = Func08F7(CANDICE);
+	var var0005 = isNpcNearbyAndVisible(CANDICE);
 	if (var0005) {
 		CANDICE->say("\"I had lost all enthusiasm for life before I joined The "
 					 "Fellowship,\" says Candice.*");
 		BATLIN->say("\"Thank thee for sharing, Candice.\"*");
 		CANDICE->hide();
 	}
-	var var0006 = Func08F7(PATTERSON);
+	var var0006 = isNpcNearbyAndVisible(PATTERSON);
 	if (var0006) {
 		PATTERSON->say("\"The Fellowship helps me to be more honest with "
 					   "people,\" says Patterson.*");
 		PATTERSON->hide();
 	}
-	var var0007 = Func08F7(FIGG);
+	var var0007 = isNpcNearbyAndVisible(FIGG);
 	if (var0007) {
 		FIGG->say("\"The Fellowship has taught me not to let others push me "
 				  "around,\" says Figg.*");
 		FIGG->hide();
 	}
-	var var0008 = Func08F7(GRAYSON);
+	var var0008 = isNpcNearbyAndVisible(GRAYSON);
 	if (var0008) {
 		GRAYSON->say("\"The Triad of Inner Strength has helped me to improve "
 					 "my skills and build better weapons,\" says Grayson.*");
 		GRAYSON->hide();
 	}
-	var var0009 = Func08F7(GORDON);
+	var var0009 = isNpcNearbyAndVisible(GORDON);
 	if (var0009) {
 		GORDON->say("\"The Fellowship has put me back on the path to "
 					"prosperity,\" says Gordon.*");
 		BATLIN->say("\"Yes! Thank thee for sharing, brother!\"*");
 		GORDON->hide();
 	}
-	var var000A = Func08F7(SEAN);
+	var var000A = isNpcNearbyAndVisible(SEAN);
 	if (var000A) {
 		SEAN->say("\"The Fellowship has taught me not to be afraid of "
 				  "success,\" says Sean.*");
 		SEAN->hide();
 	}
-	var var000B = Func08F7(MILLIE);
+	var var000B = isNpcNearbyAndVisible(MILLIE);
 	if (var000B) {
 		MILLIE->say("\"The Fellowship has given my life a whole new purpose. "
 					"Just today I have recruited two more potential members!\" "
 					"says Millie.*");
 		MILLIE->hide();
 	}
-	var var000C = Func08F7(NANNA);
+	var var000C = isNpcNearbyAndVisible(NANNA);
 	if (var000C) {
 		NANNA->say("\"The Fellowship has taught me about the evils of the "
 				   "class structure,\" says Nanna.*");
 		NANNA->hide();
 	}
-	var0002 = Func08F7(IOLO);
-	var var000D = Func08F7(SHAMINO);
+	var0002 = isNpcNearbyAndVisible(IOLO);
+	var var000D = isNpcNearbyAndVisible(SHAMINO);
 	if (var000D && var0002) {
 		IOLO->say(
 				"You notice Iolo is whispering to Shamino. \"I do not think "
@@ -66974,7 +66991,7 @@ void Func084F id#(0x84F) () {
 		"a sip. Finally, the goblet is handed to you. You look at it "
 		"thoughtfully as you feel all eyes in the room upon you.");
 	if (var000D) {
-		var var000F = Func08F7(DUPRE);
+		var var000F = isNpcNearbyAndVisible(DUPRE);
 		var var0010 = UI_is_pc_female();
 		declare var var0011;
 		if (var0010) {
@@ -67104,79 +67121,79 @@ void Func0850 id#(0x850) () {
 	say("\"Now I think would be a good time to hear the words of our fellow "
 		"members. To hear them share with us how The Fellowship has been "
 		"bringing positive change to their lives.\"");
-	var var0002 = Func08F7(CANDICE);
+	var var0002 = isNpcNearbyAndVisible(CANDICE);
 	if (var0002) {
 		CANDICE->say("\"The Fellowship has shown me that I was afraid of "
 					 "myself and that I had to open myself up to life's "
 					 "experiences,\" says Candice.*");
 		CANDICE->hide();
 	}
-	var var0003 = Func08F7(PATTERSON);
+	var var0003 = isNpcNearbyAndVisible(PATTERSON);
 	if (var0003) {
 		PATTERSON->say("\"The Fellowship helps me be more honest with "
 					   "people,\" says Patterson.*");
 		BATLIN->say("\"Thank thee for sharing, Patterson.\"*");
 		PATTERSON->hide();
 	}
-	var var0004 = Func08F7(FIGG);
+	var var0004 = isNpcNearbyAndVisible(FIGG);
 	if (var0004) {
 		FIGG->say(
 				"\"The Fellowship has taught me how to better perform my "
 				"duties as the Caretaker of the Royal Orchards,\" says Figg.*");
 		FIGG->hide();
 	}
-	var var0005 = Func08F7(GAYE);
+	var var0005 = isNpcNearbyAndVisible(GAYE);
 	if (var0005) {
 		GAYE->say("\"The Fellowship has taught me to, first and foremost, "
 				  "treat people with respect,\" says Gaye.*");
 		GAYE->hide();
 	}
-	var var0006 = Func08F7(GRAYSON);
+	var var0006 = isNpcNearbyAndVisible(GRAYSON);
 	if (var0006) {
 		GRAYSON->say("\"After joining The Fellowship I learned how to be a "
 					 "man's man,\" says Grayson.*");
 		GRAYSON->hide();
 	}
-	var var0007 = Func08F7(GORDON);
+	var var0007 = isNpcNearbyAndVisible(GORDON);
 	if (var0007) {
 		GORDON->say("\"The Fellowship is helping me back from the brink of "
 					"personal and financial oblivion,\" says Gordon.*");
 		BATLIN->say("\"Right thou art, brother!\"*");
 		GORDON->hide();
 	}
-	var var0008 = Func08F7(SEAN);
+	var var0008 = isNpcNearbyAndVisible(SEAN);
 	if (var0008) {
 		SEAN->say("\"The Fellowship has freed me from the illusory appeals of "
 				  "mediocrity,\" says Sean.*");
 		SEAN->hide();
 	}
-	var var0009 = Func08F7(MILLIE);
+	var var0009 = isNpcNearbyAndVisible(MILLIE);
 	if (var0009) {
 		MILLIE->say("\"In The Fellowship I am learning that I need to devote "
 					"my life to a special purpose,\" says Millie.*");
 		MILLIE->hide();
 	}
-	var var000A = Func08F7(SPARK);
+	var var000A = isNpcNearbyAndVisible(SPARK);
 	if (var000A) {
 		SPARK->say("\"This whole ceremony and everyone in it doth give me the "
 				   "willies!\"*");
 		SPARK->hide();
 	}
-	var var000B = Func08F7(IOLO);
+	var var000B = isNpcNearbyAndVisible(IOLO);
 	if (var000B) {
 		IOLO->say("\"'Tis a sad thing to see so many people who have nothing "
 				  "else better in their lives than blindly following this "
 				  "dubious spiritual leader.\"*");
 		IOLO->hide();
 	}
-	var var000C = Func08F7(SHAMINO);
+	var var000C = isNpcNearbyAndVisible(SHAMINO);
 	if (var000C) {
 		SHAMINO->say(
 				"\"'Tis a sad thing that Britannia has fallen so far as to "
 				"leave itself open to a group like this Fellowship.\"*");
 		SHAMINO->hide();
 	}
-	var var000D = Func08F7(DUPRE);
+	var var000D = isNpcNearbyAndVisible(DUPRE);
 	if (var000D) {
 		DUPRE->say("\"'Tis a sad thing when I cannot even keep my eyes open "
 				   "from the boredom of this Fellowship ceremony!\"*");
@@ -68125,7 +68142,7 @@ void Func0861 id#(0x861) () {
 }
 
 void Func0862 id#(0x862) () {
-	var var0000 = Func08F7(IOLO);
+	var var0000 = isNpcNearbyAndVisible(IOLO);
 	var var0001 = false;
 	var var0002 = false;
 	var var0003 = false;
@@ -69703,20 +69720,20 @@ void Func087B id#(0x87B) () {
 		"which they have made themselves worthy.\"");
 	say("\"Now I would like to hear from our members who have gathered here "
 		"this evening. Share with us how The Fellowship has helped thee!\"");
-	var var0000 = Func08F7(GREGOR);
+	var var0000 = isNpcNearbyAndVisible(GREGOR);
 	if (var0000) {
 		GREGOR->say("\"The Fellowship has improved mine ability to run my "
 					"business,\" says Gregor.*");
 		GREGOR->hide();
 	}
-	var var0001 = Func08F7(OWEN);
+	var var0001 = isNpcNearbyAndVisible(OWEN);
 	if (var0001) {
 		OWEN->say("\"The Fellowship has taught me how to face mine own "
 				  "potential for greatness unquestioningly,\" says Owen.*");
 		ELYNOR->say("\"Thank thee for sharing, brother!\"*");
 		OWEN->hide();
 	}
-	var var0002 = Func08F7(BURNSIDE);
+	var var0002 = isNpcNearbyAndVisible(BURNSIDE);
 	if (var0002) {
 		BURNSIDE->say("You notice that Burnside has apparently nodded off. "
 					  "After a nudge from the person next to him, his eyes pop "
@@ -69724,39 +69741,39 @@ void Func087B id#(0x87B) () {
 					  "asks sheepishly.*");
 		BURNSIDE->hide();
 	}
-	var var0003 = Func08F7(WILLIAM);
+	var var0003 = isNpcNearbyAndVisible(WILLIAM);
 	if (var0003) {
 		WILLIAM->say(
 				"\"The Fellowship has helped me to have more courage to deal "
 				"with the unexpected terrors of life,\" says William.*");
 		WILLIAM->hide();
 	}
-	var var0004 = Func08F7(MIKOS);
+	var var0004 = isNpcNearbyAndVisible(MIKOS);
 	if (var0004) {
 		MIKOS->say(
 				"\"The Fellowship has helped me to have the firm hand that is "
 				"necessary as the supervisor of the mine,\" says Mikos.*");
 		MIKOS->hide();
 	}
-	var var0005 = Func08F7(SPARK);
+	var var0005 = isNpcNearbyAndVisible(SPARK);
 	if (var0005) {
 		SPARK->say("\"Everything about this Fellowship gives me the creeps!\" "
 				   "says Spark.*");
 		SPARK->hide();
 	}
-	var var0006 = Func08F7(IOLO);
+	var var0006 = isNpcNearbyAndVisible(IOLO);
 	if (var0006) {
 		IOLO->say("\"Elynor is certainly going out of her way to make them "
 				  "feel like they are persecuted,\" says Iolo.*");
 		IOLO->hide();
 	}
-	var var0007 = Func08F7(SHAMINO);
+	var var0007 = isNpcNearbyAndVisible(SHAMINO);
 	if (var0007) {
 		SHAMINO->say("\"These Fellowship members seem fixated upon their own "
 					 "personal gain and very little else,\" says Shamino.*");
 		SHAMINO->hide();
 	}
-	var var0008 = Func08F7(DUPRE);
+	var var0008 = isNpcNearbyAndVisible(DUPRE);
 	if (var0008) {
 		DUPRE->say("\"Why are these people so fascinated by The Fellowship "
 				   "anyway? I do not understand it.\"*");
@@ -70058,18 +70075,24 @@ var findAvatarStatue id#(0x881) () {
 	return NULL_OBJ;
 }
 
-void Func0882 id#(0x882) (var var0000) {
-	if (var0000->get_barge()) {
-		var var0001 = var0000->find_nearby(SHAPE_BARGE, 10, MASK_EGG);
-		if (var0001) {
-			if (Func080D() && AVATAR->get_barge()) {
-				var0001->Func061C();
+/**
+ * If the provided object is part of a barge, finds the owner barge
+ * object and either activates it, or tries to assign seats to all
+ * party members.
+ * @param object An object whose barge will be used.
+ */
+void ferrymanHandleBarge id#(0x882) (var object) {
+	if (object->get_barge()) {
+		var nearby_barge = object->find_nearby(SHAPE_BARGE, 10, MASK_EGG);
+		if (nearby_barge) {
+			if (allPartyMembersSeated() && AVATAR->get_barge()) {
+				nearby_barge->ferrymanMoveBarge();
 			} else {
-				var var0002 = Func08B3(var0000);
+				var fallback_result = assignSeatsOnBarge(object);
 				AVATAR->clear_item_flag(ON_MOVING_BARGE);
-				var var0003 = AVATAR->find_nearby(SHAPE_FERRYMAN, 25, MASK_NONE);
-				if (var0003) {
-					var0003->set_item_flag(ACTIVE_SAILOR);
+				var nearby_ferryman = AVATAR->find_nearby(SHAPE_FERRYMAN, 25, MASK_NONE);
+				if (nearby_ferryman) {
+					nearby_ferryman->set_item_flag(ACTIVE_SAILOR);
 				}
 			}
 			abort;
@@ -70079,7 +70102,7 @@ void Func0882 id#(0x882) (var var0000) {
 
 void Func0883 id#(0x883) () {
 	FINNIGAN->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func08F7(PETRE);
+	var var0000 = isNpcNearbyAndVisible(PETRE);
 	if (var0000) {
 		say("\"Petre here knows something about all of this.\"*");
 		PETRE->say("The peasant interjects. \"I discovered poor Christopher "
@@ -70765,7 +70788,7 @@ void Func088C id#(0x88C) () {
 }
 
 void Func088D id#(0x88D) () {
-	var var0000 = Func08F7(IOLO);
+	var var0000 = isNpcNearbyAndVisible(IOLO);
 	if (var0000) {
 		IOLO->say("\"Feeling all right, man?\"*");
 		GARGAN->say("Gargan coughs, wheezes, and then lights his pipe. On "
@@ -72629,12 +72652,12 @@ void Func08AA id#(0x8AA) () {
 }
 
 void Func08AB id#(0x8AB) () {
-	var var0000 = Func08F7(JOHNSON);
-	var var0001 = Func08F7(ELLEN);
-	var var0002 = Func08F7(DELL);
-	var var0003 = Func08F7(CAROLINE);
-	var var0004 = Func08F7(IOLO);
-	var var0005 = Func08F7(SPARK);
+	var var0000 = isNpcNearbyAndVisible(JOHNSON);
+	var var0001 = isNpcNearbyAndVisible(ELLEN);
+	var var0002 = isNpcNearbyAndVisible(DELL);
+	var var0003 = isNpcNearbyAndVisible(CAROLINE);
+	var var0004 = isNpcNearbyAndVisible(IOLO);
+	var var0005 = isNpcNearbyAndVisible(SPARK);
 	KLOG->say("Klog is leading the town members in a Fellowship meeting.");
 	say("\"Thank you, Fellowship members of Trinsic, for attending our meeting "
 		"this evening.~~\"I am certain you are all sorely aware of the crimes "
@@ -72903,7 +72926,7 @@ void Func08AF id#(0x8AF) () {
 			"of the island and the well will be free to go on to their "
 			"destiny. Unfortunately, Mayor Forsythe will be lost for all "
 			"time.\"");
-		var var0003 = Func08F7(FORSYTHE);
+		var var0003 = isNpcNearbyAndVisible(FORSYTHE);
 		if (var0003) {
 			say(" He looks sadly at the ghostly gentleman.");
 		}
@@ -73001,34 +73024,40 @@ void Func08B2 id#(0x8B2) () {
 	}
 }
 
-var Func08B3 id#(0x8B3) (var var0000) {
-	var var0001 = 1;
-	var var0002 = 0;
-	var var0003 = false;
-	var var0004 = UI_get_party_list();
-	var var0005 = var0000->get_barge();
-	var var0006 = var0000->find_nearby(SHAPE_SEAT, 30, MASK_NONE);
-	var var0007 = [];
-	var var0008 = [];
-	declare var var000B;
-	for (var000B in var0006) {
-		if (var000B->get_barge() == var0005) {
-			if (!var0003 && var000B->get_item_quality() == 255) {
-				AVATAR->sit_down(var000B);
-				var0004 = filterArray(AVATAR->get_npc_object(), var0004);
-				var0003 = true;
+/**
+ * Assigns party members to available seats belonging to the same barge
+ * as the given object. Seats the avatar first if a priority seat exists.
+ * @param sourceObj An object whose barge will be used.
+ * @returns true if all party members have seats, false otherwise.
+ */
+var assignSeatsOnBarge id#(0x8B3) (var sourceObj) {
+	var seatIndex = 1;
+	var unused_zero = 0;
+	var avatar_seated = false;
+	var party_list = UI_get_party_list();
+	var barge_id = sourceObj->get_barge();
+	var seats_nearby = sourceObj->find_nearby(SHAPE_SEAT, 30, MASK_NONE);
+	var seats = [];
+	var distances = [];
+	declare var seat;
+	for (seat in seats_nearby) {
+		if (seat->get_barge() == barge_id) {
+			if (!avatar_seated && seat->get_item_quality() == 255) {
+				AVATAR->sit_down(seat);
+				party_list = filterArray(AVATAR->get_npc_object(), party_list);
+				avatar_seated = true;
 			} else {
-				var0008 &= var000B->get_distance(AVATAR);
-				var0007 &= var000B;
+				distances &= seat->get_distance(AVATAR);
+				seats &= seat;
 			}
 		}
 	}
-	var var000C = UI_get_array_size(var0004);
-	var0007 = sortArraysBySecondArray(var0007, var0008);
-	for (var000B in var0007) {
-		if (var000C >= var0001) {
-			var0004[var0001]->sit_down(var000B);
-			var0001 += 1;
+	var party_size = UI_get_array_size(party_list);
+	seats = sortArraysBySecondArray(seats, distances);
+	for (seat in seats) {
+		if (party_size >= seatIndex) {
+			party_list[seatIndex]->sit_down(seat);
+			seatIndex += 1;
 		} else {
 			return true;
 		}
@@ -74467,8 +74496,8 @@ void Func08C6 id#(0x8C6) () {
 
 void Func08C7 id#(0x8C7) () {
 	PAUL->show_npc_face(DEFAULT_FACE);
-	var var0000 = Func08F7(IOLO);
-	var var0001 = Func08F7(SPARK);
+	var var0000 = isNpcNearbyAndVisible(IOLO);
+	var var0001 = isNpcNearbyAndVisible(SPARK);
 	say("As the actors take their places and don masks, you settle down to "
 		"watch the action.*");
 	if (var0001) {
@@ -74905,10 +74934,10 @@ void Func08CD id#(0x8CD) () {
 }
 
 void Func08CE id#(0x8CE) () {
-	var var0000 = Func08F7(RUNEB);
-	var var0001 = Func08F7(SARPLING);
-	var var0002 = Func08F7(QUAEVEN);
-	var var0003 = Func08F7(SPARK);
+	var var0000 = isNpcNearbyAndVisible(RUNEB);
+	var var0001 = isNpcNearbyAndVisible(SARPLING);
+	var var0002 = isNpcNearbyAndVisible(QUAEVEN);
+	var var0003 = isNpcNearbyAndVisible(SPARK);
 	var var0004 = getAvatarName();
 	say("The winged gargoyle begins his sermon.");
 	if (var0000) {
@@ -74944,7 +74973,7 @@ void Func08CE id#(0x8CE) () {
 		"such an awakening into the real world. To find in the order a clear "
 		"path to reach what we seek!\"~~ The members present all stand and "
 		"shout.*");
-	var var0005 = Func08F7(IOLO);
+	var var0005 = isNpcNearbyAndVisible(IOLO);
 	if (var0005) {
 		IOLO->say("\"'Tis time for us to depart, ", var0004, ".\"*");
 		IOLO->hide();
@@ -74953,10 +74982,10 @@ void Func08CE id#(0x8CE) () {
 }
 
 void Func08CF id#(0x8CF) () {
-	var var0000 = Func08F7(BALAYNA);
-	var var0001 = Func08F7(TOLEMAC);
-	var var0002 = Func08F7(IOLO);
-	var var0003 = Func08F7(DUPRE);
+	var var0000 = isNpcNearbyAndVisible(BALAYNA);
+	var var0001 = isNpcNearbyAndVisible(TOLEMAC);
+	var var0002 = isNpcNearbyAndVisible(IOLO);
+	var var0003 = isNpcNearbyAndVisible(DUPRE);
 	say("\"Fellow members, each of thee has faced -- and doubtless shall face "
 		"again -- a moment in which thou dost feel the heat of the fever. A "
 		"moment when thy mind has been clouded with illusory thoughts and "
@@ -75103,7 +75132,7 @@ void Func08D1 id#(0x8D1) () {
 		fallthrough;
 	always:
 		UI_clear_answers();
-		var var0001 = Func08F7(JESSE);
+		var var0001 = isNpcNearbyAndVisible(JESSE);
 		if (var0001) {
 			say("\"Jesse, hand our friend thy staff.\"*");
 			if (var0000) {
@@ -75377,7 +75406,7 @@ void Func08D5 id#(0x8D5) () {
 
 void Func08D6 id#(0x8D6) () {
 	var var0000 = getPoliteTitle();
-	var var0001 = Func08F7(TRENT);
+	var var0001 = isNpcNearbyAndVisible(TRENT);
 	if (!var0001) {
 		say("\"Where, oh where has my dear husband gone. I cannot stand to be "
 			"away from him!\"*");
@@ -75414,7 +75443,7 @@ void Func08D7 id#(0x8D7) () {
 	var var0001 = UI_get_party_list();
 	var var0002 = ROWENA->get_npc_object();
 	if (var0002 in var0001) {
-		var var0003 = Func08F7(TRENT);
+		var var0003 = isNpcNearbyAndVisible(TRENT);
 		if (var0003) {
 			ROWENA->remove_from_party();
 			say("The starcrossed lovers rush into each other's ghostly "
@@ -75487,7 +75516,7 @@ void Func08D8 id#(0x8D8) () {
 		abort;
 	}
 	if (!gflags[BOX_FIRST_TIME]) {
-		var var0002 = Func08F7(HORANCE);
+		var var0002 = isNpcNearbyAndVisible(HORANCE);
 		if (var0002) {
 			say("The music of the little box makes Rowena turn her head in "
 				"your direction. She blinks several times as if waking from a "
@@ -76351,9 +76380,9 @@ void Func08EB id#(0x8EB) (var var0000, var var0001, var var0002) {
 }
 
 void Func08EC id#(0x8EC) () {
-	var var0000 = Func08F7(SPARK);
-	var var0001 = Func08F7(IOLO);
-	var var0002 = Func08F7(SHAMINO);
+	var var0000 = isNpcNearbyAndVisible(SPARK);
+	var var0001 = isNpcNearbyAndVisible(IOLO);
+	var var0002 = isNpcNearbyAndVisible(SHAMINO);
 	say("\"Hubert the Lion was haughty and vain ~And especially proud of his "
 		"elegant mane. ~But conceit of this sort isn't proper at all ~And "
 		"Hubert the Lion was due for a fall.");
@@ -76527,7 +76556,7 @@ void Func08EF id#(0x8EF) () {
 
 void Func08F0 id#(0x8F0) () {
 	var var0000 = getPoliteTitle();
-	var var0001 = Func08F7(ROWENA);
+	var var0001 = isNpcNearbyAndVisible(ROWENA);
 	if (var0001) {
 		say("The couple haven't released their embrace since they were first "
 			"reunited as far as you can tell, and they show no sign of doing "
@@ -76813,10 +76842,10 @@ var Func08F5 id#(0x8F5) (var var0000, var var0001) {
 			IOLO->say("\"Avatar, this stranger grows upon me by the moment. "
 					  "Surely he would be a boon travelling companion.\"");
 			var000D = INVALID_NPC;
-			if (Func08F7(SHAMINO)) {
+			if (isNpcNearbyAndVisible(SHAMINO)) {
 				var000D = SHAMINO;
 			}
-			if (Func08F7(DUPRE)) {
+			if (isNpcNearbyAndVisible(DUPRE)) {
 				var000D = DUPRE;
 			}
 			if (var000D != INVALID_NPC) {
@@ -76892,13 +76921,19 @@ var Func08F6 id#(0x8F6) (var var0000) {
 	return var0003;
 }
 
-var Func08F7 id#(0x8F7) (var var0000) {
-	var var0001 = var0000->get_npc_object();
-	var var0002 = var0001->npc_nearby();
-	if (var0001->get_item_flag(INVISIBLE)) {
-		var0002 = false;
+/**
+ * Checks whether the actor's NPC representation is nearby and visible.
+ *
+ * @param npcId the NPC ID to query
+ * @returns true if the NPC is nearby and not invisible, false otherwise
+ */
+var isNpcNearbyAndVisible id#(0x8F7) (var npcId) {
+	var npcObj = npcId->get_npc_object();
+	var is_nearby = npcObj->npc_nearby();
+	if (npcObj->get_item_flag(INVISIBLE)) {
+		is_nearby = false;
 	}
-	return var0002;
+	return is_nearby;
 }
 
 var Func08F8 id#(0x8F8) (
