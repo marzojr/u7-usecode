@@ -886,27 +886,30 @@ void FuncFerryman shape#(SHAPE_FERRYMAN) () {
 	}
 }
 
+/**
+ * Displays current time when double-clicking the pocket watch.
+ */
 void FuncPocketwatch shape#(SHAPE_POCKETWATCH) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = UI_game_hour();
-		var var0001 = "am";
-		if (var0000 > 12) {
-			var0000 -= 12;
-			var0001 = "pm";
+		var hours = UI_game_hour();
+		var amOrPm = "am";
+		if (hours > 12) {
+			hours -= 12;
+			amOrPm = "pm";
 		}
-		if (var0000 == 0) {
-			var0000 = 12;
-			var0001 = "am";
+		if (hours == 0) {
+			hours = 12;
+			amOrPm = "am";
 		}
-		var var0002 = UI_game_minute();
-		if (var0002 <= 9) {
-			var0002 = "0" + var0002;
+		var minutes = UI_game_minute();
+		if (minutes <= 9) {
+			minutes = "0" + minutes;
 		}
-		var var0003 = " " + var0000 + ":" + var0002 + var0001;
+		var timeStr = " " + hours + ":" + minutes + amOrPm;
 		if (UI_in_gump_mode()) {
-			item_say(var0003);
+			item_say(timeStr);
 		} else {
-			item_say(var0003);
+			item_say(timeStr);
 		}
 	}
 }
