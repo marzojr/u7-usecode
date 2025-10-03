@@ -3482,7 +3482,7 @@ void FuncPick shape#(SHAPE_PICK) () {
 						|| var0009 == FRAME_TREE_OF_LIFE_FULL) {
 					var var0011 = 0;
 					while (var0011 < FRAME_BLOOD_LAST) {
-						var var0012 = UI_create_new_object(SHAPE_BLOOD);
+						var var0012 = UI_create_new_object(SHAPE_PUDDLE);
 						var0012->set_item_frame(FRAME_BLOOD_LAST - var0011);
 						struct<Position> var0013
 								= var000E->get_object_position();
@@ -54025,7 +54025,7 @@ void Func0627 object#(0x627) () {
 }
 
 void Func0628 object#(0x628) () {
-	var var0000 = UI_create_new_object(SHAPE_BLOOD);
+	var var0000 = UI_create_new_object(SHAPE_PUDDLE);
 	if (var0000) {
 		var0000->set_item_flag(TEMPORARY);
 		var0000->set_item_frame(UI_die_roll(FRAME_BEER_FIRST, FRAME_BEER_LAST));
@@ -54068,7 +54068,7 @@ void Func0628 object#(0x628) () {
 }
 
 void Func0629 object#(0x629) () {
-	var var0000 = UI_create_new_object(SHAPE_BLOOD);
+	var var0000 = UI_create_new_object(SHAPE_PUDDLE);
 	if (var0000) {
 		var0000->set_item_flag(TEMPORARY);
 		var0000->set_item_frame(UI_die_roll(FRAME_WINE_FIRST, FRAME_WINE_LAST));
@@ -54113,12 +54113,12 @@ void Func062C object#(0x62C) () {
 	var var0002 = UI_find_nearby(
 			[0x09B7, 0x06C8, 0], SHAPE_ROCK, 18, MASK_NONE);
 	for (var0005 in var0002) {
-		var var0006 = var0005->find_nearby(SHAPE_BLOOD, 3, MASK_ALL_UNSEEN);
+		var var0006 = var0005->find_nearby(SHAPE_PUDDLE, 3, MASK_ALL_UNSEEN);
 		for (var0009 in var0006) {
 			var var000A = var0009->get_item_frame();
 			struct<Position> var000B = var0009->get_object_position();
 			var0009->remove_item();
-			var var000C = UI_create_new_object(SHAPE_BLOOD);
+			var var000C = UI_create_new_object(SHAPE_PUDDLE);
 			var000C->set_item_frame(var000A);
 			var var000D = UI_update_last_created(var000B);
 		}
@@ -58746,7 +58746,7 @@ void Func0694 object#(0x694) () {
 	var0004.x = var0003.x;
 	var0004.y = var0003.y - 1;
 	var0004.z = 0;
-	var var0005 = UI_create_new_object(SHAPE_BLOOD);
+	var var0005 = UI_create_new_object(SHAPE_PUDDLE);
 	var0005->set_item_flag(TEMPORARY);
 	var0005->set_item_frame(UI_die_roll(var0001, var0002));
 	var var0006 = UI_update_last_created(var0004);
@@ -60497,7 +60497,7 @@ void Func06BA object#(0x6BA) () {
 			var0006 += FRAME_BLOOD_DELTA;
 		}
 		for (var000B in var0007) {
-			var0005 = UI_create_new_object(SHAPE_BLOOD);
+			var0005 = UI_create_new_object(SHAPE_PUDDLE);
 			if (var0005) {
 				var0005->set_item_flag(TEMPORARY);
 				var var000C = UI_update_last_created(get_object_position());
@@ -60684,14 +60684,14 @@ void Func06C1 object#(0x6C1) () {
 			var var0000 = find_nearby(SHAPE_VICTIM, 15, MASK_NONE);
 			var var0001 = find_nearby(SHAPE_LIT_LIGHT_SOURCE, 15, MASK_NONE);
 			var var0002 = find_nearby(SHAPE_BUCKET, 15, MASK_NONE);
-			var var0003 = find_nearby(SHAPE_BLOOD, 15, MASK_ALL_UNSEEN);
+			var var0003 = find_nearby(SHAPE_PUDDLE, 15, MASK_ALL_UNSEEN);
 			var var0004 = [var0000, var0001, var0002, var0003];
 			for (var0007 in var0004) {
 				var var0008 = var0007->get_item_shape();
 				struct<Position> var0009 = var0007->get_object_position();
 				if (var0009.z == 6) {
 					declare struct<Position> var000A;
-					if (var0008 == SHAPE_VICTIM || var0008 == SHAPE_BLOOD) {
+					if (var0008 == SHAPE_VICTIM || var0008 == SHAPE_PUDDLE) {
 						var000A = [var0009.x, var0009.y, 1];
 					} else {
 						var000A = [var0009.x, var0009.y, 0];
@@ -60728,7 +60728,7 @@ void Func06C2 object#(0x6C2) () {
 	if (event == EGG) {
 		if (gflags[LEFT_TRINSIC]) {
 			Func080F();
-			var var0000 = find_nearby(SHAPE_BLOOD, 60, MASK_ALL_UNSEEN);
+			var var0000 = find_nearby(SHAPE_PUDDLE, 60, MASK_ALL_UNSEEN);
 			declare var var0004;
 			for (var0003 in var0000) {
 				var0004 = var0003->set_last_created();
@@ -63975,7 +63975,7 @@ void Func0710 object#(0x710) () {
 				var var000C = var000B->get_item_frame();
 				if (var000C >= 0 && (var000C <= 10
 						&& var000B->find_nearby(
-								SHAPE_BLOOD, 2, MASK_ALL_UNSEEN))) {
+								SHAPE_PUDDLE, 2, MASK_ALL_UNSEEN))) {
 					var0008 += 1;
 				}
 			}
@@ -64058,7 +64058,7 @@ void Func0713 object#(0x713) () {
 		if (var0000->get_item_frame() == FRAME_TREE_OF_LIFE_WILTED) {
 			var0000->set_item_frame(FRAME_TREE_OF_LIFE_FULL);
 		}
-		var var0002 = var0000->find_nearby(SHAPE_BLOOD, 20, MASK_ALL_UNSEEN);
+		var var0002 = var0000->find_nearby(SHAPE_PUDDLE, 20, MASK_ALL_UNSEEN);
 		for (var0005 in var0002) {
 			UI_sprite_effect(
 					ANIMATION_FIREWORKS, var0001.x, var0001.y, 0, 0, 0,
@@ -64214,7 +64214,7 @@ void Func0715 object#(0x715) () {
 		UI_play_sound_effect(SFX_THUNDER);
 		UI_lightning();
 	}
-	var0000 = AVATAR->find_nearby(SHAPE_BLOOD, 40, MASK_ALL_UNSEEN);
+	var0000 = AVATAR->find_nearby(SHAPE_PUDDLE, 40, MASK_ALL_UNSEEN);
 	for (var0009 in var0000) {
 		struct<Position> var000A = var0009->get_object_position();
 		var var000B = UI_create_new_object(SHAPE_FIRE_FIELD);
@@ -64632,7 +64632,7 @@ void Func080F id#(0x80F) () {
 		var var0001 = find_nearby(SHAPE_LIT_LIGHT_SOURCE, 15, MASK_NONE);
 		var var0002 = find_nearby(SHAPE_LIGHT_SOURCE, 15, MASK_NONE);
 		var var0003 = find_nearby(SHAPE_BUCKET, 15, MASK_ALL_UNSEEN);
-		var var0004 = find_nearby(SHAPE_BLOOD, 15, MASK_TRANSLUCENT);
+		var var0004 = find_nearby(SHAPE_PUDDLE, 15, MASK_TRANSLUCENT);
 		var var0005 = find_nearby(SHAPE_SERPENTINE_DAGGER, 15, MASK_NONE);
 		var var0006 = find_nearby(SHAPE_BEAM_OF_LIGHT, 15, MASK_ALL_UNSEEN);
 		var var0007 = [
