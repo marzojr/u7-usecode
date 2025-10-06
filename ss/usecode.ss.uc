@@ -5961,77 +5961,64 @@ void Func01C3 shape#(0x1C3) () {
 				"difficult, ",
 				var0001, "?\"");
 			var0005 = 0x0000;
-			converse([
-				"the gremlins", "the explosions", "the Cyclops",
-				"the invisible man", "change subject"
-			]) {
-			case "the gremlins"(remove):
-				say("\"Gremlins? Thou art merely trying to impress us, ",
-					var0001,
-					". There aren't any gremlins in the Knight's Test!\"");
-				var0005 = Func08ED(var0005);
-				if (var0005 == 0x0004) {
-					// This could be a break instead; the original
-					// skips the endconv from a break, which is why
-					// I did it this way
-					goto labelFunc01C3_073B;
+break_converse:
+			breakable {
+				converse([
+					"the gremlins", "the explosions", "the Cyclops",
+					"the invisible man", "change subject"
+				]) {
+				case "the gremlins"(remove):
+					say("\"Gremlins? Thou art merely trying to impress us, ",
+						var0001,
+						". There aren't any gremlins in the Knight's Test!\"");
+					var0005 = Func08ED(var0005);
+					if (var0005 == 0x0004) {
+						break break_converse;
+					}
+					fallthrough;
+				case "the explosions"(remove):
+					say("\"But those are so easy to avoid...\"");
+					CALADIN->show_npc_face1(0x0000);
+					say("\"Perhaps thou didst not walk fast enough. If thou dost "
+						"lag, the explosions will catch thee.\"");
+					UI_remove_npc_face1();
+					UI_set_conversation_slot(0);
+					var0005 = Func08ED(var0005);
+					if (var0005 == 0x0004) {
+						break break_converse;
+					}
+					fallthrough;
+				case "the Cyclops"(remove):
+					say("\"Didst thou hear what ", var0002,
+						" didst say? There are magical beasts in the Knight's "
+						"Test!\"");
+					BRENDANN->show_npc_face1(0x0000);
+					say("\"We must speak with Shmed about this. Our dungeon is "
+						"strictly a test of fighting ability -- no magic "
+						"allowed!\"");
+					UI_remove_npc_face1();
+					UI_set_conversation_slot(0);
+					var0005 = Func08ED(var0005);
+					if (var0005 == 0x0004) {
+						break break_converse;
+					}
+					fallthrough;
+				case "the invisible man"(remove):
+					say("\"Oh, surely thou art mistaken!\"");
+					TEMPLAR->show_npc_face1(0x0000);
+					say("\"Perhaps in the darkness, thou didst become disoriented "
+						"and imagine such an enemy.\"");
+					UI_remove_npc_face1();
+					UI_set_conversation_slot(0);
+					var0005 = Func08ED(var0005);
+					if (var0005 == 0x0004) {
+						break break_converse;
+					}
+					fallthrough;
+				case "change subject"(remove):
+					break break_converse;
 				}
-				fallthrough;
-			case "the explosions"(remove):
-				say("\"But those are so easy to avoid...\"");
-				CALADIN->show_npc_face1(0x0000);
-				say("\"Perhaps thou didst not walk fast enough. If thou dost "
-					"lag, the explosions will catch thee.\"");
-				UI_remove_npc_face1();
-				UI_set_conversation_slot(0);
-				var0005 = Func08ED(var0005);
-				if (var0005 == 0x0004) {
-					// This could be a break instead; the original
-					// skips the endconv from a break, which is why
-					// I did it this way
-					goto labelFunc01C3_073B;
-				}
-				fallthrough;
-			case "the Cyclops"(remove):
-				say("\"Didst thou hear what ", var0002,
-					" didst say? There are magical beasts in the Knight's "
-					"Test!\"");
-				BRENDANN->show_npc_face1(0x0000);
-				say("\"We must speak with Shmed about this. Our dungeon is "
-					"strictly a test of fighting ability -- no magic "
-					"allowed!\"");
-				UI_remove_npc_face1();
-				UI_set_conversation_slot(0);
-				var0005 = Func08ED(var0005);
-				if (var0005 == 0x0004) {
-					// This could be a break instead; the original
-					// skips the endconv from a break, which is why
-					// I did it this way
-					goto labelFunc01C3_073B;
-				}
-				fallthrough;
-			case "the invisible man"(remove):
-				say("\"Oh, surely thou art mistaken!\"");
-				TEMPLAR->show_npc_face1(0x0000);
-				say("\"Perhaps in the darkness, thou didst become disoriented "
-					"and imagine such an enemy.\"");
-				UI_remove_npc_face1();
-				UI_set_conversation_slot(0);
-				var0005 = Func08ED(var0005);
-				if (var0005 == 0x0004) {
-					// This could be a break instead; the original
-					// skips the endconv from a break, which is why
-					// I did it this way
-					goto labelFunc01C3_073B;
-				}
-				fallthrough;
-			case "change subject"(remove):
-				// This could be a break instead; the original
-				// skips the endconv from a break, which is why
-				// I did it this way
-				goto labelFunc01C3_073B;
 			}
-		labelFunc01C3_073B:
 			MARSTEN->show_npc_face1(0x0000);
 			if (var0005 == 0x0000) {
 				say("\"It is good to see a Knight who is not boastful. Luther, "
@@ -55425,95 +55412,88 @@ void FuncEthAutomaton object#(FIRST_NPC_FUNCTION - ETH_AUTOMATON)() {
 					"to die, would it be Ethical to risk death trying to save "
 					"the doomed person? Or would it be more Ethical to flee "
 					"before the same fate befell thee?\"");
-				converse(["Risk Death", "Flee"]) {
-				case "Risk Death":
-					say("\"Thou art correct. Ethicality demands that thou must "
-						"seek to preserve the life of others, as thou wouldst "
-						"thine own.\" *\"No man's fate is certain while he yet "
-						"lives. Thine actions can change the course of "
-						"fate...\"");
-					UI_push_answers();
-					say("\"Question Two: If thou didst come upon a room of "
-						"untold wealth within a structure where thou didst not "
-						"know if the owner lived, would it be Ethical to take "
-						"the money if thou wert in sore need? Or wouldst thou "
-						"leave the money to possibly be used for evil ends?\"");
-					add(["Take the Money", "Leave the Money"]);
-					fallthrough;
-				case "Take the Money":
-					say("\"No matter what the need, seeker, Ethicality demands "
-						"that thou not takest anything without permission. It "
-						"is difficult to weigh these things at times, but thou "
-						"shalt find it easier as time passes...\"");
-					UI_pop_answers();
-					// This could be a break instead; the original
-					// skips the endconv from a break, which is why
-					// I did it this way
-					goto labelFuncEthAutomaton_0169;
-				case "Leave the Money":
-					say("\"Thou art correct, seeker. Thou wouldst have no idea "
-						"what the money was to be used for.\" *\"Ethicality "
-						"demands that thou not takest anything without "
-						"permission, no matter what the need. If thou wouldst "
-						"stand in judgment of another, thou must be sure of "
-						"thine Ethicality.\"");
-					UI_push_answers();
-					say("\"Finally, Question Three: If thou wert faced with "
-						"the certainty of thy death at the hands of an "
-						"unethical man, wouldst thou yield to him to save thy "
-						"life? Or would Ethicality demand that thou shouldst "
-						"continue the struggle unto death?\"");
-					add(["Yield", "Continue"]);
-					fallthrough;
-				case "Yield":
-					say("\"No, seeker. If thou shouldst yield to one who is "
-						"evil, even to save thy life, then thou art admitting "
-						"the dominion of that evil.\"");
-					say("\"Thy life doth have little value if thou dost "
-						"abandon thy virtue. Ethicality demands that thou wilt "
-						"oppose evil in all ways, even at the cost of thine "
-						"own life.\"");
-					UI_pop_answers();
-					UI_pop_answers();
-					// This could be a break instead; the original
-					// skips the endconv from a break, which is why
-					// I did it this way
-					goto labelFuncEthAutomaton_0169;
-				case "Continue":
-					say("\"Thou art correct, and brave as well, seeker. Thou "
-						"dost know that yielding to evil is to admit the "
-						"dominion of that evil.\" *\"Ethicality demands that "
-						"thou shouldst maintain thy virtue and oppose evil, "
-						"even at the cost of thy life.\"");
-					say("\"Thou hast answered well... Of all virtues, "
-						"Ethicality is often the most subjective and "
-						"tenuous.\" *\"Thou art worthy to begin the test...\"");
-					UI_pop_answers();
-					UI_pop_answers();
-					ETH_AUTOMATON->set_item_flag(MET);
-					UI_fade_palette(0x000C, 0x0001, 0x0000);
-					AVATAR->move_object([0x09AE, 0x036F, 0x0000]);
-					UI_play_sound_effect(0x0066);
-					var0001 = script AVATAR after 5 ticks {
-						nohalt;
-						call Func0636;
-					};
-					gflags[TEST_NEVER_YIELDED] = true;
-					abort;
-				case "Flee":
-					say("\"Thou art incorrect, seeker. While thou must never "
-						"seek to throw thy life away, Ethicality demands that "
-						"thou must seek to preserve the life of others as thou "
-						"wouldst thine own.\" *\"No man's fate is certain "
-						"while he yet lives. Thine actions can change the "
-						"course of fate...\"");
-					UI_pop_answers();
-					// This could be a break instead; the original
-					// skips the endconv from a break, which is why
-					// I did it this way
-					goto labelFuncEthAutomaton_0169;
+break_converse:
+				breakable {
+					converse(["Risk Death", "Flee"]) {
+					case "Risk Death":
+						say("\"Thou art correct. Ethicality demands that thou must "
+							"seek to preserve the life of others, as thou wouldst "
+							"thine own.\" *\"No man's fate is certain while he yet "
+							"lives. Thine actions can change the course of "
+							"fate...\"");
+						UI_push_answers();
+						say("\"Question Two: If thou didst come upon a room of "
+							"untold wealth within a structure where thou didst not "
+							"know if the owner lived, would it be Ethical to take "
+							"the money if thou wert in sore need? Or wouldst thou "
+							"leave the money to possibly be used for evil ends?\"");
+						add(["Take the Money", "Leave the Money"]);
+						fallthrough;
+					case "Take the Money":
+						say("\"No matter what the need, seeker, Ethicality demands "
+							"that thou not takest anything without permission. It "
+							"is difficult to weigh these things at times, but thou "
+							"shalt find it easier as time passes...\"");
+						UI_pop_answers();
+						break break_converse;
+					case "Leave the Money":
+						say("\"Thou art correct, seeker. Thou wouldst have no idea "
+							"what the money was to be used for.\" *\"Ethicality "
+							"demands that thou not takest anything without "
+							"permission, no matter what the need. If thou wouldst "
+							"stand in judgment of another, thou must be sure of "
+							"thine Ethicality.\"");
+						UI_push_answers();
+						say("\"Finally, Question Three: If thou wert faced with "
+							"the certainty of thy death at the hands of an "
+							"unethical man, wouldst thou yield to him to save thy "
+							"life? Or would Ethicality demand that thou shouldst "
+							"continue the struggle unto death?\"");
+						add(["Yield", "Continue"]);
+						fallthrough;
+					case "Yield":
+						say("\"No, seeker. If thou shouldst yield to one who is "
+							"evil, even to save thy life, then thou art admitting "
+							"the dominion of that evil.\"");
+						say("\"Thy life doth have little value if thou dost "
+							"abandon thy virtue. Ethicality demands that thou wilt "
+							"oppose evil in all ways, even at the cost of thine "
+							"own life.\"");
+						UI_pop_answers();
+						UI_pop_answers();
+						break break_converse;
+					case "Continue":
+						say("\"Thou art correct, and brave as well, seeker. Thou "
+							"dost know that yielding to evil is to admit the "
+							"dominion of that evil.\" *\"Ethicality demands that "
+							"thou shouldst maintain thy virtue and oppose evil, "
+							"even at the cost of thy life.\"");
+						say("\"Thou hast answered well... Of all virtues, "
+							"Ethicality is often the most subjective and "
+							"tenuous.\" *\"Thou art worthy to begin the test...\"");
+						UI_pop_answers();
+						UI_pop_answers();
+						ETH_AUTOMATON->set_item_flag(MET);
+						UI_fade_palette(0x000C, 0x0001, 0x0000);
+						AVATAR->move_object([0x09AE, 0x036F, 0x0000]);
+						UI_play_sound_effect(0x0066);
+						var0001 = script AVATAR after 5 ticks {
+							nohalt;
+							call Func0636;
+						};
+						gflags[TEST_NEVER_YIELDED] = true;
+						abort;
+					case "Flee":
+						say("\"Thou art incorrect, seeker. While thou must never "
+							"seek to throw thy life away, Ethicality demands that "
+							"thou must seek to preserve the life of others as thou "
+							"wouldst thine own.\" *\"No man's fate is certain "
+							"while he yet lives. Thine actions can change the "
+							"course of fate...\"");
+						UI_pop_answers();
+						break break_converse;
+					}
 				}
-			labelFuncEthAutomaton_0169:
 				say("\"I am sorry, seeker. It is necessary for thee to think "
 					"more about these questions before undergoing the tests. "
 					"Please return after further meditation.\"");
@@ -83390,37 +83370,39 @@ void Func07A3 object#(0x7A3) () {
 }
 
 void Func07A4 object#(0x7A4) () {
-	if (event == EGG) {
-		event = DOUBLECLICK;
-		var var0000 = find_nearby(0x010E, 0x0028, MASK_NONE);
-		var0000 &= find_nearby(0x0178, 0x0028, MASK_NONE);
-		var var0001 = [];
-		declare var var0004;
-		for (var0004 in var0000) {
-			var0001 &= get_distance(var0004);
-		}
-		var0000 = Func0989(var0000, var0001);
-		var var0005 = 0x0001;
-		forever {
-			var0004 = var0000[var0005];
-			if (!var0004) {
-				// TODO: Need to make UCC optimize this
-				goto labelFunc07A4_00BE;
+exit_function:
+	breakable {
+		if (event == EGG) {
+			event = DOUBLECLICK;
+			var var0000 = find_nearby(0x010E, 0x0028, MASK_NONE);
+			var0000 &= find_nearby(0x0178, 0x0028, MASK_NONE);
+			var var0001 = [];
+			declare var var0004;
+			for (var0004 in var0000) {
+				var0001 &= get_distance(var0004);
 			}
-			if (Func0906(var0004) != 0x0002) {
-				break;
+			var0000 = Func0989(var0000, var0001);
+			var var0005 = 0x0001;
+			forever {
+				var0004 = var0000[var0005];
+				if (!var0004) {
+					// TODO: Need to make UCC optimize this
+					break exit_function;
+				}
+				if (Func0906(var0004) != 0x0002) {
+					break;
+				}
+				var0005 += 0x0001;
 			}
-			var0005 += 0x0001;
-		}
-		var var0006 = var0004->get_item_shape();
-		if (var0006 == 0x010E) {
-			var0004->Func010E();
-		}
-		if (var0006 == 0x0178) {
-			var0004->Func0178();
+			var var0006 = var0004->get_item_shape();
+			if (var0006 == 0x010E) {
+				var0004->Func010E();
+			}
+			if (var0006 == 0x0178) {
+				var0004->Func0178();
+			}
 		}
 	}
-labelFunc07A4_00BE:
 	return;
 }
 
@@ -87673,62 +87655,58 @@ void Func07FC object#(0x7FC) () {
 			say("\"What hast thou to do with me? I did not even set eyes upon ",
 				var0002, " until this trial.\"");
 		}
-		converse(
-				["the character of the accused", "Daemonism", "no questions"]) {
-		case "the character of the accused":
-			remove(["the character of the accused", "no questions"]);
-			add("no further questions");
-			if (JOTH->get_item_flag(MET)) {
-				var0003 = Func08AC(false);
-				if (gflags[IOLO_ACCUSED]) {
-					say("\"To be honest, he did not strike me as an honest "
-						"man. Never cared much for bards. Louts, every one of "
-						"them!\"");
+break_converse:
+		breakable {
+			converse(
+					["the character of the accused", "Daemonism", "no questions"]) {
+			case "the character of the accused":
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
+				if (JOTH->get_item_flag(MET)) {
+					var0003 = Func08AC(false);
+					if (gflags[IOLO_ACCUSED]) {
+						say("\"To be honest, he did not strike me as an honest "
+							"man. Never cared much for bards. Louts, every one of "
+							"them!\"");
+					}
+					if (gflags[DUPRE_ACCUSED]) {
+						say("\"Well, I must say that I find him likable. He does "
+							"his duty without blabbering all the time.\"");
+						say("\"Hard to believe a good man like Dupre would be in "
+							"league with Daemon British...\"");
+					}
+					if (gflags[SHAMINO_ACCUSED]) {
+						say("\"Hard to say. He doth not talk much, and always "
+							"seems to be in a hurry...\"");
+						say("\"Couldn't say more than that. Merely an ordinary "
+							"knave.\"");
+					}
+				} else {
+					say("\"Art thou daft? I said that I have never met the man. I "
+						"can form no opinion.\"");
 				}
-				if (gflags[DUPRE_ACCUSED]) {
-					say("\"Well, I must say that I find him likable. He does "
-						"his duty without blabbering all the time.\"");
-					say("\"Hard to believe a good man like Dupre would be in "
-						"league with Daemon British...\"");
-				}
-				if (gflags[SHAMINO_ACCUSED]) {
-					say("\"Hard to say. He doth not talk much, and always "
-						"seems to be in a hurry...\"");
-					say("\"Couldn't say more than that. Merely an ordinary "
-						"knave.\"");
-				}
-			} else {
-				say("\"Art thou daft? I said that I have never met the man. I "
-					"can form no opinion.\"");
+				fallthrough;
+			case "Daemonism":
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
+				say("\"Look here, ", var0001,
+					". I'm a captain, not a theologian. I find it hard to believe "
+					"in something I can't touch or smell.\"");
+				say("\"Yet all of our legends tell of this Beast British, and his "
+					"crimes against our ancestors.\"");
+				say("\"I suppose I don't know what to believe -- pardon me, "
+					"Kylista...\"");
+				fallthrough;
+			case "no questions":
+				AVATAR->show_npc_face1(0x0000);
+				say("\"Forgive me. I have no questions for thee.\"");
+				Func097F(item, "@Waste of time...@", 0x0000);
+				break break_converse;
+			case "no further questions":
+				Func097F(AVATAR, "@No further questions...@", 0x0000);
+				break break_converse;
 			}
-			fallthrough;
-		case "Daemonism":
-			remove(["Daemonism", "no questions"]);
-			add("no further questions");
-			say("\"Look here, ", var0001,
-				". I'm a captain, not a theologian. I find it hard to believe "
-				"in something I can't touch or smell.\"");
-			say("\"Yet all of our legends tell of this Beast British, and his "
-				"crimes against our ancestors.\"");
-			say("\"I suppose I don't know what to believe -- pardon me, "
-				"Kylista...\"");
-			fallthrough;
-		case "no questions":
-			AVATAR->show_npc_face1(0x0000);
-			say("\"Forgive me. I have no questions for thee.\"");
-			Func097F(item, "@Waste of time...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0135;
-		case "no further questions":
-			Func097F(AVATAR, "@No further questions...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0135;
 		}
-	labelFunc07FC_0135:
 		gflags[FAWN_TRIAL_LEON_JOTH_SPOKE] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = JOTH->get_object_position() & (0x0004 & 0x0006);
@@ -87746,59 +87724,55 @@ void Func07FC object#(0x7FC) () {
 		GARTH->show_npc_face0(0x0000);
 		say("\"Question me! I am ready. On what subject dost thou desire "
 			"information?\"");
-		converse(
-				["the character of the accused", "Daemonism", "no questions"]) {
-		case "the character of the accused":
-			remove(["the character of the accused", "no questions"]);
-			add("no further questions");
-			var0003 = Func0992(0x0001, 0x0000, 0x0000, true);
-			var0003 = var0003->get_npc_name();
-			say("\"I have met him face to face, and I find ", var0003,
-				" to be the most surly, disrespectful man I have ever seen.\"");
-			say("\"He offends with every breath that comes out of his ugly "
-				"face!\"");
-			var var0007 = Func08AC(false);
-			if (var0003 != var0007) {
-				OLON->show_npc_face1(0x0000);
-				say("\"Captain, thou art confused. It is ", var0007,
-					" on trial, not ", var0003, ".\"");
-				UI_remove_npc_face1();
-				UI_set_conversation_slot(0);
-				say("\"Why, thou art right, sailor. Nevertheless, I stand by "
-					"my sworn testimony!\"");
-				OLON->show_npc_face1(0x0000);
-				say("\"I may be drunk, but I'm not stupid...\"");
-				UI_remove_npc_face1();
-				UI_set_conversation_slot(0);
+break_converse2:
+		breakable {
+			converse(
+					["the character of the accused", "Daemonism", "no questions"]) {
+			case "the character of the accused":
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
+				var0003 = Func0992(0x0001, 0x0000, 0x0000, true);
+				var0003 = var0003->get_npc_name();
+				say("\"I have met him face to face, and I find ", var0003,
+					" to be the most surly, disrespectful man I have ever seen.\"");
+				say("\"He offends with every breath that comes out of his ugly "
+					"face!\"");
+				var var0007 = Func08AC(false);
+				if (var0003 != var0007) {
+					OLON->show_npc_face1(0x0000);
+					say("\"Captain, thou art confused. It is ", var0007,
+						" on trial, not ", var0003, ".\"");
+					UI_remove_npc_face1();
+					UI_set_conversation_slot(0);
+					say("\"Why, thou art right, sailor. Nevertheless, I stand by "
+						"my sworn testimony!\"");
+					OLON->show_npc_face1(0x0000);
+					say("\"I may be drunk, but I'm not stupid...\"");
+					UI_remove_npc_face1();
+					UI_set_conversation_slot(0);
+				}
+				fallthrough;
+			case "Daemonism":
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
+				say("\"Lest anyone be confused, let me state unequivocably that "
+					"Daemons exist. Evil is real!\"");
+				say("\"The tales of our forefathers -- about the Daemon King named "
+					"British, and the lands he stole in the name of Virtue -- are "
+					"literally true.\"");
+				say("\"Lastly, I have absolute faith in the Priestess of Beauty... "
+					"wherever she may be. She is too beautiful to be wrong!\"");
+				fallthrough;
+			case "no questions":
+				AVATAR->show_npc_face1(0x0000);
+				say("\"Forgive me. I have no questions for thee.\"");
+				Func097F(item, "@Damned traitor...@", 0x0000);
+				break break_converse2;
+			case "no further questions":
+				Func097F(AVATAR, "@No further questions...@", 0x0000);
+				break break_converse2;
 			}
-			fallthrough;
-		case "Daemonism":
-			remove(["Daemonism", "no questions"]);
-			add("no further questions");
-			say("\"Lest anyone be confused, let me state unequivocably that "
-				"Daemons exist. Evil is real!\"");
-			say("\"The tales of our forefathers -- about the Daemon King named "
-				"British, and the lands he stole in the name of Virtue -- are "
-				"literally true.\"");
-			say("\"Lastly, I have absolute faith in the Priestess of Beauty... "
-				"wherever she may be. She is too beautiful to be wrong!\"");
-			fallthrough;
-		case "no questions":
-			AVATAR->show_npc_face1(0x0000);
-			say("\"Forgive me. I have no questions for thee.\"");
-			Func097F(item, "@Damned traitor...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_02C2;
-		case "no further questions":
-			Func097F(AVATAR, "@No further questions...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_02C2;
 		}
-	labelFunc07FC_02C2:
 		gflags[FAWN_TRIAL_RUGGS_GARTH_SPOKE] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = GARTH->get_object_position() & (0x0005 & 0x0006);
@@ -87830,128 +87804,124 @@ void Func07FC object#(0x7FC) () {
 			add("Gwenno");
 		}
 		declare var var0008;
-		converse("no questions") {
-		case "strange objects":
-			remove(["strange objects", "no questions"]);
-			add("no further questions");
-			say("\"That is what I said in my testimony -- ", var0002,
-				" brought me strange items, and asked me to identify them.\"");
-			var0008 = Func0992(
-					0x0001,
-					"@But thou art an innkeeper! Surely, many folks bring thee "
-					"mysteries...@",
-					0x0000, false);
-			UI_set_conversation_slot(0);
-			say("\"Mayhaps, stranger. But nothing half so strange...\"");
-			fallthrough;
-		case "ancient ruins":
-			remove(["ancient ruins", "no questions"]);
-			add("no further questions");
-			say("\"", var0002,
-				" did ask me about the ancient ruins, indeed. Very "
-				"suspicious.\"");
-			var0008 = Func0992(
-					0x0001, "@Surely, others ask of these same things?@",
-					0x0000, false);
-			UI_set_conversation_slot(0);
-			say("\"Indeed, the sage Batlin was also curious about the "
-				"ruins.\"");
-			GARTH->show_npc_face1(0x0000);
-			say("\"See how the evidence convicts him! I tell thee, this ",
-				var0002,
-				" works for Batlin, and both are tools of Beast British!\"");
-			UI_remove_npc_face1();
-			UI_set_conversation_slot(0);
-			fallthrough;
-		case "savages":
-			remove(["savages", "no questions"]);
-			add("no further questions");
-			say("\"We did speak of the northern barbarians, ", var0002,
-				" and I. He seemed to relish the most grisly parts of the "
-				"tale.\"");
-			OLON->show_npc_face1(0x0000);
-			say("\"Ah, but thou dost tell that tale to everyone, Jendon. Thou "
-				"canst not convict a man for listening to thy tales...\"");
-			UI_remove_npc_face1();
-			UI_set_conversation_slot(0);
-			fallthrough;
-		case "Gwenno":
-			remove(["Gwenno", "no questions"]);
-			add("no further questions");
-			say("\"Yes, I did meet the scholar when she was here. A fine lady, "
-				"of good temperament.\"");
-			if (gflags[IOLO_ACCUSED]) {
-				say("\"I find it hard to believe that Iolo could be guilty of "
-					"Daemonism, yet be wed to such a wonderful lady.\"");
-			} else {
-				say("\"But I fail to see any connection between that good "
-					"lady, and this trial.\"");
-			}
-			fallthrough;
-		case "the character of the accused":
-			remove(["the character of the accused", "no questions"]);
-			add("no further questions");
-			if (JENDON->get_item_flag(MET)) {
+break_converse3:
+		breakable {
+			converse("no questions") {
+			case "strange objects":
+				remove(["strange objects", "no questions"]);
+				add("no further questions");
+				say("\"That is what I said in my testimony -- ", var0002,
+					" brought me strange items, and asked me to identify them.\"");
+				var0008 = Func0992(
+						0x0001,
+						"@But thou art an innkeeper! Surely, many folks bring thee "
+						"mysteries...@",
+						0x0000, false);
+				UI_set_conversation_slot(0);
+				say("\"Mayhaps, stranger. But nothing half so strange...\"");
+				fallthrough;
+			case "ancient ruins":
+				remove(["ancient ruins", "no questions"]);
+				add("no further questions");
+				say("\"", var0002,
+					" did ask me about the ancient ruins, indeed. Very "
+					"suspicious.\"");
+				var0008 = Func0992(
+						0x0001, "@Surely, others ask of these same things?@",
+						0x0000, false);
+				UI_set_conversation_slot(0);
+				say("\"Indeed, the sage Batlin was also curious about the "
+					"ruins.\"");
+				GARTH->show_npc_face1(0x0000);
+				say("\"See how the evidence convicts him! I tell thee, this ",
+					var0002,
+					" works for Batlin, and both are tools of Beast British!\"");
+				UI_remove_npc_face1();
+				UI_set_conversation_slot(0);
+				fallthrough;
+			case "savages":
+				remove(["savages", "no questions"]);
+				add("no further questions");
+				say("\"We did speak of the northern barbarians, ", var0002,
+					" and I. He seemed to relish the most grisly parts of the "
+					"tale.\"");
+				OLON->show_npc_face1(0x0000);
+				say("\"Ah, but thou dost tell that tale to everyone, Jendon. Thou "
+					"canst not convict a man for listening to thy tales...\"");
+				UI_remove_npc_face1();
+				UI_set_conversation_slot(0);
+				fallthrough;
+			case "Gwenno":
+				remove(["Gwenno", "no questions"]);
+				add("no further questions");
+				say("\"Yes, I did meet the scholar when she was here. A fine lady, "
+					"of good temperament.\"");
 				if (gflags[IOLO_ACCUSED]) {
-					say("\"A prince of a man! Why, when he breaks into song, I "
-						"can hardly keep the crowds out of mine inn!\"");
-					YELINDA->show_npc_face1(0x0000);
-					say("\"Such a man hardly sounds like the servant of "
-						"Daemons, innkeeper.\"");
-					UI_remove_npc_face1();
-					UI_set_conversation_slot(0);
-					say("\"Aye. But then again, doth legend not claim that "
-						"Daemons have silver tongues? This Iolo doth certainly "
-						"have charm...\"");
+					say("\"I find it hard to believe that Iolo could be guilty of "
+						"Daemonism, yet be wed to such a wonderful lady.\"");
+				} else {
+					say("\"But I fail to see any connection between that good "
+						"lady, and this trial.\"");
 				}
-				if (gflags[SHAMINO_ACCUSED]) {
-					say("\"Can't say as I like him much, ", var0001,
-						". He doth not drink much, nor doth he seem to enjoy "
-						"the entertainments of the inn.\"");
-					ZULITH->show_npc_face1(0x0000);
-					say("\"Doth Shamino not have the passions of a normal man, "
-						"Jendon?\"");
-					UI_remove_npc_face1();
-					UI_set_conversation_slot(0);
-					say("\"Perhaps. Or he may merely be driven by his cause. "
-						"Shamino is far too serious.\"");
+				fallthrough;
+			case "the character of the accused":
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
+				if (JENDON->get_item_flag(MET)) {
+					if (gflags[IOLO_ACCUSED]) {
+						say("\"A prince of a man! Why, when he breaks into song, I "
+							"can hardly keep the crowds out of mine inn!\"");
+						YELINDA->show_npc_face1(0x0000);
+						say("\"Such a man hardly sounds like the servant of "
+							"Daemons, innkeeper.\"");
+						UI_remove_npc_face1();
+						UI_set_conversation_slot(0);
+						say("\"Aye. But then again, doth legend not claim that "
+							"Daemons have silver tongues? This Iolo doth certainly "
+							"have charm...\"");
+					}
+					if (gflags[SHAMINO_ACCUSED]) {
+						say("\"Can't say as I like him much, ", var0001,
+							". He doth not drink much, nor doth he seem to enjoy "
+							"the entertainments of the inn.\"");
+						ZULITH->show_npc_face1(0x0000);
+						say("\"Doth Shamino not have the passions of a normal man, "
+							"Jendon?\"");
+						UI_remove_npc_face1();
+						UI_set_conversation_slot(0);
+						say("\"Perhaps. Or he may merely be driven by his cause. "
+							"Shamino is far too serious.\"");
+					}
+					if (gflags[DUPRE_ACCUSED]) {
+						say("\"He can out-drink any man in this town, and I think "
+							"he could out-fight nearly everyone except Jorvin!\"");
+						say("\"I must admit, Dupre is a likable man. Hard to "
+							"believe he's a tool of Beast British.\"");
+					}
+				} else {
+					say("\"Not having met the man, I have little to say about him. "
+						"He needs a shave.\"");
 				}
-				if (gflags[DUPRE_ACCUSED]) {
-					say("\"He can out-drink any man in this town, and I think "
-						"he could out-fight nearly everyone except Jorvin!\"");
-					say("\"I must admit, Dupre is a likable man. Hard to "
-						"believe he's a tool of Beast British.\"");
-				}
-			} else {
-				say("\"Not having met the man, I have little to say about him. "
-					"He needs a shave.\"");
+				fallthrough;
+			case "Daemonism":
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
+				say("\"Do I believe in Daemonism? Of course. My mother told me the "
+					"legends when I was a mere child.\"");
+				say("\"And even if I didn't -- why, I'm an innkeeper, ", var0001,
+					". For the sake of my business, friend, I dare not disagree "
+					"with the Priestess of Beauty.\"");
+				fallthrough;
+			case "no questions":
+				AVATAR->show_npc_face1(0x0000);
+				say("\"Forgive me. I have no questions for thee.\"");
+				Func097F(item, "@Strange kind of person...@", 0x0000);
+				break break_converse3;
+			case "no further questions":
+				Func097F(AVATAR, "@No further questions...@", 0x0000);
+				break break_converse3;
 			}
-			fallthrough;
-		case "Daemonism":
-			remove(["Daemonism", "no questions"]);
-			add("no further questions");
-			say("\"Do I believe in Daemonism? Of course. My mother told me the "
-				"legends when I was a mere child.\"");
-			say("\"And even if I didn't -- why, I'm an innkeeper, ", var0001,
-				". For the sake of my business, friend, I dare not disagree "
-				"with the Priestess of Beauty.\"");
-			fallthrough;
-		case "no questions":
-			AVATAR->show_npc_face1(0x0000);
-			say("\"Forgive me. I have no questions for thee.\"");
-			Func097F(item, "@Strange kind of person...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0595;
-		case "no further questions":
-			Func097F(AVATAR, "@No further questions...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0595;
 		}
-	labelFunc07FC_0595:
 		gflags[FAWN_TRIAL_JENDON_SPOKE] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = JENDON->get_object_position() & (0x0010 & 0x0006);
@@ -87974,72 +87944,68 @@ void Func07FC object#(0x7FC) () {
 		if (gflags[TRIAL_ASK_DELPHYNIA_VARO_LEAVES]) {
 			add("Varo Leaves");
 		}
-		converse("no questions") {
-		case "Varo Leaves":
-			remove(["Varo Leaves", "no questions"]);
-			add("no further questions");
-			say("\"I did provide Varo Leaves for ", var0002,
-				", as I did testify before. And such leaves are used to treat "
-				"poisons and curses.\"");
-			AVATAR->show_npc_face1(0x0000);
-			say("\"It was not ", var0002,
-				" who was cursed, Delphynia. 'Twas I, poisoned by a "
-				"treacherous woman in the city of Monitor.\"");
-			UI_remove_npc_face1();
-			UI_set_conversation_slot(0);
-			say("\"Mine apologies, ", var0001, ". I did not know...\"");
-			GARTH->show_npc_face1(0x0000);
-			say("\"How do we know this to be true? I say that he lies!\"");
-			UI_remove_npc_face1();
-			UI_set_conversation_slot(0);
-			fallthrough;
-		case "the character of the accused":
-			remove(["the character of the accused", "no questions"]);
-			add("no further questions");
-			if (gflags[IOLO_ACCUSED]) {
-				say("\"He did strike me as a kindly man, of affable "
-					"temperament. Good with children. Not the kind to consort "
-					"with Daemons.\"");
+break_converse4:
+		breakable {
+			converse("no questions") {
+			case "Varo Leaves":
+				remove(["Varo Leaves", "no questions"]);
+				add("no further questions");
+				say("\"I did provide Varo Leaves for ", var0002,
+					", as I did testify before. And such leaves are used to treat "
+					"poisons and curses.\"");
+				AVATAR->show_npc_face1(0x0000);
+				say("\"It was not ", var0002,
+					" who was cursed, Delphynia. 'Twas I, poisoned by a "
+					"treacherous woman in the city of Monitor.\"");
+				UI_remove_npc_face1();
+				UI_set_conversation_slot(0);
+				say("\"Mine apologies, ", var0001, ". I did not know...\"");
+				GARTH->show_npc_face1(0x0000);
+				say("\"How do we know this to be true? I say that he lies!\"");
+				UI_remove_npc_face1();
+				UI_set_conversation_slot(0);
+				fallthrough;
+			case "the character of the accused":
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
+				if (gflags[IOLO_ACCUSED]) {
+					say("\"He did strike me as a kindly man, of affable "
+						"temperament. Good with children. Not the kind to consort "
+						"with Daemons.\"");
+				}
+				if (gflags[SHAMINO_ACCUSED]) {
+					say("\"He doth have honest eyes. He is a hard man to like, but "
+						"I do not think he is a bad sort.\"");
+				}
+				if (gflags[DUPRE_ACCUSED]) {
+					say("\"This man drinks far too much, and his health will "
+						"surely suffer for this some day! He is also a bit of a "
+						"braggart, and he doth think himself a ladies' man --\"");
+					say("\"He did try to steal a kiss from me!\"");
+					say("\"Dupre doth have an evil heart. I'd not be surprised if "
+						"he were in the service of Daemons.\"");
+				}
+				fallthrough;
+			case "Daemonism":
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
+				say("\"I do believe in Daemons. There is much evil in this world, "
+					"and I do not believe that we cause it of ourselves.\"");
+				say("\"Our ancestors did beat the British by escaping to this "
+					"land. Is it so incredible that the Daemon would want "
+					"revenge?\"");
+				say("\"We should be very afraid, all of us...\"");
+				fallthrough;
+			case "no questions":
+				AVATAR->show_npc_face1(0x0000);
+				say("\"Forgive me. I have no questions for thee.\"");
+				Func097F(item, "@Never mind...@", 0x0000);
+				break break_converse4;
+			case "no further questions":
+				Func097F(AVATAR, "@No further questions...@", 0x0000);
+				break break_converse4;
 			}
-			if (gflags[SHAMINO_ACCUSED]) {
-				say("\"He doth have honest eyes. He is a hard man to like, but "
-					"I do not think he is a bad sort.\"");
-			}
-			if (gflags[DUPRE_ACCUSED]) {
-				say("\"This man drinks far too much, and his health will "
-					"surely suffer for this some day! He is also a bit of a "
-					"braggart, and he doth think himself a ladies' man --\"");
-				say("\"He did try to steal a kiss from me!\"");
-				say("\"Dupre doth have an evil heart. I'd not be surprised if "
-					"he were in the service of Daemons.\"");
-			}
-			fallthrough;
-		case "Daemonism":
-			remove(["Daemonism", "no questions"]);
-			add("no further questions");
-			say("\"I do believe in Daemons. There is much evil in this world, "
-				"and I do not believe that we cause it of ourselves.\"");
-			say("\"Our ancestors did beat the British by escaping to this "
-				"land. Is it so incredible that the Daemon would want "
-				"revenge?\"");
-			say("\"We should be very afraid, all of us...\"");
-			fallthrough;
-		case "no questions":
-			AVATAR->show_npc_face1(0x0000);
-			say("\"Forgive me. I have no questions for thee.\"");
-			Func097F(item, "@Never mind...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_074A;
-		case "no further questions":
-			Func097F(AVATAR, "@No further questions...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_074A;
 		}
-	labelFunc07FC_074A:
 		gflags[FAWN_TRIAL_DELPHYNIA_SPOKE] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = DELPHYNIA->get_object_position() & (0x0012 & 0x0006);
@@ -88062,77 +88028,73 @@ void Func07FC object#(0x7FC) () {
 		if (gflags[TRIAL_ASK_ALYSSAND_RING]) {
 			add("engagement ring");
 		}
-		converse("no questions") {
-		case "engagement ring":
-			remove(["engagement ring", "no questions"]);
-			add("no further questions");
-			say("\"That is what Alyssand said in her testimony -- that thy "
-				"friend did return her engagement ring to her.\"");
-			say("\"Mighty nice of him, I say. He looks to be a good lad. Doth "
-				"he need a wife?\"");
-			if (gflags[IOLO_ACCUSED]) {
-				IOLO->show_npc_face1(0x0000);
-				say("\"I already have a wife, thank thee!\"");
+break_converse5:
+		breakable {
+			converse("no questions") {
+			case "engagement ring":
+				remove(["engagement ring", "no questions"]);
+				add("no further questions");
+				say("\"That is what Alyssand said in her testimony -- that thy "
+					"friend did return her engagement ring to her.\"");
+				say("\"Mighty nice of him, I say. He looks to be a good lad. Doth "
+					"he need a wife?\"");
+				if (gflags[IOLO_ACCUSED]) {
+					IOLO->show_npc_face1(0x0000);
+					say("\"I already have a wife, thank thee!\"");
+				}
+				if (gflags[DUPRE_ACCUSED]) {
+					DUPRE->show_npc_face1(0x0000);
+					say("\"I'm afraid thy daughter is not lively enough for me, "
+						"old man.\"");
+				}
+				if (gflags[SHAMINO_ACCUSED]) {
+					SHAMINO->show_npc_face1(0x0000);
+					say("\"This is not the time for idle chat, good man. My life "
+						"is at stake!\"");
+				}
+				UI_remove_npc_face1();
+				UI_set_conversation_slot(0);
+				say("\"I know that the Priestess fears that the ring was stolen by "
+					"magical means. But what about the storms! They steal things "
+					"every day. Could not a storm have taken my daughter's "
+					"ring?\"");
+				fallthrough;
+			case "the character of the accused":
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
+				if (gflags[IOLO_ACCUSED]) {
+					say("\"He looks to be too old for my daughter, now that I see "
+						"him clearly.\"");
+					say("\"When a man ages, he starts to lose his mind. Wouldn't "
+						"want mine Alyssand to have to deal with someone like "
+						"that...\"");
+				}
+				if (gflags[SHAMINO_ACCUSED]) {
+					say("\"Doth he not ever smile? He doth have the look of a "
+						"convict, that's what I say.\"");
+				}
+				if (gflags[DUPRE_ACCUSED]) {
+					say("\"He looks like a fine lad, he doth.\"");
+					say("\"", var0002,
+						"! Come by the shop afterwards, and I'll introduce ye to "
+						"my daughter!\"");
+				}
+				fallthrough;
+			case "Daemonism":
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
+				say("\"Very frightening. Don't care much for Daemons.\"");
+				fallthrough;
+			case "no questions":
+				AVATAR->show_npc_face1(0x0000);
+				say("\"Forgive me. I have no questions for thee.\"");
+				Func097F(item, "@Nor I for thee...@", 0x0000);
+				break break_converse5;
+			case "no further questions":
+				Func097F(AVATAR, "@No further questions...@", 0x0000);
+				break break_converse5;
 			}
-			if (gflags[DUPRE_ACCUSED]) {
-				DUPRE->show_npc_face1(0x0000);
-				say("\"I'm afraid thy daughter is not lively enough for me, "
-					"old man.\"");
-			}
-			if (gflags[SHAMINO_ACCUSED]) {
-				SHAMINO->show_npc_face1(0x0000);
-				say("\"This is not the time for idle chat, good man. My life "
-					"is at stake!\"");
-			}
-			UI_remove_npc_face1();
-			UI_set_conversation_slot(0);
-			say("\"I know that the Priestess fears that the ring was stolen by "
-				"magical means. But what about the storms! They steal things "
-				"every day. Could not a storm have taken my daughter's "
-				"ring?\"");
-			fallthrough;
-		case "the character of the accused":
-			remove(["the character of the accused", "no questions"]);
-			add("no further questions");
-			if (gflags[IOLO_ACCUSED]) {
-				say("\"He looks to be too old for my daughter, now that I see "
-					"him clearly.\"");
-				say("\"When a man ages, he starts to lose his mind. Wouldn't "
-					"want mine Alyssand to have to deal with someone like "
-					"that...\"");
-			}
-			if (gflags[SHAMINO_ACCUSED]) {
-				say("\"Doth he not ever smile? He doth have the look of a "
-					"convict, that's what I say.\"");
-			}
-			if (gflags[DUPRE_ACCUSED]) {
-				say("\"He looks like a fine lad, he doth.\"");
-				say("\"", var0002,
-					"! Come by the shop afterwards, and I'll introduce ye to "
-					"my daughter!\"");
-			}
-			fallthrough;
-		case "Daemonism":
-			remove(["Daemonism", "no questions"]);
-			add("no further questions");
-			say("\"Very frightening. Don't care much for Daemons.\"");
-			fallthrough;
-		case "no questions":
-			AVATAR->show_npc_face1(0x0000);
-			say("\"Forgive me. I have no questions for thee.\"");
-			Func097F(item, "@Nor I for thee...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0904;
-		case "no further questions":
-			Func097F(AVATAR, "@No further questions...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0904;
 		}
-	labelFunc07FC_0904:
 		gflags[FAWN_TRIAL_DELIN_SPOKE] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = DELIN->get_object_position() & (0x000E & 0x0006);
@@ -88156,96 +88118,86 @@ void Func07FC object#(0x7FC) () {
 		UI_set_conversation_slot(0);
 		say("\"I drinks ta forget my pain, innkeeper. Go ahead, Avatar. Ask me "
 			"thy questions.\"");
-		converse([
-			"the character of the accused", "Daemonism", "drinking",
-			"no questions"
-		]) {
-		case "the character of the accused":
-			remove(["the character of the accused", "no questions"]);
-			add("no further questions");
-			if (OLON->get_item_flag(MET)) {
-				if (gflags[IOLO_ACCUSED]) {
-					say("\"He looks like he hath had one too many tips of the "
-						"bottle, if ya know what I mean.\"");
+break_converse6:
+		breakable {
+			converse([
+				"the character of the accused", "Daemonism", "drinking",
+				"no questions"
+			]) {
+			case "the character of the accused":
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
+				if (OLON->get_item_flag(MET)) {
+					if (gflags[IOLO_ACCUSED]) {
+						say("\"He looks like he hath had one too many tips of the "
+							"bottle, if ya know what I mean.\"");
+					}
+					if (gflags[SHAMINO_ACCUSED]) {
+						say("\"What a sourpuss! Wouldn't even share a glass of ale "
+							"with me...\"");
+					}
+					if (gflags[DUPRE_ACCUSED]) {
+						say("\"I love that man! Dupre, sing that drinking song "
+							"thou didst teach me, the one about all the young "
+							"ladies?\"");
+						ZULITH->show_npc_face1(0x0000);
+						say("\"I don't think that would be advisable.\"");
+						UI_remove_npc_face1();
+						UI_set_conversation_slot(0);
+						say("\"I have my lute with me...\"");
+						UI_play_music(0x003B, Func09A0(0x0005, 0x0001));
+						say("\"If all the young ladies were bricks in a pile,\"");
+						UI_play_music(0x003C, Func09A0(0x0005, 0x0001));
+						say("\"I'd be a mason and lay them in style!\"");
+						UI_play_music(0x003D, Func09A0(0x0005, 0x0001));
+						say("\"Roll thy leg over, roll thy leg over...\"");
+						ZULITH->show_npc_face1(0x0000);
+						say("\"Zounds, man! In the earshot of Lady Yelinda? Hast "
+							"thou no decency!\"");
+						Func097F(OLON, "@Leave me alone...@", 0x0000);
+						break break_converse6;
+					}
+				} else {
+					say("\"Don't believe I've met the man before.\"");
 				}
-				if (gflags[SHAMINO_ACCUSED]) {
-					say("\"What a sourpuss! Wouldn't even share a glass of ale "
-						"with me...\"");
-				}
-				if (gflags[DUPRE_ACCUSED]) {
-					say("\"I love that man! Dupre, sing that drinking song "
-						"thou didst teach me, the one about all the young "
-						"ladies?\"");
-					ZULITH->show_npc_face1(0x0000);
-					say("\"I don't think that would be advisable.\"");
-					UI_remove_npc_face1();
-					UI_set_conversation_slot(0);
-					say("\"I have my lute with me...\"");
-					UI_play_music(0x003B, Func09A0(0x0005, 0x0001));
-					say("\"If all the young ladies were bricks in a pile,\"");
-					UI_play_music(0x003C, Func09A0(0x0005, 0x0001));
-					say("\"I'd be a mason and lay them in style!\"");
-					UI_play_music(0x003D, Func09A0(0x0005, 0x0001));
-					say("\"Roll thy leg over, roll thy leg over...\"");
-					ZULITH->show_npc_face1(0x0000);
-					say("\"Zounds, man! In the earshot of Lady Yelinda? Hast "
-						"thou no decency!\"");
-					Func097F(OLON, "@Leave me alone...@", 0x0000);
-					// This could be a break instead; the original
-					// skips the endconv from a break, which is why
-					// I did it this way
-					goto labelFunc07FC_0B2E;
-				}
-			} else {
-				say("\"Don't believe I've met the man before.\"");
+				fallthrough;
+			case "Daemonism":
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
+				say("\"I used ta believe in that stuff. But what Beauty is there "
+					"in the world for a sailor who cannot sail?\"");
+				say("\"If the Oracle is so powerful, why did it not save us from "
+					"the storms? Why did it let so many good men die?\"");
+				GARTH->show_npc_face1(0x0000);
+				say("\"Foul blasphemy! Hold thy tongue, rogue, or face the wrath "
+					"of the Oracle.\"");
+				UI_remove_npc_face1();
+				UI_set_conversation_slot(0);
+				say("\"I may be a drunk, but I be an honest drunk. I shall follow "
+					"no hypocrite ta a watery grave.\"");
+				Func097F(OLON, "@That's all I have to say...@", 0x0000);
+				break break_converse6;
+			case "drinking":
+				remove(["drinking", "no questions"]);
+				add("no further questions");
+				say("\"Why do I drink so much? That's rather a personal "
+					"question...\"");
+				say("\"I be a sailor stranded on the shore, mate. 'Tis no worse "
+					"fate. With my very own eyes, I have seen our fleet blasted to "
+					"wreckage by the storms. I saw sailors die!\"");
+				say("\"Why would a man who hath cheated death not drink, Avatar? "
+					"Perhaps I should have died with my brothers...\"");
+				fallthrough;
+			case "no questions":
+				AVATAR->show_npc_face1(0x0000);
+				say("\"Forgive me. I have no questions for thee.\"");
+				Func097F(item, "@Drunkard...@", 0x0000);
+				break break_converse6;
+			case "no further questions":
+				Func097F(AVATAR, "@No further questions...@", 0x0000);
+				break break_converse6;
 			}
-			fallthrough;
-		case "Daemonism":
-			remove(["Daemonism", "no questions"]);
-			add("no further questions");
-			say("\"I used ta believe in that stuff. But what Beauty is there "
-				"in the world for a sailor who cannot sail?\"");
-			say("\"If the Oracle is so powerful, why did it not save us from "
-				"the storms? Why did it let so many good men die?\"");
-			GARTH->show_npc_face1(0x0000);
-			say("\"Foul blasphemy! Hold thy tongue, rogue, or face the wrath "
-				"of the Oracle.\"");
-			UI_remove_npc_face1();
-			UI_set_conversation_slot(0);
-			say("\"I may be a drunk, but I be an honest drunk. I shall follow "
-				"no hypocrite ta a watery grave.\"");
-			Func097F(OLON, "@That's all I have to say...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0B2E;
-		case "drinking":
-			remove(["drinking", "no questions"]);
-			add("no further questions");
-			say("\"Why do I drink so much? That's rather a personal "
-				"question...\"");
-			say("\"I be a sailor stranded on the shore, mate. 'Tis no worse "
-				"fate. With my very own eyes, I have seen our fleet blasted to "
-				"wreckage by the storms. I saw sailors die!\"");
-			say("\"Why would a man who hath cheated death not drink, Avatar? "
-				"Perhaps I should have died with my brothers...\"");
-			fallthrough;
-		case "no questions":
-			AVATAR->show_npc_face1(0x0000);
-			say("\"Forgive me. I have no questions for thee.\"");
-			Func097F(item, "@Drunkard...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0B2E;
-		case "no further questions":
-			Func097F(AVATAR, "@No further questions...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0B2E;
 		}
-	labelFunc07FC_0B2E:
 		gflags[FAWN_TRIAL_OLON_SPOKE] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = OLON->get_object_position() & (0x0011 & 0x0006);
@@ -88263,68 +88215,61 @@ void Func07FC object#(0x7FC) () {
 		YELINDA->show_npc_face0(0x0000);
 		say("\"I shall answer thy questions, ", var0001,
 			", for the sake of the Oracle. But do not try my patience.\"");
-		converse([
-			"the character of the accused", "Daemonism", "Dupre's words",
-			"no questions"
-		]) {
-		case "Dupre's words":
-			remove(["Dupre's words", "no questions"]);
-			add("no further questions");
-			say("\"I do not remember every word uttered in my presence, ",
-				var0001, ".\"");
-			Func08AC(true)->show_npc_face1(0x0000);
-			say("\"These were mine exact words, Lady -- All hail Lord British "
-				"and the glory that is Britannia!\"");
-			UI_remove_npc_face1();
-			UI_set_conversation_slot(0);
-			say("\"Beauty forbid! Thou hast spouted the blasphemy again!\"");
-			Func097F(YELINDA, "@I cannot bear this!@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0CC8;
-		case "the character of the accused":
-			remove(["the character of the accused", "no questions"]);
-			add("no further questions");
-			if (gflags[IOLO_ACCUSED]) {
-				say("\"He seems to be an unstable man. Sociable at one moment, "
-					"and deranged in the next!\"");
+break_converse7:
+		breakable {
+			converse([
+				"the character of the accused", "Daemonism", "Dupre's words",
+				"no questions"
+			]) {
+			case "Dupre's words":
+				remove(["Dupre's words", "no questions"]);
+				add("no further questions");
+				say("\"I do not remember every word uttered in my presence, ",
+					var0001, ".\"");
+				Func08AC(true)->show_npc_face1(0x0000);
+				say("\"These were mine exact words, Lady -- All hail Lord British "
+					"and the glory that is Britannia!\"");
+				UI_remove_npc_face1();
+				UI_set_conversation_slot(0);
+				say("\"Beauty forbid! Thou hast spouted the blasphemy again!\"");
+				Func097F(YELINDA, "@I cannot bear this!@", 0x0000);
+				break break_converse7;
+			case "the character of the accused":
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
+				if (gflags[IOLO_ACCUSED]) {
+					say("\"He seems to be an unstable man. Sociable at one moment, "
+						"and deranged in the next!\"");
+				}
+				if (gflags[SHAMINO_ACCUSED]) {
+					say("\"He frightens me. Look into those cold, hard eyes! "
+						"Aren't those the eyes of a murderer?\"");
+				}
+				if (gflags[DUPRE_ACCUSED]) {
+					say("\"This is a wild man, full of passions and lusts! I can "
+						"feel his eyes on me now...\"");
+				}
+				fallthrough;
+			case "Daemonism":
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
+				say("\"There is no doubt that Daemon British exists. I have seen "
+					"the records left by previous generations.\"");
+				say("\"The Beast did conquer all of Sosaria, and did force the "
+					"Fawnese to flee into the sea. How cruel!\"");
+				say("\"I have always hated the Beast, and I always shall!\"");
+				fallthrough;
+			case "no questions":
+				AVATAR->show_npc_face1(0x0000);
+				say("\"Forgive me. I have no questions for thee.\"");
+				Func097F(ZULITH, "@Such impudence!@", 0x0002);
+				Func097F(JOTH, "@For shame!@", 0x0000);
+				break break_converse7;
+			case "no further questions":
+				Func097F(AVATAR, "@No further questions...@", 0x0000);
+				break break_converse7;
 			}
-			if (gflags[SHAMINO_ACCUSED]) {
-				say("\"He frightens me. Look into those cold, hard eyes! "
-					"Aren't those the eyes of a murderer?\"");
-			}
-			if (gflags[DUPRE_ACCUSED]) {
-				say("\"This is a wild man, full of passions and lusts! I can "
-					"feel his eyes on me now...\"");
-			}
-			fallthrough;
-		case "Daemonism":
-			remove(["Daemonism", "no questions"]);
-			add("no further questions");
-			say("\"There is no doubt that Daemon British exists. I have seen "
-				"the records left by previous generations.\"");
-			say("\"The Beast did conquer all of Sosaria, and did force the "
-				"Fawnese to flee into the sea. How cruel!\"");
-			say("\"I have always hated the Beast, and I always shall!\"");
-			fallthrough;
-		case "no questions":
-			AVATAR->show_npc_face1(0x0000);
-			say("\"Forgive me. I have no questions for thee.\"");
-			Func097F(ZULITH, "@Such impudence!@", 0x0002);
-			Func097F(JOTH, "@For shame!@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0CC8;
-		case "no further questions":
-			Func097F(AVATAR, "@No further questions...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0CC8;
 		}
-	labelFunc07FC_0CC8:
 		gflags[FAWN_TRIAL_YELINDA_SPOKE] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = YELINDA->get_object_position() & (0x0002 & 0x0006);
@@ -88343,101 +88288,97 @@ void Func07FC object#(0x7FC) () {
 		say("\"Ask thy questions, Avatar. However, I shall reserve the right "
 			"to silence. After all, I am the custodian of Lady Yelinda's "
 			"confidential matters.\"");
-		converse([
-			"the character of the accused", "Daemonism", "following me",
-			"no questions"
-		]) {
-		case "following me":
-			remove(["following me", "no questions"]);
-			add("no further questions");
-			breakable {
-				if (gflags[TRIAL_ZULITH_SPOKE_BEFORE]) {
-					say("\"As I stated in the earlier session of these "
-						"proceedings, ",
-						var0002,
-						" was too sharp for me. However, I did see him "
-						"conferring with Delin's daughter, and she is a known "
-						"sympathizer with The Fellowship!\"");
-				} else {
-					say("\"I do not have to answer that question. This is a "
-						"matter of state security.\"");
-					var0003 = Func0956(["protest", "accept"]);
-					if (var0003 == "protest") {
-						say("\"I don't have to answer thy questions, "
-							"traitor!\"");
-						YELINDA->show_npc_face1(0x0000);
-						say("\"The Oracle must hear all of the facts, if it is "
-							"to decide fairly. Chancellor, I give my "
-							"permission to speak of thy secrets.\"");
+break_converse8:
+		breakable {
+			converse([
+				"the character of the accused", "Daemonism", "following me",
+				"no questions"
+			]) {
+			case "following me":
+				remove(["following me", "no questions"]);
+				add("no further questions");
+				breakable {
+					if (gflags[TRIAL_ZULITH_SPOKE_BEFORE]) {
+						say("\"As I stated in the earlier session of these "
+							"proceedings, ",
+							var0002,
+							" was too sharp for me. However, I did see him "
+							"conferring with Delin's daughter, and she is a known "
+							"sympathizer with The Fellowship!\"");
+					} else {
+						say("\"I do not have to answer that question. This is a "
+							"matter of state security.\"");
+						var0003 = Func0956(["protest", "accept"]);
+						if (var0003 == "protest") {
+							say("\"I don't have to answer thy questions, "
+								"traitor!\"");
+							YELINDA->show_npc_face1(0x0000);
+							say("\"The Oracle must hear all of the facts, if it is "
+								"to decide fairly. Chancellor, I give my "
+								"permission to speak of thy secrets.\"");
+							UI_remove_npc_face1();
+							UI_set_conversation_slot(0);
+						} else {
+							say("\"Ask me something else...\"");
+							break;
+						}
+						say("\"I followed ", var0002,
+							" about this town, until he spotted me. No doubt I "
+							"prevented him from great evil!\"");
+						DELPHYNIA->show_npc_face1(0x0000);
+						say("\"But thou didst not see him actually perform any "
+							"vile acts?\"");
 						UI_remove_npc_face1();
 						UI_set_conversation_slot(0);
-					} else {
-						say("\"Ask me something else...\"");
-						break;
+						say("\"He contacted Alyssand, madam! I saw them speaking "
+							"together, and casting many sly glances in my "
+							"direction.\"");
 					}
-					say("\"I followed ", var0002,
-						" about this town, until he spotted me. No doubt I "
-						"prevented him from great evil!\"");
-					DELPHYNIA->show_npc_face1(0x0000);
-					say("\"But thou didst not see him actually perform any "
-						"vile acts?\"");
+					DELIN->show_npc_face1(0x0000);
+					say("\"My daughter is not on trial here, chancellor...\"");
 					UI_remove_npc_face1();
 					UI_set_conversation_slot(0);
-					say("\"He contacted Alyssand, madam! I saw them speaking "
-						"together, and casting many sly glances in my "
-						"direction.\"");
+					say("\"Well... I suppose not...\"");
 				}
-				DELIN->show_npc_face1(0x0000);
-				say("\"My daughter is not on trial here, chancellor...\"");
-				UI_remove_npc_face1();
-				UI_set_conversation_slot(0);
-				say("\"Well... I suppose not...\"");
+				var0003 = 0x0001;
+				fallthrough;
+			case "the character of the accused":
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
+				if (gflags[IOLO_ACCUSED]) {
+					say("\"Isn't it obvious? The bard is a light-minded man, "
+						"disrespectful of proper authority! Iolo is not a man to "
+						"be trusted.\"");
+				}
+				if (gflags[SHAMINO_ACCUSED]) {
+					say("\"He possesses the grim silence of the professional "
+						"executioner. Shamino never laughs. I find him to be "
+						"disquieting...\"");
+				}
+				if (gflags[DUPRE_ACCUSED]) {
+					say("\"Why, the man is a known drunkard, and a companion of "
+						"thieves and cut-throats. Look at those he consorts "
+						"with!\"");
+				}
+				fallthrough;
+			case "Daemonism":
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
+				say("\"Dost thou not feel the sudden chill in this Temple, at the "
+					"very mention of Beast British?\"");
+				say("\"I tell thee, the Daemon exists, and his schemes to destroy "
+					"Fawn can only be averted by the justice of the Oracle!\"");
+				fallthrough;
+			case "no questions":
+				AVATAR->show_npc_face1(0x0000);
+				say("\"Forgive me. I have no questions for thee.\"");
+				Func097F(item, "@Idiot...@", 0x0000);
+				break break_converse8;
+			case "no further questions":
+				Func097F(AVATAR, "@No further questions...@", 0x0000);
+				break break_converse8;
 			}
-			var0003 = 0x0001;
-			fallthrough;
-		case "the character of the accused":
-			remove(["the character of the accused", "no questions"]);
-			add("no further questions");
-			if (gflags[IOLO_ACCUSED]) {
-				say("\"Isn't it obvious? The bard is a light-minded man, "
-					"disrespectful of proper authority! Iolo is not a man to "
-					"be trusted.\"");
-			}
-			if (gflags[SHAMINO_ACCUSED]) {
-				say("\"He possesses the grim silence of the professional "
-					"executioner. Shamino never laughs. I find him to be "
-					"disquieting...\"");
-			}
-			if (gflags[DUPRE_ACCUSED]) {
-				say("\"Why, the man is a known drunkard, and a companion of "
-					"thieves and cut-throats. Look at those he consorts "
-					"with!\"");
-			}
-			fallthrough;
-		case "Daemonism":
-			remove(["Daemonism", "no questions"]);
-			add("no further questions");
-			say("\"Dost thou not feel the sudden chill in this Temple, at the "
-				"very mention of Beast British?\"");
-			say("\"I tell thee, the Daemon exists, and his schemes to destroy "
-				"Fawn can only be averted by the justice of the Oracle!\"");
-			fallthrough;
-		case "no questions":
-			AVATAR->show_npc_face1(0x0000);
-			say("\"Forgive me. I have no questions for thee.\"");
-			Func097F(item, "@Idiot...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0EB4;
-		case "no further questions":
-			Func097F(AVATAR, "@No further questions...@", 0x0000);
-			// This could be a break instead; the original
-			// skips the endconv from a break, which is why
-			// I did it this way
-			goto labelFunc07FC_0EB4;
 		}
-	labelFunc07FC_0EB4:
 		gflags[FAWN_TRIAL_ZULITH_SPOKE] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = ZULITH->get_object_position() & (0x000A & 0x0006);
@@ -97174,187 +97115,186 @@ void Func0843 id#(0x843) () {
 			declare var var0012;
 			declare var var0013;
 			declare var var0014;
-			if (var000C == "leather armour") {
-				breakable {
-					var0012 = 0x0239;
-					var0013 = 0x000F;
-					if (var0004 > 0x0001) {
-						say("\"How many suits of leather armour wouldst thou "
-							"care to part with?\"");
-						var0014 = UI_input_numeric_value(
-								0x0000, var0004, 0x0001, 0x0000);
-						if (var0014 != 0x0001) {
-							var0013 = 0x000F * var0014;
-							if (var0014 == 0x0000) {
-								say("\"Perhaps another time, ", var0000,
-									"...\"");
-								goto labelFunc0843_05DB;
+ask_sell_more:
+			breakable {
+				if (var000C == "leather armour") {
+					breakable {
+						var0012 = 0x0239;
+						var0013 = 0x000F;
+						if (var0004 > 0x0001) {
+							say("\"How many suits of leather armour wouldst thou "
+								"care to part with?\"");
+							var0014 = UI_input_numeric_value(
+									0x0000, var0004, 0x0001, 0x0000);
+							if (var0014 != 0x0001) {
+								var0013 = 0x000F * var0014;
+								if (var0014 == 0x0000) {
+									say("\"Perhaps another time, ", var0000,
+										"...\"");
+									break ask_sell_more;
+								}
+								say("\"", var0011, "\"");
+								say("\"For thee, ", var0000, ", I can give ",
+									var0013, " monetari for the ", var0014,
+									" suits of leather armour.\"");
+								say("\"", var000E, "\"");
+								break;
 							}
-							say("\"", var0011, "\"");
-							say("\"For thee, ", var0000, ", I can give ",
-								var0013, " monetari for the ", var0014,
-								" suits of leather armour.\"");
-							say("\"", var000E, "\"");
-							break;
 						}
 					}
-				}
-				nobreak {
-					say("\"", var0010, "\"");
-					say("\"Very well, I will buy thy leather armour from thee "
-						"for ",
-						var0013, " monetari.\"");
-					say("\"", var000E, "\"");
-					var0014 = 0x0001;
-				}
-			}
-			if (var000C == "leather gloves") {
-				breakable {
-					var0012 = 0x0243;
-					var0013 = 0x0002;
-					if (var0005 > 0x0001) {
-						say("\"How many pairs of leather gloves wouldst thou "
-							"care to sell?\"");
-						var0014 = UI_input_numeric_value(
-								0x0000, var0005, 0x0001, 0x0000);
-						if (var0014 != 0x0001) {
-							var0013 = 0x0002 * var0014;
-							if (var0014 == 0x0000) {
-								say("\"Perhaps another time, ", var0000,
-									"...\"");
-								goto labelFunc0843_05DB;
-							}
-							say("\"", var0011, "\"");
-							say("\"Hmmm... for thy ", var0014,
-								" pairs of leather gloves I can offer thee ",
-								var0013, " monetari.\"");
-							say("\"", var000E, "\"");
-							break;
-						}
+					nobreak {
+						say("\"", var0010, "\"");
+						say("\"Very well, I will buy thy leather armour from thee "
+							"for ",
+							var0013, " monetari.\"");
+						say("\"", var000E, "\"");
+						var0014 = 0x0001;
 					}
 				}
-				nobreak {
-					say("\"", var0010, "\"");
-					say("\"I can pay thee ", var0013,
-						" monetari for a pair of leather gloves.\"");
-					say("\"", var000E, "\"");
-					var0014 = 0x0001;
-				}
-			}
-			if (var000C == "leather boots") {
-				breakable {
-					var0012 = 0x024B;
-					var0013 = 0x0004;
-					if (var0006 > 0x0001) {
-						say("\"So, how many pairs of leather boots wouldst "
-							"thou like to sell?\"");
-						var0014 = UI_input_numeric_value(
-								0x0000, var0006, 0x0001, 0x0000);
-						if (var0014 != 0x0001) {
-							var0013 = 0x0004 * var0014;
-							if (var0014 == 0x0000) {
-								say("\"Perhaps another time, ", var0000,
-									"...\"");
-								// I see no way other than this
-								goto labelFunc0843_05DB;
+				if (var000C == "leather gloves") {
+					breakable {
+						var0012 = 0x0243;
+						var0013 = 0x0002;
+						if (var0005 > 0x0001) {
+							say("\"How many pairs of leather gloves wouldst thou "
+								"care to sell?\"");
+							var0014 = UI_input_numeric_value(
+									0x0000, var0005, 0x0001, 0x0000);
+							if (var0014 != 0x0001) {
+								var0013 = 0x0002 * var0014;
+								if (var0014 == 0x0000) {
+									say("\"Perhaps another time, ", var0000,
+										"...\"");
+									break ask_sell_more;
+								}
+								say("\"", var0011, "\"");
+								say("\"Hmmm... for thy ", var0014,
+									" pairs of leather gloves I can offer thee ",
+									var0013, " monetari.\"");
+								say("\"", var000E, "\"");
+								break;
 							}
-							say("\"", var0011, "\"");
-							say("\"I can give ", var0013, " monetari for thy ",
-								var0014, " pairs of leather boots.\"");
-							say("\"", var000E, "\"");
-							break;
 						}
 					}
-				}
-				nobreak {
-					say("\"", var0010, "\"");
-					say("\"For this pair of leather boots I can offer ",
-						var0013, " monetari.\"");
-					say("\"", var000E, "\"");
-					var0014 = 0x0001;
-				}
-				var000B = 0x0000;
-			}
-			if (var000C == "leather helm") {
-				breakable {
-					var0012 = 0x03EC;
-					var0013 = 0x0005;
-					if (var0007 > 0x0001) {
-						say("\"Well, how many leather helms wouldst thou care "
-							"to sell?\"");
-						var0014 = UI_input_numeric_value(
-								0x0000, var0007, 0x0001, 0x0000);
-						if (var0014 != 0x0001) {
-							var0013 = 0x0005 * var0014;
-							if (var0014 == 0x0000) {
-								say("\"Perhaps another time, ", var0000,
-									"...\"");
-								// I see no way other than this
-								goto labelFunc0843_05DB;
-							}
-							say("\"", var0011, "\"");
-							say("\"Thy ", var0014,
-								" leather helms will give thee ", var0013,
-								" monetari.\"");
-							say("\"", var000E, "\"");
-							break;
-						}
+					nobreak {
+						say("\"", var0010, "\"");
+						say("\"I can pay thee ", var0013,
+							" monetari for a pair of leather gloves.\"");
+						say("\"", var000E, "\"");
+						var0014 = 0x0001;
 					}
 				}
-				nobreak {
-					say("\"", var0010, "\"");
-					say("\"I can offer ", var0013,
-						" monetari for this leather helm.\"");
-					say("\"", var000E, "\"");
-					var0014 = 0x0001;
-				}
-				var000B = 0x0000;
-			}
-			if (var000C == "leather leggings") {
-				breakable {
-					var0012 = 0x023E;
-					var0013 = 0x000A;
-					if (var0008 > 0x0001) {
-						say("\"How many pairs of leather leggings wouldst thou "
-							"like to sell?\"");
-						var0014 = UI_input_numeric_value(
-								0x0000, var0008, 0x0001, 0x0000);
-						if (var0014 != 0x0001) {
-							var0013 = 0x000A * var0014;
-							if (var0014 == 0x0000) {
-								say("\"Perhaps another time, ", var0000,
-									"...\"");
-								// I see no way other than this
-								goto labelFunc0843_05DB;
+				if (var000C == "leather boots") {
+					breakable {
+						var0012 = 0x024B;
+						var0013 = 0x0004;
+						if (var0006 > 0x0001) {
+							say("\"So, how many pairs of leather boots wouldst "
+								"thou like to sell?\"");
+							var0014 = UI_input_numeric_value(
+									0x0000, var0006, 0x0001, 0x0000);
+							if (var0014 != 0x0001) {
+								var0013 = 0x0004 * var0014;
+								if (var0014 == 0x0000) {
+									say("\"Perhaps another time, ", var0000,
+										"...\"");
+									break ask_sell_more;
+								}
+								say("\"", var0011, "\"");
+								say("\"I can give ", var0013, " monetari for thy ",
+									var0014, " pairs of leather boots.\"");
+								say("\"", var000E, "\"");
+								break;
 							}
-							say("\"", var0011, "\"");
-							say("\"Thy ", var0014,
-								" pairs of leather leggings will give thee ",
-								var0013, " monetari.\"");
-							say("\"", var000E, "\"");
-							break;
 						}
 					}
+					nobreak {
+						say("\"", var0010, "\"");
+						say("\"For this pair of leather boots I can offer ",
+							var0013, " monetari.\"");
+						say("\"", var000E, "\"");
+						var0014 = 0x0001;
+					}
+					var000B = 0x0000;
 				}
-				nobreak {
-					say("\"", var0010, "\"");
-					say("\"So be it, I will buy thy pair of leather leggings "
-						"from thee for ",
-						var0013, " monetari.\"");
-					say("\"", var000E, "\"");
-					var0014 = 0x0001;
+				if (var000C == "leather helm") {
+					breakable {
+						var0012 = 0x03EC;
+						var0013 = 0x0005;
+						if (var0007 > 0x0001) {
+							say("\"Well, how many leather helms wouldst thou care "
+								"to sell?\"");
+							var0014 = UI_input_numeric_value(
+									0x0000, var0007, 0x0001, 0x0000);
+							if (var0014 != 0x0001) {
+								var0013 = 0x0005 * var0014;
+								if (var0014 == 0x0000) {
+									say("\"Perhaps another time, ", var0000,
+										"...\"");
+									break ask_sell_more;
+								}
+								say("\"", var0011, "\"");
+								say("\"Thy ", var0014,
+									" leather helms will give thee ", var0013,
+									" monetari.\"");
+								say("\"", var000E, "\"");
+								break;
+							}
+						}
+					}
+					nobreak {
+						say("\"", var0010, "\"");
+						say("\"I can offer ", var0013,
+							" monetari for this leather helm.\"");
+						say("\"", var000E, "\"");
+						var0014 = 0x0001;
+					}
+					var000B = 0x0000;
+				}
+				if (var000C == "leather leggings") {
+					breakable {
+						var0012 = 0x023E;
+						var0013 = 0x000A;
+						if (var0008 > 0x0001) {
+							say("\"How many pairs of leather leggings wouldst thou "
+								"like to sell?\"");
+							var0014 = UI_input_numeric_value(
+									0x0000, var0008, 0x0001, 0x0000);
+							if (var0014 != 0x0001) {
+								var0013 = 0x000A * var0014;
+								if (var0014 == 0x0000) {
+									say("\"Perhaps another time, ", var0000,
+										"...\"");
+									break ask_sell_more;
+								}
+								say("\"", var0011, "\"");
+								say("\"Thy ", var0014,
+									" pairs of leather leggings will give thee ",
+									var0013, " monetari.\"");
+								say("\"", var000E, "\"");
+								break;
+							}
+						}
+					}
+					nobreak {
+						say("\"", var0010, "\"");
+						say("\"So be it, I will buy thy pair of leather leggings "
+							"from thee for ",
+							var0013, " monetari.\"");
+						say("\"", var000E, "\"");
+						var0014 = 0x0001;
+					}
+				}
+				if (Func0955()) {
+					var var0015 = UI_remove_party_items(
+							var0014, var0012, QUALITY_ANY, var000B, true);
+					var0015 = Func099B(
+							AVATAR, var0013, var0003, QUALITY_ANY, FRAME_ANY,
+							0x0000, true);
+				} else {
+					say("\"If thou dost not want to sell, 'tis fine by me.\"");
 				}
 			}
-			if (Func0955()) {
-				var var0015 = UI_remove_party_items(
-						var0014, var0012, QUALITY_ANY, var000B, true);
-				var0015 = Func099B(
-						AVATAR, var0013, var0003, QUALITY_ANY, FRAME_ANY,
-						0x0000, true);
-			} else {
-				say("\"If thou dost not want to sell, 'tis fine by me.\"");
-			}
-		labelFunc0843_05DB:
 			say("\"Dost thou wish to sell more items?\"");
 			var0002 = Func0955();
 		} else {
@@ -101973,256 +101913,251 @@ void Func0868 id#(0x868) () {
 			declare var var0014;
 			declare var var0015;
 			declare var var0016;
-			if (var000E == "scale armour") {
-				breakable {
-					var0014 = 0x023A;
-					var0015 = 0x001E;
-					if (var0005 > 0x0001) {
-						say("\"How many suits of scale armour wouldst thou "
-							"care to sell?\"");
-						var0016 = UI_input_numeric_value(
-								0x0000, var0005, 0x0001, 0x0000);
-						if (var0016 != 0x0001) {
-							var0015 = 0x001E * var0016;
-							if (var0016 == 0x0000) {
-								say("\"Perhaps another time, ", var0000,
-									"...\"");
-								// I see no way other than this
-								goto labelFunc0868_0785;
+ask_sell_more:
+			breakable {
+				if (var000E == "scale armour") {
+					breakable {
+						var0014 = 0x023A;
+						var0015 = 0x001E;
+						if (var0005 > 0x0001) {
+							say("\"How many suits of scale armour wouldst thou "
+								"care to sell?\"");
+							var0016 = UI_input_numeric_value(
+									0x0000, var0005, 0x0001, 0x0000);
+							if (var0016 != 0x0001) {
+								var0015 = 0x001E * var0016;
+								if (var0016 == 0x0000) {
+									say("\"Perhaps another time, ", var0000,
+										"...\"");
+									break ask_sell_more;
+								}
+								say("\"", var0013, "\"");
+								say("\"Very well, I will buy thy ", var0016,
+									" suits of scale armour from thee for ",
+									var0015, " monetari.\"");
+								say("\"", var0010, "\"");
+								break;
 							}
-							say("\"", var0013, "\"");
-							say("\"Very well, I will buy thy ", var0016,
-								" suits of scale armour from thee for ",
-								var0015, " monetari.\"");
-							say("\"", var0010, "\"");
-							break;
 						}
 					}
-				}
-				nobreak {
-					say("\"", var0012, "\"");
-					say("\"Very well, I will buy this scale armour from thee "
-						"for ",
-						var0015, " monetari.\"");
-					say("\"", var0010, "\"");
-					var0016 = 0x0001;
-				}
-			}
-			if (var000E == "chain armour") {
-				breakable {
-					var0014 = 0x023B;
-					var0015 = 0x0032;
-					if (var0006 > 0x0001) {
-						say("\"How many suits of chain armour wouldst thou "
-							"care to sell?\"");
-						var0016 = UI_input_numeric_value(
-								0x0000, var0006, 0x0001, 0x0000);
-						if (var0016 != 0x0001) {
-							var0015 = 0x0032 * var0016;
-							if (var0016 == 0x0000) {
-								say("\"Perhaps another time, ", var0000,
-									"...\"");
-								// I see no way other than this
-								goto labelFunc0868_0785;
-							}
-							say("\"", var0013, "\"");
-							say("\"Hmmm... I suppose I could buy thy ", var0016,
-								" suits of chain armour from thee for ",
-								var0015, " monetari.\"");
-							say("\"", var0010, "\"");
-							break;
-						}
+					nobreak {
+						say("\"", var0012, "\"");
+						say("\"Very well, I will buy this scale armour from thee "
+							"for ",
+							var0015, " monetari.\"");
+						say("\"", var0010, "\"");
+						var0016 = 0x0001;
 					}
 				}
-				nobreak {
-					say("\"", var0012, "\"");
-					say("\"I suppose I could pay thee ", var0015,
-						" monetari for a suit of chain armour.\"");
-					say("\"", var0010, "\"");
-					var0016 = 0x0001;
-				}
-			}
-			if (var000E == "plate armour") {
-				breakable {
-					var0014 = 0x023D;
-					var0015 = 0x004B;
-					if (var0007 > 0x0001) {
-						say("\"How many suits of plate armour wouldst thou "
-							"care to sell?\"");
-						var0016 = UI_input_numeric_value(
-								0x0000, var0007, 0x0001, 0x0000);
-						if (var0016 != 0x0001) {
-							var0015 = 0x004B * var0016;
-							if (var0016 == 0x0000) {
-								say("\"Perhaps another time, ", var0000,
-									"...\"");
-								// I see no way other than this
-								goto labelFunc0868_0785;
+				if (var000E == "chain armour") {
+					breakable {
+						var0014 = 0x023B;
+						var0015 = 0x0032;
+						if (var0006 > 0x0001) {
+							say("\"How many suits of chain armour wouldst thou "
+								"care to sell?\"");
+							var0016 = UI_input_numeric_value(
+									0x0000, var0006, 0x0001, 0x0000);
+							if (var0016 != 0x0001) {
+								var0015 = 0x0032 * var0016;
+								if (var0016 == 0x0000) {
+									say("\"Perhaps another time, ", var0000,
+										"...\"");
+									break ask_sell_more;
+								}
+								say("\"", var0013, "\"");
+								say("\"Hmmm... I suppose I could buy thy ", var0016,
+									" suits of chain armour from thee for ",
+									var0015, " monetari.\"");
+								say("\"", var0010, "\"");
+								break;
 							}
-							say("\"", var0013, "\"");
-							say("\"I will give thee ", var0015,
-								" monetari for thy ", var0016,
-								" suits of plate armour.\"");
-							say("\"", var0010, "\"");
-							break;
 						}
 					}
-				}
-				nobreak {
-					say("\"", var0012, "\"");
-					say("\"For this plate armour, I can offer ", var0015,
-						" monetari.\"");
-					say("\"", var0010, "\"");
-					var0016 = 0x0001;
-				}
-			}
-			if (var000E == "chain leggings") {
-				breakable {
-					var0014 = 0x023F;
-					var0015 = 0x0019;
-					if (var0008 > 0x0001) {
-						say("\"How many pairs of chain leggings wouldst thou "
-							"care to sell?\"");
-						var0016 = UI_input_numeric_value(
-								0x0000, var0008, 0x0001, 0x0000);
-						if (var0016 != 0x0001) {
-							var0015 = 0x0019 * var0016;
-							if (var0016 == 0x0000) {
-								say("\"Perhaps another time, ", var0000,
-									"...\"");
-								// I see no way other than this
-								goto labelFunc0868_0785;
-							}
-							say("\"", var0013, "\"");
-							say("\"Hmmm... perhaps I can give thee ", var0015,
-								" monetari for thy ", var0016,
-								" pairs of chain leggings.\"");
-							say("\"", var0010, "\"");
-							break;
-						}
+					nobreak {
+						say("\"", var0012, "\"");
+						say("\"I suppose I could pay thee ", var0015,
+							" monetari for a suit of chain armour.\"");
+						say("\"", var0010, "\"");
+						var0016 = 0x0001;
 					}
 				}
-				nobreak {
-					say("\"", var0012, "\"");
-					say("\"So be it, I will offer ", var0015,
-						" monetari for the chain leggings.\"");
-					say("\"", var0010, "\"");
-					var0016 = 0x0001;
-				}
-			}
-			if (var000E == "plate leggings") {
-				breakable {
-					var0014 = 0x0240;
-					var0015 = 0x002D;
-					if (var0009 > 0x0001) {
-						say("\"And how many pairs of plate leggings wouldst "
-							"thou care to sell?\"");
-						var0016 = UI_input_numeric_value(
-								0x0000, var0009, 0x0001, 0x0000);
-						if (var0016 != 0x0001) {
-							var0015 = 0x002D * var0016;
-							if (var0016 == 0x0000) {
-								say("\"Perhaps another time, ", var0000,
-									"...\"");
-								// I see no way other than this
-								goto labelFunc0868_0785;
+				if (var000E == "plate armour") {
+					breakable {
+						var0014 = 0x023D;
+						var0015 = 0x004B;
+						if (var0007 > 0x0001) {
+							say("\"How many suits of plate armour wouldst thou "
+								"care to sell?\"");
+							var0016 = UI_input_numeric_value(
+									0x0000, var0007, 0x0001, 0x0000);
+							if (var0016 != 0x0001) {
+								var0015 = 0x004B * var0016;
+								if (var0016 == 0x0000) {
+									say("\"Perhaps another time, ", var0000,
+										"...\"");
+									break ask_sell_more;
+								}
+								say("\"", var0013, "\"");
+								say("\"I will give thee ", var0015,
+									" monetari for thy ", var0016,
+									" suits of plate armour.\"");
+								say("\"", var0010, "\"");
+								break;
 							}
-							say("\"", var0013, "\"");
-							say("\"For thy ", var0016,
-								" pairs of plate leggings, I can give thee ",
-								var0015, " monetari.\"");
-							say("\"", var0010, "\"");
-							break;
 						}
 					}
-				}
-				nobreak {
-					say("\"", var0012, "\"");
-					say("\"", var0015,
-						" monetari is what I can give thee for the pair of "
-						"plate leggings.\"");
-					say("\"", var0010, "\"");
-					var0016 = 0x0001;
-				}
-			}
-			if (var000E == "great helm") {
-				breakable {
-					var0014 = 0x021D;
-					var0015 = 0x0014;
-					if (var000A > 0x0001) {
-						say("\"How many great helms wouldst thou care to "
-							"sell?\"");
-						var0016 = UI_input_numeric_value(
-								0x0000, var000A, 0x0001, 0x0000);
-						if (var0016 != 0x0001) {
-							var0015 = 0x0014 * var0016;
-							if (var0016 == 0x0000) {
-								say("\"Perhaps another time, ", var0000,
-									"...\"");
-								// I see no way other than this
-								goto labelFunc0868_0785;
-							}
-							say("\"", var0013, "\"");
-							say("\"Very well...\" ~\"I can offer thee ",
-								var0015, " monetari for thy ", var0016,
-								" great helms.\"");
-							say("\"", var0010, "\"");
-							break;
-						}
+					nobreak {
+						say("\"", var0012, "\"");
+						say("\"For this plate armour, I can offer ", var0015,
+							" monetari.\"");
+						say("\"", var0010, "\"");
+						var0016 = 0x0001;
 					}
 				}
-				nobreak {
-					say("\"", var0012, "\"");
-					say("\"Very well, I will buy thy great helm for ", var0015,
-						" monetari.\"");
-					say("\"", var0010, "\"");
-					var0016 = 0x0001;
-				}
-			}
-			if (var000E == "crested helm") {
-				breakable {
-					var0014 = 0x021E;
-					var0015 = 0x000A;
-					if (var000B > 0x0001) {
-						say("\"How many crested helms wouldst thou care to "
-							"sell?\"");
-						var0016 = UI_input_numeric_value(
-								0x0000, var000B, 0x0001, 0x0000);
-						if (var0016 != 0x0001) {
-							var0015 = 0x000A * var0016;
-							if (var0016 == 0x0000) {
-								say("\"Perhaps another time, ", var0000,
-									"...\"");
-								// I see no way other than this
-								goto labelFunc0868_0785;
+				if (var000E == "chain leggings") {
+					breakable {
+						var0014 = 0x023F;
+						var0015 = 0x0019;
+						if (var0008 > 0x0001) {
+							say("\"How many pairs of chain leggings wouldst thou "
+								"care to sell?\"");
+							var0016 = UI_input_numeric_value(
+									0x0000, var0008, 0x0001, 0x0000);
+							if (var0016 != 0x0001) {
+								var0015 = 0x0019 * var0016;
+								if (var0016 == 0x0000) {
+									say("\"Perhaps another time, ", var0000,
+										"...\"");
+									break ask_sell_more;
+								}
+								say("\"", var0013, "\"");
+								say("\"Hmmm... perhaps I can give thee ", var0015,
+									" monetari for thy ", var0016,
+									" pairs of chain leggings.\"");
+								say("\"", var0010, "\"");
+								break;
 							}
-							say("\"", var0013, "\"");
-							say("\"I suppose I can give thee ", var0015,
-								" monetari for thy ", var0016,
-								" crested helms.\"");
-							say("\"", var0010, "\"");
-							break;
 						}
 					}
+					nobreak {
+						say("\"", var0012, "\"");
+						say("\"So be it, I will offer ", var0015,
+							" monetari for the chain leggings.\"");
+						say("\"", var0010, "\"");
+						var0016 = 0x0001;
+					}
 				}
-				nobreak {
-					say("\"", var0012, "\"");
-					say("\"For this crested helm, I can give thee ", var0015,
-						" monetari.\"");
-					say("\"", var0010, "\"");
-					var0016 = 0x0001;
+				if (var000E == "plate leggings") {
+					breakable {
+						var0014 = 0x0240;
+						var0015 = 0x002D;
+						if (var0009 > 0x0001) {
+							say("\"And how many pairs of plate leggings wouldst "
+								"thou care to sell?\"");
+							var0016 = UI_input_numeric_value(
+									0x0000, var0009, 0x0001, 0x0000);
+							if (var0016 != 0x0001) {
+								var0015 = 0x002D * var0016;
+								if (var0016 == 0x0000) {
+									say("\"Perhaps another time, ", var0000,
+										"...\"");
+									break ask_sell_more;
+								}
+								say("\"", var0013, "\"");
+								say("\"For thy ", var0016,
+									" pairs of plate leggings, I can give thee ",
+									var0015, " monetari.\"");
+								say("\"", var0010, "\"");
+								break;
+							}
+						}
+					}
+					nobreak {
+						say("\"", var0012, "\"");
+						say("\"", var0015,
+							" monetari is what I can give thee for the pair of "
+							"plate leggings.\"");
+						say("\"", var0010, "\"");
+						var0016 = 0x0001;
+					}
+				}
+				if (var000E == "great helm") {
+					breakable {
+						var0014 = 0x021D;
+						var0015 = 0x0014;
+						if (var000A > 0x0001) {
+							say("\"How many great helms wouldst thou care to "
+								"sell?\"");
+							var0016 = UI_input_numeric_value(
+									0x0000, var000A, 0x0001, 0x0000);
+							if (var0016 != 0x0001) {
+								var0015 = 0x0014 * var0016;
+								if (var0016 == 0x0000) {
+									say("\"Perhaps another time, ", var0000,
+										"...\"");
+									break ask_sell_more;
+								}
+								say("\"", var0013, "\"");
+								say("\"Very well...\" ~\"I can offer thee ",
+									var0015, " monetari for thy ", var0016,
+									" great helms.\"");
+								say("\"", var0010, "\"");
+								break;
+							}
+						}
+					}
+					nobreak {
+						say("\"", var0012, "\"");
+						say("\"Very well, I will buy thy great helm for ", var0015,
+							" monetari.\"");
+						say("\"", var0010, "\"");
+						var0016 = 0x0001;
+					}
+				}
+				if (var000E == "crested helm") {
+					breakable {
+						var0014 = 0x021E;
+						var0015 = 0x000A;
+						if (var000B > 0x0001) {
+							say("\"How many crested helms wouldst thou care to "
+								"sell?\"");
+							var0016 = UI_input_numeric_value(
+									0x0000, var000B, 0x0001, 0x0000);
+							if (var0016 != 0x0001) {
+								var0015 = 0x000A * var0016;
+								if (var0016 == 0x0000) {
+									say("\"Perhaps another time, ", var0000,
+										"...\"");
+									break ask_sell_more;
+								}
+								say("\"", var0013, "\"");
+								say("\"I suppose I can give thee ", var0015,
+									" monetari for thy ", var0016,
+									" crested helms.\"");
+								say("\"", var0010, "\"");
+								break;
+							}
+						}
+					}
+					nobreak {
+						say("\"", var0012, "\"");
+						say("\"For this crested helm, I can give thee ", var0015,
+							" monetari.\"");
+						say("\"", var0010, "\"");
+						var0016 = 0x0001;
+					}
+				}
+				if (Func0955()) {
+					var var0017 = UI_remove_party_items(
+							var0016, var0014, QUALITY_ANY, FRAME_ANY, true);
+					var0017 = Func099B(
+							AVATAR, var0015, var0004, QUALITY_ANY, FRAME_ANY,
+							0x0000, true);
+				} else {
+					say("\"Thy loss, then.\"");
 				}
 			}
-			if (Func0955()) {
-				var var0017 = UI_remove_party_items(
-						var0016, var0014, QUALITY_ANY, FRAME_ANY, true);
-				var0017 = Func099B(
-						AVATAR, var0015, var0004, QUALITY_ANY, FRAME_ANY,
-						0x0000, true);
-			} else {
-				say("\"Thy loss, then.\"");
-			}
-		labelFunc0868_0785:
 			say("\"Dost thou wish to sell more armour?\"");
 			var0003 = Func0955();
 		} else {
@@ -106219,10 +106154,9 @@ void Func08AE id#(0x8AE) () {
 			// BUG: This should use SI_PATH_FAILURE instead of PATH_SUCCESS.
 			UI_set_path_failure(FuncTeldrono, item, PATH_SUCCESS);
 			// TODO: Need to make UCC optimize this
-			goto labelFunc08AE_00DD;
+			break;
 		}
 	}
-labelFunc08AE_00DD:
 	return;
 }
 
@@ -111731,81 +111665,81 @@ void Func0936 id#(0x936) (var var0000, var var0001) {
 			gflags[TEMP_FLAG_1] = false;
 			return;
 		}
-		if (gflags[TRAINING_FLAG_SET]) {
-			if (SHAZZANA->get_npc_id() == 0x0009) {
+		breakable {
+			if (gflags[TRAINING_FLAG_SET]) {
+				if (SHAZZANA->get_npc_id() == 0x0009) {
+					SHAZZANA->show_npc_face0(0x0000);
+					say("\"Thou hast been beaten by my blade. Remember this day, "
+						"and learn.\"");
+					UI_remove_npc_face0();
+					Func092E(var0001);
+					return;
+				}
+				if (LUTHER->get_npc_id() == 0x0009) {
+					LUTHER->show_npc_face0(0x0000);
+					say("\"Thou hast been beaten, as was expected. Though thou art "
+						"insignificant, try to remember the lessons I have taught "
+						"thee this day.\"");
+					UI_remove_npc_face0();
+					Func092E(var0001);
+					return;
+				}
+				if (BRENDANN->get_npc_id() == 0x0009) {
+					BRENDANN->show_npc_face0(0x0000);
+					say("\"Thou made a good showing, but fell to my superior skill "
+						"in the end. With more experience, thou wilt make a fine "
+						"warrior.\"");
+					UI_remove_npc_face0();
+					Func092E(var0001);
+					return;
+				}
+				if (!(CALADIN->get_npc_id() == 0x0009)) {
+					break;
+				}
+				CALADIN->show_npc_face0(0x0000);
+				say("\"I have overwhelmed thee with sheer strength. Learn from "
+					"this lesson, my friend.\"");
+				UI_remove_npc_face0();
+				Func092E(var0001);
+				return;
+			}
+			if (var0000 == SHAZZANA->get_npc_object()) {
 				SHAZZANA->show_npc_face0(0x0000);
-				say("\"Thou hast been beaten by my blade. Remember this day, "
-					"and learn.\"");
+				say("\"Thou hast lost this match.\"");
 				UI_remove_npc_face0();
 				Func092E(var0001);
 				return;
 			}
-			if (LUTHER->get_npc_id() == 0x0009) {
+			if (var0000 == LUTHER->get_npc_object()) {
 				LUTHER->show_npc_face0(0x0000);
-				say("\"Thou hast been beaten, as was expected. Though thou art "
-					"insignificant, try to remember the lessons I have taught "
-					"thee this day.\"");
+				say("\"Hah, I have bested thee. Away with thee!\"");
 				UI_remove_npc_face0();
 				Func092E(var0001);
 				return;
 			}
-			if (BRENDANN->get_npc_id() == 0x0009) {
+			if (var0000 == BRENDANN->get_npc_object()) {
 				BRENDANN->show_npc_face0(0x0000);
-				say("\"Thou made a good showing, but fell to my superior skill "
-					"in the end. With more experience, thou wilt make a fine "
-					"warrior.\"");
+				say("\"Thou hast been beaten in a fair spar. Perhaps now thou wilt "
+					"be more humble.\"");
 				UI_remove_npc_face0();
 				Func092E(var0001);
 				return;
 			}
-			if (!(CALADIN->get_npc_id() == 0x0009)) {
-				// I see no way other than this
-				goto labelFunc0936_0460;
+			if (var0000 == CALADIN->get_npc_object()) {
+				CALADIN->show_npc_face0(0x0000);
+				say("\"Thou hast lost to my prowess.\"");
+				UI_remove_npc_face0();
+				Func092E(var0001);
+				return;
 			}
-			CALADIN->show_npc_face0(0x0000);
-			say("\"I have overwhelmed thee with sheer strength. Learn from "
-				"this lesson, my friend.\"");
-			UI_remove_npc_face0();
-			Func092E(var0001);
-			return;
+			if (var0000 == TEMPLAR->get_npc_object()) {
+				TEMPLAR->show_npc_face0(0x0000);
+				say("\"I have beaten thee!\"");
+				UI_remove_npc_face0();
+				Func092E(var0001);
+				return;
+			}
 		}
-		if (var0000 == SHAZZANA->get_npc_object()) {
-			SHAZZANA->show_npc_face0(0x0000);
-			say("\"Thou hast lost this match.\"");
-			UI_remove_npc_face0();
-			Func092E(var0001);
-			return;
-		}
-		if (var0000 == LUTHER->get_npc_object()) {
-			LUTHER->show_npc_face0(0x0000);
-			say("\"Hah, I have bested thee. Away with thee!\"");
-			UI_remove_npc_face0();
-			Func092E(var0001);
-			return;
-		}
-		if (var0000 == BRENDANN->get_npc_object()) {
-			BRENDANN->show_npc_face0(0x0000);
-			say("\"Thou hast been beaten in a fair spar. Perhaps now thou wilt "
-				"be more humble.\"");
-			UI_remove_npc_face0();
-			Func092E(var0001);
-			return;
-		}
-		if (var0000 == CALADIN->get_npc_object()) {
-			CALADIN->show_npc_face0(0x0000);
-			say("\"Thou hast lost to my prowess.\"");
-			UI_remove_npc_face0();
-			Func092E(var0001);
-			return;
-		}
-		if (var0000 == TEMPLAR->get_npc_object()) {
-			TEMPLAR->show_npc_face0(0x0000);
-			say("\"I have beaten thee!\"");
-			UI_remove_npc_face0();
-			Func092E(var0001);
-			return;
-		}
-	labelFunc0936_0460:
 		return;
 	}
 	LUTHER->show_npc_face0(0x0000);

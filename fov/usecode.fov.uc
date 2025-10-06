@@ -30038,71 +30038,72 @@ void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA)() {
 			remove("strange");
 			fallthrough;
 		case "betting":
-			if (var0006 || (var0005 || (var0007 || var0008))) {
-				say("\"Sorry, all bets are off, due to the... er, unfortunate "
-					"passing on of one or more of the parties involved.\"");
-			} else {
-				say("\"I am taking wagers on Sprellic's duels. Wouldst thou "
-					"like to place a bet?\"");
-				var var0012 = askYesNo();
-				if (var0012) {
-					say("\"How much wouldst thou like to bet that Sprellic "
-						"defeats all three of his challengers?\"");
-					forever {
-						var0012 = UI_input_numeric_value(0, 200, 10, 0);
-						if (var0012 == 0) {
-							say("\"Perhaps thou art not truly serious about "
-								"thy convictions. Mayhaps Daphne will take thy "
-								"line of bets.\"");
-							// I see no way other than this
-							goto labelFuncOphelia_0447;
+ophelia_betting:
+			breakable {
+				if (var0006 || (var0005 || (var0007 || var0008))) {
+					say("\"Sorry, all bets are off, due to the... er, unfortunate "
+						"passing on of one or more of the parties involved.\"");
+				} else {
+					say("\"I am taking wagers on Sprellic's duels. Wouldst thou "
+						"like to place a bet?\"");
+					var var0012 = askYesNo();
+					if (var0012) {
+						say("\"How much wouldst thou like to bet that Sprellic "
+							"defeats all three of his challengers?\"");
+						forever {
+							var0012 = UI_input_numeric_value(0, 200, 10, 0);
+							if (var0012 == 0) {
+								say("\"Perhaps thou art not truly serious about "
+									"thy convictions. Mayhaps Daphne will take thy "
+									"line of bets.\"");
+								break ophelia_betting;
+							}
+							say("\"Thou wouldst bet ", var0012,
+								" gold that Sprellic will win?\"");
+							var var0013 = askYesNo();
+							if (var0013) {
+								break;
+							}
+							say("\"Very well. How much wouldst thou like to "
+								"bet?\"");
 						}
-						say("\"Thou wouldst bet ", var0012,
-							" gold that Sprellic will win?\"");
-						var var0013 = askYesNo();
-						if (var0013) {
-							break;
-						}
-						say("\"Very well. How much wouldst thou like to "
-							"bet?\"");
-					}
-					var000F = PARTY->count_objects(
-							SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
-					if (var000F >= var0012) {
-						say("\"Very well. Let me give thee markers for thy "
-							"gold. Each one is worth 10 gold coins. If "
-							"Sprellic wins, thou mayest come collect twice "
-							"that amount of gold from me.~~\"Should he lose, ",
-							var0000,
-							", thy markers are, of course, worthless.\"");
-						var var0014 = UI_add_party_items(
-								var0012 / 10, SHAPE_BETTING_MARKER, QUALITY_ANY,
-								FRAME_BETTING_MARKER_BLUE, false);
-						if (var0014) {
-							var var0015 = UI_remove_party_items(
-									var0012, SHAPE_GOLD_COIN, QUALITY_ANY,
-									FRAME_ANY, true);
-							gflags[AVATAR_BET_ON_SPRELLIC] = true;
-							say("\"I shall soon see thee again, ", var0000,
-								".\" You notice she is suppressing a tiny "
-								"giggle. \"When thou dost return to collect "
-								"thy winnings.\" For a moment it seems she "
-								"cannot make eye contact with you.");
+						var000F = PARTY->count_objects(
+								SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+						if (var000F >= var0012) {
+							say("\"Very well. Let me give thee markers for thy "
+								"gold. Each one is worth 10 gold coins. If "
+								"Sprellic wins, thou mayest come collect twice "
+								"that amount of gold from me.~~\"Should he lose, ",
+								var0000,
+								", thy markers are, of course, worthless.\"");
+							var var0014 = UI_add_party_items(
+									var0012 / 10, SHAPE_BETTING_MARKER, QUALITY_ANY,
+									FRAME_BETTING_MARKER_BLUE, false);
+							if (var0014) {
+								var var0015 = UI_remove_party_items(
+										var0012, SHAPE_GOLD_COIN, QUALITY_ANY,
+										FRAME_ANY, true);
+								gflags[AVATAR_BET_ON_SPRELLIC] = true;
+								say("\"I shall soon see thee again, ", var0000,
+									".\" You notice she is suppressing a tiny "
+									"giggle. \"When thou dost return to collect "
+									"thy winnings.\" For a moment it seems she "
+									"cannot make eye contact with you.");
+							} else {
+								say("\"Thou must return later when thou hast "
+									"enough room in thy pack for these markers.\"");
+							}
 						} else {
-							say("\"Thou must return later when thou hast "
-								"enough room in thy pack for these markers.\"");
+							say("\"Thou hast not the amount of gold thou dost want "
+								"to bet! Art thou trying to swindle me?\"");
 						}
 					} else {
-						say("\"Thou hast not the amount of gold thou dost want "
-							"to bet! Art thou trying to swindle me?\"");
+						say("\"Then if thou wouldst like to bet against Sprellic, "
+							"thou mayest see Daphne, but I warn thee thou wilt be "
+							"throwing thy money away!\"");
 					}
-				} else {
-					say("\"Then if thou wouldst like to bet against Sprellic, "
-						"thou mayest see Daphne, but I warn thee thou wilt be "
-						"throwing thy money away!\"");
 				}
 			}
-		labelFuncOphelia_0447:
 			remove("betting");
 			fallthrough;
 		case "winnings":
@@ -30284,71 +30285,72 @@ void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE)() {
 			remove("Library of Scars");
 			fallthrough;
 		case "gambling":
-			if (var0004) {
-				say("\"I am sorry. All bets are off since the matter has been "
-					"resolved.\"");
-			} else {
-				say("\"In fact, I am taking bets on the upcoming duels. Dost "
-					"thou wish to bet that Sprellic will lose to any of the "
-					"three other duellists?\"");
-				var var000A = askYesNo();
-				if (var000A) {
-					say("\"How much wouldst thou like to bet?\"");
-					declare var var000B;
-					forever {
-						var000B = UI_input_numeric_value(0, 200, 10, 0);
-						if (var000B == 0) {
-							say("\"Perhaps thou art not truly serious about "
-								"thy convictions. Mayhaps the princess will "
-								"take thy line of bets.\"");
-							// I see no way other than this
-							goto labelFuncDaphne_0352;
+daphne_betting:
+			breakable {
+				if (var0004) {
+					say("\"I am sorry. All bets are off since the matter has been "
+						"resolved.\"");
+				} else {
+					say("\"In fact, I am taking bets on the upcoming duels. Dost "
+						"thou wish to bet that Sprellic will lose to any of the "
+						"three other duellists?\"");
+					var var000A = askYesNo();
+					if (var000A) {
+						say("\"How much wouldst thou like to bet?\"");
+						declare var var000B;
+						forever {
+							var000B = UI_input_numeric_value(0, 200, 10, 0);
+							if (var000B == 0) {
+								say("\"Perhaps thou art not truly serious about "
+									"thy convictions. Mayhaps the princess will "
+									"take thy line of bets.\"");
+								break daphne_betting;
+							}
+							say("\"Thou wouldst bet ", var000B,
+								" gold that Sprellic will lose?\"");
+							var var000C = askYesNo();
+							if (var000C) {
+								break;
+							}
+							say("\"Very well. How much wouldst thou like to "
+								"bet?\"");
 						}
-						say("\"Thou wouldst bet ", var000B,
-							" gold that Sprellic will lose?\"");
-						var var000C = askYesNo();
-						if (var000C) {
-							break;
-						}
-						say("\"Very well. How much wouldst thou like to "
-							"bet?\"");
-					}
-					var var000D = PARTY->count_objects(
-							SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
-					if (var000D >= var000B) {
-						var var000E = UI_add_party_items(
-								var000B / 10, SHAPE_BETTING_MARKER, QUALITY_ANY,
-								FRAME_BETTING_MARKER_RED, false);
-						if (var000E) {
-							var var000F = UI_remove_party_items(
-									var000B, SHAPE_GOLD_COIN, QUALITY_ANY,
-									FRAME_ANY, true);
-							var var0010 = true;
-							say("\"Very well. Let me give thee markers for thy "
-								"gold. Each one is worth 10 gold coins. If "
-								"Sprellic loses, thou mayest come collect "
-								"twice that amount of gold from me.~~\"Should "
-								"he win, ",
-								var0000,
-								", thy markers are, of course, worthless.\"");
-							say("\"Thou mayest come see me after the duels and "
-								"exchange this marker for thy winnings if thou "
-								"hast won.\"");
+						var var000D = PARTY->count_objects(
+								SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+						if (var000D >= var000B) {
+							var var000E = UI_add_party_items(
+									var000B / 10, SHAPE_BETTING_MARKER, QUALITY_ANY,
+									FRAME_BETTING_MARKER_RED, false);
+							if (var000E) {
+								var var000F = UI_remove_party_items(
+										var000B, SHAPE_GOLD_COIN, QUALITY_ANY,
+										FRAME_ANY, true);
+								var var0010 = true;
+								say("\"Very well. Let me give thee markers for thy "
+									"gold. Each one is worth 10 gold coins. If "
+									"Sprellic loses, thou mayest come collect "
+									"twice that amount of gold from me.~~\"Should "
+									"he win, ",
+									var0000,
+									", thy markers are, of course, worthless.\"");
+								say("\"Thou mayest come see me after the duels and "
+									"exchange this marker for thy winnings if thou "
+									"hast won.\"");
+							} else {
+								say("\"Oh! Thou must return later when thou hast "
+									"enough room in thy pack for these markers.\"");
+							}
 						} else {
-							say("\"Oh! Thou must return later when thou hast "
-								"enough room in thy pack for these markers.\"");
+							say("\"Thou hast not the amount of gold thou dost want "
+								"to bet! Art thou trying to swindle me?\"");
 						}
 					} else {
-						say("\"Thou hast not the amount of gold thou dost want "
-							"to bet! Art thou trying to swindle me?\"");
+						say("\"Then if thou wouldst like to bet in favor of "
+							"Sprellic, thou mayest see Ophelia, but I warn thee "
+							"thou wilt be throwing thy money away!\"");
 					}
-				} else {
-					say("\"Then if thou wouldst like to bet in favor of "
-						"Sprellic, thou mayest see Ophelia, but I warn thee "
-						"thou wilt be throwing thy money away!\"");
 				}
 			}
-		labelFuncDaphne_0352:
 			remove("gambling");
 			fallthrough;
 		case "winnings":
@@ -37815,6 +37817,7 @@ void FuncThurston object#(FIRST_NPC_FUNCTION - THURSTON)() {
 		} else {
 			say("\"Greetings, ", var0000, ",\" says Thurston.");
 		}
+converse_label:
 		converse(0) {
 		case "name":
 			say("\"I am Thurston.\"");
@@ -37855,8 +37858,7 @@ void FuncThurston object#(FIRST_NPC_FUNCTION - THURSTON)() {
 									if (var0007) {
 										continue;
 									}
-									// I see no way other than this
-									goto labelFuncThurston_02F6;
+									break converse_label;
 								}
 								break;
 							}
@@ -37981,7 +37983,6 @@ void FuncThurston object#(FIRST_NPC_FUNCTION - THURSTON)() {
 			remove("Polly");
 			fallthrough;
 		case "bye":
-		labelFuncThurston_02F6:
 			break;
 		}
 		say("\"Good day to thee, ", var0000, ".\"*");
@@ -39952,6 +39953,7 @@ void FuncAndrew object#(FIRST_NPC_FUNCTION - ANDREW)() {
 		} else {
 			say("\"Greetings, ", var0000, ",\" says Andrew.");
 		}
+break_converse:
 		converse(0) {
 		case "name":
 			say("\"My name is Andrew. How art thou, ", var0000, "?\"");
@@ -39986,8 +39988,7 @@ void FuncAndrew object#(FIRST_NPC_FUNCTION - ANDREW)() {
 								if (var0006) {
 									continue;
 								}
-								// I see no way other than this
-								goto labelFuncAndrew_0332;
+								break break_converse;
 							}
 							say("\"Thou hast not the room for the jug.\"");
 							var var0007 = UI_add_party_items(
@@ -40108,8 +40109,7 @@ void FuncAndrew object#(FIRST_NPC_FUNCTION - ANDREW)() {
 		case "bye":
 			break;
 		}
-		nobreak{labelFuncAndrew_0332:
-		} say("\"I hope I was of some assistance to thee, ", var0000, ".\"*");
+		say("\"I hope I was of some assistance to thee, ", var0000, ".\"*");
 	}
 	if (event == PROXIMITY) {
 		Func092E(ANDREW);
@@ -60330,38 +60330,40 @@ void Func06B4 object#(0x6B4) () {
 }
 
 void Func06B5 object#(0x6B5) () {
-	if (event == EGG) {
-		event = DOUBLECLICK;
-		var var0000 = find_nearby(SHAPE_DOOR_NS_RIGHT, 40, MASK_NONE);
-		var0000 &= find_nearby(SHAPE_DOOR_EW_BOTTOM, 40, MASK_NONE);
-		var var0001 = [];
-		declare var var0004;
-		for (var0004 in var0000) {
-			var0001 &= get_distance(var0004);
-		}
-		var0000 = sortArraysBySecondArray(var0000, var0001);
-		var var0005 = 1;
-		forever {
-			var0004 = var0000[var0005];
-			if (!var0004) {
-				// TODO: this should be a return.
-				// Need to make UCC optimize this.
-				goto labelFunc06B5_00BE;
+function_exit:
+	breakable {
+		if (event == EGG) {
+			event = DOUBLECLICK;
+			var var0000 = find_nearby(SHAPE_DOOR_NS_RIGHT, 40, MASK_NONE);
+			var0000 &= find_nearby(SHAPE_DOOR_EW_BOTTOM, 40, MASK_NONE);
+			var var0001 = [];
+			declare var var0004;
+			for (var0004 in var0000) {
+				var0001 &= get_distance(var0004);
 			}
-			if (getDoorState(var0004) != FRAME_DOOR_LOCKED) {
-				break;
+			var0000 = sortArraysBySecondArray(var0000, var0001);
+			var var0005 = 1;
+			forever {
+				var0004 = var0000[var0005];
+				if (!var0004) {
+					// TODO: this should be a return.
+					// Need to make UCC optimize this.
+					break function_exit;
+				}
+				if (getDoorState(var0004) != FRAME_DOOR_LOCKED) {
+					break;
+				}
+				var0005 += 1;
 			}
-			var0005 += 1;
-		}
-		var var0006 = var0004->get_item_shape();
-		if (var0006 == SHAPE_DOOR_NS_RIGHT) {
-			var0004->FuncDoorNsRight();
-		}
-		if (var0006 == SHAPE_DOOR_EW_BOTTOM) {
-			var0004->FuncDoorEwBottom();
+			var var0006 = var0004->get_item_shape();
+			if (var0006 == SHAPE_DOOR_NS_RIGHT) {
+				var0004->FuncDoorNsRight();
+			}
+			if (var0006 == SHAPE_DOOR_EW_BOTTOM) {
+				var0004->FuncDoorEwBottom();
+			}
 		}
 	}
-labelFunc06B5_00BE:
 	return;
 }
 
@@ -61608,277 +61610,279 @@ void Func06F6 object#(0x6F6) () {
 		var var0013 = false;
 		var var0014 = false;
 		var var0015 = false;
-		converse(0) {
-		case "name":
-			say("The daemon sword's tone is rather ominous as he says, \"I am, "
-				"and ever shall be, thy servant Arcadion.\"");
-			remove("name");
-			fallthrough;
-		case "job":
-			say("\"I am the Shade Blade. My destiny is to serve thee until we "
-				"are...\" The sword pauses, \"parted.\"");
-			remove("job");
-			fallthrough;
-		case "powers":
-			if (!AVATAR->get_npc_object()->is_readied(
-						BG_WEAPON_HAND, SHAPE_BLACK_SWORD, FRAME_ANY)) {
-				say("\"I needs must be in thy hand, master, if thou wishest to "
-					"use my powers.\"");
-			} else {
-				say("\"Which of my powers dost thou seek to use?\"");
-				UI_push_answers();
-				add(["Magic", "Fire", "Death", "Return", "none"]);
-			}
-			fallthrough;
-		case "help":
-			say("Arcadion's voice is smug as he replies to your request for "
-				"assistance. \"Yes, I can help thee if thou wishest to exile "
-				"what remains of Exodus to the Void. Firstly, thou shalt have "
-				"need of the lenses of which the doddering, old fool spoke. "
-				"Next thou needs must have the three Talismans of Principle. "
-				"And finally, make sure that there are lit torches upon the "
-				"walls to either side of the pedestal upon which the Dark Core "
-				"rests.");
-			add(["lenses", "talismans"]);
-			remove("help");
-			fallthrough;
-		case "lenses":
-			say("\"The concave and convex lenses which thou used to place the "
-				"Codex of Infinite Wisdom within the Void, I believe now sit "
-				"forgotten in the Museum of Britannia. They must be placed "
-				"between the Dark Core and the torches on either side of the "
-				"pedestal\"");
-			remove("lenses");
-			fallthrough;
-		case "talismans":
-			say("\"The Talismans of Principle must be placed upon the Dark "
-				"Core like wedges in a pie.\"");
-			remove("talismans");
-			fallthrough;
-		case "none":
-			say("\"As thou wish, master. I but seek to serve thee.\"");
-			UI_pop_answers();
-			fallthrough;
-		case "Magic":
-			var var0016 = UI_part_of_day();
-			if ((var0016 == NIGHT)
-				|| ((var0016 == MIDNIGHT) || (var0016 == EARLY))) {
-				Func0845(true);
-			} else {
-				say("The blade croons quietly, \"Alas, master. My energies "
-					"seem a trifle low. Perhaps if thou were to find some "
-					"creature to slay, my power would be sufficient. After "
-					"all, I have needs just as thou dost.\"");
-			}
-			fallthrough;
-		case "Death":
-			say("\"Where is the corpse of which thou dost speak?\" The dark "
-				"sword begins to vibrate in your hand.*");
-			ARCADION_SWORD->hide();
-			var0011 = UI_click_on_item();
-			var var0017 = var0011->get_item_shape();
-			struct<Position> var0018 = var0011->get_object_position();
-			ARCADION_SWORD->show_npc_face(DEFAULT_FACE);
-			if (var0011->is_npc()) {
-				breakable {
-					if (var0017 == SHAPE_MALE_AVATAR
-							|| var0017 == SHAPE_FEMALE_AVATAR) {
-						say("The daemon speaks with a sanctimonious tone. \"I "
-							"could not in honor take the life of my most "
-							"wondrous master.\"");
-						break;
-					}
-					if (var0017 == SHAPE_LORD_BRITISH) {
-						if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
-							say("\"Yes! I have long sought the end of Lord "
-								"British, my traitorous master.\"");
-							var var0019 = getAvatarName();
-							LORD_BRITISH->say(
-									"\"", var0019,
-									", for what reason art thou brandishing "
-									"that black sword in my presence?\"");
-							ARCADION_SWORD->hide();
-							AVATAR->say(
-									"The daemon responds, using your mouth. "
-									"\"This blade is thy doom,...\" You spit "
-									"the words, \"Lord British!\"");
-							LORD_BRITISH->say(
-									"Lord British looks truly taken aback, his "
-									"eyes narrow calculatingly. \"What foul "
-									"treachery is this?\"");
-							AVATAR->say(
-									"You find yourself unable to respond, and "
-									"your muscles are clenching as if to lash "
-									"out with the wicked blade in your hand.");
-							LORD_BRITISH->say(
-									"\"Perhaps when thou art sitting in a "
-									"dungeon, thy tongue will loosen.");
-							say("\"Guards!\"*");
-							var0014 = true;
-							goto labelFunc06F6_0B89;
-						} else {
-							say("The Shade Blade lets out a harsh whisper. "
-								"\"Move a little closer to him, and I'll "
-								"perform this task for thee, master.\"");
-							break;
-						}
-					} else if (var0017 == SHAPE_BATLIN2
-							|| var0017 == SHAPE_BATLIN) {
-						say("\"Alas master, this one is protected by a power "
-							"greater than mine. His destiny lies elsewhere.\"");
-						break;
-					}
-					if (Func0849(var0017)) {
-						say("The sword recoils in something akin to horror. "
-							"\"That creature is beyond even my power. I "
-							"suggest that thou hackest it to bits, if "
-							"possible, then burn the pieces.\" Arcadion offers "
-							"helpfully.");
-						break;
-					}
-					if (var0017 == SHAPE_DRAGON) {
-						if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
-							if (var0011->get_cont_items(
-									SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS,
-									FRAME_SCROLL_INVISIBLE)) {
-								say("\"Ah, Dracothraxus. We meet once again. "
-									"'Tis a pity thou shan't survive our "
-									"meeting this time. Perhaps if thou hadst "
-									"given the gem to me when first I asked, "
-									"none of this unpleasantness would be "
-									"necessary.\"");
-								DRACOTHRAXUS->say(
-										"The dragon responds with great "
-										"resignation. \"My will is not mine "
-										"own in this matter, Arcadion. Mayhap "
-										"thou art finding too, that thy will "
-										"is not thine own.\"");
-								DRACOTHRAXUS->hide();
-								ARCADION_SWORD->say(
-										"The daemon, possibly stung by the "
-										"dragon's repartee, falls silent and "
-										"goes to its bloody work.*");
-								var0015 = true;
-								goto labelFunc06F6_0B89;
-							}
-						} else {
-							say("The Shade Blade croons sofltly. \"Move a "
-								"little closer to the dragon, and I'll end its "
-								"life for thee, master.\"");
-							break;
-						}
-					} else if (var0017 == SHAPE_MONSTER_MAGE) {
-						if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
-							if (var0011->get_cont_items(
-									SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN,
-									FRAME_SCROLL_INVISIBLE)) {
-								say("\"I owe thee quite a favor for this, "
-									"master. I thank thee for allowing me "
-									"this, my revenge!\"*");
-								var0015 = true;
-								goto labelFunc06F6_0B89;
-							}
-						} else {
-							say("\"Move closer to him, and I'll see that his "
-								"life plagues thee no more.\" The\tdark sword "
-								"sounds almost gleeful at this prospect.");
-							break;
-						}
-					} else if (var0017 == SHAPE_GOLEM) {
-						say("\"This creature is not strictly speaking,... "
-							"living. Thy best course of action would be to "
-							"smash it to pieces\" You hear a smile in "
-							"Arcadion's voice.");
-						break;
-					}
-					if (Func0848(var0017)) {
-						if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
-							say("\"Very well, master. If thou cannot dispatch "
-								"this foe thyself, I shall do it for thee.\"");
-							var0015 = true;
-							goto labelFunc06F6_0B89;
-						} else {
-							say("\"I must get closer to this one in order to "
-								"enjoy its essence.\" The blade hums eagerly "
-								"as it tugs in the direction of your selected "
-								"target.");
-						}
-					} else {
-						say("The daemon sword abruptly ceases its vibration. "
-							"\"This being is hardly worth a death the likes of "
-							"which I would visit upon it. Call upon me again "
-							"when thou art faced with a more worthy "
-							"opponent.\"");
-					}
-				}
-			} else if (Func0847(var0017)) {
-				say("\"Perhaps thou misunderstands my meaning. I do not raise "
-					"the dead... I slay the living.\" The last is spoken in a "
-					"sibilant whisper.");
-			} else if (!var0017) {
-				say("\"Thou wouldst have me destroy the very world around "
-					"thee. Not a very bright idea for such a virtuous one as "
-					"thou art thought to be.\" A strangely metallic chuckle "
-					"escapes from the sword.");
-			} else if (var0017 == SHAPE_FERRYMAN) {
-				say("The sword recoils in something akin to horror. \"That one "
-					"is beyond even my power.\"");
-			} else if (var0017 == SHAPE_DRAFT_HORSE
-					|| var0017 == SHAPE_WOUNDED_MAN) {
-				say("The daemon sword abruptly ceases its vibration. \"This "
-					"being is hardly worth a death the likes of which I would "
-					"visit upon it. Call upon me again when thou art faced "
-					"with a more worthy opponent.\"");
-			} else if (var0017 == SHAPE_BLACK_SWORD) {
-				say("\"Thou shall not be rid of me quite so easily, my master. "
-					"However, I do not begrudge thine attempt. Quite to the "
-					"contrary. I respect thy resourcefulness.\"");
-			} else if (var0017 == SHAPE_DARK_CORE) {
-				say("\"Would that I had such power. That artifact would allow "
-					"me to return to my home plane if only I could unlock its "
-					"secrets.\"");
-			} else {
-				say("\"Hast thou such a grudge against this inanimate object "
-					"that thou wouldst see it perish forever?\" His voice is "
-					"laden with undisguised sarcasm. \"I cannot take life from "
-					"that which is already lifeless.\"");
-			}
-			fallthrough;
-		case "Return":
-			if (!Func08E7()) {
-				say("\"Ah... home again. I never tire of rocky little islands. "
-					"Dost thou truly wish to go to the forsaken Isle of "
-					"Fire?\"");
-				if (askYesNo()) {
-					say("\"I see. Very well, master. But let us not forget "
-						"this little favor...\" The gem in the hilt of the "
-						"sword glows brightly then everything dims.*");
-					var0013 = true;
-					goto labelFunc06F6_0B89;
+converse_break:
+		breakable {
+			converse(0) {
+			case "name":
+				say("The daemon sword's tone is rather ominous as he says, \"I am, "
+					"and ever shall be, thy servant Arcadion.\"");
+				remove("name");
+				fallthrough;
+			case "job":
+				say("\"I am the Shade Blade. My destiny is to serve thee until we "
+					"are...\" The sword pauses, \"parted.\"");
+				remove("job");
+				fallthrough;
+			case "powers":
+				if (!AVATAR->get_npc_object()->is_readied(
+							BG_WEAPON_HAND, SHAPE_BLACK_SWORD, FRAME_ANY)) {
+					say("\"I needs must be in thy hand, master, if thou wishest to "
+						"use my powers.\"");
 				} else {
-					say("\"It is good. Sense returns to the Virtuous Wonder. "
-						"Thou art truly without peer in the arena of thought, "
-						"master.\"");
+					say("\"Which of my powers dost thou seek to use?\"");
+					UI_push_answers();
+					add(["Magic", "Fire", "Death", "Return", "none"]);
 				}
-			} else {
-				say("\"Forgive me, master, but are we not already on or near "
-					"the Isle of Fire? Though, why one would wish to remain "
-					"here on this forsaken piece of rock, I have no\tidea.\"");
+				fallthrough;
+			case "help":
+				say("Arcadion's voice is smug as he replies to your request for "
+					"assistance. \"Yes, I can help thee if thou wishest to exile "
+					"what remains of Exodus to the Void. Firstly, thou shalt have "
+					"need of the lenses of which the doddering, old fool spoke. "
+					"Next thou needs must have the three Talismans of Principle. "
+					"And finally, make sure that there are lit torches upon the "
+					"walls to either side of the pedestal upon which the Dark Core "
+					"rests.");
+				add(["lenses", "talismans"]);
+				remove("help");
+				fallthrough;
+			case "lenses":
+				say("\"The concave and convex lenses which thou used to place the "
+					"Codex of Infinite Wisdom within the Void, I believe now sit "
+					"forgotten in the Museum of Britannia. They must be placed "
+					"between the Dark Core and the torches on either side of the "
+					"pedestal\"");
+				remove("lenses");
+				fallthrough;
+			case "talismans":
+				say("\"The Talismans of Principle must be placed upon the Dark "
+					"Core like wedges in a pie.\"");
+				remove("talismans");
+				fallthrough;
+			case "none":
+				say("\"As thou wish, master. I but seek to serve thee.\"");
+				UI_pop_answers();
+				fallthrough;
+			case "Magic":
+				var var0016 = UI_part_of_day();
+				if ((var0016 == NIGHT)
+					|| ((var0016 == MIDNIGHT) || (var0016 == EARLY))) {
+					Func0845(true);
+				} else {
+					say("The blade croons quietly, \"Alas, master. My energies "
+						"seem a trifle low. Perhaps if thou were to find some "
+						"creature to slay, my power would be sufficient. After "
+						"all, I have needs just as thou dost.\"");
+				}
+				fallthrough;
+			case "Death":
+				say("\"Where is the corpse of which thou dost speak?\" The dark "
+					"sword begins to vibrate in your hand.*");
+				ARCADION_SWORD->hide();
+				var0011 = UI_click_on_item();
+				var var0017 = var0011->get_item_shape();
+				struct<Position> var0018 = var0011->get_object_position();
+				ARCADION_SWORD->show_npc_face(DEFAULT_FACE);
+				if (var0011->is_npc()) {
+					breakable {
+						if (var0017 == SHAPE_MALE_AVATAR
+								|| var0017 == SHAPE_FEMALE_AVATAR) {
+							say("The daemon speaks with a sanctimonious tone. \"I "
+								"could not in honor take the life of my most "
+								"wondrous master.\"");
+							break;
+						}
+						if (var0017 == SHAPE_LORD_BRITISH) {
+							if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
+								say("\"Yes! I have long sought the end of Lord "
+									"British, my traitorous master.\"");
+								var var0019 = getAvatarName();
+								LORD_BRITISH->say(
+										"\"", var0019,
+										", for what reason art thou brandishing "
+										"that black sword in my presence?\"");
+								ARCADION_SWORD->hide();
+								AVATAR->say(
+										"The daemon responds, using your mouth. "
+										"\"This blade is thy doom,...\" You spit "
+										"the words, \"Lord British!\"");
+								LORD_BRITISH->say(
+										"Lord British looks truly taken aback, his "
+										"eyes narrow calculatingly. \"What foul "
+										"treachery is this?\"");
+								AVATAR->say(
+										"You find yourself unable to respond, and "
+										"your muscles are clenching as if to lash "
+										"out with the wicked blade in your hand.");
+								LORD_BRITISH->say(
+										"\"Perhaps when thou art sitting in a "
+										"dungeon, thy tongue will loosen.");
+								say("\"Guards!\"*");
+								var0014 = true;
+								break converse_break;
+							} else {
+								say("The Shade Blade lets out a harsh whisper. "
+									"\"Move a little closer to him, and I'll "
+									"perform this task for thee, master.\"");
+								break;
+							}
+						} else if (var0017 == SHAPE_BATLIN2
+								|| var0017 == SHAPE_BATLIN) {
+							say("\"Alas master, this one is protected by a power "
+								"greater than mine. His destiny lies elsewhere.\"");
+							break;
+						}
+						if (Func0849(var0017)) {
+							say("The sword recoils in something akin to horror. "
+								"\"That creature is beyond even my power. I "
+								"suggest that thou hackest it to bits, if "
+								"possible, then burn the pieces.\" Arcadion offers "
+								"helpfully.");
+							break;
+						}
+						if (var0017 == SHAPE_DRAGON) {
+							if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
+								if (var0011->get_cont_items(
+										SHAPE_SCROLL, QUALITY_SCROLL_DRACOTHRAXUS,
+										FRAME_SCROLL_INVISIBLE)) {
+									say("\"Ah, Dracothraxus. We meet once again. "
+										"'Tis a pity thou shan't survive our "
+										"meeting this time. Perhaps if thou hadst "
+										"given the gem to me when first I asked, "
+										"none of this unpleasantness would be "
+										"necessary.\"");
+									DRACOTHRAXUS->say(
+											"The dragon responds with great "
+											"resignation. \"My will is not mine "
+											"own in this matter, Arcadion. Mayhap "
+											"thou art finding too, that thy will "
+											"is not thine own.\"");
+									DRACOTHRAXUS->hide();
+									ARCADION_SWORD->say(
+											"The daemon, possibly stung by the "
+											"dragon's repartee, falls silent and "
+											"goes to its bloody work.*");
+									var0015 = true;
+									break converse_break;
+								}
+							} else {
+								say("The Shade Blade croons sofltly. \"Move a "
+									"little closer to the dragon, and I'll end its "
+									"life for thee, master.\"");
+								break;
+							}
+						} else if (var0017 == SHAPE_MONSTER_MAGE) {
+							if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
+								if (var0011->get_cont_items(
+										SHAPE_SCROLL, QUALITY_SCROLL_ERETHIAN,
+										FRAME_SCROLL_INVISIBLE)) {
+									say("\"I owe thee quite a favor for this, "
+										"master. I thank thee for allowing me "
+										"this, my revenge!\"*");
+									var0015 = true;
+									break converse_break;
+								}
+							} else {
+								say("\"Move closer to him, and I'll see that his "
+									"life plagues thee no more.\" The\tdark sword "
+									"sounds almost gleeful at this prospect.");
+								break;
+							}
+						} else if (var0017 == SHAPE_GOLEM) {
+							say("\"This creature is not strictly speaking,... "
+								"living. Thy best course of action would be to "
+								"smash it to pieces\" You hear a smile in "
+								"Arcadion's voice.");
+							break;
+						}
+						if (Func0848(var0017)) {
+							if (AVATAR->get_npc_object()->get_distance(var0011) < 5) {
+								say("\"Very well, master. If thou cannot dispatch "
+									"this foe thyself, I shall do it for thee.\"");
+								var0015 = true;
+								break converse_break;
+							} else {
+								say("\"I must get closer to this one in order to "
+									"enjoy its essence.\" The blade hums eagerly "
+									"as it tugs in the direction of your selected "
+									"target.");
+							}
+						} else {
+							say("The daemon sword abruptly ceases its vibration. "
+								"\"This being is hardly worth a death the likes of "
+								"which I would visit upon it. Call upon me again "
+								"when thou art faced with a more worthy "
+								"opponent.\"");
+						}
+					}
+				} else if (Func0847(var0017)) {
+					say("\"Perhaps thou misunderstands my meaning. I do not raise "
+						"the dead... I slay the living.\" The last is spoken in a "
+						"sibilant whisper.");
+				} else if (!var0017) {
+					say("\"Thou wouldst have me destroy the very world around "
+						"thee. Not a very bright idea for such a virtuous one as "
+						"thou art thought to be.\" A strangely metallic chuckle "
+						"escapes from the sword.");
+				} else if (var0017 == SHAPE_FERRYMAN) {
+					say("The sword recoils in something akin to horror. \"That one "
+						"is beyond even my power.\"");
+				} else if (var0017 == SHAPE_DRAFT_HORSE
+						|| var0017 == SHAPE_WOUNDED_MAN) {
+					say("The daemon sword abruptly ceases its vibration. \"This "
+						"being is hardly worth a death the likes of which I would "
+						"visit upon it. Call upon me again when thou art faced "
+						"with a more worthy opponent.\"");
+				} else if (var0017 == SHAPE_BLACK_SWORD) {
+					say("\"Thou shall not be rid of me quite so easily, my master. "
+						"However, I do not begrudge thine attempt. Quite to the "
+						"contrary. I respect thy resourcefulness.\"");
+				} else if (var0017 == SHAPE_DARK_CORE) {
+					say("\"Would that I had such power. That artifact would allow "
+						"me to return to my home plane if only I could unlock its "
+						"secrets.\"");
+				} else {
+					say("\"Hast thou such a grudge against this inanimate object "
+						"that thou wouldst see it perish forever?\" His voice is "
+						"laden with undisguised sarcasm. \"I cannot take life from "
+						"that which is already lifeless.\"");
+				}
+				fallthrough;
+			case "Return":
+				if (!Func08E7()) {
+					say("\"Ah... home again. I never tire of rocky little islands. "
+						"Dost thou truly wish to go to the forsaken Isle of "
+						"Fire?\"");
+					if (askYesNo()) {
+						say("\"I see. Very well, master. But let us not forget "
+							"this little favor...\" The gem in the hilt of the "
+							"sword glows brightly then everything dims.*");
+						var0013 = true;
+						break converse_break;
+					} else {
+						say("\"It is good. Sense returns to the Virtuous Wonder. "
+							"Thou art truly without peer in the arena of thought, "
+							"master.\"");
+					}
+				} else {
+					say("\"Forgive me, master, but are we not already on or near "
+						"the Isle of Fire? Though, why one would wish to remain "
+						"here on this forsaken piece of rock, I have no\tidea.\"");
+				}
+				fallthrough;
+			case "Fire":
+				say("\"And what, pray tell, is the intended target of thy immense "
+					"and most puissant wrath, O' Master of Infinite "
+					"Destruction?\"");
+				ARCADION_SWORD->hide();
+				var0012 = true;
+				break converse_break;
+			case "bye":
+				say("\"Forgive me master, but I shan't be leaving. However, thou "
+					"mayest cease thy speaking... if thou dost wish it.\"*");
+				break converse_break;
 			}
-			fallthrough;
-		case "Fire":
-			say("\"And what, pray tell, is the intended target of thy immense "
-				"and most puissant wrath, O' Master of Infinite "
-				"Destruction?\"");
-			ARCADION_SWORD->hide();
-			var0012 = true;
-			goto labelFunc06F6_0B89;
-		case "bye":
-			say("\"Forgive me master, but I shan't be leaving. However, thou "
-				"mayest cease thy speaking... if thou dost wish it.\"*");
-			goto labelFunc06F6_0B89;
 		}
-	labelFunc06F6_0B89:
 		if (var0012) {
 			item->Func06FC();
 		}
@@ -62685,9 +62689,11 @@ void Func06F9 object#(0x6F9) () {
 	if (event == SCRIPTED) {
 		var var0002 = get_item_shape();
 		if (var0002 == SHAPE_STATUE) {
+			// I see no way other than this
 			goto labelFunc06F9_0025;
 		}
 		if (var0002 == SHAPE_BLACK_SWORD) {
+			// I see no way other than this
 			goto labelFunc06F9_0032;
 		}
 		UI_fade_palette(12 * TICK, 1, FADE_FROM_BLACK);
@@ -71169,60 +71175,59 @@ void Func0892 id#(0x892) () {
 			"to miss the glimmer of intelligence in his eyes.");
 	add(["name", "job", "bye"]);
 	var var0000 = false;
-	converse(0) {
-	case "name":
-		say("\"As thou must know by now, my creator chose to call me "
-			"Adjhar.\"");
-		remove("name");
-		fallthrough;
-	case "job":
-		say("\"I was created to be one of many protectors to the Shrines of "
-			"the Three Principles. However,\" he pauses, \"my duty also "
-			"included being the keeper of the Talisman of Love.\"");
-		remove("job");
-		add("Talisman");
-		fallthrough;
-	case "Talisman":
-		say("\"Dost thou want the Talisman of Love?\"");
-		remove("Talisman");
-		if (askYesNo()) {
-			say("\"I was put here to protect the Shrines and prevent any from "
-				"acquiring the Talisman. Any except the Avatar who "
-				"demonstrated knowledge and understanding of Love. The "
-				"Talisman is thine, Avatar.\"~He brings his stone hand to his "
-				"heart and opens a panel on the front of his chest. Reaching "
-				"inside with his other hand, he brings forth a beautiful "
-				"yellow talisman.");
-			var0000 = UI_create_new_object(SHAPE_AMULET);
-			var0000->set_item_frame(FRAME_AMULET_TALISMAN_OF_LOVE);
-			var var0001 = Func0907(AVATAR->get_npc_object());
-			if (var0001) {
-				say("He places the Talisman in your palm. ~\"Thou hast earned "
-					"this and the honors and powers associated with it. Thou "
-					"art truly an Avatar.\"");
-				gflags[GOT_TALISMAN_OF_LOVE] = true;
-				// This could be a break instead; the original
-				// skips the endconv from a break, which is why
-				// I did it this way
-				goto labelFunc0892_00CA;
+break_converse:
+	breakable {
+		converse(0) {
+		case "name":
+			say("\"As thou must know by now, my creator chose to call me "
+				"Adjhar.\"");
+			remove("name");
+			fallthrough;
+		case "job":
+			say("\"I was created to be one of many protectors to the Shrines of "
+				"the Three Principles. However,\" he pauses, \"my duty also "
+				"included being the keeper of the Talisman of Love.\"");
+			remove("job");
+			add("Talisman");
+			fallthrough;
+		case "Talisman":
+			say("\"Dost thou want the Talisman of Love?\"");
+			remove("Talisman");
+			if (askYesNo()) {
+				say("\"I was put here to protect the Shrines and prevent any from "
+					"acquiring the Talisman. Any except the Avatar who "
+					"demonstrated knowledge and understanding of Love. The "
+					"Talisman is thine, Avatar.\"~He brings his stone hand to his "
+					"heart and opens a panel on the front of his chest. Reaching "
+					"inside with his other hand, he brings forth a beautiful "
+					"yellow talisman.");
+				var0000 = UI_create_new_object(SHAPE_AMULET);
+				var0000->set_item_frame(FRAME_AMULET_TALISMAN_OF_LOVE);
+				var var0001 = Func0907(AVATAR->get_npc_object());
+				if (var0001) {
+					say("He places the Talisman in your palm. ~\"Thou hast earned "
+						"this and the honors and powers associated with it. Thou "
+						"art truly an Avatar.\"");
+					gflags[GOT_TALISMAN_OF_LOVE] = true;
+					break break_converse;
+				} else {
+					say("\"I am sorry, but thou must be less burdened to receive "
+						"this one of three greatest of all blessings.\"");
+				}
 			} else {
-				say("\"I am sorry, but thou must be less burdened to receive "
-					"this one of three greatest of all blessings.\"");
+				say("\"Thou art truly deserving of such an artifact. But if thou "
+					"dost not wish to utilize the Shrines, I must respect thy "
+					"wishes.\"");
 			}
-		} else {
-			say("\"Thou art truly deserving of such an artifact. But if thou "
-				"dost not wish to utilize the Shrines, I must respect thy "
-				"wishes.\"");
+			fallthrough;
+		case "bye":
+			say("\"I bid thee farewell.\"*");
+			if (gflags[GOT_TALISMAN_OF_LOVE]) {
+				say("\"Mark the wisdom of the Shrine of Love well, Avatar.\"*");
+			}
+			abort;
 		}
-		fallthrough;
-	case "bye":
-		say("\"I bid thee farewell.\"*");
-		if (gflags[GOT_TALISMAN_OF_LOVE]) {
-			say("\"Mark the wisdom of the Shrine of Love well, Avatar.\"*");
-		}
-		abort;
 	}
-labelFunc0892_00CA:
 	if (gflags[GOT_TALISMAN_OF_LOVE] && (!gflags[DID_SHRINE_OF_LOVE])) {
 		event = BG_PATH_SUCCESS;
 		var0000->Func06F9();
@@ -76763,100 +76768,102 @@ void Func08F3 id#(0x8F3) (var var0000) {
 		"must know... Does the Avatar prefer mystical enchantment to overcome "
 		"enemies, or physical strength and valor in arms?\"");
 	var var0003 = false;
-	converse(0) {
-	case "enchantment":
-		say("\"I have suspected it! No skill have I in such deep matters, but "
-			"perchance our speech might turn to enchantment when our quest is "
-			"complete.\"");
-		gflags[TSERAMED_THINKS_MAGE] = true;
-		goto labelFunc08F3_0157;
-	case "valor in arms":
-		say("\"I have often suspected it! I am honored to travel with thee. I "
-			"shall watch thee diligently, for surely thou art the greatest "
-			"fighter who ever lived.\"");
-		say("\"When our quest is complete we shall regale each other with our "
-			"exploits. Tell me, dost thou prefer hand to hand combat or ranged "
-			"weaponry?\"");
-		remove(["enchantment", "valor in arms"]);
-		add(["hand to hand", "ranged weaponry"]);
-		gflags[TSERAMED_THINKS_MAGE] = false;
-		var0001 = false;
-		fallthrough;
-	case "hand to hand"(remove):
-		var var0004 = "and thou seemest man enough for such close work";
-		if (UI_is_pc_female() == 1) {
-			var0004 = "especially in women. The women of Britannia seldom have "
-					  "them";
+leave_converse:
+	breakable {
+		converse(0) {
+		case "enchantment":
+			say("\"I have suspected it! No skill have I in such deep matters, but "
+				"perchance our speech might turn to enchantment when our quest is "
+				"complete.\"");
+			gflags[TSERAMED_THINKS_MAGE] = true;
+			break leave_converse;
+		case "valor in arms":
+			say("\"I have often suspected it! I am honored to travel with thee. I "
+				"shall watch thee diligently, for surely thou art the greatest "
+				"fighter who ever lived.\"");
+			say("\"When our quest is complete we shall regale each other with our "
+				"exploits. Tell me, dost thou prefer hand to hand combat or ranged "
+				"weaponry?\"");
+			remove(["enchantment", "valor in arms"]);
+			add(["hand to hand", "ranged weaponry"]);
+			gflags[TSERAMED_THINKS_MAGE] = false;
+			var0001 = false;
+			fallthrough;
+		case "hand to hand"(remove):
+			var var0004 = "and thou seemest man enough for such close work";
+			if (UI_is_pc_female() == 1) {
+				var0004 = "especially in women. The women of Britannia seldom have "
+						"them";
+				var0002 = true;
+			}
+			say("\"Such weapons require strength and daring! I admire such "
+				"qualities, ",
+				var0004, ".\"");
+			say("\"But my preferences run to the bow. An ancient weapon, and "
+				"elegant, a fine bow of Yew may bring down game sooner than a "
+				"sword.\"");
+			var0003 = true;
+			fallthrough;
+		case "ranged weaponry"(remove):
+			say("\"Such is also my choice. Few are my peers in the art of archery. "
+				"A keen eye and steady hand are required, and that is rare in the "
+				"men of this day. Even rarer in women. Sad, that the women of "
+				"Britannia should be innocent of such art!\"");
 			var0002 = true;
-		}
-		say("\"Such weapons require strength and daring! I admire such "
-			"qualities, ",
-			var0004, ".\"");
-		say("\"But my preferences run to the bow. An ancient weapon, and "
-			"elegant, a fine bow of Yew may bring down game sooner than a "
-			"sword.\"");
-		var0003 = true;
-		fallthrough;
-	case "ranged weaponry"(remove):
-		say("\"Such is also my choice. Few are my peers in the art of archery. "
-			"A keen eye and steady hand are required, and that is rare in the "
-			"men of this day. Even rarer in women. Sad, that the women of "
-			"Britannia should be innocent of such art!\"");
-		var0002 = true;
-		var0003 = true;
-		fallthrough;
-	always:
-		if (var0002) {
-			var0002 = false;
-			var var0005 = false;
-			// BUG: this whole do...while and both nobreak statements are to
-			// emulate a bug in the original usecode. This prevents the code
-			// after the nobreak from ever executing, and some dialog gets
-			// lost because of it.
-			declare var var0008;
-			breakable {
-				for (var0008 in var0000) {
-					if (var0008->get_npc_prop(SEX_FLAG) == 1) {
-						var0005 = true;
-						// BUG: this was meant to go to the dead code below,
-						// but the original ends up breaking from the dialog
-						// entirely. The 'nobreak' blocks below emulate this
-						// bug.
+			var0003 = true;
+			fallthrough;
+		always:
+			if (var0002) {
+				var0002 = false;
+				var var0005 = false;
+				// BUG: this whole do...while and both nobreak statements are to
+				// emulate a bug in the original usecode. This prevents the code
+				// after the nobreak from ever executing, and some dialog gets
+				// lost because of it.
+				declare var var0008;
+				breakable {
+					for (var0008 in var0000) {
+						if (var0008->get_npc_prop(SEX_FLAG) == 1) {
+							var0005 = true;
+							// BUG: this was meant to go to the dead code below,
+							// but the original ends up breaking from the dialog
+							// entirely. The 'nobreak' blocks below emulate this
+							// bug.
+							break;
+						}
+					}
+					nobreak {
 						break;
 					}
 				}
 				nobreak {
 					break;
 				}
+				// NOTE: Dead code
+				if (var0005) {
+					var0008->say("\"Take care with thy words, master woodsman.\"");
+					TSERAMED->say("\"I do not mean this gracious company! Surely "
+								"thou art among the elite of Britannia and a "
+								"rare figure of a woman.\"");
+					var0008->say("\"Thy speech does me service. Alas! Too few are "
+								"the women who learn skill in arms.\"");
+					var0008->hide();
+				}
 			}
-			nobreak {
-				break;
+			if (var0003) {
+				break leave_converse;
 			}
-			// NOTE: Dead code
-			if (var0005) {
-				var0008->say("\"Take care with thy words, master woodsman.\"");
-				TSERAMED->say("\"I do not mean this gracious company! Surely "
-							  "thou art among the elite of Britannia and a "
-							  "rare figure of a woman.\"");
-				var0008->say("\"Thy speech does me service. Alas! Too few are "
-							 "the women who learn skill in arms.\"");
-				var0008->hide();
+			fallthrough;
+		case "bye":
+			if (!var0001) {
+				say("\"Please, Avatar, I simply must know.\"");
+			} else {
+				abort;
 			}
+			var0001 = true;
+			fallthrough;
 		}
-		if (var0003) {
-			goto labelFunc08F3_0157;
-		}
-		fallthrough;
-	case "bye":
-		if (!var0001) {
-			say("\"Please, Avatar, I simply must know.\"");
-		} else {
-			abort;
-		}
-		var0001 = true;
-		fallthrough;
 	}
-labelFunc08F3_0157:
 	UI_pop_answers();
 }
 
