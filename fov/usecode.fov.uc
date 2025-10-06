@@ -5618,13 +5618,10 @@ void FuncCannon shape#(SHAPE_CANNON) () {
 		for (var000D in var000A) {
 			if (var0008 == var000D) {
 				remove_item();
-				// TODO: this should be a return.
-				// Need to make UCC optimize this.
-				goto labelFuncCannon_01A6;
+				break;
 			}
 		}
 	}
-labelFuncCannon_01A6:
 	return;
 }
 
@@ -5677,13 +5674,10 @@ void FuncGuillotinePlatform shape#(SHAPE_GUILLOTINE_PLATFORM) () {
 			struct<Position> var0005 = var0004->get_object_position();
 			if (var0005.x == var0000) {
 				var0004->FuncGuillotine();
-				// TODO: this should be a return.
-				// Need to make UCC optimize this.
-				goto labelFuncGuillotinePlatform_004E;
+				break;
 			}
 		}
 	}
-labelFuncGuillotinePlatform_004E:
 	return;
 }
 
@@ -54153,12 +54147,9 @@ void Func062C object#(0x62C) () {
 				wait 30;
 				call Func063F;
 			};
-			// TODO: this should be a return.
-			// Need to make UCC optimize this.
-			goto labelFunc062C_015C;
+			break;
 		}
 	}
-labelFunc062C_015C:
 	return;
 }
 
