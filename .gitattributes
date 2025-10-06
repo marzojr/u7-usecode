@@ -1,5 +1,7 @@
-*.uc		text
-*.uca		text
-*.ucxt		text
+*.uc		text eol=lf
+*.ucc		text eol=lf
+*.uh		text eol=lf
+*.uca		text eol=lf
+*.ucxt		text eol=lf
 .gitattributes		text
 .gitignore		text
