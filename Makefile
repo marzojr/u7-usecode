@@ -37,12 +37,12 @@ check_ref: usecode.fov2.ucxt usecode.ss2.ucxt
 
 usecode.fov2 : fov/usecode.fov.uc $(FOV_SOURCES) $(UCC)
 	rm -f usecode.fov2.ucxt usecode.fov3.ucxt
-	$(UCC) -c always -b -I fov -o $@ $< |& (grep -vE "Warning: (Interpreting integer|You \*really\*)" || true)
+	$(UCC) -c always -b -I fov -o $@ $< |& (grep -vE "warning:.* (Interpreting integer|You \*really\*)" || true)
 
 usecode.ss2 : ss/usecode.ss.uc $(SS_SOURCES) $(UCC)
 	rm -f usecode.ss2.ucxt usecode.ss3.ucxt
 	rm -f
-	$(UCC) -c always -b -I ss -o $@ $< |& (grep -vE "Warning: (Interpreting integer|You \*really\*)" || true)
+	$(UCC) -c always -b -I ss -o $@ $< |& (grep -vE "warning:.* (Interpreting integer|You \*really\*)" || true)
 
 usecode.fov2.ucxt : usecode.fov2 $(UCXT)
 	$(UCXT) -a -fs -fov -i$< > $@
@@ -51,10 +51,10 @@ usecode.ss2.ucxt : usecode.ss2 $(UCXT)
 	$(UCXT) -a -fs -ss -i$< > $@
 
 usecode.fov3 : ucxt/usecode.fov.ucxt $(UCC)
-	$(UCC) -u -c always -o $@ $< |& (grep -vE "Warning: (Interpreting integer|You \*really\*)" || true)
+	$(UCC) -u -c always -o $@ $< |& (grep -vE "warning:.* (Interpreting integer|You \*really\*)" || true)
 
 usecode.ss3 : ucxt/usecode.ss.ucxt $(UCC)
-	$(UCC) -u -c always -o $@ $< |& (grep -vE "Warning: (Interpreting integer|You \*really\*)" || true)
+	$(UCC) -u -c always -o $@ $< |& (grep -vE "warning:.* (Interpreting integer|You \*really\*)" || true)
 
 usecode.fov3.ucxt : usecode.fov3 $(UCXT)
 	$(UCXT) -a -fs -fov -i$< > $@
