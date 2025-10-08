@@ -1110,29 +1110,32 @@ void FuncGrandfatherClockEw shape#(SHAPE_GRANDFATHER_CLOCK_EW) () {
 	}
 }
 
+/**
+ * Beer Keg interaction handler.
+ */
 void FuncKeg shape#(SHAPE_KEG) () {
 	if (event == DOUBLECLICK) {
 		if (in_usecode()) {
 			halt_scheduled();
 			partyUtters("@It is about time!@");
 		} else {
-			item->Func0628();
+			item->kegServeBeer();
 		}
 	}
 	if (event == BG_PATH_FAILURE) {
-		struct<Position> var0000 = get_object_position();
-		var0000.x -= 2;
-		var0000.y += 1;
-		var var0001 = AVATAR->get_cont_items(SHAPE_BUCKET, QUALITY_ANY, FRAME_ANY);
-		declare var var0002;
-		if (var0001) {
-			var0002 = var0001->set_last_created();
-			if (var0002) {
-				var0001->set_item_frame(FRAME_BUCKET_BEER);
-				var0002 = UI_update_last_created(var0000);
+		struct<Position> targetPos = get_object_position();
+		targetPos.x -= 2;
+		targetPos.y += 1;
+		var bucketsList = AVATAR->get_cont_items(SHAPE_BUCKET, QUALITY_ANY, FRAME_ANY);
+		declare var result;
+		if (bucketsList) {
+			result = bucketsList->set_last_created();
+			if (result) {
+				bucketsList->set_item_frame(FRAME_BUCKET_BEER);
+				result = UI_update_last_created(targetPos);
 			}
 		}
-		var0002 = script AVATAR {
+		result = script AVATAR {
 			face north;
 			continue;
 			actor frame bowing;
@@ -2516,30 +2519,33 @@ void FuncDoorEwTop shape#(SHAPE_DOOR_EW_TOP) () {
 	}
 }
 
+/**
+ * Wine interaction handler.
+ */
 void FuncCask shape#(SHAPE_CASK) () {
 	if (event == DOUBLECLICK) {
 		if (in_usecode()) {
 			halt_scheduled();
 			partyUtters("@It is about time!@");
 		} else {
-			item->Func0629();
+			item->caskServeWine();
 		}
 	}
 	if (event == BG_PATH_FAILURE) {
-		struct<Position> var0000 = get_object_position();
-		var0000.x += 1;
-		var0000.y -= 1;
-		var var0001 = AVATAR->get_cont_items(
+		struct<Position> targetPos = get_object_position();
+		targetPos.x += 1;
+		targetPos.y -= 1;
+		var bucketsList = AVATAR->get_cont_items(
 				SHAPE_BUCKET, QUALITY_ANY, FRAME_ANY);
-		declare var var0002;
-		if (var0001) {
-			var0002 = var0001->set_last_created();
-			if (var0002) {
-				var0001->set_item_frame(FRAME_BUCKET_WINE);
-				var0002 = UI_update_last_created(var0000);
+		declare var result;
+		if (bucketsList) {
+			result = bucketsList->set_last_created();
+			if (result) {
+				bucketsList->set_item_frame(FRAME_BUCKET_WINE);
+				result = UI_update_last_created(targetPos);
 			}
 		}
-		var0002 = script AVATAR {
+		result = script AVATAR {
 			face north;
 			continue;
 			actor frame bowing;
@@ -54018,85 +54024,101 @@ void Func0627 object#(0x627) () {
 	}
 }
 
-void Func0628 object#(0x628) () {
-	var var0000 = UI_create_new_object(SHAPE_PUDDLE);
-	if (var0000) {
-		var0000->set_item_flag(TEMPORARY);
-		var0000->set_item_frame(UI_die_roll(FRAME_BEER_FIRST, FRAME_BEER_LAST));
-		struct<Position> var0001 = get_object_position();
-		var var0002 = find_nearby(SHAPE_BUCKET, 2, MASK_NONE);
-		declare var var0007;
-		for (var0005 in var0002) {
-			struct<Position> var0006 = var0005->get_object_position();
-			if ((var0006.x == (var0001.x - 1))
-				&& ((var0006.y == (var0001.y + 1))
-					&& (var0006.z == var0001.z))) {
-				if (var0005->get_item_frame() == FRAME_BUCKET_EMPTY) {
-					var0005->set_item_frame(FRAME_BUCKET_BEER);
+/**
+ * @brief Spawn beer puddle and handle nearby buckets/continuation.
+ *
+ * This function creates a temporary puddle object (beer puddle) at the
+ * current item's position, attempts to fill any nearby empty bucket, and
+ * otherwise spreads the puddle nearby. It also schedules itself to run
+ * again after a short delay to simulate a continuing leak.
+ */
+void kegServeBeer object#(0x628) () {
+	var puddleObj = UI_create_new_object(SHAPE_PUDDLE);
+	if (puddleObj) {
+		puddleObj->set_item_flag(TEMPORARY);
+		puddleObj->set_item_frame(UI_die_roll(FRAME_BEER_FIRST, FRAME_BEER_LAST));
+		struct<Position> basePos = get_object_position();
+		var nearbyBuckets = find_nearby(SHAPE_BUCKET, 2, MASK_NONE);
+		declare var ignore;
+		for (bucketObj in nearbyBuckets) {
+			struct<Position> bucketPos = bucketObj->get_object_position();
+			if ((bucketPos.x == (basePos.x - 1))
+				&& ((bucketPos.y == (basePos.y + 1))
+					&& (bucketPos.z == basePos.z))) {
+				if (bucketObj->get_item_frame() == FRAME_BUCKET_EMPTY) {
+					bucketObj->set_item_frame(FRAME_BUCKET_BEER);
 					halt_scheduled();
-					var0007 = script item after 16 ticks {
-						call Func0628;
+					ignore = script item after 16 ticks {
+						call kegServeBeer;
 					};
 					return;
 				}
 			}
 		}
-		var0001.x -= UI_die_roll(1, 3);
-		var0001.y += UI_die_roll(1, 2);
-		var0007 = UI_update_last_created(var0001);
-		var var0008 = UI_die_roll(1, 2);
-		if (var0008 == 1) {
+		basePos.x -= UI_die_roll(1, 3);
+		basePos.y += UI_die_roll(1, 2);
+		ignore = UI_update_last_created(basePos);
+		var randomReaction = UI_die_roll(1, 2);
+		if (randomReaction == 1) {
 			partyUtters("@Turn it off!@");
 		}
-		if (var0008 == 2) {
+		if (randomReaction == 2) {
 			partyUtters("@Thou art wasting it!@");
 		}
 		if (DUPRE->npc_nearby()) {
 			DUPRE->item_say("@That is perfectly good beer!@");
 		}
 		halt_scheduled();
-		var0007 = script item after 16 ticks {
-			call Func0628;
+		ignore = script item after 16 ticks {
+			call kegServeBeer;
 		};
 	}
 }
 
-void Func0629 object#(0x629) () {
-	var var0000 = UI_create_new_object(SHAPE_PUDDLE);
-	if (var0000) {
-		var0000->set_item_flag(TEMPORARY);
-		var0000->set_item_frame(UI_die_roll(FRAME_WINE_FIRST, FRAME_WINE_LAST));
-		struct<Position> var0001 = get_object_position();
-		var var0002 = find_nearby(SHAPE_BUCKET, 2, MASK_NONE);
-		declare var var0007;
-		for (var0005 in var0002) {
-			struct<Position> var0006 = var0005->get_object_position();
-			if ((var0006.x == (var0001.x + 1))
-				&& ((var0006.y == (var0001.y - 1))
-					&& (var0006.z == var0001.z))) {
-				if (var0005->get_item_frame() == FRAME_BUCKET_EMPTY) {
-					var0005->set_item_frame(FRAME_BUCKET_WINE);
+/**
+ * @brief Spawn wine puddle and handle nearby buckets/continuation.
+ *
+ * This function creates a temporary puddle object (wine puddle) at the
+ * current item's position, attempts to fill any nearby empty bucket, and
+ * otherwise spreads the puddle nearby. It also schedules itself to run
+ * again after a short delay to simulate a continuing leak.
+ */
+void caskServeWine object#(0x629) () {
+	var puddleObj = UI_create_new_object(SHAPE_PUDDLE);
+	if (puddleObj) {
+		puddleObj->set_item_flag(TEMPORARY);
+		puddleObj->set_item_frame(UI_die_roll(FRAME_WINE_FIRST, FRAME_WINE_LAST));
+		struct<Position> basePos = get_object_position();
+		var nearbyBuckets = find_nearby(SHAPE_BUCKET, 2, MASK_NONE);
+		declare var ignore;
+		for (bucketObj in nearbyBuckets) {
+			struct<Position> bucketPos = bucketObj->get_object_position();
+			if ((bucketPos.x == (basePos.x + 1))
+				&& ((bucketPos.y == (basePos.y - 1))
+					&& (bucketPos.z == basePos.z))) {
+				if (bucketObj->get_item_frame() == FRAME_BUCKET_EMPTY) {
+					bucketObj->set_item_frame(FRAME_BUCKET_WINE);
 					halt_scheduled();
-					var0007 = script item after 16 ticks {
-						call Func0629;
+					ignore = script item after 16 ticks {
+						call caskServeWine;
 					};
 					return;
 				}
 			}
 		}
-		var0001.x += UI_die_roll(1, 2);
-		var0001.y -= UI_die_roll(0, 2);
-		var0007 = UI_update_last_created(var0001);
-		var var0008 = UI_die_roll(1, 2);
-		if (var0008 == 1) {
+		basePos.x += UI_die_roll(1, 2);
+		basePos.y -= UI_die_roll(0, 2);
+		ignore = UI_update_last_created(basePos);
+		var randomReaction = UI_die_roll(1, 2);
+		if (randomReaction == 1) {
 			partyUtters("@Turn it off!@");
 		}
-		if (var0008 == 2) {
+		if (randomReaction == 2) {
 			partyUtters("@Thou art wasting it!@");
 		}
 		halt_scheduled();
-		var0007 = script item after 16 ticks {
-			call Func0629;
+		ignore = script item after 16 ticks {
+			call caskServeWine;
 		};
 	}
 }
