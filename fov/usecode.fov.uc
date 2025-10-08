@@ -916,7 +916,7 @@ void FuncPocketwatch shape#(SHAPE_POCKETWATCH) () {
 
 void FuncClothMap shape#(SHAPE_CLOTH_MAP) () {
 	if (event == DOUBLECLICK) {
-		var ignore = UI_display_map();
+		var result = UI_display_map();
 	}
 }
 
@@ -1076,7 +1076,7 @@ void FuncSails shape#(SHAPE_SAILS) () {
 			if (allPartyMembersSeated()) {
 				shipStartSailing(item);
 			} else {
-				var ignore = assignSeatsOnBarge(masts[1]);
+				var result = assignSeatsOnBarge(masts[1]);
 				set_item_flag(ACTIVE_SAILOR);
 			}
 		} else {
@@ -54039,7 +54039,7 @@ void kegServeBeer object#(0x628) () {
 		puddleObj->set_item_frame(UI_die_roll(FRAME_BEER_FIRST, FRAME_BEER_LAST));
 		struct<Position> basePos = get_object_position();
 		var nearbyBuckets = find_nearby(SHAPE_BUCKET, 2, MASK_NONE);
-		declare var ignore;
+		declare var result;
 		for (bucketObj in nearbyBuckets) {
 			struct<Position> bucketPos = bucketObj->get_object_position();
 			if ((bucketPos.x == (basePos.x - 1))
@@ -54048,7 +54048,7 @@ void kegServeBeer object#(0x628) () {
 				if (bucketObj->get_item_frame() == FRAME_BUCKET_EMPTY) {
 					bucketObj->set_item_frame(FRAME_BUCKET_BEER);
 					halt_scheduled();
-					ignore = script item after 16 ticks {
+					result = script item after 16 ticks {
 						call kegServeBeer;
 					};
 					return;
@@ -54057,7 +54057,7 @@ void kegServeBeer object#(0x628) () {
 		}
 		basePos.x -= UI_die_roll(1, 3);
 		basePos.y += UI_die_roll(1, 2);
-		ignore = UI_update_last_created(basePos);
+		result = UI_update_last_created(basePos);
 		var randomReaction = UI_die_roll(1, 2);
 		if (randomReaction == 1) {
 			partyUtters("@Turn it off!@");
@@ -54069,7 +54069,7 @@ void kegServeBeer object#(0x628) () {
 			DUPRE->item_say("@That is perfectly good beer!@");
 		}
 		halt_scheduled();
-		ignore = script item after 16 ticks {
+		result = script item after 16 ticks {
 			call kegServeBeer;
 		};
 	}
@@ -54090,7 +54090,7 @@ void caskServeWine object#(0x629) () {
 		puddleObj->set_item_frame(UI_die_roll(FRAME_WINE_FIRST, FRAME_WINE_LAST));
 		struct<Position> basePos = get_object_position();
 		var nearbyBuckets = find_nearby(SHAPE_BUCKET, 2, MASK_NONE);
-		declare var ignore;
+		declare var result;
 		for (bucketObj in nearbyBuckets) {
 			struct<Position> bucketPos = bucketObj->get_object_position();
 			if ((bucketPos.x == (basePos.x + 1))
@@ -54099,7 +54099,7 @@ void caskServeWine object#(0x629) () {
 				if (bucketObj->get_item_frame() == FRAME_BUCKET_EMPTY) {
 					bucketObj->set_item_frame(FRAME_BUCKET_WINE);
 					halt_scheduled();
-					ignore = script item after 16 ticks {
+					result = script item after 16 ticks {
 						call caskServeWine;
 					};
 					return;
@@ -54108,7 +54108,7 @@ void caskServeWine object#(0x629) () {
 		}
 		basePos.x += UI_die_roll(1, 2);
 		basePos.y -= UI_die_roll(0, 2);
-		ignore = UI_update_last_created(basePos);
+		result = UI_update_last_created(basePos);
 		var randomReaction = UI_die_roll(1, 2);
 		if (randomReaction == 1) {
 			partyUtters("@Turn it off!@");
@@ -54117,7 +54117,7 @@ void caskServeWine object#(0x629) () {
 			partyUtters("@Thou art wasting it!@");
 		}
 		halt_scheduled();
-		ignore = script item after 16 ticks {
+		result = script item after 16 ticks {
 			call caskServeWine;
 		};
 	}
@@ -59063,7 +59063,7 @@ void handleErethianTransformation object#(0x697) () {
 				wait 16;
 				call dialogErethianTransformation;
 			};
-			var ignore = script gargoyleObject {
+			var result = script gargoyleObject {
 				face south;
 				actor frame kneeling;
 				wait 4;
@@ -59147,7 +59147,7 @@ void handleErethianTransformation object#(0x697) () {
 			wait 7;
 			call revertFailedErethianTransformation;
 		};
-		var ignore = script mouseObject {
+		var result = script mouseObject {
 			face south;
 			wait 4;
 			actor frame step_right;
@@ -59183,7 +59183,7 @@ void handleErethianTransformation object#(0x697) () {
 			wait 7;
 			call revertFailedErethianTransformation;
 		};
-		var ignore = script cowObject {
+		var result = script cowObject {
 			face south;
 			wait 4;
 			actor frame raise_2h;
@@ -65080,7 +65080,7 @@ var handleDoorInteraction id#(0x81D) (
 	doorPosition.x += deltaX;
 	doorPosition.y += deltaY;
 	if (door->set_last_created()) {
-		var ignore = UI_update_last_created(doorPosition);
+		var result = UI_update_last_created(doorPosition);
 	}
 	return true;
 }
@@ -65765,7 +65765,7 @@ void sailsFurlUnfurl id#(0x830) (var sails, var startSailing) {
 		frameDelta = -4;
 		sfxToPlay = SFX_SAIL_UNFURL;
 		var masts = sails[1]->find_nearby(SHAPE_MAST, 25, MASK_NONE);
-		var ignore = script masts {
+		var result = script masts {
 			music MUSIC_SEA_SHANTY, PLAY_ONCE;
 		};
 	}
@@ -70007,7 +70007,7 @@ void erethianStorePartyItemsInChest id#(0x87F) (var obj) {
 			var nearbyObjects = egg->find_nearby(ANY_SHAPE, 1, MASK_NONE);
 			var chest = NULL_OBJ;
 			declare var nearbyShape;
-			declare var ignore;
+			declare var result;
 			declare struct<Position> objPos;
 			declare var lightQuality;
 			declare var lightFrame;
@@ -70022,16 +70022,16 @@ void erethianStorePartyItemsInChest id#(0x87F) (var obj) {
 						if (objPos.x == eggPosition.x
 								&& objPos.y == eggPosition.y) {
 							chest = nearby;
-							ignore = chest->set_item_quality(QUALITY_ERSTAMS_CHEST);
+							result = chest->set_item_quality(QUALITY_ERSTAMS_CHEST);
 						}
 					}
 				}
 				// If no chest was found, create one.
 				if (!chest) {
 					chest = UI_create_new_object(SHAPE_CHEST);
-					ignore = chest->set_item_quality(QUALITY_ERSTAMS_CHEST);
+					result = chest->set_item_quality(QUALITY_ERSTAMS_CHEST);
 					chest->set_item_frame(0);
-					ignore = UI_update_last_created(eggPosition);
+					result = UI_update_last_created(eggPosition);
 				}
 				// Dump nearby objects into the chest.
 				for (nearby in nearbyObjects) {
@@ -70045,20 +70045,20 @@ void erethianStorePartyItemsInChest id#(0x87F) (var obj) {
 								lightFrame = nearby->get_item_frame();
 								nearby->remove_item();
 								nearby = UI_create_new_object(SHAPE_LIGHT_SOURCE);
-								ignore = nearby->set_item_quality(lightQuality);
+								result = nearby->set_item_quality(lightQuality);
 								nearby->set_item_frame(lightFrame);
 							}
-							ignore = nearby->set_last_created();
-							ignore = chest->give_last_created();
+							result = nearby->set_last_created();
+							result = chest->give_last_created();
 						}
 					}
 				}
 			} else {
 				// No nearby objects, so create the chest anyway.
 				chest = UI_create_new_object(SHAPE_CHEST);
-				ignore = chest->set_item_quality(QUALITY_ERSTAMS_CHEST);
+				result = chest->set_item_quality(QUALITY_ERSTAMS_CHEST);
 				chest->set_item_frame(0);
-				ignore = UI_update_last_created(eggPosition);
+				result = UI_update_last_created(eggPosition);
 			}
 			// Dump the input object into the chest.
 			objPos = chest->get_object_position();
@@ -70072,11 +70072,11 @@ void erethianStorePartyItemsInChest id#(0x87F) (var obj) {
 				lightFrame = obj->get_item_frame();
 				obj->remove_item();
 				obj = UI_create_new_object(SHAPE_LIGHT_SOURCE);
-				ignore = obj->set_item_quality(lightQuality);
+				result = obj->set_item_quality(lightQuality);
 				obj->set_item_frame(lightFrame);
 			}
-			ignore = obj->set_last_created();
-			ignore = chest->give_last_created();
+			result = obj->set_last_created();
+			result = chest->give_last_created();
 		}
 	}
 }
