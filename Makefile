@@ -45,10 +45,10 @@ usecode.ss2 : ss/usecode.ss.uc $(SS_SOURCES) $(UCC)
 	$(UCC) -c always -b -I ss -o $@ $< |& (grep -vE "warning:.* (Interpreting integer|You \*really\*)" || true)
 
 usecode.fov2.ucxt : usecode.fov2 $(UCXT)
-	$(UCXT) -a -fs -fov -i$< > $@
+	$(UCXT) -a -fs -fov -i$< > $@ && dos2unix $@
 
 usecode.ss2.ucxt : usecode.ss2 $(UCXT)
-	$(UCXT) -a -fs -ss -i$< > $@
+	$(UCXT) -a -fs -ss -i$< > $@ && dos2unix $@
 
 usecode.fov3 : ucxt/usecode.fov.ucxt $(UCC)
 	$(UCC) -u -c always -o $@ $< |& (grep -vE "warning:.* (Interpreting integer|You \*really\*)" || true)
@@ -57,7 +57,7 @@ usecode.ss3 : ucxt/usecode.ss.ucxt $(UCC)
 	$(UCC) -u -c always -o $@ $< |& (grep -vE "warning:.* (Interpreting integer|You \*really\*)" || true)
 
 usecode.fov3.ucxt : usecode.fov3 $(UCXT)
-	$(UCXT) -a -fs -fov -i$< > $@
+	$(UCXT) -a -fs -fov -i$< > $@ && dos2unix $@
 
 usecode.ss3.ucxt : usecode.ss3 $(UCXT)
-	$(UCXT) -a -fs -ss -i$< > $@
+	$(UCXT) -a -fs -ss -i$< > $@ && dos2unix $@
