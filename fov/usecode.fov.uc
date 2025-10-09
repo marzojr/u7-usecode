@@ -1143,11 +1143,14 @@ void FuncKeg shape#(SHAPE_KEG) () {
 	}
 }
 
+/**
+ * Loom interaction handler.
+ */
 void FuncLoom shape#(SHAPE_LOOM) () {
-	declare var var0000;
+	declare var result;
 	if (event == BG_PATH_SUCCESS) {
 		halt_scheduled();
-		var0000 = script item {
+		result = script item {
 			frame 0;
 			repeat 32 {
 				next frame cycle;
@@ -1156,9 +1159,9 @@ void FuncLoom shape#(SHAPE_LOOM) () {
 			};
 			call FuncLoom;
 		};
-		var var0001 = Func0827(AVATAR, item);
-		var0000 = script AVATAR {
-			face var0001;
+		var direction = directionFromObject(AVATAR, item);
+		result = script AVATAR {
+			face direction;
 			repeat 9 {
 				continue;
 				actor frame strike_1h;
@@ -1168,20 +1171,20 @@ void FuncLoom shape#(SHAPE_LOOM) () {
 		};
 	}
 	if (event == SCRIPTED) {
-		var var0002 = AVATAR->get_cont_items(
+		var spindles = AVATAR->get_cont_items(
 				SHAPE_SPINDLE_OF_THREAD, QUALITY_ANY, FRAME_ANY);
-		if (var0002) {
-			var0002->remove_item();
+		if (spindles) {
+			spindles->remove_item();
 		}
-		var var0003 = UI_create_new_object(SHAPE_CLOTH);
-		if (var0003) {
-			var0003->set_item_flag(TEMPORARY);
-			var0003->set_item_flag(OKAY_TO_TAKE);
-			var0003->set_item_frame(UI_die_roll(0, 4));
-			struct<Position> var0004 = get_object_position();
-			var0004.x += 1;
-			var0004.y += 1;
-			var0000 = UI_update_last_created(var0004);
+		var clothObj = UI_create_new_object(SHAPE_CLOTH);
+		if (clothObj) {
+			clothObj->set_item_flag(TEMPORARY);
+			clothObj->set_item_flag(OKAY_TO_TAKE);
+			clothObj->set_item_frame(UI_die_roll(0, 4));
+			struct<Position> position = get_object_position();
+			position.x += 1;
+			position.y += 1;
+			result = UI_update_last_created(position);
 		}
 	}
 	if (event == DOUBLECLICK) {
@@ -1615,7 +1618,7 @@ void FuncLitLightSource shape#(SHAPE_LIT_LIGHT_SOURCE) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		set_item_shape(SHAPE_LIGHT_SOURCE);
-		var var0000 = Func0827(AVATAR, item);
+		var var0000 = directionFromObject(AVATAR, item);
 		var var0001 = script AVATAR {
 			face var0000;
 			continue;
@@ -2370,7 +2373,7 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 				wait 1;
 				frame 0;
 			};
-			var0002 = Func0827(AVATAR, item);
+			var0002 = directionFromObject(AVATAR, item);
 			AVATAR->halt_scheduled();
 			var000A = script AVATAR {
 				face var0002;
@@ -2560,7 +2563,7 @@ void FuncLitSconce shape#(SHAPE_LIT_SCONCE) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		set_item_shape(SHAPE_SCONCE);
-		var var0000 = Func0827(AVATAR, item);
+		var var0000 = directionFromObject(AVATAR, item);
 		var var0001 = script AVATAR {
 			face var0000;
 			continue;
@@ -5555,7 +5558,7 @@ void FuncLitTorch shape#(SHAPE_LIT_TORCH) () {
 		Func0839(item, SHAPE_TORCH, event);
 	}
 	if (event == BG_PATH_SUCCESS) {
-		var var0000 = Func0827(AVATAR, item);
+		var var0000 = directionFromObject(AVATAR, item);
 		var var0001 = script AVATAR {
 			face var0000;
 			continue;
@@ -6542,7 +6545,7 @@ void FuncStrengthTester shape#(SHAPE_STRENGTH_TESTER) () {
 				BG_PATH_SUCCESS);
 	}
 	if (event == BG_PATH_SUCCESS) {
-		var var0003 = Func0827(AVATAR, item);
+		var var0003 = directionFromObject(AVATAR, item);
 		var var0004 = script AVATAR {
 			face var0003;
 			continue;
@@ -7092,7 +7095,7 @@ void FuncLever shape#(SHAPE_LEVER) () {
 				BG_PATH_SUCCESS);
 	}
 	if (event == BG_PATH_SUCCESS) {
-		var var0003 = Func0827(AVATAR, item);
+		var var0003 = directionFromObject(AVATAR, item);
 		var var0004 = script AVATAR {
 			face var0003;
 			continue;
@@ -7119,7 +7122,7 @@ void FuncSwitch shape#(SHAPE_SWITCH) () {
 	if ((event == BG_PATH_SUCCESS) || (event == SCRIPTED)) {
 		declare var var0004;
 		if (event != SCRIPTED) {
-			var var0003 = Func0827(AVATAR, item);
+			var var0003 = directionFromObject(AVATAR, item);
 			var0004 = script AVATAR {
 				face var0003;
 				continue;
@@ -54180,7 +54183,7 @@ void Func062D object#(0x62D) () {
 	if (event == BG_PATH_SUCCESS) {
 		var0000 = get_container();
 		if (!var0000) {
-			var var0001 = Func0827(AVATAR, item);
+			var var0001 = directionFromObject(AVATAR, item);
 			struct<Position> var0002 = get_object_position();
 			var var0003 = set_last_created();
 			if (var0003) {
@@ -54226,7 +54229,7 @@ void Func062E object#(0x62E) () {
 	if (event == BG_PATH_SUCCESS) {
 		var0000 = get_container();
 		if (!var0000) {
-			var var0001 = Func0827(AVATAR, item);
+			var var0001 = directionFromObject(AVATAR, item);
 			struct<Position> var0002 = get_object_position();
 			var var0003 = set_last_created();
 			if (var0003) {
@@ -65295,8 +65298,16 @@ var Func0826 id#(0x826) (var var0000) {
 	return false;
 }
 
-var Func0827 id#(0x827) (var var0000, var var0001) {
-	return var0000->find_direction(var0001);
+/**
+ * Calculates the direction from a given object or position to another.
+ *
+ * @param source The source object or position.
+ * @param target The target object or position.
+ *
+ * @returns The direction from source to target.
+ */
+var directionFromObject id#(0x827) (var source, var target) {
+	return source->find_direction(target);
 }
 
 /**
