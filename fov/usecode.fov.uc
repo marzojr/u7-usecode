@@ -1229,29 +1229,32 @@ void FuncDoorNsRight shape#(SHAPE_DOOR_NS_RIGHT) () {
 	}
 }
 
+/**
+ * Displays current time when double-clicking the sundial during
+ * daytime hours.
+ */
 void FuncSundial shape#(SHAPE_SUNDIAL) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = UI_game_hour();
-		if ((var0000 >= 6) && (var0000 <= 11)) {
+		var currentHour = UI_game_hour();
+		if ((currentHour >= 6) && (currentHour <= 11)) {
 			item_say(" " + UI_game_hour() + " o'clock");
 			return;
 		}
-		if (var0000 == 12) {
+		if (currentHour == 12) {
 			item_say("Noon");
 			return;
 		}
-		if ((var0000 >= 13) && (var0000 <= 20)) {
-			var0000 -= 12;
-			item_say(" " + var0000 + " o'clock");
+		if ((currentHour >= 13) && (currentHour <= 20)) {
+			currentHour -= 12;
+			item_say(" " + currentHour + " o'clock");
 			return;
 		}
-		var var0001 = getAvatarName();
-		// BUG: Based on Agil documents, this ought to have been <var0001>
-		// instead of <Avatar>. It is likely that var0001 was called something
-		// akin to Avatar, likely with a typo, which is why the string
-		// interpolation was never done.
-		// In the equivalent of this function from Spanish SI, var0001 is called
-		// "avatar", all lowercase.
+		// This variable has its name drawn from the equivalent
+		// of this function from Spanish SI.
+		var avatar = getAvatarName();
+		// BUG: Based on Agil documents, this ought to have been <avatar>
+		// instead of <Avatar>. It is likely a typo, which is why the
+		// string interpolation was never done.
 		partySpeak("@^<Avatar>, I believe the key word in sundial is `sun'.@");
 	}
 }
