@@ -1273,90 +1273,97 @@ void FuncClosedShuttersEw shape#(SHAPE_CLOSED_SHUTTERS_EW) () {
 	}
 }
 
+/**
+ * Handles interaction with a seat, whether it is a barge seat
+ * or one of the thrones of change, or the throne of Virtue.
+ */
 void FuncSeat shape#(SHAPE_SEAT) () {
-	declare var var0001;
+	declare var result;
 	if (event == DOUBLECLICK) {
 		if (get_barge()) {
-			var var0000 = Func080C(item);
-			if ((var0000 == SHAPE_CART_PIECE) || (var0000 == SHAPE_FLYING_CARPET)) {
+			var kind = identifyBargeKind(item);
+			if (kind == SHAPE_CART_PIECE || kind == SHAPE_FLYING_CARPET) {
 				if (get_item_flag(ON_MOVING_BARGE)) {
-					if (var0000 == SHAPE_CART_PIECE) {
+					if (kind == SHAPE_CART_PIECE) {
 						item->FuncCartPiece();
 					}
-					if (var0000 == SHAPE_FLYING_CARPET) {
+					if (kind == SHAPE_FLYING_CARPET) {
 						item->FuncFlyingCarpet();
 					}
 				} else {
-					var0001 = assignSeatsOnBarge(item);
+					result = assignSeatsOnBarge(item);
 				}
 			}
 		} else {
-			Func080A(item, SHAPE_SEAT);
-			var var0002 = get_distance(AVATAR) + 15;
-			var0001 = script item after var0002 ticks {
+			partySitDownNearObj(item, SHAPE_SEAT);
+			var delay = get_distance(AVATAR) + 15;
+			result = script item after delay ticks {
 				nohalt;
 				call FuncSeat;
 			};
 		}
 	}
 	if (event == SCRIPTED) {
-		struct<Position> var0003 = AVATAR->get_object_position();
-		var var0004 = [
-			0x0AE7, 0x09D5, 0x0A37, 0x09D5, 0x0AA7, 0x08E5, 0x0A37, 0x09A5
+		struct<Position> avatarPos = AVATAR->get_object_position();
+		var thronesOfChangePos = [
+			0x0AE7, 0x09D5,
+			0x0A37, 0x09D5,
+			0x0AA7, 0x08E5,
+			0x0A37, 0x09A5
 		];
-		struct<Position> var0005 = [0x0AD7, 0x0885];
-		struct<Position> var0006 = 0;
-		if ((var0003.x == var0005.x)
-			&& ((var0003.y == var0005.y) && (gflags[SATIN_GOOD] == false))) {
+		struct<Position> throneOfVirtuePos = [0x0AD7, 0x0885];
+		struct<Position> foundTarget = 0;
+		if (avatarPos.x == throneOfVirtuePos.x
+			&& (avatarPos.y == throneOfVirtuePos.y && gflags[SATIN_GOOD] == false)) {
 			gflags[SATIN_GOOD] = true;
-			var0005.y += 2;
+			throneOfVirtuePos.y += 2;
 			UI_sprite_effect(
-					ANIMATION_LIGHTNING, var0005.x, var0005.y, 0, 0, 0, 1);
+					ANIMATION_LIGHTNING, throneOfVirtuePos.x, throneOfVirtuePos.y, 0, 0, 0, 1);
 			UI_play_sound_effect2(SFX_THUNDER, item);
 			UI_lightning();
-			var var0007 = UI_create_new_object(SHAPE_FIRE_FIELD);
-			if (var0007) {
-				var0007->set_item_flag(TEMPORARY);
-				var0001 = UI_update_last_created(var0005);
+			var newObj = UI_create_new_object(SHAPE_FIRE_FIELD);
+			if (newObj) {
+				newObj->set_item_flag(TEMPORARY);
+				result = UI_update_last_created(throneOfVirtuePos);
 			}
 			abort;
 		}
-		var var0008 = 1;
+		var posIndex = 1;
 		do {
-			if ((var0003.x == var0004[var0008])
-				&& (var0003.y == var0004[var0008 + 1])) {
-				var0008 = Func080B(var0008);
-				var0006.x = var0004[var0008];
-				var0006.y = var0004[var0008 + 1];
+			if (avatarPos.x == thronesOfChangePos[posIndex]
+				&& avatarPos.y == thronesOfChangePos[posIndex + 1]) {
+				posIndex = throneOfChangeFindTarget(posIndex);
+				foundTarget.x = thronesOfChangePos[posIndex];
+				foundTarget.y = thronesOfChangePos[posIndex + 1];
 				break;
 			}
-			var0008 = Func080B(var0008);
-		} while (var0008 > 1);
-		if (var0006) {
-			var var0009 = UI_get_party_list();
-			var var000A = [];
-			var var000B = [];
-			var var000C = [];
-			struct<Position> var000D = AVATAR->get_object_position();
-			var var000E = 1;
-			declare var var0011;
-			for (var0011 in var0009) {
-				struct<Position> var0012 = var0011->get_object_position();
-				var000A[var000E] = var000D.x - var0012.x;
-				var000B[var000E] = var000D.y - var0012.y;
-				var000C[var000E] = var0011->get_item_frame_rot();
-				var000E += 1;
+			posIndex = throneOfChangeFindTarget(posIndex);
+		} while (posIndex > 1);
+		if (foundTarget) {
+			var partyList = UI_get_party_list();
+			var destX = [];
+			var destY = [];
+			var destFrame = [];
+			struct<Position> avatarPos = AVATAR->get_object_position();
+			var index = 1;
+			declare var npc;
+			for (npc in partyList) {
+				struct<Position> var0012 = npc->get_object_position();
+				destX[index] = avatarPos.x - var0012.x;
+				destY[index] = avatarPos.y - var0012.y;
+				destFrame[index] = npc->get_item_frame_rot();
+				index += 1;
 			}
-			PARTY->move_object(var0006);
-			var000D = AVATAR->get_object_position();
-			var000E = 1;
-			for (var0011 in var0009) {
-				var0011->move_object([
-					var000D.x - var000A[var000E], var000D.y - var000B[var000E],
-					var000D.z
+			PARTY->move_object(foundTarget);
+			avatarPos = AVATAR->get_object_position();
+			index = 1;
+			for (npc in partyList) {
+				npc->move_object([
+					avatarPos.x - destX[index], avatarPos.y - destY[index],
+					avatarPos.z
 				]);
-				var0011->set_item_frame_rot(var000C[var000E]);
-				var000E += 1;
+				npc->set_item_frame_rot(destFrame[index]);
+				index += 1;
 			}
 		}
 	}
@@ -8640,19 +8647,22 @@ void FuncHourglass shape#(SHAPE_HOURGLASS) () {
 	}
 }
 
+/**
+ * Handles interaction with the magic carpet.
+ */
 void FuncFlyingCarpet shape#(SHAPE_FLYING_CARPET) () {
-	var var0000 = get_barge();
-	if ((event == DOUBLECLICK) && (!(var0000 == NULL_OBJ))) {
+	var barge = get_barge();
+	if (event == DOUBLECLICK && !(barge == NULL_OBJ)) {
 		if (!get_item_flag(ON_MOVING_BARGE)) {
 			if (allPartyMembersSeated()) {
-				Func0812(var0000);
+				flyingCarpetTakeOff(barge);
 			} else if (assignSeatsOnBarge(item)) {
 				UI_close_gumps();
 			}
-		} else if (var0000->get_item_flag(OKAY_TO_LAND)) {
+		} else if (barge->get_item_flag(OKAY_TO_LAND)) {
 			clear_item_flag(ON_MOVING_BARGE);
 			clear_item_flag(ACTIVE_BARGE);
-			var var0001 = script var0000 {
+			var var0001 = script barge {
 				repeat 10 {
 					descent;
 					nop;
@@ -9014,13 +9024,16 @@ void FuncKitchenItems shape#(SHAPE_KITCHEN_ITEMS) () {
 	}
 }
 
+/**
+ * Handles interaction with chairs.
+ */
 void FuncChair shape#(SHAPE_CHAIR) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = get_container();
-		if (var0000) {
+		var owner = get_container();
+		if (owner) {
 			return;
 		}
-		Func080A(item, SHAPE_CHAIR);
+		partySitDownNearObj(item, SHAPE_CHAIR);
 	}
 }
 
@@ -54456,29 +54469,33 @@ void Func0633 object#(0x633) () {
 	}
 }
 
-void Func0634 object#(0x634) () {
-	var var0000 = get_barge();
-	if (var0000) {
-		var var0001 = Func080C(item);
-		if (var0001 == SHAPE_FLYING_CARPET) {
-			Func0812(var0000);
+/**
+ * Called by the Sit schedule when the last NPC in party is done
+ * sitting down. Activates the appripriate barge type.
+ */
+void bargeActivate object#(0x634) () {
+	var barge = get_barge();
+	if (barge) {
+		var kind = identifyBargeKind(item);
+		if (kind == SHAPE_FLYING_CARPET) {
+			flyingCarpetTakeOff(barge);
 		}
-		if (var0001 == SHAPE_CART_PIECE) {
+		if (kind == SHAPE_CART_PIECE) {
 			item->FuncCartPiece();
 		}
-		if (var0001 == SHAPE_MAST) {
-			var var0002 = AVATAR->find_nearby(SHAPE_FERRYMAN, 25, MASK_NONE);
-			if (var0002) {
-				if (var0002->get_barge() == var0000) {
-					if (AVATAR->get_item_flag(ACTIVE_SAILOR) == var0002) {
-						var0000->ferrymanMoveBarge();
+		if (kind == SHAPE_MAST) {
+			var ferryman = AVATAR->find_nearby(SHAPE_FERRYMAN, 25, MASK_NONE);
+			if (ferryman) {
+				if (ferryman->get_barge() == barge) {
+					if (AVATAR->get_item_flag(ACTIVE_SAILOR) == ferryman) {
+						barge->ferrymanMoveBarge();
 						AVATAR->clear_item_flag(ACTIVE_SAILOR);
 					}
 				}
 			} else {
-				var var0003 = AVATAR->get_item_flag(ACTIVE_SAILOR);
-				if (var0003) {
-					shipStartSailing(var0003);
+				var sailor = AVATAR->get_item_flag(ACTIVE_SAILOR);
+				if (sailor) {
+					shipStartSailing(sailor);
 				}
 			}
 		}
@@ -64499,81 +64516,111 @@ void Func0809 id#(0x809) (var var0000) {
 	}
 }
 
-void Func080A id#(0x80A) (var var0000, var var0001) {
-	var var0002 = [];
-	var var0003 = AVATAR->find_nearby(var0001, 15, MASK_NONE);
-	declare var var0007;
-	for (var0006 in var0003) {
-		var0007 = 0;
-		var var0008 = 9999;
-		declare var var000D;
-		for (var000B in var0003) {
-			var0007 += 1;
-			if (var000B != NULL_OBJ && var000B != var0000) {
-				var var000C = var0000->get_distance(var000B);
-				if (var000C < var0008) {
-					var0008 = var000C;
-					var000D = var0007;
+/**
+ * Finds seats of the given shape near the avatar, sorts them
+ * by distance, and assigns them to the avatar and party members.
+ * For each assigned seat, UI_sit_down() is called so that the
+ * party member assigned to it sits down on this seat.
+ *
+ * @param sourceObj The object around which to find seats.
+ * @param shapeNum The shape number of the seats to find.
+ */
+void partySitDownNearObj id#(0x80A) (var sourceObj, var shapeNum) {
+	var sortedChairs = [];
+	var chairList = AVATAR->find_nearby(shapeNum, 15, MASK_NONE);
+	declare var counter;
+	for (unused in chairList) {
+		counter = 0;
+		var bestDistance = 9999;
+		declare var bestIndex;
+		for (chair in chairList) {
+			counter += 1;
+			if (chair != NULL_OBJ && chair != sourceObj) {
+				var distance = sourceObj->get_distance(chair);
+				if (distance < bestDistance) {
+					bestDistance = distance;
+					bestIndex = counter;
 				}
 			}
 		}
-		var0002 &= var0003[var000D];
-		var0003[var000D] = 0;
+		sortedChairs &= chairList[bestIndex];
+		chairList[bestIndex] = NULL_OBJ;
 	}
-	AVATAR->sit_down(var0000);
-	var var000E = UI_get_array_size(var0002);
-	var var000F = UI_get_party_list();
-	var0007 = 2;
-	for (var0012 in var000F) {
-		if ((var0007 - 1) > var000E) {
+	AVATAR->sit_down(sourceObj);
+	var sortedChairsSize = UI_get_array_size(sortedChairs);
+	var partyMembers = UI_get_party_list();
+	counter = 2;
+	for (npc in partyMembers) {
+		if (counter - 1 > sortedChairsSize) {
 			break;
 		}
-		if (!(var0012->get_schedule_type() == MAJOR_SIT)) {
-			var var0013 = var0007 - 1;
-			var0012->sit_down(var0002[var0013]);
+		if (!(npc->get_schedule_type() == MAJOR_SIT)) {
+			var index = counter - 1;
+			npc->sit_down(sortedChairs[index]);
 		}
-		var0007 += 1;
+		counter += 1;
 	}
 }
 
-var Func080B id#(0x80B) (var var0000) {
-	if (var0000 < 5) {
-		var0000 += 2;
-		return var0000;
+/**
+ * Remaps the source index to the destination index for the
+ * given throne of many changes. Loops through the odd indices
+ * 1, 3, and 5, unless SATIN_GOOD is set, in which case index
+ * 5 maps to 7.
+ *
+ * @param index One of 1, 3, 5, or 7.
+ * @return The next index in the sequence.
+ */
+var throneOfChangeFindTarget id#(0x80B) (var index) {
+	if (index < 5) {
+		index += 2;
+		return index;
 	}
-	if (var0000 == 5) {
+	if (index == 5) {
 		if (gflags[SATIN_GOOD]) {
-			var0000 = 7;
+			index = 7;
 		} else {
-			var0000 = 1;
+			index = 1;
 		}
-		return var0000;
+		return index;
 	}
-	if (var0000 > 5) {
-		var0000 = 1;
-		return var0000;
+	if (index > 5) {
+		index = 1;
+		return index;
 	}
 	return 0;
 }
 
-var Func080C id#(0x80C) (var var0000) {
-	var var0001 = find_nearby(SHAPE_ANY, 2, MASK_NONE);
-	var var0002 = [SHAPE_FLYING_CARPET];
-	var var0003 = [
+/**
+ * Finds objects near to *item* of all shapes and identifies
+ * the kind of barge they belong to.
+ * Overlapping barges will cause only one of them to be
+ * identified, and there is no guarantee which one it will be.
+ *
+ * @param sourceObj Ignored/unused.
+ * @return One of SHAPE_FLYING_CARPET, SHAPE_CART_PIECE,
+ * or SHAPE_MAST. The latter is returned by default.
+ */
+var identifyBargeKind id#(0x80C) (var sourceObj) {
+	var nearbyObjects = find_nearby(SHAPE_ANY, 2, MASK_NONE);
+	var flyingCarpetShapes = [SHAPE_FLYING_CARPET];
+	var cartPieceShapes = [
 		SHAPE_DRAFT_HORSE, SHAPE_CART_PIECE, SHAPE_CART_PIECE2,
-		SHAPE_CART_PIECE4, SHAPE_CART_PIECE5, SHAPE_CART_PIECE3, SHAPE_CART
+		SHAPE_CART_PIECE4, SHAPE_CART_PIECE5, SHAPE_CART_PIECE3,
+		SHAPE_CART
 	];
-	for (var0006 in var0001) {
-		var var0007 = var0006->get_item_shape();
-		if (var0007 in var0002) {
+	for (obj in nearbyObjects) {
+		var shapeNum = obj->get_item_shape();
+		if (shapeNum in flyingCarpetShapes) {
 			return SHAPE_FLYING_CARPET;
 		}
-		if (var0007 in var0003) {
+		if (shapeNum in cartPieceShapes) {
 			return SHAPE_CART_PIECE;
 		}
 	}
 	return SHAPE_MAST;
 }
+
 
 /**
  * @returns true if every party member is seated.
@@ -64712,20 +64759,25 @@ void Func0811 id#(0x811) () {
 	}
 }
 
-void Func0812 id#(0x812) (var var0000) {
-	var var0001 = AVATAR->get_barge();
+/**
+ * Causes the magic carpet indicated by sourceObj to take off.
+ *
+ * @param sourceObj The barge object for the magic carpet.
+ */
+void flyingCarpetTakeOff id#(0x812) (var sourceObj) {
+	var barge = AVATAR->get_barge();
 	if (UI_on_barge()) {
-		struct<Position> var0002 = var0000->get_object_position();
-		var var0003 = script var0000 {
+		struct<Position> position = sourceObj->get_object_position();
+		var result = script sourceObj {
 			repeat 15 {
 				rise;
 				nop;
 			};
 		};
 		UI_play_music(MUSIC_DRAGONS_FLIGHT, NULL_OBJ);
-		// BUG: this should probably have been 'var0001' instead of 2
+		// BUG: this should probably have been 'barge' instead of 2
 		2->set_item_flag(ON_MOVING_BARGE);
-		var0001->set_item_flag(ACTIVE_BARGE);
+		barge->set_item_flag(ACTIVE_BARGE);
 	}
 }
 
