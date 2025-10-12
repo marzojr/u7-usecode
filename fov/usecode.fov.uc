@@ -954,8 +954,7 @@ void FuncAbbeyDoorClosedRight shape#(SHAPE_ABBEY_DOOR_CLOSED_RIGHT) () {
 	}
 	var state = getDoorState(item);
 	if (state == FRAME_DOOR_OPENED) {
-		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_CLOSED,
-				0, 0, 7)) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_OPENED, X,
 					SHAPE_ABBEY_DOOR_OPEN_LEFT, FRAME_DOOR_CLOSED, 0, 3, 5);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
@@ -964,8 +963,7 @@ void FuncAbbeyDoorClosedRight shape#(SHAPE_ABBEY_DOOR_CLOSED_RIGHT) () {
 		}
 	}
 	if (state == FRAME_DOOR_CLOSED) {
-		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_OPENED,
-				0, 0, 7)) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_CLOSED, Y,
 					SHAPE_ABBEY_DOOR_OPEN_LEFT, FRAME_DOOR_OPENED, -3, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
@@ -987,8 +985,7 @@ void FuncAbbeyDoorClosedLeft shape#(SHAPE_ABBEY_DOOR_CLOSED_LEFT) () {
 	}
 	var state = getDoorState(item);
 	if (state == FRAME_DOOR_OPENED) {
-		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_CLOSED,
-				0, 3, 5)) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_LEFT, FRAME_DOOR_CLOSED, 0, 3, 5)) {
 			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_OPENED, X,
 					SHAPE_ABBEY_DOOR_OPEN_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
@@ -997,8 +994,7 @@ void FuncAbbeyDoorClosedLeft shape#(SHAPE_ABBEY_DOOR_CLOSED_LEFT) () {
 		}
 	}
 	if (state == FRAME_DOOR_CLOSED) {
-		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_OPENED,
-				-3, 0, 7)) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_LEFT, FRAME_DOOR_OPENED, -3, 0, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_CLOSED, Y,
 					SHAPE_ABBEY_DOOR_OPEN_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
@@ -1020,8 +1016,7 @@ void FuncAbbeyDoorOpenLeft shape#(SHAPE_ABBEY_DOOR_OPEN_LEFT) () {
 	}
 	var state = getDoorState(item);
 	if (state == FRAME_DOOR_OPENED) {
-		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_CLOSED,
-				3, 0, 1)) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_CLOSED, 3, 0, 1)) {
 			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_OPENED, Y,
 					SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
@@ -1030,8 +1025,7 @@ void FuncAbbeyDoorOpenLeft shape#(SHAPE_ABBEY_DOOR_OPEN_LEFT) () {
 		}
 	}
 	if (state == FRAME_DOOR_CLOSED) {
-		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_OPENED,
-				0, -3, 7)) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_OPENED, 0, -3, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_CLOSED, X,
 					SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
@@ -1202,8 +1196,8 @@ void FuncDoorNsRight shape#(SHAPE_DOOR_NS_RIGHT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var doorState = getDoorState(item);
-	if (doorState == FRAME_DOOR_OPENED) {
+	var state = getDoorState(item);
+	if (state == FRAME_DOOR_OPENED) {
 		if (handleDoorInteraction(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_OPENED, X,
 					SHAPE_DOOR_EW_TOP, FRAME_DOOR_CLOSED, 0, 3, 5);
@@ -1212,7 +1206,7 @@ void FuncDoorNsRight shape#(SHAPE_DOOR_NS_RIGHT) () {
 			partyUttersDoorIsBlocked();
 		}
 	}
-	if (doorState == FRAME_DOOR_CLOSED) {
+	if (state == FRAME_DOOR_CLOSED) {
 		if (handleDoorInteraction(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_OPENED, 0, 0, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_CLOSED, Y,
 					SHAPE_DOOR_EW_TOP, FRAME_DOOR_OPENED, -3, 0, 7);
@@ -1221,10 +1215,10 @@ void FuncDoorNsRight shape#(SHAPE_DOOR_NS_RIGHT) () {
 			partyUttersDoorIsBlocked();
 		}
 	}
-	if (doorState == FRAME_DOOR_LOCKED) {
+	if (state == FRAME_DOOR_LOCKED) {
 		doorUtterLocked(item);
 	}
-	if (doorState == FRAME_DOOR_MAGIC_LOCK) {
+	if (state == FRAME_DOOR_MAGIC_LOCK) {
 		doorUtterMagicallyLocked(item);
 	}
 }
@@ -1734,8 +1728,8 @@ void FuncDoorEwBottom shape#(SHAPE_DOOR_EW_BOTTOM) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = getDoorState(item);
-	if (var0000 == FRAME_DOOR_OPENED) {
+	var state = getDoorState(item);
+	if (state == FRAME_DOOR_OPENED) {
 		if (handleDoorInteraction(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_OPENED, Y,
 					SHAPE_DOOR_NS_LEFT, FRAME_DOOR_CLOSED, 3, 0, 1);
@@ -1744,7 +1738,7 @@ void FuncDoorEwBottom shape#(SHAPE_DOOR_EW_BOTTOM) () {
 			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_CLOSED) {
+	if (state == FRAME_DOOR_CLOSED) {
 		if (handleDoorInteraction(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_CLOSED, X,
 					SHAPE_DOOR_NS_LEFT, FRAME_DOOR_OPENED, 0, -3, 7);
@@ -1753,319 +1747,325 @@ void FuncDoorEwBottom shape#(SHAPE_DOOR_EW_BOTTOM) () {
 			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_LOCKED) {
+	if (state == FRAME_DOOR_LOCKED) {
 		doorUtterLocked(item);
 	}
-	if (var0000 == FRAME_DOOR_MAGIC_LOCK) {
+	if (state == FRAME_DOOR_MAGIC_LOCK) {
 		doorUtterMagicallyLocked(item);
 	}
 }
 
 void FuncFood shape#(SHAPE_FOOD) () {
-	var var0000 = [
+	var foodValueList = [
 		 4,  6,  2,  5,  3,  3,  1, 12,
 		24, 16, 24, 24,  4,  8, 16,  6,
 		 2,  3,  2,  1,  4,  3,  1, 24,
 		 3,  1,  9,  2, 31,  8,  6,  0
 	];
-	var var0001 = var0000[get_item_frame() + 1];
-	Func0813(item, var0001, SFX_GULP);
+	var foodValue = foodValueList[get_item_frame() + 1];
+	consumeFood(item, foodValue, SFX_GULP);
 }
 
+/**
+ * Handles interaction with signs.
+ */
 void FuncSign shape#(SHAPE_SIGN) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = getAvatarName();
-	var var0001 = get_item_quality();
-	if (var0001 > QUALITY_SIGN_FOLLOW_THE_FIRE) {
+	var avatarName = getAvatarName();
+	var quality = get_item_quality();
+	if (quality > QUALITY_SIGN_FOLLOW_THE_FIRE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["THIS IS", "NOT A", "VALID", "SIGN"]);
-	} else if (var0001 == QUALITY_SIGN_DRINK_AT_GILDED_LIZARD) {
+	} else if (quality == QUALITY_SIGN_DRINK_AT_GILDED_LIZARD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["drink", "at\{dot}\{th}e", "gilded", "lizard"]);
-	} else if (var0001 == QUALITY_SIGN_SKARA_BRAE_POPULATION) {
+	} else if (quality == QUALITY_SIGN_SKARA_BRAE_POPULATION) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["skara", "brae~", "~population", "47"]);
-	} else if (var0001 == QUALITY_SIGN_TRINSIC) {
+	} else if (quality == QUALITY_SIGN_TRINSIC) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["trinsic"]);
-	} else if (var0001 == QUALITY_SIGN_HONORABLE_HOUND) {
+	} else if (quality == QUALITY_SIGN_HONORABLE_HOUND) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "honorable", "hound"]);
-	} else if (var0001 == QUALITY_SIGN_FELLOWSHIP_HALL) {
+	} else if (quality == QUALITY_SIGN_FELLOWSHIP_HALL) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["FELLOWSHIP", "HALL"]);
-	} else if (var0001 == QUALITY_SIGN_BRITAIN) {
+	} else if (quality == QUALITY_SIGN_BRITAIN) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["britain"]);
-	} else if (var0001 == QUALITY_SIGN_COMING_RAYMUNDOS_TRIALS_OF_THE_AVATAR) {
+	} else if (quality == QUALITY_SIGN_COMING_RAYMUNDOS_TRIALS_OF_THE_AVATAR) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["COMING:", "RAYMUNDO'S", "@TRIALS OF", "THE AVATAR@"]);
-	} else if (var0001 == QUALITY_SIGN_RESERVE_THEY_SEATS_NOW) {
+	} else if (quality == QUALITY_SIGN_RESERVE_THEY_SEATS_NOW) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["RESERVE", "THY", "SEATS", "NOW"]);
-	} else if (var0001 == QUALITY_SIGN_ROYAL_MUSEUM) {
+	} else if (quality == QUALITY_SIGN_ROYAL_MUSEUM) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["royal", "museum"]);
-	} else if (var0001 == QUALITY_SIGN_MUSIC_HALL) {
+	} else if (quality == QUALITY_SIGN_MUSIC_HALL) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "music", "hall"]);
-	} else if (var0001 == QUALITY_SIGN_WAYFARERS_INN) {
+	} else if (quality == QUALITY_SIGN_WAYFARERS_INN) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "wayfarer's", "inn"]);
-	} else if (var0001 == QUALITY_SIGN_IOLOS_BOWS) {
+	} else if (quality == QUALITY_SIGN_IOLOS_BOWS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["iolos", "bows"]);
-	} else if (var0001 == QUALITY_SIGN_BLUE_BOAR) {
+	} else if (quality == QUALITY_SIGN_BLUE_BOAR) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "blue", "boar"]);
-	} else if (var0001 == QUALITY_SIGN_GAYES_CLOTHIERS) {
+	} else if (quality == QUALITY_SIGN_GAYES_CLOTHIERS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["gayes", "clo\{th}iers"]);
-	} else if (var0001 == QUALITY_SIGN_NORTH_STAR_ARMOURY) {
+	} else if (quality == QUALITY_SIGN_NORTH_STAR_ARMOURY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["nor\{th}", "\{st}ar", "armoury"]);
-	} else if (var0001 == QUALITY_SIGN_OAKEN_OAR) {
+	} else if (quality == QUALITY_SIGN_OAKEN_OAR) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "oaken", "oar"]);
-	} else if (var0001 == QUALITY_SIGN_BAKERY) {
+	} else if (quality == QUALITY_SIGN_BAKERY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["bakery"]);
-	} else if (var0001 == QUALITY_SIGN_JEWELER) {
+	} else if (quality == QUALITY_SIGN_JEWELER) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["jeweler"]);
-	} else if (var0001 == QUALITY_SIGN_FARMERS_MARKET) {
+	} else if (quality == QUALITY_SIGN_FARMERS_MARKET) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["farmers", "market"]);
-	} else if (var0001 == QUALITY_SIGN_APOTHECARY) {
+	} else if (quality == QUALITY_SIGN_APOTHECARY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["apo\{th}ecary"]);
-	} else if (var0001 == QUALITY_SIGN_ROYAL_MINT) {
+	} else if (quality == QUALITY_SIGN_ROYAL_MINT) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["royal", "mint"]);
-	} else if (var0001 == QUALITY_SIGN_CSIL_THE_HEALER) {
+	} else if (quality == QUALITY_SIGN_CSIL_THE_HEALER) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["csil", "\{th}e", "h\{ea}ler"]);
-	} else if (var0001 == QUALITY_SIGN_PROVISIONS) {
+	} else if (quality == QUALITY_SIGN_PROVISIONS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["provisions"]);
-	} else if (var0001 == QUALITY_SIGN_ROYAL_ORCHARDS) {
+	} else if (quality == QUALITY_SIGN_ROYAL_ORCHARDS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["royal", "orchards"]);
-	} else if (var0001 == QUALITY_SIGN_TEST_OF_STRENGTH) {
+	} else if (quality == QUALITY_SIGN_TEST_OF_STRENGTH) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["TEST OF STRENGTH", " -- ", "ART THOU AN AVATAR?"]);
-	} else if (var0001 == QUALITY_SIGN_PUNCH_AND_JUDY_SHOW) {
+	} else if (quality == QUALITY_SIGN_PUNCH_AND_JUDY_SHOW) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["punch and", "judy", "show"]);
-	} else if (var0001 == QUALITY_SIGN_FISH_N_CHIPS) {
+	} else if (quality == QUALITY_SIGN_FISH_N_CHIPS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["fish\{dot}n\{dot}chips"]);
-	} else if (var0001 == QUALITY_SIGN_COVE) {
+	} else if (quality == QUALITY_SIGN_COVE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["cove"]);
-	} else if (var0001 == QUALITY_SIGN_EMERALD) {
+	} else if (quality == QUALITY_SIGN_EMERALD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "emerald"]);
-	} else if (var0001 == QUALITY_SIGN_OUT_N_INN) {
+	} else if (quality == QUALITY_SIGN_OUT_N_INN) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["out\{dot}n\{dot}inn"]);
-	} else if (var0001 == QUALITY_SIGN_LOVERS_WALK) {
+	} else if (quality == QUALITY_SIGN_LOVERS_WALK) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["lovers", "walk"]);
-	} else if (var0001 == QUALITY_SIGN_BUCCANEERS_DEN) {
+	} else if (quality == QUALITY_SIGN_BUCCANEERS_DEN) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["buccaneers", "den"]);
-	} else if (var0001 == QUALITY_SIGN_THE_BATHS) {
+	} else if (quality == QUALITY_SIGN_THE_BATHS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, "\{th}e\{dot}ba\{th}s");
-	} else if (var0001 == QUALITY_SIGN_HOUSE_OF_GAMES) {
+	} else if (quality == QUALITY_SIGN_HOUSE_OF_GAMES) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["house", "of", "games"]);
-	} else if (var0001 == QUALITY_SIGN_FALLEN_VIRGIN) {
+	} else if (quality == QUALITY_SIGN_FALLEN_VIRGIN) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "fallen", "virgin"]);
-	} else if (var0001 == QUALITY_SIGN_BUDOS) {
+	} else if (quality == QUALITY_SIGN_BUDOS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, "budos");
-	} else if (var0001 == QUALITY_SIGN_MEDITATION_RETREAT) {
+	} else if (quality == QUALITY_SIGN_MEDITATION_RETREAT) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["MEDITATION", "RETREAT"]);
-	} else if (var0001 == QUALITY_SIGN_GO_THIS_WAY) {
+	} else if (quality == QUALITY_SIGN_GO_THIS_WAY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["GO THIS WAY"]);
-	} else if (var0001 == QUALITY_SIGN_LYCAEUM) {
+	} else if (quality == QUALITY_SIGN_LYCAEUM) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["lycaeum"]);
-	} else if (var0001 == QUALITY_SIGN_HALLOWED_DOCK) {
+	} else if (quality == QUALITY_SIGN_HALLOWED_DOCK) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "hallowed", "dock"]);
-	} else if (var0001 == QUALITY_SIGN_FRIENDLY_KNAVE) {
+	} else if (quality == QUALITY_SIGN_FRIENDLY_KNAVE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "friendly", "knave"]);
-	} else if (var0001 == QUALITY_SIGN_GILDED_LIZARD) {
+	} else if (quality == QUALITY_SIGN_GILDED_LIZARD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "gilded", "lizard"]);
-	} else if (var0001 == QUALITY_SIGN_HEALER) {
+	} else if (quality == QUALITY_SIGN_HEALER) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["h\{ea}ler"]);
-	} else if (var0001 == QUALITY_SIGN_ELDROTHS_PROVISIONS) {
+	} else if (quality == QUALITY_SIGN_ELDROTHS_PROVISIONS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["eldro\{th}s", "provisions"]);
-	} else if (var0001 == QUALITY_SIGN_HOUSE_OF_ITEMS) {
+	} else if (quality == QUALITY_SIGN_HOUSE_OF_ITEMS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["house", "of", "items"]);
-	} else if (var0001 == QUALITY_SIGN_BRITANNIAN_MINING_COMPANY) {
+	} else if (quality == QUALITY_SIGN_BRITANNIAN_MINING_COMPANY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["britannian", "mini\{ng}", "company"]);
-	} else if (var0001 == QUALITY_SIGN_MINOC_BRANCH) {
+	} else if (quality == QUALITY_SIGN_MINOC_BRANCH) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["minoc", "branch"]);
-	} else if (var0001 == QUALITY_SIGN_TRAINER) {
+	} else if (quality == QUALITY_SIGN_TRAINER) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["trainer"]);
-	} else if (var0001 == QUALITY_SIGN_SCHOLAR) {
+	} else if (quality == QUALITY_SIGN_SCHOLAR) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["scholar"]);
-	} else if (var0001 == QUALITY_SIGN_TOWN_HALL) {
+	} else if (quality == QUALITY_SIGN_TOWN_HALL) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["town\{dot}hall"]);
-	} else if (var0001 == QUALITY_SIGN_WIS_SUR_MAGICS) {
+	} else if (quality == QUALITY_SIGN_WIS_SUR_MAGICS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["wis-surs", "magics"]);
-	} else if (var0001 == QUALITY_SIGN_OBSERVATORY) {
+	} else if (quality == QUALITY_SIGN_OBSERVATORY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["observatory"]);
-	} else if (var0001 == QUALITY_SIGN_VESPER) {
+	} else if (quality == QUALITY_SIGN_VESPER) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["vesper"]);
-	} else if (var0001 == QUALITY_SIGN_MOONGLOW) {
+	} else if (quality == QUALITY_SIGN_MOONGLOW) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["moo\{ng}low"]);
-	} else if (var0001 == QUALITY_SIGN_TERFIN) {
+	} else if (quality == QUALITY_SIGN_TERFIN) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["terfin"]);
-	} else if (var0001 == QUALITY_SIGN_SERPENTS_HOLD) {
+	} else if (quality == QUALITY_SIGN_SERPENTS_HOLD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["serpents", "hold"]);
-	} else if (var0001 == QUALITY_SIGN_EMPATH_ABBEY) {
+	} else if (quality == QUALITY_SIGN_EMPATH_ABBEY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["empa\{th}", "abbey"]);
-	} else if (var0001 == QUALITY_SIGN_JHELOM) {
+	} else if (quality == QUALITY_SIGN_JHELOM) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["jhelom"]);
-	} else if (var0001 == QUALITY_SIGN_MINOC) {
+	} else if (quality == QUALITY_SIGN_MINOC) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["minoc"]);
-	} else if (var0001 == QUALITY_SIGN_UNDERTAKER) {
+	} else if (quality == QUALITY_SIGN_UNDERTAKER) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["undertaker"]);
-	} else if (var0001 == QUALITY_SIGN_HIGH_COURT_OF_BRITANNIA) {
+	} else if (quality == QUALITY_SIGN_HIGH_COURT_OF_BRITANNIA) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["high", "court", "of", "britannia"]);
-	} else if (var0001 == QUALITY_SIGN_PRISON) {
+	} else if (quality == QUALITY_SIGN_PRISON) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["prison"]);
-	} else if (var0001 == QUALITY_SIGN_MODEST_DAMSEL) {
+	} else if (quality == QUALITY_SIGN_MODEST_DAMSEL) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "mode\{st}", "damsel"]);
-	} else if (var0001 == QUALITY_SIGN_ARMOURY) {
+	} else if (quality == QUALITY_SIGN_ARMOURY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["armoury"]);
-	} else if (var0001 == QUALITY_SIGN_BLACKSMITH) {
+	} else if (quality == QUALITY_SIGN_BLACKSMITH) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["blacksmi\{th}"]);
-	} else if (var0001 == QUALITY_SIGN_RECREATION_CENTER) {
+	} else if (quality == QUALITY_SIGN_RECREATION_CENTER) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["recr\{ea}tion", "center"]);
-	} else if (var0001 == QUALITY_SIGN_HALL_OF_KNOWLEDGE) {
+	} else if (quality == QUALITY_SIGN_HALL_OF_KNOWLEDGE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["hall", "of", "knowledge"]);
-	} else if (var0001 == QUALITY_SIGN_HELLO_THERE_AVATAR) {
+	} else if (quality == QUALITY_SIGN_HELLO_THERE_AVATAR) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["hello", "\{th}ere", "avatar"]);
-	} else if (var0001 == QUALITY_SIGN_TONIGHT_9_12_IN_PERSON_THE_AVATARS) {
+	} else if (quality == QUALITY_SIGN_TONIGHT_9_12_IN_PERSON_THE_AVATARS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["tonight\{dot}9-12", "in\{dot}person", "the\{dot}avatars"]);
-	} else if (var0001 == QUALITY_SIGN_WHY_ASK_WHY) {
+	} else if (quality == QUALITY_SIGN_WHY_ASK_WHY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["why", "ask", "why?"]);
-	} else if (var0001 == QUALITY_SIGN_STREET_OF_HONOR) {
+	} else if (quality == QUALITY_SIGN_STREET_OF_HONOR) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{st}r\{ee}t", "of", "honor"]);
-	} else if (var0001 == QUALITY_SIGN_PALADINS_PATH) {
+	} else if (quality == QUALITY_SIGN_PALADINS_PATH) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["paladins", "pa\{th}"]);
-	} else if (var0001 == QUALITY_SIGN_AVENUE_OF_THE_FELLOWSHIP) {
+	} else if (quality == QUALITY_SIGN_AVENUE_OF_THE_FELLOWSHIP) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["AVENUE", "OF", "THE", "FELLOWSHIP"]);
-	} else if (var0001 == QUALITY_SIGN_WIDOWS_WALK) {
+	} else if (quality == QUALITY_SIGN_WIDOWS_WALK) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["widows", "walk"]);
-	} else if (var0001 == QUALITY_SIGN_HAROLDS_HALLWAY) {
+	} else if (quality == QUALITY_SIGN_HAROLDS_HALLWAY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["harolds", "hallway"]);
-	} else if (var0001 == QUALITY_SIGN_FOOLS_WAY) {
+	} else if (quality == QUALITY_SIGN_FOOLS_WAY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["fools\{dot}way"]);
-	} else if (var0001 == QUALITY_SIGN_WHITSABER_ROAD) {
+	} else if (quality == QUALITY_SIGN_WHITSABER_ROAD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["whitsaber", "road"]);
-	} else if (var0001 == QUALITY_SIGN_STRAND) {
+	} else if (quality == QUALITY_SIGN_STRAND) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{st}rand"]);
-	} else if (var0001 == QUALITY_SIGN_CHALICE_AVENUE) {
+	} else if (quality == QUALITY_SIGN_CHALICE_AVENUE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["chalice", "avenue"]);
-	} else if (var0001 == QUALITY_SIGN_TWO_COVES) {
+	} else if (quality == QUALITY_SIGN_TWO_COVES) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["two", "coves"]);
-	} else if (var0001 == QUALITY_SIGN_WEST_WALL_ROAD) {
+	} else if (quality == QUALITY_SIGN_WEST_WALL_ROAD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["we\{st}", "wall", "road"]);
-	} else if (var0001 == QUALITY_SIGN_EAST_WALL_ROAD) {
+	} else if (quality == QUALITY_SIGN_EAST_WALL_ROAD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{ea}\{st}", "wall", "road"]);
-	} else if (var0001 == QUALITY_SIGN_NORTH_WALL_ROAD) {
+	} else if (quality == QUALITY_SIGN_NORTH_WALL_ROAD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["nor\{th}", "wall", "road"]);
-	} else if (var0001 == QUALITY_SIGN_SOUTH_WALL_ROAD) {
+	} else if (quality == QUALITY_SIGN_SOUTH_WALL_ROAD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["sou\{th}", "wall", "road"]);
-	} else if (var0001 == QUALITY_SIGN_HEROES_WAY) {
+	} else if (quality == QUALITY_SIGN_HEROES_WAY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["heroes", "way"]);
-	} else if (var0001 == QUALITY_SIGN_IOLOS_SOUTH) {
+	} else if (quality == QUALITY_SIGN_IOLOS_SOUTH) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["iolos", "sou\{th}"]);
-	} else if (var0001 == QUALITY_SIGN_PAWS) {
+	} else if (quality == QUALITY_SIGN_PAWS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["paws"]);
-	} else if (var0001 == QUALITY_SIGN_SALTY_DOG) {
+	} else if (quality == QUALITY_SIGN_SALTY_DOG) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "salty\{dot}dog"]);
-	} else if (var0001 == QUALITY_SIGN_FELLOWSHIP_SHELTER) {
+	} else if (quality == QUALITY_SIGN_FELLOWSHIP_SHELTER) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["FELLOWSHIP", "SHELTER"]);
-	} else if (var0001 == QUALITY_SIGN_VESPER_BRANCH) {
+	} else if (quality == QUALITY_SIGN_VESPER_BRANCH) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["vesper", "branch"]);
-	} else if (var0001 == QUALITY_SIGN_CHECKERED_CORK) {
+	} else if (quality == QUALITY_SIGN_CHECKERED_CORK) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "checquered", "cork"]);
-	} else if (var0001 == QUALITY_SIGN_ARTISTS_GUILD) {
+	} else if (quality == QUALITY_SIGN_ARTISTS_GUILD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["artists", "guild"]);
-	} else if (var0001 == QUALITY_SIGN_THE_BUNK_AND_STOOL) {
+	} else if (quality == QUALITY_SIGN_THE_BUNK_AND_STOOL) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e bunk", "and", "\{st}ool"]);
-	} else if (var0001 == QUALITY_SIGN_LIBRARY_OF_SCARS) {
+	} else if (quality == QUALITY_SIGN_LIBRARY_OF_SCARS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{th}e", "library", "of", "scars"]);
-	} else if (var0001 == QUALITY_SIGN_CARLYNS_CLOTHES) {
+	} else if (quality == QUALITY_SIGN_CARLYNS_CLOTHES) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["carlyns", "clo\{th}es"]);
-	} else if (var0001 == QUALITY_SIGN_WITHIN_THESE_WALLS_LIES_MASTER_RICHARD) {
+	} else if (quality == QUALITY_SIGN_WITHIN_THESE_WALLS_LIES_MASTER_RICHARD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, [
 			"wi\{th}in\{dot}\{th}ese", "walls", "lies\{dot}ma\{st}er", "richard"
 		]);
-	} else if (var0001 == QUALITY_SIGN_CASTLE_WAY) {
+	} else if (quality == QUALITY_SIGN_CASTLE_WAY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["ca\{st}le\{dot}way"]);
-	} else if (var0001 == QUALITY_SIGN_LORD_BRITISH_LANE) {
+	} else if (quality == QUALITY_SIGN_LORD_BRITISH_LANE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["lord", "british", "lane"]);
-	} else if (var0001 == QUALITY_SIGN_NOBLE_ROAD) {
+	} else if (quality == QUALITY_SIGN_NOBLE_ROAD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["noble\{dot}road"]);
-	} else if (var0001 == QUALITY_SIGN_WEST_END_AVENUE) {
+	} else if (quality == QUALITY_SIGN_WEST_END_AVENUE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["we\{st}\{dot}end", "avenue"]);
-	} else if (var0001 == QUALITY_SIGN_HAZLE_LANE) {
+	} else if (quality == QUALITY_SIGN_HAZLE_LANE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["hazle\{dot}lane"]);
-	} else if (var0001 == QUALITY_SIGN_PARK_SQUARE_NORTH) {
+	} else if (quality == QUALITY_SIGN_PARK_SQUARE_NORTH) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["park", "square", "nor\{th}"]);
-	} else if (var0001 == QUALITY_SIGN_PARK_SQUARE_SOUTH) {
+	} else if (quality == QUALITY_SIGN_PARK_SQUARE_SOUTH) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["park", "square", "sou\{th}"]);
-	} else if (var0001 == QUALITY_SIGN_MARKET_STREET) {
+	} else if (quality == QUALITY_SIGN_MARKET_STREET) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["market", "\{st}r\{ee}t"]);
-	} else if (var0001 == QUALITY_SIGN_GOLDEN_WAY) {
+	} else if (quality == QUALITY_SIGN_GOLDEN_WAY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["golden", "way"]);
-	} else if (var0001 == QUALITY_SIGN_CENTER_AVENUE) {
+	} else if (quality == QUALITY_SIGN_CENTER_AVENUE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["center", "avenue"]);
-	} else if (var0001 == QUALITY_SIGN_SPIKE_LANE) {
+	} else if (quality == QUALITY_SIGN_SPIKE_LANE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["spike", "lane"]);
-	} else if (var0001 == QUALITY_SIGN_AVATAR_AVENUE) {
+	} else if (quality == QUALITY_SIGN_AVATAR_AVENUE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["avatar", "avenue"]);
-	} else if (var0001 == QUALITY_SIGN_STABLE_LANE) {
+	} else if (quality == QUALITY_SIGN_STABLE_LANE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{st}able", "lane"]);
-	} else if (var0001 == QUALITY_SIGN_EAST_END_AVENUE) {
+	} else if (quality == QUALITY_SIGN_EAST_END_AVENUE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["\{ea}\{st}", "end", "avenue"]);
-	} else if (var0001 == QUALITY_SIGN_FARM_ROAD) {
+	} else if (quality == QUALITY_SIGN_FARM_ROAD) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["farm", "road"]);
-	} else if (var0001 == QUALITY_SIGN_NUGGET_STREET) {
+	} else if (quality == QUALITY_SIGN_NUGGET_STREET) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["nugget", "\{st}r\{ee}t"]);
-	} else if (var0001 == QUALITY_SIGN_COOL_COVE) {
+	} else if (quality == QUALITY_SIGN_COOL_COVE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["cool", "cove"]);
-	} else if (var0001 == QUALITY_SIGN_NORTH_END_AVENUE) {
+	} else if (quality == QUALITY_SIGN_NORTH_END_AVENUE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["nor\{th}", "end", "avenue"]);
-	} else if (var0001 == QUALITY_SIGN_GOLDEN_EYE_WAY) {
+	} else if (quality == QUALITY_SIGN_GOLDEN_EYE_WAY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["golden", "eye", "way"]);
-	} else if (var0001 == QUALITY_SIGN_TO_THE_DARK_TOWER) {
+	} else if (quality == QUALITY_SIGN_TO_THE_DARK_TOWER) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["to", "\{th}e", "dark", "tower"]);
-	} else if (var0001 == QUALITY_SIGN_BEWARE_OF_LANDSLIDES) {
+	} else if (quality == QUALITY_SIGN_BEWARE_OF_LANDSLIDES) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["BEWARE", "OF", "LANDSLIDES"]);
-	} else if (var0001 == QUALITY_SIGN_DANGER_DO_NOT_ENTER) {
+	} else if (quality == QUALITY_SIGN_DANGER_DO_NOT_ENTER) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["DANGER:", "DO", "NOT", "ENTER"]);
-	} else if (var0001 == QUALITY_SIGN_OLD_NUMBER_ONE) {
+	} else if (quality == QUALITY_SIGN_OLD_NUMBER_ONE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["old", "number", "one"]);
-	} else if (var0001 == QUALITY_SIGN_DO_NOT_FREE_THE_LICHE) {
+	} else if (quality == QUALITY_SIGN_DO_NOT_FREE_THE_LICHE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["do\{dot}not", "free", "\{th}e", "liche"]);
-	} else if (var0001 == QUALITY_SIGN_BEWARE_MONSTERS_WITHIN) {
+	} else if (quality == QUALITY_SIGN_BEWARE_MONSTERS_WITHIN) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["beware", "mon\{st}ers", "wi\{th}in"]);
-	} else if (var0001 == QUALITY_SIGN_PAUPERS_GRAVES) {
+	} else if (quality == QUALITY_SIGN_PAUPERS_GRAVES) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["paupers", "graves"]);
-	} else if (var0001 == QUALITY_SIGN_MANRIK_A_SOUL_OF_A_SOUL) {
-		UI_display_runes(GUMP_WOODEN_SIGN,
-				["\{dot}manrik\{dot}", "a\{dot}soul", "of\{dot}a", "soul"]);
-	} else if (var0001 == QUALITY_SIGN_HERE_LIES_JULES_NO_WORDS_FOR_THE_LOSS) {
+	} else if (quality == QUALITY_SIGN_MANRIK_A_SOUL_OF_A_SOUL) {
+		UI_display_runes(GUMP_WOODEN_SIGN, [
+			"\{dot}manrik\{dot}", "a\{dot}soul", "of\{dot}a", "soul"
+		]);
+	} else if (quality == QUALITY_SIGN_HERE_LIES_JULES_NO_WORDS_FOR_THE_LOSS) {
 		UI_display_runes(GUMP_WOODEN_SIGN, [
 			"here\{dot}lies", "jules\{dot}no", "words\{dot}for",
 			"\{th}e\{dot}loss"
 		]);
-	} else if (var0001 == QUALITY_SIGN_MORGAN_HER_DEATH_A_TRAGEDY) {
-		UI_display_runes(GUMP_WOODEN_SIGN,
-				["\{dot}morgan\{dot}", "her", "dea\{th}\{dot}a", "tragedy"]);
-	} else if (var0001 == QUALITY_SIGN_HERE_LIES_KETHIAN_FRIEND_TO_MANY) {
-		UI_display_runes(GUMP_WOODEN_SIGN,
-				["here\{dot}lies", "ke\{th}ian", "friend\{dot}to", "many"]);
-	} else if (var0001 == QUALITY_SIGN_WADLEY_HIS_SOUL_DEEPER_THAN_HIS_BODY) {
+	} else if (quality == QUALITY_SIGN_MORGAN_HER_DEATH_A_TRAGEDY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, [
+			"\{dot}morgan\{dot}", "her", "dea\{th}\{dot}a", "tragedy"
+		]);
+	} else if (quality == QUALITY_SIGN_HERE_LIES_KETHIAN_FRIEND_TO_MANY) {
+		UI_display_runes(GUMP_WOODEN_SIGN, [
+			"here\{dot}lies", "ke\{th}ian", "friend\{dot}to", "many"
+		]);
+	} else if (quality == QUALITY_SIGN_WADLEY_HIS_SOUL_DEEPER_THAN_HIS_BODY) {
 		UI_display_runes(GUMP_WOODEN_SIGN, [
 			"\{dot}wadley\{dot}", "his\{dot}soul", "deeper\{dot}\{th}an",
 			"his\{dot}body"
 		]);
-	} else if (var0001 == QUALITY_SIGN_HERE_LIES_JENNA_KINDRED_SPIRIT) {
+	} else if (quality == QUALITY_SIGN_HERE_LIES_JENNA_KINDRED_SPIRIT) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["here\{dot}lies", "jenna", "kindred", "spirit"]);
-	} else if (var0001 == QUALITY_SIGN_DEAD_END) {
+	} else if (quality == QUALITY_SIGN_DEAD_END) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["d\{ea}d", "end"]);
-	} else if (var0001 == QUALITY_SIGN_TO_SKARA_BRAE) {
+	} else if (quality == QUALITY_SIGN_TO_SKARA_BRAE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["to", "skara", "brae"]);
-	} else if (var0001 == QUALITY_SIGN_THE_THRONE_OF_THE_GUARDIAN) {
+	} else if (quality == QUALITY_SIGN_THE_THRONE_OF_THE_GUARDIAN) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["THE", "THRONE", "OF\{dot}THE", "GUARDIAN"]);
-	} else if (var0001 == QUALITY_SIGN_NORTH_TO_BRITAIN) {
+	} else if (quality == QUALITY_SIGN_NORTH_TO_BRITAIN) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["nor\{th}", "to", "britain"]);
-	} else if (var0001 == QUALITY_SIGN_PULL_LEVER) {
+	} else if (quality == QUALITY_SIGN_PULL_LEVER) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["pull", "lever"]);
-	} else if (var0001 == QUALITY_SIGN_ROUND_AND_ROUND) {
+	} else if (quality == QUALITY_SIGN_ROUND_AND_ROUND) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["round", "and", "round"]);
-	} else if (var0001 == QUALITY_SIGN_WAY_OUT) {
+	} else if (quality == QUALITY_SIGN_WAY_OUT) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["way", "out"]);
-	} else if (var0001 == QUALITY_SIGN_KEEP_DOORS_OPEN) {
+	} else if (quality == QUALITY_SIGN_KEEP_DOORS_OPEN) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["keep", "doors", "open"]);
-	} else if (var0001 == QUALITY_SIGN_SELWYNS_TOWER) {
+	} else if (quality == QUALITY_SIGN_SELWYNS_TOWER) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["selwyns", "tower"]);
-	} else if (var0001 == QUALITY_SIGN_FOLLOW_THE_FIRE) {
+	} else if (quality == QUALITY_SIGN_FOLLOW_THE_FIRE) {
 		UI_display_runes(GUMP_WOODEN_SIGN, ["follow", "\{th}e", "fire"]);
 	}
 }
@@ -2076,8 +2076,7 @@ void FuncAbbeyDoorOpenRight shape#(SHAPE_ABBEY_DOOR_OPEN_RIGHT) () {
 	}
 	var state = getDoorState(item);
 	if (state == FRAME_DOOR_OPENED) {
-		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_CLOSED,
-				0, 0, 7)) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_OPENED, Y,
 					SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_CLOSED, 3, 0, 1);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
@@ -2086,8 +2085,7 @@ void FuncAbbeyDoorOpenRight shape#(SHAPE_ABBEY_DOOR_OPEN_RIGHT) () {
 		}
 	}
 	if (state == FRAME_DOOR_CLOSED) {
-		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_OPENED,
-				0, 0, 7)) {
+		if (handleDoorInteraction(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_CLOSED, X,
 					SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_OPENED, 0, -3, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
@@ -2105,7 +2103,7 @@ void FuncAbbeyDoorOpenRight shape#(SHAPE_ABBEY_DOOR_OPEN_RIGHT) () {
 
 void FuncGuard1 shape#(SHAPE_GUARD1) () {
 	// BUG: this should probably have been 'item' instead of SHAPE_GUARD1
-	var var0000 = SHAPE_GUARD1->get_npc_object()->get_schedule_type();
+	var schedule = SHAPE_GUARD1->get_npc_object()->get_schedule_type();
 	if (event == DOUBLECLICK) {
 		BOB->show_npc_face(DEFAULT_FACE);
 		add(["name", "job", "bye"]);
@@ -2128,24 +2126,24 @@ void FuncGuard1 shape#(SHAPE_GUARD1) () {
 	}
 	if (event == PROXIMITY) {
 		// BUG: this should probably have been 'item' instead of SHAPE_GUARD1
-		var var0001 = SHAPE_GUARD1->get_npc_object()->get_schedule_type();
-		if (var0001 == PATROL) {
-			var var0002 = UI_die_roll(1, 4);
-			declare var var0003;
-			if (var0002 == 1) {
-				var0003 = "@Move along!@";
+		var schedule = SHAPE_GUARD1->get_npc_object()->get_schedule_type();
+		if (schedule == PATROL) {
+			var random = UI_die_roll(1, 4);
+			declare var line;
+			if (random == 1) {
+				line = "@Move along!@";
 			}
-			if (var0002 == 2) {
-				var0003 = "@Stand aside!@";
+			if (random == 2) {
+				line = "@Stand aside!@";
 			}
-			if (var0002 == 3) {
-				var0003 = "@Go about thy business!@";
+			if (random == 3) {
+				line = "@Go about thy business!@";
 			}
-			if (var0002 == 4) {
-				var0003 = "@Keep moving!@";
+			if (random == 4) {
+				line = "@Keep moving!@";
 			}
 			// BUG: this should probably have been 'item' instead of SHAPE_GUARD1
-			SHAPE_GUARD1->item_say(var0003);
+			SHAPE_GUARD1->item_say(line);
 		}
 	}
 }
@@ -2489,9 +2487,9 @@ void FuncDoorNsLeft shape#(SHAPE_DOOR_NS_LEFT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = getDoorState(item);
-	if (var0000 == FRAME_DOOR_OPENED) {
-		if (handleDoorInteraction(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_CLOSED, 0, 3, 5)) {
+	var state = getDoorState(item);
+	if (state == FRAME_DOOR_OPENED) {
+		if (handleDoorInteraction(item, SHAPE_DOOR_EW_TOP, FRAME_DOOR_CLOSED, 0, 3, 5)) {
 			handleDoubleDoorInteraction(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_OPENED, X,
 					SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
@@ -2499,8 +2497,8 @@ void FuncDoorNsLeft shape#(SHAPE_DOOR_NS_LEFT) () {
 			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_CLOSED) {
-		if (handleDoorInteraction(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_OPENED, -3, 0, 7)) {
+	if (state == FRAME_DOOR_CLOSED) {
+		if (handleDoorInteraction(item, SHAPE_DOOR_EW_TOP, FRAME_DOOR_OPENED, -3, 0, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_CLOSED, Y,
 					SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_OPENED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
@@ -2508,10 +2506,10 @@ void FuncDoorNsLeft shape#(SHAPE_DOOR_NS_LEFT) () {
 			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_LOCKED) {
+	if (state == FRAME_DOOR_LOCKED) {
 		doorUtterLocked(item);
 	}
-	if (var0000 == FRAME_DOOR_MAGIC_LOCK) {
+	if (state == FRAME_DOOR_MAGIC_LOCK) {
 		doorUtterMagicallyLocked(item);
 	}
 }
@@ -2520,9 +2518,9 @@ void FuncDoorEwTop shape#(SHAPE_DOOR_EW_TOP) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = getDoorState(item);
-	if (var0000 == FRAME_DOOR_OPENED) {
-		if (handleDoorInteraction(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_CLOSED, 3, 0, 1)) {
+	var state = getDoorState(item);
+	if (state == FRAME_DOOR_OPENED) {
+		if (handleDoorInteraction(item, SHAPE_DOOR_NS_LEFT, FRAME_DOOR_CLOSED, 3, 0, 1)) {
 			handleDoubleDoorInteraction(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_OPENED, Y,
 					SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
@@ -2530,8 +2528,8 @@ void FuncDoorEwTop shape#(SHAPE_DOOR_EW_TOP) () {
 			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_CLOSED) {
-		if (handleDoorInteraction(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_OPENED, 0, -3, 7)) {
+	if (state == FRAME_DOOR_CLOSED) {
+		if (handleDoorInteraction(item, SHAPE_DOOR_NS_LEFT, FRAME_DOOR_OPENED, 0, -3, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_CLOSED, X,
 					SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_OPENED, 0, 0, 7);
 			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
@@ -2539,10 +2537,10 @@ void FuncDoorEwTop shape#(SHAPE_DOOR_EW_TOP) () {
 			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_LOCKED) {
+	if (state == FRAME_DOOR_LOCKED) {
 		doorUtterLocked(item);
 	}
-	if (var0000 == FRAME_DOOR_MAGIC_LOCK) {
+	if (state == FRAME_DOOR_MAGIC_LOCK) {
 		doorUtterMagicallyLocked(item);
 	}
 }
@@ -3057,7 +3055,7 @@ void FuncTorch shape#(SHAPE_TORCH) () {
 }
 
 void FuncBottle shape#(SHAPE_BOTTLE) () {
-	Func0813(item, 1, SFX_QUAFF);
+	consumeFood(item, 1, SFX_QUAFF);
 }
 
 void FuncTimeLord shape#(SHAPE_TIME_LORD) () {
@@ -8692,7 +8690,7 @@ void FuncFlyingCarpet shape#(SHAPE_FLYING_CARPET) () {
 
 void FuncReagent shape#(SHAPE_REAGENT) () {
 	if (get_item_frame() == FRAME_REAGENT_GARLIC) {
-		Func0813(item, 2, SFX_GULP);
+		consumeFood(item, 2, SFX_GULP);
 	}
 }
 
@@ -64971,68 +64969,68 @@ void flyingCarpetTakeOff id#(0x812) (var sourceObj) {
 	}
 }
 
-void Func0813 id#(0x813) (var var0000, var var0001, var var0002) {
-	struct<ObjPos> var0003 = UI_click_on_item();
-	var var0004 = UI_get_party_list();
-	if ((var0003 in var0004)
-		&& ((!var0003->get_item_flag(ASLEEP))
-			&& ((!var0003->get_item_flag(PARALYZED))
-				&& (!var0003->get_item_flag(DEAD))))) {
-		var var0005 = var0003->get_npc_prop(FOODLEVEL);
-		var var0006 = var0005 + var0001;
-		declare var var0007;
-		if (var0005 > 24) {
-			var0007 = "@No, thank thee.@";
+void consumeFood id#(0x813) (var foodObj, var foodValue, var sfxToPlay) {
+	struct<ObjPos> target = UI_click_on_item();
+	var partyList = UI_get_party_list();
+	if ((target in partyList)
+		&& (!target->get_item_flag(ASLEEP)
+			&& (!target->get_item_flag(PARALYZED)
+				&& !target->get_item_flag(DEAD)))) {
+		var foodLevel = target->get_npc_prop(FOODLEVEL);
+		var newFoodLevel = foodLevel + foodValue;
+		declare var line;
+		if (foodLevel > 24) {
+			line = "@No, thank thee.@";
 		} else {
-			handleStealingConsequences(var0000);
-			UI_play_sound_effect2(var0002, item);
-			drainQuantity(var0000);
-			var var0008 = UI_die_roll(1, 10);
-			if (var0005 <= 4) {
-				if (var0006 <= 4) {
-					var0007 = "@More!@";
-					if (var0008 < 6) {
-						var0007 = "@I must have more!@";
+			handleStealingConsequences(foodObj);
+			UI_play_sound_effect2(sfxToPlay, item);
+			drainQuantity(foodObj);
+			var random = UI_die_roll(1, 10);
+			if (foodLevel <= 4) {
+				if (newFoodLevel <= 4) {
+					line = "@More!@";
+					if (random < 6) {
+						line = "@I must have more!@";
 					}
-				} else if (var0006 < 10) {
-					var0007 = "@I am still hungry.@";
-					if (var0008 < 6) {
-						if (!(var0003 == AVATAR->get_npc_object())) {
-							var0007 = "@May I have some more?@";
+				} else if (newFoodLevel < 10) {
+					line = "@I am still hungry.@";
+					if (random < 6) {
+						if (!(target == AVATAR->get_npc_object())) {
+							line = "@May I have some more?@";
 						}
 					}
-				} else if (var0006 < 20) {
-					if (var0000->get_item_shape() == SHAPE_REAGENT) {
-						var0007 = "@Yum, garlic!@";
+				} else if (newFoodLevel < 20) {
+					if (foodObj->get_item_shape() == SHAPE_REAGENT) {
+						line = "@Yum, garlic!@";
 					} else {
-						var0007 = "@Ah yes, much better.@";
+						line = "@Ah yes, much better.@";
 					}
 				} else {
-					var0007 = "@That hit the spot!@";
-					if (var0008 < 6) {
-						var0007 = "@Burp@";
+					line = "@That hit the spot!@";
+					if (random < 6) {
+						line = "@Burp@";
 					}
 				}
-			} else if (var0005 < 20) {
-				if (var0000->get_item_shape() == SHAPE_REAGENT) {
-					var0007 = "@Yum, garlic!@";
+			} else if (foodLevel < 20) {
+				if (foodObj->get_item_shape() == SHAPE_REAGENT) {
+					line = "@Yum, garlic!@";
 				}
-				var0007 = "@Ahh, very tasty.@";
-				if (var0006 > 24 && var0008 < 3) {
-					var0007 = "@Belch@";
+				line = "@Ahh, very tasty.@";
+				if (newFoodLevel > 24 && random < 3) {
+					line = "@Belch@";
 				}
-			} else if (gflags[MET_BATLIN] && var0008 < 2) {
-				var0007 = "@I'll soon be plump.@";
-			} else if (var0008 < 5) {
-				var0007 = "@I'll soon be plump.@";
+			} else if (gflags[MET_BATLIN] && random < 2) {
+				line = "@I'll soon be plump.@";
+			} else if (random < 5) {
+				line = "@I'll soon be plump.@";
 			}
 		}
-		if (!(var0007 == "")) {
-			if (canTalk(var0003)) {
-				var0003->item_say(var0007);
+		if (!(line == "")) {
+			if (canTalk(target)) {
+				target->item_say(line);
 			}
 		}
-		var var0009 = var0003->set_npc_prop(FOODLEVEL, var0001);
+		var result = target->set_npc_prop(FOODLEVEL, foodValue);
 	}
 }
 
@@ -78261,7 +78259,7 @@ void changeHealth id#(0x92A) (var obj, var delta) {
 		} else if (health + delta > strength) {
 			delta = strength - health;
 		}
-		var result = obj->set_npc_prop(HEALTH, var0001);
+		var result = obj->set_npc_prop(HEALTH, delta);
 	}
 }
 

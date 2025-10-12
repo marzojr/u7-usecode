@@ -125,7 +125,7 @@ extern void Func080F id#(0x80F) ();
 extern void Func0810 id#(0x810) (var var0000, var var0001);
 extern void Func0811 id#(0x811) ();
 extern void flyingCarpetTakeOff id#(0x812) (var sourceObj);
-extern void Func0813 id#(0x813) (var var0000, var var0001, var var0002);
+extern void consumeFood id#(0x813) (var foodObj, var foodValue, var sfxToPlay);
 extern var Func0814 id#(0x814) ();
 extern void Func0815 id#(0x815) (var var0000);
 extern void Func0816 id#(0x816) (var var0000);
