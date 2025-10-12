@@ -115,7 +115,7 @@ extern void Func0805 id#(0x805) (var var0000);
 extern void Func0806 id#(0x806) (var var0000, var var0001);
 extern void Func0807 id#(0x807) (var var0000);
 extern void Func0808 id#(0x808) ();
-extern void Func0809 id#(0x809) (var var0000);
+extern void handleCartInteraction id#(0x809) (var cartPiece);
 extern void partySitDownNearObj id#(0x80A) (var sourceObj, var shapeNum);
 extern var throneOfChangeFindTarget id#(0x80B) (var index);
 extern var identifyBargeKind id#(0x80C) (var sourceObj);

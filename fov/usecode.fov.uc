@@ -1202,8 +1202,8 @@ void FuncDoorNsRight shape#(SHAPE_DOOR_NS_RIGHT) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var var0000 = getDoorState(item);
-	if (var0000 == FRAME_DOOR_OPENED) {
+	var doorState = getDoorState(item);
+	if (doorState == FRAME_DOOR_OPENED) {
 		if (handleDoorInteraction(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_OPENED, X,
 					SHAPE_DOOR_EW_TOP, FRAME_DOOR_CLOSED, 0, 3, 5);
@@ -1212,7 +1212,7 @@ void FuncDoorNsRight shape#(SHAPE_DOOR_NS_RIGHT) () {
 			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_CLOSED) {
+	if (doorState == FRAME_DOOR_CLOSED) {
 		if (handleDoorInteraction(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_OPENED, 0, 0, 7)) {
 			handleDoubleDoorInteraction(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_CLOSED, Y,
 					SHAPE_DOOR_EW_TOP, FRAME_DOOR_OPENED, -3, 0, 7);
@@ -1221,10 +1221,10 @@ void FuncDoorNsRight shape#(SHAPE_DOOR_NS_RIGHT) () {
 			partyUttersDoorIsBlocked();
 		}
 	}
-	if (var0000 == FRAME_DOOR_LOCKED) {
+	if (doorState == FRAME_DOOR_LOCKED) {
 		doorUtterLocked(item);
 	}
-	if (var0000 == FRAME_DOOR_MAGIC_LOCK) {
+	if (doorState == FRAME_DOOR_MAGIC_LOCK) {
 		doorUtterMagicallyLocked(item);
 	}
 }
@@ -1348,9 +1348,9 @@ void FuncSeat shape#(SHAPE_SEAT) () {
 			var index = 1;
 			declare var npc;
 			for (npc in partyList) {
-				struct<Position> var0012 = npc->get_object_position();
-				destX[index] = avatarPos.x - var0012.x;
-				destY[index] = avatarPos.y - var0012.y;
+				struct<Position> npcPos = npc->get_object_position();
+				destX[index] = avatarPos.x - npcPos.x;
+				destY[index] = avatarPos.y - npcPos.y;
 				destFrame[index] = npc->get_item_frame_rot();
 				index += 1;
 			}
@@ -1369,34 +1369,41 @@ void FuncSeat shape#(SHAPE_SEAT) () {
 	}
 }
 
+/**
+ * Handle wearing ring of invisibility.
+ */
 void FuncRingOfInvisibility shape#(SHAPE_RING_OF_INVISIBILITY) () {
-	declare var var0000;
-	if ((event == READIED) || (event == UNREADIED)) {
-		var0000 = get_container();
-		while ((var0000 != NULL_OBJ) && (!var0000->is_npc())) {
-			var0000 = var0000->get_container();
+	declare var wearer;
+	if (event == READIED || event == UNREADIED) {
+		wearer = get_container();
+		while (wearer != NULL_OBJ && !wearer->is_npc()) {
+			wearer = wearer->get_container();
 		}
-		if (var0000 == NULL_OBJ) {
+		if (wearer == NULL_OBJ) {
 			UI_flash_mouse(CURSOR_HAND);
 			return;
 		}
 	}
 	if (event == READIED) {
-		var0000->set_item_flag(INVISIBLE);
+		wearer->set_item_flag(INVISIBLE);
 	}
 	if (event == UNREADIED) {
-		var0000->clear_item_flag(INVISIBLE);
+		wearer->clear_item_flag(INVISIBLE);
 	}
 }
 
+/**
+ * Handle wearing ring of regeneration.
+ * Heals 1 HP every 4 in-game minutes and has a 1% chance of vanishing.
+ */
 void FuncRingOfRegeneration shape#(SHAPE_RING_OF_REGENERATION) () {
-	declare var var0000;
-	declare var var0001;
+	declare var wearer;
+	declare var result;
 	if (event == READIED) {
-		var0000 = get_container();
-		if (var0000 && var0000->is_npc()) {
+		wearer = get_container();
+		if (wearer && wearer->is_npc()) {
 			halt_scheduled();
-			var0001 = script item after 100 ticks {
+			result = script item after 100 ticks {
 				call FuncRingOfRegeneration;
 			};
 		} else {
@@ -1408,18 +1415,18 @@ void FuncRingOfRegeneration shape#(SHAPE_RING_OF_REGENERATION) () {
 	}
 	if (event == SCRIPTED) {
 		halt_scheduled();
-		var0000 = get_container();
-		if (var0000 && var0000->is_npc()) {
-			var var0002 = var0000->get_npc_prop(STRENGTH);
-			var var0003 = var0000->get_npc_prop(HEALTH);
-			if (var0003 < var0002) {
-				var0001 = var0000->set_npc_prop(HEALTH, 1);
+		wearer = get_container();
+		if (wearer && wearer->is_npc()) {
+			var strength = wearer->get_npc_prop(STRENGTH);
+			var health = wearer->get_npc_prop(HEALTH);
+			if (health < strength) {
+				result = wearer->set_npc_prop(HEALTH, 1);
 				if (UI_die_roll(1, 100) == 1) {
 					remove_item();
 					return;
 				}
 			}
-			var0001 = script item after 100 ticks {
+			result = script item after 100 ticks {
 				call FuncRingOfRegeneration;
 			};
 		}
@@ -1428,7 +1435,7 @@ void FuncRingOfRegeneration shape#(SHAPE_RING_OF_REGENERATION) () {
 
 void FuncCart shape#(SHAPE_CART) () {
 	if (event == DOUBLECLICK) {
-		Func0809(item);
+		handleCartInteraction(item);
 	}
 }
 
@@ -5011,7 +5018,7 @@ void FuncSpinningWheel shape#(SHAPE_SPINNING_WHEEL) () {
 
 void FuncCartPiece shape#(SHAPE_CART_PIECE) () {
 	if (event == DOUBLECLICK) {
-		Func0809(item);
+		handleCartInteraction(item);
 	}
 }
 
@@ -5149,7 +5156,7 @@ void FuncDough shape#(SHAPE_DOUGH) () {
 
 void FuncCartPiece2 shape#(SHAPE_CART_PIECE2) () {
 	if (event == DOUBLECLICK) {
-		Func0809(item);
+		handleCartInteraction(item);
 	}
 }
 
@@ -6742,7 +6749,7 @@ void FuncVial shape#(SHAPE_VIAL) () {
 
 void FuncCartPiece3 shape#(SHAPE_CART_PIECE3) () {
 	if (event == DOUBLECLICK) {
-		Func0809(item);
+		handleCartInteraction(item);
 	}
 }
 
@@ -6920,13 +6927,13 @@ void FuncRudyomsWand shape#(SHAPE_RUDYOMS_WAND) () {
 
 void FuncCartPiece4 shape#(SHAPE_CART_PIECE4) () {
 	if (event == DOUBLECLICK) {
-		Func0809(item);
+		handleCartInteraction(item);
 	}
 }
 
 void FuncCartPiece5 shape#(SHAPE_CART_PIECE5) () {
 	if (event == DOUBLECLICK) {
-		Func0809(item);
+		handleCartInteraction(item);
 	}
 }
 
@@ -7180,7 +7187,7 @@ void FuncInvisibilityDust shape#(SHAPE_INVISIBILITY_DUST) () {
 
 void FuncDraftHorse shape#(SHAPE_DRAFT_HORSE) () {
 	if (event == DOUBLECLICK) {
-		Func0809(item);
+		handleCartInteraction(item);
 	}
 }
 
@@ -64556,25 +64563,31 @@ void Func0808 id#(0x808) () {
 	}
 }
 
-void Func0809 id#(0x809) (var var0000) {
-	var var0001 = var0000->get_barge();
-	if (var0001) {
-		if (var0000->get_item_flag(ON_MOVING_BARGE)) {
-			var0000->clear_item_flag(ON_MOVING_BARGE);
-			var0000->clear_item_flag(ACTIVE_BARGE);
+/**
+ * Handles cart interation. Checks for a deed to the cart when
+ * starting to use the cart.
+ *
+ * @param cartPiece A piece of the cart in question.
+ */
+void handleCartInteraction id#(0x809) (var cartPiece) {
+	var barge = cartPiece->get_barge();
+	if (barge) {
+		if (cartPiece->get_item_flag(ON_MOVING_BARGE)) {
+			cartPiece->clear_item_flag(ON_MOVING_BARGE);
+			cartPiece->clear_item_flag(ACTIVE_BARGE);
 			makeNpcSay(AVATAR, "@Whoa!@");
 		} else {
-			var var0002 = var0000->find_nearby(SHAPE_DRAFT_HORSE, 16, MASK_NONE);
-			if (var0002) {
-				var var0003 = PARTY->count_objects(
-						SHAPE_SCROLL, var0002->get_item_quality(), FRAME_ANY);
-				if (var0003) {
+			var horseObj = cartPiece->find_nearby(SHAPE_DRAFT_HORSE, 16, MASK_NONE);
+			if (horseObj) {
+				var cartDeed = PARTY->count_objects(
+						SHAPE_SCROLL, horseObj->get_item_quality(), FRAME_ANY);
+				if (cartDeed) {
 					if (allPartyMembersSeated()) {
-						var0000->set_item_flag(ON_MOVING_BARGE);
-						var0001->set_item_flag(ACTIVE_BARGE);
+						cartPiece->set_item_flag(ON_MOVING_BARGE);
+						barge->set_item_flag(ACTIVE_BARGE);
 						makeNpcSay(AVATAR, "@Giddy-up!@");
 					} else {
-						var var0004 = assignSeatsOnBarge(var0000);
+						var result = assignSeatsOnBarge(cartPiece);
 					}
 				} else if (UI_get_array_size(UI_get_party_list()) == 1) {
 					partySpeak("@The title for this cart must first be "
