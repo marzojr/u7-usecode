@@ -1448,86 +1448,87 @@ void FuncMetalWallEw shape#(SHAPE_METAL_WALL_EW) () {
 		UI_flash_mouse(CURSOR_HAND);
 		return;
 	}
-	Func0833(item, FuncPortcullisDoorEw);
+	raiseMetalDoor(item, FuncPortcullisDoorEw);
 }
 
 void FuncLaboratoryBurner shape#(SHAPE_LABORATORY_BURNER) () {
 	if (event == DOUBLECLICK) {
 		if (get_item_frame() == FRAME_LAB_BURNER_OFF) {
-			struct<Position> var0000 = get_object_position();
-			var var0001 = find_nearby(SHAPE_POTION, 5, MASK_NONE);
-			var var0002 = NULL_OBJ;
-			var var0003 = NULL_OBJ;
-			var var0004 = NULL_OBJ;
-			var var0005 = [
-				FRAME_POTION_CURING, FRAME_POTION_INVISIBILITY,
+			struct<Position> burnerPos = get_object_position();
+			var potionList = find_nearby(SHAPE_POTION, 5, MASK_NONE);
+			var potion1 = NULL_OBJ;
+			var potion2 = NULL_OBJ;
+			var potion3 = NULL_OBJ;
+			var expectedFrames = [
+				FRAME_POTION_CURING,
+				FRAME_POTION_INVISIBILITY,
 				FRAME_POTION_MANDRAKE_ESSENCE
 			];
-			for (var0008 in var0001) {
-				struct<Position> var0009 = var0008->get_object_position();
-				var var000A = var0008->get_item_frame();
-				if ((var0009.x == (var0000.x - 3))
-					&& ((var0009.y == var0000.y)
-						&& ((var0009.z == var0000.z)
-							&& (var000A in var0005)))) {
-					var0005 = Func0802(var000A, var0005);
-					var0002 = var0008;
+			for (potion in potionList) {
+				struct<Position> potionPos = potion->get_object_position();
+				var frameNum = potion->get_item_frame();
+				if (potionPos.x == burnerPos.x - 3
+					&& (potionPos.y == burnerPos.y
+						&& (potionPos.z == burnerPos.z
+							&& (frameNum in expectedFrames)))) {
+					expectedFrames = filterFromList(frameNum, expectedFrames);
+					potion1 = potion;
 				}
-				if ((var0009.x == (var0000.x - 2))
-					&& ((var0009.y == (var0000.y + 2))
-						&& ((var0009.z == var0000.z)
-							&& (var000A in var0005)))) {
-					var0005 = Func0802(var000A, var0005);
-					var0003 = var0008;
+				if (potionPos.x == burnerPos.x - 2
+					&& (potionPos.y == burnerPos.y + 2
+						&& (potionPos.z == burnerPos.z
+							&& (frameNum in expectedFrames)))) {
+					expectedFrames = filterFromList(frameNum, expectedFrames);
+					potion2 = potion;
 				}
-				if ((var0009.x == var0000.x)
-					&& ((var0009.y == (var0000.y + 3))
-						&& ((var0009.z == var0000.z)
-							&& (var000A in var0005)))) {
-					var0005 = Func0802(var000A, var0005);
-					var0004 = var0008;
+				if (potionPos.x == burnerPos.x
+					&& (potionPos.y == burnerPos.y + 3
+						&& (potionPos.z == burnerPos.z
+							&& (frameNum in expectedFrames)))) {
+					expectedFrames = filterFromList(frameNum, expectedFrames);
+					potion3 = potion;
 				}
 			}
-			declare var var0015;
-			if (var0002 && (var0003 && var0004)) {
-				var var000B = find_nearby(SHAPE_VIAL, 5, MASK_NONE);
-				for (var000E in var000B) {
-					struct<Position> var000F = var000E->get_object_position();
-					if ((var000F.x == (var0000.x + 2))
-						&& ((var000F.y == (var0000.y - 2))
-							&& (var000F.z == var0000.z))) {
-						var var0010 = find_nearby(
+			declare var result;
+			if (potion1 && (potion2 && potion3)) {
+				var nearbyVials = find_nearby(SHAPE_VIAL, 5, MASK_NONE);
+				for (vialObj in nearbyVials) {
+					struct<Position> vialPos = vialObj->get_object_position();
+					if (vialPos.x == burnerPos.x + 2
+						&& (vialPos.y == burnerPos.y - 2
+							&& vialPos.z ==burnerPos.z)) {
+						var deviceList = find_nearby(
 								SHAPE_ALCHEMIST_DEVICE, 5, MASK_NONE);
-						for (var0013 in var0010) {
-							struct<Position> var0014
-									= var0013->get_object_position();
-							if ((var0014.x == (var0000.x + 1))
-								&& ((var0014.y == (var0000.y + 2))
-									&& (var0014.z == (var0000.z + 2)))) {
-								var0015 = script item {
+						for (devviceObj in deviceList) {
+							struct<Position> devicePos
+									= devviceObj->get_object_position();
+							if (devicePos.x == burnerPos.x + 1
+								&& (devicePos.y == burnerPos.y + 2
+									&& devicePos.z == burnerPos.z + 2)) {
+								result = script item {
 									next frame cycle;
 									sfx SFX_WIZARD_MAGIC;
 									wait 10;
 									previous frame cycle;
 								};
-								var0015 = script var0002 after 2 ticks {
+								result = script potion1 after 2 ticks {
 									nohalt;
-									call Func0615;
+									call scriptEmptyVial;
 								};
-								var0015 = script var0003 after 4 ticks {
+								result = script potion2 after 4 ticks {
 									nohalt;
-									call Func0615;
+									call scriptEmptyVial;
 								};
-								var0015 = script var0004 after 6 ticks {
+								result = script potion3 after 6 ticks {
 									nohalt;
-									call Func0615;
+									call scriptEmptyVial;
 								};
-								var0015 = script var000E {
+								result = script vialObj {
 									repeat 4 {
 										next frame cycle;
 									};
 								};
-								var0015 = script var0013 {
+								result = script devviceObj {
 									repeat 3 {
 										next frame cycle;
 									};
@@ -1540,7 +1541,7 @@ void FuncLaboratoryBurner shape#(SHAPE_LABORATORY_BURNER) () {
 					}
 				}
 			}
-			var0015 = script item {
+			result = script item {
 				next frame cycle;
 				sfx SFX_SPELL_FAIL;
 				wait 10;
@@ -1560,18 +1561,18 @@ void FuncOpenShuttersEw shape#(SHAPE_OPEN_SHUTTERS_EW) () {
 }
 
 void FuncKite shape#(SHAPE_KITE) () {
-	declare var var0002;
+	declare var result;
 	if (in_usecode()) {
 		return;
 	}
 	if (event == DOUBLECLICK) {
-		var var0000 = get_container();
-		if (var0000) {
-			struct<Position> var0001 = AVATAR->get_object_position();
-			var0001.x += 1;
-			var0002 = set_last_created();
-			if (var0002) {
-				var0002 = UI_update_last_created(var0001);
+		var owner = get_container();
+		if (owner) {
+			struct<Position> avatarPos = AVATAR->get_object_position();
+			avatarPos.x += 1;
+			result = set_last_created();
+			if (result) {
+				result = UI_update_last_created(avatarPos);
 			} else {
 				return;
 			}
@@ -1579,15 +1580,15 @@ void FuncKite shape#(SHAPE_KITE) () {
 		if (UI_in_gump_mode()) {
 			UI_close_gumps();
 		}
-		var var0003 = -1;
-		var var0004 = -1;
-		var var0005 = -2;
-		tryPathRunUsecodeTo(item, var0003, var0004, var0005, FuncKite, item,
+		var maxDeltaX = -1;
+		var maxDeltaY = -1;
+		var maxDeltaZ = -2;
+		tryPathRunUsecodeTo(item, maxDeltaX, maxDeltaY, maxDeltaZ, FuncKite, item,
 				 BG_PATH_SUCCESS);
 	}
 	if (event == BG_PATH_SUCCESS) {
 		if (!UI_is_pc_inside()) {
-			var0002 = script item {
+			result = script item {
 				frame 0;
 				repeat 14 {
 					next frame;
@@ -1605,7 +1606,7 @@ void FuncKite shape#(SHAPE_KITE) () {
 				};
 				frame 0;
 			};
-			var0002 = script AVATAR {
+			result = script AVATAR {
 				actor frame bowing;
 				actor frame standing;
 				face west;
@@ -1624,7 +1625,7 @@ void FuncKite shape#(SHAPE_KITE) () {
 
 void FuncLightSource shape#(SHAPE_LIGHT_SOURCE) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
-		Func0942(item, SHAPE_LIT_LIGHT_SOURCE);
+		igniteLightSource(item, SHAPE_LIT_LIGHT_SOURCE);
 	}
 }
 
@@ -1635,16 +1636,16 @@ void FuncLitLightSource shape#(SHAPE_LIT_LIGHT_SOURCE) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		set_item_shape(SHAPE_LIGHT_SOURCE);
-		var var0000 = directionFromObject(AVATAR, item);
-		var var0001 = script AVATAR {
-			face var0000;
+		var direction = directionFromObject(AVATAR, item);
+		var result = script AVATAR {
+			face direction;
 			continue;
 			actor frame strike_2h;
 			actor frame standing;
 		};
 	}
 	if (event == READIED) {
-		Func0905(item);
+		enableLightSource(item);
 	}
 }
 
@@ -2710,7 +2711,7 @@ void FuncEmp shape#(SHAPE_EMP) () {
 
 void FuncSconce shape#(SHAPE_SCONCE) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
-		Func0942(item, SHAPE_LIT_SCONCE);
+		igniteLightSource(item, SHAPE_LIT_SCONCE);
 	}
 }
 
@@ -3044,7 +3045,7 @@ void FuncBedRoll shape#(SHAPE_BED_ROLL) () {
 
 void FuncTorch shape#(SHAPE_TORCH) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
-		Func0942(item, SHAPE_LIT_TORCH);
+		igniteLightSource(item, SHAPE_LIT_TORCH);
 	}
 }
 
@@ -5572,20 +5573,20 @@ void FuncShears shape#(SHAPE_SHEARS) () {
 
 void FuncLitTorch shape#(SHAPE_LIT_TORCH) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
-		Func0839(item, SHAPE_TORCH, event);
+		handleTorchInteraction(item, SHAPE_TORCH, event);
 	}
 	if (event == BG_PATH_SUCCESS) {
-		var var0000 = directionFromObject(AVATAR, item);
-		var var0001 = script AVATAR {
-			face var0000;
+		var direction = directionFromObject(AVATAR, item);
+		var result = script AVATAR {
+			face direction;
 			continue;
 			actor frame strike_2h;
 			actor frame standing;
 		};
-		Func0839(item, SHAPE_TORCH, event);
+		handleTorchInteraction(item, SHAPE_TORCH, event);
 	}
 	if (event == READIED) {
-		Func0905(item);
+		enableLightSource(item);
 	}
 }
 
@@ -7165,7 +7166,7 @@ void FuncSwitch shape#(SHAPE_SWITCH) () {
 			}
 		}
 		var0004 = Func080E(var0008);
-		Func0836(item, SHAPE_ANY);
+		controlMetalDoors(item, SHAPE_ANY);
 	}
 }
 
@@ -9053,7 +9054,7 @@ void FuncMetalWallNs shape#(SHAPE_METAL_WALL_NS) () {
 		UI_flash_mouse(CURSOR_HAND);
 		return;
 	}
-	Func0833(item, FuncPortcullisDoorNs);
+	raiseMetalDoor(item, FuncPortcullisDoorNs);
 }
 
 void FuncHorn shape#(SHAPE_HORN) () {
@@ -9155,7 +9156,7 @@ void FuncPortcullisDoorNs shape#(SHAPE_PORTCULLIS_DOOR_NS) () {
 		UI_flash_mouse(CURSOR_HAND);
 		return;
 	}
-	Func0832(item, FuncMetalWallNs);
+	lowerMetalDoor(item, FuncMetalWallNs);
 }
 
 void FuncPortcullisDoorEw shape#(SHAPE_PORTCULLIS_DOOR_EW) () {
@@ -9167,7 +9168,7 @@ void FuncPortcullisDoorEw shape#(SHAPE_PORTCULLIS_DOOR_EW) () {
 		UI_flash_mouse(CURSOR_HAND);
 		return;
 	}
-	Func0832(item, FuncMetalWallEw);
+	lowerMetalDoor(item, FuncMetalWallEw);
 }
 
 void FuncPot shape#(SHAPE_POT) () {
@@ -52594,26 +52595,31 @@ void FuncDaniel object#(FIRST_NPC_FUNCTION - DANIEL)() {
 	item->FuncGuard4();
 }
 
-void Func0600 object#(0x600) () {
-	var var0000 = get_item_quality() - 1;
-	var var0001 = set_item_quality(var0000);
-	if (var0000 == 0) {
+/**
+ * Script function that slowly decreases the quality of `item`
+ * until it reaches zero, at which point the light source is
+ * marked as 'spent'.
+ */
+void scriptBurnLightSource object#(0x600) () {
+	var quality = get_item_quality() - 1;
+	var result = set_item_quality(quality);
+	if (quality == 0) {
 		halt_scheduled();
-		var var0002 = get_item_shape();
-		if (var0002 == SHAPE_LIT_LIGHT_SOURCE) {
+		var shapeNum = get_item_shape();
+		if (shapeNum == SHAPE_LIT_LIGHT_SOURCE) {
 			set_item_shape(SHAPE_SPENT_LIGHT_SOURCE);
 		}
-		if (var0002 == SHAPE_LIT_TORCH) {
+		if (shapeNum == SHAPE_LIT_TORCH) {
 			set_item_shape(SHAPE_TORCH);
-			var0001 = set_item_quality(QUALITY_SPENT_TORCH);
+			result = set_item_quality(QUALITY_SPENT_TORCH);
 		}
-		if (var0002 == SHAPE_LIT_SCONCE) {
+		if (shapeNum == SHAPE_LIT_SCONCE) {
 			set_item_shape(SHAPE_SPENT_SCONCE);
 		}
 		UI_play_sound_effect(SFX_IGNITE);
 	} else {
-		var var0003 = script item after 50 ticks {
-			call Func0600;
+		var result = script item after 50 ticks {
+			call scriptBurnLightSource;
 		};
 	}
 }
@@ -53368,7 +53374,10 @@ void showSpeechSubtitlesOverlay object#(0x614) () {
 	say("\"Ho ho ha ha heh heh heh!\"");
 }
 
-void Func0615 object#(0x615) () {
+/**
+ * Turns the vial into an empty vial.
+ */
+void scriptEmptyVial object#(0x615) () {
 	if (event == SCRIPTED) {
 		set_item_shape(SHAPE_VIAL);
 		set_item_frame(FRAME_VIAL_EMPTY);
@@ -61073,9 +61082,16 @@ void Func06D9 object#(0x6D9) () {
 	}
 }
 
-void Func06DA object#(0x6DA) () {
+/**
+ * Toggles nearby metal doors matching the quality of `item`.
+ *
+ * Egg function used by two usecode eggs:
+ * - Chunk 0x82: position [2663, 2722, 0], quality 1
+ * - Chunk 0x83: position [2888, 2647, 2], quality 15
+ */
+void eggToggleMetalDoors object#(0x6DA) () {
 	if (event == EGG) {
-		Func0836(item, SHAPE_ANY);
+		controlMetalDoors(item, SHAPE_ANY);
 	}
 }
 
@@ -61091,15 +61107,84 @@ void Func06DC object#(0x6DC) () {
 	}
 }
 
-void Func06DD object#(0x6DD) () {
+/**
+ * Lowers nearby metal doors matching the quality of `item`.
+ *
+ * Egg function used by various usecode eggs:
+ * - Chunk 0x50:
+ *   - posision [2279, 1550, 0], quality 14
+ *   - posision [2247, 1627, 0], quality 13
+ *   - posision [2089, 1671, 0], quality 2
+ * - Chunk 0x51:
+ *   - posision [2343, 1550, 0], quality 15
+ *   - posision [2316, 1610, 0], quality 16
+ *   - posision [2316, 1605, 0], quality 16
+ *   - posision [2307, 1610, 0], quality 16
+ *   - posision [2307, 1605, 0], quality 16
+ * - Chunk 0x73:
+ *   - posision [1831, 2550, 0], quality 40
+ * - Chunk 0x7f:
+ *   - posision [1823, 2568, 0], quality 10
+ *   - posision [1831, 2571, 0], quality 30
+ *   - posision [1840, 2568, 0], quality 20
+ * - Chunk 0x82:
+ *   - posision [2807, 2577, 0], quality 14
+ *   - posision [2648, 2702, 0], quality 50
+ *   - posision [2730, 2759, 0], quality 2
+ * - Chunk 0x83:
+ *   - posision [2887, 2633, 0], quality 15
+ *   - posision [2820, 2696, 0], quality 25
+ *   - posision [2880, 2697, 0], quality 12
+ *   - posision [2880, 2693, 0], quality 12
+ */
+
+void eggLowerMetalDoors object#(0x6DD) () {
 	if (event == EGG) {
-		Func0836(item, FLAG_FIND_METAL_WALLS);
+		controlMetalDoors(item, FLAG_FIND_METAL_WALLS);
 	}
 }
 
-void Func06DE object#(0x6DE) () {
+/**
+ * Raises nearby metal doors matching the quality of `item`.
+ *
+ * Egg function used by various usecode eggs:
+ * - Chunk 0x26:
+ *   - position [ 745, 870, 0], quality 151
+ * - Chunk 0x50:
+ *   - position [2279, 1557, 0], quality 14
+ *   - position [2299, 1607, 0], quality 16
+ *   - position [2249, 1636, 0], quality 13
+ *   - position [2082, 1671, 0], quality 2
+ *   - position [2096, 1671, 0], quality 2
+ * - Chunk 0x51:
+ *   - position [2343, 1557, 0], quality 15
+ *   - position [2324, 1607, 0], quality 16
+ *   - position [2311, 1617, 0], quality 16
+ * - Chunk 0x73:
+ *   - position [1831, 2554, 0], quality 40
+ *   - position [1831, 2546, 0], quality 40
+ * - Chunk 0x7f:
+ *   - position [1819, 2568, 0], quality 10
+ *   - position [1836, 2568, 0], quality 20
+ *   - position [1831, 2575, 0], quality 30
+ *   - position [1831, 2567, 0], quality 30
+ *   - position [1827, 2568, 0], quality 10
+ *   - position [1844, 2568, 0], quality 20
+ * - Chunk 0x82:
+ *   - position [2807, 2570, 0], quality 14
+ *   - position [2807, 2585, 0], quality 14
+ *   - position [2811, 2696, 0], quality 25
+ *   - position [2648, 2710, 0], quality 50
+ *   - position [2746, 2759, 0], quality 2
+ * - Chunk 0x83:
+ *   - position [2873, 2695, 0], quality 12
+ *   - position [2887, 2695, 0], quality 12
+ *   - position [2839, 2751, 0], quality 11
+ *   - position [2839, 2755, 0], quality 21
+*/
+void eggRaiseMetalDoors object#(0x6DE) () {
 	if (event == EGG) {
-		Func0836(item, FLAG_FIND_PORTCULLIS);
+		controlMetalDoors(item, FLAG_FIND_PORTCULLIS);
 	}
 }
 
@@ -64450,14 +64535,21 @@ var isBedroll id#(0x801) (var obj) {
 	return false;
 }
 
-var Func0802 id#(0x802) (var var0000, var var0001) {
-	var var0002 = [];
-	for (var0005 in var0001) {
-		if (!(var0005 == var0000)) {
-			var0002 &= var0005;
+/**
+ * Creates a new list from another with the given element filtered out.
+ *
+ * @param toFilter Element to remove.
+ * @param list The list to duplicate.
+ * @returns A list with the input element filtered out.
+ */
+var filterFromList id#(0x802) (var toFilter, var list) {
+	var newList = [];
+	for (elem in list) {
+		if (!(elem == toFilter)) {
+			newList &= elem;
 		}
 	}
-	return var0002;
+	return newList;
 }
 
 void Func0803 id#(0x803) (var var0000) {
@@ -65956,21 +66048,35 @@ void shipStartSailing id#(0x831) (var sourceObj) {
 	AVATAR->get_barge()->set_item_flag(ACTIVE_BARGE);
 }
 
-void Func0832 id#(0x832) (var var0000, var var0001) {
-	var var0002 = script var0000 {
+/**
+ * Runs a script to lower a metal door.
+ *
+ * @param metalDoor the door to lower.
+ * @param setShapeFun Function that will set the door's shape
+ * when the script finishes.
+ */
+void lowerMetalDoor id#(0x832) (var metalDoor, var setShapeFun) {
+	var result = script metalDoor {
 		frame 4;
 		repeat 3 {
 			previous frame cycle;
 			sfx SFX_PORTCULLIS_OPEN;
 		};
-		call var0001;
+		call setShapeFun;
 		sfx SFX_PORTCULLIS_CLOSE;
 	};
 }
 
-void Func0833 id#(0x833) (var var0000, var var0001) {
-	var var0002 = script var0000 {
-		call var0001;
+/**
+ * Runs a script to raise a metal door.
+ *
+ * @param metalDoor the door to raise.
+ * @param setShapeFun Function that will set the door's shape
+ * when the script starts.
+ */
+void raiseMetalDoor id#(0x833) (var metalDoor, var setShapeFun) {
+	var result = script metalDoor {
+		call setShapeFun;
 		repeat 3 {
 			next frame cycle;
 			sfx SFX_PORTCULLIS_OPEN;
@@ -66074,33 +66180,43 @@ void Func0835 id#(0x835) (var var0000, var var0001, var var0002) {
 	var var0004 = var0000->set_npc_prop(var0001, var0002 - var0003);
 }
 
-void Func0836 id#(0x836) (var var0000, var var0001) {
-	var var0002 = var0000->get_item_quality();
-	var var0003 = [];
-	if (var0001 == FLAG_FIND_METAL_WALLS || var0001 == SHAPE_ANY) {
-		var0003 &= UI_find_nearby_avatar(SHAPE_METAL_WALL_EW);
-		var0003 &= UI_find_nearby_avatar(SHAPE_METAL_WALL_NS);
+/**
+ * Function called by several eggs and switches to toggle (raise if
+ * lowered,lower if raised) nearby metal walls with matching quality.
+ *
+ * @param refObj Object whole quality determines the walls to toggle.
+ * @flag One of:
+ * - FLAG_FIND_METAL_WALLS to only lower;
+ * - FLAG_FIND_PORTCULLIS to only raise;
+ * - SHAPE_ANY do both.
+ */
+void controlMetalDoors id#(0x836) (var refObj, var flag) {
+	var eggQuality = refObj->get_item_quality();
+	var targetList = [];
+	if (flag == FLAG_FIND_METAL_WALLS || flag == SHAPE_ANY) {
+		targetList &= UI_find_nearby_avatar(SHAPE_METAL_WALL_EW);
+		targetList &= UI_find_nearby_avatar(SHAPE_METAL_WALL_NS);
 	}
-	if (var0001 == FLAG_FIND_PORTCULLIS || var0001 == SHAPE_ANY) {
-		var0003 &= UI_find_nearby_avatar(SHAPE_PORTCULLIS_DOOR_EW);
-		var0003 &= UI_find_nearby_avatar(SHAPE_PORTCULLIS_DOOR_NS);
+	if (flag == FLAG_FIND_PORTCULLIS || flag == SHAPE_ANY) {
+		targetList &= UI_find_nearby_avatar(SHAPE_PORTCULLIS_DOOR_EW);
+		targetList &= UI_find_nearby_avatar(SHAPE_PORTCULLIS_DOOR_NS);
 	}
-	if (var0003) {
-		for (var0006 in var0003) {
-			if (var0006->get_item_quality() == var0002) {
-				var var0007 = var0006->get_item_shape();
-				if (var0007 == SHAPE_METAL_WALL_EW) {
-					var0007 = FuncPortcullisDoorEw;
-					Func0832(var0006, var0007);
-				} else if (var0007 == SHAPE_METAL_WALL_NS) {
-					var0007 = FuncPortcullisDoorNs;
-					Func0832(var0006, var0007);
-				} else if (var0007 == SHAPE_PORTCULLIS_DOOR_EW) {
-					var0007 = FuncMetalWallEw;
-					Func0833(var0006, var0007);
-				} else if (var0007 == SHAPE_PORTCULLIS_DOOR_NS) {
-					var0007 = FuncMetalWallNs;
-					Func0833(var0006, var0007);
+	if (targetList) {
+		for (obj in targetList) {
+			if (obj->get_item_quality() == eggQuality) {
+				var shapeNum = obj->get_item_shape();
+				if (shapeNum == SHAPE_METAL_WALL_EW) {
+					shapeNum = FuncPortcullisDoorEw;
+					lowerMetalDoor(obj, shapeNum);
+				} else if (shapeNum == SHAPE_METAL_WALL_NS) {
+					shapeNum = FuncPortcullisDoorNs;
+					lowerMetalDoor(obj, shapeNum);
+				} else if (shapeNum == SHAPE_PORTCULLIS_DOOR_EW) {
+					shapeNum = FuncMetalWallEw;
+					raiseMetalDoor(obj, shapeNum);
+				} else if (shapeNum == SHAPE_PORTCULLIS_DOOR_NS) {
+					shapeNum = FuncMetalWallNs;
+					raiseMetalDoor(obj, shapeNum);
 				}
 			}
 		}
@@ -66199,23 +66315,30 @@ void Func0838 id#(0x838) (var var0000) {
 	}
 }
 
-void Func0839 id#(0x839) (var var0000, var var0001, var var0002) {
-	if (var0002 == DOUBLECLICK || var0002 == SCRIPTED) {
-		var0000->set_item_shape(var0001);
-		var0000->halt_scheduled();
+/**
+ * Handles interaction with lit torches.
+ *
+ * @param lightSource The torch in question.
+ * @param newShape What shape to use after interaction.
+ * @param eventId The event to use.
+ */
+void handleTorchInteraction id#(0x839) (var lightSource, var newShape, var eventId) {
+	if (eventId == DOUBLECLICK || eventId == SCRIPTED) {
+		lightSource->set_item_shape(newShape);
+		lightSource->halt_scheduled();
 		UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
 		set_light(true);
 	}
-	if (var0002 == DEATH) {
-		var0000->set_item_shape(var0001);
-		var0000->halt_scheduled();
+	if (eventId == DEATH) {
+		lightSource->set_item_shape(newShape);
+		lightSource->halt_scheduled();
 		UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
 		set_light(true);
 	}
-	if (var0002 == READIED) {
+	if (eventId == READIED) {
 		set_light(true);
 	}
-	if (var0002 == UNREADIED) {
+	if (eventId == UNREADIED) {
 		set_light(false);
 	}
 }
@@ -77497,13 +77620,19 @@ void makeNpcSay id#(0x904) (var npc, var lines) {
 	}
 }
 
-void Func0905 id#(0x905) (var var0000) {
-	var0000->halt_scheduled();
+/**
+ * Turns on the light source (through UI_set_light), updates the
+ * palette, and starts burning the light source.
+ *
+ * @param lightSource The light source to ignite.
+ */
+void enableLightSource id#(0x905) (var lightSource) {
+	lightSource->halt_scheduled();
 	set_light(true);
 	UI_set_time_palette();
-	var var0001 = script var0000 after 50 ticks {
+	var result = script lightSource after 50 ticks {
 		nohalt;
-		call Func0600;
+		call scriptBurnLightSource;
 	};
 }
 
@@ -78597,28 +78726,34 @@ void startBlockingSpeech id#(0x941) (var speechNum) {
 	}
 }
 
-void Func0942 id#(0x942) (var var0000, var var0001) {
-	var var0002 = var0000->get_item_frame();
-	if (!var0000->get_item_quality()) {
-		var var0003 = var0000->set_item_quality(UI_die_roll(30, 60));
+/**
+ * Ignites the light source.
+ *
+ * @param lightSource Light source to ignite.
+ * @param newShape Shape of the ignited light source.
+ */
+void igniteLightSource id#(0x942) (var lightSource, var newShape) {
+	var frameNum = lightSource->get_item_frame();
+	if (!lightSource->get_item_quality()) {
+		var result = lightSource->set_item_quality(UI_die_roll(30, 60));
 	}
-	if (var0000->get_item_shape() == SHAPE_TORCH) {
-		if (var0000->get_item_quality() == QUALITY_SPENT_TORCH) {
-			var0000->item_say("Spent");
+	if (lightSource->get_item_shape() == SHAPE_TORCH) {
+		if (lightSource->get_item_quality() == QUALITY_SPENT_TORCH) {
+			lightSource->item_say("Spent");
 			return;
 		}
 	}
-	var var0004 = var0000->get_container();
-	if ((var0004 == NULL_OBJ) || var0004->is_npc()) {
-		set_item_shape(var0001);
-		var var0005 = UI_get_party_list();
-		if (var0004 in var0005) {
-			Func0905(var0000);
+	var container = lightSource->get_container();
+	if (container == NULL_OBJ || container->is_npc()) {
+		set_item_shape(newShape);
+		var partyList = UI_get_party_list();
+		if (container in partyList) {
+			enableLightSource(lightSource);
 		}
 	} else {
 		UI_flash_mouse(CURSOR_HAND);
 	}
-	var0000->set_light(true);
+	lightSource->set_light(true);
 	UI_set_time_palette();
 }
 
