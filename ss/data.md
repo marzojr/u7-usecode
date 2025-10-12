@@ -4,15 +4,19 @@
 
 | Function | Condition                                             |
 | -------- | ----------------------------------------------------- |
-| 0x638    | Double-click shape 642, if `Quality > 99`             |
 | 0x60e    | When avatar dies (`event = 4`)                        |
 | 0x614    | Speech (voice eggs, party member death)               |
 | 0x622    | Sleep schedule on Avatar                              |
 | 0x625    | Arresting guard usecode                               |
 | 0x626    | When objects are destroyed                            |
-| 0x62F    | By patrol schedule kind 15 if NPC identity is 31      |
+| 0x62a    | Double-click shape 0x2c1, if `Quality > 212`          |
+| 0x62f    | By patrol schedule kind 15 if NPC identity is 31      |
 | 0x634    | By Sit schedule when sitting down                     |
+| 0x638    | Double-click shape 0x282, if `99 < Quality < 180`     |
+| 0x63b    | Double-click shape 0x282, if `Quality > 179`          |
 | 0x63d    | Instead of normal dialog when failing copy protection |
+| 0x68c    | On game load if `gflags[0x004] && !gflags[0x318]`     |
+| 0x7dd    | When serpent arrows hit (if modded for 'no-damage')   |
 | 0x7e1    | When sleep arrows hit                                 |
 
 ## Weapon Functions

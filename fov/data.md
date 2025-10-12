@@ -4,11 +4,11 @@
 
 | Function | Condition                                             |
 | -------- | ----------------------------------------------------- |
-| 0x638    | Double-click shape 642, if `Quality > 99`             |
 | 0x60e    | When avatar dies (`event = 4`)                        |
 | 0x614    | Speech (voice eggs, party member death)               |
 | 0x622    | Sleep schedule on Avatar                              |
 | 0x625    | Arresting guard usecode                               |
+| 0x638    | Double-click shape 642, if `Quality > 99`             |
 | 0x626    | When objects are destroyed                            |
 | 0x634    | By Sit schedule when sitting down                     |
 | 0x63d    | Instead of normal dialog when failing copy protection |
@@ -23,7 +23,7 @@
 | 75     | 0x66b    | "On_Dispel_Field_Hit"         |
 | 76     | 0x66d    | "On_Heal_01_Hit"              |
 | 79     | 0x666    | "On_Reveal_Hit"               |
-| 81     | 0x672    | "On_Flamestrike_Hit"          |
+| 81     | 0x672    | "On_FlameStrike_Hit"          |
 | 82     | 0x67a    | "On_Delayed_Explosion_00_Hit" |
 | 280    | 0x646    | "On_Ignite_Hit"               |
 | 339    | 0x64a    | "On_Dispel_Magic_Hit"         |
