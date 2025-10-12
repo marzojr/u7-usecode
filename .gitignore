@@ -1,10 +1,5 @@
-usecode.fov2
-usecode.fov3
-usecode.ss2
-usecode.ss3
-usecode.fov2.ucxt
-usecode.fov3.ucxt
-usecode.fov.ref.ucxt
-usecode.ss2.ucxt
-usecode.ss3.ucxt
-usecode.ss.ref.ucxt
+usecode.*.new.bin
+usecode.*.orig.bin
+usecode.*.new.ucxt
+usecode.*.orig.ucxt
+usecode.*.ref.ucxt

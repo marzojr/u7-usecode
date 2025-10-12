@@ -1,63 +1,59 @@
-UCC=D:/msys64/home/Marzo/exult-linux/exult/ucc.exe
-UCXT=D:/msys64/home/Marzo/exult-linux/exult/ucxt.exe
+UCC:=D:/msys64/home/Marzo/exult-linux/exult/ucc.exe
+UCXT:=D:/msys64/home/Marzo/exult-linux/exult/ucxt.exe
 
-FOV_SOURCES=$(wildcard fov/include/*.uc)
-SS_SOURCES=$(wildcard ss/include/*.uc)
+UCC_ARGS:=-c always -b -W no-goto -W no-integer-coercion -W no-shape-to-function
+UCXT_ARGS:=-a -fs
 
-PASS=\e[1m\e[32m[✔️  PASS]\e[0m
-FAIL=\e[1m\e[31m[❌  FAIL]\e[0m
+PASS:=\e[1m\e[32m[✔️  PASS]\e[0m
+FAIL:=\e[1m\e[31m[❌  FAIL]\e[0m
 
-all: usecode.fov3.ucxt usecode.ss3.ucxt check_ref
+strip_suffix = $(patsubst %.orig,%, $(patsubst %.new,%, $(1)))
 
-usecode.fov.ref.ucxt : usecode.fov2.ucxt
-	cp $< $@
+all: usecode.fov.orig.ucxt usecode.ss.orig.ucxt check_ref
 
-usecode.ss.ref.ucxt : usecode.ss2.ucxt
-	cp $< $@
+all_clean: clean
+	rm -f usecode.fov.ref.ucxt usecode.ss.ref.ucxt
+
+clean:
+	rm -f usecode.fov.new.bin usecode.ss.new.bin
+	rm -f usecode.fov.new.ucxt usecode.ss.new.ucxt
+	rm -f usecode.fov.orig.bin usecode.ss.orig.bin
+	rm -f usecode.fov.orig.ucxt usecode.ss.orig.ucxt
 
 ref: usecode.fov.ref.ucxt usecode.ss.ref.ucxt
 
-check_ref: usecode.fov2.ucxt usecode.ss2.ucxt
-	@if [ ! -f usecode.fov.ref.ucxt ] || [ ! -f usecode.ss.ref.ucxt ]; then \
-		printf "$(FAIL) Reference files usecode.fov.ref.ucxt and usecode.ss.ref.ucxt are missing!"; \
+check_ref: usecode.fov.new.ucxt usecode.ss.new.ucxt
+	@if [ ! -f usecode.fov.ref.ucxt ]; then \
+		printf "$(FAIL) Reference file usecode.fov.ref.ucxt is missing!\n"; \
 		exit 1; \
 	fi
-	@if diff -u usecode.fov.ref.ucxt usecode.fov2.ucxt &> /dev/null; then \
+	@if [ ! -f usecode.ss.ref.ucxt ]; then \
+		printf "$(FAIL) Reference file usecode.ss.ref.ucxt is missing!\n"; \
+		exit 1; \
+	fi
+	@if diff -u usecode.fov.ref.ucxt usecode.fov.new.ucxt &> /dev/null; then \
 		printf "$(PASS) ☥ 'Forge of Virtue' usecode matches reference.\n"; \
 	else \
 		printf "$(FAIL) ☥ 'Forge of Virtue' usecode differs from reference!\n"; \
 		exit 1; \
 	fi
-	@if diff -u usecode.ss.ref.ucxt usecode.ss2.ucxt &> /dev/null; then \
+	@if diff -u usecode.ss.ref.ucxt usecode.ss.new.ucxt &> /dev/null; then \
 		printf "$(PASS) ⚚ 'Silver Seed' usecode matches reference.\n"; \
 	else \
 		printf "$(FAIL) ⚚ 'Silver Seed' usecode differs from reference!\n"; \
 		exit 1; \
 	fi
 
-usecode.fov2 : fov/usecode.fov.uc $(FOV_SOURCES) $(UCC)
-	rm -f usecode.fov2.ucxt usecode.fov3.ucxt
-	$(UCC) -c always -b -I fov -o $@ $< |& (grep -vE "warning:.* (Interpreting integer|You \*really\*)" || true)
+usecode.%.ref.ucxt : usecode.%.new.ucxt
+	cp $< $@
 
-usecode.ss2 : ss/usecode.ss.uc $(SS_SOURCES) $(UCC)
-	rm -f usecode.ss2.ucxt usecode.ss3.ucxt
-	rm -f
-	$(UCC) -c always -b -I ss -o $@ $< |& (grep -vE "warning:.* (Interpreting integer|You \*really\*)" || true)
+usecode.%.new.bin : %/usecode.uc %/include/*.uc $(UCC)
+	rm -f usecode.$*.new.ucxt
+	$(UCC) $(UCC_ARGS) -I $* -o $@ $<
 
-usecode.fov2.ucxt : usecode.fov2 $(UCXT)
-	$(UCXT) -a -fs -fov -i$< > $@ && dos2unix $@
+usecode.%.orig.bin : ucxt/usecode.%.ucxt $(UCC)
+	rm -f usecode.$*.orig.ucxt
+	$(UCC) $(UCC_ARGS) -I $* -o $@ $<
 
-usecode.ss2.ucxt : usecode.ss2 $(UCXT)
-	$(UCXT) -a -fs -ss -i$< > $@ && dos2unix $@
-
-usecode.fov3 : ucxt/usecode.fov.ucxt $(UCC)
-	$(UCC) -u -c always -o $@ $< |& (grep -vE "warning:.* (Interpreting integer|You \*really\*)" || true)
-
-usecode.ss3 : ucxt/usecode.ss.ucxt $(UCC)
-	$(UCC) -u -c always -o $@ $< |& (grep -vE "warning:.* (Interpreting integer|You \*really\*)" || true)
-
-usecode.fov3.ucxt : usecode.fov3 $(UCXT)
-	$(UCXT) -a -fs -fov -i$< > $@ && dos2unix $@
-
-usecode.ss3.ucxt : usecode.ss3 $(UCXT)
-	$(UCXT) -a -fs -ss -i$< > $@ && dos2unix $@
+usecode.%.ucxt : usecode.%.bin $(UCXT)
+	$(UCXT) $(UCXT_ARGS) -$(call strip_suffix,$*) -i$< | dos2unix > $@
