@@ -5545,7 +5545,7 @@ void FuncGrandfatherClockNs shape#(SHAPE_GRANDFATHER_CLOCK_NS) () {
 
 void FuncBedEw shape#(SHAPE_BED_EW) () {
 	if (event == DOUBLECLICK) {
-		Func0800(item);
+		handleBedInteraction(item);
 	}
 }
 
@@ -6390,7 +6390,7 @@ void FuncCrystalBall shape#(SHAPE_CRYSTAL_BALL) () {
 		var var0000 = get_item_quality();
 		declare struct<Position> var0001;
 		if ((var0000 == QUALITY_CRYSTAL_BALL_GO_AWAY) || (var0000 > QUALITY_CRYSTAL_BALL_HIDDEN_ROOM)) {
-			Func0940(SPEECH_GUARDIAN_GO_AWAY);
+			startSpeech(SPEECH_GUARDIAN_GO_AWAY);
 			return;
 		}
 		if (var0000 == QUALITY_CRYSTAL_BALL_ALAGNERS_LAB) {
@@ -6979,7 +6979,7 @@ void FuncOrbOfTheMoons shape#(SHAPE_ORB_OF_THE_MOONS) () {
 			partyUtters(["@How odd!@", "@It work before.@"]);
 			return;
 		}
-		if (gflags[LEFT_TRINSIC] || (!Func093E())) {
+		if (gflags[LEFT_TRINSIC] || (!isAvatarInTrinsic())) {
 			struct<ObjPos> var0000 = UI_click_on_item();
 			struct<Position> var0001 = Func0822(var0000);
 			var var0002 = AVATAR->find_direction(var0001);
@@ -9426,7 +9426,7 @@ void FuncCradle shape#(SHAPE_CRADLE) () {
 
 void FuncBed shape#(SHAPE_BED) () {
 	if (event == DOUBLECLICK) {
-		Func0800(item);
+		handleBedInteraction(item);
 	}
 }
 
@@ -52513,7 +52513,7 @@ void FuncXorinia object#(FIRST_NPC_FUNCTION - XORINIA)() {
 			"want to know more about 'The Guardian'?\"");
 		var var0004 = askYesNo();
 		// BUG: This should probably be var0004
-		if (Func0614) {
+		if (showSpeechSubtitlesOverlay) {
 			say("\"'Xorinia' has digested information about 'The Guardian' and "
 				"can state the following facts:~~\"'The Guardian' possesses "
 				"qualities which human entities label 'vain', 'greedy', "
@@ -52647,7 +52647,7 @@ void Func0607 object#(0x607) () {
 
 void Func0608 object#(0x608) () {
 	if (event == EGG) {
-		Func0941(SPEECH_GUARDIAN_STOP_AVATAR);
+		startBlockingSpeech(SPEECH_GUARDIAN_STOP_AVATAR);
 		var var0000 = UI_is_pc_female();
 		BATLIN->say("\"Avatar! Stop where thou art! Thou shalt not succeed in "
 					"thy quest to destroy the Black Gate! Art thou mad??! The "
@@ -52962,134 +52962,155 @@ void Func060D object#(0x60D) () {
 	}
 }
 
-void Func060E object#(0x60E) () {
-	declare var var0003;
-	declare var var0004;
+/**
+ * Called when the Avatar dies. Heals party and transports
+ */
+void onAvatarDeath object#(0x60E) () {
+	declare var partyNpc;
+	declare var result;
 	if (event == WEAPON) {
 		UI_fade_palette(12 * TICK, 1, FADE_TO_BLACK);
 		UI_play_music(MUSIC_STOP, NULL_OBJ);
 		UI_play_music(MUSIC_WILDERNESS, NULL_OBJ);
 		UI_UNKNOWN_83();
-		var var0000 = get_dead_party();
-		for (var0003 in var0000) {
-			var0004 = var0003->resurrect();
+		var deadPartyList = get_dead_party();
+		for (partyNpc in deadPartyList) {
+			result = partyNpc->resurrect();
 		}
-		var0004 = script item after 5 ticks {
+		result = script item after 5 ticks {
 			nohalt;
-			call Func060E;
+			call onAvatarDeath;
 		};
 	}
 	if (event == SCRIPTED) {
-		var var0005 = get_item_shape();
-		struct<Position> var0006 = get_object_position();
+		var shapeNum = get_item_shape();
+		struct<Position> position = get_object_position();
 		gflags[INSIDE_GENERATOR] = false;
 		if (gflags[LEFT_TRINSIC]) {
-			gflags[NEAR_SHELTER] = Func08F9(
-					AVATAR->get_object_position(), [0x02F1, 0x063B, 0],
-					[0x0383, 0x06FF, 0]);
+			gflags[NEAR_SHELTER] = isPointInCube(
+					AVATAR->get_object_position(),
+					[0x2F1, 0x63B, 0],
+					[0x383, 0x6FF, 0]);
 			if (gflags[NEAR_SHELTER]) {
-				var var0007 = AVATAR->find_nearby(SHAPE_ANY, 90, MASK_NPC);
-				var0007 = filterArray(AVATAR->get_npc_object(), var0007);
-				for (var000A in var0007) {
-					if (var000A->get_schedule_type() == IN_COMBAT) {
-						var var000B = var000A->get_alignment();
-						// BUG: It should be var000B == GOOD instead of GOOD.
-						if ((var000B == NEUTRAL) || GOOD) {
-							var000A->set_schedule_type(WANDER);
+				var nearbyNpcs = AVATAR->find_nearby(SHAPE_ANY, 90, MASK_NPC);
+				nearbyNpcs = filterArray(AVATAR->get_npc_object(), nearbyNpcs);
+				for (npc in nearbyNpcs) {
+					if (npc->get_schedule_type() == IN_COMBAT) {
+						var alignment = npc->get_alignment();
+						// BUG: It should be alignment == GOOD instead of GOOD.
+						if (alignment == NEUTRAL || GOOD) {
+							npc->set_schedule_type(WANDER);
 						}
-						if ((var000B == CHAOTIC) || (var000B == EVIL)) {
-							var var000C = var000A->get_cont_items(
+						if (alignment == CHAOTIC || alignment == EVIL) {
+							var itemList = npc->get_cont_items(
 									SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
-							for (var000F in var000C) {
-								var000F->remove_item();
+							for (obj in itemList) {
+								obj->remove_item();
 							}
-							var000A->remove_npc();
+							npc->remove_npc();
 						}
 					}
 				}
 			}
-			struct<Position> var0010 = [0x0344, 0x06C5, 1];
+			struct<Position> shelterPos = [0x344, 0x6C5, 1];
 			AVATAR->set_item_frame(LIE_NORTH);
 			AVATAR->set_item_flag(ASLEEP);
-			var var0011 = [
-				-4, 0, 4, 0, 0, 4, -4, 1, 4, 1, -4, -1, 4, -1, 1, 2, -1, 2
+			var posOffsets = [
+				-4,  0,
+				 4,  0,
+				 0,  4,
+				-4,  1,
+				 4,  1,
+				-4, -1,
+				 4, -1,
+				 1,  2,
+				-1,  2
 			];
-			var var0012 = STAND_NORTH;
-			var var0013 = [
-				FACE_EAST, var0012, FACE_WEST, var0012, FACE_NORTH, var0012,
-				FACE_EAST, var0012, FACE_WEST, var0012, FACE_EAST, var0012,
-				FACE_WEST, var0012, FACE_NORTH, var0012, FACE_NORTH
+			var standN = STAND_NORTH;
+			var directions = [
+				FACE_EAST, standN, FACE_WEST, standN, FACE_NORTH, standN,
+				FACE_EAST, standN, FACE_WEST, standN, FACE_EAST, standN,
+				FACE_WEST, standN, FACE_NORTH, standN, FACE_NORTH
 			];
-			var var0014 = [-7, 0, 8, 0, 0, 8, -7, 8, 8, 8, -17, 0, -17, 8];
-			var var0015 = [
-				LIE_NORTH, var0012, LIE_NORTH, var0012, LIE_SOUTH, var0012,
-				LIE_SOUTH, var0012, LIE_SOUTH, var0012, LIE_NORTH, var0012,
+			var posOffsetsAsleep = [
+				 -7,  0,
+				  8,  0,
+				  0,  8,
+				 -7,  8,
+				  8,  8,
+				-17,  0,
+				-17,  8
+			];
+			var sleepingFrames = [
+				LIE_NORTH, standN, LIE_NORTH, standN, LIE_SOUTH, standN,
+				LIE_SOUTH, standN, LIE_SOUTH, standN, LIE_NORTH, standN,
 				LIE_NORTH
 			];
-			var var0016 = 1;
-			var var0017 = UI_get_party_list2();
-			for (var0003 in var0017) {
-				var0003->clear_item_flag(POISONED);
-				var0003->clear_item_flag(PARALYZED);
-				var0003->clear_item_flag(CURSED);
-				var0003->clear_item_flag(CHARMED);
-				var0003->clear_item_flag(INVISIBLE);
-				var0003->clear_item_flag(PROTECTION);
-				var0004 = var0003->set_npc_prop(
-						HEALTH, var0003->get_npc_prop(STRENGTH)
-										- var0003->get_npc_prop(HEALTH));
-				var0004 = var0003->set_npc_prop(
-						MANA, var0003->get_npc_prop(MAX_MANA)
-									  - var0003->get_npc_prop(MANA));
-				var0003->set_schedule_type(FOLLOW_AVATAR);
+			var index = 1;
+			var partyList = UI_get_party_list2();
+			for (partyNpc in partyList) {
+				partyNpc->clear_item_flag(POISONED);
+				partyNpc->clear_item_flag(PARALYZED);
+				partyNpc->clear_item_flag(CURSED);
+				partyNpc->clear_item_flag(CHARMED);
+				partyNpc->clear_item_flag(INVISIBLE);
+				partyNpc->clear_item_flag(PROTECTION);
+				result = partyNpc->set_npc_prop(
+						HEALTH, partyNpc->get_npc_prop(STRENGTH)
+										- partyNpc->get_npc_prop(HEALTH));
+				result = partyNpc->set_npc_prop(
+						MANA, partyNpc->get_npc_prop(MAX_MANA)
+									  - partyNpc->get_npc_prop(MANA));
+				partyNpc->set_schedule_type(FOLLOW_AVATAR);
 			}
-			var var001A = var0017;
+			var transportList = partyList;
 			if (!((FERIDWYN->get_schedule_type() == IN_COMBAT)
 				  || (BRITA->get_schedule_type() == IN_COMBAT))) {
 				if (!isNpcIncapacitated(FERIDWYN)) {
-					var001A &= FERIDWYN->get_npc_object();
+					transportList &= FERIDWYN->get_npc_object();
 					FERIDWYN->set_schedule_type(LOITER);
 				}
 				if (!isNpcIncapacitated(BRITA)) {
-					var001A &= BRITA->get_npc_object();
+					transportList &= BRITA->get_npc_object();
 					BRITA->set_schedule_type(LOITER);
 				}
 			}
-			PARTY->move_object(var0010);
-			for (var0003 in var001A) {
-				if (!(var0003 == AVATAR->get_npc_object())) {
-					var0003->halt_scheduled();
-					declare struct<Position> var000D;
-					declare var var001D;
-					if (!var0003->get_item_flag(ASLEEP)) {
-						var0004 = script var0003 {
+			PARTY->move_object(shelterPos);
+			for (partyNpc in transportList) {
+				if (!(partyNpc == AVATAR->get_npc_object())) {
+					partyNpc->halt_scheduled();
+					declare struct<Position> targetPos;
+					if (!partyNpc->get_item_flag(ASLEEP)) {
+						result = script partyNpc {
 							actor frame standing;
-							face var0013[var0016];
+							face directions[index];
 						};
-						var001D = [
-							var0010.x + var0011[var0016],
-							var0010.y + var0011[var0016 + 1], var0010.z - 1
+						targetPos = [
+							shelterPos.x + posOffsets[index],
+							shelterPos.y + posOffsets[index + 1],
+							shelterPos.z - 1
 						];
 					} else {
-						var001D = [
-							var0010.x + var0014[var0016],
-							var0010.y + var0014[var0016 + 1], var0010.z
+						targetPos = [
+							shelterPos.x + posOffsetsAsleep[index],
+							shelterPos.y + posOffsetsAsleep[index + 1],
+							shelterPos.z
 						];
-						var0003->set_item_frame(var0015[var0016]);
-						var var001E = UI_die_roll(1, 20);
-						var0004 = script var0003 {
-							wait var001E;
-							call Func0619;
+						partyNpc->set_item_frame(sleepingFrames[index]);
+						var delay = UI_die_roll(1, 20);
+						result = script partyNpc {
+							wait delay;
+							call scriptedAwaken;
 						};
 					}
-					var0003->move_object(var001D);
-					var0016 += 2;
+					partyNpc->move_object(targetPos);
+					index += 2;
 				}
 			}
 			AVATAR->clear_item_flag(DEAD);
-			var0004 = script AVATAR {
+			result = script AVATAR {
 				wait 2;
-				call Func0610;
+				call postRevivalDialog;
 			};
 		} else {
 			UI_restart_game();
@@ -53106,41 +53127,44 @@ void Func060F object#(0x60F) () {
 			get_npc_prop(STRENGTH), 12, LIGHTNING_DAMAGE, item);
 }
 
-void Func0610 object#(0x610) () {
+/**
+ * Post-revival dialog with party members.
+ */
+void postRevivalDialog object#(0x610) () {
 	UI_fade_palette(36 * TICK, 1, FADE_FROM_BLACK);
-	var var0000 = find_nearby(SHAPE_ANY, 35, MASK_NPC);
-	for (var0003 in var0000) {
-		if ((var0003->get_alignment() == NEUTRAL)
-			&& (var0003->get_schedule_type() == IN_COMBAT)) {
+	var nearbyNpcs = find_nearby(SHAPE_ANY, 35, MASK_NPC);
+	for (npc in nearbyNpcs) {
+		if ((npc->get_alignment() == NEUTRAL)
+			&& (npc->get_schedule_type() == IN_COMBAT)) {
 			return;
 		}
 	}
-	var var0004 = getPoliteTitle();
-	var var0005 = getAvatarName();
-	var var0006 = isNpcNearbyAndVisible(FERIDWYN);
-	var var0007 = isNpcNearbyAndVisible(BRITA);
-	var var0008 = isNpcNearbyAndVisible(IOLO);
+	var politeTitle = getPoliteTitle();
+	var avatarName = getAvatarName();
+	var feridwynNear = isNpcNearbyAndVisible(FERIDWYN);
+	var britaNear = isNpcNearbyAndVisible(BRITA);
+	var ioloNear = isNpcNearbyAndVisible(IOLO);
 	if (IOLO->get_item_flag(ASLEEP)) {
-		var0008 = 0;
+		ioloNear = 0;
 	}
-	var var0009 = isNpcNearbyAndVisible(SHAMINO);
+	var shaminoNear = isNpcNearbyAndVisible(SHAMINO);
 	if (SHAMINO->get_item_flag(ASLEEP)) {
-		var0009 = 0;
+		shaminoNear = 0;
 	}
-	var var000A = isNpcNearbyAndVisible(DUPRE);
+	var dupreNear = isNpcNearbyAndVisible(DUPRE);
 	if (DUPRE->get_item_flag(ASLEEP)) {
-		var000A = 0;
+		dupreNear = 0;
 	}
-	if (var0006) {
+	if (feridwynNear) {
 		FERIDWYN->show_npc_face(DEFAULT_FACE);
 		Func08D5();
 		FERIDWYN->hide();
-	} else if (var0007) {
+	} else if (britaNear) {
 		BRITA->show_npc_face(DEFAULT_FACE);
 		Func08D5();
 		BRITA->hide();
 	}
-	if (var0008) {
+	if (ioloNear) {
 		IOLO->say("\"I am gladdened to see thee still alive, my good friend. I "
 				  "was sorely grieved at thine apparent demise.~~\"In the "
 				  "midst of our battle I did lose track of thee. It is good to "
@@ -53148,7 +53172,7 @@ void Func0610 object#(0x610) () {
 				  "then continue our quest.\"*");
 		IOLO->hide();
 	}
-	if (var0009) {
+	if (shaminoNear) {
 		SHAMINO->say("\"Thy recovery is a miracle! 'Twould have been a severe "
 					 "blow for this world to lose its Avatar.~~\"When at last "
 					 "thou wert found, thy body was being taken to this place "
@@ -53157,7 +53181,7 @@ void Func0610 object#(0x610) () {
 					 "and travelled far. Perhaps thou shouldst rest...\"*");
 		SHAMINO->hide();
 	}
-	if (var000A) {
+	if (dupreNear) {
 		DUPRE->say(
 				"\"The Fellowship members who brought thee to this place did "
 				"not speak once during the entire journey.~~\"But it seems "
@@ -53204,7 +53228,7 @@ void Func0613 object#(0x613) () {
 	recall_virtue_stone();
 }
 
-void Func0614 object#(0x614) () {
+void showSpeechSubtitlesOverlay object#(0x614) () {
 	UUUNGH->show_npc_face(DEFAULT_FACE);
 	var var0000 = UI_get_speech_track();
 	if (var0000 == SPEECH_GUARDIAN_REST) {
@@ -53384,7 +53408,10 @@ void Func0618 object#(0x618) () {
 	}
 }
 
-void Func0619 object#(0x619) () {
+/**
+ * Halts schedule usecode and awakens `item`.
+ */
+void scriptedAwaken object#(0x619) () {
 	halt_scheduled();
 	clear_item_flag(ASLEEP);
 }
@@ -53741,96 +53768,105 @@ void Func0621 object#(0x621) () {
 	}
 }
 
-void Func0622 object#(0x622) () {
+/**
+ * Called by the engine to handle the Avatar sleeping.
+ */
+void onAvatarSleep object#(0x622) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = UI_get_party_list();
-		var var0001 = getNearbyPartyMember();
-		declare var var0002;
-		declare var var0008;
-		if (var0001 == AVATAR) {
-			var0002 = 6 + UI_die_roll(0, 9);
+		var partyList = UI_get_party_list();
+		var partyNpc = getNearbyPartyMember();
+		declare var sleepDuration;
+		declare var npc;
+		if (partyNpc == AVATAR) {
+			sleepDuration = 6 + UI_die_roll(0, 9);
 		} else {
-			var0001->show_npc_face(DEFAULT_FACE);
-			var var0003 = AVATAR->get_npc_name();
-			var var0004 = UI_get_array_size(UI_get_party_list());
-			declare var var0005;
-			if (var0004 > 2) {
-				var0005 = "we";
+			partyNpc->show_npc_face(DEFAULT_FACE);
+			var name = AVATAR->get_npc_name();
+			var numParty = UI_get_array_size(UI_get_party_list());
+			declare var article;
+			if (numParty > 2) {
+				article = "we";
 			} else {
-				var0005 = "I";
+				article = "I";
 			}
-			say("\"In how many hours shall ", var0005, " wake thee up, ",
-				var0003, "?\"");
-			var0002 = UI_input_numeric_value(0, 12, 1, 8);
-			if (var0002 == 0) {
-				var0003 = var0001->get_npc_name();
-				say(var0003,
+			say("\"In how many hours shall ", article, " wake thee up, ",
+				name, "?\"");
+			sleepDuration = UI_input_numeric_value(0, 12, 1, 8);
+			if (sleepDuration == 0) {
+				name = partyNpc->get_npc_name();
+				say(name,
 					" gives you an exasperated look.* \"Never mind, then.\"");
-				if (Func0801(item)) {
-					item->Func0624();
+				if (isBedroll(item)) {
+					item->rollBedroll();
 				}
-				for (var0008 in var0000) {
-					Func093F(var0008, FOLLOW_AVATAR);
+				for (npc in partyList) {
+					setNpcSchedule(npc, FOLLOW_AVATAR);
 				}
-				var0001->hide();
+				partyNpc->hide();
 				AVATAR->clear_item_flag(ASLEEP);
 				return;
 			}
 			say("\"Pleasant dreams.\"");
-			var0001->hide();
+			partyNpc->hide();
 		}
 		if (UI_die_roll(1, 4) == 1) {
-			Func0940(SPEECH_GUARDIAN_REST);
+			startSpeech(SPEECH_GUARDIAN_REST);
 		}
 		UI_fade_palette(12 * TICK, 1, FADE_TO_BLACK);
-		var var0009 = var0002 * HOUR;
-		handleSleepEffects(var0002, item);
-		var0000 = filterArray(AVATAR->get_npc_object(), var0000);
-		for (var0008 in var0000) {
-			Func093F(var0008, LOITER);
+		var timeInTicks = sleepDuration * HOUR;
+		handleSleepEffects(sleepDuration, item);
+		partyList = filterArray(AVATAR->get_npc_object(), partyList);
+		for (npc in partyList) {
+			setNpcSchedule(npc, LOITER);
 		}
-		var var000C = script AVATAR {
+		var result = script AVATAR {
 			wait 35;
 		};
-		var000C = script item after 33 ticks {
+		result = script item after 33 ticks {
 			nohalt;
-			call Func0636;
-			call Func0623;
+			call unfadePaletteFinishTeleport;
+			call onAvatarAwaken;
 		};
-		UI_advance_time(var0009);
+		UI_advance_time(timeInTicks);
 	}
 }
 
-void Func0623 object#(0x623) () {
+/**
+ * Called when the party awakens after sleeping.
+ */
+void onAvatarAwaken object#(0x623) () {
 	if (event == SCRIPTED) {
-		var var0000 = getNearbyPartyMember();
-		if (!(var0000 == AVATAR)) {
-			var0000->show_npc_face(DEFAULT_FACE);
-			var var0001 = AVATAR->get_npc_name();
-			say("\"Arise, ", var0001, ". Time to continue the quest.\"");
-			var0000->hide();
+		var partyNpc = getNearbyPartyMember();
+		if (!(partyNpc == AVATAR)) {
+			partyNpc->show_npc_face(DEFAULT_FACE);
+			var name = AVATAR->get_npc_name();
+			say("\"Arise, ", name, ". Time to continue the quest.\"");
+			partyNpc->hide();
 		}
-		var var0002 = UI_get_party_list();
-		for (var0005 in var0002) {
-			Func093F(var0005, FOLLOW_AVATAR);
+		var partyList = UI_get_party_list();
+		for (npc in partyList) {
+			setNpcSchedule(npc, FOLLOW_AVATAR);
 		}
 		AVATAR->set_item_flag(ASLEEP);
 		AVATAR->clear_item_flag(ASLEEP);
-		if ((get_item_shape() == SHAPE_BED) && (get_item_frame() == FRAME_BED_ROLL)) {
+		if (get_item_shape() == SHAPE_BED && get_item_frame() == FRAME_BED_ROLL) {
 			event = DOUBLECLICK;
-			item->Func0624();
+			item->rollBedroll();
 		}
 	}
 }
 
-void Func0624 object#(0x624) () {
+/**
+ * Makes the Avatar walk up to `item` (a bedroll) and roll it up.
+ */
+void rollBedroll object#(0x624) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
-		var var0000 = [-1, -1, -1, 0, 0, 0, 1, 1, 1];
-		var var0001 = [1, 0, -1, 1, 0, -1, 1, 0, -1];
+		var offsetX = [-1, -1, -1,  0,  0,  0,  1,  1,  1];
+		var offsetY = [ 1,  0, -1,  1,  0, -1,  1,  0, -1];
 		AVATAR->halt_scheduled();
-		tryPathRunUsecodeTo(item, var0000, var0001, -1, Func0624, item, BG_PATH_SUCCESS);
-		UI_set_path_failure(Func0624, item, SCRIPTED);
+		tryPathRunUsecodeTo(item, offsetX, offsetY, -1, rollBedroll, item, BG_PATH_SUCCESS);
+		UI_set_path_failure(rollBedroll, item, SCRIPTED);
 	}
 	if (event == SCRIPTED) {
 		set_item_shape(SHAPE_BED_ROLL);
@@ -53838,29 +53874,33 @@ void Func0624 object#(0x624) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		UI_close_gumps();
-		var var0002 = script AVATAR {
+		var result = script AVATAR {
 			face FACE_NORTH;
 			actor frame bowing;
 			wait 1;
 			actor frame standing;
 		};
-		if (var0002) {
-			var0002 = script item {
+		if (result) {
+			result = script item {
 				wait 2;
-				call Func0624;
+				call rollBedroll;
 			};
 		}
 	}
 }
 
-void Func0625 object#(0x625) () {
-	declare var var0013;
+/**
+ * Called by the game engine when a guard is spawned to arrest
+ * the Avatar.
+ */
+void onArrestAvatar object#(0x625) () {
+	declare var result;
 	if (event == DOUBLECLICK) {
-		var var0000 = get_item_shape();
-		struct<Position> var0001 = [0x017B, 0x0111];
-		struct<Position> var0002 = [0x01B8, 0x0133];
-		struct<Position> var0003 = AVATAR->get_object_position();
-		if (Func093E()) {
+		var shapeNum = get_item_shape();
+		struct<Position> jailTopLeft = [0x17B, 0x111];
+		struct<Position> jailBottomRight = [0x1B8, 0x133];
+		struct<Position> avatarPos = AVATAR->get_object_position();
+		if (isAvatarInTrinsic()) {
 			JUGGERNAUT->say(
 					"You see an irate guard.~~Years of indoctrination have "
 					"instilled in him an overly developed sense of "
@@ -53874,55 +53914,55 @@ void Func0625 object#(0x625) () {
 			UI_attack_avatar();
 			return;
 		}
-		if (Func08F9(var0003, var0001, var0002)) {
+		if (isPointInCube(avatarPos, jailTopLeft, jailBottomRight)) {
 			BOB->say("The guard glares at you. \"Unrepentant scoundrel!\"");
 			BOB->hide();
 			UI_attack_avatar();
 			return;
 		}
 		BOB->show_npc_face(DEFAULT_FACE);
-		var var0004 = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
-		if ((UI_die_roll(1, 2) == 1) && var0004) {
+		var bribeAmount = PARTY->count_objects(SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY);
+		if ((UI_die_roll(1, 2) == 1) && bribeAmount) {
 			say("You see an angry guard. \"Cease and desist "
 				"immediately!.~~Dost thou wish to avoid the unpleasantries of "
 				"a lengthy trial?\"");
-			var var0005 = askYesNo();
-			if (var0005) {
+			var reply = askYesNo();
+			if (reply) {
 				say("\"What is your liberty worth?\"");
 				breakable {
-					if (!Func084B(var0004)) {
+					if (!offerBribeToGuard(bribeAmount)) {
 						say("The guard looks unimpressed by your paltry offer. "
 							"\"How about a bit more? Our jail is populated by "
 							"some unsavory characters.\"");
-						if (!Func084B(var0004)) {
+						if (!offerBribeToGuard(bribeAmount)) {
 							break;
 						}
 					}
-					declare var var0006;
+					declare var pronoun;
 					if (UI_is_pc_female()) {
-						var0006 = "woman";
+						pronoun = "woman";
 					} else {
-						var0006 = "man";
+						pronoun = "man";
 					}
-					var var0007 = [
+					var guardShapes = [
 						SHAPE_GUARD1, SHAPE_GUARD2, SHAPE_GUARD3, SHAPE_GUARD4
 					];
-					var var0008 = [];
-					for (var000B in var0007) {
-						var0008 &= find_nearby(var000B, 30, MASK_NONE);
+					var nearbuGuards = [];
+					for (var000B in guardShapes) {
+						nearbuGuards &= find_nearby(var000B, 30, MASK_NONE);
 					}
-					for (var000E in var0008) {
-						var000E->set_schedule_type(WANDER);
+					for (guard in nearbuGuards) {
+						guard->set_schedule_type(WANDER);
 					}
-					var var000F = find_nearby(SHAPE_ANY, 30, MASK_NPC2);
-					for (var0012 in var000F) {
-						if (var0012->get_schedule_type() == IN_COMBAT) {
-							var0012->set_schedule_type(WANDER);
+					var nearbyNpcs = find_nearby(SHAPE_ANY, 30, MASK_NPC2);
+					for (npc in nearbyNpcs) {
+						if (npc->get_schedule_type() == IN_COMBAT) {
+							npc->set_schedule_type(WANDER);
 						}
 					}
 					say("The guard winks. \"I am pleased to see that thou art "
 						"a thinking ",
-						var0006, ". I will take care of this disturbance.\"");
+						pronoun, ". I will take care of this disturbance.\"");
 					UI_play_music(MUSIC_STOP, item);
 					abort;
 				}
@@ -53935,80 +53975,85 @@ void Func0625 object#(0x625) () {
 					"to release thee.\"");
 				BOB->hide();
 				AVATAR->halt_scheduled();
-				var0013 = script AVATAR after 2 ticks {
-					call Func0625;
+				result = script AVATAR after 2 ticks {
+					call onArrestAvatar;
 					actor frame sleeping;
 					wait 5;
 				};
 				abort;
 			}
 		}
-	labelFunc0625_01DB:
 		say("\"An unfortunate decision, my friend.\"");
 		UI_attack_avatar();
 		return;
 	}
 	if (event == SCRIPTED) {
-		var var0014 = UI_get_party_list();
-		for (var0017 in var0014) {
-			Func093F(var0017, FOLLOW_AVATAR);
-			var0017->set_item_frame(STAND_NORTH);
+		var partyList = UI_get_party_list();
+		for (npc in partyList) {
+			setNpcSchedule(npc, FOLLOW_AVATAR);
+			npc->set_item_frame(STAND_NORTH);
 		}
-		struct<Position> var0018 = [0x01A4, 0x0127, 0];
+		struct<Position> jailPosition = [0x1A4, 0x127, 0];
 		UI_fade_palette(12 * TICK, 1, FADE_TO_BLACK);
 		UI_play_music(MUSIC_STOP, item);
-		PARTY->move_object(var0018);
-		var var0019 = AVATAR->find_nearby(SHAPE_WALL_BOTTOM, 10, MASK_NONE);
-		if (var0019 && (getDoorState(var0019) == FRAME_DOOR_OPENED)) {
-			var0013 = handleSecretDoorInteraction(var0019);
+		PARTY->move_object(jailPosition);
+		var hiddenDoor = AVATAR->find_nearby(SHAPE_WALL_BOTTOM, 10, MASK_NONE);
+		if (hiddenDoor && (getDoorState(hiddenDoor) == FRAME_DOOR_OPENED)) {
+			result = handleSecretDoorInteraction(hiddenDoor);
 		}
-		Func084A();
-		var0013 = script AVATAR {
+		teleportPartyGearToCourt();
+		result = script AVATAR {
 			wait 1;
-			call Func063C;
+			call scriptedLockJailDoor;
 		};
 	}
 }
 
-void Func0626 object#(0x626) () {
-	var var0000 = get_item_shape();
-	if (var0000 == SHAPE_GLASS_COUNTER_TOPS) {
+/**
+ * Function called by the engine when an object is destroyed.
+ * Has special handling glass counter tops and mirrors.
+ * Removes the object from the game world before returning,
+ * except for mirrors which are just set to cracked instead.
+ */
+void onDestroyObject object#(0x626) () {
+	var shapeNum = get_item_shape();
+	if (shapeNum == SHAPE_GLASS_COUNTER_TOPS) {
 		UI_call_guards();
-		var var0001 = filterArray(item,
+		var counterTops = filterArray(item,
 				find_nearby(SHAPE_GLASS_COUNTER_TOPS, 6, MASK_NONE));
-		var var0002 = [];
-		declare var var0005;
-		for (var0005 in var0001) {
-			var0002 &= var0005->get_distance(item);
+		var distArray = [];
+		declare var obj;
+		for (obj in counterTops) {
+			distArray &= obj->get_distance(item);
 		}
-		var0001 = sortArraysBySecondArray(var0001, var0002);
-		struct<Position> var0006 = get_object_position();
-		var var0007 = 1;
-		for (var0005 in var0001) {
-			struct<Position> var000A = var0005->get_object_position();
-			var var000B = 1;
-			while (var000B <= var0007) {
-				var var000C = ((var000B - 1) * 3) + 1;
-				if ((absoluteValueOf(var000A.x - var0006[var000C]) <= 2)
-					&& (absoluteValueOf(var000A.y - var0006[var000C + 1]) <= 2)) {
-					var0005->remove_item();
-					var0006 &= var000A;
-					var0007 += 1;
+		counterTops = sortArraysBySecondArray(counterTops, distArray);
+		struct<Position> itemPos = get_object_position();
+		var numFound = 1;
+		for (obj in counterTops) {
+			struct<Position> objPos = obj->get_object_position();
+			var coordIndex = 1;
+			while (coordIndex <= numFound) {
+				var coord = ((coordIndex - X) * 3) + X;
+				if ((absoluteValueOf(objPos.x - itemPos[coord]) <= 2)
+					&& (absoluteValueOf(objPos.y - itemPos[coord + 1]) <= 2)) {
+					obj->remove_item();
+					itemPos &= objPos;
+					numFound += 1;
 					break;
 				}
-				var000B += 1;
+				coordIndex += 1;
 			}
 		}
 		UI_play_sound_effect2(SFX_GLASS_SHATTERING, item);
 		remove_item();
 		return;
 	}
-	if ((var0000 == SHAPE_MIRROR_NS) || (var0000 == SHAPE_MIRROR_EW)) {
+	if ((shapeNum == SHAPE_MIRROR_NS) || (shapeNum == SHAPE_MIRROR_EW)) {
 		if (!(get_item_frame() == FRAME_MIRROR_BROKEN)) {
-			var var000D = script item {
+			var result = script item {
 				sfx SFX_GLASS_SHATTERING;
 				continue;
-				frame 2;
+				frame FRAME_MIRROR_BROKEN;
 			};
 		}
 		return;
@@ -54183,7 +54228,7 @@ void Func062C object#(0x62C) () {
 			UI_fade_palette(12 * TICK, 1, FADE_TO_BLACK);
 			var var0013 = script var0012 {
 				nohalt;
-				call Func0636;
+				call unfadePaletteFinishTeleport;
 				call Func0713;
 				wait 30;
 				call Func063F;
@@ -54448,7 +54493,7 @@ void Func0633 object#(0x633) () {
 			if (DUPRE->get_item_flag(IN_PARTY) && canTalk(DUPRE)) {
 				DUPRE->item_say("@I am leaving!@");
 				DUPRE->remove_from_party();
-				Func093F(DUPRE, WANDER);
+				setNpcSchedule(DUPRE, WANDER);
 				gflags[DUPRE_PISSED] = true;
 				return;
 			}
@@ -54456,14 +54501,14 @@ void Func0633 object#(0x633) () {
 				SHAMINO->item_say("@I am leaving!@");
 				gflags[SHAMINO_PISSED] = true;
 				SHAMINO->remove_from_party();
-				Func093F(SHAMINO, WANDER);
+				setNpcSchedule(SHAMINO, WANDER);
 				return;
 			}
 			if (IOLO->get_item_flag(IN_PARTY) && canTalk(IOLO)) {
 				IOLO->item_say("@I am leaving!@");
 				gflags[IOLO_PISSED] = true;
 				IOLO->remove_from_party();
-				Func093F(IOLO, WANDER);
+				setNpcSchedule(IOLO, WANDER);
 			}
 		}
 	}
@@ -54542,12 +54587,16 @@ void Func0635 object#(0x635) () {
 	}
 }
 
-void Func0636 object#(0x636) () {
+/**
+ * Fades the palette from black and, if `item` is the Avatar,
+ * displays teleport animation.
+ */
+void unfadePaletteFinishTeleport object#(0x636) () {
 	UI_fade_palette(12 * TICK, 1, FADE_FROM_BLACK);
 	if (item == AVATAR->get_npc_object()) {
-		struct<Position> var0000 = get_object_position();
+		struct<Position> position = get_object_position();
 		UI_sprite_effect(
-				ANIMATION_TELEPORT, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
+				ANIMATION_TELEPORT, position.x, position.y, 0, 0, 0, LOOP_ONCE);
 	}
 }
 
@@ -54559,20 +54608,23 @@ void clearBargeAndResetCamera object#(0x637) () {
 	AVATAR->set_camera();
 }
 
-void Func0638 object#(0x638) () {
-	var var0000 = get_item_quality();
+/**
+ * Called for books with quality > 99.
+ */
+void FuncBookAlt object#(0x638) () {
+	var quality = get_item_quality();
 	if ((event != DOUBLECLICK) && (event != SCRIPTED)) {
 		return;
 	}
-	declare var var0001;
+	declare var result;
 	if (event == SCRIPTED) {
-		if (var0000 == QUALITY_BOOK_STONE_OF_CASTAMBRE
+		if (quality == QUALITY_BOOK_STONE_OF_CASTAMBRE
 				&& get_item_shape() == SHAPE_BOOK) {
 			partySpeak("@Odd. The page is smudged with dirt here. I cannot make "
 					 "out this text.@");
-			var0001 = set_item_quality(QUALITY_BOOK_STONE_OF_CASTAMBRE2);
-			var0001 = script item {
-				call Func0638;
+			result = set_item_quality(QUALITY_BOOK_STONE_OF_CASTAMBRE2);
+			result = script item {
+				call FuncBookAlt;
 			};
 			return;
 		}
@@ -54586,10 +54638,10 @@ void Func0638 object#(0x638) () {
 	}
 	UI_play_sound_effect2(SFX_GUMP, item);
 	book_mode();
-	if (var0000 > QUALITY_BOOK_CONVERTING_MOONGATES) {
+	if (quality > QUALITY_BOOK_CONVERTING_MOONGATES) {
 		say("This is @not a @valid book");
 	}
-	if (var0000 == QUALITY_BOOK_DRAGON_COMPENDIUM) {
+	if (quality == QUALITY_BOOK_DRAGON_COMPENDIUM) {
 		say("~~ ~~THE DRAGON COMPENDIUM~~ ~~by Perrin*");
 		say("     Found almost exclusively in the dungeon Destard, dragons are "
 			"an ancient race of large reptiles. They possess great "
@@ -54606,7 +54658,7 @@ void Func0638 object#(0x638) () {
 			"battle with one of these terrible lizards, and even fewer can "
 			"emerge victorious.");
 	}
-	if (var0000 == QUALITY_BOOK_JOURNAL_OF_GARRET_MOORE) {
+	if (quality == QUALITY_BOOK_JOURNAL_OF_GARRET_MOORE) {
 		say("~~ ~~THE JOURNAL OF GARRET MOORE*");
 		say("Day 1: I arrived upon this forsaken isle.~~");
 		say("Day 3: Found the ruins of an edifice. A tower?~~");
@@ -54632,12 +54684,12 @@ void Func0638 object#(0x638) () {
 		say("Day 40232: Hah! The voices now beg, but I will not finish until "
 			"he is gone. The night is my haven and the dogs will bark!~~");
 	}
-	if (var0000 == QUALITY_BOOK_TRANSITIVE_VAMPIRE) {
+	if (quality == QUALITY_BOOK_TRANSITIVE_VAMPIRE) {
 		say("~~ ~~THE TRANSITIVE VAMPIRE, by Karen Elizabeth Gordon*");
 		say("     This richly-detailed tome is a \"handbook of grammar for the "
 			"Innocent, the Eager, and the Doomed.\"");
 	}
-	if (var0000 == QUALITY_BOOK_TOME_OF_THE_DEAD) {
+	if (quality == QUALITY_BOOK_TOME_OF_THE_DEAD) {
 		say("~~ ~~THE TOME OF THE DEAD~~ ~~by Suvol Shadowface*");
 		say("     The crinkled pages of this book appear to be made of an odd "
 			"sort of leather. It contains various essays concerning the "
@@ -54646,7 +54698,7 @@ void Func0638 object#(0x638) () {
 			"Another passage describes the method by which human skin is "
 			"tanned and pressed for use as writing material...");
 	}
-	if (var0000 == QUALITY_BOOK_ARTIFACTS_OF_DARKNESS) {
+	if (quality == QUALITY_BOOK_ARTIFACTS_OF_DARKNESS) {
 		say("~~ ~~ARTIFACTS OF DARKNESS~~ ~~by Mordra Morgaelin*");
 		say("     Within the pages of this handwritten book are many "
 			"references to devices of destructive power. Amongst them are "
@@ -54660,7 +54712,7 @@ void Func0638 object#(0x638) () {
 			"explains what seems to be a far simpler method of dispatching the "
 			"noble monarch.");
 	}
-	if (var0000 == QUALITY_BOOK_LIGHT_UNTIL_DAWN) {
+	if (quality == QUALITY_BOOK_LIGHT_UNTIL_DAWN) {
 		say("~~ ~~THE LIGHT UNTIL DAWN~~ ~~by Drennal*");
 		say("     Herein is the short book that discusses both moons of "
 			"Britannia, Trammel and Felucca, in detail, explaining their "
@@ -54672,13 +54724,13 @@ void Func0638 object#(0x638) () {
 			"quickly learns that the changes have little affect on anything or "
 			"anyone.");
 	}
-	if (var0000 == QUALITY_BOOK_CODAVAR) {
+	if (quality == QUALITY_BOOK_CODAVAR) {
 		say("~~ ~~CODAVAR~~ ~~by Nexa*");
 		say("     Within the pages of this novel is the parable of an usurping "
 			"lord seemingly inspired by Blackthorn's tyrranical rule during "
 			"Lord British's disappearance more than two hundred years ago.");
 	}
-	if (var0000 == QUALITY_BOOK_RITUAL_MAGIC) {
+	if (quality == QUALITY_BOOK_RITUAL_MAGIC) {
 		say("~~ ~~RITUAL MAGIC~~ ~~by Nicodemus*");
 		say("     The ability to combine one's power with that of another "
 			"mage's is fundamental to the casting of enchantments. While "
@@ -54691,7 +54743,7 @@ void Func0638 object#(0x638) () {
 			"within one of the five corners of a pentagram drawn from the dust "
 			"of a dragon's thigh bone...");
 	}
-	if (var0000 == QUALITY_BOOK_PATHWAYS_OF_PLANAR_TRAVEL) {
+	if (quality == QUALITY_BOOK_PATHWAYS_OF_PLANAR_TRAVEL) {
 		say("~~ ~~PATHWAYS OF PLANAR TRAVEL~~ ~~by Nicodemus*");
 		say("     Herein are the many complex formulae necessary for travel "
 			"between and through the many diverse planes of existence. Each "
@@ -54706,7 +54758,7 @@ void Func0638 object#(0x638) () {
 			"into our fair lands at their whimsy? A thought to be considered "
 			"for the future.");
 	}
-	if (var0000 == QUALITY_BOOK_ENCHANTING_ITEMS_FOR_HOUSEHOLD_USE) {
+	if (quality == QUALITY_BOOK_ENCHANTING_ITEMS_FOR_HOUSEHOLD_USE) {
 		say("~~ ~~ENCHANTING ITEMS FOR HOUSEHOLD USE~~ ~~by Nicodemus*");
 		say("     Found upon the pages of this tome are many a recipe for the "
 			"creation of \"mundane\" magic utensils and apparatuses, including "
@@ -54719,12 +54771,12 @@ void Func0638 object#(0x638) () {
 			"BLADES. It would seem that this mage was not conjuring with all "
 			"of his reagents.");
 	}
-	if (var0000 == QUALITY_BOOK_MISCELLANEOUS_CANTRIPS) {
+	if (quality == QUALITY_BOOK_MISCELLANEOUS_CANTRIPS) {
 		say("~~ ~~MISCELLANEOUS CANTRIPS~~ ~~Anonymous*");
 		say("     As the title says, this book describes the minor spells that "
 			"fall into the bailiwick of charlatans and prestidigitators.");
 	}
-	if (var0000 == QUALITY_BOOK_MODERN_NECROMANCY) {
+	if (quality == QUALITY_BOOK_MODERN_NECROMANCY) {
 		say("~~ ~~MODERN NECROMANCY~~ ~~by Horance*");
 		say("     The author of this poetic treatise attempts to show how "
 			"necromancy has been maligned throughout the years and explains "
@@ -54733,7 +54785,7 @@ void Func0638 object#(0x638) () {
 			"art of returning life to a dead companion, known as "
 			"resurrection.");
 	}
-	if (var0000 == QUALITY_BOOK_SYMBOLOGY_OF_RUNES) {
+	if (quality == QUALITY_BOOK_SYMBOLOGY_OF_RUNES) {
 		say("~~ ~~THE SYMBOLOGY OF RUNES~~ ~~by Smidgeon the Green*");
 		say("     Found within is the complete dictionary of terms for "
 			"understanding and translating runes. In addition, the work "
@@ -54741,62 +54793,62 @@ void Func0638 object#(0x638) () {
 			"the intense text within, it would seem that the author is either "
 			"a profound dolt or a simple genius.");
 	}
-	if (var0000 == QUALITY_BOOK_BUNK_AND_STOOL) {
+	if (quality == QUALITY_BOOK_BUNK_AND_STOOL) {
 		say("~~ ~~THE BUNK AND STOOL");
 		say("~~ ~~Register*");
 		say("~ ~Dosklin of Vesper~~Lord Shamino~~Erstran of Moonglow~~Aaron of "
 			"Britain~~Karman of Buccaneer's Den~~The Avatar...");
 	}
-	if (var0000 == QUALITY_BOOK_MODEST_DAMSEL) {
+	if (quality == QUALITY_BOOK_MODEST_DAMSEL) {
 		say("~~ ~~THE MODEST DAMSEL");
 		say("~~ ~~Register*");
 		say("~ ~Sir Dupre~~Lord Iolo~~Rasmereng of Britain~~Hetteth of "
 			"Paws~~Dukat of New Magincia~~Newon of Britain...");
 	}
-	if (var0000 == QUALITY_BOOK_CHECQUERED_CORK) {
+	if (quality == QUALITY_BOOK_CHECQUERED_CORK) {
 		say("~~ ~~THE CHECQUERED CORK");
 		say("~~ ~~Register*");
 		say("~ ~Sars of Yew~~Lord Shamino~~Sir Dupre~~Keth of "
 			"Moonglow~~Darek~~ Vinder of Jhelom...");
 	}
-	if (var0000 == QUALITY_BOOK_HONORABLE_HOUND) {
+	if (quality == QUALITY_BOOK_HONORABLE_HOUND) {
 		say("~~ ~~THE HONORABLE HOUND");
 		say("~~ ~~Register*");
 		say("~ ~Walter of Britain~~Jaffe of Yew~~Jaana~~Atans of Serpent's "
 			"Hold...");
 	}
-	if (var0000 == QUALITY_BOOK_OUTNINN) {
+	if (quality == QUALITY_BOOK_OUTNINN) {
 		say("~~ ~~THE OUT'N'INN");
 		say("~~ ~~Register*");
 		say("~ ~Tyors of Britain~~Kellin of Buccaneer's Den~~Sir Dupre~~Wentok "
 			"of Trinsic~~Uberak of Minok...");
 	}
-	if (var0000 == QUALITY_BOOK_WAYFARERERS_INN) {
+	if (quality == QUALITY_BOOK_WAYFARERERS_INN) {
 		say("~~ ~~THE WAYFARERER'S INN");
 		say("~~ ~~Register*");
 		say("~ ~John-Paul of Serpent's Hold~~Horffe of Serpent's "
 			"Hold~~Featherbank of Moonglow~~Tervis of Buccaneer's Den~~Lord "
 			"Shamino...");
 	}
-	if (var0000 == QUALITY_BOOK_FALLEN_VIRGIN) {
+	if (quality == QUALITY_BOOK_FALLEN_VIRGIN) {
 		say("~~ ~~THE FALLEN VIRGIN");
 		say("~~ ~~Register*");
 		say("~ ~Carson of Minoc~~Lord Iolo~~Lady Gwenno~~Yethrod of "
 			"Britain~~Addom of Yew...");
 	}
-	if (var0000 == QUALITY_BOOK_BRITANNIAN_MINING_COMPANY_LOG) {
+	if (quality == QUALITY_BOOK_BRITANNIAN_MINING_COMPANY_LOG) {
 		say("BRITANNIAN MINING COMPANY ~~ ~~log.");
 		say("... Iron Ore -- 30 tons~~Lead -- 24 tons~~Iron Ore -- 27 tons~~ "
 			"B.R. -- 2 tons~~Lead -- 14 tons~~Lead -- 37 tons~~Iron Ore -- 26 "
 			"tons ~~B.R. -- 3 tons~~Iron Ore -- 31 tons...");
 	}
-	if (var0000 == QUALITY_BOOK_SALTY_DOG) {
+	if (quality == QUALITY_BOOK_SALTY_DOG) {
 		say("~~ ~~THE SALTY DOG");
 		say("~~ ~~Register*");
 		say("~ ~Addom of Yew~~The Avatar~~Jalal of Britain~~Tim of Yew~~Blorn "
 			"of Vesper~~Sir Dupre~~Penelope of Cove...");
 	}
-	if (var0000 == QUALITY_BOOK_GUIDE_TO_CHILDCARE) {
+	if (quality == QUALITY_BOOK_GUIDE_TO_CHILDCARE) {
 		say("~~ ~~A GUIDE TO CHILDCARE FOR THE RICH AND FAMOUS~~ ~~by Lady M "
 			"~~ ~~with love for Samantha Meng Ling*");
 		say("     Within is the extensive guide for nannies, describing "
@@ -54807,7 +54859,7 @@ void Func0638 object#(0x638) () {
 			"who may be reading) the effects of hurling soiled diapers at "
 			"one's enemies.");
 	}
-	if (var0000 == QUALITY_BOOK_ALAGNERS_BOOK_OF_MARVELOUS_THINGS) {
+	if (quality == QUALITY_BOOK_ALAGNERS_BOOK_OF_MARVELOUS_THINGS) {
 		say("~~ ~~ ~~ALAGNER'S BOOK OF MARVELOUS AND ASTONISHING THINGS");
 		say("~~A compiled volume of items of interest both magical and "
 			"mundane~~by Alagner*");
@@ -54938,12 +54990,12 @@ void Func0638 object#(0x638) () {
 			"magically triggered by the approaching close approach of any "
 			"creature.");
 	}
-	if (var0000 == QUALITY_BOOK_BATHS_PROFITS) {
+	if (quality == QUALITY_BOOK_BATHS_PROFITS) {
 		say("BATHS - PROFITS~~...April, 0360 - 9000~May, 0360 - 8700~June, "
 			"0360 - 8300~July, 0360 - 8000~August, 0630 - 6300~September, 0630 "
 			"- 7600~ October, 0360 - 10,000...~...January, 0361 - 9600");
 	}
-	if (var0000 == QUALITY_BOOK_HISTORY_OF_STONEGATE) {
+	if (quality == QUALITY_BOOK_HISTORY_OF_STONEGATE) {
 		say("~~ ~~THE HISTORY OF STONEGATE~~ ~~by Shazle*");
 		say("     The story of Stonegate Castle is, indeed, an interesting "
 			"one. At one time the keep was occupied by the Shadowlords, during "
@@ -54963,7 +55015,7 @@ void Func0638 object#(0x638) () {
 			"residence amongst the ruins, along with an ancient wizard, but no "
 			"one has ever confirmed\ttheir existence.");
 	}
-	if (var0000 == QUALITY_BOOK_WAY_OF_THE_SWALLOW) {
+	if (quality == QUALITY_BOOK_WAY_OF_THE_SWALLOW) {
 		say("~~ ~~THE WAY OF THE SWALLOW~~ ~~by Foiles*");
 		say("     Within the pages of this tome lies the story of a mother who "
 			"loved, and was deeply loved by, her family. Though the work ends "
@@ -54971,7 +55023,7 @@ void Func0638 object#(0x638) () {
 			"the knowledge that her inner spirit has found a better place to "
 			"rest.");
 	}
-	if (var0000 == QUALITY_BOOK_VETRONS_GUIDE_TO_WEAPONS_AND_ARMOUR) {
+	if (quality == QUALITY_BOOK_VETRONS_GUIDE_TO_WEAPONS_AND_ARMOUR) {
 		say("~~ ~~VETRONS GUIDE TO WEAPONS AND ARMOUR~~ ~~Their effectiveness "
 			"and value*");
 		say("Here is listed, for easy comparison, the various weapons and "
@@ -55002,7 +55054,7 @@ void Func0638 object#(0x638) () {
 			"unique items, or legendary items. Their usefulness in combat has "
 			"not yet been explored fully.");
 	}
-	if (var0000 == QUALITY_BOOK_VARGAZS_STORIES_OF_LEGEND) {
+	if (quality == QUALITY_BOOK_VARGAZS_STORIES_OF_LEGEND) {
 		say("~~ ~~VARGAZ'S STORIES OF LEGEND~~Reasons why one should never "
 			"build doors facing north or west.*");
 		say("     Many centuries ago, the prophet, Father Antos, foretold the "
@@ -55023,7 +55075,7 @@ void Func0638 object#(0x638) () {
 			"more likely to invade households with doors that directly cross "
 			"their paths... ");
 	}
-	if (var0000 == QUALITY_BOOK_ONE_HUNDRED_AND_ONE_WAYS_TO_CHEAT_AT_NIM) {
+	if (quality == QUALITY_BOOK_ONE_HUNDRED_AND_ONE_WAYS_TO_CHEAT_AT_NIM) {
 		say("~~ ~~ONE HUNDRED AND ONE WAYS TO CHEAT AT NIM~~ ~~by Dr. Cat*");
 		say("     Within the pages of this tome are all the many ways to earn "
 			"supplementary gold by gambling at Nim. Written by the originator "
@@ -55031,7 +55083,7 @@ void Func0638 object#(0x638) () {
 			"as, \"claw first, question later\" and \"there are no ways to "
 			"skin a cat.\"");
 	}
-	if (var0000 == QUALITY_BOOK_PLAY_DIRECTING) {
+	if (quality == QUALITY_BOOK_PLAY_DIRECTING) {
 		say("~~ ~~PLAY DIRECTING: ANALYSIS, COMMUNICATION AND STYLE~~ ~~by "
 			"Francis Hodge*");
 		say("     Within the pages of this highly respected textbook one can "
@@ -55040,14 +55092,14 @@ void Func0638 object#(0x638) () {
 			"university in a distant land, this book is considered by most "
 			"thespians as the definitive source book on directing.");
 	}
-	if (var0000 == QUALITY_BOOK_ON_ACTING) {
+	if (quality == QUALITY_BOOK_ON_ACTING) {
 		say("~~ ~~ON ACTING~~ ~~by Laurence Olivier*");
 		say("     Within the pages of this tome are the theories and "
 			"philosophies of acting, as well as personal anecdotes, written by "
 			"a noted thespian of a distant land. Apparently this book was one "
 			"of the many brought to Britannia by Lord British.");
 	}
-	if (var0000 == QUALITY_BOOK_THOU_ART_WHAT_THEE_EATS) {
+	if (quality == QUALITY_BOOK_THOU_ART_WHAT_THEE_EATS) {
 		say("~~ ~~THOU ART WHAT THEE EATS~~ ~~by Fordras*");
 		say("     Within these pages thou wilt find the comparitive analysis "
 			"of many of things we, humans, place in our bodies in the name of "
@@ -55077,7 +55129,7 @@ void Func0638 object#(0x638) () {
 			"and thou truly hast a wonderful feast!~     For a second course, "
 			"I would suggest...");
 	}
-	if (var0000 == QUALITY_BOOK_MAN_VERSUS_FISH) {
+	if (quality == QUALITY_BOOK_MAN_VERSUS_FISH) {
 		say("~~ ~~MAN VERSUS FISH: THE ULTIMATE CONFLICT~~ ~~by Aquastyr*");
 		say("     Thou might consider fishing to be an activity designed "
 			"simply to feed thy familty. Daily thou takest thy fishing pole "
@@ -55105,7 +55157,7 @@ void Func0638 object#(0x638) () {
 			"unwillingly into the waiting bucket.~");
 		say("     And then, the process must begin anew...");
 	}
-	if (var0000 == QUALITY_BOOK_KNIGHTS_BRIDGE_IN_A_NUTSHELL) {
+	if (quality == QUALITY_BOOK_KNIGHTS_BRIDGE_IN_A_NUTSHELL) {
 		say("~~ ~~KNIGHT'S BRIDGE IN A NUTSHELL~~ ~~by Nicodemus*");
 		say("     This is a board game for two players.  Each player begins "
 			"with three pieces. The object is to move thy three pieces in "
@@ -55128,7 +55180,7 @@ void Func0638 object#(0x638) () {
 		say("To win the game, a player must \"push\" the treasure to the back "
 			"row of squares on his side of the board.");
 	}
-	if (var0000 == QUALITY_BOOK_MEMPTO_RAYS) {
+	if (quality == QUALITY_BOOK_MEMPTO_RAYS) {
 		say("~~ ~~MEMPTO RAYS~~A qualitative study in metaparaphilosophical "
 			"radiation~~ ~~by Mempto*");
 		say("     Despite Felcrodan's theory of 0335, there are, indeed, rays "
@@ -55140,7 +55192,7 @@ void Func0638 object#(0x638) () {
 			"ability numerous times, once killing an entire boulder in a "
 			"matter of a few hours. It is my recommendation...");
 	}
-	if (var0000 == QUALITY_BOOK_BOOK_OF_CIRCLES) {
+	if (quality == QUALITY_BOOK_BOOK_OF_CIRCLES) {
 		say("~~ ~~THE BOOK OF CIRCLES~~ ~~Translated from Gargish to "
 			"Britannian by Jillian*");
 		say("     All begins with the three principles: Control, Passion and "
@@ -55163,7 +55215,7 @@ void Func0638 object#(0x638) () {
 		say("     Our society is the same. It, too, continues forever, with "
 			"all members (and all virtues) equeal parts of the unified whole.");
 	}
-	if (var0000 == QUALITY_BOOK_CHICKEN_RAISING) {
+	if (quality == QUALITY_BOOK_CHICKEN_RAISING) {
 		say("~~ ~~CHICKEN RAISING~~ ~~by Daheness Gon*");
 		say("     While handling chickens is a relatively easy task, as is "
 			"collecting eggs, there are several pieces of information that "
@@ -55180,7 +55232,7 @@ void Func0638 object#(0x638) () {
 			"not be concerned if more time is necessary for thy hens to create "
 			"more of their offspring.");
 	}
-	if (var0000 == QUALITY_BOOK_ART_OF_FIELD_DRESSING) {
+	if (quality == QUALITY_BOOK_ART_OF_FIELD_DRESSING) {
 		say("~~ ~~THE ART OF FIELD DRESSING~~ ~~by Creston~Forward by Lady "
 			"Leigh*");
 		say("     Though I personally advocate the use of healing herbs and "
@@ -55202,7 +55254,7 @@ void Func0638 object#(0x638) () {
 			"ready to travel again (though I advise this travel to be to the "
 			"house of a competent healer!).");
 	}
-	if (var0000 == QUALITY_BOOK_WATER_ON_THE_CAT) {
+	if (quality == QUALITY_BOOK_WATER_ON_THE_CAT) {
 		say("~~ ~~WATER ON THE CAT~~ ~~by Mowze*");
 		say("     (This text is a humorous diatribe, and should be taken as "
 			"nothing more than such. Any of the following activities should "
@@ -55219,7 +55271,7 @@ void Func0638 object#(0x638) () {
 			"parents DO often anger quickly when their offspring is "
 			"threatened.");
 	}
-	if (var0000 == QUALITY_BOOK_SHORT_TREATISE_ON_BRITANNIAN_SOCIETY) {
+	if (quality == QUALITY_BOOK_SHORT_TREATISE_ON_BRITANNIAN_SOCIETY) {
 		say("~~ ~~A SHORT TREATISE ON BRITANNIAN SOCIETY~~ ~~by Clayton*");
 		say("     The hierarchy of the peoples of Britannia follows a "
 			"traditional order. Though little here is meant to be law, the "
@@ -55240,7 +55292,7 @@ void Func0638 object#(0x638) () {
 		say("     Much of the impact upon our economic system has come "
 			"from...");
 	}
-	if (var0000 == QUALITY_BOOK_BAKERS_HANDBOOK) {
+	if (quality == QUALITY_BOOK_BAKERS_HANDBOOK) {
 		say("~~ ~~A BAKER'S HANDBOOK~~ ~~by Settlar*");
 		say("     The fundamentals for baking all come from knowledge of how "
 			"to perform one simple task: baking bread. If thou art able to do "
@@ -55258,7 +55310,7 @@ void Func0638 object#(0x638) () {
 		say("     Now, the next item will prove a true treat for thy loved "
 			"ones...");
 	}
-	if (var0000 == QUALITY_BOOK_LOGBOOK_ASTELLERON) {
+	if (quality == QUALITY_BOOK_LOGBOOK_ASTELLERON) {
 		say("~~ Logbook~~ Astelleron*");
 		say("... I have grown lonely here on the island. Despite my golems, I "
 			"have no one with whom I can converse, no one with any "
@@ -55296,7 +55348,7 @@ void Func0638 object#(0x638) () {
 			"can hear them discussing weather! I must go now and talk with "
 			"them. Oddly enough, the sky no longer seems overcast...");
 	}
-	if (var0000 == QUALITY_BOOK_GOLEMS_FROM_CLAY_TO_STONE) {
+	if (quality == QUALITY_BOOK_GOLEMS_FROM_CLAY_TO_STONE) {
 		say("~~ ~~GOLEMS: FROM CLAY TO STONE~~ ~~by Castadon*");
 		say("... Stone golems can be created from any hard rock. However, it "
 			"is important to note that the enchantments require they be "
@@ -55325,7 +55377,7 @@ void Func0638 object#(0x638) () {
 			"investigation quite worth while. For additional information, see "
 			"\"The Stone of Castambre,\" by MacCuth.");
 	}
-	if (var0000 == QUALITY_BOOK_STONE_OF_CASTAMBRE) {
+	if (quality == QUALITY_BOOK_STONE_OF_CASTAMBRE) {
 		say("~~ ~~THE STONE OF CASTAMBRE~~ ~~by MacCuth*");
 		say("     Legendary rock? Perhaps. Powerful relic? Definitely.~The "
 			"Stone Of Castambre -- named for the mage who is rumored to have "
@@ -55356,11 +55408,11 @@ void Func0638 object#(0x638) () {
 			"thou must perform magicks beyonds the abilities of normal men. "
 			"With a ... thou must..........");
 		UI_close_gumps();
-		var0001 = script item {
-			call Func0638;
+		result = script item {
+			call FuncBookAlt;
 		};
 	}
-	if (var0000 == QUALITY_BOOK_STONE_OF_CASTAMBRE2) {
+	if (quality == QUALITY_BOOK_STONE_OF_CASTAMBRE2) {
 		say("... Once the the \"heart\" has been placed within the \"chest\" "
 			"of the creature, the ritual may begin. First, using perhaps the "
 			"same pick, thou must strike the Tree hard enough to draw blood. "
@@ -55381,18 +55433,18 @@ void Func0638 object#(0x638) () {
 		say("     Now that the creature is enchanted, of course, it will "
 			"become necessary to instruct it, much as one educates a child. "
 			"However, a stone golem will learn much more quickly...");
-		var var0002 = set_item_quality(QUALITY_BOOK_STONE_OF_CASTAMBRE);
+		var result = set_item_quality(QUALITY_BOOK_STONE_OF_CASTAMBRE);
 		if (!gflags[PAGE_FELL_FROM_BOOK]) {
-			var var0003 = UI_create_new_object(SHAPE_SCROLL);
-			var var0004 = var0003->set_item_quality(QUALITY_SCROLL_OF_CASTAMBRE);
-			var var0005 = UI_update_last_created(AVATAR->get_object_position());
+			var scroll = UI_create_new_object(SHAPE_SCROLL);
+			var result1 = scroll->set_item_quality(QUALITY_SCROLL_OF_CASTAMBRE);
+			var result2 = UI_update_last_created(AVATAR->get_object_position());
 		}
-		var var0006 = script AVATAR {
+		var result3 = script AVATAR {
 			nohalt;
-			call Func0638;
+			call FuncBookAlt;
 		};
 	}
-	if (var0000 == QUALITY_BOOK_DARK_CORE_OF_EXODUS) {
+	if (quality == QUALITY_BOOK_DARK_CORE_OF_EXODUS) {
 		say("~~ ~~THE DARK CORE OF EXODUS~~ ~~by Erethian*");
 		say("    Exodus was a mixture of etherial being and magical mechanism. "
 			"Its living portion, or psyche, was comprised of its ambitions, "
@@ -55407,13 +55459,13 @@ void Func0638 object#(0x638) () {
 		say("    Exodus served none other than...");
 		say("~~(The text remains unfinished.)");
 	}
-	if (var0000 == QUALITY_BOOK_ETHICAL_HEDONISM) {
+	if (quality == QUALITY_BOOK_ETHICAL_HEDONISM) {
 		say("~~ ~~Ethical Hedonism~~ ~~by R. Allen G.*");
 		say("    This handbook details a non-religous religion in which people "
 			"live for the joy of living and make it their responsibility to "
 			"keep the entire world out of disrepair.");
 	}
-	if (var0000 == QUALITY_BOOK_CONVERTING_MOONGATES) {
+	if (quality == QUALITY_BOOK_CONVERTING_MOONGATES) {
 		say("~~ ~~CONVERTING MOONGATES TO THINE OWN USE~~ ~~by Erethian*");
 		say("    Moongates come in four known varieties: blue, a gate across a "
 			"land, red, a gate connecting worlds, black, a gate that traverses "
@@ -55459,7 +55511,7 @@ void Func063A object#(0x63A) () {
 		var var0000 = UI_get_array_size(UI_get_party_list());
 		var var0001 = UI_die_roll(1, 4);
 		if (var0001 == 1) {
-			Func0940(SPEECH_GUARDIAN_BEST_NOT_DO);
+			startSpeech(SPEECH_GUARDIAN_BEST_NOT_DO);
 		}
 		if (var0000 == 1) {
 			return;
@@ -55476,29 +55528,38 @@ void Func063A object#(0x63A) () {
 	}
 }
 
-void Func063C object#(0x63C) () {
+/**
+ * Unfades palette from black and locks nearby doors.
+ * Used when jailing the Avatar.
+ */
+void scriptedLockJailDoor object#(0x63C) () {
 	UI_fade_palette(12 * TICK, 1, FADE_FROM_BLACK);
-	var var0000 = AVATAR->find_nearby(SHAPE_DOOR_EW_BOTTOM, 6, MASK_NONE);
-	if (var0000) {
-		var var0001 = script var0000 after 1 ticks {
+	var nearbyDoors = AVATAR->find_nearby(SHAPE_DOOR_EW_BOTTOM, 6, MASK_NONE);
+	if (nearbyDoors) {
+		var result = script nearbyDoors after 1 ticks {
 			call FuncDoorNsRight;
 			frame FRAME_DOOR_JAIL_LOCKED;
 		};
 	}
 }
 
-void Func063D object#(0x63D) () {
+/**
+ * Called by the engine instead of normal dialog when copy protection
+ * has failed.
+ * Makes the NPC spew forth nonsense dialog.
+ */
+void onCopyProtectionFailedDialog object#(0x63D) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = get_npc_number();
+		var npcId = get_npc_number();
 		// NOTE: Original game had a limit of 256 true NPCs. So this means
 		// this function needs changes in Exult.
-		if (var0000 < -XORINIA) {
-			var0000->show_npc_face(DEFAULT_FACE);
-			var var0001 = 0;
-			while (var0001 < 10) {
-				var var0002 = Func086F();
-				say("\"", var0002, "\"");
-				var0001 += 1;
+		if (npcId < -XORINIA) {
+			npcId->show_npc_face(DEFAULT_FACE);
+			var index = 0;
+			while (index < 10) {
+				var line = generateRandomDialog();
+				say("\"", line, "\"");
+				index += 1;
 			}
 		}
 	}
@@ -55570,7 +55631,7 @@ void Func063F object#(0x63F) () {
 		wait 2;
 		nohalt;
 		call Func0716;
-		call Func0636;
+		call unfadePaletteFinishTeleport;
 	};
 	UI_fade_palette(12 * TICK, 1, FADE_TO_BLACK);
 }
@@ -57163,7 +57224,7 @@ void Func0669 object#(0x669) () {
 				UI_sprite_effect(
 						ANIMATION_SPARKLES, var0007.x, var0007.y, 0, 0, 0,
 						LOOP_ONCE);
-				Func093F(var0005, DANCE);
+				setNpcSchedule(var0005, DANCE);
 				var0005->set_item_flag(IN_ACTION);
 				var var0008 = [
 					"@Dance!@", "@Yeah!@", "@Huh!@", "@Oh, yeah!@",
@@ -58560,7 +58621,7 @@ void Func0687 object#(0x687) () {
 
 void Func0688 object#(0x688) () {
 	if (event == SCRIPTED) {
-		Func093F(item, WANDER);
+		setNpcSchedule(item, WANDER);
 		clear_item_flag(IN_ACTION);
 	}
 }
@@ -60466,7 +60527,7 @@ void Func06B8 object#(0x6B8) () {
 					call Func061F;
 				};
 				var0004->halt_scheduled();
-				Func093F(var0004, DANCE);
+				setNpcSchedule(var0004, DANCE);
 				var0007 = script var0004 after var0001 ticks {
 					nohalt;
 					call Func06B8;
@@ -60475,7 +60536,7 @@ void Func06B8 object#(0x6B8) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		Func093F(item, FOLLOW_AVATAR);
+		setNpcSchedule(item, FOLLOW_AVATAR);
 	}
 }
 
@@ -60553,7 +60614,7 @@ void Func06BB object#(0x6BB) () {
 			if (var0004 != AVATAR->get_npc_object()) {
 				if (!UI_roll_to_win(var0004->get_npc_prop(INTELLIGENCE), 15)) {
 					var0004->halt_scheduled();
-					Func093F(var0004, IN_COMBAT);
+					setNpcSchedule(var0004, IN_COMBAT);
 					var0004->set_attack_mode(FLEE);
 					var0004->set_oppressor(AVATAR);
 					var var0005 = script var0004 after var0000 ticks {
@@ -60565,7 +60626,7 @@ void Func06BB object#(0x6BB) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		Func093F(item, FOLLOW_AVATAR);
+		setNpcSchedule(item, FOLLOW_AVATAR);
 	}
 }
 
@@ -60580,7 +60641,7 @@ void Func06BC object#(0x6BC) () {
 		}
 		for (var0004 in var0001) {
 			if (!var0004->get_item_flag(IN_PARTY)) {
-				Func093F(var0004, IN_COMBAT);
+				setNpcSchedule(var0004, IN_COMBAT);
 				var0004->clear_item_flag(ASLEEP);
 			}
 		}
@@ -60709,7 +60770,7 @@ void Func06C0 object#(0x6C0) () {
 		for (var0003 in var0000) {
 			var var0004 = var0003->get_schedule_type();
 			if (!(var0004 == IN_COMBAT)) {
-				Func093F(var0003, IN_COMBAT);
+				setNpcSchedule(var0003, IN_COMBAT);
 			}
 		}
 	}
@@ -60825,10 +60886,10 @@ void Func06C6 object#(0x6C6) () {
 			gflags[PAWS_SETUP] = true;
 		}
 		if (gflags[PAWS_SETUP] && (!gflags[STREET_TROUBLE])) {
-			Func093F(FERIDWYN->get_npc_object(), TALK);
+			setNpcSchedule(FERIDWYN->get_npc_object(), TALK);
 		}
 		if (gflags[FERIDWYN_ACCUSED_TOBIAS] && (!gflags[CAMILLE_PLEADS])) {
-			Func093F(CAMILLE->get_npc_object(), TALK);
+			setNpcSchedule(CAMILLE->get_npc_object(), TALK);
 		}
 	}
 }
@@ -60837,7 +60898,7 @@ void Func06C7 object#(0x6C7) () {
 	if (event == EGG) {
 		var var0000 = [WILLIAM, BURNSIDE, ELYNOR, GREGOR, OWEN];
 		for (var0003 in var0000) {
-			Func093F(var0003, LOITER);
+			setNpcSchedule(var0003, LOITER);
 		}
 	}
 }
@@ -60846,7 +60907,7 @@ void Func06C8 object#(0x6C8) () {
 	if (event == EGG) {
 		var var0000 = [SEARA, JULIA, GLADSTONE];
 		for (var0003 in var0000) {
-			Func093F(var0003, LOITER);
+			setNpcSchedule(var0003, LOITER);
 		}
 	}
 }
@@ -60855,7 +60916,7 @@ void Func06C9 object#(0x6C9) () {
 	if (event == EGG) {
 		var var0000 = [JAKHER, KARENNA];
 		for (var0003 in var0000) {
-			Func093F(var0003, LOITER);
+			setNpcSchedule(var0003, LOITER);
 		}
 	}
 }
@@ -60864,7 +60925,7 @@ void Func06CA object#(0x6CA) () {
 	if (event == EGG) {
 		var var0000 = [ZORN, XANTHIA, RUTHERFORD];
 		for (var0003 in var0000) {
-			Func093F(var0003, LOITER);
+			setNpcSchedule(var0003, LOITER);
 		}
 	}
 }
@@ -60981,7 +61042,7 @@ void Func06D6 object#(0x6D6) () {
 void Func06D7 object#(0x6D7) () {
 	if (event == EGG) {
 		if (gflags[MET_TIME_LORD]) {
-			Func0940(SPEECH_GUARDIAN_DONT_TRUST_TIME_LORD);
+			startSpeech(SPEECH_GUARDIAN_DONT_TRUST_TIME_LORD);
 			remove_item();
 		}
 	}
@@ -60990,7 +61051,7 @@ void Func06D7 object#(0x6D7) () {
 void Func06D8 object#(0x6D8) () {
 	if (event == EGG) {
 		if (gflags[WISP_READ_NOTEBOOK]) {
-			Func0940(SPEECH_GUARDIAN_THANKS_NOTEBOOK);
+			startSpeech(SPEECH_GUARDIAN_THANKS_NOTEBOOK);
 			remove_item();
 		}
 	}
@@ -60999,7 +61060,7 @@ void Func06D8 object#(0x6D8) () {
 void Func06D9 object#(0x6D9) () {
 	if (event == EGG) {
 		if (gflags[CHEST_QUEST]) {
-			Func0940(SPEECH_GUARDIAN_TRAP_WARNING);
+			startSpeech(SPEECH_GUARDIAN_TRAP_WARNING);
 			remove_item();
 		}
 	}
@@ -64317,55 +64378,66 @@ void Func0717 object#(0x717) () {
 	Func0838(item);
 }
 
-void Func0800 id#(0x800) (var var0000) {
+/**
+ * Handles interaction with bed objects.
+ *
+ * @param bedObj The bed that was double-clicked.
+ */
+void handleBedInteraction id#(0x800) (var bedObj) {
 	UI_close_gumps();
 	gflags[INSIDE_PUT_THE_AVATAR_TO_BED] = false;
-	var var0001 = getNearbyPartyMember();
+	var partyNpc = getNearbyPartyMember();
 	if (UI_in_combat()) {
-		var0001->show_npc_face(DEFAULT_FACE);
-		var var0002 = var0001->get_npc_name();
-		if (var0001 == AVATAR) {
+		partyNpc->show_npc_face(DEFAULT_FACE);
+		var name = partyNpc->get_npc_name();
+		if (partyNpc == AVATAR) {
 			say("\"This is no time to sleep! Look alive!\"");
 		} else {
-			say(var0002, " glares. \"This is no time to sleep! Look alive!\"");
+			say(name, " glares. \"This is no time to sleep! Look alive!\"");
 		}
-		if (Func0801(var0000)) {
-			var0000->Func0624();
+		if (isBedroll(bedObj)) {
+			bedObj->rollBedroll();
 		}
-		var0001->hide();
+		partyNpc->hide();
 	} else {
-		var var0003 = var0000->get_item_frame();
-		var var0004 = var0000->get_item_shape();
-		if (var0003 > 3 && !Func0801(var0000)) {
-			struct<Position> var0005 = var0000->get_object_position();
-			var var0006 = var0000->find_nearby(var0004, 2, MASK_NONE);
-			for (var0009 in var0006) {
-				if (var0009->get_item_frame() <= 2) {
-					struct<Position> var000A = var0009->get_object_position();
-					if (var000A.x == var0005.x
-						&& (var000A.y == var0005.y
-							&& (var000A.z + 1) == var0005.z)) {
-						var0000 = var0009;
+		var frameNum = bedObj->get_item_frame();
+		var shapeNum = bedObj->get_item_shape();
+		if (frameNum > 3 && !isBedroll(bedObj)) {
+			struct<Position> bedPos = bedObj->get_object_position();
+			var bedList = bedObj->find_nearby(shapeNum, 2, MASK_NONE);
+			for (bed in bedList) {
+				if (bed->get_item_frame() <= 2) {
+					struct<Position> objPos = bed->get_object_position();
+					if (objPos.x == bedPos.x
+						&& (objPos.y == bedPos.y
+							&& (objPos.z + 1) == bedPos.z)) {
+						bedObj = bed;
 					}
 				}
 			}
 		}
-		if (Func0801(item)) {
-			var var000B = script AVATAR {
+		if (isBedroll(item)) {
+			var result = script AVATAR {
 				nohalt;
 				music MUSIC_CAMPING, PLAY_ONCE;
 			};
 		}
-		var var000C = filterArray(AVATAR->get_npc_object(), UI_get_party_list());
+		var filteredParty = filterArray(AVATAR->get_npc_object(), UI_get_party_list());
 		AVATAR->set_schedule_type(SLEEP);
-		var0000->nap_time();
+		bedObj->nap_time();
 	}
 }
 
-var Func0801 id#(0x801) (var var0000) {
-	var var0001 = var0000->get_item_frame();
-	var var0002 = var0000->get_item_shape();
-	if (var0001 == FRAME_BED_ROLL && var0002 == SHAPE_BED) {
+/**
+ * Checks if the object is a bedroll.
+ *
+ * @param obj Object to be tested.
+ * @returns True if the input is a bedroll.
+ */
+var isBedroll id#(0x801) (var obj) {
+	var frameNum = obj->get_item_frame();
+	var shapeNum = obj->get_item_shape();
+	if (frameNum == FRAME_BED_ROLL && shapeNum == SHAPE_BED) {
 		return true;
 	}
 	return false;
@@ -65297,7 +65369,7 @@ void Func0824 id#(0x824) (var var0000) {
 		PARTY->move_object(Func0823(var0000));
 		var var0004 = script AVATAR {
 			nohalt;
-			call Func0636;
+			call unfadePaletteFinishTeleport;
 		};
 	}
 }
@@ -65627,7 +65699,7 @@ var Func082E id#(0x82E) (var var0000) {
 				var000D->remove_item();
 			}
 			if (var000D) {
-				Func0940(SPEECH_GUARDIAN_MOMENT_OF_TRUTH);
+				startSpeech(SPEECH_GUARDIAN_MOMENT_OF_TRUTH);
 			}
 		} else {
 			for (var000D in var0001) {
@@ -66719,35 +66791,71 @@ var Func0849 id#(0x849) (var var0000) {
 	return 0;
 }
 
-void Func084A id#(0x84A) () {
-	var var0000 = 1;
-	var var0001 =
-			[0x0193, 0x0193, 0x0193, 0x0193, 0x019B, 0x019B, 0x019B, 0x019B];
-	var var0002 =
-			[0x0132, 0x0135, 0x013B, 0x013E, 0x0132, 0x0135, 0x013B, 0x013E];
-	var var0003 = [2, 2, 2, 2, 0, 0, 0, 0];
-	var var0004 = UI_get_party_list();
-	for (var0007 in var0004) {
-		struct<Position> var0008 = var0001[var0000];
-		var0008 &= var0002[var0000];
-		var0008 &= var0003[var0000];
-		var0000 += 1;
-		var var0009
-				= var0007->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
-		for (var000C in var0009) {
-			var var000D = var000C->set_last_created();
-			if (var000D) {
-				var000D = UI_update_last_created(var0008);
+/**
+ * Teleports the party's gear to court.
+ */
+void teleportPartyGearToCourt id#(0x84A) () {
+	var index = 1;
+	var coordsX = [
+		0x193,
+		0x193,
+		0x193,
+		0x193,
+		0x19B,
+		0x19B,
+		0x19B,
+		0x19B
+	];
+	var coordsY = [
+		0x132,
+		0x135,
+		0x13B,
+		0x13E,
+		0x132,
+		0x135,
+		0x13B,
+		0x13E
+	];
+	var coordsZ = [
+		2,
+		2,
+		2,
+		2,
+		0,
+		0,
+		0,
+		0
+	];
+	var partyList = UI_get_party_list();
+	for (npc in partyList) {
+		struct<Position> position = coordsX[index];
+		position &= coordsY[index];
+		position &= coordsZ[index];
+		index += 1;
+		var npcItems = npc->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+		for (obj in npcItems) {
+			var result = obj->set_last_created();
+			if (result) {
+				result = UI_update_last_created(position);
 			}
 		}
 	}
 }
 
-var Func084B id#(0x84B) (var var0000) {
-	var var0001 = UI_input_numeric_value(0, var0000, 1, var0000 / 2);
-	if (var0001 >= 50 && var0001 >= (var0000 / 2)) {
-		var var0002 = UI_remove_party_items(
-				var0001, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
+/**
+ * Handles whether an offered bribe is accepted or not.
+ * The bribe must be at least 50 gold, and at least half of the
+ * input amount.
+ * If the bribe is accepted, the gold is taken from the party.
+ *
+ * @param totalGold How much gold the party has.
+ * @returns `true` if the bribe was accepted, `false` otherwise.
+ */
+var offerBribeToGuard id#(0x84B) (var totalGold) {
+	var offeredAmount = UI_input_numeric_value(0, totalGold, 1, totalGold / 2);
+	if (offeredAmount >= 50 && offeredAmount >= (totalGold / 2)) {
+		var result = UI_remove_party_items(
+				offeredAmount, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 		return true;
 	}
 	return false;
@@ -68492,8 +68600,11 @@ void Func0864 id#(0x864) () {
 	var0000->item_say(var0002);
 }
 
-var Func0865 id#(0x865) () {
-	var var0000
+/**
+ * Select a random themed pair of singular/plural nouns (set 1).
+ */
+var getRandomNoun1 id#(0x865) () {
+	var fragments
 			= "soup"
 			  & ("*"
 				 & ("eruption"
@@ -68502,14 +68613,14 @@ var Func0865 id#(0x865) () {
 						  & ("*"
 							 & ("bureaucracy"
 								& ("bureaucracies" & ("tractor" & "*"))))))));
-	var0000 &= "Socialism"
+	fragments &= "Socialism"
 			   & ("*"
 				  & ("Capitalism"
 					 & ("*"
 						& ("hammer"
 						   & ("*"
 							  & ("sickle" & ("*" & ("imperialism" & "*"))))))));
-	var0000 &= "crankshaft"
+	fragments &= "crankshaft"
 			   & ("*"
 				  & ("carbuerator"
 					 & ("*"
@@ -68522,17 +68633,20 @@ var Func0865 id#(0x865) () {
 										  & ("sloop"
 											 & ("*"
 												& ("barge" & "*"))))))))))));
-	var var0001 = UI_die_roll(1, UI_get_array_size(var0000) / 2);
-	var var0002 = var0000[var0001 * 2 - 1];
-	var var0003 = var0000[var0001 * 2];
-	if (var0003 == "*") {
-		var0003 = var0002 + "s";
+	var random = UI_die_roll(1, UI_get_array_size(fragments) / 2);
+	var nounSingular = fragments[random * 2 - 1];
+	var nounPlural = fragments[random * 2];
+	if (nounPlural == "*") {
+		nounPlural = nounSingular + "s";
 	}
-	return [var0002, var0003];
+	return [nounSingular, nounPlural];
 }
 
-var Func0866 id#(0x866) () {
-	var var0000
+/**
+ * Select a random themed pair of singular/plural nouns (set 2).
+ */
+var getRandomNoun2 id#(0x866) () {
+	var fragments
 			= "batting cage"
 			  & ("*"
 				 & ("flagstaff"
@@ -68546,7 +68660,7 @@ var Func0866 id#(0x866) () {
 										 & ("sycophant"
 											& ("*"
 											   & ("demagouge" & "*"))))))))))));
-	var0000 &= "prophet"
+	fragments &= "prophet"
 			   & ("*"
 				  & ("profit"
 					 & ("*"
@@ -68554,7 +68668,7 @@ var Func0866 id#(0x866) () {
 						   & ("pus"
 							  & ("mulch"
 								 & ("mulch" & ("Garden Gnome" & "*"))))))));
-	var0000 &= "personal crisis"
+	fragments &= "personal crisis"
 			   & ("personal crises"
 				  & ("wit"
 					 & ("*"
@@ -68570,17 +68684,20 @@ var Func0866 id#(0x866) () {
 												   & ("*"
 													  & ("baloon payment"
 														 & "*"))))))))))))));
-	var var0001 = UI_die_roll(1, UI_get_array_size(var0000) / 2);
-	var var0002 = var0000[var0001 * 2 - 1];
-	var var0003 = var0000[var0001 * 2];
-	if (var0003 == "*") {
-		var0003 = var0002 + "s";
+	var random = UI_die_roll(1, UI_get_array_size(fragments) / 2);
+	var nounSingular = fragments[random * 2 - 1];
+	var nounPlural = fragments[random * 2];
+	if (nounPlural == "*") {
+		nounPlural = nounSingular + "s";
 	}
-	return [var0002, var0003];
+	return [nounSingular, nounPlural];
 }
 
-var Func0867 id#(0x867) () {
-	var var0000 = "constipated"
+/**
+ * Pick two random adjectives from a curated list.
+ */
+var getRandomAdjective1 id#(0x867) () {
+	var fragments = "constipated"
 				  & ("fractal"
 					 & ("dysfuctional"
 						& ("dyslexic"
@@ -68590,7 +68707,7 @@ var Func0867 id#(0x867) () {
 									& ("obtuse"
 									   & ("obese"
 										  & ("partisan" & "bilateral")))))))));
-	var0000 &= "symmetrical"
+	fragments &= "symmetrical"
 			   & ("frontal"
 				  & ("superfluous"
 					 & ("super-saturated"
@@ -68603,7 +68720,7 @@ var Func0867 id#(0x867) () {
 										  & ("suicidal"
 											 & ("comforting"
 												& "passive")))))))))));
-	var0000 &= "hedonisitic"
+	fragments &= "hedonisitic"
 			   & ("pagan"
 				  & ("philanthropic"
 					 & ("operatic"
@@ -68616,15 +68733,18 @@ var Func0867 id#(0x867) () {
 										  & ("imperialist"
 											 & ("Gumpy"
 												& "co-dependent")))))))))));
-	var var0001 = UI_die_roll(1, UI_get_array_size(var0000));
-	var var0002 = var0000[var0001];
-	var0001 = UI_die_roll(1, UI_get_array_size(var0000));
-	var var0003 = var0000[var0001];
-	return [var0002, var0003];
+	var random = UI_die_roll(1, UI_get_array_size(fragments));
+	var adjective1 = fragments[random];
+	random = UI_die_roll(1, UI_get_array_size(fragments));
+	var adjective2 = fragments[random];
+	return [adjective1, adjective2];
 }
 
-var Func0868 id#(0x868) () {
-	var var0000 = "lactate"
+/**
+ * Pick a random verb triple (present, past, continuous) (set 1).
+ */
+var getRandomVerb1 id#(0x868) () {
+	var fragments = "lactate"
 				  & ("lactated"
 					 & ("lactating"
 						& ("grovel"
@@ -68638,7 +68758,7 @@ var Func0868 id#(0x868) () {
 												& ("*"
 												   & ("complain"
 													  & ("*" & "*")))))))))))));
-	var0000 &= "gump"
+	fragments &= "gump"
 			   & ("*"
 				  & ("*"
 					 & ("guffaw"
@@ -68647,7 +68767,7 @@ var Func0868 id#(0x868) () {
 							  & ("loiter"
 								 & ("*"
 									& ("*" & ("solicit" & ("*" & "*"))))))))));
-	var0000 &= "represent"
+	fragments &= "represent"
 			   & ("*"
 				  & ("*"
 					 & ("conjugate"
@@ -68669,26 +68789,29 @@ var Func0868 id#(0x868) () {
 																	 & ("sued"
 																		& "suin"
 																		  "g")))))))))))))))))));
-	var0000 &= "gyrate"
+	fragments &= "gyrate"
 			   & ("gyreated"
 				  & ("gyrating"
 					 & ("outstrech"
 						& ("*" & ("*" & ("deflower" & ("*" & "*")))))));
-	var var0001 = UI_die_roll(1, UI_get_array_size(var0000) / 3);
-	var var0002 = var0000[var0001 * 3 - 2];
-	var var0003 = var0000[var0001 * 3 - 1];
-	var var0004 = var0000[var0001 * 3];
-	if (var0003 == "*") {
-		var0003 = var0002 + "ed";
+	var random = UI_die_roll(1, UI_get_array_size(fragments) / 3);
+	var verbPresent = fragments[random * 3 - 2];
+	var verbPast = fragments[random * 3 - 1];
+	var verbContinuous = fragments[random * 3];
+	if (verbPast == "*") {
+		verbPast = verbPresent + "ed";
 	}
-	if (var0004 == "*") {
-		var0004 = var0002 + "ing";
+	if (verbContinuous == "*") {
+		verbContinuous = verbPresent + "ing";
 	}
-	return [var0002, var0003, var0004];
+	return [verbPresent, verbPast, verbContinuous];
 }
 
-var Func0869 id#(0x869) () {
-	var var0000
+/**
+ * Pick a random verb triple (present, past, continuous) (set 2).
+ */
+var getRandomVerb2 id#(0x869) () {
+	var fragments
 			= "collate"
 			  & ("collated"
 				 & ("collating"
@@ -68708,7 +68831,7 @@ var Func0869 id#(0x869) () {
 														   & ("conjured"
 															  & "conjurin"
 																"g"))))))))))))))));
-	var0000 &= "campaign"
+	fragments &= "campaign"
 			   & ("*"
 				  & ("*"
 					 & ("protest"
@@ -68722,7 +68845,7 @@ var Func0869 id#(0x869) () {
 											 & ("*"
 												& ("censor"
 												   & ("*" & "*")))))))))))));
-	var0000 &= "lay off"
+	fragments &= "lay off"
 			   & ("laid off"
 				  & ("laying off"
 					 & ("irradiate"
@@ -68730,46 +68853,55 @@ var Func0869 id#(0x869) () {
 						   & ("irradiating"
 							  & ("martinize"
 								 & ("martinized" & "martinizing")))))));
-	var var0001 = UI_die_roll(1, UI_get_array_size(var0000) / 3);
-	var var0002 = var0000[var0001 * 3 - 2];
-	var var0003 = var0000[var0001 * 3 - 1];
-	var var0004 = var0000[var0001 * 3];
-	if (var0003 == "*") {
-		var0003 = var0002 + "ed";
+	var random = UI_die_roll(1, UI_get_array_size(fragments) / 3);
+	var verbPresent = fragments[random * 3 - 2];
+	var verbPast = fragments[random * 3 - 1];
+	var verbContinuous = fragments[random * 3];
+	if (verbPast == "*") {
+		verbPast = verbPresent + "ed";
 	}
-	if (var0004 == "*") {
-		var0004 = var0002 + "ing";
+	if (verbContinuous == "*") {
+		verbContinuous = verbPresent + "ing";
 	}
-	return [var0002, var0003, var0004];
+	return [verbPresent, verbPast, verbContinuous];
 }
 
-var Func086A id#(0x86A) () {
-	var var0000
+/**
+ * Pick a random clause/phrase fragment (set 1).
+ */
+var getRandomClause1 id#(0x86A) () {
+	var fragments
 			= "between the sheets"
 			  & ("with a melon"
 				 & ("assuredly" & ("above your house" & "below the ground")));
-	var0000 &= "with much consternation"
+	fragments &= "with much consternation"
 			   & ("Gumpily"
 				  & ("fiscally" & ("similarilly" & "throughout the universe")));
-	var var0001 = UI_die_roll(1, UI_get_array_size(var0000));
-	var var0002 = var0000[var0001];
-	return var0002;
+	var random = UI_die_roll(1, UI_get_array_size(fragments));
+	var clause = fragments[random];
+	return clause;
 }
 
-var Func086B id#(0x86B) () {
-	var var0000 = "without my knowledge"
+/**
+ * Pick a random clause/phrase fragment (set 2).
+ */
+var getRandomClause2 id#(0x86B) () {
+	var fragments = "without my knowledge"
 				  & ("without the proper documentation"
 					 & ("though the ages" & "against all odds"));
-	var0000 &= "with your mother"
+	fragments &= "with your mother"
 			   & ("in a roundabout manner"
 				  & ("implicitly" & ("explicitly" & "anxiously")));
-	var var0001 = UI_die_roll(1, UI_get_array_size(var0000));
-	var var0002 = var0000[var0001];
-	return var0002;
+	var random = UI_die_roll(1, UI_get_array_size(fragments));
+	var clause = fragments[random];
+	return clause;
 }
 
-var Func086C id#(0x86C) () {
-	var var0000
+/**
+ * Select a random themed pair of singular/plural nouns (set 3).
+ */
+var getRandomNoun3 id#(0x86C) () {
+	var fragments
 			= "armadillo"
 			  & ("*"
 				 & ("octopus"
@@ -68783,7 +68915,7 @@ var Func086C id#(0x86C) () {
 										 & ("weasel"
 											& ("*"
 											   & ("bassalope" & "*"))))))))))));
-	var0000 &= "platypus"
+	fragments &= "platypus"
 			   & ("platypuses"
 				  & ("no-see-um"
 					 & ("*"
@@ -68793,7 +68925,7 @@ var Func086C id#(0x86C) () {
 								 & ("*"
 									& ("thundermoose"
 									   & ("*" & ("llama" & "*"))))))))));
-	var0000 &= "iguana"
+	fragments &= "iguana"
 			   & ("*"
 				  & ("reptile"
 					 & ("*"
@@ -68801,17 +68933,20 @@ var Func086C id#(0x86C) () {
 						   & ("*"
 							  & ("mammal"
 								 & ("*" & ("invertebrate" & "*"))))))));
-	var var0001 = UI_die_roll(1, UI_get_array_size(var0000) / 2);
-	var var0002 = var0000[var0001 * 2 - 1];
-	var var0003 = var0000[var0001 * 2];
-	if (var0003 == "*") {
-		var0003 = var0002 + "s";
+	var random = UI_die_roll(1, UI_get_array_size(fragments) / 2);
+	var nounSingular = fragments[random * 2 - 1];
+	var nounPlural = fragments[random * 2];
+	if (nounPlural == "*") {
+		nounPlural = nounSingular + "s";
 	}
-	return [var0002, var0003];
+	return [nounSingular, nounPlural];
 }
 
-var Func086D id#(0x86D) () {
-	var var0000
+/**
+ * Select a random themed pair of singular/plural nouns (set 4).
+ */
+var getRandomNoun4 id#(0x86D) () {
+	var fragments
 			= "dicot"
 			  & ("*"
 				 & ("conifer"
@@ -68830,7 +68965,7 @@ var Func086D id#(0x86D) () {
 														& ("*"
 														   & ("Basque"
 															  & "*"))))))))))))))));
-	var0000 &= "Gypsy"
+	fragments &= "Gypsy"
 			   & ("Gypsies"
 				  & ("Serb"
 					 & ("*"
@@ -68851,17 +68986,20 @@ var Func086D id#(0x86D) () {
 																  & ("rock "
 																	 "critic"
 																	 & "*"))))))))))))))))));
-	var var0001 = UI_die_roll(1, UI_get_array_size(var0000) / 2);
-	var var0002 = var0000[var0001 * 2 - 1];
-	var var0003 = var0000[var0001 * 2];
-	if (var0003 == "*") {
-		var0003 = var0002 + "s";
+	var random = UI_die_roll(1, UI_get_array_size(fragments) / 2);
+	var nounSingular = fragments[random * 2 - 1];
+	var nounPlural = fragments[random * 2];
+	if (nounPlural == "*") {
+		nounPlural = nounSingular + "s";
 	}
-	return [var0002, var0003];
+	return [nounSingular, nounPlural];
 }
 
-var Func086E id#(0x86E) () {
-	var var0000
+/**
+ * Pick a single random adjective from a pool (set 2).
+ */
+var getRandomAdjective2 id#(0x86E) () {
+	var fragments
 			= "studmuffin"
 			  & ("creampuff"
 				 & ("homeboy"
@@ -68880,275 +69018,278 @@ var Func086E id#(0x86E) () {
 														& ("smartypants"
 														   & "Spankamia"
 															 "h")))))))))))))));
-	var var0001 = UI_die_roll(1, UI_get_array_size(var0000));
-	var var0002 = var0000[var0001];
-	return var0002;
+	var random = UI_die_roll(1, UI_get_array_size(fragments));
+	var adjective = fragments[random];
+	return adjective;
 }
 
-var Func086F id#(0x86F) () {
-	declare var var0000;
+/**
+ * Generate a randomized dialog line assembled from fragments.
+ */
+var generateRandomDialog id#(0x86F) () {
+	declare var result;
 	if (UI_die_roll(0, 3)) {
 		if (UI_die_roll(0, 1)) {
-			var0000 = Func0865();
+			result = getRandomNoun1();
 		} else {
-			var0000 = Func0866();
+			result = getRandomNoun2();
 		}
 	} else if (UI_die_roll(0, 1)) {
-		var0000 = Func086C();
+		result = getRandomNoun3();
 	} else {
-		var0000 = Func086D();
+		result = getRandomNoun4();
 	}
-	var var0001 = var0000[1];
-	var var0002 = var0000[2];
-	declare var var0003;
+	var nounSingular = result[1];
+	var nounPlural = result[2];
+	declare var noun2;
 	if (UI_die_roll(0, 1)) {
-		var0003 = Func0865();
+		noun2 = getRandomNoun1();
 	} else {
-		var0003 = Func0866();
+		noun2 = getRandomNoun2();
 	}
-	declare var var0004;
+	declare var noun3;
 	if (UI_die_roll(0, 1)) {
-		var0004 = Func0865();
+		noun3 = getRandomNoun1();
 	} else {
-		var0004 = Func0866();
+		noun3 = getRandomNoun2();
 	}
-	declare var var0005;
+	declare var noun4;
 	if (UI_die_roll(0, 1)) {
-		var0005 = Func0865();
+		noun4 = getRandomNoun1();
 	} else {
-		var0005 = Func0866();
+		noun4 = getRandomNoun2();
 	}
-	var0005 = var0005[2];
-	var0000 = Func0867();
-	var var0006 = var0000[1];
-	var var0007 = var0000[2];
+	noun4 = noun4[2];
+	result = getRandomAdjective1();
+	var adjective1 = result[1];
+	var adjective2 = result[2];
 	if (UI_die_roll(0, 1)) {
-		var0000 = Func0868();
+		result = getRandomVerb1();
 	} else {
-		var0000 = Func0869();
+		result = getRandomVerb2();
 	}
-	var var0008 = var0000[1];
-	var var0009 = var0000[2];
-	var var000A = var0000[3];
-	declare var var000B;
+	var verbPresent = result[1];
+	var verbPast = result[2];
+	var verbContinuous = result[3];
+	declare var clause;
 	if (UI_die_roll(0, 1)) {
-		var000B = Func086A();
+		clause = getRandomClause1();
 	} else {
-		var000B = Func086B();
+		clause = getRandomClause2();
 	}
 	if (UI_die_roll(0, 1)) {
-		var0000 = Func086C();
+		result = getRandomNoun3();
 	} else {
-		var0000 = Func086D();
+		result = getRandomNoun4();
 	}
-	var var000C = var0000[1];
-	var var000D = var0000[2];
-	var var000E = Func086E();
-	declare var var000F;
-	var0000 = UI_die_roll(0, 36);
-	if (var0000 == 0) {
-		var000F = "I'll show you my " + var0006 + " " + var0001
+	var noun5 = result[1];
+	var noun6 = result[2];
+	var adjective3 = getRandomAdjective2();
+	declare var dialog;
+	result = UI_die_roll(0, 36);
+	if (result == 0) {
+		dialog = "I'll show you my " + adjective1 + " " + nounSingular
 				  + " if you show me yours.";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "All of my " + var0006 + " " + var0002 + " are " + var000A
-				  + " " + var000B + ".";
+	result -= 1;
+	if (result == 0) {
+		dialog = "All of my " + adjective1 + " " + nounPlural + " are " + verbContinuous
+				  + " " + clause + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Stop " + var000A + " my " + var0006 + " " + var0001
+	result -= 1;
+	if (result == 0) {
+		dialog = "Stop " + verbContinuous + " my " + adjective1 + " " + nounSingular
 				  + ", please.";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Have you seen my " + var0001 + "? It's " + var000A + " "
-				  + var000B + ".";
+	result -= 1;
+	if (result == 0) {
+		dialog = "Have you seen my " + nounSingular + "? It's " + verbContinuous + " "
+				  + clause + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "There is no " + var0001 + " for you today, little " + var000C
+	result -= 1;
+	if (result == 0) {
+		dialog = "There is no " + nounSingular + " for you today, little " + noun5
 				  + ", only death.";
 	}
-	var0000 -= 1;
-	declare var var0010;
-	if (var0000 == 0) {
-		var0010 = UI_a_or_an(var0006);
-		var000F = "Am I having " + var0010 + " " + var0006 + " " + var0001
+	result -= 1;
+	declare var aOrAn;
+	if (result == 0) {
+		aOrAn = UI_a_or_an(adjective1);
+		dialog = "Am I having " + aOrAn + " " + adjective1 + " " + nounSingular
 				  + " yet?";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var0010 = UI_a_or_an(var0006);
-		var000F = "Where is my attorney? I need " + var0010 + " " + var0006
-				  + " " + var0001 + " right away.";
+	result -= 1;
+	if (result == 0) {
+		aOrAn = UI_a_or_an(adjective1);
+		dialog = "Where is my attorney? I need " + aOrAn + " " + adjective1
+				  + " " + nounSingular + " right away.";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "You saved my " + var0006 + " " + var000C + " from " + var0001
-				  + ", " + var000E + ". How can I ever repay you?";
+	result -= 1;
+	if (result == 0) {
+		dialog = "You saved my " + adjective1 + " " + noun5 + " from " + nounSingular
+				  + ", " + adjective3 + ". How can I ever repay you?";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var0010 = UI_a_or_an(var0001);
-		var000F = "^" + var0010 + " " + var0001 + ", " + var0010 + " " + var0001
-				  + ", my kingdom for " + var0010 + " " + var0001 + "!";
+	result -= 1;
+	if (result == 0) {
+		aOrAn = UI_a_or_an(nounSingular);
+		dialog = "^" + aOrAn + " " + nounSingular + ", " + aOrAn + " " + nounSingular
+				  + ", my kingdom for " + aOrAn + " " + nounSingular + "!";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var0010 = UI_a_or_an(var0001);
-		var000F = "Frankly, my dear, I don't give " + var0010 + " " + var0001
+	result -= 1;
+	if (result == 0) {
+		aOrAn = UI_a_or_an(nounSingular);
+		dialog = "Frankly, my dear, I don't give " + aOrAn + " " + nounSingular
 				  + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "As " + var0002 + " are my witness, I'll never go " + var0006
+	result -= 1;
+	if (result == 0) {
+		dialog = "As " + nounPlural + " are my witness, I'll never go " + adjective1
 				  + " again.";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Oh my, " + var000E
+	result -= 1;
+	if (result == 0) {
+		dialog = "Oh my, " + adjective3
 				  + ", I don't think we're in Kansas anymore.";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "May I borrow your " + var0001 + "? Mine seems to be "
-				  + var0006 + " " + var000B + ".";
+	result -= 1;
+	if (result == 0) {
+		dialog = "May I borrow your " + nounSingular + "? Mine seems to be "
+				  + adjective1 + " " + clause + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "My " + var000D + " are " + var000A + " " + var000B + ".";
+	result -= 1;
+	if (result == 0) {
+		dialog = "My " + noun6 + " are " + verbContinuous + " " + clause + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "You shall know the " + var0001 + " and the " + var0001
-				  + " shall make you " + var0006 + ".";
+	result -= 1;
+	if (result == 0) {
+		dialog = "You shall know the " + nounSingular + " and the " + nounSingular
+				  + " shall make you " + adjective1 + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var0010 = UI_a_or_an(var000C);
-		var000F = "Thou shalt not " + var0008 + " to " + var0010 + " " + var000C
-				  + ", " + var000E + ".";
+	result -= 1;
+	if (result == 0) {
+		aOrAn = UI_a_or_an(noun5);
+		dialog = "Thou shalt not " + verbPresent + " to " + aOrAn + " " + noun5
+				  + ", " + adjective3 + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Honor thy father and thy " + var0001 + ", " + var000E + ".";
+	result -= 1;
+	if (result == 0) {
+		dialog = "Honor thy father and thy " + nounSingular + ", " + adjective3 + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Thou shalt not covet thy neighbor's " + var0001 + ", "
-				  + var000E + ".";
+	result -= 1;
+	if (result == 0) {
+		dialog = "Thou shalt not covet thy neighbor's " + nounSingular + ", "
+				  + adjective3 + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var0010 = UI_a_or_an(var0001);
-		var000F = "Neither a borrower nor " + var0010 + " " + var0001 + " be.";
+	result -= 1;
+	if (result == 0) {
+		aOrAn = UI_a_or_an(nounSingular);
+		dialog = "Neither a borrower nor " + aOrAn + " " + nounSingular + " be.";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Never " + var0008 + " a gift " + var000C + " in the "
-				  + var0001 + ".";
+	result -= 1;
+	if (result == 0) {
+		dialog = "Never " + verbPresent + " a gift " + noun5 + " in the "
+				  + nounSingular + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "A fool and his " + var0001 + " are soon " + var0006 + ".";
+	result -= 1;
+	if (result == 0) {
+		dialog = "A fool and his " + nounSingular + " are soon " + adjective1 + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Workers of the world, " + var0008
-				  + "! You have nothing to lose but your " + var0002 + "!";
+	result -= 1;
+	if (result == 0) {
+		dialog = "Workers of the world, " + verbPresent
+				  + "! You have nothing to lose but your " + nounPlural + "!";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Ich bin ein " + var0001 + "er.";
+	result -= 1;
+	if (result == 0) {
+		dialog = "Ich bin ein " + nounSingular + "er.";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Damn the " + var0002 + "! ^" + var0006 + " speed ahead!";
+	result -= 1;
+	if (result == 0) {
+		dialog = "Damn the " + nounPlural + "! ^" + adjective1 + " speed ahead!";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Ask not what your " + var0006 + " " + var0001
-				  + " can do for you, but what you can do for your " + var0006
-				  + " " + var0001 + ".";
+	result -= 1;
+	if (result == 0) {
+		dialog = "Ask not what your " + adjective1 + " " + nounSingular
+				  + " can do for you, but what you can do for your " + adjective1
+				  + " " + nounSingular + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "^" + var000E + "! " + var000E + "! You damn " + var000C
+	result -= 1;
+	if (result == 0) {
+		dialog = "^" + adjective3 + "! " + adjective3 + "! You damn " + noun5
 				  + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Let me just remind you that the " + var0002 + " of "
-				  + var0003 + " may be more " + var0006 + " than they appear.";
+	result -= 1;
+	if (result == 0) {
+		dialog = "Let me just remind you that the " + nounPlural + " of "
+				  + noun2 + " may be more " + adjective1 + " than they appear.";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Destroy your " + var0006 + " and " + var0007
-				  + " life before it is too late, " + var000E + ".";
+	result -= 1;
+	if (result == 0) {
+		dialog = "Destroy your " + adjective1 + " and " + adjective2
+				  + " life before it is too late, " + adjective3 + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var0010 = UI_a_or_an(var0006);
-		var var0011 = UI_a_or_an(var0001);
-		var000F = "My head feels like " + var0010 + " " + var0006 + " with "
-				  + var0011 + " " + var0001 + " pointed at it.";
+	result -= 1;
+	if (result == 0) {
+		aOrAn = UI_a_or_an(adjective1);
+		var aOrAn2 = UI_a_or_an(nounSingular);
+		dialog = "My head feels like " + aOrAn + " " + adjective1 + " with "
+				  + aOrAn2 + " " + nounSingular + " pointed at it.";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "Beautiful, " + var000E + ", I'll have my " + var0001
-				  + " call your " + var0001 + ".";
+	result -= 1;
+	if (result == 0) {
+		dialog = "Beautiful, " + adjective3 + ", I'll have my " + nounSingular
+				  + " call your " + nounSingular + ".";
 	}
-	var0000 -= 1;
-	if (var0000 == 0) {
-		var000F = "No thank you, I'm watching my " + var0001 + " intake.";
+	result -= 1;
+	if (result == 0) {
+		dialog = "No thank you, I'm watching my " + nounSingular + " intake.";
 	}
-	var0000 -= 1;
-	declare var var0012;
-	if (var0000 >= 0) {
-		var0010 = UI_a_or_an(var0006);
-		var0012 = "Ode to " + var0010 + " " + var0006 + " " + var0001 + ". ";
-		if (var0000 == 0) {
-			var000F = "O how the " + var000D + " of " + var0001 + " " + var0008
-					  + " " + var000B + " amidst the " + var0006 + " " + var0003
+	result -= 1;
+	declare var leadIn;
+	if (result >= 0) {
+		aOrAn = UI_a_or_an(adjective1);
+		leadIn = "Ode to " + aOrAn + " " + adjective1 + " " + nounSingular + ". ";
+		if (result == 0) {
+			dialog = "O how the " + noun6 + " of " + nounSingular + " " + verbPresent
+					  + " " + clause + " amidst the " + adjective1 + " " + noun2
 					  + ".";
 		}
-		var0000 -= 1;
-		if (var0000 == 0) {
-			var0010 = UI_a_or_an(var0006);
-			var000F = "Shall I compare thee to " + var0010 + " " + var0006 + " "
-					  + var0001 + "? Thou art far more " + var0007 + ".";
+		result -= 1;
+		if (result == 0) {
+			aOrAn = UI_a_or_an(adjective1);
+			dialog = "Shall I compare thee to " + aOrAn + " " + adjective1 + " "
+					  + nounSingular + "? Thou art far more " + adjective2 + ".";
 		}
-		var0000 -= 1;
-		if (var0000 == 0) {
-			var var0013 = UI_a_or_an(var0001);
-			var000F = "To be " + var0013 + " " + var0001
-					  + " or not to be. That is the " + var0003
-					  + ". Whether tis nobler in the " + var0004 + " to "
-					  + var0008 + " the " + var0002 + " and " + var0005 + " of "
-					  + var0006 + " " + var0003 + " or...";
+		result -= 1;
+		if (result == 0) {
+			var aOrAn2 = UI_a_or_an(nounSingular);
+			dialog = "To be " + aOrAn2 + " " + nounSingular
+					  + " or not to be. That is the " + noun2
+					  + ". Whether tis nobler in the " + noun3 + " to "
+					  + verbPresent + " the " + nounPlural + " and " + noun4 + " of "
+					  + adjective1 + " " + noun2 + " or...";
 		}
-		var0000 -= 1;
-		if (var0000 == 0) {
-			var000F = "This morning I saw a small " + var0001 + " " + var000A
-					  + " " + var000B + ". How the seasons of " + var0006 + " "
-					  + var0003 + " come and go." + " Death falls upon us all.";
+		result -= 1;
+		if (result == 0) {
+			dialog = "This morning I saw a small " + nounSingular + " " + verbContinuous
+					  + " " + clause + ". How the seasons of " + adjective1 + " "
+					  + noun2 + " come and go." + " Death falls upon us all.";
 		}
-		var0000 -= 1;
-		if (var0000 == 0) {
-			var000F = "Rage, rage against the " + var000A + " of the " + var0001
+		result -= 1;
+		if (result == 0) {
+			dialog = "Rage, rage against the " + verbContinuous + " of the " + nounSingular
 					  + ".";
 		}
-		var0000 -= 1;
-		if (var0000 == 0) {
-			var000F = "Love in the turning " + var0001 + ". The small "
-					  + var000D + " " + var0008 + " " + var000B + ".  The "
-					  + var0006 + " " + var0005 + " whisper their " + var0007
-					  + " muses. Oh, the turning " + var0001 + ".";
+		result -= 1;
+		if (result == 0) {
+			dialog = "Love in the turning " + nounSingular + ". The small "
+					  + noun6 + " " + verbPresent + " " + clause + ".  The "
+					  + adjective1 + " " + noun4 + " whisper their " + adjective2
+					  + " muses. Oh, the turning " + nounSingular + ".";
 		}
-		var0000 -= 1;
+		result -= 1;
 	}
-	return (var0012 + var000F);
+	return leadIn + dialog;
 }
 
 void Func0870 id#(0x870) (var var0000, var var0001, var var0002) {
@@ -77157,13 +77298,23 @@ var Func08F8 id#(0x8F8) (
 	return var000A;
 }
 
-var Func08F9 id#(0x8F9) (
-		struct<Position> var0000, struct<Position> var0001,
-		struct<Position> var0002) {
-	var var0003 = [X, Y, Z];
-	for (var0006 in var0003) {
-		if ((!(var0000[var0006] >= var0001[var0006]))
-			|| (!(var0000[var0006] <= var0002[var0006]))) {
+/**
+ * Tests if given position is within the specified cube.
+ * 'left' vs 'right' refers to monitor position (X)
+ * 'top' vs 'bottom' refers to monitor position (Y)
+ * 'low' vs 'high' is the Z coordinate
+ *
+ * @param position Position to test
+ * @param topLeft The top-left-low corner of the cube
+ * @param topLeft The bottom-right-high corner of the cube
+ */
+var isPointInCube id#(0x8F9) (
+		struct<Position> position, struct<Position> topLeft,
+		struct<Position> bottomRight) {
+	var coordinates = [X, Y, Z];
+	for (coord in coordinates) {
+		if ((!(position[coord] >= topLeft[coord]))
+			|| !(position[coord] <= bottomRight[coord])) {
 			return false;
 		}
 	}
@@ -78385,31 +78536,49 @@ var sortArraysBySecondArray id#(0x93D) (var valueArray, var keyArray) {
 	return valueArray;
 }
 
-var Func093E id#(0x93E) () {
-	struct<Position> var0000 = [0x0390, 0x0810, 0];
-	struct<Position> var0001 = [0x0450, 0x0930, 15];
-	return Func08F9(AVATAR->get_object_position(), var0000, var0001);
+/**
+ * Checks if the Avatar is in Trinsic.
+ */
+var isAvatarInTrinsic id#(0x93E) () {
+	struct<Position> trinsicTopLeft = [0x390, 0x810, 0];
+	struct<Position> trinsicBottomRight = [0x450, 0x930, 15];
+	return isPointInCube(AVATAR->get_object_position(), trinsicTopLeft, trinsicBottomRight);
 }
 
-void Func093F id#(0x93F) (var var0000, var var0001) {
-	var var0002 = UI_get_party_list();
-	if ((getNpcById(var0000) in var0002) && gflags[INSIDE_GENERATOR]) {
+/**
+ * Changes the current schedule for the input NPC.
+ * Does nothing for party members if the Avatar is inside one
+ * of the generators.
+ */
+void setNpcSchedule id#(0x93F) (var npc, var schedule) {
+	var partyList = UI_get_party_list();
+	if ((getNpcById(npc) in partyList) && gflags[INSIDE_GENERATOR]) {
 		return;
 	}
-	var0000->set_schedule_type(var0001);
+	npc->set_schedule_type(schedule);
 }
 
-void Func0940 id#(0x940) (var var0000) {
-	if (!UI_start_speech(var0000)) {
-		NULL_OBJ->Func0614();
+/**
+ * Starts the given speech track, and optionally displays subtitles.
+ *
+ * @param speechNum The speech track to play.
+ */
+void startSpeech id#(0x940) (var speechNum) {
+	if (!UI_start_speech(speechNum)) {
+		NULL_OBJ->showSpeechSubtitlesOverlay();
 	} else {
 		UI_close_gumps();
 	}
 }
 
-void Func0941 id#(0x941) (var var0000) {
-	if (!UI_start_blocking_speech(var0000)) {
-		NULL_OBJ->Func0614();
+/**
+ * Starts the given speech track, and optionally displays subtitles.
+ *
+ * @param speechNum The speech track to play.
+ */
+void startBlockingSpeech id#(0x941) (var speechNum) {
+	if (!UI_start_blocking_speech(speechNum)) {
+		NULL_OBJ->showSpeechSubtitlesOverlay();
 	} else {
 		UI_close_gumps();
 	}

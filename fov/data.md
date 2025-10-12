@@ -8,9 +8,9 @@
 | 0x614    | Speech (voice eggs, party member death)               |
 | 0x622    | Sleep schedule on Avatar                              |
 | 0x625    | Arresting guard usecode                               |
-| 0x638    | Double-click shape 642, if `Quality > 99`             |
 | 0x626    | When objects are destroyed                            |
 | 0x634    | By Sit schedule when sitting down                     |
+| 0x638    | Double-click shape 642, if `Quality > 99`             |
 | 0x63d    | Instead of normal dialog when failing copy protection |
 
 ## Weapon Functions
