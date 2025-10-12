@@ -1451,6 +1451,9 @@ void FuncMetalWallEw shape#(SHAPE_METAL_WALL_EW) () {
 	raiseMetalDoor(item, FuncPortcullisDoorEw);
 }
 
+/**
+ * Handles the Skara Brae laboratory burner.
+ */
 void FuncLaboratoryBurner shape#(SHAPE_LABORATORY_BURNER) () {
 	if (event == DOUBLECLICK) {
 		if (get_item_frame() == FRAME_LAB_BURNER_OFF) {
@@ -1499,9 +1502,9 @@ void FuncLaboratoryBurner shape#(SHAPE_LABORATORY_BURNER) () {
 							&& vialPos.z ==burnerPos.z)) {
 						var deviceList = find_nearby(
 								SHAPE_ALCHEMIST_DEVICE, 5, MASK_NONE);
-						for (devviceObj in deviceList) {
+						for (deviceObj in deviceList) {
 							struct<Position> devicePos
-									= devviceObj->get_object_position();
+									= deviceObj->get_object_position();
 							if (devicePos.x == burnerPos.x + 1
 								&& (devicePos.y == burnerPos.y + 2
 									&& devicePos.z == burnerPos.z + 2)) {
@@ -1528,7 +1531,7 @@ void FuncLaboratoryBurner shape#(SHAPE_LABORATORY_BURNER) () {
 										next frame cycle;
 									};
 								};
-								result = script devviceObj {
+								result = script deviceObj {
 									repeat 3 {
 										next frame cycle;
 									};
@@ -1560,6 +1563,9 @@ void FuncOpenShuttersEw shape#(SHAPE_OPEN_SHUTTERS_EW) () {
 	}
 }
 
+/**
+ * Handles flying a kite.
+ */
 void FuncKite shape#(SHAPE_KITE) () {
 	declare var result;
 	if (in_usecode()) {
@@ -1649,70 +1655,71 @@ void FuncLitLightSource shape#(SHAPE_LIT_LIGHT_SOURCE) () {
 	}
 }
 
+/**
+ * Handles the various potion effects.
+ */
 void FuncPotion shape#(SHAPE_POTION) () {
 	if (event == DOUBLECLICK) {
-		Func08FA(item);
-		var var0000 = get_item_frame();
-		struct<ObjPos> var0001 = UI_click_on_item();
-		var var0002 = var0001->is_npc();
+		handleStealingConsequences(item);
+		var frameNum = get_item_frame();
+		struct<ObjPos> target = UI_click_on_item();
+		var targetIsNpc = target->is_npc();
 		UI_play_sound_effect2(SFX_QUAFF, item);
-		declare var var0003;
-		if (var0002) {
+		declare var random;
+		if (targetIsNpc) {
 			UI_play_sound_effect(SFX_GENERAL_MAGIC);
-			if (var0000 == FRAME_POTION_SLEEP) {
-				var0001->set_item_flag(ASLEEP);
+			if (frameNum == FRAME_POTION_SLEEP) {
+				target->set_item_flag(ASLEEP);
 			}
-			if (var0000 == FRAME_POTION_HEALING) {
-				var0003 = UI_die_roll(3, 12);
-				Func092A(var0001, var0003);
+			if (frameNum == FRAME_POTION_HEALING) {
+				random = UI_die_roll(3, 12);
+				changeHealth(target, random);
 			}
-			if (var0000 == FRAME_POTION_CURING) {
-				var0001->clear_item_flag(POISONED);
-				var0001->clear_item_flag(PARALYZED);
-				var0001->clear_item_flag(ASLEEP);
-				var0001->clear_item_flag(CHARMED);
-				var0001->clear_item_flag(CURSED);
+			if (frameNum == FRAME_POTION_CURING) {
+				target->clear_item_flag(POISONED);
+				target->clear_item_flag(PARALYZED);
+				target->clear_item_flag(ASLEEP);
+				target->clear_item_flag(CHARMED);
+				target->clear_item_flag(CURSED);
 			}
-			if (var0000 == FRAME_POTION_POISON) {
-				var0001->set_item_flag(POISONED);
+			if (frameNum == FRAME_POTION_POISON) {
+				target->set_item_flag(POISONED);
 			}
-			if (var0000 == FRAME_POTION_AWAKEN) {
-				var0001->clear_item_flag(ASLEEP);
-				if (var0001->get_npc_number() == PENUMBRA) {
-					var0001->set_schedule_type(TEND_SHOP);
+			if (frameNum == FRAME_POTION_AWAKEN) {
+				target->clear_item_flag(ASLEEP);
+				if (target->get_npc_number() == PENUMBRA) {
+					target->set_schedule_type(TEND_SHOP);
 				}
 			}
-			if (var0000 == FRAME_POTION_PROTECTION) {
-				var0001->set_item_flag(PROTECTION);
+			if (frameNum == FRAME_POTION_PROTECTION) {
+				target->set_item_flag(PROTECTION);
 			}
-			if (var0000 == FRAME_POTION_LIGHT) {
+			if (frameNum == FRAME_POTION_LIGHT) {
 				UI_cause_light(100);
 			}
-			if (var0000 == FRAME_POTION_INVISIBILITY) {
-				var0001->set_item_flag(INVISIBLE);
+			if (frameNum == FRAME_POTION_INVISIBILITY) {
+				target->set_item_flag(INVISIBLE);
 			}
-			if (var0000 >= FRAME_POTION_MANDRAKE_ESSENCE) {
+			if (frameNum >= FRAME_POTION_MANDRAKE_ESSENCE) {
 				partySpeak("@What is this!@");
 				abort;
 			}
 		} else {
-			var0003 = UI_die_roll(1, 3);
-			if (var0003 == 1) {
-				var var0004 = getPoliteTitle();
+			random = UI_die_roll(1, 3);
+			if (random == 1) {
+				var gender = getPoliteTitle();
 				// BUG: Based on Agil documents, this ought to have been
-				// <var0004> instead of <Gender>. It is likely that var0004 was
-				// called something akin to Gender, likely with a typo, which is
-				// why the string interpolation was never done.
+				// <gender> instead of <Gender>.
 				// TYPO: Should be "please"
-				var var0005 = "@Those are expensive, <Gender>! "
+				var line = "@Those are expensive, <Gender>! "
 							  + "Plese waste them not!@";
-				partySpeak(var0005);
+				partySpeak(line);
 			} else {
-				Func08FD(CURSOR_X_INVALID);
+				flashBlocked(CURSOR_X_INVALID);
 				return;
 			}
 		}
-		Func0925(item);
+		drainQuantity(item);
 	}
 }
 
@@ -3564,7 +3571,7 @@ void FuncLockpick shape#(SHAPE_LOCKPICK) () {
 				return;
 			}
 			var0000->item_say("Pick broke");
-			Func0925(item);
+			drainQuantity(item);
 			return;
 		}
 		var var0006 = [SHAPE_DOOR_EW_BOTTOM, SHAPE_DOOR_NS_RIGHT, SHAPE_DOOR_NS_LEFT, SHAPE_DOOR_EW_TOP];
@@ -3577,7 +3584,7 @@ void FuncLockpick shape#(SHAPE_LOCKPICK) () {
 							var0000->item_say("Unlocked");
 						} else {
 							var0000->item_say("Pick broke");
-							Func0925(item);
+							drainQuantity(item);
 						}
 						return;
 					}
@@ -4897,7 +4904,7 @@ void FuncSleepingPowder shape#(SHAPE_SLEEPING_POWDER) () {
 		} else {
 			partyUtters("@Do not waste that!@");
 		}
-		Func0925(item);
+		drainQuantity(item);
 	}
 }
 
@@ -4935,7 +4942,7 @@ void FuncVenom shape#(SHAPE_VENOM) () {
 			};
 			remove_item();
 		} else {
-			Func08FD(CURSOR_X_INVALID);
+			flashBlocked(CURSOR_X_INVALID);
 		}
 	}
 }
@@ -5603,8 +5610,8 @@ void FuncCannon shape#(SHAPE_CANNON) () {
 			partyUtters("@It needs cannon balls!@");
 			return;
 		}
-		Func0925(var0000[1]);
-		Func0925(var0001[1]);
+		drainQuantity(var0000[1]);
+		drainQuantity(var0001[1]);
 		struct<ObjPos> var0002 = UI_click_on_item();
 		struct<Position> var0003 = get_object_position();
 		var var0004 = var0002.x - var0003.x;
@@ -6447,9 +6454,9 @@ void FuncBaby shape#(SHAPE_BABY) () {
 						 "be a little crowded?@");
 			} else if (var0002 == SHAPE_CRADLE) {
 				var0001->set_item_shape(SHAPE_BABY_IN_A_CRADLE);
-				Func0925(item);
+				drainQuantity(item);
 			} else {
-				Func08FD(CURSOR_X_INVALID);
+				flashBlocked(CURSOR_X_INVALID);
 			}
 		}
 	}
@@ -6976,7 +6983,7 @@ void FuncFlamingOil shape#(SHAPE_FLAMING_OIL) () {
 		}
 		var var0005 = var0000->find_nearby(SHAPE_FLAMING_OIL, 2, MASK_NONE);
 		if (var0005) {
-			Func0925(var0005);
+			drainQuantity(var0005);
 		}
 	}
 }
@@ -7182,7 +7189,7 @@ void FuncInvisibilityDust shape#(SHAPE_INVISIBILITY_DUST) () {
 			partyUtters("@Do not waste that!@");
 		}
 		UI_play_sound_effect2(SFX_WIZARD_MAGIC, item);
-		Func0925(item);
+		drainQuantity(item);
 	}
 }
 
@@ -8514,7 +8521,7 @@ void FuncDiaper shape#(SHAPE_DIAPER) () {
 				set_item_frame(FRAME_DIAPER_DIRTY);
 			} else if (var0001->get_item_shape() == SHAPE_DIAPER) {
 				if (var0001->get_item_frame() == FRAME_DIAPER_BASKET) {
-					Func0925(item);
+					drainQuantity(item);
 				}
 			} else {
 				partyUtters("@Those are for babies.@");
@@ -8526,10 +8533,10 @@ void FuncDiaper shape#(SHAPE_DIAPER) () {
 				var0001->set_schedule_type(IN_COMBAT);
 				var0001->set_attack_mode(FLEE);
 				var0001->set_oppressor(AVATAR);
-				Func0925(item);
+				drainQuantity(item);
 			} else if (var0001->get_item_shape() == SHAPE_DIAPER) {
 				if (var0001->get_item_frame() == FRAME_DIAPER_BASKET) {
-					Func0925(item);
+					drainQuantity(item);
 				}
 			}
 		}
@@ -8616,7 +8623,7 @@ void FuncBandages shape#(SHAPE_BANDAGES) () {
 					var0003 = var0001 - var0002;
 				}
 				var0003 = var0000->set_npc_prop(HEALTH, var0003);
-				Func0925(item);
+				drainQuantity(item);
 			}
 		} else {
 			partyUtters("@Do not soil the bandages.@");
@@ -9120,7 +9127,7 @@ void FuncPoolOfWater shape#(SHAPE_POOL_OF_WATER) () {
 		if (var0000 == QUALITY_POOL_OF_HEALING) {
 			var var0002 = UI_die_roll(1, 10);
 			var var0003 = 13 - var0002;
-			Func092A(var0001, var0003);
+			changeHealth(var0001, var0003);
 		}
 		if (var0000 == QUALITY_POOL_OF_CURING) {
 			var0001->clear_item_flag(POISONED);
@@ -54502,9 +54509,12 @@ void Func0632 object#(0x632) () {
 	}
 }
 
-void Func0633 object#(0x633) () {
+/**
+ * Consequences of stealing: party members complain, maybe leave.
+ */
+void partyStealingConsequences object#(0x633) () {
 	if (event == DOUBLECLICK) {
-		item->Func063A();
+		item->partyComplainsStealing();
 		if (UI_die_roll(1, 8) == 1) {
 			if (DUPRE->get_item_flag(IN_PARTY) && canTalk(DUPRE)) {
 				DUPRE->item_say("@I am leaving!@");
@@ -55522,23 +55532,26 @@ void Func0639 object#(0x639) () {
 	}
 }
 
-void Func063A object#(0x63A) () {
+/**
+ * Makes party complain about the avatar stealing things.
+ */
+void partyComplainsStealing object#(0x63A) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = UI_get_array_size(UI_get_party_list());
-		var var0001 = UI_die_roll(1, 4);
-		if (var0001 == 1) {
+		var partySize = UI_get_array_size(UI_get_party_list());
+		var random = UI_die_roll(1, 4);
+		if (random == 1) {
 			startSpeech(SPEECH_GUARDIAN_BEST_NOT_DO);
 		}
-		if (var0000 == 1) {
+		if (partySize == 1) {
 			return;
 		}
-		if (var0001 == 2) {
+		if (random == 2) {
 			partyUtters("@Must we do this?@");
 		}
-		if (var0001 == 3) {
+		if (random == 3) {
 			partyUtters("@Is that virtuous?@");
 		}
-		if (var0001 == 4) {
+		if (random == 4) {
 			partyUtters("@Avatar?!@");
 		}
 	}
@@ -55683,7 +55696,7 @@ void Func0640 object#(0x640) () {
 		if (is_npc()) {
 			clear_item_flag(ASLEEP);
 		} else {
-			Func08FD(CURSOR_X_INVALID);
+			flashBlocked(CURSOR_X_INVALID);
 		}
 	}
 }
@@ -55751,7 +55764,7 @@ void Func0642 object#(0x642) () {
 			};
 			UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
 		} else {
-			Func08FD(CURSOR_X_INVALID);
+			flashBlocked(CURSOR_X_INVALID);
 		}
 	}
 }
@@ -55892,7 +55905,7 @@ void Func0646 object#(0x646) () {
 				call var0003;
 			};
 		} else {
-			Func08FD(CURSOR_X_INVALID);
+			flashBlocked(CURSOR_X_INVALID);
 		}
 	}
 }
@@ -61208,9 +61221,9 @@ void Func06E0 object#(0x6E0) () {
 			var var0000 = find_nearby(SHAPE_RED_MOONGATE_UNSTABLE_NS, 10, MASK_EGG);
 			var0000 &= find_nearby(SHAPE_BLUE_MOONGATE_NS, 10, MASK_EGG);
 			for (var0003 in var0000) {
-				Func0925(var0003);
+				drainQuantity(var0003);
 			}
-			Func0925(item);
+			drainQuantity(item);
 		}
 	}
 }
@@ -64971,9 +64984,9 @@ void Func0813 id#(0x813) (var var0000, var var0001, var var0002) {
 		if (var0005 > 24) {
 			var0007 = "@No, thank thee.@";
 		} else {
-			Func08FA(var0000);
+			handleStealingConsequences(var0000);
 			UI_play_sound_effect2(var0002, item);
-			Func0925(var0000);
+			drainQuantity(var0000);
 			var var0008 = UI_die_roll(1, 10);
 			if (var0005 <= 4) {
 				if (var0006 <= 4) {
@@ -77457,11 +77470,17 @@ var isPointInCube id#(0x8F9) (
 	return true;
 }
 
-void Func08FA id#(0x8FA) (var var0000) {
-	if ((!var0000->get_item_flag(OKAY_TO_TAKE))
-		&& (!var0000->get_item_flag(IN_DUNGEON))) {
+/**
+ * Determines if the Avatar is stealing the item.
+ * If so, calls guards and makes party members complain or leave.
+ *
+ * @param obj the item potentially being stolen.
+ */
+void handleStealingConsequences id#(0x8FA) (var obj) {
+	if (!obj->get_item_flag(OKAY_TO_TAKE)
+		&& !obj->get_item_flag(IN_DUNGEON)) {
 		UI_call_guards();
-		var0000->Func0633();
+		obj->partyStealingConsequences();
 	}
 }
 
@@ -77477,12 +77496,15 @@ var Func08FC id#(0x8FC) (var var0000, var var0001) {
 	return 0;
 }
 
-void Func08FD id#(0x8FD) (var var0000) {
+/**
+ * Makes mouse flash with given shape and plays a buzzing sound.
+ */
+void flashBlocked id#(0x8FD) (var cursor) {
 	UI_play_sound_effect(SFX_FAIL_BUZZ);
-	if (var0000 > CURSOR_FIRST_INVALID) {
-		var0000 = CURSOR_X;
+	if (cursor > CURSOR_FIRST_INVALID) {
+		cursor = CURSOR_X;
 	}
-	UI_flash_mouse(var0000);
+	UI_flash_mouse(cursor);
 }
 
 /**
@@ -78101,13 +78123,18 @@ var Func0924 id#(0x924) (var var0000, var var0001) {
 	return var0003;
 }
 
-void Func0925 id#(0x925) (var var0000) {
-	var var0001 = var0000->get_item_quantity(AVATAR);
-	if (var0001 <= 1) {
-		var0000->remove_item();
+/**
+ * Drains 1 unit of quantity from the object and deletes it if zero.
+ *
+ * @param obj The obj to use up.
+ */
+void drainQuantity id#(0x925) (var obj) {
+	var quantity = obj->get_item_quantity(AVATAR);
+	if (quantity <= 1) {
+		obj->remove_item();
 	} else {
-		var0001 -= 1;
-		var var0002 = var0000->set_item_quantity(var0001);
+		quantity -= 1;
+		var result = obj->set_item_quantity(quantity);
 	}
 }
 
@@ -78136,7 +78163,7 @@ void Func0926 id#(0x926) (var var0000) {
 }
 
 void Func0927 id#(0x927) (var var0000) {
-	Func08FA(var0000);
+	handleStealingConsequences(var0000);
 	var var0001 = var0000->get_item_frame();
 	if (var0001 == 0) {
 		partySpeak(["I bet that would work much better if thou wouldst put some "
@@ -78166,7 +78193,7 @@ void Func0927 id#(0x927) (var var0000) {
 }
 
 void Func0928 id#(0x928) (var var0000) {
-	Func08FA(var0000);
+	handleStealingConsequences(var0000);
 	var var0001 = var0000->get_item_frame() % 2;
 	if (var0001 == 0) {
 		partySpeak(["I bet that would work much better if thou wouldst put some "
@@ -78214,20 +78241,27 @@ void Func0929 id#(0x929) () {
 			"thy hand and hit somebody with it... Somebody else that is."
 		]);
 	} else {
-		Func08FD(CURSOR_HAND);
+		flashBlocked(CURSOR_HAND);
 	}
 }
 
-void Func092A id#(0x92A) (var var0000, var var0001) {
-	if (var0000->is_npc()) {
-		var var0002 = var0000->get_npc_prop(STRENGTH);
-		var var0003 = var0000->get_npc_prop(HEALTH);
-		if ((var0003 + var0001) < 1) {
-			var0001 = -1 * var0003;
-		} else if ((var0003 + var0001) > var0002) {
-			var0001 = var0002 - var0003;
+/**
+ * Changes the NPC's health by the given amount.
+ * Result is clamped to the range [0, strength].
+ *
+ * @param obj The NPC to change health of.
+ * @delta The amount to change health by.
+ */
+void changeHealth id#(0x92A) (var obj, var delta) {
+	if (obj->is_npc()) {
+		var strength = obj->get_npc_prop(STRENGTH);
+		var health = obj->get_npc_prop(HEALTH);
+		if (health + delta < 1) {
+			delta = -1 * health;
+		} else if (health + delta > strength) {
+			delta = strength - health;
 		}
-		var var0004 = var0000->set_npc_prop(HEALTH, var0001);
+		var result = obj->set_npc_prop(HEALTH, var0001);
 	}
 }
 
@@ -78867,7 +78901,7 @@ void Func0947 id#(0x947) () {
 			if (var000C) {
 				for (var000A in var0007) {
 					if (var000A->get_container()) {
-						Func0925(var000A);
+						drainQuantity(var000A);
 					} else {
 						var000A->clear_item_flag(OKAY_TO_TAKE);
 					}
