@@ -2148,25 +2148,28 @@ void FuncGuard1 shape#(SHAPE_GUARD1) () {
 	}
 }
 
+/**
+ * Handles interaction with mining machine.
+ */
 void FuncMiningMachine shape#(SHAPE_MINING_MACHINE) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
-		var var0000 = find_nearby(SHAPE_CONVEYER_BELT, 10, MASK_NONE);
-		var var0001 = get_item_quality();
-		declare var var0002;
-		if ((var0001 == 0) || (var0001 > 3)) {
-			var0002 = script item {
+		var conveyorBelt = find_nearby(SHAPE_CONVEYER_BELT, 10, MASK_NONE);
+		var quality = get_item_quality();
+		declare var result;
+		if (quality == 0 || quality > 3) {
+			result = script item {
 				frame 0;
 				frame 1;
 				sfx SFX_GLASS_SHATTERING;
 				sfx SFX_FAIL_BUZZ;
 			};
 		} else {
-			var var0003 = [
+			var oreShapeList = [
 				SHAPE_BLACKROCK, SHAPE_CHUNKS_OF_IRON_ORE, SHAPE_CHUNKS_OF_LEAD
 			];
-			var var0004 = var0003[var0001];
-			var0002 = script item {
+			var oreShape = oreShapeList[quality];
+			result = script item {
 				repeat 7 {
 					frame 0;
 					repeat 3, 4 {
@@ -2176,36 +2179,39 @@ void FuncMiningMachine shape#(SHAPE_MINING_MACHINE) () {
 					};
 				};
 			};
-			var0002 = script var0000 {
+			result = script conveyorBelt {
 				frame 0;
 				repeat 24 {
 					next frame cycle;
 					continue;
 					sfx SFX_GAVEL_THUD;
-					call Func060D;
+					call runMiningMachine;
 				};
 			};
 		}
 	}
 }
 
+/**
+ * Handles interaction with giant bones.
+ */
 void FuncGiantBones shape#(SHAPE_GIANT_BONES) () {
 	if (event == DOUBLECLICK) {
-		var var0000 = get_item_quality();
-		if (!(var0000 == UI_game_hour())) {
-			var var0001 = find_nearby(SHAPE_AMMUNITION, 5, MASK_NONE);
-			if (!var0001) {
-				var var0002 = UI_create_new_object(SHAPE_AMMUNITION);
-				if (var0002) {
-					var0002->set_item_flag(TEMPORARY);
-					var0002->set_item_flag(OKAY_TO_TAKE);
-					var var0003 = var0002->set_item_quantity(
+		var quality = get_item_quality();
+		if (!(quality == UI_game_hour())) {
+			var ammoList = find_nearby(SHAPE_AMMUNITION, 5, MASK_NONE);
+			if (!ammoList) {
+				var ammoObj = UI_create_new_object(SHAPE_AMMUNITION);
+				if (ammoObj) {
+					ammoObj->set_item_flag(TEMPORARY);
+					ammoObj->set_item_flag(OKAY_TO_TAKE);
+					var result = ammoObj->set_item_quantity(
 							UI_die_roll(1, MAX_QUANTITY));
-					struct<Position> var0004 = get_object_position();
-					var0004.x += 1;
-					var0003 = UI_update_last_created(var0004);
-					if (var0003) {
-						var0003 = set_item_quality(UI_game_hour());
+					struct<Position> objPos = get_object_position();
+					objPos.x += 1;
+					result = UI_update_last_created(objPos);
+					if (result) {
+						result = set_item_quality(UI_game_hour());
 					}
 				}
 			}
@@ -2213,16 +2219,19 @@ void FuncGiantBones shape#(SHAPE_GIANT_BONES) () {
 	}
 }
 
+/**
+ * Handles interaction with bellows.
+ */
 void FuncBellows shape#(SHAPE_BELLOWS) () {
-	var var0000 = get_item_frame();
-	declare var var0002;
-	if (var0000 >= FRAME_MAGIC_BELLOWS_OPEN
-			&& var0000 <= FRAME_MAGIC_BELLOWS_FLAT) {
+	var bellowsFrame = get_item_frame();
+	declare var dirFacing;
+	if (bellowsFrame >= FRAME_MAGIC_BELLOWS_OPEN
+			&& bellowsFrame <= FRAME_MAGIC_BELLOWS_FLAT) {
 		if (event == DOUBLECLICK) {
 			tryPathRunUsecodeTo(item, 1, 0, -1, FuncBellows, item, BG_PATH_SUCCESS);
 		}
 		if (event == BG_PATH_SUCCESS) {
-			var var0001 = script item {
+			var result = script item {
 				sfx SFX_BLACKSMITH_BELLOWS;
 				continue;
 				frame 4;
@@ -2233,28 +2242,28 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 				wait 1;
 				frame 3;
 			};
-			var0002 = directionFromAvatar(item);
-			var0001 = script AVATAR->get_npc_object() {
-				face var0002;
+			dirFacing = directionFromAvatar(item);
+			result = script AVATAR->get_npc_object() {
+				face dirFacing;
 				actor frame bowing;
 				wait 3;
 				actor frame standing;
 			};
-			var var0003 = find_nearest(SHAPE_FIREPIT, 3);
-			var var0004 = var0003->get_item_frame();
-			var var0005 = find_nearest(SHAPE_SWORD_BLANK, 3);
-			var var0006 = var0005->get_item_frame();
-			if (var0003) {
-				if (var0004 == FRAME_MAGIC_FIREPIT_COLD) {
-					var0001 = script var0003 {
+			var firepitObj = find_nearest(SHAPE_FIREPIT, 3);
+			var firepitFrame = firepitObj->get_item_frame();
+			var swordBlank = find_nearest(SHAPE_SWORD_BLANK, 3);
+			var blankFrame = swordBlank->get_item_frame();
+			if (firepitObj) {
+				if (firepitFrame == FRAME_MAGIC_FIREPIT_COLD) {
+					result = script firepitObj {
 						wait 1;
 						frame 5;
 						wait 15;
 						frame 4;
 					};
 				}
-				if (var0004 == FRAME_MAGIC_FIREPIT_EMBERS) {
-					var0001 = script var0003 {
+				if (firepitFrame == FRAME_MAGIC_FIREPIT_EMBERS) {
+					result = script firepitObj {
 						wait 1;
 						frame 6;
 						wait 15;
@@ -2263,8 +2272,8 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 						frame 4;
 					};
 				}
-				if (var0004 == FRAME_MAGIC_FIREPIT_HOT) {
-					var0001 = script var0003 {
+				if (firepitFrame == FRAME_MAGIC_FIREPIT_HOT) {
+					result = script firepitObj {
 						wait 1;
 						frame 7;
 						wait 15;
@@ -2275,8 +2284,8 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 						frame 4;
 					};
 				}
-				if (var0004 == FRAME_MAGIC_FIREPIT_FLAME) {
-					var0001 = script var0003 {
+				if (firepitFrame == FRAME_MAGIC_FIREPIT_FLAME) {
+					result = script firepitObj {
 						wait 1;
 						frame 7;
 						wait 15;
@@ -2286,42 +2295,42 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 						wait 15;
 						frame 4;
 					};
-					if (var0005) {
-						struct<Position> var0007
-								= var0003->get_object_position();
-						struct<Position> var0008
-								= var0005->get_object_position();
-						var var0009 = false;
-						if (var0008.x == var0007.x) {
-							if ((var0008.y + 1) == var0007.y) {
-								if ((var0008.z - 2) == var0007.z) {
-									var0009 = true;
+					if (swordBlank) {
+						struct<Position> firepitPos
+								= firepitObj->get_object_position();
+						struct<Position> blankPos
+								= swordBlank->get_object_position();
+						var blankInPitFlag = false;
+						if (blankPos.x == firepitPos.x) {
+							if ((blankPos.y + 1) == firepitPos.y) {
+								if ((blankPos.z - 2) == firepitPos.z) {
+									blankInPitFlag = true;
 								}
 							}
 						}
-						if (var0009) {
-							if (var0006 > FRAME_SWORD_BLANK_HOTTEST) {
-								if ((var0006 >= FRAME_BLACKSWORD_BLANK_COLD1)
-									&& (var0006 <= FRAME_BLACKSWORD_BLANK_COLD3)) {
-									var0001 = script var0005 {
+						if (blankInPitFlag) {
+							if (blankFrame > FRAME_SWORD_BLANK_HOTTEST) {
+								if ((blankFrame >= FRAME_BLACKSWORD_BLANK_COLD1)
+									&& (blankFrame <= FRAME_BLACKSWORD_BLANK_COLD3)) {
+									result = script swordBlank {
 										wait 2;
 										frame 8;
 										wait 25;
-										call Func068F;
+										call updateBlackSwordBlankFrame;
 									};
 								}
-								if (var0006 == FRAME_BLACKSWORD_BLANK_LUKEWARM1) {
-									var0001 = script var0005 {
+								if (blankFrame == FRAME_BLACKSWORD_BLANK_LUKEWARM1) {
+									result = script swordBlank {
 										wait 2;
 										frame 9;
 										wait 25;
 										frame 8;
 										wait 25;
-										call Func068F;
+										call updateBlackSwordBlankFrame;
 									};
 								}
-								if (var0006 == FRAME_BLACKSWORD_BLANK_LUKEWARM2) {
-									var0001 = script var0005 {
+								if (blankFrame == FRAME_BLACKSWORD_BLANK_LUKEWARM2) {
+									result = script swordBlank {
 										wait 2;
 										frame 10;
 										wait 25;
@@ -2329,11 +2338,11 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 										wait 25;
 										frame 8;
 										wait 25;
-										call Func068F;
+										call updateBlackSwordBlankFrame;
 									};
 								}
-								if (var0006 == FRAME_BLACKSWORD_BLANK_HOT1) {
-									var0001 = script var0005 {
+								if (blankFrame == FRAME_BLACKSWORD_BLANK_HOT1) {
+									result = script swordBlank {
 										wait 2;
 										frame 11;
 										wait 25;
@@ -2343,12 +2352,12 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 										wait 25;
 										frame 8;
 										wait 25;
-										call Func068F;
+										call updateBlackSwordBlankFrame;
 									};
 								}
-								if ((var0006 == FRAME_BLACKSWORD_BLANK_HOT2)
-									|| (var0006 == FRAME_BLACKSWORD_BLANK_HOT3)) {
-									var0001 = script var0005 {
+								if ((blankFrame == FRAME_BLACKSWORD_BLANK_HOT2)
+									|| (blankFrame == FRAME_BLACKSWORD_BLANK_HOT3)) {
+									result = script swordBlank {
 										wait 2;
 										frame 12;
 										wait 25;
@@ -2360,7 +2369,7 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 										wait 25;
 										frame 8;
 										wait 25;
-										call Func068F;
+										call updateBlackSwordBlankFrame;
 									};
 								}
 							}
@@ -2376,7 +2385,7 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 		}
 		if (event == BG_PATH_SUCCESS) {
 			halt_scheduled();
-			var var000A = script item {
+			var result = script item {
 				sfx SFX_BLACKSMITH_BELLOWS;
 				continue;
 				frame 0;
@@ -2396,10 +2405,10 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 				wait 1;
 				frame 0;
 			};
-			var0002 = directionFromObject(AVATAR, item);
+			dirFacing = directionFromObject(AVATAR, item);
 			AVATAR->halt_scheduled();
-			var000A = script AVATAR {
-				face var0002;
+			result = script AVATAR {
+				face dirFacing;
 				actor frame standing;
 				actor frame bowing;
 				wait 3;
@@ -2409,11 +2418,11 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 				wait 3;
 				actor frame standing;
 			};
-			var var000B = find_nearby(SHAPE_FIREPIT, 4, MASK_ALL_UNSEEN);
-			for (var000E in var000B) {
-				var var000F = var000E->get_item_frame();
-				if (var000F == FRAME_NORMAL_FIREPIT_COLD) {
-					var000A = script var000E {
+			var firepitList = find_nearby(SHAPE_FIREPIT, 4, MASK_ALL_UNSEEN);
+			for (firepit in firepitList) {
+				var firepitFrame = firepit->get_item_frame();
+				if (firepitFrame == FRAME_NORMAL_FIREPIT_COLD) {
+					result = script firepit {
 						nohalt;
 						sfx SFX_BLACKSMITH_BELLOWS;
 						frame 0;
@@ -2421,7 +2430,7 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 						frame 2;
 						frame 3;
 					};
-					var000A = script var000E after 18 ticks {
+					result = script firepit after 18 ticks {
 						finish;
 						frame 2;
 						wait 3;
@@ -2430,15 +2439,15 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 						frame 0;
 					};
 				}
-				if (var000F == FRAME_NORMAL_FIREPIT_EMBERS) {
-					var000A = script var000E {
+				if (firepitFrame == FRAME_NORMAL_FIREPIT_EMBERS) {
+					result = script firepit {
 						nohalt;
 						sfx SFX_BLACKSMITH_BELLOWS;
 						frame 1;
 						frame 2;
 						frame 3;
 					};
-					var000A = script var000E after 17 ticks {
+					result = script firepit after 17 ticks {
 						finish;
 						frame 2;
 						wait 3;
@@ -2447,14 +2456,14 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 						frame 0;
 					};
 				}
-				if (var000F == FRAME_NORMAL_FIREPIT_HOT) {
-					var000A = script var000E {
+				if (firepitFrame == FRAME_NORMAL_FIREPIT_HOT) {
+					result = script firepit {
 						nohalt;
 						sfx SFX_BLACKSMITH_BELLOWS;
 						frame 2;
 						frame 3;
 					};
-					var000A = script var000E after 16 ticks {
+					result = script firepit after 16 ticks {
 						finish;
 						frame 2;
 						wait 3;
@@ -2463,13 +2472,13 @@ void FuncBellows shape#(SHAPE_BELLOWS) () {
 						frame 0;
 					};
 				}
-				if (var000F == FRAME_NORMAL_FIREPIT_FLAME) {
-					var000A = script var000E {
+				if (firepitFrame == FRAME_NORMAL_FIREPIT_FLAME) {
+					result = script firepit {
 						nohalt;
 						sfx SFX_BLACKSMITH_BELLOWS;
 						frame 3;
 					};
-					var000A = script var000E after 15 ticks {
+					result = script firepit after 15 ticks {
 						finish;
 						frame 2;
 						wait 3;
@@ -2579,6 +2588,9 @@ void FuncCask shape#(SHAPE_CASK) () {
 	}
 }
 
+/**
+ * Handles interaction with lit sconces.
+ */
 void FuncLitSconce shape#(SHAPE_LIT_SCONCE) () {
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		set_item_shape(SHAPE_SCONCE);
@@ -2586,9 +2598,9 @@ void FuncLitSconce shape#(SHAPE_LIT_SCONCE) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		set_item_shape(SHAPE_SCONCE);
-		var var0000 = directionFromObject(AVATAR, item);
-		var var0001 = script AVATAR {
-			face var0000;
+		var dirFacing = directionFromObject(AVATAR, item);
+		var result = script AVATAR {
+			face dirFacing;
 			continue;
 			actor frame strike_2h;
 			actor frame standing;
@@ -5235,21 +5247,25 @@ void FuncFishingRod shape#(SHAPE_FISHING_ROD) () {
 	}
 }
 
+/**
+ * Handles interaction with sword blanks.
+ */
 void FuncSwordBlank shape#(SHAPE_SWORD_BLANK) () {
-	declare var var0003;
-	declare var var0008;
+	declare var blankFrame;
+	declare var result1;
 	if (event == DOUBLECLICK) {
 		if (AVATAR->is_readied(BG_WEAPON_HAND, SHAPE_HAMMER, FRAME_ANY)) {
-			var var0000 = find_nearest(SHAPE_ANVIL, 3);
-			if (var0000) {
-				struct<Position> var0001 = get_object_position();
-				struct<Position> var0002 = var0000->get_object_position();
-				if (var0001.x == var0002.x) {
-					if (var0001.y == var0002.y) {
-						if (var0001.z == (var0002.z + 1)) {
-							var0003 = get_item_frame();
-							if ((var0003 >= FRAME_BLACKSWORD_BLANK_HOT1) && (var0003 <= FRAME_BLACKSWORD_BLANK_HOT3)) {
-								var0000->FuncHammer();
+			var anvilObj = find_nearest(SHAPE_ANVIL, 3);
+			if (anvilObj) {
+				struct<Position> blankPos = get_object_position();
+				struct<Position> anvilPos = anvilObj->get_object_position();
+				if (blankPos.x == anvilPos.x) {
+					if (blankPos.y == anvilPos.y) {
+						if (blankPos.z == (anvilPos.z + 1)) {
+							blankFrame = get_item_frame();
+							if ((blankFrame >= FRAME_BLACKSWORD_BLANK_HOT1)
+								&& (blankFrame <= FRAME_BLACKSWORD_BLANK_HOT3)) {
+								anvilObj->FuncHammer();
 								return;
 							}
 						}
@@ -5258,74 +5274,75 @@ void FuncSwordBlank shape#(SHAPE_SWORD_BLANK) () {
 			}
 		}
 		UI_close_gumps();
-		var var0004 = get_item_frame();
-		if ((var0004 >= FRAME_BLACKSWORD_BLANK_LUKEWARM1) && (var0004 <= FRAME_BLACKSWORD_BLANK_COLD3)) {
-			declare var var0005;
-			declare var var0006;
+		var blankFrame = get_item_frame();
+		if ((blankFrame >= FRAME_BLACKSWORD_BLANK_LUKEWARM1)
+			&& (blankFrame <= FRAME_BLACKSWORD_BLANK_COLD3)) {
+			declare var maxDeltaX;
+			declare var maxDeltaY;
 			if (!get_container()) {
-				var0005 = [0, 1, -1, 1];
-				var0006 = [2, 1, 2, 0];
+				maxDeltaX = [0, 1, -1, 1];
+				maxDeltaY = [2, 1, 2, 0];
 				tryPathRunUsecodeTo(
-						item, var0005, var0006, -3, FuncSwordBlank, item,
-						BG_PATH_SUCCESS);
-			} else if (!Func0944(item)) {
-				var var0007 = Func0945(item);
-				var0005 = [0, 1, -1, 1];
-				var0006 = [2, 1, 2, 0];
+						item, maxDeltaX, maxDeltaY, -3, FuncSwordBlank,
+						item, BG_PATH_SUCCESS);
+			} else if (!isContainedByAvatar(item)) {
+				var targetObj = getOuterContainer(item);
+				maxDeltaX = [0, 1, -1, 1];
+				maxDeltaY = [2, 1, 2, 0];
 				tryPathRunUsecodeTo(
-						var0007, var0005, var0006, -3, FuncSwordBlank, var0007,
-						BG_PATH_SUCCESS);
+						targetObj, maxDeltaX, maxDeltaY, -3, FuncSwordBlank,
+						targetObj, BG_PATH_SUCCESS);
 			} else {
-				var0008 = script item {
+				result1 = script item {
 					wait 2;
 					call FuncSwordBlank;
 				};
 			}
 		}
 	}
-	declare var var0009;
+	declare var dirFacing;
 	if (event == BG_PATH_SUCCESS) {
-		var0009 = directionFromAvatar(item);
-		var0008 = script AVATAR->get_npc_object() {
-			face var0009;
+		dirFacing = directionFromAvatar(item);
+		result1 = script AVATAR->get_npc_object() {
+			face dirFacing;
 			actor frame bowing;
 			wait 3;
 			actor frame standing;
 			call FuncSwordBlank;
 		};
-		var0008 = script item {
+		result1 = script item {
 			wait 3;
-			call Func0717;
+			call giveSwordBlankToAvatar;
 		};
 	}
-	declare var var000A;
+	declare var result2;
 	if (event == SCRIPTED) {
-		var000A = AVATAR->get_npc_object()->get_cont_items(
+		result2 = AVATAR->get_npc_object()->get_cont_items(
 				SHAPE_SWORD_BLANK, QUALITY_ANY, FRAME_ANY);
-		if (var000A) {
-			struct<ObjPos> var000B = UI_click_on_item();
-			var var000C = var000B->get_item_shape();
-			if (var000C == SHAPE_ANVIL) {
-				if (var000B->get_item_frame() == FRAME_MAGIC_ANVIL) {
+		if (result2) {
+			struct<ObjPos> targetObj = UI_click_on_item();
+			var targetShape = targetObj->get_item_shape();
+			if (targetShape == SHAPE_ANVIL) {
+				if (targetObj->get_item_frame() == FRAME_MAGIC_ANVIL) {
 					tryPathRunUsecodeTo(
-							var000B, 0, 2, 0, FuncSwordBlank, var000B,
+							targetObj, 0, 2, 0, FuncSwordBlank, targetObj,
 							BG_PATH_FAILURE);
 				}
 			}
-			if (var000C == SHAPE_FIREPIT) {
-				if ((var000B->get_item_frame() >= FRAME_MAGIC_FIREPIT_COLD)
-					&& (var000B->get_item_frame() <= FRAME_MAGIC_FIREPIT_FLAME)) {
+			if (targetShape == SHAPE_FIREPIT) {
+				if ((targetObj->get_item_frame() >= FRAME_MAGIC_FIREPIT_COLD)
+					&& (targetObj->get_item_frame() <= FRAME_MAGIC_FIREPIT_FLAME)) {
 					tryPathRunUsecodeTo(
-							var000B, 1, 0, 0, FuncSwordBlank, var000B,
+							targetObj, 1, 0, 0, FuncSwordBlank, targetObj,
 							PATH_SUCCESS_9);
 				}
 			}
-			if (var000C == SHAPE_WATER_TROUGH_NS) {
-				var0003 = var000A->get_item_frame();
-				if ((var0003 >= FRAME_BLACKSWORD_BLANK_LUKEWARM1)
-					&& (var0003 <= FRAME_BLACKSWORD_BLANK_HOT3)) {
+			if (targetShape == SHAPE_WATER_TROUGH_NS) {
+				blankFrame = result2->get_item_frame();
+				if ((blankFrame >= FRAME_BLACKSWORD_BLANK_LUKEWARM1)
+					&& (blankFrame <= FRAME_BLACKSWORD_BLANK_HOT3)) {
 					tryPathRunUsecodeTo(
-							var000B, 0, 1, 0, FuncSwordBlank, var000B,
+							targetObj, 0, 1, 0, FuncSwordBlank, targetObj,
 							PATH_SUCCESS);
 				} else {
 					AVATAR->get_npc_object()->item_say(
@@ -5338,44 +5355,44 @@ void FuncSwordBlank shape#(SHAPE_SWORD_BLANK) () {
 		}
 	}
 	if (event == BG_PATH_FAILURE) {
-		var0009 = directionFromAvatar(item);
-		var0008 = script AVATAR->get_npc_object() {
-			face var0009;
+		dirFacing = directionFromAvatar(item);
+		result1 = script AVATAR->get_npc_object() {
+			face dirFacing;
 			actor frame bowing;
 			wait 3;
 			actor frame standing;
 		};
-		var000A = AVATAR->get_npc_object()->get_cont_items(
+		result2 = AVATAR->get_npc_object()->get_cont_items(
 				SHAPE_SWORD_BLANK, QUALITY_ANY, FRAME_ANY);
-		var0008 = script var000A {
+		result1 = script result2 {
 			wait 3;
-			call Func068B;
+			call placeItemOnAnvil;
 		};
 	}
 	if (event == STARTED_TALKING) {
-		var0009 = directionFromAvatar(item);
-		var0008 = script AVATAR->get_npc_object() {
-			face var0009;
+		dirFacing = directionFromAvatar(item);
+		result1 = script AVATAR->get_npc_object() {
+			face dirFacing;
 			actor frame bowing;
 			wait 3;
 			actor frame standing;
 		};
-		var000A = AVATAR->get_npc_object()->get_cont_items(
+		result2 = AVATAR->get_npc_object()->get_cont_items(
 				SHAPE_SWORD_BLANK, QUALITY_ANY, FRAME_ANY);
-		var0008 = script var000A {
+		result1 = script result2 {
 			wait 3;
-			call Func068C;
+			call placeItemOnFirepit;
 		};
 	}
 	if (event == PATH_SUCCESS) {
-		var0009 = directionFromAvatar(item);
-		var0008 = script AVATAR->get_npc_object() {
-			face var0009;
+		dirFacing = directionFromAvatar(item);
+		result1 = script AVATAR->get_npc_object() {
+			face dirFacing;
 			actor frame bowing;
 		};
-		var0008 = script item {
+		result1 = script item {
 			wait 5;
-			call Func068D;
+			call scriptDouseBlackSwordBlank;
 		};
 	}
 }
@@ -7788,9 +7805,9 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 			var0001 = [0, 1, 1, 1, -1, -1, 0, -1];
 			var0002 = [1, 1, 0, -1, 1, 0, -1, -1];
 			tryPathRunUsecodeTo(item, var0001, var0002, -3, FuncBucket, item, EGG);
-		} else if (!Func0944(item)) {
+		} else if (!isContainedByAvatar(item)) {
 			UI_close_gumps();
-			var0003 = Func0945(item);
+			var0003 = getOuterContainer(item);
 			var0001 = [0, 1, -1, 1];
 			var0002 = [2, 1, 2, 0];
 			tryPathRunUsecodeTo(var0003, var0001, var0002, -3, FuncBucket, item, EGG);
@@ -7804,7 +7821,7 @@ void FuncBucket shape#(SHAPE_BUCKET) () {
 	}
 	declare var var0005;
 	if (event == EGG) {
-		var0003 = Func0945(item);
+		var0003 = getOuterContainer(item);
 		var0005 = directionFromAvatar(var0003);
 		if (var0003->is_npc()) {
 			var0004 = script AVATAR->get_npc_object() {
@@ -52935,46 +52952,52 @@ void Func060C object#(0x60C) () {
 	}
 }
 
-void Func060D object#(0x60D) () {
+/**
+ * Runs the mining machine. Creates ore with 1/20 chance, with the
+ * quality of the mining machine determining the kind of ore:
+ * - 0 -> blackrock
+ * - 1 -> iron ore
+ * - 2 -> lead
+ */
+void runMiningMachine object#(0x60D) () {
 	if (event != SCRIPTED) {
 		return;
 	}
-	var var0000 = find_nearby(SHAPE_MINING_MACHINE, 10, MASK_NONE);
-	var var0001 = var0000->get_item_quality();
-	var var0002 = [
+	var conveyorBelt = find_nearby(SHAPE_MINING_MACHINE, 10, MASK_NONE);
+	var quality = conveyorBelt->get_item_quality();
+	var oreShapeList = [
 		SHAPE_BLACKROCK, SHAPE_CHUNKS_OF_IRON_ORE, SHAPE_CHUNKS_OF_LEAD
 	];
-	var var0003 = var0002[var0001];
-	declare var var0006;
+	var oreShape = oreShapeList[quality];
+	declare var result;
 	if (UI_die_roll(1, 20) == 1) {
-		struct<Position> var0004 = get_object_position();
-		var var0005 = UI_create_new_object(var0003);
-		if (var0005) {
-			var0005->set_item_flag(TEMPORARY);
-			var0005->set_item_frame(0);
-			var0006 = UI_update_last_created([var0004.x - 9, var0004.y, 1]);
+		struct<Position> conveyorPos = get_object_position();
+		var oreObj = UI_create_new_object(oreShape);
+		if (oreObj) {
+			oreObj->set_item_flag(TEMPORARY);
+			oreObj->set_item_frame(0);
+			result = UI_update_last_created([conveyorPos.x - 9, conveyorPos.y, 1]);
 		}
 	}
-	var var0007 = find_nearby(SHAPE_ANY, 10, MASK_NONE);
-	struct<Position> var0008 = get_object_position();
-	var var0009 = var0008.x;
-	var var000A = var0008.y;
-	for (var000D in var0007) {
-		struct<Position> var000E = var000D->get_object_position();
-		var var000F = var000E.x;
-		var var0010 = var000E.y;
-		var var0011 = var000E.z;
-		if (var000F <= var0009 && (var0010 == var000A && var0011 == 1)) {
-			var0006 = var000D->set_last_created();
-			if (var0006) {
-				var0006 = UI_update_last_created(
-						[var000F + 1, var0010, var0011]);
+	var nearbyObjs = find_nearby(SHAPE_ANY, 10, MASK_NONE);
+	struct<Position> conveyorPos = get_object_position();
+	var conveyorX = conveyorPos.x;
+	var conveyorY = conveyorPos.y;
+	for (obj in nearbyObjs) {
+		struct<Position> objPos = obj->get_object_position();
+		var objX = objPos.x;
+		var objY = objPos.y;
+		var objZ = objPos.z;
+		if (objX <= conveyorX && (objY == conveyorY && objZ == 1)) {
+			result = obj->set_last_created();
+			if (result) {
+				result = UI_update_last_created([objX + 1, objY, objZ]);
 			}
 		}
-		if (var000F == (var0009 + 1) && (var0010 == var000A && var0011 == 1)) {
-			var0006 = var000D->set_last_created();
-			if (var0006) {
-				var0006 = UI_update_last_created([var000F, var0010, 0]);
+		if (objX == (conveyorX + 1) && (objY == conveyorY && objZ == 1)) {
+			result = obj->set_last_created();
+			if (result) {
+				result = UI_update_last_created([objX, objY, 0]);
 			}
 		}
 	}
@@ -54210,7 +54233,7 @@ void caskServeWine object#(0x629) () {
 
 void Func062C object#(0x62C) () {
 	var var0000 = item;
-	var var0001 = Func0945(var0000);
+	var var0001 = getOuterContainer(var0000);
 	var var0002 = UI_find_nearby(
 			[0x09B7, 0x06C8, 0], SHAPE_ROCK, 18, MASK_NONE);
 	for (var0005 in var0002) {
@@ -58667,53 +58690,65 @@ void Func068A object#(0x68A) () {
 	UI_set_weather(CLEAR_WEATHER);
 }
 
-void Func068B object#(0x68B) () {
-	var var0000 = AVATAR->get_npc_object()->find_nearest(SHAPE_ANVIL, 5);
-	if (var0000) {
-		var var0001 = Func0837(item, var0000, 0, 0, 1);
-		Func0838(item);
+/**
+ * Places `item` on a nearby anvil.
+ */
+void placeItemOnAnvil object#(0x68B) () {
+	var anvilList = AVATAR->get_npc_object()->find_nearest(SHAPE_ANVIL, 5);
+	if (anvilList) {
+		var result = placeOnTarget(item, anvilList, 0, 0, 1);
+		scriptCoolDownBlackSwordBlank(item);
 	}
 }
 
-void Func068C object#(0x68C) () {
-	var var0000 = AVATAR->get_npc_object()->find_nearest(SHAPE_FIREPIT, 5);
-	if (var0000) {
-		var var0001 = Func0837(item, var0000, 0, -1, 2);
-		Func0838(item);
+/**
+ * Places `item` on a nearby firepit.
+ */
+void placeItemOnFirepit object#(0x68C) () {
+	var firepitList = AVATAR->get_npc_object()->find_nearest(SHAPE_FIREPIT, 5);
+	if (firepitList) {
+		var result = placeOnTarget(item, firepitList, 0, -1, 2);
+		scriptCoolDownBlackSwordBlank(item);
 	}
 }
 
-void Func068D object#(0x68D) () {
-	var var0000 = get_item_frame();
-	var var0001 = AVATAR->get_npc_object()->get_cont_items(
+/**
+ * Douses the blacksword blank into target trough.
+ */
+void scriptDouseBlackSwordBlank object#(0x68D) () {
+	var blankFrame = get_item_frame();
+	var avatarBlanks = AVATAR->get_npc_object()->get_cont_items(
 			SHAPE_SWORD_BLANK, QUALITY_ANY, FRAME_ANY);
-	if (var0000 == FRAME_SWORD_BLANK_HOT1 || var0000 == FRAME_SWORD_BLANK_HOTTEST) {
-		var var0002 = script AVATAR->get_npc_object() {
+	if (blankFrame == FRAME_SWORD_BLANK_HOT1 || blankFrame == FRAME_SWORD_BLANK_HOTTEST) {
+		var result = script AVATAR->get_npc_object() {
 			wait 10;
 			actor frame standing;
 		};
-		var0002 = script var0001 {
+		result = script avatarBlanks {
 			wait 2;
-			call Func068E;
+			call scriptFinishDouseBlackSwordBlank;
 		};
 	} else {
 		AVATAR->get_npc_object()->item_say("@There's not enough water.@");
 	}
 }
 
-void Func068E object#(0x68E) () {
-	var var0000 = AVATAR->get_npc_object()->find_nearest(SHAPE_WATER_TROUGH_NS, 5);
-	if (Func0837(item, var0000, 0, 0, 2)) {
-		struct<Position> var0001 = get_object_position();
+/**
+ * Finishes dowsing the blacksword blank and drains the trough.
+ */
+void scriptFinishDouseBlackSwordBlank object#(0x68E) () {
+	var troughObj = AVATAR->get_npc_object()->find_nearest(SHAPE_WATER_TROUGH_NS, 5);
+	if (placeOnTarget(item, troughObj, 0, 0, 2)) {
+		struct<Position> troughPos = get_object_position();
 		UI_sprite_effect(
-				ANIMATION_POOF, var0001.x - 3, var0001.y - 3, 0, 0, 0,
+				ANIMATION_POOF, troughPos.x - 3, troughPos.y - 3, 0, 0, 0,
 				LOOP_ONCE);
 		UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
-		var var0002 = script item {
+		var result = script item {
 			frame 8;
-			call Func068F;
+			call updateBlackSwordBlankFrame;
 		};
-		var0002 = script var0000 {
+		result = script troughObj {
 			repeat 2 {
 				previous frame cycle;
 			};
@@ -58721,17 +58756,21 @@ void Func068E object#(0x68E) () {
 	}
 }
 
-void Func068F object#(0x68F) () {
-	declare var var0000;
+/**
+ * Sets the next frame of the blacksword blank based on current
+ * forging state.
+ */
+void updateBlackSwordBlankFrame object#(0x68F) () {
+	declare var newBlackswordBlankFrame;
 	if (gflags[FINISHED_BLADE]) {
-		var0000 = FRAME_BLACKSWORD_BLANK_COLD3;
+		newBlackswordBlankFrame = FRAME_BLACKSWORD_BLANK_COLD3;
 	} else if (gflags[IMPROVED_BLADE]) {
-		var0000 = FRAME_BLACKSWORD_BLANK_COLD2;
+		newBlackswordBlankFrame = FRAME_BLACKSWORD_BLANK_COLD2;
 	} else {
-		var0000 = FRAME_BLACKSWORD_BLANK_COLD1;
+		newBlackswordBlankFrame = FRAME_BLACKSWORD_BLANK_COLD1;
 	}
-	var var0001 = script item {
-		frame var0000;
+	var result = script item {
+		frame newBlackswordBlankFrame;
 	};
 }
 
@@ -63784,7 +63823,7 @@ void Func070A object#(0x70A) () {
 }
 
 void Func070B object#(0x70B) () {
-	if (!Func0944(item)) {
+	if (!isContainedByAvatar(item)) {
 		struct<Position> var0000 = get_object_position();
 		var var0001 = false;
 		var var0002 = set_last_created();
@@ -64458,27 +64497,32 @@ void Func0716 object#(0x716) () {
 	};
 }
 
-void Func0717 object#(0x717) () {
-	declare var var0001;
+/**
+ * If `item` is a sword blank, gives it to the Avatar.
+ * Otherwise, if `item` contains a sword blank, gives this contained
+ * sword blank to the Avatar.
+ */
+void giveSwordBlankToAvatar object#(0x717) () {
+	declare var result;
 	if (get_item_shape() == SHAPE_SWORD_BLANK) {
-		struct<Position> var0000 = get_object_position();
-		var0001 = set_last_created();
+		struct<Position> blankPos = get_object_position();
+		result = set_last_created();
 		if (!AVATAR->get_npc_object()->give_last_created()) {
-			if (UI_update_last_created(var0000)) {
+			if (UI_update_last_created(blankPos)) {
 				UI_flash_mouse(CURSOR_WONT_FIT);
 			}
 		}
 	} else {
-		var var0002 = get_cont_items(SHAPE_SWORD_BLANK, QUALITY_ANY, FRAME_ANY);
-		var var0003 = var0002->get_container();
-		var0001 = var0002->set_last_created();
+		var swordBlank = get_cont_items(SHAPE_SWORD_BLANK, QUALITY_ANY, FRAME_ANY);
+		var ownerObj = swordBlank->get_container();
+		result = swordBlank->set_last_created();
 		if (!AVATAR->get_npc_object()->give_last_created()) {
-			if (var0003->give_last_created()) {
+			if (ownerObj->give_last_created()) {
 				UI_flash_mouse(CURSOR_WONT_FIT);
 			}
 		}
 	}
-	Func0838(item);
+	scriptCoolDownBlackSwordBlank(item);
 }
 
 /**
@@ -66234,56 +66278,72 @@ void controlMetalDoors id#(0x836) (var refObj, var flag) {
 	}
 }
 
-var Func0837 id#(0x837) (
-		var var0000, var var0001, var var0002, var var0003, var var0004) {
-	struct<Position> var0005 = var0001->get_object_position();
-	var0005.x += var0002;
-	var0005.y += var0003;
-	var0005.z += var0004;
-	var var0006 = get_container();
-	struct<Position> var0007 = get_object_position();
-	var var0008 = set_last_created();
-	if (UI_is_not_blocked(var0005, get_item_shape(), get_item_frame())) {
-		if (UI_update_last_created(var0005)) {
+/**
+ * Places `item` on top of `sourceObj` with the given offsets.
+ * If placement is not possible, returns the item to its original location.
+ *
+ * @param unusedObj Unused parameter.
+ * @param sourceObj The object on which to place the item.
+ * @param deltaX The X offset from the source object's position.
+ * @param deltaY The Y offset from the source object's position.
+ * @param deltaZ The Z offset from the source object's position.
+ * @return 1 if placement was successful, 0 otherwise.
+ */
+var placeOnTarget id#(0x837) (
+		var unusedObj, var sourceObj, var deltaX, var deltaY, var deltaZ) {
+	struct<Position> newPos = sourceObj->get_object_position();
+	newPos.x += deltaX;
+	newPos.y += deltaY;
+	newPos.z += deltaZ;
+	var ownerObj = get_container();
+	struct<Position> sourcePos = get_object_position();
+	var result = set_last_created();
+	if (UI_is_not_blocked(newPos, get_item_shape(), get_item_frame())) {
+		if (UI_update_last_created(newPos)) {
 			UI_play_sound_effect(SFX_RAT_RACE_CLOSE);
 			return 1;
 		}
 	} else {
 		UI_flash_mouse(CURSOR_WONT_FIT);
-		if (var0006) {
-			if (var0006->give_last_created()) {
+		if (ownerObj) {
+			if (ownerObj->give_last_created()) {
 				return 0;
 			}
-		} else if (UI_update_last_created(var0007)) {
+		} else if (UI_update_last_created(sourcePos)) {
 			return 0;
 		}
 	}
 	return 0;
 }
 
-void Func0838 id#(0x838) (var var0000) {
-	var var0001 = get_item_frame();
-	declare var var0002;
-	if (var0001 == FRAME_BLACKSWORD_BLANK_LUKEWARM1) {
-		var0002 = script item {
+/**
+ * Sets up scripts to cooldown the Black Sword Blank based on its current state.
+ *
+ * @param ignoredObj An unused parameter.
+ */
+void scriptCoolDownBlackSwordBlank id#(0x838) (var ignoredObj) {
+	var blankFrame = get_item_frame();
+	declare var result;
+	if (blankFrame == FRAME_BLACKSWORD_BLANK_LUKEWARM1) {
+		result = script item {
 			wait 2;
 			frame FRAME_BLACKSWORD_BLANK_LUKEWARM1;
 			wait 25;
-			call Func068F;
+			call updateBlackSwordBlankFrame;
 		};
 	}
-	if (var0001 == FRAME_BLACKSWORD_BLANK_LUKEWARM2) {
-		var0002 = script item {
+	if (blankFrame == FRAME_BLACKSWORD_BLANK_LUKEWARM2) {
+		result = script item {
 			wait 2;
 			frame FRAME_BLACKSWORD_BLANK_LUKEWARM2;
 			wait 25;
 			frame FRAME_BLACKSWORD_BLANK_LUKEWARM1;
 			wait 25;
-			call Func068F;
+			call updateBlackSwordBlankFrame;
 		};
 	}
-	if (var0001 == FRAME_BLACKSWORD_BLANK_HOT1) {
-		var0002 = script item {
+	if (blankFrame == FRAME_BLACKSWORD_BLANK_HOT1) {
+		result = script item {
 			wait 2;
 			frame FRAME_BLACKSWORD_BLANK_HOT1;
 			wait 25;
@@ -66291,11 +66351,11 @@ void Func0838 id#(0x838) (var var0000) {
 			wait 25;
 			frame FRAME_BLACKSWORD_BLANK_LUKEWARM1;
 			wait 25;
-			call Func068F;
+			call updateBlackSwordBlankFrame;
 		};
 	}
-	if (var0001 == FRAME_BLACKSWORD_BLANK_HOT2) {
-		var0002 = script item {
+	if (blankFrame == FRAME_BLACKSWORD_BLANK_HOT2) {
+		result = script item {
 			wait 2;
 			frame FRAME_BLACKSWORD_BLANK_HOT2;
 			wait 25;
@@ -66305,11 +66365,11 @@ void Func0838 id#(0x838) (var var0000) {
 			wait 25;
 			frame FRAME_BLACKSWORD_BLANK_LUKEWARM1;
 			wait 25;
-			call Func068F;
+			call updateBlackSwordBlankFrame;
 		};
 	}
-	if (var0001 == FRAME_BLACKSWORD_BLANK_HOT3) {
-		var0002 = script item {
+	if (blankFrame == FRAME_BLACKSWORD_BLANK_HOT3) {
+		result = script item {
 			wait 2;
 			frame FRAME_BLACKSWORD_BLANK_HOT3;
 			wait 25;
@@ -66321,7 +66381,7 @@ void Func0838 id#(0x838) (var var0000) {
 			wait 25;
 			frame FRAME_BLACKSWORD_BLANK_LUKEWARM1;
 			wait 25;
-			call Func068F;
+			call updateBlackSwordBlankFrame;
 		};
 	}
 }
@@ -78795,25 +78855,37 @@ void Func0943 id#(0x943) (var var0000) {
 			ANIMATION_MUSIC, var0001.x, var0001.y, -2, -2, 0, LOOP_ONCE);
 }
 
-var Func0944 id#(0x944) (var var0000) {
-	var var0001 = get_container();
-	while (!(var0001 == AVATAR->get_npc_object())) {
-		var0001 = var0001->get_container();
-		if (!var0001) {
+/**
+ * Checks if `item` is contained by the Avatar.
+ *
+ * @param unusedObj Unused item reference.
+ * @returns the Avatar if they own `item`, `NULL_OBJ` otherwise.
+ */
+var isContainedByAvatar id#(0x944) (var unusedObj) {
+	var owner = get_container();
+	while (!(owner == AVATAR->get_npc_object())) {
+		owner = owner->get_container();
+		if (!owner) {
 			return NULL_OBJ;
 		}
 	}
-	return var0001;
+	return owner;
 }
 
-var Func0945 id#(0x945) (var var0000) {
-	var var0001 = get_container();
-	declare var var0002;
-	while (var0001) {
-		var0002 = var0001;
-		var0001 = var0001->get_container();
+/**
+ * Returns the outermost container of `item`.
+ *
+ * @param unusedObj Unused item reference.
+ * @returns the outermost container, or `NULL_OBJ` if not contained.
+ */
+var getOuterContainer id#(0x945) (var unusedObj) {
+	var container = get_container();
+	var owner;
+	while (container) {
+		owner = container;
+		container = container->get_container();
 	}
-	return var0002;
+	return owner;
 }
 
 void Func0946 id#(0x946) () {
