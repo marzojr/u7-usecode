@@ -1,0 +1,528 @@
+(* Usecode C Grammar in EBNF Notation *)
+(* Converted from Bison grammar (usecode-syntax.txt) *)
+
+(* Whitespace and Comments *)
+digit          = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+letter         = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m"
+               | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+               | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M"
+               | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" ;
+underscore     = "_" ;
+
+(* Terminals *)
+identifier             = letter { letter | digit | underscore } ;
+int_literal            = digit { digit } ;
+string_literal         = '"' { ? any character except '"' ? } '"' ;
+string_prefix          = identifier string_literal ;
+
+(* Keywords - represented as terminals *)
+keyword = "if" | "else" | "return" | "do" | "while" | "for" | "with" | "to"
+        | "extern" | "declare" | "break" | "goto" | "case" | "var" | "void"
+        | "alias" | "struct" | "char" | "byte" | "int" | "long" | "const"
+        | "string" | "enum" | "converse" | "nested" | "say" | "message" | "response"
+        | "event" | "gflags" | "item" | "true" | "false" | "remove" | "add" | "hide"
+        | "script" | "after" | "ticks" | "static" | "original" | "shape#" | "object#"
+        | "id#" | "class" | "runscript" | "switch" | "default" | "fallthrough" | "always"
+        | "user_choice" | "try" | "catch" | "abort" | "throw" | "attend" | "endconv"
+        | "nobreak" | "continue" | "repeat" | "nop" | "nohalt" | "wait" | "rise"
+        | "descend" | "frame" | "hatch" | "next" | "previous" | "cycle" | "step"
+        | "music" | "call" | "speech" | "sfx" | "face" | "hit" | "hours" | "actor"
+        | "attack" | "finish" | "resurrect" | "setegg" | "minutes" | "reset" | "weather"
+        | "near" | "far" | "north" | "south" | "east" | "west" | "ne" | "nw" | "se"
+        | "sw" | "nop2" | "raw" | "standing" | "step_right" | "step_left" | "ready"
+        | "raise_1h" | "reach_1h" | "strike_1h" | "raise_2h" | "reach_2h" | "strike_2h"
+        | "sitting" | "bowing" | "kneeling" | "sleeping" | "cast_up" | "cast_out"
+        | "cached_in" | "party_near" | "avatar_near" | "avatar_far" | "avatar_footpad"
+        | "party_footpad" | "something_on" | "external_criteria" | "normal_damage"
+        | "fire_damage" | "magic_damage" | "lightning_damage" | "poison_damage"
+        | "starvation_damage" | "freezing_damage" | "ethereal_damage" | "sonic_damage"
+        | "forever" | "breakable" | "new" | "delete" ;
+
+(* Operators *)
+operator = "+" | "-" | "*" | "/" | "%" | "=" | "==" | "!=" | "<" | "<=" | ">" | ">="
+         | "&&" | "||" | "!" | "&" | "->" | "::" | "<<" | "+=" | "-=" | "*=" | "/="
+         | "%=" | "&=" | "in" ;
+
+(* Top-level Design *)
+design = global_decl { global_decl } ;
+
+global_decl = function
+            | function_decl
+            | const_int_decl
+            | enum_decl
+            | static_decl
+            | class_definition
+            | struct_definition ;
+
+(* Class Definitions *)
+class_definition = "class" identifier [ ":" defined_class ] "{" [ class_item_list ] "}" ;
+
+class_item_list = class_item { class_item } ;
+
+class_item = "var" class_var_def
+           | "var" alias_tok identifier "=" declared_var ";"
+           | "struct" "<" defined_struct ">" class_struct_def
+           | "struct" "<" defined_struct ">" alias_tok identifier "=" declared_var ";"
+           | "class" "<" defined_class ">" method
+           | [ opt_void ] method ;
+
+class_var_def = var_decl_list ";"
+              | method ;
+
+class_struct_def = struct_decl_list ";"
+                 | method ;
+
+method = identifier "(" [ param_list ] ")" function_body ;
+
+(* Struct Definitions *)
+struct_definition = "struct" identifier "{" [ struct_item_list ] "}" ;
+
+struct_item_list = struct_item { struct_item } ;
+
+struct_item = "var" identifier ";"
+            | "struct" "<" defined_struct ">" ";"
+            | "struct" "<" defined_struct ">" identifier ";" ;
+
+(* Functions *)
+function = function_proto function_body ;
+
+function_body = "{" [ statement_list ] [ label_statement ] "}" ;
+
+function_proto = ret_type identifier [ opt_funid ] "(" [ param_list ] ")"
+               | "class" "<" defined_class ">" identifier [ const_int_val ] "(" [ param_list ] ")" ;
+
+opt_funid = "shape#" "(" const_int_expr ")"
+          | "object#" "(" [ const_int_expr ] ")"
+          | [ const_int_val ]
+          | "id#" "(" const_int_expr ")" ;
+
+opt_const_int_expr = [ const_int_expr ] ;
+
+const_int_expr = const_int_val
+               | const_int_expr "+" const_int_expr
+               | const_int_expr "-" const_int_expr
+               | const_int_expr "*" const_int_expr
+               | const_int_expr "/" const_int_expr
+               | const_int_expr "%" const_int_expr
+               | const_int_expr "==" const_int_expr
+               | const_int_expr "!=" const_int_expr
+               | const_int_expr "<" const_int_expr
+               | const_int_expr "<=" const_int_expr
+               | const_int_expr ">" const_int_expr
+               | const_int_expr ">=" const_int_expr
+               | const_int_expr "&&" const_int_expr
+               | const_int_expr "||" const_int_expr
+               | "!" const_int_expr
+               | "(" const_int_expr ")"
+               | addressof ;
+
+const_int_val = sign_int_literal | identifier ;
+
+(* Statements *)
+statement_list = { statement } ;
+
+statement = simple_or_if_statement
+          | statement_block
+          | converse_case_attend ;
+
+simple_or_if_statement = simple_statement | if_statement ;
+
+simple_statement = stmt_declaration
+                 | assignment_statement
+                 | trycatch_statement
+                 | while_statement
+                 | array_loop_statement
+                 | array_enum_statement
+                 | function_call_statement
+                 | special_method_call_statement
+                 | return_statement
+                 | converse_statement
+                 | switch_statement
+                 | script_statement
+                 | break_statement
+                 | continue_statement
+                 | fallthrough_statement
+                 | goto_statement
+                 | delete_statement
+                 | "say" "(" [ nonclass_expr_list ] ")" ";"
+                 | "message" "(" [ nonclass_expr_list ] ")" ";"
+                 | answer_statement
+                 | "endconv" ";"
+                 | throwabort_statement [ expression ] ";"
+                 | ";" ;
+
+statement_block = "{" [ statement_list ] [ label_statement ] "}" ;
+
+throwabort_statement = "abort" | "throw" ;
+
+alias_tok = "alias" | "&" ;
+
+stmt_declaration = "declare" "var" identifier ";"
+                 | "declare" "struct" "<" defined_struct ">" identifier ";"
+                 | "declare" "class" "<" defined_class ">" identifier ";"
+                 | "var" var_decl_list ";"
+                 | "var" alias_tok identifier "=" declared_var ";"
+                 | "struct" "<" defined_struct ">" struct_decl_list ";"
+                 | "struct" "<" defined_struct ">" alias_tok identifier "=" declared_var ";"
+                 | "class" "<" defined_class ">" class_decl_list ";"
+                 | "class" "<" defined_class ">" alias_tok identifier "=" declared_var ";"
+                 | "string" string_decl_list [ "," ] ";"
+                 | const_int_decl
+                 | enum_decl
+                 | function_decl
+                 | static_decl ;
+
+var_decl_list = var_decl { "," var_decl } ;
+
+var_decl = identifier
+         | identifier "=" nonclass_expr
+         | identifier "=" script_expr ;
+
+(* Enumerations *)
+enum_decl = "enum" identifier [ ":" const_int_type ] "{" enum_item_list [ "," ] "}" ";" ;
+
+const_int_type = "int" | "char" | "byte" | "long" | "long" "int" ;
+
+enum_item_list = enum_item { "," enum_item } ;
+
+enum_item = const_int | identifier ;
+
+const_int_decl = "const" const_int_type const_int_decl_list [ "," ] ";" ;
+
+const_int_decl_list = const_int { "," const_int } ;
+
+const_int = identifier "=" [ int_cast ] const_int_expr ;
+
+(* Classes and Structs *)
+class_decl_list = class_decl { "," class_decl } ;
+
+class_decl = identifier
+           | identifier "=" class_expr ;
+
+class_expr = new_expr | identifier | function_call ;
+
+struct_decl_list = struct_decl { "," struct_decl } ;
+
+struct_decl = identifier
+            | identifier "=" nonclass_expr ;
+
+static_decl = "static" "var" static_var_decl_list ";"
+            | "static" "struct" "<" defined_struct ">" static_struct_var_decl_list ";"
+            | "static" "class" "<" defined_class ">" static_cls_decl_list ";" ;
+
+static_var_decl_list = static_var { "," static_var } ;
+
+static_var = identifier ;
+
+static_struct_var_decl_list = static_struct_var { "," static_struct_var } ;
+
+static_struct_var = identifier ;
+
+static_cls_decl_list = static_cls { "," static_cls } ;
+
+static_cls = identifier ;
+
+string_literal_rule = string_literal { string_literal } ;
+
+string_prefix_rule = string_literal_rule string_prefix ;
+
+string_decl_list = string_decl { "," string_decl } ;
+
+string_decl = identifier "=" string_literal_rule ;
+
+function_decl = "extern" function_proto ";" ;
+
+(* Assignment *)
+assignment_statement = expression "=" expression ";"
+                     | expression "=" script_expr ";"
+                     | nonclass_expr assignment_operator nonclass_expr ";"
+                     | nonclass_expr "<<" appended_element_list ";" ;
+
+assignment_operator = "+=" | "-=" | "*=" | "/=" | "%=" | "&=" ;
+
+appended_element_list = appended_element { "<<" appended_element } ;
+
+appended_element = nonclass_expr | "{" script_command_list "}" ;
+
+(* Control Flow *)
+scoped_statement = "{" [ statement_list ] [ label_statement ] "}"
+                 | simple_statement
+                 | if_statement ;
+
+if_statement = "if" "(" expression ")" scoped_statement [ "else" scoped_statement ] ;
+
+trycatch_statement = "try" "{" [ statement_list ] [ label_statement ] "}" "catch" "(" [ identifier ] ")" "{" [ statement_list ] [ label_statement ] "}" ;
+
+while_statement = "while" "(" nonclass_expr ")" scoped_statement [ opt_nobreak ]
+               | "forever" scoped_statement [ opt_nobreak ]
+               | "do" scoped_statement "while" "(" nonclass_expr ")" [ opt_nobreak_do ]
+               | "breakable" scoped_statement [ opt_nobreak ] ;
+
+opt_nobreak = "nobreak" "{" [ statement_list ] [ label_statement ] "}" ;
+
+opt_nobreak_do = "nobreak" "{" [ statement_list ] [ label_statement ] "}" | ";" ;
+
+opt_nobreak_conv = [ "nobreak" "{" [ statement_list ] [ label_statement ] "}" ] ;
+
+array_enum_statement = "enum" "(" ")" ";" ;
+
+array_loop_statement = start_array_variables scoped_statement [ opt_nobreak ]
+                     | start_array_variables "attend" identifier ";" ;
+
+start_array_variables = start_array_loop ")"
+                      | start_array_loop "with" identifier ")"
+                      | start_array_loop "with" identifier "to" identifier ")" ;
+
+start_array_loop = "for" "(" identifier "in" declared_var ;
+
+(* Function Calls *)
+function_call_statement = function_call ";" ;
+
+special_method_call_statement = primary hierarchy_tok "say" "(" [ nonclass_expr_list ] ")" ";"
+                              | primary hierarchy_tok "hide" "(" ")" ";"
+                              | run_script_expression ";" ;
+
+run_script_expression = [ opt_primary_expression ] "runscript" "(" nonclass_expr [ opt_delay ] ")" ;
+
+opt_delay = "," nonclass_expr ;
+
+return_statement = "return" [ expression ] ";" ;
+
+(* Conversation *)
+opt_nest = [ ":" "nested" ] ;
+
+converse_statement = "converse" "{" [ noncase_statement_list ] response_case_list "}" [ opt_nobreak_conv ]
+                   | "converse" [ opt_nest ] conv_expression "{" [ noncase_statement_list ] converse_case_list "}" [ opt_nobreak_conv ]
+                   | "converse" "attend" identifier ";" ;
+
+conv_expression = "(" expression ")" ;
+
+converse_case_list = { converse_case } ;
+
+converse_case = "case" declared_var_value [ converse_options ] ":" [ noncase_statement_list ]
+              | "case" string_list [ converse_options ] ":" [ noncase_statement_list ]
+              | "always" ":" [ noncase_statement_list ]
+              | "default" ":" [ noncase_statement_list ] ;
+
+opt_int_value = [ "(" int_literal ")" ] ;
+
+converse_case_attend = "case" declared_var_value [ converse_options ] "attend" identifier ":"
+                     | "case" string_list [ converse_options ] "attend" identifier ":"
+                     | "default" [ opt_int_value ] "attend" identifier ":" ;
+
+response_case_list = response_case { "else" response_case } ;
+
+response_case = response_expression [ statement_list ] ;
+
+response_expression = "if" "(" "response" "==" string_literal_rule ")"
+                    | "if" "(" "response" "in" "[" string_list "]" ")" ;
+
+string_list = string_literal_rule { "," string_literal_rule } ;
+
+converse_options = [ "(" "remove" ")" ] ;
+
+(* Switch Statements *)
+switch_statement = "switch" "(" expression ")" "{" switch_case_list "}" ;
+
+switch_case_list = switch_case { switch_case } ;
+
+switch_case = "case" int_literal ":" [ noncase_statement_list ]
+            | "case" string_literal ":" [ noncase_statement_list ]
+            | "default" ":" [ noncase_statement_list ] ;
+
+(* Scripts *)
+script_expr = "script" item [ opt_script_delay ] script_command ;
+
+script_statement = script_expr ;
+
+item = nonclass_expr ;
+
+script_command_list = script_command { script_command } ;
+
+script_command = "finish" ";"
+               | "resurrect" ";"
+               | "continue" ";"
+               | "reset" ";"
+               | "repeat" repeat_count script_command ";"
+               | "repeat" nonclass_expr "," nonclass_expr script_command ";"
+               | "raw" "(" int_literal ")" ";"
+               | "nop" ";"
+               | "nop2" ";"
+               | "nohalt" ";"
+               | "wait" nonclass_expr [ "minutes" | "hours" ] ";"
+               | "wait" "while" [ "near" | "far" ] nonclass_expr ";"
+               | "remove" ";"
+               | "rise" ";"
+               | "descend" ";"
+               | "frame" nonclass_expr ";"
+               | "actor" "frame" [ nonclass_expr | actor_frames ] ";"
+               | "hatch" ";"
+               | "setegg" nonclass_expr "," nonclass_expr ";"
+               | "setegg" egg_criteria "," nonclass_expr ";"
+               | "next" "frame" [ "cycle" ] ";"
+               | "previous" "frame" [ "cycle" ] ";"
+               | "say" nonclass_expr ";"
+               | "step" nonclass_expr [ "," nonclass_expr ] ";"
+               | "step" direction ";"
+               | "music" nonclass_expr [ "," nonclass_expr ] ";"
+               | start_call [ "," nonclass_expr ] ";"
+               | "speech" nonclass_expr ";"
+               | "sfx" nonclass_expr ";"
+               | "face" [ nonclass_expr | direction ] ";"
+               | "weather" nonclass_expr ";"
+               | "hit" nonclass_expr "," [ nonclass_expr | dam_type ] ";"
+               | "attack" ";"
+               | declared_var_value ";"
+               | "{" script_command_list "}" ;
+
+start_call = "call" nonclass_expr ;
+
+repeat_count = nonclass_expr | "forever" ;
+
+dam_type = "normal_damage" | "fire_damage" | "magic_damage" | "lightning_damage"
+         | "poison_damage" | "starvation_damage" | "freezing_damage" | "ethereal_damage"
+         | "sonic_damage" ;
+
+direction = "north" | "ne" | "east" | "se" | "south" | "sw" | "west" | "nw" ;
+
+actor_frames = "standing" | "step_right" | "step_left" | "ready" | "raise_1h" | "reach_1h"
+             | "strike_1h" | "raise_2h" | "reach_2h" | "strike_2h" | "sitting" | "bowing"
+             | "kneeling" | "sleeping" | "cast_up" | "cast_out" ;
+
+egg_criteria = "cached_in" | "party_near" | "avatar_near" | "avatar_far" | "avatar_footpad"
+             | "party_footpad" | "something_on" | "external_criteria" ;
+
+opt_script_delay = [ "after" nonclass_expr "ticks" ] ;
+
+(* Break, Continue, and Labels *)
+break_statement = "break" ";" ;
+
+continue_statement = "continue" ";" ;
+
+fallthrough_statement = "fallthrough" ";" ;
+
+label_statement = identifier ":" ;
+
+goto_statement = "goto" identifier ";" ;
+
+delete_statement = "delete" declared_var ";" ;
+
+answer_statement = "add" "(" nonclass_expr_list ")" ";"
+                 | "remove" "(" nonclass_expr_list ")" ";" ;
+
+(* Expressions *)
+noncase_statement_list = { noncase_statement } ;
+
+noncase_statement = simple_or_if_statement | statement_block ;
+
+opt_nonclass_expr_list = [ nonclass_expr_list ] ;
+
+nonclass_expr_list = nonclass_expr { "," nonclass_expr } ;
+
+nonclass_expr = expression ;
+
+expression = primary
+           | nonclass_expr "+" nonclass_expr
+           | nonclass_expr "-" nonclass_expr
+           | nonclass_expr "*" nonclass_expr
+           | nonclass_expr "/" nonclass_expr
+           | nonclass_expr "%" nonclass_expr
+           | nonclass_expr "==" nonclass_expr
+           | "new" "script" script_command
+           | "user_choice"
+           | nonclass_expr "!=" nonclass_expr
+           | nonclass_expr "<" nonclass_expr
+           | nonclass_expr "<=" nonclass_expr
+           | nonclass_expr ">" nonclass_expr
+           | nonclass_expr ">=" nonclass_expr
+           | nonclass_expr "&&" nonclass_expr
+           | nonclass_expr "||" nonclass_expr
+           | nonclass_expr "in" nonclass_expr
+           | nonclass_expr "&" nonclass_expr
+           | "+" primary
+           | "-" primary
+           | addressof
+           | "!" primary
+           | "[" [ expression_list ] "]"
+           | string_literal_rule
+           | string_prefix_rule
+           | new_expr
+           | run_script_expression ;
+
+addressof = "&" identifier
+          | "&" "struct" "<" defined_struct ">" "::" identifier ;
+
+opt_expression_list = [ expression_list [ "," ] ] ;
+
+expression_list = expression { "," expression } ;
+
+int_cast = "(" const_int_type ")" ;
+
+primary = int_literal
+        | [ int_cast ] int_literal
+        | member_selector
+        | declared_var_value
+        | declared_var "[" expression "]"
+        | "gflags" "[" nonclass_expr "]"
+        | function_call
+        | "true"
+        | "false"
+        | "event"
+        | "item"
+        | "(" expression ")" ;
+
+new_expr = "new" defined_class "(" [ nonclass_expr_list ] ")" ;
+
+hierarchy_tok = "->" | "." ;
+
+member_selector = primary hierarchy_tok identifier ;
+
+opt_primary_expression = [ primary hierarchy_tok ] ;
+
+function_call = member_selector [ "original" ] "(" [ expression_list ] ")"
+              | identifier [ "original" ] "(" [ expression_list ] ")"
+              | primary hierarchy_tok defined_class "::" identifier "(" [ expression_list ] ")"
+              | defined_class "::" identifier "(" [ expression_list ] ")"
+              | primary hierarchy_tok "(" "*" primary ")" "(" [ expression_list ] ")"
+              | "(" "*" primary ")" "(" [ expression_list ] ")"
+              | primary hierarchy_tok "(" "@" int_literal ")" "(" [ expression_list ] ")"
+              | "(" "@" int_literal ")" "(" [ expression_list ] ")" ;
+
+(* Parameters *)
+opt_param_list = [ param_list ] ;
+
+param_list = param { "," param } ;
+
+param = identifier
+      | "var" identifier
+      | "struct" "<" defined_struct ">" identifier
+      | "class" "<" defined_class ">" identifier ;
+
+(* Integer Literals *)
+sign_int_literal = int_literal
+                 | "-" int_literal
+                 | "+" int_literal ;
+
+int_literal = sign_int_literal
+            | [ int_cast ] sign_int_literal
+            | declared_sym
+            | "true"
+            | "false" ;
+
+(* Types *)
+opt_void = [ "void" ] ;
+
+ret_type = "var"
+         | "struct" "<" defined_struct ">"
+         | [ "void" ] ;
+
+(* Declared Identifiers *)
+declared_var_value = declared_sym ;
+
+declared_var = declared_sym ;
+
+declared_sym = identifier ;
+
+defined_class = identifier ;
+
+defined_struct = identifier ;
