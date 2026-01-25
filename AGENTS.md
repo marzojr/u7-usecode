@@ -39,7 +39,7 @@ For general project information, background, and detailed tool descriptions, see
 
 ## Tool Paths and Versions
 
-The [Makefile](Makefile#L1-L2) locates tools dynamically via `command -v`:
+The [Makefile](Makefile#L1-L2) locates tools dynamically via `readlink -f $(command -v <tool_name>)`:
 
 * `ucc`: Usecode C compiler (resolved from `$PATH`)
 * `ucxt`: Usecode eXtractor Tool (resolved from `$PATH`)

@@ -1,5 +1,5 @@
-UCC:=$(shell command -v ucc)
-UCXT:=$(shell command -v ucxt)
+UCC:=$(shell readlink -f $(shell command -v ucc))
+UCXT:=$(shell readlink -f $(shell command -v ucxt))
 
 UCC_ARGS:=-c always -b -W no-goto -W no-integer-coercion -W no-shape-to-function
 UCXT_ARGS:=-a -fs
@@ -39,7 +39,7 @@ ss: usecode.ss.orig.ucxt usecode.ss.new.bin usecode.ss.orig.bin usecode.ss.new.u
 
 ref: usecode.fov.ref.ucxt usecode.ss.ref.ucxt
 
-check: check.fov check.ss
+check: fov ss check.fov check.ss
 
 check.% : usecode.%.new.ucxt
 	@if [ ! -f usecode.$*.ref.ucxt ]; then \
