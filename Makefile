@@ -1,5 +1,5 @@
-UCC:=D:/msys64/home/Marzo/exult-linux/exult/ucc.exe
-UCXT:=D:/msys64/home/Marzo/exult-linux/exult/ucxt.exe
+UCC:=$(shell command -v ucc)
+UCXT:=$(shell command -v ucxt)
 
 UCC_ARGS:=-c always -b -W no-goto -W no-integer-coercion -W no-shape-to-function
 UCXT_ARGS:=-a -fs
@@ -9,9 +9,20 @@ FAIL:=\e[1m\e[31m[❌  FAIL]\e[0m
 
 strip_suffix = $(patsubst %.orig,%, $(patsubst %.new,%, $(1)))
 
-.PHONY: all all_clean clean ref fov ss check
+.PHONY: all all_clean clean ref fov ss check help
 
 all: fov ss check
+
+help:
+	@printf "make            Build fov, ss, then run all checks (default).\n"
+	@printf "make fov        Build usecode.fov.new/orig bins and .new.ucxt.\n"
+	@printf "make ss         Build usecode.ss.new/orig bins and .new.ucxt.\n"
+	@printf "make check.fov  Diff usecode.fov.new.ucxt against usecode.fov.ref.ucxt.\n"
+	@printf "make check.ss   Diff usecode.ss.new.ucxt against usecode.ss.ref.ucxt.\n"
+	@printf "make check      Run check.fov and check.ss.\n"
+	@printf "make ref        Refresh reference ucxts from current .new.ucxt outputs.\n"
+	@printf "make clean      Remove generated bins and .ucxt (keeps refs).\n"
+	@printf "make all_clean  clean + remove ref ucxts.\n"
 
 all_clean: clean
 	rm -f usecode.fov.ref.ucxt usecode.ss.ref.ucxt
