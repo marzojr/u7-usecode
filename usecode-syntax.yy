@@ -942,10 +942,12 @@ opt_script_delay:
 
 break_statement:
 	BREAK ';'
+	| BREAK IDENTIFIER ';'
 	;
 
 continue_statement:
 	CONTINUE ';'
+	| CONTINUE IDENTIFIER ';'
 	;
 
 fallthrough_statement:

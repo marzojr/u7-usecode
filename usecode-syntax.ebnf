@@ -395,9 +395,11 @@ egg_criteria = "cached_in" | "party_near" | "avatar_near" | "avatar_far" | "avat
 opt_script_delay = [ "after" nonclass_expr "ticks" ] ;
 
 (* Break, Continue, and Labels *)
-break_statement = "break" ";" ;
+break_statement = "break" ";"
+                | "break" identifier ;
 
-continue_statement = "continue" ";" ;
+continue_statement = "continue" ";"
+                   | "continue" identifier ;
 
 fallthrough_statement = "fallthrough" ";" ;
 
