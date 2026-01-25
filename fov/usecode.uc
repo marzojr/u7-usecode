@@ -2615,13 +2615,13 @@ void FuncWoundedMan shape#(SHAPE_WOUNDED_MAN) () {
 }
 
 void FuncWell shape#(SHAPE_WELL) () {
-	var var0000 = AVATAR->get_npc_object()->get_cont_items(
+	var bucket = AVATAR->get_npc_object()->get_cont_items(
 			SHAPE_BUCKET, QUALITY_ANY, FRAME_BUCKET_EMPTY);
-	if (var0000) {
-		var var0001 = [-5, -5];
-		var var0002 = [-1, -1];
+	if (bucket) {
+		var deltaX = [-5, -5];
+		var deltaY = [-1, -1];
 		tryPathRunUsecodeTo(
-				item, var0001, var0002, 0, FuncBucket, var0000,
+				item, deltaX, deltaY, 0, FuncBucket, bucket,
 				PATH_SUCCESS_9);
 	}
 }
