@@ -9,7 +9,9 @@ FAIL:=\e[1m\e[31m[❌  FAIL]\e[0m
 
 strip_suffix = $(patsubst %.orig,%, $(patsubst %.new,%, $(1)))
 
-all: usecode.fov.orig.ucxt usecode.ss.orig.ucxt check_ref
+.PHONY: all all_clean clean ref fov ss check
+
+all: fov ss check
 
 all_clean: clean
 	rm -f usecode.fov.ref.ucxt usecode.ss.ref.ucxt
@@ -20,27 +22,23 @@ clean:
 	rm -f usecode.fov.orig.bin usecode.ss.orig.bin
 	rm -f usecode.fov.orig.ucxt usecode.ss.orig.ucxt
 
+fov: usecode.fov.orig.ucxt usecode.fov.new.bin usecode.fov.orig.bin usecode.fov.new.ucxt
+
+ss: usecode.ss.orig.ucxt usecode.ss.new.bin usecode.ss.orig.bin usecode.ss.new.ucxt
+
 ref: usecode.fov.ref.ucxt usecode.ss.ref.ucxt
 
-check_ref: usecode.fov.new.ucxt usecode.ss.new.ucxt
-	@if [ ! -f usecode.fov.ref.ucxt ]; then \
-		printf "$(FAIL) Reference file usecode.fov.ref.ucxt is missing!\n"; \
+check: check.fov check.ss
+
+check.% : usecode.%.new.ucxt
+	@if [ ! -f usecode.$*.ref.ucxt ]; then \
+		printf "$(FAIL) Reference file usecode.$*.ref.ucxt is missing!\n"; \
 		exit 1; \
 	fi
-	@if [ ! -f usecode.ss.ref.ucxt ]; then \
-		printf "$(FAIL) Reference file usecode.ss.ref.ucxt is missing!\n"; \
-		exit 1; \
-	fi
-	@if diff -u usecode.fov.ref.ucxt usecode.fov.new.ucxt &> /dev/null; then \
-		printf "$(PASS) ☥ 'Forge of Virtue' usecode matches reference.\n"; \
+	@if diff -u usecode.$*.ref.ucxt usecode.$*.new.ucxt &> /dev/null; then \
+		printf "$(PASS) ☥ '$*' usecode matches reference.\n"; \
 	else \
-		printf "$(FAIL) ☥ 'Forge of Virtue' usecode differs from reference!\n"; \
-		exit 1; \
-	fi
-	@if diff -u usecode.ss.ref.ucxt usecode.ss.new.ucxt &> /dev/null; then \
-		printf "$(PASS) ⚚ 'Silver Seed' usecode matches reference.\n"; \
-	else \
-		printf "$(FAIL) ⚚ 'Silver Seed' usecode differs from reference!\n"; \
+		printf "$(FAIL) ☥ '$*' usecode differs from reference!\n"; \
 		exit 1; \
 	fi
 
