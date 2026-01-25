@@ -55658,7 +55658,7 @@ void Func063E object#(0x63E) () {
 		// var0000 = script item {
 		//	speech SPEECH_GUARDIAN_LAUGH_RANGE_END;
 		//};
-		var0000 = UI_execute_usecode_array((byte)0x56, 0x0015);
+		var0000 = script (byte)0x56 raw(0x0015);;
 		var var0002 = UI_get_party_list();
 		for (var0005 in var0002) {
 			var0005->set_item_flag(PARALYZED);
