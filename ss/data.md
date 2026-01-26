@@ -1,10 +1,44 @@
 # Externally Called Usecode Functions
 
-## Custom Functions
+## Overall
+
+This document lists all Usecode functions called by the game engine, that is, not called by other Usecode functions.
+
+Usecode functions called by the engine (for whatever reason) are declared as either `object#(<N>)` or `shape#(<N>)`, for some number `<N>`. `shape#(<N>)` are a special class of `object#(<N>)` functions that are called to execute Usecode when the shape `<N>` is double-clicked, or runs Usecode-based events of some sort.
+
+Functions called only by other Usecode functions are declared as `id#(<N>)` or `<N>` (both are equivalent).
+
+### Shape functions
+
+Functions declared as `shape#(<N>)` are called when the shape with ID `<N>` is activated.
+
+In the original SIB/SI/SS games (and translations), all shapes are in the range `0-0x3ff` — with a caveat.
+
+When looking at `SHAPES.VGA`, one can see that it goes all the way to shape `0x40b`, with the "multiracial" Avatar skins corresponding to shapes `0x400-0x40b`. These aren't "true" shapes, in the sense that they cannot be placed in-game — the game data only allows 10-bits for shape number — but are instead used as a source of pixel data to override the appearance of normal Avatar shapes when a given skin is chosen.
+
+### NPC functions
+
+The first 256 NPCs are "true" NPCs and can call Usecode number when double-clicked, or when events happen (schedule-dependent). NPC number `<N>` calls function `<N> + 0x400`.
+
+In Usecode, NPC number `<N>` is referred to using a negative number (so `<M> = - <N>`), and these constants are used in the definition with a minus sign as, so they are declared as `object#(0x400 - <M>)`.
+
+The exception is the Avatar — the Avatar's ID is `0`, but their Usecode constant is `-356` (that is, the game takes `-356` to mean "the Avatar"), their Usecode function is 0x400, and this function is called only when they die.
+
+### Miscellaneous functions
+
+Other functions are called by the engine on various occasions:
+
+* Some are defined in `WEAPONS.DAT` to call specific Usecode functions when a weapon *hits* a target.
+* Some are specified in Usecode egg data to be called when they 'hatch'.
+* Others are hard-coded by the engine to be called on some events, or when some intrinsics are called.
+
+## Hard-Coded Functions
+
+Note: the `Condition` column lists the conditions when the *game engine* will call the function in question; no mention is made in this column of whether or not they are also called by other Usecode functions, or by an embedded Usecode script.
 
 | Function | Condition                                             |
 | -------- | ----------------------------------------------------- |
-| 0x60e    | When avatar dies (`event = 4`)                        |
+| 0x400    | When avatar dies (`event = 4`)                        |
 | 0x614    | Speech (voice eggs, party member death)               |
 | 0x622    | Sleep schedule on Avatar                              |
 | 0x625    | Arresting guard usecode                               |
@@ -21,6 +55,8 @@
 
 ## Weapon Functions
 
+Note: the `Condition` column lists the conditions when the *game engine* will call the function in question; no mention is made in this column of whether or not they are also called by other Usecode functions, or by an embedded Usecode script.
+
 | Weapon | Function | Suggested Name          |
 | ------ | -------- | ----------------------- |
 | 280    | 0x646    | "On_Ignite_Hit"         |
@@ -33,6 +69,16 @@
 | 540    | 0x642    | "On_Douse_Hit"          |
 
 ## Chunk Usecode Egg Dump
+
+The following tables list Usecode eggs placed in the game world, organized by map chunk.
+
+**Quality**: A game data value stored in each egg that can serve various purposes depending on context (e.g., parameters, flags, or identifiers).
+
+**Location**: World coordinates `[x, y, z]` where `x, y` are tile positions from the top-left of the map, and `z` is height above ground.
+
+**Function 0x000**: Eggs with function number `0x000` are disabled eggs — likely remnants of cut plot content where the function field was zeroed instead of deleting the egg entirely.
+
+**Note**: Some chunks contain duplicate rows with identical coordinates — these represent multiple eggs placed at the same location in the game data.
 
 ### Chunk 0x00
 

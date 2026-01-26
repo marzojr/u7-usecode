@@ -1,6 +1,38 @@
 # Externally Called Usecode Functions
 
-## Custom Functions
+## Overall
+
+This document lists all Usecode functions called by the game engine, that is, not called by other Usecode functions.
+
+Usecode functions called by the engine (for whatever reason) are declared as either `object#(<N>)` or `shape#(<N>)`, for some number `<N>`. `shape#(<N>)` are a special class of `object#(<N>)` functions that are called to execute Usecode when the shape `<N>` is double-clicked, or runs Usecode-based events of some sort.
+
+Functions called only by other Usecode functions are declared as `id#(<N>)` or `<N>` (both are equivalent).
+
+### Shape functions
+
+Functions declared as `shape#(<N>)` are called when the shape with ID `<N>` is activated.
+
+In the original BG/FOV games (and translations), all shapes are in the range `0-0x3ff`.
+
+### NPC functions
+
+The first 256 NPCs are "true" NPCs and can call Usecode number when double-clicked, or when events happen (schedule-dependent). NPC number `<N>` calls function `<N> + 0x400`.
+
+In Usecode, NPC number `<N>` is referred to using a negative number (so `<M> = - <N>`), and these constants are used in the definition with a minus sign as, so they are declared as `object#(0x400 - <M>)`.
+
+The exception is the Avatar — the Avatar's ID is `0`, but their Usecode constant is `-356` (that is, the game takes `-356` to mean "the Avatar"), their Usecode function is `0x60e`, and this function is called only when they die.
+
+### Miscellaneous functions
+
+Other functions are called by the engine on various occasions:
+
+* Some are defined in `WEAPONS.DAT` to call specific Usecode functions when a weapon *hits* a target.
+* Some are specified in Usecode egg data to be called when they 'hatch'.
+* Others are hard-coded by the engine to be called on some events, or when some intrinsics are called.
+
+## Hard-Coded Functions
+
+Note: the `Condition` column lists the conditions when the *game engine* will call the function in question; no mention is made in this column of whether or not they are also called by other Usecode functions, or by an embedded Usecode script.
 
 | Function | Condition                                             |
 | -------- | ----------------------------------------------------- |
@@ -10,10 +42,12 @@
 | 0x625    | Arresting guard usecode                               |
 | 0x626    | When objects are destroyed                            |
 | 0x634    | By Sit schedule when sitting down                     |
-| 0x638    | Double-click shape 642, if `Quality > 99`             |
+| 0x638    | Double-click shape 0x282, if `Quality > 99`           |
 | 0x63d    | Instead of normal dialog when failing copy protection |
 
 ## Weapon Functions
+
+Note: the `Condition` column lists the conditions when the *game engine* will call the function in question; no mention is made in this column of whether or not they are also called by other Usecode functions, or by an embedded Usecode script.
 
 | Weapon | Function | Suggested Name                |
 | ------ | -------- | ----------------------------- |
@@ -36,6 +70,14 @@
 | 782    | 0x30e    | "On_Flaming_Oil_Hit"          |
 
 ## Chunk Usecode Egg Dump
+
+The following tables list Usecode eggs placed in the game world, organized by map chunk.
+
+**Quality**: A game data value stored in each egg that can serve various purposes depending on context (e.g., parameters, flags, or identifiers).
+
+**Location**: World coordinates `[x, y, z]` where `x, y` are tile positions from the top-left of the map, and `z` is height above ground.
+
+**Note**: Some chunks contain duplicate rows with identical coordinates—these represent multiple eggs placed at the same location in the game data.
 
 ### Chunk 0x00
 

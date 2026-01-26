@@ -8,6 +8,7 @@ For general project information, background, and detailed tool descriptions, see
 * Key tools: `ucc` (Usecode C compiler), `ucxt` (extract/decompile usecode), `wuc` (Usecode assembler).
 * Main targets: `make fov` / `make ss` build compiled binaries and extracted `.new.ucxt`; `make check.fov` / `make check.ss` compare against refs; `make ref` regenerates reference `.ref.ucxt` (rarely needed). `make` is equivalent to `make fov ss check.fov check.ss`.
 * Important dirs: `fov/`, `ss/` contain in-progress higher-level conversions plus includes; `ucxt/` stores extracted originals; `uca/` holds assembly dumps (notably SIES with debug opcodes).
+* Reference docs: [fov/data.md](fov/data.md) and [ss/data.md](ss/data.md) list all engine-called functions (shape/NPC handlers, hard-coded callbacks, weapon hits) plus complete Usecode egg dumps organized by map chunk with world coordinates.
 * Syntax docs: see [usecode-syntax.ebnf](usecode-syntax.ebnf) (EBNF) and [usecode-syntax.yy](usecode-syntax.yy) (simplified Bison); intrinsics reference: [exult_intrinsics.txt](exult_intrinsics.txt).
 
 ## Build / Compile Pipeline
@@ -46,3 +47,15 @@ The [Makefile](Makefile#L1-L2) locates tools dynamically via `readlink -f $(comm
 * `wuc`: Usecode assembler (used externally; not in Makefile)
 
 **⚠️ Version Requirement**: Only the newest versions are guaranteed to work. Tools are continuously updated with new features to reproduce original usecode as faithfully as possible. If builds fail, ensure you have the latest versions of `ucc`, `ucxt`, and `wuc` from the Exult project. Older versions may lack syntax changes/code generation needed for accurate compilation/decompilation.
+
+## Engine-Called Functions Reference
+
+The [fov/data.md](fov/data.md) and [ss/data.md](ss/data.md) files document all Usecode functions invoked directly by the game engine (not called by other Usecode):
+
+* **Shape functions** (`shape#<N>`): triggered when shape `<N>` is double-clicked or runs events.
+* **NPC functions** (`object#(0x400 - <M>)`): the first 256 NPCs call `function = NPC_ID + 0x400` on interaction or schedule events.
+* **Hard-coded functions**: engine callbacks for avatar death, speech/voice eggs, sleep/sit schedules, arresting guards, object destruction, copy-protection failure, etc.
+* **Weapon hit callbacks**: functions defined in `WEAPONS.DAT` called when specific weapons hit targets (e.g., Ignite, Dispel Magic, Death Bolt, Telekinesis).
+* **Usecode egg dump**: complete listing of all placed Usecode eggs organized by map chunk, with world coordinates `[x, y, z]` (tile positions from map origin + height), function numbers, and Quality values. Eggs with function `0x000` are disabled (likely cut content). Some chunks have duplicate entries representing multiple eggs at the same coordinates.
+
+These references are essential when tracing engine→usecode interactions, understanding game event flow, or investigating function calls not visible in code cross-references.
