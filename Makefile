@@ -33,13 +33,16 @@ clean:
 	rm -f usecode.fov.orig.bin usecode.ss.orig.bin
 	rm -f usecode.fov.orig.ucxt usecode.ss.orig.ucxt
 
-fov: usecode.fov.orig.ucxt usecode.fov.new.bin usecode.fov.orig.bin usecode.fov.new.ucxt
+fov: build.fov
 
-ss: usecode.ss.orig.ucxt usecode.ss.new.bin usecode.ss.orig.bin usecode.ss.new.ucxt
+ss: build.ss
 
 ref: usecode.fov.ref.ucxt usecode.ss.ref.ucxt
 
-check: fov ss check.fov check.ss
+check: build.fov build.ss check.fov check.ss
+
+build.%: usecode.%.orig.ucxt usecode.%.new.bin usecode.%.orig.bin usecode.%.new.ucxt
+	@true
 
 check.% : usecode.%.new.ucxt
 	@if [ ! -f usecode.$*.ref.ucxt ]; then \
