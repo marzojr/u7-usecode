@@ -86936,7 +86936,7 @@ void Func07FB object#(0x7FB) () {
 	if (var0000 == 0x001E) {
 		gflags[FAWN_TRIAL_ALYSSAND_SPOKE] = true;
 		UI_init_conversation();
-		gflags[TRIAL_ASK_ALYSSAND_RING] = true;
+		gflags[FAWN_TRIAL_ASK_ALYSSAND_RING] = true;
 		VOLDIN->show_npc_face0(0x0000);
 		say("\"Alyssand, we are told that thou hast often been seen in the "
 			"company of the accused traitor. What things hath he asked of "
@@ -87167,13 +87167,13 @@ void Func07FB object#(0x7FB) () {
 		if (gflags[JENDON_SPOKE_STRANGE_OBJECTS]) {
 			say("\"He did ask me about strange objects, such as I had never "
 				"heard of. They weren't normal items, sir!\"");
-			gflags[TRIAL_ASK_JENDON_STRANGE_OBJECTS] = true;
+			gflags[FAWN_TRIAL_ASK_JENDON_STRANGE_OBJECTS] = true;
 		}
 		if (gflags[ASK_ONLON_GWANI]) {
 			say("\"He asked me about the bloodthirsty savages that live in the "
 				"far north -- had a grisly interest in the tale, I might "
 				"add.\"");
-			gflags[TRIAL_ASK_JENDON_SAVAGES] = true;
+			gflags[FAWN_TRIAL_ASK_JENDON_SAVAGES] = true;
 		}
 		if (gflags[ASK_DELIN_ABOUT_BATLIN]) {
 			say("\"", var0003,
@@ -87186,7 +87186,7 @@ void Func07FB object#(0x7FB) () {
 				"land?\"");
 			JENDON->show_npc_face1(0x0000);
 			say("\"Yes, captain. The Serpent Ruins.\"");
-			gflags[TRIAL_ASK_DELIN_FUR_CAP] = true;
+			gflags[FAWN_TRIAL_ASK_DELIN_FUR_CAP] = true;
 		}
 		UI_remove_npc_face1();
 		UI_set_conversation_slot(0);
@@ -87506,7 +87506,7 @@ void Func07FB object#(0x7FB) () {
 		abort;
 	}
 	if (var0000 == 0x0033) {
-		gflags[TRIAL_ZULITH_SPOKE_BEFORE] = true;
+		gflags[FAWN_TRIAL_ZULITH_SPOKE_BEFORE] = true;
 		gflags[FAWN_TRIAL_ZULITH_SPOKE] = true;
 		UI_init_conversation();
 		ZULITH->show_npc_face0(0x0000);
@@ -87791,13 +87791,13 @@ break_converse2:
 		say("\"Why hast thou brought me before the Oracle, Avatar? Ask me thy "
 			"questions.\"");
 		add(["the character of the accused", "Daemonism"]);
-		if (gflags[TRIAL_ASK_JENDON_STRANGE_OBJECTS]) {
+		if (gflags[FAWN_TRIAL_ASK_JENDON_STRANGE_OBJECTS]) {
 			add("strange objects");
 		}
-		if (gflags[TRIAL_ASK_DELIN_FUR_CAP]) {
+		if (gflags[FAWN_TRIAL_ASK_DELIN_FUR_CAP]) {
 			add("ancient ruins");
 		}
-		if (gflags[TRIAL_ASK_JENDON_SAVAGES]) {
+		if (gflags[FAWN_TRIAL_ASK_JENDON_SAVAGES]) {
 			add("savages");
 		}
 		if (gflags[KNOWS_JENDON_MET_GWENNO]) {
@@ -87941,7 +87941,7 @@ break_converse3:
 		say("\"I shall answer thy questions truthfully, Avatar. Of what can I "
 			"tell thee?\"");
 		add(["the character of the accused", "Daemonism"]);
-		if (gflags[TRIAL_ASK_DELPHYNIA_VARO_LEAVES]) {
+		if (gflags[FAWN_TRIAL_ASK_DELPHYNIA_VARO_LEAVES]) {
 			add("Varo Leaves");
 		}
 break_converse4:
@@ -88025,7 +88025,7 @@ break_converse4:
 			"make me nervous...\"");
 		say("\"Let this be swift. Ask thy questions.\"");
 		add(["the character of the accused", "Daemonism"]);
-		if (gflags[TRIAL_ASK_ALYSSAND_RING]) {
+		if (gflags[FAWN_TRIAL_ASK_ALYSSAND_RING]) {
 			add("engagement ring");
 		}
 break_converse5:
@@ -88298,7 +88298,7 @@ break_converse8:
 				remove(["following me", "no questions"]);
 				add("no further questions");
 				breakable {
-					if (gflags[TRIAL_ZULITH_SPOKE_BEFORE]) {
+					if (gflags[FAWN_TRIAL_ZULITH_SPOKE_BEFORE]) {
 						say("\"As I stated in the earlier session of these "
 							"proceedings, ",
 							var0002,
