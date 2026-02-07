@@ -17818,7 +17818,7 @@ void Func033D shape#(0x33D) () {
 				} else {
 					UI_sprite_effect(
 							ANIMATION_LIGHTNING_GREEN, var0007.x, var0007.y, 0,
-							0, var000C, LOOP_ONCE2);
+							0, var000C, LOOP_REVERSE);
 				}
 				UI_lightning();
 				UI_play_sound_effect(0x0074);
@@ -33676,7 +33676,7 @@ void FuncErstam object#(FIRST_NPC_FUNCTION - ERSTAM)() {
 						0, LOOP_ONCE);
 				UI_sprite_effect(
 						ANIMATION_FIREWORKS, var0012.x, var0012.y, 0, 0, 10,
-						LOOP_ONCE2);
+						LOOP_REVERSE);
 				UI_play_sound_effect(0x0077);
 				var000F = script ERSTAM after 7 ticks {
 					nohalt;
@@ -33708,7 +33708,7 @@ void FuncErstam object#(FIRST_NPC_FUNCTION - ERSTAM)() {
 							0, 0, 0, LOOP_ONCE);
 					UI_sprite_effect(
 							ANIMATION_FIREWORKS, var0012.x, var0012.y, 0, 0, 10,
-							LOOP_ONCE2);
+							LOOP_REVERSE);
 					UI_play_sound_effect(0x0077);
 					var000F = script ERSTAM after 7 ticks {
 						nohalt;
@@ -33725,7 +33725,7 @@ void FuncErstam object#(FIRST_NPC_FUNCTION - ERSTAM)() {
 						0, LOOP_ONCE);
 				UI_sprite_effect(
 						ANIMATION_FIREWORKS, var0012.x, var0012.y, 0, 0, 10,
-						LOOP_ONCE2);
+						LOOP_REVERSE);
 				UI_play_sound_effect(0x0077);
 				var000F = script ERSTAM after 7 ticks {
 					nohalt;
@@ -58936,7 +58936,7 @@ void FuncMorghrim object#(FIRST_NPC_FUNCTION - MORGHRIM)() {
 			UI_sprite_effect(
 					ANIMATION_TELEPORT, 0x063E, 0x044D, 0, 0, 0, LOOP_ONCE);
 			UI_sprite_effect(
-					ANIMATION_TELEPORT, 0x063E, 0x044D, 0, 0, 12, LOOP_ONCE2);
+					ANIMATION_TELEPORT, 0x063E, 0x044D, 0, 0, 12, LOOP_REVERSE);
 			Func097F(MORGHRIM, "Draygan's power is broken!", 0x0003);
 			var0004 = script MORGHRIM after 10 ticks {
 				nohalt;
@@ -71011,7 +71011,7 @@ void Func0650 object#(0x650) () {
 		UI_play_sound_effect(0x005A);
 		var var0001 = Func0941(AVATAR);
 		var var0002 = 0x07D0 + (var0001 * 0x00C8);
-		obj_sprite_effect(ANIMATION_TELEPORT, -2, -2, 0, 0, 0, LOOP_ONCE2);
+		obj_sprite_effect(ANIMATION_TELEPORT, -2, -2, 0, 0, 0, LOOP_REVERSE);
 		gflags[CAST_CHILL_SPELL] = true;
 		var var0003 = Func09A0(0x0007, 0x0002);
 		var0000 = script var0003 after var0002 ticks {
@@ -73725,7 +73725,7 @@ void Func0688 object#(0x688) () {
 }
 
 void Func068A object#(0x68A) () {
-	obj_sprite_effect(ANIMATION_TELEPORT2, -3, -4, 0, 0, 0, LOOP_ONCE2);
+	obj_sprite_effect(ANIMATION_TELEPORT2, -3, -4, 0, 0, 0, LOOP_REVERSE);
 	gflags[CAST_CHILL_SPELL] = false;
 }
 
@@ -76196,7 +76196,7 @@ void Func06D9 object#(0x6D9) () {
 			UI_play_sound_effect(0x0051);
 			UI_sprite_effect(
 					ANIMATION_TELEPORT2, var0003.x, var0003.y, 0, 0, 12,
-					LOOP_ONCE2);
+					LOOP_REVERSE);
 			CLONE_IOLO->move_object(var0003);
 			CLONE_IOLO->set_schedule_type(STANDTHERE);
 			Func097F(CLONE_IOLO, "@Avatar!@", 0x0001);
@@ -76217,7 +76217,7 @@ void Func06D9 object#(0x6D9) () {
 			UI_play_sound_effect(0x0051);
 			UI_sprite_effect(
 					ANIMATION_TELEPORT, var0003.x, var0003.y, 0, 0, 12,
-					LOOP_ONCE2);
+					LOOP_REVERSE);
 			THOXA->move_object(var0003);
 			THOXA->set_schedule_type(STANDTHERE);
 			THOXA->Func07D2();
@@ -76261,10 +76261,10 @@ void Func06D9 object#(0x6D9) () {
 			UI_play_sound_effect(0x0051);
 			UI_sprite_effect(
 					ANIMATION_TELEPORT2, var0003.x, var0003.y, 0, 0, 12,
-					LOOP_ONCE2);
+					LOOP_REVERSE);
 			UI_sprite_effect(
 					ANIMATION_TELEPORT, var0007.x, var0007.y, 0, 0, 12,
-					LOOP_ONCE2);
+					LOOP_REVERSE);
 			var0005 = script item after 30 ticks {
 				nohalt;
 				call Func013E;
@@ -78083,7 +78083,7 @@ void Func06FD object#(0x6FD) () {
 				ANIMATION_TELEPORT, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
 		GUARD1->move_object([0x0722, 0x0273, 0x0000]);
 		UI_sprite_effect(
-				ANIMATION_TELEPORT, 0x0722, 0x0273, 0, 0, 15, LOOP_ONCE2);
+				ANIMATION_TELEPORT, 0x0722, 0x0273, 0, 0, 15, LOOP_REVERSE);
 	}
 	if (event == SCRIPTED) {
 		var0000 = get_object_position();
@@ -78095,7 +78095,7 @@ void Func06FD object#(0x6FD) () {
 				ANIMATION_TELEPORT, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
 		GUARD1->move_object([0x0722, 0x0273, 0x0000]);
 		UI_sprite_effect(
-				ANIMATION_TELEPORT, 0x0722, 0x0273, 0, 0, 15, LOOP_ONCE2);
+				ANIMATION_TELEPORT, 0x0722, 0x0273, 0, 0, 15, LOOP_REVERSE);
 	}
 	if (event == EGG) {
 		var var0001 = AVATAR->find_nearby(0x02EC, 0x000C, MASK_NONE);
@@ -78125,7 +78125,7 @@ void Func06FD object#(0x6FD) () {
 					GUARD1->move_object([var0000.x - 4, var0000.y, 0]);
 					UI_sprite_effect(
 							ANIMATION_TELEPORT, var0000.x - 4, var0000.y, 0, 0,
-							15, LOOP_ONCE2);
+							15, LOOP_REVERSE);
 					var var0005 = script GUARD1 {
 						nohalt;
 						wait 60;
@@ -80439,7 +80439,7 @@ void Func072B object#(0x72B) () {
 				var0003 = var0004->get_object_position();
 				UI_sprite_effect(
 						ANIMATION_PULSATING_DISC, var0003.x - 3, var0003.y - 3,
-						5, 0, 0, LOOP_ONCE2);
+						5, 0, 0, LOOP_REVERSE);
 				var0004->remove_item();
 			}
 			if (var0009 == 0x0013) {
@@ -80581,7 +80581,7 @@ void Func072B object#(0x72B) () {
 							0, 0, 0, LOOP_ONCE);
 					UI_sprite_effect(
 							ANIMATION_TELEPORT, var0015.x - 3, var0015.y - 4, 0,
-							0, 10, LOOP_ONCE2);
+							0, 10, LOOP_REVERSE);
 					UI_play_sound_effect(0x0043);
 					Func097F(AVATAR, "@The Eye of Order!@", 0x0005);
 				}
@@ -84623,7 +84623,7 @@ void Func07DC object#(0x7DC) () {
 		UI_play_sound_effect(0x0082);
 		for (var0003 in var0000) {
 			var0003->obj_sprite_effect(
-					ANIMATION_TELEPORT, 0, 0, 0, 0, 15, LOOP_ONCE2);
+					ANIMATION_TELEPORT, 0, 0, 0, 0, 15, LOOP_REVERSE);
 		}
 		abort;
 	}

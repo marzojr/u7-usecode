@@ -3,8 +3,9 @@ const int NULL_OBJ = 0;
 const int FIRST_NPC_FUNCTION = 0x400;
 
 enum sprite_repeats {
-	LOOP_ONCE = -1,
-	LOOP_ONCE2 = -3	// Not sure about this
+	LOOP_ONCE = -1,		// Go through all frames once.
+	LOOP_UNTIL_OFFSCREEN = -2,	// Keep looping until the sprite is off-screen.
+	LOOP_REVERSE = -3	// As LOOP_ONCE, but in reverse order.
 };
 
 enum spells_si {
