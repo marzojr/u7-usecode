@@ -55,6 +55,13 @@ There is comprehensive documentation on intrinsics in [exult_intrinsics.txt](exu
 
 ## Testing and Building
 
+To use this repository effectively, you need:
+
+* A UNIX-compatible environment: Linux, Mac OSX, and BSD are natively supported. On Windows, use WSL2, msys2, or cygwin (enabling real symlinks is recommended for the latter two).
+* GNU make: available as `make` on Linux and as `gmake` on BSD and Mac OSX.
+* The Exult tools: specifically `ucc` and `ucxt`, installed and available in your PATH.
+* A syntax-aware editor: VSCode with the [Exult Usecode Syntax](https://marketplace.visualstudio.com/items?itemName=Exult.usecode-syntax) extension is recommended.
+
 The main files can be built with `make fov` or `make ss`. They can be checked with `make check.fov` or `make check.ss`. Doing a plain `make` or `make all` will build and check both `fov` and `ss`, while a `make check` is equivalent to doing `make check.fov check.ss`.
 
 A `make ref` can be used to build the reference files used by `check.fov` and `check.ss`, but this should probably never be used.
