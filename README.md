@@ -89,6 +89,13 @@ The basic workflow was as follows:
 4. Iterated (effectively `make all` each time): copy missing lines from raw `ucxt` when the prettifier lost them; hand-prettify; add higher-level control-flow/features to `ucc` and update the prettified sources to use them; repeat until generated output matched originals and was largely free of bare `goto`/`attend`. When there were no more issues stemming from the VB6 prettifier, I moved on to 5:
 5. Iterated on documentation and naming: added constants, function names, and comments, always making sure to `make all` to check for mismatches.
 
+The usecode contains annotation comments using the following conventions:
+
+* `BUG:` identifies bugs in the original usecode.
+* `TYPO:` identifies misspellings (archaic word forms are considered valid, so modern spellcheckers may disagree).
+* `TODO:` marks planned improvements to `ucc` that would simplify the decompiled usecode.
+* `NOTE:` provides additional context, primarily documenting restored dead code.
+
 ## Outstanding issues
 
 Usecode has embedded scripts (which I will call "scripts", for short). `ucc` has a higher level version of those (the `script` block), which compile down to either `UI_execute_usecode_array` or `UI_delayed_execute_usecode_array` intrinsics.
