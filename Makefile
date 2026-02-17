@@ -1,5 +1,11 @@
-UCC:=$(shell readlink -f $(shell command -v ucc))
-UCXT:=$(shell readlink -f $(shell command -v ucxt))
+ifeq ($(OS),Windows_NT)
+	EXE_EXT := .exe
+else
+	EXE_EXT :=
+endif
+
+UCC:=$(shell readlink -f $(shell command -v ucc$(EXE_EXT)))
+UCXT:=$(shell readlink -f $(shell command -v ucxt$(EXE_EXT)))
 
 UCC_ARGS:=-c always -b -W no-goto -W no-integer-coercion -W no-shape-to-function
 UCXT_ARGS:=-a -fs
@@ -68,4 +74,4 @@ usecode.%.orig.bin : ucxt/usecode.%.ucxt $(UCC)
 	$(UCC) $(UCC_ARGS) -I $* -o $@ $<
 
 usecode.%.ucxt : usecode.%.bin $(UCXT)
-	$(UCXT) $(UCXT_ARGS) -$(call strip_suffix,$*) -i$< | dos2unix > $@
+	$(UCXT) $(UCXT_ARGS) -$(call strip_suffix,$*) -i$< | sed 's/\r$$//' > $@
