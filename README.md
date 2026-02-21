@@ -9,7 +9,7 @@ All `*.uc`, `*.ucxt`, and `*.uca` files are different forms of usecode — scrip
 * Ultima VII Part 2: The Serpent Isle Beta ("SIB")
 * Ultima VII Part 2: The Serpent Isle ("SI")
 * Ultima VII Part 2: The Silver Seed ("SS")
-* Exult (an open-source, white-box reverse engineered recreation of those engines for modern computers and operating systems)
+* Exult (an open-source, clean-room reverse engineered recreation of those engines for modern computers and operating systems)
 
 Some of these games had official translations:
 
