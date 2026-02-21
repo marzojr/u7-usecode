@@ -2873,8 +2873,8 @@ void Func010E shape#(0x10E) () {
 		}
 	}
 	if (var0000 == 0x00B3) {
-		if ((gflags[FAWN_TRIAL_DONE_FIRST_DAY] || gflags[FAWN_TRIAL_DONE])
-			&& (!(gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+		if ((gflags[FAWN_TRIAL_ONGOING] || gflags[FAWN_TRIAL_DONE])
+			&& (!(gflags[FAWN_TRIAL_ONGOING]
 				  && gflags[FAWN_TRIAL_DONE]))) {
 			var0001 = script item {
 				nohalt;
@@ -5570,8 +5570,8 @@ void Func01B0 shape#(0x1B0) () {
 		}
 	}
 	if (var0000 == 0x00B3) {
-		if ((gflags[FAWN_TRIAL_DONE_FIRST_DAY] || gflags[FAWN_TRIAL_DONE])
-			&& (!(gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+		if ((gflags[FAWN_TRIAL_ONGOING] || gflags[FAWN_TRIAL_DONE])
+			&& (!(gflags[FAWN_TRIAL_ONGOING]
 				  && gflags[FAWN_TRIAL_DONE]))) {
 			var0001 = script item {
 				nohalt;
@@ -38271,7 +38271,7 @@ void FuncAlyssand object#(FIRST_NPC_FUNCTION - ALYSSAND)() {
 			add("fishnet stockings");
 		}
 		if (gflags[ZULITH_CAUGHT_TAILING]
-			&& (!(gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			&& (!(gflags[FAWN_TRIAL_ONGOING]
 				  || gflags[FAWN_TRIAL_DONE]))) {
 			add("Zulith");
 		}
@@ -38313,7 +38313,7 @@ void FuncAlyssand object#(FIRST_NPC_FUNCTION - ALYSSAND)() {
 		case "Fawn":
 			say("\"Fawn, the city of Beauty. Fawn, the city that lost Love in "
 				"vanity and the pursuit of power.\"");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"But there is fresh hope in Fawn, for Lady Yelinda doth "
@@ -38328,7 +38328,7 @@ void FuncAlyssand object#(FIRST_NPC_FUNCTION - ALYSSAND)() {
 			add(["Beauty", "Love"]);
 			fallthrough;
 		case "Beauty"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"The consequences of the trial of thy friend hath been "
@@ -38344,7 +38344,7 @@ void FuncAlyssand object#(FIRST_NPC_FUNCTION - ALYSSAND)() {
 			say("\"Love and Beauty were once regarded as aspects of the same "
 				"entity. Whoever loved was beautiful. Whoever nurtured the "
 				"beauty of truth was loved.\"");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"With the aid of Lady Yelinda, those ways shall be "
@@ -38369,7 +38369,7 @@ void FuncAlyssand object#(FIRST_NPC_FUNCTION - ALYSSAND)() {
 			say("\"The Goblins have grown bold of late. They have often come "
 				"to hurl themselves upon our gate. Thankfully, we have held "
 				"fast so far.\"");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"Thankfully, Leon and his followers have been allowed to "
@@ -38505,7 +38505,7 @@ void FuncAlyssand object#(FIRST_NPC_FUNCTION - ALYSSAND)() {
 		case "the Cause"(remove):
 			UI_play_music(0x0014, Func09A0(0x0005, 0x0001));
 			Func0801();
-			if (!(gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (!(gflags[FAWN_TRIAL_ONGOING]
 				  || gflags[FAWN_TRIAL_DONE])) {
 				say("\"Persevere, ", var0003,
 					", for one cannot tell when the time to act shall "
@@ -38518,7 +38518,7 @@ void FuncAlyssand object#(FIRST_NPC_FUNCTION - ALYSSAND)() {
 				say("\"Thou must find the evidence that hath eluded us, so "
 					"that Fawn can be freed!\"");
 			}
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& ((!gflags[FAWN_TRIAL_RECESS])
 					&& (!gflags[FAWN_TRIAL_DONE]))) {
 				say("\"I have heard that thy friend hath been taken prisoner, "
@@ -38561,7 +38561,7 @@ void FuncAlyssand object#(FIRST_NPC_FUNCTION - ALYSSAND)() {
 						"evil system!\"");
 				}
 			}
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY] && gflags[FAWN_TRIAL_DONE]) {
+			if (gflags[FAWN_TRIAL_ONGOING] && gflags[FAWN_TRIAL_DONE]) {
 				if (gflags[ORACLE_SET_TO_INNOCENT]) {
 					say("\"The Cause is doomed, ", var0003,
 						". I am pleased that thy friend hath been freed from "
@@ -39562,7 +39562,7 @@ void FuncDelphynia object#(FIRST_NPC_FUNCTION - DELPHYNIA)() {
 		DELPHYNIA->show_npc_face0(0x0000);
 		var var0002 = DELPHYNIA->get_item_flag(MET);
 		if (gflags[FAWN_TRIAL_RECESS]
-			|| (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			|| (gflags[FAWN_TRIAL_ONGOING]
 				&& (!gflags[FAWN_TRIAL_DONE]))) {
 			say("\"Leave! I have no wish to be seen with thee! Thou dost "
 				"consort with criminals and blasphemers.\"");
@@ -39671,7 +39671,7 @@ void FuncDelphynia object#(FIRST_NPC_FUNCTION - DELPHYNIA)() {
 			remove("Pomdirgun");
 			fallthrough;
 		case "storms"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"My sole hope is now that the conspiracy of Kylista and "
@@ -39702,7 +39702,7 @@ void FuncDelphynia object#(FIRST_NPC_FUNCTION - DELPHYNIA)() {
 			remove("harbingers");
 			fallthrough;
 		case "false prophets"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"But now I am so confused... 'Twas Kylista who told us "
@@ -39760,7 +39760,7 @@ void FuncDelphynia object#(FIRST_NPC_FUNCTION - DELPHYNIA)() {
 			add("Alyssand");
 			fallthrough;
 		case "Alyssand"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"Hast thou not heard? Lady Yelinda doth look to the "
@@ -39987,7 +39987,7 @@ void FuncGarth object#(FIRST_NPC_FUNCTION - GARTH)() {
 		GARTH->show_npc_face0(0x0000);
 		var var0004 = GARTH->get_item_flag(MET);
 		if (gflags[FAWN_TRIAL_RECESS]
-			|| (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			|| (gflags[FAWN_TRIAL_ONGOING]
 				&& (!gflags[FAWN_TRIAL_DONE]))) {
 			say("\"Why, thou art the confidant of the accused blasphemer! I "
 				"cannot be seen speaking with thee...\"");
@@ -40048,7 +40048,7 @@ void FuncGarth object#(FIRST_NPC_FUNCTION - GARTH)() {
 			if (var0002 == true) {
 				say("\"But we are a hardy lot.\" ~\"We will weather these foul "
 					"storms and rebuild what hath been destroyed.\"");
-				if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+				if (gflags[FAWN_TRIAL_ONGOING]
 					&& (gflags[FAWN_TRIAL_DONE]
 						&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 					say("\"Perhaps I shall speak with Lady Yelinda again. "
@@ -40063,7 +40063,7 @@ void FuncGarth object#(FIRST_NPC_FUNCTION - GARTH)() {
 			} else {
 				say("\"We have lost most of our men to the sea and storms.\" "
 					"~\"We do not know if they were drowned or transformed.\"");
-				if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+				if (gflags[FAWN_TRIAL_ONGOING]
 					&& (gflags[FAWN_TRIAL_DONE]
 						&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 					say("\"May Beauty lay their souls to rest...\"");
@@ -40264,7 +40264,7 @@ void FuncGarth object#(FIRST_NPC_FUNCTION - GARTH)() {
 			say("\"Delphynia is a horticulturist.\" ~\"Her knowledge of herbs "
 				"made her the only logical choice as healer when Seth was "
 				"killed.\"");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"She doth seem happier of late, since the Lady did allow "
@@ -40363,7 +40363,7 @@ void FuncJoth object#(FIRST_NPC_FUNCTION - JOTH)() {
 				"me ship was thrown inta the shoals.\"");
 			say("\"Seth, the healer, patched me up right enough, but that were "
 				"the end of me sea-goin' days.\"");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"Life's not been the same for me since. I do miss the "
@@ -40489,7 +40489,7 @@ void FuncJoth object#(FIRST_NPC_FUNCTION - JOTH)() {
 			say("\"Fawn used ta be able ta bring in enough fish for us an' the "
 				"other cities besides. Now there's nothing but a few old "
 				"rowboats left.");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"An' there be nobody brave enough to even sail the "
@@ -40578,7 +40578,7 @@ void FuncVoldin object#(FIRST_NPC_FUNCTION - VOLDIN)() {
 	}
 	if ((event == DOUBLECLICK) && (VOLDIN->get_schedule_type() != WAIT)) {
 		VOLDIN->Func07D1();
-		if ((gflags[FAWN_TRIAL_DONE_FIRST_DAY] && gflags[FAWN_TRIAL_DONE])
+		if ((gflags[FAWN_TRIAL_ONGOING] && gflags[FAWN_TRIAL_DONE])
 			&& (!gflags[ORACLE_SET_TO_INNOCENT])) {
 			AVATAR->item_say("@Hail, criminal!@");
 			VOLDIN->set_schedule_type(WAIT);
@@ -40610,7 +40610,7 @@ void FuncVoldin object#(FIRST_NPC_FUNCTION - VOLDIN)() {
 			VOLDIN->show_npc_face0(0x0000);
 			var var0005 = VOLDIN->get_item_flag(MET);
 			if (gflags[FAWN_TRIAL_RECESS]
-				|| (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+				|| (gflags[FAWN_TRIAL_ONGOING]
 					&& (!gflags[FAWN_TRIAL_DONE]))) {
 				say("\"Thou dost dare to confront me? Thou, that didst bring "
 					"the blasphemer to Lady Yelinda!\"");
@@ -40933,7 +40933,7 @@ void FuncVoldin object#(FIRST_NPC_FUNCTION - VOLDIN)() {
 			Func08AB();
 			UI_remove_npc_face0();
 			Func097F(AVATAR, "@Goodbye.@", 0x0000);
-			if ((gflags[FAWN_TRIAL_DONE_FIRST_DAY] && gflags[FAWN_TRIAL_DONE])
+			if ((gflags[FAWN_TRIAL_ONGOING] && gflags[FAWN_TRIAL_DONE])
 				&& (!gflags[ORACLE_SET_TO_INNOCENT])) {
 				Func097F(VOLDIN, "@Thou shalt see!@", 0x0002);
 			} else {
@@ -40974,7 +40974,7 @@ void FuncJendon object#(FIRST_NPC_FUNCTION - JENDON)() {
 		JENDON->show_npc_face0(0x0000);
 		var var0003 = 0x0005;
 		if (gflags[FAWN_TRIAL_RECESS]
-			|| (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			|| (gflags[FAWN_TRIAL_ONGOING]
 				&& (!gflags[FAWN_TRIAL_DONE]))) {
 			say("\"I should have known that thou wert trouble! Askin' all "
 				"those questions...\"");
@@ -41153,7 +41153,7 @@ void FuncJendon object#(FIRST_NPC_FUNCTION - JENDON)() {
 			}
 			fallthrough;
 		case "the Priestess"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"Kylista hath been imprisoned since the trial, ", var0001,
@@ -41207,7 +41207,7 @@ void FuncJendon object#(FIRST_NPC_FUNCTION - JENDON)() {
 			var0003 = Func09AE(var0003);
 			fallthrough;
 		case "the Great Captains"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"Why, they have been in disrepute ever since the trial. "
@@ -41250,7 +41250,7 @@ void FuncJendon object#(FIRST_NPC_FUNCTION - JENDON)() {
 			say("\"Brunt, Ruggs, Deadeye, Kalen... I found them congenial "
 				"enough. Excepting Kalen... he enjoyed arguing with my "
 				"customers.\"");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"The Lady hath admitted them back into the city, thou "
@@ -41701,7 +41701,7 @@ void FuncJendon object#(FIRST_NPC_FUNCTION - JENDON)() {
 				say("\"Perhaps Fawn's luck shall change after all!\"");
 				say("\"That is the Priestess Kylista's ceremonial "
 					"breastplate!");
-				if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+				if (gflags[FAWN_TRIAL_ONGOING]
 					&& (gflags[FAWN_TRIAL_DONE]
 						&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 					say("\"Thou shouldst leave it in the Temple, for it "
@@ -41714,7 +41714,7 @@ void FuncJendon object#(FIRST_NPC_FUNCTION - JENDON)() {
 					"Fawn's luck nowadays!\"");
 				say("\"It sounds like Priestess Kylista's ceremonial "
 					"breastplate.\"");
-				if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+				if (gflags[FAWN_TRIAL_ONGOING]
 					&& (gflags[FAWN_TRIAL_DONE]
 						&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 					say("\"If it is, then it belongs in the Temple. Perhaps "
@@ -42283,7 +42283,7 @@ void FuncJorvin object#(FIRST_NPC_FUNCTION - JORVIN)() {
 		case "Chancellor"(remove):
 			say("\"His name is Zulith. Thou mayest know him by his green robes "
 				"of state. Thou canst not miss them.");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"Thou canst most often find Zulith in the palace, acting "
@@ -42426,7 +42426,7 @@ void FuncJorvin object#(FIRST_NPC_FUNCTION - JORVIN)() {
 			remove("storms");
 			fallthrough;
 		case "Fellowship troublemakers"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"Now, do not speak of Leon's followers in such a manner! "
@@ -42569,7 +42569,7 @@ void FuncKylista object#(FIRST_NPC_FUNCTION - KYLISTA)() {
 		};
 	}
 	if ((event == PROXIMITY) && (KYLISTA->get_schedule_type() == TEND_SHOP)) {
-		if ((gflags[FAWN_TRIAL_DONE_FIRST_DAY] && gflags[FAWN_TRIAL_DONE])
+		if ((gflags[FAWN_TRIAL_ONGOING] && gflags[FAWN_TRIAL_DONE])
 			&& (!gflags[ORACLE_SET_TO_INNOCENT])) {
 			var var0006 = [
 				"@I do not deserve this!@", "@Save me, please!@",
@@ -42588,7 +42588,7 @@ void FuncKylista object#(FIRST_NPC_FUNCTION - KYLISTA)() {
 	}
 	if ((event == DOUBLECLICK) && (KYLISTA->get_schedule_type() != WAIT)) {
 		KYLISTA->Func07D1();
-		if ((gflags[FAWN_TRIAL_DONE_FIRST_DAY] && gflags[FAWN_TRIAL_DONE])
+		if ((gflags[FAWN_TRIAL_ONGOING] && gflags[FAWN_TRIAL_DONE])
 			&& (!gflags[ORACLE_SET_TO_INNOCENT])) {
 			AVATAR->item_say("@Surprise!@");
 			KYLISTA->set_schedule_type(WAIT);
@@ -42621,7 +42621,7 @@ void FuncKylista object#(FIRST_NPC_FUNCTION - KYLISTA)() {
 			KYLISTA->show_npc_face0(0x0000);
 			var var0007 = KYLISTA->get_item_flag(MET);
 			if (gflags[FAWN_TRIAL_RECESS]
-				|| (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+				|| (gflags[FAWN_TRIAL_ONGOING]
 					&& (!gflags[FAWN_TRIAL_DONE]))) {
 				say("\"Thou dost make my spine shiver, thou who dost associate "
 					"with the enemies of Beauty!");
@@ -42836,7 +42836,7 @@ void FuncKylista object#(FIRST_NPC_FUNCTION - KYLISTA)() {
 				"interests of the merchant captains.\"");
 			fallthrough;
 		case "Voldin"(remove):
-			if ((gflags[FAWN_TRIAL_DONE_FIRST_DAY] && gflags[FAWN_TRIAL_DONE])
+			if ((gflags[FAWN_TRIAL_ONGOING] && gflags[FAWN_TRIAL_DONE])
 				&& (!gflags[ORACLE_SET_TO_INNOCENT])) {
 				if (VOLDIN->get_item_flag(DEAD)) {
 					say("\"He was an evil man, Avatar. Captain Voldin forced "
@@ -43118,7 +43118,7 @@ void FuncYelinda object#(FIRST_NPC_FUNCTION - YELINDA)() {
 		YELINDA->clear_item_say();
 		YELINDA->show_npc_face0(0x0000);
 		if (gflags[FAWN_TRIAL_RECESS]
-			|| (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			|| (gflags[FAWN_TRIAL_ONGOING]
 				&& (!gflags[FAWN_TRIAL_DONE]))) {
 			say("\"It is not fitting that I be seen with thee until thou hast "
 				"been judged by the Oracle.\"");
@@ -43141,7 +43141,7 @@ void FuncYelinda object#(FIRST_NPC_FUNCTION - YELINDA)() {
 			if (gflags[HAVE_YELINDA_AUDIENCE]
 				&& (!gflags[AUDIENCE_WITH_YELINDA])) {
 				if (IOLO->npc_nearby() && IOLO->get_item_flag(IN_PARTY)) {
-					gflags[IOLO_HAS_DIAMOND_NECKLACE] = true;
+					gflags[FAWN_TRIAL_ONGOING] = true;
 					gflags[AUDIENCE_WITH_YELINDA] = true;
 					UI_play_music(0x001F, Func09A0(0x0005, 0x0001));
 					say("\"I am so glad that thou hast come -- and thou hast "
@@ -43245,8 +43245,7 @@ void FuncYelinda object#(FIRST_NPC_FUNCTION - YELINDA)() {
 					say("\"Welcome to the city of Beauty. I am Lady Yelinda, "
 						"ruler of Fawn.\"");
 				}
-			} else if (
-					gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			} else if (gflags[FAWN_TRIAL_ONGOING]
 					&& (!gflags[FAWN_TRIAL_DONE])) {
 				say("\"Until thy friend's innocence or guilt hath been proven, "
 					"Avatar, we may not speak together.\"");
@@ -43277,7 +43276,7 @@ void FuncYelinda object#(FIRST_NPC_FUNCTION - YELINDA)() {
 		case "Monitor"(remove):
 			say("\"'Tis south of here. I do not associate with them. They are "
 				"too warlike.\"");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"Chancellor Zulith deals with them for me.\"");
@@ -43304,7 +43303,7 @@ void FuncYelinda object#(FIRST_NPC_FUNCTION - YELINDA)() {
 			fallthrough;
 		case "storms"(remove):
 			say("\"Quite a nuisance, actually.\"");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"Alyssand tells me that the storms are the result of a "
@@ -43540,7 +43539,7 @@ void FuncLeon object#(FIRST_NPC_FUNCTION - LEON)() {
 			Func0966();
 			fallthrough;
 		case "goblins"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"Now that Lady Yelinda hath admitted my people within "
@@ -44398,7 +44397,7 @@ void FuncOlon object#(FIRST_NPC_FUNCTION - OLON)() {
 			add(["island of cats", "King of the White Dragon", "love story"]);
 			fallthrough;
 		case "Fellowship sailors"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"Now, if thou dost want to know more about them, thou "
@@ -45357,7 +45356,7 @@ void FuncRuggs object#(FIRST_NPC_FUNCTION - RUGGS)() {
 			add("Goblins");
 			fallthrough;
 		case "Goblins"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"It is such a relief to be able to shelter behind the "
@@ -45479,7 +45478,7 @@ void FuncScots object#(FIRST_NPC_FUNCTION - SCOTS)() {
 		}
 		converse(0) {
 		case "goblins"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"I think that we shall be safe from their raiding "
@@ -45582,7 +45581,7 @@ void FuncScots object#(FIRST_NPC_FUNCTION - SCOTS)() {
 			}
 			fallthrough;
 		case "Priestess"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"'Tis a shame to see any creature so beautiful placed "
@@ -45791,7 +45790,7 @@ void FuncZulith object#(FIRST_NPC_FUNCTION - ZULITH)() {
 		ZULITH->show_npc_face0(0x0000);
 		var var000C = ZULITH->get_item_flag(MET);
 		if (gflags[FAWN_TRIAL_RECESS]
-			|| (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			|| (gflags[FAWN_TRIAL_ONGOING]
 				&& (!gflags[FAWN_TRIAL_DONE]))) {
 			say("\"I know thee for what thou art, stranger! And I shall "
 				"testify at the trial.\"");
@@ -45844,7 +45843,7 @@ void FuncZulith object#(FIRST_NPC_FUNCTION - ZULITH)() {
 		case "storms"(remove):
 			say("\"Quite disruptive... They have totally depleted our fishing "
 				"fleet.\"");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"If only these terrible storms would end!\"");
@@ -46031,7 +46030,7 @@ void FuncZulith object#(FIRST_NPC_FUNCTION - ZULITH)() {
 			UI_pop_answers();
 			fallthrough;
 		case "Chancellor"(remove):
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (gflags[FAWN_TRIAL_DONE]
 					&& (!gflags[ORACLE_SET_TO_INNOCENT]))) {
 				say("\"I serve the Lady, handling those details which she doth "
@@ -48174,7 +48173,8 @@ void FuncHarnna object#(FIRST_NPC_FUNCTION - HARNNA)() {
 				"adventures that thou must undertake. Seemingly unconnected "
 				"events shall prosper thee in thy seeking of my lost "
 				"daughter.\"");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+			// BUG: this should probably be gflags[FAWN_TRIAL_DONE] instead.
+			if (gflags[FAWN_TRIAL_ONGOING]) {
 				say("\"Thou mayest find this hard to believe, but my dreams "
 					"tell me that thy sojourn in Fawn hath been of benefit to "
 					"thy quest.\"");
@@ -48182,7 +48182,8 @@ void FuncHarnna object#(FIRST_NPC_FUNCTION - HARNNA)() {
 			say("\"Thy travels shall take thee north. Far north through caves "
 				"that lie to the west... I can feel the cold wind blowing upon "
 				"thee.\"");
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			// BUG: this should probably be gflags[FAWN_TRIAL_DONE] instead.
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& gflags[HAVE_HELM_OF_MONITOR]) {
 				say("\"I sense that now is the time to go north. All is ready "
 					"for thy success.\"");
@@ -74902,9 +74903,9 @@ void Func06C0 object#(0x6C0) () {
 
 void Func06C1 object#(0x6C1) () {
 	if (event == EGG) {
-		if (!gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+		if (!gflags[FAWN_TRIAL_ONGOING]) {
 			var var0000 = UI_game_hour();
-			if ((var0000 > 0x0006) && (var0000 < 0x0014)) {
+			if ((var0000 > 6) && (var0000 < 20)) {
 				item->Func00F9();
 			}
 		} else {
@@ -86493,7 +86494,7 @@ void Func07F8 object#(0x7F8) () {
 				AVATAR -> get_npc_object(), Func07F8, false);
 		Func08C2();
 		declare var var000C;
-		if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+		if (gflags[FAWN_TRIAL_ONGOING]) {
 			var000C = Func0992(
 					0x0001, "@The trial awaits!@",
 					"@The trial awaits our presence.@", true);
@@ -107203,7 +107204,7 @@ void Func08C2 id#(0x8C2) () {
 			var0008 = 0x0006;
 		}
 		if (var0006 == 0x0006) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+			if (gflags[FAWN_TRIAL_ONGOING]) {
 				var0007 = VOLDIN;
 				var0008 = 0x0006;
 			} else {
@@ -107211,7 +107212,7 @@ void Func08C2 id#(0x8C2) () {
 			}
 		}
 		if (var0006 == 0x0007) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY] == true) {
+			if (gflags[FAWN_TRIAL_ONGOING] == true) {
 				var0007 = JORVIN;
 				var0008 = 0x0002;
 			} else {
@@ -107219,7 +107220,7 @@ void Func08C2 id#(0x8C2) () {
 			}
 		}
 		if (var0006 == 0x0008) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+			if (gflags[FAWN_TRIAL_ONGOING]) {
 				var0007 = SCOTS;
 				var0008 = 0x0002;
 			} else {
@@ -107231,19 +107232,19 @@ void Func08C2 id#(0x8C2) () {
 			var0008 = 0x0002;
 		}
 		if (var0006 == 0x000B) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+			if (gflags[FAWN_TRIAL_ONGOING]) {
 				var0007 = LEON;
 				var0008 = 0x0002;
 			}
 		}
 		if (var0006 == 0x000C) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY] == true) {
+			if (gflags[FAWN_TRIAL_ONGOING] == true) {
 				var0007 = RUGGS;
 				var0008 = 0x0002;
 			}
 		}
 		if (var0006 == 0x000D) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY] == true) {
+			if (gflags[FAWN_TRIAL_ONGOING] == true) {
 				var0007 = KYLISTA;
 				var0008 = 0x0006;
 			} else {
@@ -107255,7 +107256,7 @@ void Func08C2 id#(0x8C2) () {
 			var0008 = 0x0006;
 		}
 		if (var0006 == 0x000F) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+			if (gflags[FAWN_TRIAL_ONGOING]) {
 				var0007 = ALYSSAND;
 				var0008 = 0x0006;
 			} else {
@@ -107287,9 +107288,9 @@ void Func08C2 id#(0x8C2) () {
 }
 
 void Func08C3 id#(0x8C3) () {
-	if ((gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+	if ((gflags[FAWN_TRIAL_ONGOING]
 		 || (gflags[FAWN_TRIAL_DONE] && (!gflags[FAWN_TRIAL_RECESS])))
-		&& (!(gflags[FAWN_TRIAL_DONE_FIRST_DAY] && gflags[FAWN_TRIAL_DONE]))) {
+		&& (!(gflags[FAWN_TRIAL_ONGOING] && gflags[FAWN_TRIAL_DONE]))) {
 		var var0000 = find_nearby(0x017D, 0x0001, MASK_NPC2);
 		if (!var0000) {
 			struct<Position> var0001 = get_object_position();
@@ -111861,7 +111862,7 @@ void Func0939 id#(0x939) (var var0000) {
 			continue;
 			actor frame standing;
 		};
-		if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+		if (gflags[FAWN_TRIAL_ONGOING]) {
 			var0001 = script KYLISTA {
 				nohalt;
 				actor frame bowing;
@@ -111907,7 +111908,7 @@ void Func093A id#(0x93A) (var var0000) {
 	declare var var0004;
 	declare var var0008;
 	declare struct<Position> var0005;
-	if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+	if (gflags[FAWN_TRIAL_ONGOING]) {
 		if (var0000 == 0x0057) {
 			var0003 = script VOLDIN {
 				face west;
@@ -112027,7 +112028,7 @@ void Func093A id#(0x93A) (var var0000) {
 			abort;
 		}
 		if (var0000 == 0x005D) {
-			gflags[FAWN_TRIAL_DONE_FIRST_DAY] = false;
+			gflags[FAWN_TRIAL_ONGOING] = false;
 			gflags[FAWN_TRIAL_DONE] = true;
 			var0003 = UI_get_party_list2();
 			for (var0008 in var0003) {
@@ -112683,7 +112684,7 @@ void Func093A id#(0x93A) (var var0000) {
 			gflags[DUPRE_ACCUSED] = false;
 			gflags[IOLO_ACCUSED] = false;
 			gflags[SHAMINO_ACCUSED] = false;
-			gflags[FAWN_TRIAL_DONE_FIRST_DAY] = true;
+			gflags[FAWN_TRIAL_ONGOING] = true;
 			if (gflags[ORACLE_SET_TO_INNOCENT]) {
 				KYLISTA->run_schedule();
 				VOLDIN->run_schedule();
@@ -112697,7 +112698,7 @@ void Func093B id#(0x93B) (var var0000) {
 	var var0002 = Func08AC(false);
 	declare var var0003;
 	if (var0000 == 0x0014) {
-		if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+		if (gflags[FAWN_TRIAL_ONGOING]) {
 			UI_init_conversation();
 			KYLISTA->show_npc_face0(0x0000);
 			say("\"Let it be known that ", var0002, ", companion of ", var0001,
@@ -112740,7 +112741,7 @@ void Func093B id#(0x93B) (var var0000) {
 		abort;
 	}
 	if (var0000 == 0x0015) {
-		if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+		if (gflags[FAWN_TRIAL_ONGOING]) {
 			UI_init_conversation();
 			KYLISTA->show_npc_face0(0x0000);
 			say("\"Lady Yelinda, as thou dost rule this city, dost thou wish "
@@ -112770,7 +112771,7 @@ void Func093B id#(0x93B) (var var0000) {
 		abort;
 	}
 	if (var0000 == 0x0016) {
-		if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+		if (gflags[FAWN_TRIAL_ONGOING]) {
 			UI_init_conversation();
 			YELINDA->show_npc_face0(0x0000);
 			say("\"I fear that the witnesses might be tempted to spare my "
@@ -112840,7 +112841,7 @@ void Func093B id#(0x93B) (var var0000) {
 		abort;
 	}
 	if (var0000 == 0x0017) {
-		if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+		if (gflags[FAWN_TRIAL_ONGOING]) {
 			UI_init_conversation();
 			VOLDIN->show_npc_face0(0x0000);
 			say("\"It would be my pleasure to act on the Lady's behalf.\"");
@@ -112891,7 +112892,7 @@ void Func093B id#(0x93B) (var var0000) {
 	declare var var0005;
 	declare struct<Position> var0006;
 	if (var0000 == 0x0018) {
-		if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+		if (gflags[FAWN_TRIAL_ONGOING]) {
 			UI_init_conversation();
 			JORVIN->show_npc_face0(0x0000);
 			say("\"For the purpose of this trial, it hath been necessary to "
@@ -112954,7 +112955,7 @@ void Func093B id#(0x93B) (var var0000) {
 		abort;
 	}
 	if (var0000 == 0x0019) {
-		if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+		if (gflags[FAWN_TRIAL_ONGOING]) {
 			var0003 = script VOLDIN {
 				nohalt;
 				actor frame ready;
@@ -112974,13 +112975,13 @@ void Func093B id#(0x93B) (var var0000) {
 	}
 	if (var0000 == 0x001A) {
 		declare var var0007;
-		if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+		if (gflags[FAWN_TRIAL_ONGOING]) {
 			var0007 = false;
 		} else {
 			var0007 = [];
 		}
 		if (!gflags[FAWN_TRIAL_YELINDA_SPOKE]) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (((((((((((gflags[FAWN_TRIAL_ALYSSAND_SPOKE]
 							  + gflags[FAWN_TRIAL_DELIN_SPOKE])
 							 + gflags[FAWN_TRIAL_DELPHYNIA_SPOKE])
@@ -113014,7 +113015,7 @@ void Func093B id#(0x93B) (var var0000) {
 			}
 		}
 		if (!gflags[FAWN_TRIAL_OLON_SPOKE]) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& ((((((((((((gflags[FAWN_TRIAL_ALYSSAND_SPOKE]
 							   + gflags[FAWN_TRIAL_DELIN_SPOKE])
 							  + gflags[FAWN_TRIAL_DELPHYNIA_SPOKE])
@@ -113045,7 +113046,7 @@ void Func093B id#(0x93B) (var var0000) {
 			}
 		}
 		if (!gflags[FAWN_TRIAL_ZULITH_SPOKE]) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& ZULITH->get_item_flag(MET)) {
 				var0007 = ZULITH;
 			}
@@ -113056,17 +113057,17 @@ void Func093B id#(0x93B) (var var0000) {
 		if ((!gflags[FAWN_TRIAL_SCOTS_SPOKE])
 			&& (SCOTS->get_item_flag(MET)
 				&& ((!SCOTS->get_item_flag(DEAD))
-					&& gflags[FAWN_TRIAL_DONE_FIRST_DAY]))) {
+					&& gflags[FAWN_TRIAL_ONGOING]))) {
 			var0007 = SCOTS;
 		}
 		if ((!gflags[FAWN_TRIAL_ALYSSAND_SPOKE])
 			&& ALYSSAND->get_item_flag(MET)) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+			if (gflags[FAWN_TRIAL_ONGOING]) {
 				var0007 = ALYSSAND;
 			}
 		}
 		if (!gflags[FAWN_TRIAL_JENDON_SPOKE]) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& JENDON->get_item_flag(MET)) {
 				var0007 = JENDON;
 			}
@@ -113075,17 +113076,17 @@ void Func093B id#(0x93B) (var var0000) {
 			}
 		}
 		if ((!gflags[FAWN_TRIAL_JORVIN_SPOKE])
-			&& (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			&& (gflags[FAWN_TRIAL_ONGOING]
 				&& JORVIN->get_item_flag(MET))) {
 			var0007 = JORVIN;
 		}
 		if ((!gflags[FAWN_TRIAL_KYLISTA_SPOKE])
 			&& (KYLISTA->get_item_flag(MET)
-				&& gflags[FAWN_TRIAL_DONE_FIRST_DAY])) {
+				&& gflags[FAWN_TRIAL_ONGOING])) {
 			var0007 = KYLISTA;
 		}
 		if (!gflags[FAWN_TRIAL_RUGGS_GARTH_SPOKE]) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (RUGGS->get_item_flag(MET)
 					&& (!RUGGS->get_item_flag(DEAD)))) {
 				var0007 = RUGGS;
@@ -113095,7 +113096,7 @@ void Func093B id#(0x93B) (var var0000) {
 			}
 		}
 		if (!gflags[FAWN_TRIAL_DELIN_SPOKE]) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& DELIN->get_item_flag(MET)) {
 				var0007 = DELIN;
 			}
@@ -113104,7 +113105,7 @@ void Func093B id#(0x93B) (var var0000) {
 			}
 		}
 		if (!gflags[FAWN_TRIAL_LEON_JOTH_SPOKE]) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& (LEON->get_item_flag(MET) && (!LEON->get_item_flag(DEAD)))) {
 				var0007 = LEON;
 			}
@@ -113113,7 +113114,7 @@ void Func093B id#(0x93B) (var var0000) {
 			}
 		}
 		if (!gflags[FAWN_TRIAL_DELPHYNIA_SPOKE]) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& DELPHYNIA->get_item_flag(MET)) {
 				var0007 = DELPHYNIA;
 			}
@@ -113122,7 +113123,7 @@ void Func093B id#(0x93B) (var var0000) {
 			}
 		}
 		if ((!gflags[FAWN_TRIAL_VOLDIN_SPOKE]) && var0007) {
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]
+			if (gflags[FAWN_TRIAL_ONGOING]
 				&& ((((((((((((gflags[FAWN_TRIAL_ALYSSAND_SPOKE]
 							   + gflags[FAWN_TRIAL_DELIN_SPOKE])
 							  + gflags[FAWN_TRIAL_DELPHYNIA_SPOKE])
@@ -113153,7 +113154,7 @@ void Func093B id#(0x93B) (var var0000) {
 			}
 		}
 		declare var var0009;
-		if (var0007 && gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+		if (var0007 && gflags[FAWN_TRIAL_ONGOING]) {
 			UI_init_conversation();
 			VOLDIN->show_npc_face0(0x0000);
 			var0009 = Func095B(var0007);
@@ -113186,7 +113187,7 @@ void Func093B id#(0x93B) (var var0000) {
 			}
 			abort;
 		}
-		if (gflags[FAWN_TRIAL_DONE_FIRST_DAY] && (!var0007)) {
+		if (gflags[FAWN_TRIAL_ONGOING] && (!var0007)) {
 			UI_play_music(0x0013, Func09A0(0x0005, 0x0001));
 			UI_init_conversation();
 			VOLDIN->show_npc_face0(0x0000);
@@ -113298,7 +113299,7 @@ void Func093B id#(0x93B) (var var0000) {
 		}
 		if (item == DELIN->get_npc_object()) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001F);
-			if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+			if (gflags[FAWN_TRIAL_ONGOING]) {
 				var0003 = script item {
 					nohalt;
 					face south;
@@ -113349,7 +113350,7 @@ void Func093B id#(0x93B) (var var0000) {
 			actor frame standing;
 		};
 		Func08C5();
-		if (gflags[FAWN_TRIAL_DONE_FIRST_DAY]) {
+		if (gflags[FAWN_TRIAL_ONGOING]) {
 			var0003 = script item after 5 ticks {
 				call Func07FB;
 			};

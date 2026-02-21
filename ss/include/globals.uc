@@ -301,8 +301,19 @@ enum Globals {
 	PRESSED_ORACLE_SWITCH2 = 0x16D,
 	ORACLE_SET_TO_INNOCENT = 0x16E,
 	ORACLE_SET_TO_CORRUPT = 0x16F,
-	IOLO_HAS_DIAMOND_NECKLACE = 0x170,
-	FAWN_TRIAL_DONE_FIRST_DAY = 0x170,
+	// These 3 flags form a state machine of sorts:
+	// - FAWN_TRIAL_ONGOING  false      true   true    true   false
+	// - FAWN_TRIAL_RECESS   false      false  true    false  false
+	// - FAWN_TRIAL_DONE     false      false  false   false  true
+	// - State               Pre-trial  Trial  Recess  Trial  Post-trial
+	// Here:
+	// - "Pre-trial" is the state until the audience with Yelinda.
+	// - "Trial" is the state when the trial event is active, even if
+	//   the trial itself is not happening (no proceedings are ongoing)
+	// - "Recess" means day 1 has finished
+	// - "Post-trial" means the trial is over.
+	// Not all combinations of the flags are valid.
+	FAWN_TRIAL_ONGOING = 0x170,
 	FAWN_TRIAL_RECESS = 0x171,
 	FAWN_TRIAL_DONE = 0x172,
 	DUPRE_ACCUSED = 0x173,
