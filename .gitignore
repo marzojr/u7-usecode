@@ -3,3 +3,6 @@ usecode.*.orig.bin
 usecode.*.new.ucxt
 usecode.*.orig.ucxt
 usecode.*.ref.ucxt
+.docker
+.secrets
+*.sh

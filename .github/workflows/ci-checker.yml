@@ -1,0 +1,81 @@
+name: ci-checker
+
+on:
+  push:
+    paths:
+      - "!uca/**"
+      - "!.vscode/**"
+      - "!.gitattributes"
+      - "!.gitignore"
+      - "!**.md"
+      - "!**.txt"
+      - "!**.ebnf"
+      - "!**.yy"
+  pull_request:
+    paths:
+      - "!uca/**"
+      - "!.vscode/**"
+      - "!.gitattributes"
+      - "!.gitignore"
+      - "!**.md"
+      - "!**.txt"
+      - "!**.ebnf"
+      - "!**.yy"
+  workflow_dispatch: {}
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v4
+
+      - name: Checkout SDL 3
+        uses: actions/checkout@v4
+        with:
+          repository: libsdl-org/SDL
+          path: SDL3
+          ref: release-3.2.14
+
+      - name: Checkout Exult
+        uses: actions/checkout@v4
+        with:
+          repository: exult/exult
+          path: exult
+          ref: master
+
+      - name: Install required packages
+        run: |
+          if ! apt-fast --help &> /dev/null; then
+            sudo add-apt-repository -u -y ppa:apt-fast/stable
+            sudo apt-get update
+            echo debconf apt-fast/maxdownloads string 16 | sudo debconf-set-selections
+            echo debconf apt-fast/dlflag boolean true | sudo debconf-set-selections
+            echo debconf apt-fast/aptmanager string apt-get | sudo debconf-set-selections
+            DEBIAN_FRONTEND=noninteractive sudo apt install -y apt-fast
+          else
+            sudo apt-fast update
+          fi
+          sudo apt-fast install -y build-essential zlib1g-dev libxml2-dev \
+                                  bison flex autoconf-archive
+
+      - name: Install SDL 3
+        run: |
+          pushd SDL3
+          mkdir -p build
+          cmake -B build -S . -DSDL_UNIX_CONSOLE_BUILD=ON
+          cmake --build build -j
+          sudo cmake --install build
+          popd
+
+      - name: Build and install UCC and UCXT
+        run: |
+          pushd exult
+          autoreconf -v -i
+          ./configure --disable-exult --disable-exult-studio --disable-exult-studio-support --enable-compiler --enable-tools --disable-data --disable-timidity-midi --disable-alsa --enable-fluidsynth=no --disable-mt32emu --disable-all-hq-scalers --disable-midi-sfx --disable-mods --enable-shp-thumbnailer=no --disable-aseprite-plugin --enable-gimp-plugin=no
+          make -j -O
+          sudo make install
+          popd
+
+      - name: Run checks
+        run: make -k VERBOSE=1 ref all

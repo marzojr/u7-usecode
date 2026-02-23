@@ -10,6 +10,8 @@ UCXT:=$(shell readlink -f $(shell command -v ucxt$(EXE_EXT)))
 UCC_ARGS:=-c always -b -W no-goto -W no-integer-coercion -W no-shape-to-function
 UCXT_ARGS:=-a -fs
 
+VERBOSE ?= 0
+
 PASS:=\e[1m\e[32m[✔️  PASS]\e[0m
 FAIL:=\e[1m\e[31m[❌  FAIL]\e[0m
 
@@ -55,7 +57,18 @@ check.% : usecode.%.new.ucxt
 		printf "$(FAIL) Reference file usecode.$*.ref.ucxt is missing!\n"; \
 		exit 1; \
 	fi
-	@if diff -u usecode.$*.ref.ucxt usecode.$*.new.ucxt &> /dev/null; then \
+	@if [ ! -f usecode.$*.new.ucxt ]; then \
+		printf "$(FAIL) New file usecode.$*.new.ucxt is missing!\n"; \
+		exit 1; \
+	fi
+	@if [ "$(VERBOSE)" = "1" ]; then \
+		diff -u usecode.$*.ref.ucxt usecode.$*.new.ucxt; \
+		diff_status=$$?; \
+	else \
+		diff -u usecode.$*.ref.ucxt usecode.$*.new.ucxt > /dev/null 2>&1; \
+		diff_status=$$?; \
+	fi; \
+	if [ $$diff_status -eq 0 ]; then \
 		printf "$(PASS) ☥ '$*' usecode matches reference.\n"; \
 	else \
 		printf "$(FAIL) ☥ '$*' usecode differs from reference!\n"; \
