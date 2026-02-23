@@ -11,15 +11,6 @@ For general project information, background, and detailed tool descriptions, see
 * Reference docs: [fov/data.md](fov/data.md) and [ss/data.md](ss/data.md) list all engine-called functions (shape/NPC handlers, hard-coded callbacks, weapon hits) plus complete Usecode egg dumps organized by map chunk with world coordinates.
 * Syntax docs: see [usecode-syntax.ebnf](usecode-syntax.ebnf) (EBNF) and [usecode-syntax.yy](usecode-syntax.yy) (simplified Bison); intrinsics reference: [exult_intrinsics.txt](exult_intrinsics.txt).
 
-## Build / Compile Pipeline
-
-* Authoring: edit `fov/` or `ss/` `usecode.uc` plus their `include/*.uc`.
-* New build: `make fov` or `make ss` runs `ucc` → `usecode.<game>.new.bin`, then `ucxt` → `usecode.<game>.new.ucxt`.
-* Original rebuild: same `make fov`/`ss` also compiles `ucxt/usecode.<game>.ucxt` via `ucc` → `usecode.<game>.orig.bin`, then `ucxt` → `usecode.<game>.orig.ucxt`.
-* References: `make ref` copies `usecode.<game>.new.ucxt` to `usecode.<game>.ref.ucxt` (only when you intend to update golden outputs).
-* Checks: `make check.fov` / `make check.ss` diff `usecode.<game>.new.ucxt` against `usecode.<game>.ref.ucxt`; `make check` runs both.
-* Cleanup: `make clean` removes built bins/ucxt; `make all_clean` also drops ref ucxts.
-
 ## File Dependency Graph
 
 * FOV sources: [fov/usecode.uc](fov/usecode.uc#L1-L8) includes [fov/include/constants.uc](fov/include/constants.uc), [fov/include/globals.uc](fov/include/globals.uc), [fov/include/npcs.uc](fov/include/npcs.uc), [fov/include/shapes.uc](fov/include/shapes.uc), [fov/include/structs.uc](fov/include/structs.uc), [fov/include/npc_func.uc](fov/include/npc_func.uc), [fov/include/utils.uc](fov/include/utils.uc).
@@ -57,5 +48,3 @@ The [fov/data.md](fov/data.md) and [ss/data.md](ss/data.md) files document all U
 * **Hard-coded functions**: engine callbacks for avatar death, speech/voice eggs, sleep/sit schedules, arresting guards, object destruction, copy-protection failure, etc.
 * **Weapon hit callbacks**: functions defined in `WEAPONS.DAT` called when specific weapons hit targets (e.g., Ignite, Dispel Magic, Death Bolt, Telekinesis).
 * **Usecode egg dump**: complete listing of all placed Usecode eggs organized by map chunk, with world coordinates `[x, y, z]` (tile positions from map origin + height), function numbers, and Quality values. Eggs with function `0x000` are disabled (likely cut content). Some chunks have duplicate entries representing multiple eggs at the same coordinates.
-
-These references are essential when tracing engine→usecode interactions, understanding game event flow, or investigating function calls not visible in code cross-references.
