@@ -24,6 +24,8 @@ Some of these games had official translations:
 
 * `ucxt`: UseCode eXtractor Tool, a disassembler/decompiler that can extract the usecode of the original games into low-level formats that can be fed into either `ucc`, or `wuc`, depending on flags.
 
+**⚠️ Version Requirement**: Only the newest versions are guaranteed to work. The tools are continuously updated with new features to reproduce original usecode as faithfully as possible. If builds fail, ensure you have the latest versions of `ucc`, `ucxt`, and `wuc` from the Exult project. Older versions may lack syntax changes/code generation needed for accurate compilation/decompilation.
+
 ## File Formats
 
 * `*.uc`: These are Usecode C files, a high-level C++-inspired scripting language created by the `Exult` team and designed to be compiled into usecode byte-code with `ucc`. These files are meant to be written by humans, and has friendlier control flow structures and abstractions.
@@ -95,6 +97,16 @@ The usecode contains annotation comments using the following conventions:
 * `TYPO:` identifies misspellings (archaic word forms are considered valid, so modern spellcheckers may disagree).
 * `TODO:` marks planned improvements to `ucc` that would simplify the decompiled usecode.
 * `NOTE:` provides additional context, primarily documenting restored dead code.
+
+## Engine-Called Functions Reference
+
+The [fov/data.md](fov/data.md) and [ss/data.md](ss/data.md) files document all Usecode functions invoked directly by the game engine (not called by other Usecode):
+
+* **Shape functions** (`shape#<N>`): triggered when shape `<N>` is double-clicked or runs events.
+* **NPC functions** (`object#(0x400 - <M>)`): the first 256 NPCs call `function = NPC_ID + 0x400` on interaction or schedule events.
+* **Hard-coded functions**: engine callbacks for avatar death, speech/voice eggs, sleep/sit schedules, arresting guards, object destruction, copy-protection failure, etc.
+* **Weapon hit callbacks**: functions defined in `WEAPONS.DAT` called when specific weapons hit targets (e.g., Ignite, Dispel Magic, Death Bolt, Telekinesis).
+* **Usecode egg dump**: complete listing of all placed Usecode eggs organized by map chunk, with world coordinates `[x, y, z]` (tile positions from map origin + height), function numbers, and Quality values. Eggs with function `0x000` are disabled (likely cut content). Some chunks have duplicate entries representing multiple eggs at the same coordinates.
 
 ## Outstanding issues
 
