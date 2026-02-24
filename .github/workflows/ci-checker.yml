@@ -3,6 +3,8 @@ name: ci-checker
 on:
   push:
     paths:
+      - "**"
+      - ".github/workflows/ci-checker.yml"
       - "!uca/**"
       - "!.vscode/**"
       - "!.gitattributes"
@@ -13,6 +15,8 @@ on:
       - "!**.yy"
   pull_request:
     paths:
+      - "**"
+      - ".github/workflows/ci-checker.yml"
       - "!uca/**"
       - "!.vscode/**"
       - "!.gitattributes"
