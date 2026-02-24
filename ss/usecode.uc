@@ -5835,7 +5835,7 @@ void Func01C3 shape#(0x1C3) () {
 				call Func01C3;
 			};
 			Func097F(LUTHER, "@I shall make him talk!@", 0x0002);
-			gflags[KNOWS_KRAYG_WALKS_ON_WOODS] = true;
+			gflags[KNOWS_KRAYG_WALKS_IN_WOODS] = true;
 			Func097F(SPEKTOR, "@This is unseemly...@", 0x0000);
 			Func097F(SHAZZANA, "@Cease!@", 0x0002);
 			Func097F(KRAYG, "@Leave me alone!@", 0x0000);
@@ -14809,12 +14809,12 @@ void Func0314 shape#(0x314) () {
 			if ((var0007 >= 0x00C9) && (var0007 <= 0x00D9)) {
 				struct<Position> var000D = [0x0087, 0x06C2, 0x0001];
 				if (var000D->find_object(0x0314, 0x00DC, 0x0000)) {
-					gflags[MASTER_SWITCH_IS_ACTIVE] = true;
+					gflags[SILVER_SEED_MASTER_SWITCH] = true;
 				}
 				if (var000D->find_object(0x0314, 0x00DC, 0x0001)) {
-					gflags[MASTER_SWITCH_IS_ACTIVE] = false;
+					gflags[SILVER_SEED_MASTER_SWITCH] = false;
 				}
-				if (gflags[MASTER_SWITCH_IS_ACTIVE] == true) {
+				if (gflags[SILVER_SEED_MASTER_SWITCH] == true) {
 					Func092A(var0007);
 				}
 			}
@@ -22064,7 +22064,7 @@ void Func03E6 shape#(0x3E6) () {
 		SERV11->run_schedule();
 		FEDABIBLIO->set_schedule_type(TALK);
 		Func097F(FEDABIBLIO, "@Much better...@", 0x0000);
-		gflags[FEBABIBLIO_SAVED] = true;
+		gflags[FEDABIBLIO_SAVED] = true;
 	}
 }
 
@@ -27371,7 +27371,7 @@ void FuncFreli object#(FIRST_NPC_FUNCTION - FRELI)() {
 		FRELI->show_npc_face0(0x0000);
 		var var0004 = FRELI->get_item_flag(MET);
 		if (gflags[BANES_RELEASED]) {
-			if (gflags[FEBABIBLIO_SAVED]) {
+			if (gflags[FEDABIBLIO_SAVED]) {
 				say("\"I am so glad to see thee, ", var0000,
 					"! There hath been so much trouble here of late...\"");
 			} else {
@@ -27506,7 +27506,7 @@ void FuncFreli object#(FIRST_NPC_FUNCTION - FRELI)() {
 		case "Fedabiblio":
 			var0001 = true;
 			remove("Fedabiblio");
-			if (gflags[FEBABIBLIO_SAVED]) {
+			if (gflags[FEDABIBLIO_SAVED]) {
 				say("\"Thou art a Mage beyond compare, ", var0000, "!\"");
 				say("\"I thought that Fedabiblio was dead after the Glowing "
 					"Man turned him into a statue. I had no idea how to change "
@@ -27529,7 +27529,7 @@ void FuncFreli object#(FIRST_NPC_FUNCTION - FRELI)() {
 		case "looking for scroll"(remove):
 			say("\"I know that one! It is written entirely in Serpent Runic, "
 				"and kept in the library of the Seminarium.\"");
-			if (gflags[FEBABIBLIO_SAVED]) {
+			if (gflags[FEDABIBLIO_SAVED]) {
 				say("\"Thou shouldst ask Fedabiblio for the key. I am sure he "
 					"will give it to thee since thou didst save him.\"");
 			} else {
@@ -41311,7 +41311,7 @@ void FuncJendon object#(FIRST_NPC_FUNCTION - JENDON)() {
 			say("\"Covered in fur, like an animal. Hear they're worse than "
 				"Goblins... even eat their own kind!\"");
 			say("\"Olon might be able to tell ya more.\"");
-			gflags[ASK_ONLON_GWANI] = true;
+			gflags[ASK_OLON_GWANI] = true;
 			fallthrough;
 		case "places":
 			say("\"I know little about the wilderness areas hereabouts. I be a "
@@ -47470,10 +47470,10 @@ void FuncCellia object#(FIRST_NPC_FUNCTION - CELLIA)() {
 			Func097F(CELLIA, "@Farewell.@", 0x0000);
 			abort;
 		}
-		if (gflags[SLAIN_WOLF] && (!gflags[GAVE_WOLF_TO_CELIA])) {
+		if (gflags[SLAIN_WOLF] && (!gflags[GAVE_WOLF_TO_CELLIA])) {
 			add("slain wolf");
 		}
-		if (gflags[GAVE_WOLF_TO_CELIA] && (!gflags[HAVE_WOLF_CLOAK])) {
+		if (gflags[GAVE_WOLF_TO_CELLIA] && (!gflags[HAVE_WOLF_CLOAK])) {
 			add("cloak");
 		}
 		if (gflags[ASK_CELLIA_ABOUT_FUR_CAP]
@@ -47514,7 +47514,7 @@ void FuncCellia object#(FIRST_NPC_FUNCTION - CELLIA)() {
 					say("\"Return in one day. I shall have thy cloak by "
 						"then.\"");
 					UI_set_timer(0x0004);
-					gflags[GAVE_WOLF_TO_CELIA] = true;
+					gflags[GAVE_WOLF_TO_CELLIA] = true;
 				} else {
 					var000B = Func0992(
 							0x0001, "@But we do not have the body with us.@",
@@ -47569,7 +47569,7 @@ void FuncCellia object#(FIRST_NPC_FUNCTION - CELLIA)() {
 				"supply exotic furs which are rare here in Monitor -- "
 				"especially Gwani pelts!\"");
 			add(["trappers", "Gwani pelts"]);
-			if (gflags[SLAIN_WOLF] && (!gflags[GAVE_WOLF_TO_CELIA])) {
+			if (gflags[SLAIN_WOLF] && (!gflags[GAVE_WOLF_TO_CELLIA])) {
 				say("\"Now that thou hast completed the Test of Knighthood, "
 					"thou must bring me the body of the animal thou didst "
 					"slay.\"");
@@ -49092,10 +49092,10 @@ void FuncKrayg object#(FIRST_NPC_FUNCTION - KRAYG)() {
 		if (gflags[AVATAR_IS_KNIGHT]) {
 			add("duties");
 		}
-		if ((!var0003) || gflags[KNOWS_KRAYG_WALKS_ON_WOODS]) {
+		if ((!var0003) || gflags[KNOWS_KRAYG_WALKS_IN_WOODS]) {
 			add("walks in the woods");
 		}
-		if (gflags[KNOWS_KRAYG_WALKS_ON_WOODS]) {
+		if (gflags[KNOWS_KRAYG_WALKS_IN_WOODS]) {
 			add("Luther");
 		}
 		if (gflags[FOUND_BROWN_BOTTLE]
@@ -49295,7 +49295,7 @@ void FuncKrayg object#(FIRST_NPC_FUNCTION - KRAYG)() {
 			} else {
 				UI_push_answers();
 				var0002 = true;
-				if (gflags[KNOWS_KRAYG_WALKS_ON_WOODS]) {
+				if (gflags[KNOWS_KRAYG_WALKS_IN_WOODS]) {
 					say("\"It pains me that simply because I have this natural "
 						"tendency, others would viciously gossip that I was "
 						"conspiring with our enemy. I seldom venture far while "
@@ -49311,7 +49311,7 @@ void FuncKrayg object#(FIRST_NPC_FUNCTION - KRAYG)() {
 					add(["battle sites"]);
 				}
 				add("change subject");
-				if ((!gflags[KNOWS_KRAYG_WALKS_ON_WOODS]) && var0008) {
+				if ((!gflags[KNOWS_KRAYG_WALKS_IN_WOODS]) && var0008) {
 					UI_pop_answers();
 				}
 			}
@@ -53710,7 +53710,7 @@ void FuncTemplar object#(FIRST_NPC_FUNCTION - TEMPLAR)() {
 				"prisoners.\"");
 			say("\"What can he be doing? He says that he doth have an old "
 				"injury, but he's merely a snivelling coward.\"");
-			gflags[KNOWS_KRAYG_WALKS_ON_WOODS] = true;
+			gflags[KNOWS_KRAYG_WALKS_IN_WOODS] = true;
 			fallthrough;
 		case "Leopard"(remove):
 			say("\"Marsten, the leader of the Leopard Command, officially runs "
@@ -77516,7 +77516,7 @@ void Func06EC object#(0x6EC) () {
 	struct<Position> var0000 = AVATAR->get_object_position();
 	struct<Position> var0001 = get_object_position();
 	if ((event == EGG) && (Func097E(var0000.z - var0001.z) < 3)) {
-		if (!gflags[AVATAR_IN_BEDROOM]) {
+		if (!gflags[AVATAR_IN_SPINEBREAKER_BEDROOM]) {
 			var var0002 = 0x0000;
 			var var0003 = get_item_quality();
 			declare var var0004;
@@ -77566,7 +77566,7 @@ void Func06EC object#(0x6EC) () {
 				};
 			}
 		}
-		gflags[AVATAR_IN_BEDROOM] = true;
+		gflags[AVATAR_IN_SPINEBREAKER_BEDROOM] = true;
 		remove_item();
 	}
 	if (event == SCRIPTED) {
@@ -77968,7 +77968,7 @@ void Func06FA object#(0x6FA) () {
 			AUTO4->move_object([0x0754, 0x0A64]);
 			AUTO4->set_schedule_type(WAIT);
 		}
-		gflags[ARENA_BATTLE_STARTED] = true;
+		gflags[FURNACE_ARENA_BATTLE_STARTED] = true;
 		remove_item();
 	}
 }
@@ -78175,7 +78175,7 @@ void Func06FE object#(0x6FE) () {
 }
 
 void Func06FF object#(0x6FF) () {
-	if (!gflags[ARENA_BATTLE_STARTED]) {
+	if (!gflags[FURNACE_ARENA_BATTLE_STARTED]) {
 		abort;
 	}
 	var var0000 = get_item_quality();
@@ -78490,7 +78490,7 @@ void Func0709 object#(0x709) () {
 		if (var0004) {
 			var0002 = var0004->get_item_frame();
 			if (var0002 == 0x0005) {
-				gflags[PLACED_SOUL_PRISM_MADNESS] = true;
+				gflags[PLACED_SOUL_PRISM_INSANITY] = true;
 			}
 			if (var0002 == 0x0006) {
 				gflags[PLACED_SOUL_PRISM_WANTONNESS] = true;
@@ -78503,7 +78503,7 @@ void Func0709 object#(0x709) () {
 	if (gflags[CHAOS_PLACED_BLACKROCK_SERPENT_CHAOS]
 		&& (gflags[PLACED_DUPRES_ASHES]
 			&& (gflags[PLACED_SOUL_PRISM_WANTONNESS]
-				&& (gflags[PLACED_SOUL_PRISM_MADNESS]
+				&& (gflags[PLACED_SOUL_PRISM_INSANITY]
 					&& gflags[PLACED_SOUL_PRISM_ANARCHY])))) {
 		Func0922(0x0019);
 		XENKA->show_npc_face0(0x0000);
@@ -87170,7 +87170,7 @@ void Func07FB object#(0x7FB) () {
 				"heard of. They weren't normal items, sir!\"");
 			gflags[FAWN_TRIAL_ASK_JENDON_STRANGE_OBJECTS] = true;
 		}
-		if (gflags[ASK_ONLON_GWANI]) {
+		if (gflags[ASK_OLON_GWANI]) {
 			say("\"He asked me about the bloodthirsty savages that live in the "
 				"far north -- had a grisly interest in the tale, I might "
 				"add.\"");
@@ -106947,7 +106947,7 @@ void Func08BF id#(0x8BF) () {
 		declare struct<Position> var0005;
 		if ((get_item_quality() == 0x0007)
 			&& (gflags[CHAOS_PLACED_BLACKROCK_SERPENT_CHAOS]
-				&& (gflags[PLACED_SOUL_PRISM_MADNESS]
+				&& (gflags[PLACED_SOUL_PRISM_INSANITY]
 					&& (gflags[PLACED_SOUL_PRISM_WANTONNESS]
 						&& gflags[PLACED_SOUL_PRISM_ANARCHY])))) {
 			gflags[PLACED_DUPRES_ASHES] = false;
@@ -107018,11 +107018,11 @@ void Func08BF id#(0x8BF) () {
 		declare var var0016;
 		if ((get_item_quality() == 0x0009)
 			&& gflags[CHAOS_PLACED_BLACKROCK_SERPENT_CHAOS]) {
-			gflags[PLACED_SOUL_PRISM_MADNESS] = false;
+			gflags[PLACED_SOUL_PRISM_INSANITY] = false;
 			var0012 = find_nearby(0x01BD, 0x0001, MASK_NONE);
 			for (var0015 in var0012) {
 				if (var0015->get_item_frame() == 0x0005) {
-					gflags[PLACED_SOUL_PRISM_MADNESS] = true;
+					gflags[PLACED_SOUL_PRISM_INSANITY] = true;
 					var0005 = get_object_position();
 					var0015->remove_item();
 					remove_item();
@@ -107171,7 +107171,7 @@ void Func08C0 id#(0x8C0) (var var0000) {
 }
 
 var Func08C1 id#(0x8C1) () {
-	if (gflags[PLACED_SOUL_PRISM_MADNESS]
+	if (gflags[PLACED_SOUL_PRISM_INSANITY]
 		&& (gflags[PLACED_SOUL_PRISM_WANTONNESS]
 			&& (gflags[PLACED_SOUL_PRISM_ANARCHY]
 				&& (gflags[PLACED_DUPRES_ASHES]
@@ -108384,7 +108384,7 @@ void Func08DA id#(0x8DA) (var var0000) {
 		if ((var0002 >= 0x0096) && (var0002 <= 0x00A3)) {
 			var0001 = true;
 			if (var0002 == 0x00A0) {
-				if (!gflags[PRESSED_BOTH_SWITCHES]) {
+				if (!gflags[FREEDOM_PRESSED_BOTH_SWITCHES]) {
 					break;
 				}
 			}
@@ -108422,7 +108422,7 @@ void Func08DA id#(0x8DA) (var var0000) {
 				abort;
 			}
 			if (var0002 == 0x00A2) {
-				gflags[PRESSED_BOTH_SWITCHES] = true;
+				gflags[FREEDOM_PRESSED_BOTH_SWITCHES] = true;
 				break;
 			}
 			if (var0002 == 0x00A3) {
