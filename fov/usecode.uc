@@ -1308,8 +1308,8 @@ void FuncSeat shape#(SHAPE_SEAT) () {
 		struct<Position> throneOfVirtuePos = [0x0AD7, 0x0885];
 		struct<Position> foundTarget = 0;
 		if (avatarPos.x == throneOfVirtuePos.x
-			&& (avatarPos.y == throneOfVirtuePos.y && gflags[SATIN_GOOD] == false)) {
-			gflags[SATIN_GOOD] = true;
+			&& (avatarPos.y == throneOfVirtuePos.y && gflags[THRONE_OF_CHANGE_USED] == false)) {
+			gflags[THRONE_OF_CHANGE_USED] = true;
 			throneOfVirtuePos.y += 2;
 			UI_sprite_effect(
 					ANIMATION_LIGHTNING, throneOfVirtuePos.x, throneOfVirtuePos.y, 0, 0, 0, 1);
@@ -3870,7 +3870,7 @@ void FuncBook shape#(SHAPE_BOOK) () {
 		}
 		if (var0002 == QUALITY_BOOK_COURT_RECORDS) {
 			say("~~RECORDS OF THE HIGH COURT OF YEW~~ ~~ ~~");
-			gflags[HOOK_POST] = true;
+			gflags[READ_HOOK_COURT_RECORDS] = true;
 			// TYPO: Should be "scallywags"
 			say("... Hook -- Hook is known to be an extremely dangerous "
 				"killer, a pirate who left his own band of scalliwags to "
@@ -3893,10 +3893,10 @@ void FuncBook shape#(SHAPE_BOOK) () {
 				"knowledge of such a member. In many reports of the man's "
 				"crimes, victims have stated that he claimed to be the "
 				"Avatar.");
-			gflags[KREG_DIS] = true;
+			gflags[KREG_DISCOVERED] = true;
 		}
 		if (var0002 == QUALITY_BOOK_MORFINS_LEDGER) {
-			gflags[MORFIN_CREEP] = true;
+			gflags[MORFIN_LEDGER_READ] = true;
 			say("Morfin of Paws, Ledger of Venom Sales*");
 			say("~~ ~~...July, 0359:~Sale - 3 vials - 300~Sale - 5 vials - "
 				"480~ August, 0359:~Sale - 12 vials - 1100~October, 0359:~Sale "
@@ -13437,7 +13437,7 @@ void FuncEiko object#(FIRST_NPC_FUNCTION - EIKO)() {
 	} else {
 		say("\"Thou dost wish to speak with me again?\" asks Eiko.");
 	}
-	if (gflags[KALIDETHMAD] && (!gflags[VENGEANCE_OFF])) {
+	if (gflags[KALIDETH_MAD] && (!gflags[VENGEANCE_OFF])) {
 		add("Stay thine hand!");
 	}
 	converse(["name", "job", "bye"]) {
@@ -18747,7 +18747,7 @@ void FuncAmanda object#(FIRST_NPC_FUNCTION - AMANDA)() {
 	} else {
 		say("\"How may I help thee?\" asks Amanda.");
 	}
-	if (gflags[KALIDETHMAD]) {
+	if (gflags[KALIDETH_MAD]) {
 		if (!gflags[AMANDA_SETTLED]) {
 			add("Stay thine hand!");
 		}
@@ -22832,7 +22832,7 @@ void FuncNastassia object#(FIRST_NPC_FUNCTION - NASTASSIA)() {
 			"talking again. I wish I had known him. There is something within "
 			"me that yearns for some news of him. Anything at all.\"");
 		remove("Julius");
-		gflags[NASTASIA_SAID_JULIUS] = true;
+		gflags[NASTASSIA_SAID_JULIUS] = true;
 		fallthrough;
 	case "Nadia":
 		say("\"My mother. She died horribly, and by her own hand. That is the "
@@ -26596,7 +26596,7 @@ void FuncTavenor object#(FIRST_NPC_FUNCTION - TAVENOR)() {
 			remove("name");
 			fallthrough;
 		case "job":
-			if (!gflags[TAV_EXPLAIN]) {
+			if (!gflags[TAVENOR_EXPLAIN]) {
 				say("\"The meaning of `job' is not understood.\"");
 				add("explain job");
 			} else {
@@ -26609,7 +26609,7 @@ void FuncTavenor object#(FIRST_NPC_FUNCTION - TAVENOR)() {
 			say("\"`Job' now understood by me. No job is had by me. Food is "
 				"gathered by me and my family.\" He watches you carefully. "
 				"\"Your job is to cut down Silverleaf trees, yes?\"");
-			gflags[TAV_EXPLAIN] = true;
+			gflags[TAVENOR_EXPLAIN] = true;
 			var var0002 = askYesNo();
 			if (var0002) {
 				say("\"That is as I expected. You are a menace. You are asked "
@@ -26633,7 +26633,7 @@ void FuncTavenor object#(FIRST_NPC_FUNCTION - TAVENOR)() {
 					"Humans will not be destroyers, please.\"");
 			}
 			remove("explain job");
-			gflags[TAV_EXPLAIN] = true;
+			gflags[TAVENOR_EXPLAIN] = true;
 			add(["food", "Silverleaf trees"]);
 			fallthrough;
 		case "food":
@@ -27771,7 +27771,7 @@ void FuncReyna object#(FIRST_NPC_FUNCTION - REYNA)() {
 			fallthrough;
 		case "Aimi":
 			var0003 = true;
-			if (gflags[REYNAGARDEN]) {
+			if (gflags[REYNA_MENTIONED_GARDEN]) {
 				say("\"She is the monk who tends the garden at the Abbey.\"");
 			} else {
 				say("\"She is one of the monks who lives at the Abbey. At this "
@@ -27788,7 +27788,7 @@ void FuncReyna object#(FIRST_NPC_FUNCTION - REYNA)() {
 				"often buy flowers from her.~~ But,\" she grins, \"as for the "
 				"other monks, all that I\tever see them do is make wine and "
 				"wander the countryside.\"");
-			gflags[REYNAGARDEN] = true;
+			gflags[REYNA_MENTIONED_GARDEN] = true;
 			remove("Abbey");
 			add(["flowers", "others"]);
 			fallthrough;
@@ -28628,7 +28628,7 @@ void FuncAimi object#(FIRST_NPC_FUNCTION - AIMI)() {
 		var var0000 = getPoliteTitle();
 		var var0001 = false;
 		add(["name", "job", "bye"]);
-		if (gflags[REYNAGARDEN] && gflags[AIMI_TOLD_NAME]) {
+		if (gflags[REYNA_MENTIONED_GARDEN] && gflags[AIMI_TOLD_NAME]) {
 			add("garden");
 		}
 		if (!gflags[MET_AIMI]) {
@@ -28643,7 +28643,7 @@ void FuncAimi object#(FIRST_NPC_FUNCTION - AIMI)() {
 		case "name":
 			say("\"Thou mayest call me Aimi, ", var0000, ".\"");
 			gflags[AIMI_TOLD_NAME] = true;
-			if (gflags[REYNAGARDEN] && (!var0001)) {
+			if (gflags[REYNA_MENTIONED_GARDEN] && (!var0001)) {
 				add("garden");
 			}
 			remove("name");
@@ -28791,7 +28791,7 @@ void FuncPenni object#(FIRST_NPC_FUNCTION - PENNI)() {
 			gflags[MET_PENNI] = true;
 		} else {
 			say("\"Hail, ", var0000, ". Might I assist thee?\" asks Penni.");
-			if (gflags[ADDOM_PENUMBRA]) {
+			if (gflags[ADDOM_MENTIONED_PENNI]) {
 				add("Addom");
 			}
 		}
@@ -28799,7 +28799,7 @@ void FuncPenni object#(FIRST_NPC_FUNCTION - PENNI)() {
 		case "name":
 			say("\"My name is Penni, ", var0001, ".\"");
 			remove("name");
-			if (gflags[ADDOM_PENUMBRA] && (!var0003)) {
+			if (gflags[ADDOM_MENTIONED_PENNI] && (!var0003)) {
 				add("Addom");
 			}
 			fallthrough;
@@ -36668,7 +36668,7 @@ void FuncTolemac object#(FIRST_NPC_FUNCTION - TOLEMAC)() {
 		var var0000 = getPoliteTitle();
 		var var0001 = UI_part_of_day();
 		add(["name", "job", "Fellowship", "bye"]);
-		if (gflags[RECTOL]) {
+		if (gflags[TOLEMAC_REFUSED_RECONVERT]) {
 			say("\"Get thee away! I'll hear no more of thy lies!\"*");
 			abort;
 		}
@@ -36778,7 +36778,7 @@ void FuncTolemac object#(FIRST_NPC_FUNCTION - TOLEMAC)() {
 					"unity in thy speech!\"");
 			}
 			say("*");
-			gflags[RECTOL] = true;
+			gflags[TOLEMAC_REFUSED_RECONVERT] = true;
 			abort;
 		case "bye":
 			break;
@@ -37581,7 +37581,7 @@ void FuncAddom object#(FIRST_NPC_FUNCTION - ADDOM)() {
 			gflags[MET_ADDOM] = true;
 		} else {
 			say("\"Please, ", var0001, ". Join me for some company.\"");
-			if (gflags[BRION_CRY] && (!gflags[GOT_CRYSTAL])) {
+			if (gflags[BRION_CRYSTAL] && (!gflags[GOT_CRYSTAL])) {
 				add("crystal");
 			}
 		}
@@ -37594,7 +37594,7 @@ void FuncAddom object#(FIRST_NPC_FUNCTION - ADDOM)() {
 			say("\"I travel the world in search of rare and unique items to "
 				"sell to museums. I am not a resident of Moonglow.\"");
 			add(["Moonglow", "travel", "items"]);
-			if (gflags[BRION_CRY] && (!gflags[GOT_CRYSTAL])) {
+			if (gflags[BRION_CRYSTAL] && (!gflags[GOT_CRYSTAL])) {
 				add("crystal");
 			}
 			fallthrough;
@@ -37613,7 +37613,7 @@ void FuncAddom object#(FIRST_NPC_FUNCTION - ADDOM)() {
 			say("\"I have found many odd artifacts. Many of the things thou "
 				"hast seen in The Music Hall and the Lycaeum have been brought "
 				"to them by me.\"");
-			if (!gflags[BRION_CRY]) {
+			if (!gflags[BRION_CRYSTAL]) {
 				say("\"In fact, ", var0001,
 					", I have this unique crystal I found on the mainland near "
 					"Jhelom that I am hoping will fetch a fair price from "
@@ -37638,7 +37638,7 @@ void FuncAddom object#(FIRST_NPC_FUNCTION - ADDOM)() {
 				var0001, ", I have met two people here, other than Nelson.\"");
 			remove("Moonglow");
 			add(["people", "Penni"]);
-			gflags[ADDOM_PENUMBRA] = true;
+			gflags[ADDOM_MENTIONED_PENNI] = true;
 			fallthrough;
 		case "people":
 			say("I have come to know the bartender and the healer.\"");
@@ -39040,7 +39040,7 @@ void FuncMorfin object#(FIRST_NPC_FUNCTION - MORFIN)() {
 		if (gflags[FERIDWYN_ACCUSED_TOBIAS] && (!gflags[GARRITT_GUILTY])) {
 			add("Tobias stole venom");
 		}
-		if (gflags[MORFIN_CREEP]) {
+		if (gflags[MORFIN_LEDGER_READ]) {
 			add("ledger");
 		}
 		var var0007 = Func0931(PARTY, 1, SHAPE_VENOM, QUALITY_ANY, FRAME_VENOM_MORFINS);
@@ -40702,7 +40702,7 @@ void FuncDraxinusom object#(FIRST_NPC_FUNCTION - DRAXINUSOM)() {
 		var var0000 = getAvatarName();
 		add(["name", "job", "bye"]);
 		if (gflags[DRAX_INAMO]) {
-			if (!gflags[DRAX_KNOWS]) {
+			if (!gflags[DRAXINUSOM_KNOWS]) {
 				add("Inamo");
 			}
 		}
@@ -40770,7 +40770,7 @@ void FuncDraxinusom object#(FIRST_NPC_FUNCTION - DRAXINUSOM)() {
 				"just to the west of us. To know, at least, that my prized "
 				"possessions would be safe in his hands.\"");
 			add("safe");
-			gflags[DRAX_SAID_SULTAN] = true;
+			gflags[DRAXINUSOM_SAID_SULTAN] = true;
 			Func0911(50);
 			remove("Sultan");
 			fallthrough;
@@ -40790,7 +40790,7 @@ void FuncDraxinusom object#(FIRST_NPC_FUNCTION - DRAXINUSOM)() {
 			if (var0001) {
 				say("\"To be excellent! To have seen him? To know how he is "
 					"faring? To be well?\"");
-				gflags[DRAX_KNOWS] = true;
+				gflags[DRAXINUSOM_KNOWS] = true;
 				UI_push_answers();
 				add(["murdered", "not well", "well"]);
 			} else {
@@ -40827,7 +40827,7 @@ void FuncDraxinusom object#(FIRST_NPC_FUNCTION - DRAXINUSOM)() {
 				"the ways of the altars. To see that some of the youngest "
 				"still look up to him, but the majority seem to have been "
 				"wooed away by the glamor of The Fellowship.\"");
-			if (!gflags[DRAX_KNOWS]) {
+			if (!gflags[DRAXINUSOM_KNOWS]) {
 				say("\"To tell you that his weanling, Inamo, is in Trinsic at "
 					"this time.\"");
 				gflags[DRAX_INAMO] = true;
@@ -40913,7 +40913,7 @@ void FuncInforlem object#(FIRST_NPC_FUNCTION - INFORLEM)() {
 			say("\"To train others in Terfin to be strong and powerful. To "
 				"sell some weapons, also.\"");
 			add(["train", "others", "Terfin", "buy"]);
-			if (gflags[KNOWNS_ABOUT_CONFLICTS] && (!var0000)) {
+			if (gflags[KNOWS_ABOUT_CONFLICTS] && (!var0000)) {
 				add("conflicts");
 			}
 			fallthrough;
@@ -40959,7 +40959,7 @@ void FuncInforlem object#(FIRST_NPC_FUNCTION - INFORLEM)() {
 				"Fellowship, but to have no information. To suggest you see "
 				"Quan, The Fellowship leader here and ask him.\"");
 			var0000 = true;
-			gflags[IN_FOR_QUAN] = true;
+			gflags[REFERRED_TO_QUAN] = true;
 			remove("conflicts");
 			fallthrough;
 		case "Terfin":
@@ -41015,7 +41015,7 @@ void FuncInmanilem object#(FIRST_NPC_FUNCTION - INMANILEM)() {
 		case "job":
 			say("\"To be the healer.\"");
 			add("heal");
-			if (gflags[KNOWNS_ABOUT_CONFLICTS]) {
+			if (gflags[KNOWS_ABOUT_CONFLICTS]) {
 				add("conflicts");
 			}
 			fallthrough;
@@ -41486,7 +41486,7 @@ void FuncQuan object#(FIRST_NPC_FUNCTION - QUAN)() {
 					"highest level of potential.\"");
 				add("philosophy");
 			}
-			if (gflags[IN_FOR_QUAN] && (!gflags[PLOT_TOLD])) {
+			if (gflags[REFERRED_TO_QUAN] && (!gflags[PLOT_TOLD])) {
 				add("altar conflicts");
 			}
 			remove("Fellowship");
@@ -41558,7 +41558,7 @@ void FuncQuan object#(FIRST_NPC_FUNCTION - QUAN)() {
 		case "Sarpling":
 			say("\"To sell magics and such at his shop.\"");
 			remove("Sarpling");
-			gflags[QUAN_SARP] = true;
+			gflags[QUAN_ASKED_SARPLING] = true;
 			fallthrough;
 		case "Quaeven":
 			say("\"To be in charge of the learning center.\"");
@@ -41825,7 +41825,7 @@ void FuncSarpling object#(FIRST_NPC_FUNCTION - SARPLING)() {
 		declare var var0003;
 		if (gflags[SARPLING_TOLD_NAME]) {
 			var0003 = true;
-			if (gflags[QUAN_SARP] && (!gflags[SARPLING_SPILLED])) {
+			if (gflags[QUAN_ASKED_SARPLING] && (!gflags[SARPLING_SPILLED])) {
 				add("altar conflicts");
 			}
 			if (gflags[FOUND_NOTE]) {
@@ -41839,7 +41839,7 @@ void FuncSarpling object#(FIRST_NPC_FUNCTION - SARPLING)() {
 			gflags[SARPLING_TOLD_NAME] = true;
 			remove("name");
 			if (!var0003) {
-				if (gflags[QUAN_SARP] && (!gflags[SARPLING_SPILLED])) {
+				if (gflags[QUAN_ASKED_SARPLING] && (!gflags[SARPLING_SPILLED])) {
 					add("altar conflicts");
 				}
 				if (gflags[FOUND_NOTE]) {
@@ -42004,7 +42004,7 @@ void FuncForbrak object#(FIRST_NPC_FUNCTION - FORBRAK)() {
 				"to seek the trainer and healer. To know they are observant "
 				"and may have seen something. To also suggest you speak with "
 				"members of The Fellowship.\"");
-			gflags[IN_FOR_QUAN] = true;
+			gflags[REFERRED_TO_QUAN] = true;
 			remove("shrine vs. Fellowship");
 			if (!var0001) {
 				add("trainer");
@@ -42013,7 +42013,7 @@ void FuncForbrak object#(FIRST_NPC_FUNCTION - FORBRAK)() {
 				add("healer");
 			}
 			add("members");
-			gflags[KNOWNS_ABOUT_CONFLICTS] = true;
+			gflags[KNOWS_ABOUT_CONFLICTS] = true;
 			fallthrough;
 		case "members":
 			say("\"To recommend you talk to their leader and their clerk.\"");
@@ -42032,7 +42032,7 @@ void FuncForbrak object#(FIRST_NPC_FUNCTION - FORBRAK)() {
 			if (!var0001) {
 				add("trainer");
 			}
-			gflags[KNOWNS_ABOUT_CONFLICTS] = true;
+			gflags[KNOWS_ABOUT_CONFLICTS] = true;
 			fallthrough;
 		case "residents":
 			say("\"To know many gargoyles. To want to know about some of "
@@ -42243,7 +42243,7 @@ void FuncMartingo object#(FIRST_NPC_FUNCTION - MARTINGO)() {
 		var var0000 = UI_is_pc_female();
 		var var0001 = getAvatarName();
 		add(["name", "job", "bye"]);
-		if (gflags[DRAX_SAID_SULTAN]) {
+		if (gflags[DRAXINUSOM_SAID_SULTAN]) {
 			add(["Ethereal Ring"]);
 		}
 		if (!gflags[MET_MARTINGO]) {
@@ -44979,10 +44979,10 @@ void FuncBlorn object#(FIRST_NPC_FUNCTION - BLORN)() {
 			}
 		}
 		if (gflags[BLORN_GIVE]) {
-			gflags[LAP_TELL] = false;
+			gflags[LAP_LEM_TELL] = false;
 			gflags[AGREE_TO_AVENGE] = false;
 		}
-		if (gflags[LAP_TELL]) {
+		if (gflags[LAP_LEM_TELL]) {
 			add("return amulet");
 		} else if (gflags[AGREE_TO_AVENGE]) {
 			add("Lap-Lem");
@@ -45443,7 +45443,7 @@ void FuncLapLem object#(FIRST_NPC_FUNCTION - LAP_LEM)() {
 				"stolen by the human.\" He looks down at his feet. \"To want "
 				"it back.\"");
 			remove("possession");
-			gflags[LAP_TELL] = true;
+			gflags[LAP_LEM_TELL] = true;
 			fallthrough;
 		case "give amulet":
 			say("\"To have returned with amulet?\"");
@@ -50118,7 +50118,7 @@ void FuncKreg object#(FIRST_NPC_FUNCTION - KREG)() {
 		if (var0002 == EVIL) {
 			var0001->set_schedule_type(IN_COMBAT);
 		}
-		if (gflags[KREG_DIS] && gflags[MET_KREG]) {
+		if (gflags[KREG_DISCOVERED] && gflags[MET_KREG]) {
 			add("Thief!");
 		}
 		if (!gflags[MET_KREG]) {
@@ -50133,7 +50133,7 @@ void FuncKreg object#(FIRST_NPC_FUNCTION - KREG)() {
 		converse(0) {
 		case "name":
 			say("He smiles. \"My name is Kreg, ", var0000, ".\"");
-			if (gflags[KREG_DIS]) {
+			if (gflags[KREG_DISCOVERED]) {
 				add("Thief!");
 			}
 			remove("name");
@@ -50866,7 +50866,7 @@ void FuncBrion object#(FIRST_NPC_FUNCTION - BRION)() {
 		case "bye":
 			if (gflags[BRION_CHEESE]
 				&& (gflags[BRION_MAGNIFY]
-					&& (gflags[BRION_KITE] && gflags[BRION_CRY]))) {
+					&& (gflags[BRION_KITE] && gflags[BRION_CRYSTAL]))) {
 				say("\"Good day, ", var0001,
 					". Thou mayest use mine observatory as often as thou "
 					"wishest.\"*");
@@ -50947,7 +50947,7 @@ void FuncBrion object#(FIRST_NPC_FUNCTION - BRION)() {
 			}
 			say("Wouldst thou like to have this to view mine orrery and better "
 				"predict the planet's position?\"");
-			gflags[BRION_CRY] = true;
+			gflags[BRION_CRYSTAL] = true;
 			var var000E = askYesNo();
 			if (var000E) {
 				say("He smiles proudly. \"I thought thou wouldst. However, "
@@ -64797,7 +64797,7 @@ void partySitDownNearObj id#(0x80A) (var sourceObj, var shapeNum) {
 /**
  * Remaps the source index to the destination index for the
  * given throne of many changes. Loops through the odd indices
- * 1, 3, and 5, unless SATIN_GOOD is set, in which case index
+ * 1, 3, and 5, unless THRONE_OF_CHANGE_USED is set, in which case index
  * 5 maps to 7.
  *
  * @param index One of 1, 3, 5, or 7.
@@ -64809,7 +64809,7 @@ var throneOfChangeFindTarget id#(0x80B) (var index) {
 		return index;
 	}
 	if (index == 5) {
-		if (gflags[SATIN_GOOD]) {
+		if (gflags[THRONE_OF_CHANGE_USED]) {
 			index = 7;
 		} else {
 			index = 1;
@@ -71700,7 +71700,7 @@ void Func0894 id#(0x894) (var var0000) {
 	}
 	if (event == DOUBLECLICK) {
 		BOLLUX->show_npc_face(DEFAULT_FACE);
-		if (gflags[UNSET_GOLEM_FLAG] && (!gflags[BOLLUX_IS_DEAD])) {
+		if (gflags[BOLLUX_INSISTS_TRANSPLANT] && (!gflags[BOLLUX_IS_DEAD])) {
 			say("\"I -must- return his life to him. He -will- have a new "
 				"heart!\" The determination is quite evident by his forceful "
 				"glare and stance.");
