@@ -595,7 +595,7 @@ enum Globals {
 	DRAX_INAMO = 0x239,
 	TOLD_INAMO_DEAD = 0x23A,
 	DRAXINUSOM_SAID_SULTAN = 0x23B,
-	REFERRED_TO_QUAN = 0x23C,
+	REFERRED_TO_QUAN = 0x23C, // Inforlem and Forbrak can both flag this RE Garg vs Fellowship conflict in Terfin.
 	KNOWS_SILAMO_UNHAPPY = 0x23D,
 	QUAEVEN_CONVERT = 0x23E,
 	FOUND_NOTE = 0x23F,
